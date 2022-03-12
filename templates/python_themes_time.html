@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/themes_time.css' %}">
+<link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="card-1">
+            <div class="card-1-container">
+                <h1>Choose your Python knowledge level</h1>
+                <select class="level" name="level" required>
+                    <option value="zero">I don't know anything, but I want to start from the beginning</option>
+                    <option value="first">I know the basics of Python</option>
+                    <option value="second">I can write a few lines in Python</option>
+                    <option value="third">I create small programs in Python</option>
+                </select>
+<!--                <h1>Choose Python theme</h1>-->
+<!--                <select class="themes" name="themes" required>-->
+<!--                    <option value="basics">Basics</option>-->
+<!--                    <option value="types">Types</option>-->
+<!--                    <option value="commands">Commands</option>-->
+<!--                    <option value="syntax">Syntax</option>-->
+<!--                    <option value="constructions">Constructions</option>-->
+<!--                    <option value="classes">Classes</option>-->
+<!--                </select>-->
+                <h1>Set test time</h1>
+                <select class="time" name="time" required>
+                    <option value="5">5 min</option>
+                    <option value="10">10 min</option>
+                    <option value="15">15 min</option>
+                    <option value="20">20 min</option>
+                    <option value="25">25 min</option>
+                    <option value="30">30 min</option>
+                </select>
+                <div>
+                    <button class="btn" type="submit">START</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,136 @@
+body {
+  display: grid;
+}
+
+:root {
+  --gutter: 20px;
+}
+
+.card-1 {
+    width: 95%;
+    min-height: 900px;
+    height: auto;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+
+    padding-top: 20px;
+
+    overflow-y: scroll;
+
+    padding: var(--gutter) 0;
+    display: grid;
+    grid-gap: var(--gutter) 0;
+    grid-template-columns: var(--gutter) 1fr var(--gutter);
+    align-content: start;
+}
+
+.card-1 > * {
+    grid-column: 2 / -2;
+}
+
+.card-1 > .full {
+    grid-column: 1 / -1;
+}
+
+.hs {
+    display: grid;
+    grid-gap: calc(var(--gutter) / 2);
+    grid-template-columns: 10px;
+    grid-template-rows: minmax(150px, 1fr);
+    grid-auto-flow: column;
+    grid-auto-columns: calc(50% - var(--gutter) * 2);
+
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    padding-bottom: calc(.75 * var(--gutter));
+    margin-bottom: calc(-.25 * var(--gutter));
+}
+
+.card-1-container {
+    min-width: 460px;
+    width: auto;
+    max-width: 550px;
+    min-height: 690px;
+    height: auto;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+
+    scroll-snap-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+    padding-top: 5px;
+    margin: 10px;
+
+    text-align: left;
+
+    font-family: Galatea;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+
+    color: #C1C1C1;
+
+    white-space: pre-wrap;
+}
+
+.arrow-left {
+    margin-top: 450px;
+
+    border: solid rgba(146, 157, 160, 1);
+    border-width: 0 3px 3px 0;
+
+    display: inline-block;
+    padding: 15px;
+
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.arrow-right {
+    margin-top: 450px;
+
+    border: solid rgba(146, 157, 160, 1);
+    border-width: 0 3px 3px 0;
+    border-radius: 1px;
+
+    display: inline-block;
+    padding: 15px;
+
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.arrow-left:hover {
+  border-color: black;
+  border-width: 0 3px 3px 0;
+}
+
+.arrow-right:hover {
+  border-color: black;
+  border-width: 0 3px 3px 0;
+}
+
+.btn-start {
+    width: 290px;
+    height: 50px;
+
+    margin-top: 50px;
+    margin-bottom: 80px;
+    margin-left: 40%;
+    margin-right: 40%;
+
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}

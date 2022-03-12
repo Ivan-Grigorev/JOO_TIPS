@@ -1,0 +1,91 @@
+body {
+    background: linear-gradient(133.33deg, #031417 9.8%,
+        rgba(17, 63, 73, 0.718241) 99.75%,
+        rgba(69, 80, 83, 0) 100%,
+        rgba(123, 160, 168, 0.152517) 100%,
+        rgba(38, 91, 103, 0.391034) 100%);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+
+    font-family: Galatea;
+    font-style: normal;
+}
+
+.card-1 {
+    width: 95%;
+    height: 750px;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}
+
+.card-1-container {
+    width: 80%;
+    height: 25px;
+    margin-left: 10%;
+    margin-right: 10%;
+
+    font-family: Galatea;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 25px;
+    text-align: center;
+
+    color: #ABABAB;
+}
+
+.level {
+    width: 400px;
+    height: 60px;
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.themes {
+    width: 400px;
+    height: 60px;
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.time {
+    width: 400px;
+    height: 60px;
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.btn {
+    width: 290px;
+    height: 50px;
+    margin-top: 100px;
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}

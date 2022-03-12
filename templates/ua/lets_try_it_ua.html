@@ -1,0 +1,12 @@
+{% extends 'ua/homepage_ua.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/lets_try_it.css' %}">
+<div>
+    <button class="btn-install" type="submit">Встановіть програму PWA</button>
+</div>
+<div>
+    <button class="btn-use"><a style="text-decoration: none; color: #ABABAB;"
+                               href="{% url 'programing_language_choice_ua' %}">Використовуйте WEB-версію</a></button>
+</div>
+{% endblock %}

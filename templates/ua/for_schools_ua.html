@@ -1,0 +1,24 @@
+{% extends 'ua/homepage_ua.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/for_schools.css' %}">
+<div class="card-1">
+    <div class="card-1-container">
+        <p>Ми спеціально розробляємо корпоративні рішення для шкіл, коледжів, курсів альтернативного навчання, з метою
+            регулярного оцінювання за темою, за мовою, за рівнем знань</p>
+    </div>
+</div>
+<div class="card-2">
+    <div class="card-2-container">
+        <p>Наше корпоративне рішення може допомогти підвищити рівень компетентності з урахуванням особливостей
+            цільових аудиторій</p>
+    </div>
+</div>
+<div class="card-3">
+    <div class="card-3-container">
+        <input type="text" name="email" required placeholder="Е-пошта">
+        <input class="btn-submit" type="submit" value="НАДІСЛІТЬ ВАШУ Е-ПОШТУ">
+        Будь ласка, залиште тут свою електронну пошту - ми зв'яжемося з вами найближчим часом
+    </div>
+</div>
+{% endblock %}

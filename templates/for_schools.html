@@ -1,0 +1,23 @@
+{% extends 'homepage.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/for_schools.css' %}">
+<div class="card-1">
+    <div class="card-1-container">
+        <p>We customly develop corporate decisions for schools, colleges, alternative learning courses,
+            for the purpose of regular evaluation by theme, by language, by level of knowledge</p>
+    </div>
+</div>
+<div class="card-2">
+    <div class="card-2-container">
+        <p>Our corporate decision may help to raise the level of competence within the peculiarities of target audiences</p>
+    </div>
+</div>
+<div class="card-3">
+    <div class="card-3-container">
+        <input type="text" name="email" required placeholder="E-mail">
+        <input class="btn-submit" type="submit" value="SUBMIT YOUR E-MAIL">
+        Please leave your e-mail here - we will contact you soon
+    </div>
+</div>
+{% endblock %}

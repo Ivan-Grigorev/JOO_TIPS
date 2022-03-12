@@ -1,0 +1,97 @@
+body {
+    background: linear-gradient(133.33deg, #031417 9.8%,
+        rgba(17, 63, 73, 0.718241) 99.75%,
+        rgba(69, 80, 83, 0) 100%,
+        rgba(123, 160, 168, 0.152517) 100%,
+        rgba(38, 91, 103, 0.391034) 100%);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+
+    font-family: Galatea;
+    font-style: normal;
+}
+
+.header {
+    background: linear-gradient(92.42deg,
+        rgba(255, 238, 238, 0.1) -4.28%,
+        rgba(255, 255, 255, 0.13) 109.69%);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+}
+
+.language {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.joo-header {
+    margin-left: auto;
+    margin-right: auto;
+    width: 197px;
+    height: 108px;
+    font-weight: 900;
+    font-size: 100px;
+    line-height: 126px;
+
+    background-image: linear-gradient(90deg, #F3F3F3 -2.8%, rgba(108, 99, 99, 0) 130.07%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.tips-header {
+    position: absolute;
+    left: 52%;
+    right: 38%;
+    top: 140px;
+
+    font-weight: 100;
+    font-size: 30px;
+    line-height: 37px;
+    text-align: center;
+
+    color: #ABABAB;
+}
+
+.topnav {
+    text-align: center;
+    margin-top: 35px;
+    font-weight: 100;
+    font-size: 30px;
+    line-height: 37px;
+}
+
+.topnav a {
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 40px;
+
+    color: rgba(171, 171, 171, 0.8);
+}
+
+.topnav a:hover {
+    color: rgba(171, 171, 171, 0.2);
+}
+
+.topnav a.active {
+    color: white;
+}
