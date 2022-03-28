@@ -31,9 +31,30 @@ body {
     -ms-background-size: cover;
 }
 
+.top-nav {
+    display: flex;
+    flex-direction: row;
+}
+
 .language {
     text-align: right;
     margin-right: 20px;
+    margin-left: auto;
+    margin-left-min: 800px;
+}
+
+.btn-login {
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
 }
 
 .joo-header {
@@ -68,7 +89,7 @@ body {
     color: #ABABAB;
 }
 
-.topnav {
+.navbar {
     text-align: center;
     margin-top: 35px;
     font-weight: 100;
@@ -76,7 +97,7 @@ body {
     line-height: 37px;
 }
 
-.topnav a {
+.navbar a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -88,10 +109,10 @@ body {
     color: rgba(171, 171, 171, 0.8);
 }
 
-.topnav a:hover {
+.navbar a:hover {
     color: rgba(171, 171, 171, 0.2);
 }
 
-.topnav a.active {
+.navbar a.active {
     color: white;
 }

@@ -1,41 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/timer_header.css' %}">
+<link rel="stylesheet" href="{% static 'css/theoretical_test.css' %}">
 <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 <head>
     <meta charset="UTF-8">
 </head>
-<script type="text/javascript">
-  var lesson_timer = setInterval(function() {
-
-  var now = new Date();
-  var nowUTC = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
-               now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-  var distance = new Date("{{ lesson_guests_timer }}").getTime() - nowUTC;
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  if (minutes < 10) minutes = "0" + minutes;
-  if (seconds < 10) seconds = "0" + seconds;
-
-  if (minutes == "00" && seconds < "31") {
-    document.getElementById("lesson_timer").style.color = "red";
-  }
-
-  document.getElementById("lesson_timer").innerHTML = "Lesson time: " + minutes + ":" + seconds;
-
-  if (distance < 0) {
-    clearInterval(lesson_timer);
-    document.getElementById("lesson_timer").innerHTML = "Lesson time: 00:00";
-  }
-  }, 1000);
-</script>
-<nav class="timer" id="lesson_timer">
-    <div>
-        <h1>{{ lesson_timer }}</h1>
-    </div>
-</nav>
 <script type="text/javascript">
   var test_timer = setInterval(function() {
 
@@ -68,7 +38,11 @@
 </nav>
 <body>
 {% block content %}
+<div class="card-1">
+    <div class="card-1-container">
 
+    </div>
+</div>
 
 {% endblock %}
 </body>

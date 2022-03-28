@@ -1,4 +1,4 @@
-{% extends 'timer_header.html' %}
+{% extends 'ua/timer_header_ua.html' %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/theory_cards.css' %}">
@@ -13,7 +13,7 @@
     </div>
     <div>
         <button class="btn-start"><a style="text-decoration: none; color: black;"
-                                     href="{% url 'python_test_tt_1_ua' %}">ПОЧAТИ ТЕСТ</a></button>
+                                     href="{% url 'python_theoretical_test_ua' %}">ПОЧAТИ ТЕСТ</a></button>
     </div>
 </div>
 {% endblock%}
