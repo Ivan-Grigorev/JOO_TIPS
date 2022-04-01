@@ -8,27 +8,26 @@
 </head>
 <script type="text/javascript">
   var test_timer = setInterval(function() {
+      var now = new Date();
+      var nowUTC = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
+                   now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+      var distance = new Date("{{ timer }}").getTime() - nowUTC;
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  var now = new Date();
-  var nowUTC = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
-               now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-  var distance = new Date("{{ timer }}").getTime() - nowUTC;
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      if (minutes < 10) minutes = "0" + minutes;
+      if (seconds < 10) seconds = "0" + seconds;
 
-  if (minutes < 10) minutes = "0" + minutes;
-  if (seconds < 10) seconds = "0" + seconds;
+      if (minutes == "00" && seconds < "31") {
+        document.getElementById("test_timer").style.color = "red";
+      }
 
-  if (minutes == "00" && seconds < "31") {
-    document.getElementById("test_timer").style.color = "red";
-  }
+      document.getElementById("test_timer").innerHTML = "Test time: " + minutes + ":" + seconds;
 
-  document.getElementById("test_timer").innerHTML = "Test time: " + minutes + ":" + seconds;
-
-  if (distance < 0) {
-    clearInterval(test_timer);
-    document.getElementById("test_timer").innerHTML = "Test time: 00:00";
-  }
+      if (distance < 0) {
+        clearInterval(test_timer);
+        document.getElementById("test_timer").innerHTML = "Test time: 00:00";
+      }
   }, 1000);
 </script>
 <nav class="timer" id="test_timer">
@@ -37,13 +36,31 @@
     </div>
 </nav>
 <body>
-{% block content %}
-<div class="card-1">
-    <div class="card-1-container">
-
+<form method="POST">
+    {% csrf_token %}
+    <div class="card-1">
+        <div class="question">
+            <pre class="question">{{ question }}</pre>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for left_context in left_slot %}
+                <button class="slot-left" name="left_slot" type="submit">
+                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">
+                        <pre class="text">{{ left_context }}</pre></a>
+                </button>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% for right_context in right_slot %}
+                <button class="slot-right" name="right_slot" type="submit">
+                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">
+                        <pre class="text">{{ right_context }}</pre></a>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</div>
-
-{% endblock %}
+</form>
 </body>
 </html>

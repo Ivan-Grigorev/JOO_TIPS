@@ -529,7 +529,8 @@ class PythonBasicsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
 
     class Meta:
         db_table = 'python_basics_theoretical_test'
