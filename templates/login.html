@@ -4,8 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
+<script type="text/javascript">
+  function showMessage(){
+    if (confirm("Hello dear Guest,\nFor get possibility to register on our website you need to pass your first test.\n\nLet`s try it?")) {
+      location.href = 'http://127.0.0.1:8000/lets-try-it/';
+    }
+  }
+</script>
 <body>
-
+<!--<form method="POST">-->
+<!--    {% csrf_token %}-->
+    <div class="card-1">
+        <div class="title">
+            <p>My account</p>
+        </div>
+        <div class="name">
+            <input name="name" placeholder="Name">
+        </div>
+        <div class="e-mail">
+            <input name="e-mail" placeholder="E-mail">
+        </div>
+        <div class="password">
+            <input name="password" placeholder="Password">
+        </div>
+        <div class="row">
+            <div>
+                <button class="btn-login">Log in</button>
+            </div>
+            <div>
+                <button class="btn-signup" onclick="showMessage()">Sign up</button>
+            </div>
+        </div>
+        <div class="card-2">
+            <div class="container">
+                <button class="btn-social">Log in with Facebook</button>
+            </div>
+            <div>
+                <button class="btn-social">Log in with Google</button>
+            </div>
+            <div>
+                <button class="btn-social">Log in with Apple</button>
+            </div>
+            <div>
+                <button class="btn-social">Corporate log in</button>
+            </div>
+        </div>
+        <div class="not-now">
+            <a href="/" style="color: #DDDDDD;">Not now</a>
+        </div>
+    </div>
+<!--</form>-->
 </body>
 </html>

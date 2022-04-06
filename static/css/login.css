@@ -16,3 +16,123 @@ body {
     font-family: Galatea;
     font-style: normal;
 }
+
+.card-1 {
+    width: 95%;
+    min-height: 900px;
+    height: auto;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}
+
+.title {
+    text-align: center;
+
+    padding: 20px;
+
+    font-weight: 300;
+    font-size: 30px;
+
+    color: #ABABAB;
+}
+
+input {
+    padding-left: 10px;
+
+    margin: auto;
+    margin-bottom: 10px;
+
+    display: block;
+
+    width: 400px;
+    height: 50px;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    color: #505050;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.password {
+    margin-bottom: 50px;
+}
+
+.row {
+    margin: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn-login {
+    width: 150px;
+    height: 50px;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    color: #505050;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.btn-signup {
+    margin-left: 5px;
+    margin-bottom: 100px;
+
+    width: 245px;
+    height: 50px;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    color: #505050;
+
+    background: #C4C4C4;
+    border-radius: 30px;
+}
+
+.card-2 {
+    margin: auto;
+    justify-content: center;
+
+    text-align: center;
+    width: 290px;
+    height: 170px;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 20px;
+}
+
+.btn-social {
+    margin-top: 10px;
+    width: 280px;
+    height: 30px;
+
+    font-weight: 200;
+    font-size: 15px;
+
+    color: #DDDDDD;
+
+    background: linear-gradient(92.42deg,
+        rgba(255, 238, 238, 0.5) -4.28%,
+        rgba(255, 255, 255, 0.305) 109.69%);
+    border-radius: 30px;
+}
+
+.not-now {
+    margin-top: 20px;
+
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+
+    color: #DDDDDD;
+}

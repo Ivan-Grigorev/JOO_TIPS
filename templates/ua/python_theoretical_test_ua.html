@@ -37,13 +37,31 @@
     </div>
 </nav>
 <body>
-{% block content %}
-<div class="card-1">
-    <div class="card-1-container">
-
+<form method="POST">
+    {% csrf_token %}
+    <div class="card-1">
+        <div class="question">
+            <pre class="question">{{ question_ua }}</pre>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for left_context in left_slot %}
+                <button class="slot-left" name="left_slot" type="submit">
+                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test_ua' %}">
+                        <pre class="text">{{ left_context }}</pre></a>
+                </button>
+                {% endfor %}
+            </div>
+            <div class="row">
+                {% for right_context in right_slot %}
+                <button class="slot-right" name="right_slot" type="submit">
+                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test_ua' %}">
+                        <pre class="text">{{ right_context }}</pre></a>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</div>
-
-{% endblock %}
+</form>
 </body>
 </html>

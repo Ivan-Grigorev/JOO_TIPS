@@ -64,17 +64,17 @@ def python_themes_time_guests_ua(request):
         theme_1 = PythonTheoryBasics.objects.all().filter(id=guests_card_1)
         guests_card_2 = random.randint(1, 4)
         theme_2 = PythonTheoryVariables.objects.all().filter(id=guests_card_2)
-        guests_card_3 = random.randint(1, 3)
+        guests_card_3 = random.randint(1, 4)
         theme_3 = PythonTheoryDataTypes.objects.all().filter(id=guests_card_3)
         theme_4 = random.choice([PythonTheoryBasics.objects.all().filter(id=random.randint(1, 10)),
                                  PythonTheoryVariables.objects.all().filter(id=random.randint(1, 4)),
-                                 PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 3))
+                                 PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
                                  ])
         text_ua = [theme_1[0], theme_2[0], theme_3[0], theme_4[0]]
         if theme_4[0] == theme_1[0] or theme_4[0] == theme_2[0] or theme_4[0] == theme_3[0]:
             theme_4 = random.choice([PythonTheoryBasics.objects.all().filter(id=random.randint(1, 10)),
                                      PythonTheoryVariables.objects.all().filter(id=random.randint(1, 4)),
-                                     PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 3))
+                                     PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
                                      ])
             text_ua[3] = theme_4[0]
         return render(request=request, template_name='ua/python_theory_ua.html',
@@ -85,19 +85,20 @@ def python_themes_time_guests_ua(request):
 
 
 def python_theoretical_test_ua(request):
-    question_ua = random.choice([PythonBasicsTheoreticalTest,
-                                 PythonVariablesTheoreticalTest,
-                                 PythonDataTypesTheoreticalTest])
-    question_id = random.choice([guests_card_1, guests_card_2, guests_card_3])
-    right_answer = question_ua.objects.values_list('level_1_slot_1_right_answer_ua', flat=True).filter(id=question_id)
-    wrong_answer = question_ua.objects.values_list('level_1_slot_2_wrong_answer_ua', flat=True).filter(id=question_id)
+    question_ua = random.choice([PythonBasicsTheoreticalTest.objects.all().filter(card_id_id=guests_card_1),
+                                 PythonVariablesTheoreticalTest.objects.all().filter(card_id_id=guests_card_2),
+                                 PythonDataTypesTheoreticalTest.objects.all().filter(card_id_id=guests_card_3)])
+    right_answer = question_ua.values_list('level_1_slot_1_right_answer_ua', flat=True)
+    wrong_answer = question_ua.values_list('level_1_slot_2_wrong_answer_ua', flat=True)
+    left_slot = random.choice([right_answer, wrong_answer])
+    right_slot = wrong_answer if left_slot == right_answer else right_answer
     if request.method == 'POST':
-        return redirect('python_practical_test')
-    return render(request, template_name='python_theoretical_test.html',
+        return redirect('python_practical_test_ua')
+    return render(request, template_name='ua/python_theoretical_test_ua.html',
                   context={'timer': guests_timer,
-                           'question': question_ua.objects.values_list('question_ua', flat=True)[question_id - 1],
-                           'left_slot': right_answer,
-                           'right_slot': wrong_answer})
+                           'question_ua': question_ua.values_list('question_ua', flat=True)[0],
+                           'left_slot': left_slot,
+                           'right_slot': right_slot})
 
 
 def python_practical_test_ua(request):
