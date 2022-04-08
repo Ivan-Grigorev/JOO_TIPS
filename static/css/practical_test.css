@@ -39,3 +39,81 @@ body {
     background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
     border-radius: 20px;
 }
+
+.question {
+    margin-right: 10%;
+
+    width-max: 300px;
+    height: auto;
+
+    text-align: right;
+    font-weight: 300;
+    font-size: 30px;
+    color: #ABABAB;
+
+    white-space: pre-wrap;
+}
+
+.row {
+    margin-top: -50px;
+    display: flex;
+}
+
+.card-2 {
+    margin-left: 5%;
+    margin-bottom: 10%;
+
+    padding: 20px;
+
+    width: 400px;
+    height: 70%;
+    min-height: 600px;
+
+    font-weight: 300;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #C1C1C1;
+
+    white-space: pre-wrap;
+
+    background: rgba(70, 70, 70, 0.5);
+    border-radius: 30px;
+}
+
+.card-3 {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+
+    display: grid;
+}
+
+.slots {
+    margin-bottom: 20px;
+
+    width: 400px;
+    height: 60px;
+
+    text-align: center;
+    font-weight: 300;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.slots:hover {
+    background: rgba(70, 70, 70, 0.5);
+}
+
+.text {
+    font-weight: 300;
+    font-size: 18px;
+
+    color: #C1C1C1;
+
+    white-space: pre-wrap;
+}
