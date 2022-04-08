@@ -3,11 +3,11 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/theoretical_test.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
+
 <script type="text/javascript">
   var test_timer = setInterval(function() {
       var now = new Date();
@@ -32,8 +32,11 @@
       }
   }, 1000);
 </script>
-<nav class="timer" id="test_timer">
-    <div>
+<nav class="nav-bar">
+    <div class="test-counter">
+        <h1>Theoretical test {{ test_counter }} from {{ total_tests }}</h1>
+    </div>
+    <div class="timer" id="test_timer">
         <h1>{{ test_timer }}</h1>
     </div>
 </nav>
@@ -47,18 +50,24 @@
         <div class="container">
             <div class="row">
                 {% for left_context in left_slot %}
-                <button class="slot-left" name="left_slot" type="submit">
-                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">
-                        <pre class="text">{{ left_context }}</pre></a>
+                <button class="slot-left" name="left_slot" type="submit" onclick="location.reload()">
+                        <pre class="text">{{ left_context }}</pre>
                 </button>
+<!--                <button class="slot-left" name="left_slot" type="submit">-->
+<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">-->
+<!--                        <pre class="text">{{ left_context }}</pre></a>-->
+<!--                </button>-->
                 {% endfor %}
             </div>
             <div class="row">
                 {% for right_context in right_slot %}
-                <button class="slot-right" name="right_slot" type="submit">
-                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">
-                        <pre class="text">{{ right_context }}</pre></a>
+                <button class="slot-right" name="right_slot" type="submit" onclick="location.reload()">
+                        <pre class="text">{{ right_context }}</pre>
                 </button>
+<!--                <button class="slot-right" name="right_slot" type="submit">-->
+<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">-->
+<!--                        <pre class="text">{{ right_context }}</pre></a>-->
+<!--                </button>-->
                 {% endfor %}
             </div>
         </div>

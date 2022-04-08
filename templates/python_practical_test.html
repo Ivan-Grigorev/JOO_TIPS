@@ -31,14 +31,17 @@
   }
   }, 1000);
 </script>
-<nav class="timer" id="test_timer">
-    <div>
+<nav class="nav-bar">
+    <div class="test-counter">
+        <h1>Practical test {{ test_counter }} from {{ total_tests }}</h1>
+    </div>
+    <div class="timer" id="test_timer">
         <h1>{{ test_timer }}</h1>
     </div>
 </nav>
 <body>
-<!--<form method="POST">-->
-<!--    {% csrf_token %}-->
+<form method="POST">
+    {% csrf_token %}
     <div class="card-1">
         <div class="question">
             <pre class="question">{{ question }}</pre>
@@ -49,14 +52,17 @@
             </div>
             <div class="card-3">
                 {% for context in slots %}
-                    <button class="slots" name="slots" type="submit">
-                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_progress_statistic_guests' %}">
-                        <pre class="text">{{ context }}</pre></a>
-                    </button>
+                <button class="slots" name="slots" type="submit" onclick="location.reload()">
+                        <pre class="text">{{ context }}</pre>
+                </button>
+<!--                    <button class="slots" name="slots" type="submit">-->
+<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_progress_statistic_guests' %}">-->
+<!--                        <pre class="text">{{ context }}</pre></a>-->
+<!--                    </button>-->
                 {% endfor %}
             </div>
         </div>
     </div>
-<!--</form>-->
+</form>
 </body>
 </html>

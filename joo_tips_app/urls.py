@@ -49,7 +49,7 @@ url_patterns = [
     path('ua/py/theory-cards/', python_theory_cards_ua, name='python_theory_cards_ua'),
     path('ua/py/theoretical-test/', python_theoretical_test_ua, name='python_theoretical_test_ua'),
     path('ua/py/practical-test/', python_practical_test_ua, name='python_practical_test_ua'),
-    path('ua/py/progress-statistic-guests', python_progress_statistic_guests_ua,
+    path('ua/py/progress-statistic-guests/', python_progress_statistic_guests_ua,
          name='python_progress_statistic_guests_ua'),
 
     path('ua/login/', login_ua, name='login_ua'),

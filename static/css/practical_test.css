@@ -17,13 +17,28 @@ body {
     font-style: normal;
 }
 
+.nav-bar {
+    margin-bottom: -30px;
+    display: flex;
+}
+
+.test-counter {
+    margin: auto;
+    margin-top: -20px;
+    margin-left: 50px;
+
+    text-align: left;
+    font-weight: 900;
+    font-size: 26px;
+
+    color: #ABABAB;
+}
+
 .timer {
     margin-right: 50px;
     margin-top: 10px;
 
     text-align: right;
-    font-family: Galatea;
-    font-style: normal;
     font-weight: 800;
     font-size: 40px;
 

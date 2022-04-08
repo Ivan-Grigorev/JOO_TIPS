@@ -9,44 +9,43 @@
 <body>
     <form method="POST">
     {% csrf_token %}
-    <div class="card-1">
-        <div class="card-1-container">
-            <h1>Виберіть свій рівень знань Python</h1>
-                <select class="level" name="level" required>
-                    <option value="zero">Я нічого не знаю, але хочу почати з початку</option>
-                    <option value="first">Я знаю основи Python</option>
-                    <option value="second">Я можу написати кілька рядків на Python</option>
-                    <option value="third">Я створюю невеликі програми на Python</option>
+        <div class="card-1">
+            <div class="container">
+                <h1 class="text">Виберіть свій рівень знань Python</h1>
+                    <select class="level" name="level" required>
+                        <option value="zero">Я нічого не знаю, але хочу почати з початку</option>
+                        <option value="first">Я знаю основи Python</option>
+                        <option value="second">Я можу написати кілька рядків на Python</option>
+                        <option value="third">Я створюю невеликі програми на Python</option>
+                    </select>
+<!--                <h1>Виберіть тему Python</h1>-->
+<!--                <select class="themes" name="themes" required>-->
+<!--                    <option value="basics">Основи</option>-->
+<!--                    <option value="types">Типи</option>-->
+<!--                    <option value="commands">Команди</option>-->
+<!--                    <option value="syntax">Синтаксис</option>-->
+<!--                    <option value="constructions">Конструкції</option>-->
+<!--                    <option value="classes">Класи</option>-->
+<!--                </select>-->
+                <h1>Установіть час</h1>
+                <select class="time" name="time" required>
+                    <option value="5">5 хв</option>
+                    <option value="10" disabled>*10 хв</option>
+                    <option value="15" disabled>*15 хв</option>
+                    <option value="20" disabled>*20 хв</option>
+                    <option value="25" disabled>*25 хв</option>
+                    <option value="30" disabled>*30 хв</option>
+                    <option disabled>----------------------------------------------------</option>
+                    <option disabled>* - Доступно лише для авторизованих користувачів</option>
                 </select>
-<!--            <h1>Виберіть тему Python</h1>-->
-<!--            <select class="themes" name="themes" required>-->
-<!--                <option value="basics">Основи</option>-->
-<!--                <option value="types">Типи</option>-->
-<!--                <option value="commands">Команди</option>-->
-<!--                <option value="syntax">Синтаксис</option>-->
-<!--                <option value="constructions">Конструкції</option>-->
-<!--                <option value="classes">Класи</option>-->
-<!--            </select>-->
-            <h1>Установіть час</h1>
-            <select class="time" name="time" required>
-                <option value="5">5 хв</option>
-                <option value="10" disabled>*10 хв</option>
-                <option value="15" disabled>*15 хв</option>
-                <option value="20" disabled>*20 хв</option>
-                <option value="25" disabled>*25 хв</option>
-                <option value="30" disabled>*30 хв</option>
-            </select>
-            <div>
-                <h5>* - <i>Доступно лише для авторизованих користувачів</i></h5>
-            </div>
-            <div>
-                <button class="btn" type="submit">СТАРТ</button>
-<!--                <button class="btn" type="submit"><a style="text-decoration: none; color: black;"-->
-<!--                         href="{% url 'python_theory_cards_ua' %}">СТАРТ</a>-->
-<!--                </button>-->
+                <div>
+                    <button class="btn" type="submit">СТАРТ</button>
+<!--                    <button class="btn" type="submit"><a style="text-decoration: none; color: black;"-->
+<!--                             href="{% url 'python_theory_cards_ua' %}">СТАРТ</a>-->
+<!--                    </button>-->
+                </div>
             </div>
         </div>
-    </div>
     </form>
 </body>
 </html>

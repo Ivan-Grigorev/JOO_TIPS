@@ -16,3 +16,15 @@ body {
     font-family: Galatea;
     font-style: normal;
 }
+
+.card-1 {
+    width: 95%;
+    min-height: 900px;
+    height: auto;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}
+
+

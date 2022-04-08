@@ -89,6 +89,10 @@ def python_theory_cards(request):
                            'text': text})
 
 
+theoretical_test_counter = 0
+practical_test_counter = 0
+
+
 def python_theoretical_test(request):
     question = random.choice([PythonBasicsTheoreticalTest.objects.all().filter(card_id_id=guests_card_1),
                              PythonVariablesTheoreticalTest.objects.all().filter(card_id_id=guests_card_2),
@@ -97,23 +101,42 @@ def python_theoretical_test(request):
     wrong_answer = question.values_list('level_1_slot_2_wrong_answer', flat=True)
     left_slot = random.choice([right_answer, wrong_answer])
     right_slot = wrong_answer if left_slot == right_answer else right_answer
+    global theoretical_test_counter
+    total_tests = 2
     if request.method == 'POST':
-        return redirect('python_practical_test')
+        theoretical_test_counter += 1
+        if theoretical_test_counter == total_tests:
+            theoretical_test_counter -= total_tests
+            return redirect('python_practical_test')
+        return redirect('python_theoretical_test')
     return render(request, template_name='python_theoretical_test.html',
-                  context={'timer': test_time,
+                  context={'test_counter': theoretical_test_counter + 1,
+                           'total_tests': total_tests,
+                           'timer': test_time,
                            'question': question.values_list('question', flat=True)[0],
                            'left_slot': left_slot,
                            'right_slot': right_slot})
 
 
 def python_practical_test(request):
+    global practical_test_counter
+    total_tests = 6
     question = 'Question'
     code = 'def example(attribute):\n\tfor i in len(attribute):\n\t\tprint(i)\n\nexample(10)'
     slots = ['One', 'Two', 'Three', 'Four']
-    return render(request, template_name='python_practical_test.html', context={'timer': test_time,
-                                                                                'question': question,
-                                                                                'code': code,
-                                                                                'slots': slots})
+    if request.method == 'POST':
+        practical_test_counter += 1
+        if practical_test_counter == total_tests:
+            practical_test_counter -= total_tests
+            return redirect('python_progress_statistic_guests')
+        return redirect('python_practical_test')
+    return render(request, template_name='python_practical_test.html',
+                  context={'test_counter': practical_test_counter + 1,
+                           'total_tests': total_tests,
+                           'timer': test_time,
+                           'question': question,
+                           'code': code,
+                           'slots': slots})
 
 
 def python_progress_statistic_guests(request):

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/themes_time.css' %}">
-<link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/themes_time.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
 <body>
     <form method="POST">
         {% csrf_token %}
         <div class="card-1">
-            <div class="card-1-container">
-                <h1>Choose your Python knowledge level</h1>
+            <div class="container">
+                <h1 class="text">Choose your Python knowledge level</h1>
                 <select class="level" name="level" required>
                     <option value="zero">I don't know anything, but I want to start from the beginning</option>
                     <option value="first">I know the basics of Python</option>
@@ -35,10 +35,9 @@
                     <option value="20" disabled>*20 min</option>
                     <option value="25" disabled>*25 min</option>
                     <option value="30" disabled>*30 min</option>
+                    <option disabled>------------------------------------</option>
+                    <option disabled>* - Available only for authorized users</option>
                 </select>
-                <div>
-                    <h5>* - <i>Available only for authorized users</i></h5>
-                </div>
                 <div>
                     <button class="btn" type="submit">START</button>
 <!--                    <button class="btn" type="submit"><a style="text-decoration: none; color: black;"-->

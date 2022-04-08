@@ -26,7 +26,7 @@ body {
     border-radius: 20px;
 }
 
-.card-1-container {
+.container {
     width: 80%;
     height: 25px;
     margin-left: 10%;
@@ -39,6 +39,10 @@ body {
     text-align: center;
 
     color: #ABABAB;
+}
+
+.text {
+    padding-top: 30px;
 }
 
 .level {
