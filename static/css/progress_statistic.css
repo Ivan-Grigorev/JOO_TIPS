@@ -27,4 +27,107 @@ body {
     border-radius: 20px;
 }
 
+.title {
+    padding-top: 40px;
 
+    text-align: center;
+
+    font-weight: 500;
+    font-size: 40px;
+
+    color: #ABABAB;
+}
+
+.row {
+    display: flex;
+}
+
+.card-2 {
+    margin-top: 5%;
+    margin-left: 5%;
+
+    text-align: center;
+
+    width: 30%;
+    height: auto;
+
+    display: grid;
+
+    font-weight: 300;
+    font-size: 20px;
+
+    color: #ACB0B1;
+}
+
+input {
+    margin-bottom: 5px;
+
+    text-align: center;
+
+    width: 150px;
+    height: 40px;
+
+    font-weight: 300;
+    font-size: 30px;
+
+    color: #505050;
+
+    background: rgba(196, 196, 196, 0.5);
+    border-radius: 30px;
+}
+
+.card-3 {
+    margin-top: 50px;
+
+    width: 100%;
+    min-height: 200px;
+    height: auto;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+table, tr {
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    width: 90%;
+
+    border-bottom: 1px dashed rgba(227, 227, 227, 0.1);
+    border-top: 1px dashed rgba(227, 227, 227, 0.1);
+    border-collapse: collapse;
+}
+
+.card-4 {
+    margin-top: 150px;
+    margin-left: 20%;
+    margin-right: 5%;
+
+    width: 40%;
+    height: 450px;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.btn-signin {
+    margin-top: 50px;
+    margin-left: 40%;
+    margin-right: 40%;
+
+    width: 290px;
+    height: 50px;
+
+    font-weight: 300;
+    font-size: 30px;
+
+    color: #DDDDDD;
+
+    background: linear-gradient(92.42deg,
+        rgba(255, 238, 238, 0.5) -4.28%,
+        rgba(255, 255, 255, 0.305) 109.69%);
+    border-radius: 30px;
+}

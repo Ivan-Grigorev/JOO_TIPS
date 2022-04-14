@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{% static 'css/theoretical_test.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
-
 <script type="text/javascript">
   var test_timer = setInterval(function() {
       var now = new Date();
@@ -54,7 +53,7 @@
                         <pre class="text">{{ left_context }}</pre>
                 </button>
 <!--                <button class="slot-left" name="left_slot" type="submit">-->
-<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">-->
+<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'practical_tests' %}">-->
 <!--                        <pre class="text">{{ left_context }}</pre></a>-->
 <!--                </button>-->
                 {% endfor %}
@@ -65,7 +64,7 @@
                         <pre class="text">{{ right_context }}</pre>
                 </button>
 <!--                <button class="slot-right" name="right_slot" type="submit">-->
-<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_practical_test' %}">-->
+<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'practical_tests' %}">-->
 <!--                        <pre class="text">{{ right_context }}</pre></a>-->
 <!--                </button>-->
                 {% endfor %}

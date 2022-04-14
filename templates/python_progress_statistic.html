@@ -8,7 +8,72 @@
 </head>
 <body>
 <div class="card-1">
+    <div class="title">
+        Guests {{ guests_counter }} result
+    </div>
+    <div class="row">
+        <div class="card-2">
+            <div>
+                <div>
+                    <label for="test" style="margin-right: 40px;">Points for the test</label>
+                    <input id="test" type="text" value="{{ test_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="today" style="margin-right: 53px;">Points for today</label>
+                    <input id="today" type="text" value="{{ day_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="week" style="margin-right: 60px;">Points for week</label>
+                    <input id="week" type="text" value="{{ week_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="month" style="margin-right: 46px;">Points for month</label>
+                    <input id="month" type="text" value="{{ month_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="year" style="margin-right: 65px;">Points for year</label>
+                    <input id="year" type="text" value="{{ year_result }}" readonly/>
+                </div>
+            </div>
+            <div class="card-3">
+                <table>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Jack Smith</td>
+                        <td style="text-align: right;">424</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Anna Donald's</td>
+                        <td  style="text-align: right;">310</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Ray Farrel</td>
+                        <td style="text-align: right;">287</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Albert Thomson</td>
+                        <td style="text-align: right;">259</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;"><b>Guest</b></td>
+                        <td style="text-align: right;">240</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card-4">
+            <div>
 
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="btn-signin" onclick="location.href='{% url 'register' %}'">Sign in</button>
+    </div>
 </div>
 </body>
 </html>

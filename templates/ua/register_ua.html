@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+    <div class="card-1">
+        <div class="title">
+            <p>Сторінка реєстрації</p>
+        </div>
+        <div class="name">
+            <input name="name" placeholder="Ім'я">
+        </div>
+        <div class="e-mail">
+            <input name="e-mail" placeholder="E-mail">
+        </div>
+        <div class="password">
+            <input name="password" placeholder="Пароль">
+        </div>
+        <div class="password">
+            <input name="confirm-password" placeholder="Підтвердьте пароль">
+        </div>
+        <div class="row">
+            <div>
+                <button class="btn-login" type="submit">Увійти</button>
+            </div>
+            <div>
+                <button class="btn-signup" type="submit">Зареєструватися</button>
+            </div>
+        </div>
+        <div class="card-2">
+            <div class="container">
+                <button class="btn-social">Зареєструватися через Facebook</button>
+            </div>
+            <div>
+                <button class="btn-social">Зареєструватися через Google</button>
+            </div>
+            <div>
+                <button class="btn-social">Зареєструватися через Apple</button>
+            </div>
+            <div>
+                <button class="btn-social">Корпоративна реєстрація</button>
+            </div>
+        </div>
+        <div class="not-now">
+            <a href="/" style="color: #DDDDDD;">Не зараз</a>
+        </div>
+    </div>
+</form>
+</body>
+</html>
