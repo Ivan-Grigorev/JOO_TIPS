@@ -1,0 +1,21 @@
+{% extends 'users_homepage.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/users_store.css' %}">
+<div class="card-1">
+    <div class="label">
+        <h3>Store</h3>
+    </div>
+    <div class="card-2">
+        <p><b>Become Pro faster</b></p>
+        <p>All content is available</p>
+        <p>All tests unlimited</p>
+        <p>Flexible testing schedule</p>
+    </div>
+    <div class="row">
+        <input type="text" value="1 month 200 UAH one programming language" readonly>
+        <input type="text" value="12 month 1200 UAH one programming language" readonly>
+        <input type="text" value="12 month 2400 UAH all programming languages" readonly>
+    </div>
+</div>
+{% endblock %}

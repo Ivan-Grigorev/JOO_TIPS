@@ -1,0 +1,36 @@
+.card-1 {
+    width: 95%;
+    min-height: 900px;
+    height: auto;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    text-align: center;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}
+
+.clipboards {
+    padding-top: 80px;
+}
+
+.label {
+    display: inline-block;
+    padding: 25px;
+
+    color: #ACB0B1;
+}
+
+.btn-clipboard {
+    margin-left: 1%;
+    margin-right: 1%;
+
+    background: none;
+    border: none;
+}
+
+.btn-clipboard:hover {
+    background: rgba(70, 70, 70, 0.5);
+    border-radius: 10px;
+}
+

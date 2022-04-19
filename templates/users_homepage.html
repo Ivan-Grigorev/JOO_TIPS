@@ -5,10 +5,29 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/users_homepage.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-<div class="card-1">
+<header class="navbar">
+    <div class="user">
+        <img src="{% static 'images/login.png' %}" height="25" width="30" style="margin-right: 15px;">User.name
+    </div>
+    <div class="price-list">
+        <button class="btn-price-list" onclick="location.href={% url 'users_store' %}">
+            <img src="{% static 'images/dollar.png' %}" height="45" width="45">
+        </button>
+    </div>
+</header>
+<main>
+    {% block content %}
 
-</div>
-</body>
+
+    {% endblock %}
+</main>
+<footer class="footer">
+    <button class="btn-footer"><i class="fa fa-book" style="font-size: 25px"></i> Themes</button>
+    <button class="btn-footer"><i class="fa fa-check" style="font-size: 25px"></i> Tests</button>
+    <button class="btn-footer"><i class="fa fa-pie-chart" style="font-size: 25px"></i> Results</button>
+    <button class="btn-footer"><i class="fa fa-bar-chart" style="font-size: 25px"></i> Leaders</button>
+    <button class="btn-footer"><i class="fa fa-shopping-cart" style="font-size: 25px"></i> Shop</button>
+</footer>
 </html>

@@ -4,9 +4,6 @@ from django.views.decorators.cache import cache_control
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
 
-import importlib
-
-
 from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions, \
     PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
     PythonTheoryFiles, PythonTheoryDjango, PythonTheoryDoctest, PythonTheoryGevent, PythonTheoryAiohttp, \
@@ -22,6 +19,7 @@ from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataT
 
 from datetime import datetime, timedelta
 import random
+import importlib
 
 
 def homepage(request):
@@ -152,11 +150,11 @@ def python_practical_test(request):
 
 
 def python_progress_statistic_guests(request):
-    test_result = '0'
-    day_result = '0'
-    week_result = '0'
-    month_result = '0'
-    year_result = '0'
+    test_result = '20'
+    day_result = '35'
+    week_result = '120'
+    month_result = '380'
+    year_result = '1920'
     return render(request, template_name='python_progress_statistic.html', context={'test_result': test_result,
                                                                                     'day_result': day_result,
                                                                                     'week_result': week_result,
@@ -166,7 +164,7 @@ def python_progress_statistic_guests(request):
 
 def register(request):
     if request.method == 'POST':
-        return render(request, template_name='users_homepage.html')
+        return redirect('users_homepage')
     return render(request, template_name='register.html')
 
 
@@ -181,7 +179,12 @@ def log_out(request):
 
 # @login_required
 def users_homepage(request):
-    return render(request, template_name='users_homepage.html')
+    return render(request, template_name='users_clipboards_desk.html')
+
+
+# @login_required
+def users_store(request):
+    return render(request, template_name='users_store.html')
 
 
 # @login_required

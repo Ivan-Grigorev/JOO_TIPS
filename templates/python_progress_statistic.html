@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/progress_statistic.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 </head>
 <body>
 <div class="card-1">
@@ -36,7 +37,7 @@
                 </div>
             </div>
             <div class="card-3">
-                <table>
+                <table id="users">
                     <tr>
                         <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
                         <td style="text-align: left;">Jack Smith</td>
@@ -66,8 +67,33 @@
             </div>
         </div>
         <div class="card-4">
-            <div>
+            <div class="statistic-chart">
+            <canvas id="statistic_chart" style="width: 700px; height: 500px;"></canvas>
+            <script type="text/javascript">
+                var xValues = ["1 day", "2 day", "3 day", "4 day", "5 day", "6 day", "7 day"];
+                var yValues = [11, 23, 37, 46, 80, 94, 130];
 
+                new Chart("statistic_chart", {
+                    type: "line",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                          fill: false,
+                          lineTension: 0,
+                          backgroundColor: "#ACB0B1",
+                          borderColor: "white",
+                          data: yValues,
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                            scales: {
+                                xAxes: [{ticks: {min: 0, max: 7, fontColor: "#ACB0B1"}}],
+                                yAxes: [{ticks: {min: 0, max: 200, fontColor: "#ACB0B1"}}],
+                            }
+                    }
+                });
+            </script>
             </div>
         </div>
     </div>

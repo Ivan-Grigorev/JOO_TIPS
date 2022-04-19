@@ -4,9 +4,6 @@ from django.views.decorators.cache import cache_control
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
 
-import importlib
-
-
 from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions,\
     PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
     PythonTheoryFiles, PythonTheoryDjango, PythonTheoryDoctest, PythonTheoryGevent, PythonTheoryAiohttp, \
@@ -22,6 +19,7 @@ from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataT
 
 from datetime import datetime, timedelta
 import random
+import importlib
 
 
 def homepage_ua(request):
@@ -152,7 +150,7 @@ def python_practical_test_ua(request):
 
 
 def python_progress_statistic_guests_ua(request):
-    test_result = '0'
+    test_result = '20'
     day_result = '0'
     week_result = '0'
     month_result = '0'
@@ -166,7 +164,7 @@ def python_progress_statistic_guests_ua(request):
 
 def register_ua(request):
     if request.method == 'POST':
-        return render(request, template_name='ua/users_homepage_ua.html')
+        return redirect('users_homepage_ua')
     return render(request, template_name='ua/register_ua.html')
 
 
@@ -181,7 +179,12 @@ def log_out_ua(request):
 
 # @login_required
 def users_homepage_ua(request):
-    return render(request, template_name='ua/users_homepage_ua.html')
+    return render(request, template_name='ua/users_clipboards_desk_ua.html')
+
+
+# @login_required
+def users_store_ua(request):
+    return render(request, template_name='ua/users_store_ua.html')
 
 
 # @login_required

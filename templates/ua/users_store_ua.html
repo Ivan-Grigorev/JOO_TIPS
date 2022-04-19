@@ -1,0 +1,21 @@
+{% extends 'ua/users_homepage_ua.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/users_store.css' %}">
+<div class="card-1">
+    <div class="label">
+        <h3>Магазин</h3>
+    </div>
+    <div class="card-2">
+        <p><b>Станьте професіоналом швидше</b></p>
+        <p>Весь контент доступний</p>
+        <p>Усі тести необмежені</p>
+        <p>Гнучкий графік тестування</p>
+    </div>
+    <div class="row">
+        <input type="text" value="1 місяць 200 грн одна мова програмування" readonly>
+        <input type="text" value="2 місяців 1200 грн одна мова програмування" readonly>
+        <input type="text" value="12 місяців 2400 грн всі мови програмування" readonly>
+    </div>
+</div>
+{% endblock %}
