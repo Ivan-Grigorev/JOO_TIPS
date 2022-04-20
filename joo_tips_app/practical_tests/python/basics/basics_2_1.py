@@ -68,6 +68,9 @@ except:
     print("Unworkable code.")
     var_r = "Error"
     var_w = f_w
+else:
+    print("Working code. Result:", var_r)
+    var_w = "Error"
 finally:
     print("Slot for right answer:", f6_1)
     print("Right answer:", var_r)

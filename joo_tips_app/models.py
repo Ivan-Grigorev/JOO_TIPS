@@ -664,3 +664,34 @@ class JavaScriptTheory(models.Model):
 
     class Meta:
         db_table = 'javascript_theory'
+
+
+class GuestsVisitStatistic(models.Model):
+    guests_ip = models.TextField(null=True)
+    guests_location = models.TextField(null=True)
+    guests_hostname = models.TextField(null=True)
+    visit_date = models.TextField(null=True)
+
+    lets_try_it_date = models.TextField(null=True)
+    language = models.TextField(null=True)
+    programming_language = models.TextField(null=True)
+
+    guests_level = models.TextField(null=True)
+    lesson_time = models.TextField(null=True)
+    test_time = models.TextField(null=True)
+    start_lesson_time = models.TextField(null=True)
+    start_test_time = models.TextField(null=True)
+    end_theoretical_start_practical_test_time = models.TextField(null=True)
+    end_test_time = models.TextField(null=True)
+
+    theoretical_test_result = models.TextField(null=True)
+    practical_test_result = models.TextField(null=True)
+
+    register_date = models.TextField(null=True)
+    statistic_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.guests_location  # get_all_fields()
+
+    class Meta:
+        db_table = 'guests_visit_statistic'

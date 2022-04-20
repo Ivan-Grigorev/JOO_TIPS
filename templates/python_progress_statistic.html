@@ -41,27 +41,27 @@
                     <tr>
                         <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
                         <td style="text-align: left;">Jack Smith</td>
-                        <td style="text-align: right;">424</td>
+                        <td style="text-align: right;">42</td>
                     </tr>
                     <tr>
                         <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
                         <td style="text-align: left;">Anna Donald's</td>
-                        <td  style="text-align: right;">310</td>
+                        <td  style="text-align: right;">31</td>
                     </tr>
                     <tr>
                         <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
                         <td style="text-align: left;">Ray Farrel</td>
-                        <td style="text-align: right;">287</td>
+                        <td style="text-align: right;">27</td>
                     </tr>
                     <tr>
                         <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
                         <td style="text-align: left;">Albert Thomson</td>
-                        <td style="text-align: right;">259</td>
+                        <td style="text-align: right;">18</td>
                     </tr>
                     <tr>
                         <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
                         <td style="text-align: left;"><b>Guest</b></td>
-                        <td style="text-align: right;">240</td>
+                        <td style="text-align: right;">{{ test_result }}</td>
                     </tr>
                 </table>
             </div>
@@ -71,7 +71,7 @@
             <canvas id="statistic_chart" style="width: 700px; height: 500px;"></canvas>
             <script type="text/javascript">
                 var xValues = ["1 day", "2 day", "3 day", "4 day", "5 day", "6 day", "7 day"];
-                var yValues = [11, 23, 37, 46, 80, 94, 130];
+                var yValues = [{{ test_result }}];
 
                 new Chart("statistic_chart", {
                     type: "line",

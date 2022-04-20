@@ -15,14 +15,22 @@ from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataT
     PythonTheoryFunctionsBuiltinFunctions, \
     PythonBasicsTheoreticalTest, PythonVariablesTheoreticalTest, PythonDataTypesTheoreticalTest, \
     GolangTheory, \
-    JavaScriptTheory
+    JavaScriptTheory, \
+    GuestsVisitStatistic
 
 from datetime import datetime, timedelta
 import random
 import importlib
+import ipinfo
 
 
 def homepage(request):
+    record = GuestsVisitStatistic(guests_ip=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().ip,
+                                  guests_location=[ipinfo.getHandler('c3ef7fe9b908a3').getDetails().city,
+                                                   ipinfo.getHandler('c3ef7fe9b908a3').getDetails().country_name],
+                                  guests_hostname=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().hostname,
+                                  visit_date=datetime.now())
+    record.save()
     return render(request, template_name='homepage.html')
 
 
@@ -47,13 +55,16 @@ def for_schools(request):
 
 
 def programing_language_choice(request):
+    record = GuestsVisitStatistic(lets_try_it_date=datetime.now(),
+                                  language='EN',
+                                  programming_language='Python')
+    record.save()
     return render(request, template_name='programing_language_choice.html')
 
 
 def python_themes_time_guests(request):
     global test_time, lesson_time
     if request.method == 'POST':
-        guests_level = request.POST.get('level')
         lesson_end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')) / 2)
         end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')))
         lesson_end_date_sep = lesson_end_date.ctime().split(' ')
@@ -63,6 +74,11 @@ def python_themes_time_guests(request):
                                                 lesson_end_date_sep[4], lesson_end_date_sep[3])
         test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
                                               end_date_sep[4], end_date_sep[3])
+        record = GuestsVisitStatistic(guests_level=request.POST.get('level'),
+                                      test_time=request.POST.get('time'),
+                                      lesson_time=int(request.POST.get('time')) / 2,
+                                      start_lesson_time=datetime.now())
+        record.save()
         return redirect('python_theory_cards')
     return render(request, template_name='python_themes_time_guests.html')
 
@@ -87,33 +103,44 @@ def python_theory_cards(request):
                                  PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
                                  ])
         text[3] = theme_4[0]
-    return render(request=request, template_name='python_theory.html',
-                  context={'lesson_time': lesson_time,
-                           'timer': test_time,
-                           'text': text})
+    if request.method == 'POST':
+        record = GuestsVisitStatistic(start_test_time=datetime.now())
+        record.save()
+        return redirect('python_theoretical_test')
+    return render(request=request, template_name='python_theory.html', context={'lesson_time': lesson_time,
+                                                                                'timer': test_time,
+                                                                                'text': text})
 
 
 theoretical_test_counter = 0
 practical_test_counter = 0
+right_answers = []
+tests_results = []
 
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theoretical_test(request):
-    global question_theme
+    global question_theme, theoretical_test_counter, right_answers, tests_results
     question_theme = random.choice([PythonBasicsTheoreticalTest.objects.all().filter(card_id_id=guests_card_1),
                                     PythonVariablesTheoreticalTest.objects.all().filter(card_id_id=guests_card_2),
                                     PythonDataTypesTheoreticalTest.objects.all().filter(card_id_id=guests_card_3)])
     right_answer = question_theme.values_list('level_1_slot_1_right_answer', flat=True)
+    right_answers.append(right_answer[0])
     wrong_answer = question_theme.values_list('level_1_slot_2_wrong_answer', flat=True)
     left_slot = random.choice([right_answer, wrong_answer])
     right_slot = wrong_answer if left_slot == right_answer else right_answer
-    global theoretical_test_counter
     total_tests = 2
     if request.method == 'POST':
+        right_answers.append(right_answer[0])
+        tests_results.extend([1 if request.POST.get('slot') in right_answers else 0])
         theoretical_test_counter += 1
         if theoretical_test_counter == total_tests:
+            right_answers.extend([right_answer[0]])
             theoretical_test_counter -= total_tests
-            return redirect('practical_tests')
+            record = GuestsVisitStatistic(end_theoretical_start_practical_test_time=datetime.now(),
+                                          theoretical_test_result=tests_results)
+            record.save()
+            return redirect('python_practical_test')
         return redirect('python_theoretical_test')
     return render(request, template_name='python_theoretical_test.html',
                   context={'test_counter': theoretical_test_counter + 1,
@@ -126,7 +153,7 @@ def python_theoretical_test(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_practical_test(request):
-    global practical_test_counter
+    global practical_test_counter, right_answers
     folder = question_theme.values_list('theme', flat=True)[0]
     theme = folder
     card = question_theme.values_list('card_id_id', flat=True)[0]
@@ -134,12 +161,18 @@ def python_practical_test(request):
     test_file = importlib.import_module(f"joo_tips_app.practical_tests.python.{folder}.{theme}_{card}_{test_number}")
     total_tests = 6
     answers = [test_file.var_r, test_file.var_w]
+    right_answers.append(test_file.var_r)
     if request.method == 'POST':
+        right_answers.append(test_file.var_r)
+        tests_results.extend([1 if request.POST.get('slot') in right_answers else 0])
         practical_test_counter += 1
         if practical_test_counter == total_tests:
             practical_test_counter -= total_tests
+            record = GuestsVisitStatistic(practical_test_result=tests_results[2:],
+                                          end_test_time=datetime.now())
+            record.save()
             return redirect('python_progress_statistic_guests')
-        return redirect('practical_tests')
+        return redirect('python_practical_test')
     return render(request, template_name='python_practical_test.html',
                   context={'test_counter': practical_test_counter + 1,
                            'total_tests': total_tests,
@@ -150,11 +183,12 @@ def python_practical_test(request):
 
 
 def python_progress_statistic_guests(request):
-    test_result = '20'
-    day_result = '35'
-    week_result = '120'
-    month_result = '380'
-    year_result = '1920'
+    # drop tests_result data
+    test_result = sum(tests_results)
+    day_result = 0
+    week_result = 0
+    month_result = 0
+    year_result = 0
     return render(request, template_name='python_progress_statistic.html', context={'test_result': test_result,
                                                                                     'day_result': day_result,
                                                                                     'week_result': week_result,
@@ -163,7 +197,10 @@ def python_progress_statistic_guests(request):
 
 
 def register(request):
+    record = GuestsVisitStatistic(register_date=datetime.now())
+    record.save()
     if request.method == 'POST':
+        # register date
         return redirect('users_homepage')
     return render(request, template_name='register.html')
 

@@ -39,6 +39,7 @@
         <h1>{{ test_timer }}</h1>
     </div>
 </nav>
+<body>
 <form method="POST">
     {% csrf_token %}
     <div class="card-1">
@@ -51,13 +52,9 @@
             </div>
             <div class="card-3">
                 {% for context in answers %}
-                <button class="slots" name="slots" type="submit" onclick="location.reload()">
+                <button class="slots" name="slot" value="{{ context }}" type="submit" onclick="location.reload()">
                     <pre class="text">{{ context }}</pre>
                 </button>
-<!--                    <button class="slots" name="slots" type="submit">-->
-<!--                    <a style="text-decoration: none; color: #C1C1C1;" href="{% url 'python_progress_statistic_guests_ua' %}">-->
-<!--                        <pre class="text">{{ context }}</pre></a>-->
-<!--                    </button>-->
                 {% endfor %}
             </div>
         </div>

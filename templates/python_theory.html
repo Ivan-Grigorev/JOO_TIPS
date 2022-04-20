@@ -12,9 +12,15 @@
         {% endfor %}
     </div>
     <div>
-        <button class="btn-start"><a style="text-decoration: none; color: black;"
-                         href="{% url 'python_theoretical_test' %}">START TEST</a>
-        </button>
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn-start" type="submit" onclick="location.href={% url 'python_theoretical_test' %}">
+                START TEST
+            </button>
+        </form>
+<!--        <button class="btn-start"><a style="text-decoration: none; color: black;"-->
+<!--                         href="{% url 'python_theoretical_test' %}">START TEST</a>-->
+<!--        </button>-->
     </div>
 </div>
 {% endblock %}

@@ -29,7 +29,7 @@ url_patterns = [
     path('py/themes-time/', python_themes_time, name='python_themes_time'),
     path('py/theory-cards/', python_theory_cards, name='python_theory_cards'),
     path('py/theoretical-test/', python_theoretical_test, name='python_theoretical_test'),
-    path('py/practical-test/', python_practical_test, name='practical_tests'),
+    path('py/practical-test/', python_practical_test, name='python_practical_test'),
     path('py/progress-statistic-guests/', python_progress_statistic_guests,
          name='python_progress_statistic_guests'),
 
