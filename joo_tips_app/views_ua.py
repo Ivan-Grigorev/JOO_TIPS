@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_control
 
+from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 
 from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions,\
     PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
@@ -197,15 +199,25 @@ def python_progress_statistic_guests_ua(request):
 
 
 def register_ua(request):
-    record = GuestsVisitStatistic(register_date=datetime.now())
-    record.save()
     if request.method == 'POST':
-        # register date
+        user = User.objects.create_user(username=request.POST.get('username'),
+                                        email=request.POST.get('email'),
+                                        password=request.POST.get('password'))
+        user.save()
+        record = GuestsVisitStatistic(register_date=datetime.now())
+        record.save()
+        login(request, user)
         return redirect('users_homepage_ua')
     return render(request, template_name='ua/register_ua.html')
 
 
 def log_in_ua(request):
+    user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+    if user is not None:
+        login(request, user)
+        return redirect('users_homepage_ua')
+    else:
+        messages.error(request, 'Ім`я користувача або пароль не існує!')
     return render(request, template_name='ua/login_ua.html')
 
 
@@ -214,17 +226,17 @@ def log_out_ua(request):
     return redirect('homepage_ua')
 
 
-# @login_required
+@login_required
 def users_homepage_ua(request):
     return render(request, template_name='ua/users_clipboards_desk_ua.html')
 
 
-# @login_required
+@login_required
 def users_store_ua(request):
     return render(request, template_name='ua/users_store_ua.html')
 
 
-# @login_required
+@login_required
 def python_themes_time_ua(request):
     if request.method == 'POST':
         end_date = (datetime.now() + timedelta(minutes=int(request.POST.get('time')))).ctime()

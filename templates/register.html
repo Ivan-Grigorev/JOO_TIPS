@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
+<script type="text/javascript">
+  var check = function() {
+    if (document.getElementById('password').value.length >= 6 &&
+      document.getElementById('password').value == document.getElementById('confirm_password').value) {
+      document.getElementById('message').innerHTML = 'Password matching!';
+      document.getElementById('submit').disabled = false;
+    } else {
+      document.getElementById('message').innerHTML = 'Password must be min 6 symbols and match with confirm!';
+      document.getElementById('submit').disabled = true;
+    }
+  }
+</script>
 <body>
 <form method="POST">
     {% csrf_token %}
@@ -14,23 +26,28 @@
             <p>Register page</p>
         </div>
         <div class="name">
-            <input name="name" placeholder="Name">
+            <input name="username" placeholder="Name" minlength="3" required>
         </div>
         <div class="e-mail">
-            <input name="e-mail" placeholder="E-mail">
+            <input name="email" type="email" placeholder="E-mail" required>
         </div>
         <div class="password">
-            <input name="password" placeholder="Password">
+            <input name="password" id="password" onkeyup="check();" placeholder="Password"
+                   min="6" maxlength="30" required>
         </div>
         <div class="password">
-            <input name="confirm-password" placeholder="Confirm password">
+            <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Confirm password"
+                   min="6" required>
+            <div class="message">
+                <span class="message" id="message"></span>
+            </div>
         </div>
         <div class="row">
             <div>
-                <button class="btn-login" type="submit">Log in</button>
+                <button class="btn-login" type="submit" onclick="location.href={% url 'log_in' %}">Log in</button>
             </div>
             <div>
-                <button class="btn-signup" type="submit">Sign up</button>
+                <button class="btn-signup" type="submit" id="submit" disabled>Sign up</button>
             </div>
         </div>
         <div class="card-2">

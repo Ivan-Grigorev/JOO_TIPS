@@ -23,6 +23,8 @@ body {
     height: auto;
     margin: 2.5% 2.5% 2.5% 2.5%;
 
+    text-align: center;
+
     background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
     border-radius: 20px;
 }
@@ -56,6 +58,15 @@ input {
 
     background: rgba(196, 196, 196, 0.5);
     border-radius: 30px;
+}
+
+.message {
+    height: 20px;
+
+    color: #ABABAB;
+
+    font-weight: 300;
+    font-size: 25px;
 }
 
 .row {

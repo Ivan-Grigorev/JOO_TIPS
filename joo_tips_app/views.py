@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_control
 
+from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 
 from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions, \
     PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
@@ -197,15 +199,25 @@ def python_progress_statistic_guests(request):
 
 
 def register(request):
-    record = GuestsVisitStatistic(register_date=datetime.now())
-    record.save()
     if request.method == 'POST':
-        # register date
+        user = User.objects.create_user(username=request.POST.get('username'),
+                                        email=request.POST.get('email'),
+                                        password=request.POST.get('password'))
+        user.save()
+        record = GuestsVisitStatistic(register_date=datetime.now())
+        record.save()
+        login(request, user)
         return redirect('users_homepage')
     return render(request, template_name='register.html')
 
 
 def log_in(request):
+    user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+    if user is not None:
+        login(request, user)
+        return redirect('users_homepage')
+    else:
+        messages.error(request, 'Username or password does not exist!')
     return render(request, template_name='login.html')
 
 
@@ -214,17 +226,17 @@ def log_out(request):
     return redirect('homepage')
 
 
-# @login_required
+@login_required
 def users_homepage(request):
     return render(request, template_name='users_clipboards_desk.html')
 
 
-# @login_required
+@login_required
 def users_store(request):
     return render(request, template_name='users_store.html')
 
 
-# @login_required
+@login_required
 def python_themes_time(request):
     if request.method == 'POST':
         end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')))

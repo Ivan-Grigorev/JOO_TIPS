@@ -1,7 +1,5 @@
 from django.db import models
 
-from django.contrib.auth.models import User
-
 
 class PythonTheoryBasics(models.Model):
     theme = models.TextField()

@@ -14,20 +14,20 @@
   }
 </script>
 <body>
-<!--<form method="POST">-->
-<!--    {% csrf_token %}-->
+<form method="POST">
+    {% csrf_token %}
     <div class="card-1">
         <div class="title">
             <p>Мій обліковий запис</p>
         </div>
         <div class="name">
-            <input name="name" placeholder="Ім'я">
+            <input name="username" placeholder="Ім'я" required>
         </div>
-        <div class="e-mail">
-            <input name="e-mail" placeholder="E-mail">
-        </div>
+<!--        <div class="e-mail">-->
+<!--            <input name="e-mail" placeholder="E-mail">-->
+<!--        </div>-->
         <div class="password">
-            <input name="password" placeholder="Пароль">
+            <input name="password" placeholder="Пароль" required>
         </div>
         <div class="row">
             <div>
@@ -55,6 +55,6 @@
             <a href="/" style="color: #DDDDDD;">Не зараз</a>
         </div>
     </div>
-<!--</form>-->
+</form>
 </body>
 </html>

@@ -35,6 +35,19 @@ body {
     color: #ACB0B1;
 }
 
+.btn-logout {
+    margin-top: -1%;
+    margin-left: 1%;
+
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+
+    background: linear-gradient(92.42deg,
+        rgba(255, 238, 238, 0.5) -4.28%,
+        rgba(255, 255, 255, 0.305) 109.69%);
+}
+
 .price-list {
     margin-top: -1%;
     margin-left: auto;
@@ -76,11 +89,6 @@ body {
     color: #505050;
 
     background: #C4C4C4;
-/*    color: #DDDDDD;
-
-    background: linear-gradient(92.42deg,
-        rgba(255, 238, 238, 0.5) -4.28%,
-        rgba(255, 255, 255, 0.305) 109.69%);*/
     border-radius: 20px;
 }
 
