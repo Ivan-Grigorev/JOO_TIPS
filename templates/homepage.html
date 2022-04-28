@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
-<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+</head>
 <body>
 <header class="header">
-    <nav>
-        <div class="top-nav">
-            <div>
-                <button class="btn-login"><a style="text-decoration: none; color: #ABABAB;"
-                                 href="{% url 'log_in' %}">Log in</a></button>
-            </div>
-            <div class="language">
-                <a href="{% url 'homepage' %}"><img src="{% static 'images/en-us.png' %}" width="40"></a>
-                <a href="{% url 'homepage_ua' %}"><img src="{% static 'images/ua.png' %}" width="40"></a>
-            </div>
+    <div class="top-nav">
+        <div>
+            <button class="btn-login"><a style="text-decoration: none; color: #ABABAB;"
+                             href="{% url 'log_in' %}">Log in</a></button>
         </div>
-        <div class="joo-header">JOO</div>
-        <div class="tips-header">TIPS</div>
-    </nav>
+        <div class="language">
+            <a href="{% url 'homepage' %}"><img src="{% static 'images/en-us.png' %}" width="40"></a>
+            <a href="{% url 'homepage_ua' %}"><img src="{% static 'images/ua.png' %}" width="40"></a>
+        </div>
+    </div>
+    <div class="title">
+        <div class="joo-header">
+            JOO
+        </div>
+        <div class="tips-header">
+            TIPS
+        </div>
+    </div>
     <nav class="navbar">
         <a href="{% url 'who_we_are' %}">WHO WE ARE</a>
         <a href="{% url 'how_we_work' %}">HOW WE WORK</a>

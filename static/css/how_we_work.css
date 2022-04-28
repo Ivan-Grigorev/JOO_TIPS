@@ -24,121 +24,169 @@ body {
 }
 
 .card-1 {
-    width: 33%;
-    height: 120px;
-    margin-left: 2.5%;
+    margin-left: 1%;
+
+    width: 40%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-1-container {
-    margin: 10px;
+    padding-left: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 30px;
-    line-height: 37px;
 
     color: #ABABAB;
 }
 
 .card-2 {
-    width: 57%;
-    height: 120px;
-    margin-left: 5%;
-    margin-right: 2.5%;
-    top: 218px;
+    margin-left: 30px;
+    margin-right: 1%;
+
+    width: 60%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-2-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 25px;
-    line-height: 31px;
 
     color: #ABABAB;
 }
 
 .card-3 {
-    width: 33%;
-    height: 120px;
-    margin-left: 2.5%;
+    margin-left: 1%;
+
+    width: 40%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-3-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 30px;
-    line-height: 37px;
 
     color: #ABABAB;
 }
 
 .card-4 {
-    width: 57%;
-    height: 120px;
-    margin-left: 5%;
-    margin-right: 2.5%;
-    top: 218px;
+    margin-left: 30px;
+    margin-right: 1%;
+
+    width: 60%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-4-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 25px;
-    line-height: 31px;
 
     color: #ABABAB;
 }
 
 .card-5 {
-    width: 33%;
-    height: 120px;
-    margin-left: 2.5%;
+    margin-left: 1%;
+    margin-bottom: 70px;
+
+    width: 40%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-5-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 30px;
-    line-height: 37px;
 
     color: #ABABAB;
 }
 
 .card-6 {
-    width: 57%;
-    height: 120px;
-    margin-left: 5%;
-    margin-right: 2.5%;
-    top: 218px;
+    margin-left: 30px;
+    margin-right: 1%;
+    margin-bottom: 70px;
+
+    width: 60%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-6-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 25px;
-    line-height: 31px;
 
     color: #ABABAB;
+}
+
+
+@media screen and (max-width: 600px) {
+    .row {
+        display: grid;
+    }
+
+    .card-1 {
+        margin-bottom: 10px;
+        width: 90%;
+    }
+
+    .card-2 {
+        margin-bottom: 30px;
+        width: 90%;
+    }
+
+    .card-3 {
+        margin-bottom: 10px;
+        width: 90%;
+    }
+
+    .card-4 {
+        margin-bottom: 30px;
+        width: 90%;
+    }
+
+    .card-5 {
+        margin-bottom: 10px;
+        width: 90%;
+    }
+
+    .card-6 {
+        margin-bottom: 70px;
+        width: 90%;
+    }
 }

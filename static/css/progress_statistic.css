@@ -23,6 +23,8 @@ body {
     height: auto;
     margin: 2.5% 2.5% 2.5% 2.5%;
 
+    text-align: center;
+
     background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
     border-radius: 20px;
 }
@@ -114,7 +116,6 @@ input {
     margin-right: 5%;
 
     width: 45%;
-    min-height: 450px;
     height: auto;
 
     background: rgba(196, 196, 196, 0.1);
@@ -132,8 +133,8 @@ input {
 
 .btn-signin {
     margin-top: 50px;
-    margin-left: 40%;
-    margin-right: 40%;
+    margin-left: auto;
+    margin-right: auto;
 
     width: 290px;
     height: 50px;
@@ -147,4 +148,60 @@ input {
         rgba(255, 238, 238, 0.5) -4.28%,
         rgba(255, 255, 255, 0.305) 109.69%);
     border-radius: 30px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .row {
+        display: grid;
+    }
+
+    .card-2 {
+        width: 90%;
+    }
+
+    input {
+        width: 80px;
+    }
+
+    .card-4 {
+        width: 0;
+        margin: 0;
+    }
+
+    .btn-signin {
+        margin-bottom: 70px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    .row {
+        display: flex;
+    }
+
+    .card-2 {
+        margin-left: 2.5%;
+        width: 45%;
+    }
+
+    input {
+        width: 60px;
+    }
+
+    .card-3 {
+
+    }
+
+    .card-4 {
+        margin-top: 300px;
+        margin-left: 5%;
+        margin-right: 2.5%;
+
+        width: 50%;
+    }
+
+   .btn-signin {
+        margin-bottom: 70px;
+    }
+
 }

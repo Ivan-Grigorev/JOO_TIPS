@@ -3,6 +3,7 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
@@ -44,7 +45,7 @@
         </div>
         <div class="row">
             <div>
-                <button class="btn-login" type="submit" onclick="location.href={% url 'log_in' %}">Log in</button>
+                <button class="btn-login" type="submit" onclick="location.href='{% url 'log_in' %}'">Log in</button>
             </div>
             <div>
                 <button class="btn-signup" type="submit" id="submit" disabled>Sign up</button>

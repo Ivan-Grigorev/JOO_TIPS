@@ -3,6 +3,7 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/themes_time.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
@@ -35,14 +36,11 @@
                     <option value="20" disabled>*20 min</option>
                     <option value="25" disabled>*25 min</option>
                     <option value="30" disabled>*30 min</option>
-                    <option disabled>------------------------------------</option>
+                    <option disabled></option>
                     <option disabled>* - Available only for authorized users</option>
                 </select>
                 <div>
                     <button class="btn" type="submit">START</button>
-<!--                    <button class="btn" type="submit"><a style="text-decoration: none; color: black;"-->
-<!--                         href="{% url 'python_theory_cards' %}">START</a>-->
-<!--                    </button>-->
                 </div>
             </div>
         </div>

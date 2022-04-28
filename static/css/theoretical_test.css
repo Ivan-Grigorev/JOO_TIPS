@@ -20,12 +20,16 @@ body {
 .nav-bar {
     margin-bottom: -30px;
     display: flex;
+
+    height: auto;
 }
 
 .test-counter {
     margin: auto;
     margin-top: -20px;
-    margin-left: 50px;
+    margin-left: 2.5%;
+
+    height: auto;
 
     text-align: left;
     font-weight: 900;
@@ -35,8 +39,10 @@ body {
 }
 
 .timer {
-    margin-right: 50px;
+    margin-right: 2.5%;
     margin-top: 10px;
+
+    height: auto;
 
     text-align: right;
     font-weight: 800;
@@ -46,21 +52,24 @@ body {
 }
 
 .card-1 {
-    width: 95%;
-    min-height: 900px;
-    height: auto;
     margin: 2.5% 2.5% 2.5% 2.5%;
+
+    width: 95%;
+    min-height: 95vh;
+    height: auto;
+
+    text-align: center;
 
     background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
     border-radius: 20px;
 }
 
 .question {
-/*    padding: 50px; */
-    width-max: 300px;
+    width: auto;
     height: auto;
 
     text-align: center;
+
     font-weight: 300;
     font-size: 30px;
     color: #ABABAB;
@@ -72,6 +81,8 @@ body {
     display: flex;
     min-margin-top: 100px;
     margin-top: auto;
+
+    text-align: center;
 }
 
 .row {
@@ -85,7 +96,6 @@ body {
     margin-bottom: 10px;
 
     width: auto;
-    min-width: 400px;
     height: 150px;
 
     background: rgba(196, 196, 196, 0.5);
@@ -102,7 +112,6 @@ body {
     margin-bottom: 10px;
 
     width: auto;
-    min-width: 400px;
     height: 150px;
 
     background: rgba(196, 196, 196, 0.5);
@@ -120,4 +129,88 @@ body {
     color: #C1C1C1;
 
     white-space: pre-wrap;
+}
+
+
+@media screen and (max-width: 600px) {
+    .test-counter {
+        font-size: 23px;
+    }
+
+    .timer {
+        font-size: 33px;
+    }
+
+    .nav-bar {
+        display: grid;
+        margin-bottom: 30px;
+    }
+
+    .timer {
+        margin-top: -5%;
+    }
+
+    .card-1 {
+        text-align: center;
+    }
+
+    .question {
+        margin-top: -20px;
+    }
+    .container {
+        display: grid;
+        text-align: center;
+    }
+
+    .slot-left {
+        margin-left: 2.5%;
+        margin-bottom: 10px;
+
+        width: 95%;
+        height: auto;
+        min-height: 150px;
+
+        background: rgba(196, 196, 196, 0.5);
+        border-radius: 30px;
+    }
+
+    .slot-right {
+        margin-left: 2%;
+        margin-right: 2.5%;
+        margin-bottom: 10px;
+
+        width: 95%;
+        height: auto;
+        min-height: 150px;
+
+        background: rgba(196, 196, 196, 0.5);
+        border-radius: 30px;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 800px) {
+    .slot-left {
+        margin-left: 2.5%;
+        margin-bottom: 10px;
+
+        width: 90%;
+        height: auto;
+        min-height: 150px;
+
+        background: rgba(196, 196, 196, 0.5);
+        border-radius: 30px;
+    }
+
+    .slot-right {
+        margin-left: 2%;
+        margin-right: 2.5%;
+        margin-bottom: 10px;
+
+        width: 90%;
+        height: auto;
+        min-height: 150px;
+
+        background: rgba(196, 196, 196, 0.5);
+        border-radius: 30px;
+    }
 }

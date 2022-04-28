@@ -27,44 +27,50 @@ body {
     display: flex;
 }
 
-.user {
+.btn-logout {
+    margin-top: -1%;
     margin-left: 5%;
+
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+
+    color: #505050;
+
+    background: #C4C4C4;
+}
+
+.btn-logout:hover {
+    background: rgba(70, 70, 70, 0.5);
+    color: #DDDDDD;
+}
+
+.user {
+    margin-top: -0.5%;
+    margin-left: 20px;
 
     font-weight: 500;
     font-size: 25px;
     color: #ACB0B1;
 }
 
-.btn-logout {
-    margin-top: -1%;
-    margin-left: 1%;
-
-    height: 60px;
-    width: 60px;
-    border-radius: 100%;
-
-    background: linear-gradient(92.42deg,
-        rgba(255, 238, 238, 0.5) -4.28%,
-        rgba(255, 255, 255, 0.305) 109.69%);
-}
-
-.price-list {
+.btn-price-list {
     margin-top: -1%;
     margin-left: auto;
-    margin-right: 5%;
-}
+    margin-right: 6%;
 
-.btn-price-list {
+    width: 60px;
     height: 60px;
     border-radius: 100%;
 
-    background: linear-gradient(92.42deg,
-        rgba(255, 238, 238, 0.5) -4.28%,
-        rgba(255, 255, 255, 0.305) 109.69%);
+    color: #505050;
+
+    background: #C4C4C4;
 }
 
 .btn-price-list:hover {
     background: rgba(70, 70, 70, 0.5);
+    color: #DDDDDD;
 }
 
 .footer {
@@ -80,7 +86,6 @@ body {
 .btn-footer {
     width: 200px;
     height: 70px;
-    margin-left: 1%;
     margin-right: 1%;
 
     font-weight: 300;
@@ -95,4 +100,30 @@ body {
 .btn-footer:hover {
     background: rgba(70, 70, 70);
     color: #DDDDDD;
+}
+
+
+@media screen and (max-width: 600px) {
+    .btn-price-list {
+        margin-right: 9%;
+    }
+
+    .footer {
+        width: 97%;
+        text-align: center;
+    }
+
+    .btn-footer {
+        width: 67px;
+    }
+
+    span {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    .btn-footer {
+        width: 115px;
+    }
 }

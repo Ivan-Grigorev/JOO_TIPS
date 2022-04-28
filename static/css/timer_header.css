@@ -18,7 +18,7 @@ body {
 }
 
 .timer {
-    margin-right: 50px;
+    margin-right: 2.5%;
     margin-top: 10px;
 
     text-align: right;
@@ -29,3 +29,9 @@ body {
 
     color: #ABABAB;
 }
+
+
+@media screen and (max-width: 600px) {
+    .timer {
+        font-size: 33px;
+    }

@@ -29,6 +29,8 @@ body {
     -o-background-size: cover;
     -moz-background-size: cover;
     -ms-background-size: cover;
+
+    text-align: center;
 }
 
 .top-nav {
@@ -57,14 +59,22 @@ body {
     font-weight: 300;
 }
 
+.title {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 270px;
+    height: 130px;
+}
+
 .joo-header {
     margin-left: auto;
     margin-right: auto;
-    width: 197px;
-    height: 108px;
+
+    width: 200px;
+    height: 110px;
     font-weight: 900;
     font-size: 100px;
-    line-height: 126px;
 
     background-image: linear-gradient(90deg, #F3F3F3 -2.8%, rgba(108, 99, 99, 0) 130.07%);
     background-size: 100%;
@@ -76,25 +86,24 @@ body {
 }
 
 .tips-header {
-    position: absolute;
-    left: 52%;
-    right: 38%;
-    top: 140px;
+    margin-top: -15px;
+    margin-left: 77%;
+    margin-right: 23%;
 
     font-weight: 100;
     font-size: 30px;
-    line-height: 37px;
     text-align: center;
 
     color: #ABABAB;
 }
 
 .navbar {
+    margin-top: 30px;
+
     text-align: center;
-    margin-top: 35px;
+
     font-weight: 100;
     font-size: 30px;
-    line-height: 37px;
 }
 
 .navbar a {
@@ -104,7 +113,6 @@ body {
 
     font-weight: 500;
     font-size: 32px;
-    line-height: 40px;
 
     color: rgba(171, 171, 171, 0.8);
 }
@@ -115,4 +123,26 @@ body {
 
 .navbar a.active {
     color: white;
+}
+
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        display: block;
+
+        font-size: 25px;
+    }
+
+    .navbar a {
+        display: block;
+
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+
+        font-weight: 500;
+        font-size: 25px;
+
+        color: rgba(171, 171, 171, 0.8);
+    }
 }

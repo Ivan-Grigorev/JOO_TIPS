@@ -15,15 +15,17 @@ body {
 
     font-family: Galatea;
     font-style: normal;
+
+    text-align: center;
 }
 
 .btn-install {
-    position: absolute;
-    width: 247px;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 250px;
     height: 95px;
-    left: 40%;
-    right: 40%;
-    top: 300px;
 
     background: linear-gradient(92.42deg,
         rgba(255, 238, 238, 0.5) -4.28%,
@@ -40,12 +42,12 @@ body {
 }
 
 .btn-use {
-    position: absolute;
-    width: 247px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 250px;
     height: 95px;
-    left: 40%;
-    right: 40%;
-    top: 475px;
 
     background: linear-gradient(92.42deg,
         rgba(255, 238, 238, 0.5) -4.28%,
@@ -61,3 +63,9 @@ body {
     color: #ABABAB;
 }
 
+
+@media screen and (max-width: 600px) {
+    .btn-use {
+        margin-bottom: 70px;
+    }
+}

@@ -1,94 +1,119 @@
 .card-1 {
-    width: 95%;
-    height: 120px;
+    margin-top: 40px;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    top: 218px;
+
+    width: 95%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-1-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 25px;
-    line-height: 31px;
 
     color: #ABABAB;
 }
 
 .card-2 {
-    width: 95%;
-    height: 120px;
+    margin-top: 40px;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    top: 373px;
+
+    width: 95%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-2-container {
-    margin: 10px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 25px;
-    line-height: 31px;
 
     color: #ABABAB;
 }
 
 .card-3 {
-    width: 95%;
-    height: 120px;
+    margin-top: 40px;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    top: 540px;
+    margin-bottom: 70px;
+
+    width: 95%;
+    min-height: 120px;
+    height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-3-container {
-    margin: 20px;
+    padding: 10px;
+
     font-family: Galatea;
     font-style: normal;
     font-weight: 300;
     font-size: 25px;
 
-    color: #ABABAB;
+    text-align: center;
 
-    display: flex;
+    color: #ABABAB;
 }
 
 input {
-    width: 700px;
-    height: 63px;
-    margin: 20px;
+    margin-top: 2%;
+    margin-left: 1%;
+
+    width: 500px;
+    height: 60px;
 
     background: linear-gradient(92.42deg,
         rgba(255, 238, 238, 0.5) -4.28%,
         rgba(255, 255, 255, 0.305) 109.69%);
     border-radius: 20px;
 
-    margin: 10px;
-    margin-top: 20px;
     font-family: Galatea;
     font-style: normal;
     font-weight: bold;
     font-size: 25px;
-    line-height: 31px;
 
     color: #ABABAB;
 }
 
 .btn-submit {
-    width: 260px;
-    height: 70px;
+    margin: 0 auto;
+
+    width: 150px;
+    height: 65px;
+
+    text-align: center;
+
+    font-family: Galatea;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+
+    color: #ABABAB;
 
     background: linear-gradient(92.42deg,
         rgba(255, 238, 238, 0.5) -4.28%,
         rgba(255, 255, 255, 0.305) 109.69%);
     border-radius: 20px;
+}
+
+
+@media screen and (max-width: 600px) {
+    input {
+        width: 300px;
+    }
 }
