@@ -107,7 +107,7 @@ def python_theory_cards(request):
         text[3] = theme_4[0]
     if request.method == 'POST':
         record = GuestsVisitStatistic(start_test_time=datetime.now())
-        record.save()
+        # record.save()
         return redirect('python_theoretical_test')
     return render(request=request, template_name='python_theory.html', context={'lesson_time': lesson_time,
                                                                                 'timer': test_time,
@@ -185,12 +185,12 @@ def python_practical_test(request):
 
 
 def python_progress_statistic_guests(request):
-    # drop tests_result data
     test_result = sum(tests_results)
     day_result = 0
     week_result = 0
     month_result = 0
     year_result = 0
+    tests_results.clear()
     return render(request, template_name='python_progress_statistic.html', context={'test_result': test_result,
                                                                                     'day_result': day_result,
                                                                                     'week_result': week_result,
@@ -256,3 +256,19 @@ def golang_themes_time(request):
 
 def javascript_themes_time(request):
     return render(request, template_name='javascript_themes_time.html')
+
+
+def bad_request_view(request, exception=None):
+    return render(request, template_name='errors_views/400.html', status=400)
+
+
+def permission_denied_view(request, exception=None):
+    return render(request, template_name='errors_views/403.html', status=403)
+
+
+def page_not_found_view(request, exception=None):
+    return render(request, template_name='errors_views/404.html', status=404)
+
+
+def server_error_view(request, exception=None):
+    return render(request, template_name='errors_views/500.html', status=500)

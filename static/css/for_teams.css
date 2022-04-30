@@ -81,6 +81,7 @@ input {
         rgba(255, 238, 238, 0.5) -4.28%,
         rgba(255, 255, 255, 0.305) 109.69%);
     border-radius: 20px;
+    border: none;
 
     font-family: Galatea;
     font-style: normal;

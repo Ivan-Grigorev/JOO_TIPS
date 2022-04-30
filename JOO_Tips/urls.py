@@ -26,3 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(url_patterns))
 ]
+
+handler400 = 'joo_tips_app.views.bad_request_view'
+handler403 = 'joo_tips_app.views.permission_denied_view'
+handler404 = 'joo_tips_app.views.page_not_found_view'
+handler500 = 'joo_tips_app.views.server_error_view'

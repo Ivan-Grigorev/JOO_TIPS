@@ -185,12 +185,12 @@ def python_practical_test_ua(request):
 
 
 def python_progress_statistic_guests_ua(request):
-    # drop tests_result data
     test_result = sum(tests_results)
     day_result = 0
     week_result = 0
     month_result = 0
     year_result = 0
+    tests_results.clear()
     return render(request, template_name='ua/python_progress_statistic_ua.html', context={'test_result': test_result,
                                                                                           'day_result': day_result,
                                                                                           'week_result': week_result,
