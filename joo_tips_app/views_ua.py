@@ -72,10 +72,10 @@ def python_themes_time_guests_ua(request):
         lesson_end_date_sep = lesson_end_date.ctime().split(' ')
         end_date_sep = end_date.ctime().split(' ')
         # Jan 5, 2024 15:37:25
-        lesson_time = '{0} {1}, {2} {3}'.format(lesson_end_date_sep[1], lesson_end_date_sep[2],
-                                                lesson_end_date_sep[4], lesson_end_date_sep[3])
-        test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
-                                              end_date_sep[4], end_date_sep[3])
+        lesson_time = '{0} {1}, {2} {3}'.format(lesson_end_date_sep[1], lesson_end_date_sep[3],
+                                                lesson_end_date_sep[5], lesson_end_date_sep[4])
+        test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[3],
+                                              end_date_sep[5], end_date_sep[4])
         record = GuestsVisitStatistic(guests_level=request.POST.get('level'),
                                       test_time=request.POST.get('time'),
                                       lesson_time=int(request.POST.get('time')) / 2,
@@ -226,17 +226,17 @@ def log_out_ua(request):
     return redirect('homepage_ua')
 
 
-@login_required
+@login_required(login_url='log_in_ua')
 def users_homepage_ua(request):
-    return render(request, template_name='ua/users_clipboards_desk_ua.html')
+    return render(request, template_name='ua/python_clipboards_desk_ua.html')
 
 
-@login_required
+@login_required(login_url='log_in_ua')
 def users_store_ua(request):
     return render(request, template_name='ua/users_store_ua.html')
 
 
-@login_required
+@login_required(login_url='log_in_ua')
 def python_themes_time_ua(request):
     if request.method == 'POST':
         end_date = (datetime.now() + timedelta(minutes=int(request.POST.get('time')))).ctime()
