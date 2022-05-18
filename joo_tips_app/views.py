@@ -27,12 +27,12 @@ import ipinfo
 
 
 def homepage(request):
-    record = GuestsVisitStatistic(guests_ip=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().ip,
-                                  guests_location=[ipinfo.getHandler('c3ef7fe9b908a3').getDetails().city,
-                                                   ipinfo.getHandler('c3ef7fe9b908a3').getDetails().country_name],
-                                  guests_hostname=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().hostname,
-                                  visit_date=datetime.now())
-    record.save()
+    # record = GuestsVisitStatistic(guests_ip=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().ip,
+    #                               guests_location=[ipinfo.getHandler('c3ef7fe9b908a3').getDetails().city,
+    #                                                ipinfo.getHandler('c3ef7fe9b908a3').getDetails().country_name],
+    #                               guests_hostname=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().hostname,
+    #                               visit_date=datetime.now())
+    # record.save()
     return render(request, template_name='homepage.html')
 
 
@@ -60,7 +60,7 @@ def programing_language_choice(request):
     record = GuestsVisitStatistic(lets_try_it_date=datetime.now(),
                                   language='EN',
                                   programming_language='Python')
-    record.save()
+    # record.save()
     return render(request, template_name='programing_language_choice.html')
 
 
@@ -72,15 +72,15 @@ def python_themes_time_guests(request):
         lesson_end_date_sep = lesson_end_date.ctime().split(' ')
         end_date_sep = end_date.ctime().split(' ')
         # Jan 5, 2024 15:37:25
-        lesson_time = '{0} {1}, {2} {3}'.format(lesson_end_date_sep[1], lesson_end_date_sep[3],
-                                                lesson_end_date_sep[5], lesson_end_date_sep[4])
-        test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[3],
-                                              end_date_sep[5], end_date_sep[4])
+        lesson_time = '{0} {1}, {2} {3}'.format(lesson_end_date_sep[1], lesson_end_date_sep[2],
+                                                lesson_end_date_sep[4], lesson_end_date_sep[3])
+        test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
+                                              end_date_sep[4], end_date_sep[3])
         record = GuestsVisitStatistic(guests_level=request.POST.get('level'),
                                       test_time=request.POST.get('time'),
                                       lesson_time=int(request.POST.get('time')) / 2,
                                       start_lesson_time=datetime.now())
-        record.save()
+        # record.save()
         return redirect('python_theory_cards')
     return render(request, template_name='python_themes_time_guests.html')
 
@@ -107,7 +107,7 @@ def python_theory_cards(request):
         text[3] = theme_4[0]
     if request.method == 'POST':
         record = GuestsVisitStatistic(start_test_time=datetime.now())
-        record.save()
+        # record.save()
         return redirect('python_theoretical_test')
     return render(request=request, template_name='python_theory.html', context={'lesson_time': lesson_time,
                                                                                 'timer': test_time,
@@ -141,7 +141,7 @@ def python_theoretical_test(request):
             theoretical_test_counter -= total_tests
             record = GuestsVisitStatistic(end_theoretical_start_practical_test_time=datetime.now(),
                                           theoretical_test_result=tests_results)
-            record.save()
+            # record.save()
             return redirect('python_practical_test')
         return redirect('python_theoretical_test')
     return render(request, template_name='python_theoretical_test.html',
@@ -172,8 +172,8 @@ def python_practical_test(request):
             practical_test_counter -= total_tests
             record = GuestsVisitStatistic(practical_test_result=tests_results[2:],
                                           end_test_time=datetime.now())
-            record.save()
-            return redirect('python_progress_statistic_guests')
+            # record.save()
+            return redirect('progress_statistic_guests')
         return redirect('python_practical_test')
     return render(request, template_name='python_practical_test.html',
                   context={'test_counter': practical_test_counter + 1,
@@ -184,18 +184,18 @@ def python_practical_test(request):
                            'answers': answers})
 
 
-def python_progress_statistic_guests(request):
+def progress_statistic_guests(request):
     test_result = sum(tests_results)
     day_result = 0
     week_result = 0
     month_result = 0
     year_result = 0
     tests_results.clear()
-    return render(request, template_name='python_progress_statistic.html', context={'test_result': test_result,
-                                                                                    'day_result': day_result,
-                                                                                    'week_result': week_result,
-                                                                                    'month_result': month_result,
-                                                                                    'year_result': year_result})
+    return render(request, template_name='progress_statistic.html', context={'test_result': test_result,
+                                                                             'day_result': day_result,
+                                                                             'week_result': week_result,
+                                                                             'month_result': month_result,
+                                                                             'year_result': year_result})
 
 
 def register(request):
@@ -205,7 +205,7 @@ def register(request):
                                         password=request.POST.get('password'))
         user.save()
         record = GuestsVisitStatistic(register_date=datetime.now())
-        record.save()
+        # record.save()
         login(request, user)
         return redirect('users_homepage')
     return render(request, template_name='register.html')
@@ -234,6 +234,21 @@ def users_homepage(request):
 @login_required(login_url='log_in')
 def users_store(request):
     return render(request, template_name='users_store.html')
+
+
+# @login_required(login_url='log_in')
+def pupils_homepage(request):
+    return render(request, template_name='pupils_homepage.html')
+
+
+# @login_required(login_url='log_in')
+def teachers_homepage(request):
+    return render(request, template_name='teachers_homepage.html')
+
+
+# @login_required(login_url='log_in')
+def mentors_homepage(request):
+    return render(request, template_name='mentors_homepage.html')
 
 
 @login_required(login_url='log_in')

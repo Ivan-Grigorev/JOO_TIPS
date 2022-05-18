@@ -17,6 +17,11 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .card-1 {
     width: 95%;
     height: 95vh;
@@ -32,8 +37,6 @@ body {
     margin-left: auto;
     margin-right: auto;
 
-    font-family: Galatea;
-    font-style: normal;
     font-weight: 300;
     font-size: 30px;
 

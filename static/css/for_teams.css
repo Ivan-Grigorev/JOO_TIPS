@@ -13,8 +13,6 @@
 .card-1-container {
     padding: 10px;
 
-    font-family: Galatea;
-    font-style: normal;
     font-weight: 300;
     font-size: 25px;
 
@@ -36,8 +34,6 @@
 .card-2-container {
     padding: 10px;
 
-    font-family: Galatea;
-    font-style: normal;
     font-weight: 300;
     font-size: 25px;
 
@@ -60,8 +56,6 @@
 .card-3-container {
     padding: 10px;
 
-    font-family: Galatea;
-    font-style: normal;
     font-weight: 300;
     font-size: 25px;
 
@@ -83,8 +77,6 @@ input {
     border-radius: 20px;
     border: none;
 
-    font-family: Galatea;
-    font-style: normal;
     font-weight: bold;
     font-size: 25px;
 
@@ -94,13 +86,14 @@ input {
 .btn-submit {
     margin: 0 auto;
 
-    width: 150px;
+    min-width: 150px;
+    width: auto;
     height: 65px;
 
     text-align: center;
 
-    font-family: Galatea;
-    font-style: normal;
+    padding: 5px;
+
     font-weight: bold;
     font-size: 25px;
 
@@ -116,5 +109,9 @@ input {
 @media screen and (max-width: 600px) {
     input {
         width: 300px;
+    }
+
+    .btn-submit {
+        margin-top: 10px;
     }
 }

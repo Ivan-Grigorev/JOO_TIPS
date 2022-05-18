@@ -17,6 +17,11 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .header {
     background: linear-gradient(92.42deg,
         rgba(255, 238, 238, 0.1) -4.28%,
@@ -73,8 +78,10 @@ body {
 
     width: 200px;
     height: 110px;
+
     font-weight: 900;
     font-size: 100px;
+    font-family: Galatea;
 
     background-image: linear-gradient(90deg, #F3F3F3 -2.8%, rgba(108, 99, 99, 0) 130.07%);
     background-size: 100%;
@@ -92,6 +99,8 @@ body {
 
     font-weight: 100;
     font-size: 30px;
+    font-family: Galatea;
+
     text-align: center;
 
     color: #ABABAB;

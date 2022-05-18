@@ -19,8 +19,7 @@ body {
 
 .card-1 {
     width: 95%;
-    min-height: 770px;
-    height: auto;
+    height: 95vh;
     margin: 2.5% 2.5% 2.5% 2.5%;
 
     text-align: center;

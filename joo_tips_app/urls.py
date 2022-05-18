@@ -3,15 +3,17 @@ from django.urls import path
 from .views import homepage, who_we_are, how_we_work, lets_try_it, for_teams, for_schools, \
     programing_language_choice, python_themes_time, python_themes_time_guests, golang_themes_time, \
     javascript_themes_time, python_theory_cards, python_theoretical_test, python_practical_test, \
-    python_progress_statistic_guests, \
+    progress_statistic_guests, \
     register, log_in, log_out, \
-    users_homepage, users_store
+    users_homepage, users_store, \
+    pupils_homepage, teachers_homepage, mentors_homepage
 from .views_ua import homepage_ua, who_we_are_ua, how_we_work_ua, lets_try_it_ua, for_teams_ua, for_schools_ua, \
     programing_language_choice_ua, python_themes_time_ua, python_themes_time_guests_ua, python_theory_cards_ua, \
     golang_themes_time_ua, javascript_themes_time_ua, python_theoretical_test_ua, python_practical_test_ua, \
-    python_progress_statistic_guests_ua,\
+    progress_statistic_guests_ua,\
     register_ua, log_in_ua, log_out_ua, \
-    users_homepage_ua, users_store_ua
+    users_homepage_ua, users_store_ua, \
+    pupils_homepage_ua, teachers_homepage_ua, mentors_homepage_ua
 
 
 url_patterns = [
@@ -30,8 +32,7 @@ url_patterns = [
     path('py/theory-cards/', python_theory_cards, name='python_theory_cards'),
     path('py/theoretical-test/', python_theoretical_test, name='python_theoretical_test'),
     path('py/practical-test/', python_practical_test, name='python_practical_test'),
-    path('py/progress-statistic-guests/', python_progress_statistic_guests,
-         name='python_progress_statistic_guests'),
+    path('py/progress-statistic-guests/', progress_statistic_guests, name='progress_statistic_guests'),
 
     path('register/', register, name='register'),
     path('login/', log_in, name='log_in'),
@@ -39,6 +40,10 @@ url_patterns = [
 
     path('users-homepage/', users_homepage, name='users_homepage'),
     path('users-store/', users_store, name='users_store'),
+
+    path('pupils-homepage/', pupils_homepage, name='pupils_homepage'),
+    path('teachers-homepage/', teachers_homepage, name='teachers_homepage'),
+    path('mentors-homepage/', mentors_homepage, name='mentors_homepage'),
 
     path('go/themes-time/', golang_themes_time, name='golang_themes_time'),
 
@@ -56,8 +61,7 @@ url_patterns = [
     path('ua/py/theory-cards/', python_theory_cards_ua, name='python_theory_cards_ua'),
     path('ua/py/theoretical-test/', python_theoretical_test_ua, name='python_theoretical_test_ua'),
     path('ua/py/practical-test/', python_practical_test_ua, name='python_practical_test_ua'),
-    path('ua/py/progress-statistic-guests/', python_progress_statistic_guests_ua,
-         name='python_progress_statistic_guests_ua'),
+    path('ua/py/progress-statistic-guests/', progress_statistic_guests_ua, name='progress_statistic_guests_ua'),
 
     path('ua/register/', register_ua, name='register_ua'),
     path('ua/login/', log_in_ua, name='log_in_ua'),
@@ -65,6 +69,10 @@ url_patterns = [
 
     path('ua/users-homepage/', users_homepage_ua, name='users_homepage_ua'),
     path('ua/users-store/', users_store_ua, name='users_store_ua'),
+
+    path('ua/pupils-homepage/', pupils_homepage_ua, name='pupils_homepage_ua'),
+    path('ua/teachers-homepage/', teachers_homepage_ua, name='teachers_homepage_ua'),
+    path('ua/mentors-homepage/', mentors_homepage_ua, name='mentors_homepage_ua'),
 
     path('ua/go/themes-time/', golang_themes_time_ua, name='golang_themes_time_ua'),
 

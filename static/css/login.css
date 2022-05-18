@@ -17,8 +17,14 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .card-1 {
     width: 95%;
+    min-height: 95vh;
     height: auto;
     margin: 2.5% 2.5% 2.5% 2.5%;
 

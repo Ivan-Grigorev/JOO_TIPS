@@ -17,13 +17,16 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .timer {
     margin-right: 2.5%;
     margin-top: 10px;
 
     text-align: right;
-    font-family: Galatea;
-    font-style: normal;
     font-weight: 800;
     font-size: 40px;
 

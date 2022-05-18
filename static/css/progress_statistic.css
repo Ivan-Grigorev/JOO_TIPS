@@ -17,6 +17,11 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .card-1 {
     width: 95%;
     min-height: 900px;
@@ -76,6 +81,7 @@ input {
 
     background: rgba(196, 196, 196, 0.5);
     border-radius: 30px;
+    border: none;
 }
 
 .card-3 {

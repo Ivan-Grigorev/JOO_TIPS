@@ -17,6 +17,11 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .nav-bar {
     margin-bottom: -30px;
     display: flex;
@@ -188,7 +193,7 @@ body {
     }
 }
 
-@media screen and (min-width: 700px) and (max-width: 800px) {
+@media screen and (min-width: 750px) and (max-width: 1024px) {
     .slot-left {
         margin-left: 2.5%;
         margin-bottom: 10px;

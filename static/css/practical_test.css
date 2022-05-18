@@ -17,6 +17,11 @@ body {
     font-style: normal;
 }
 
+:lang(uk) {
+    font-family: Arial;
+    font-style: normal;
+}
+
 .nav-bar {
     margin-bottom: -30px;
     display: flex;
@@ -113,6 +118,7 @@ body {
     margin-bottom: 20px;
 
     width: 400px;
+    min-height: 60px;
     height: auto;
 
     text-align: center;
@@ -177,6 +183,7 @@ body {
         font-weight: 300;
         font-size: 16px;
 
+        text-align: left;
         color: #C1C1C1;
 
         white-space: pre-wrap;
@@ -225,7 +232,6 @@ body {
     }
 
     .slots {
-
         margin-bottom: 20px;
 
         width: 270px;

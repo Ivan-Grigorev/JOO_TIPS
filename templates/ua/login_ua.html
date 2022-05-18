@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 {% load static %}
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 <script type="text/javascript">
   function showMessage(){
     if (confirm("Привіт, шановний Гість,\nЩоб отримати можливість зареєструватися на нашому веб-сайті, потрібно пройти перший тест.\n\nСпробуємо?")) {
-      location.href = 'http://127.0.0.1:8000/ua/lets-try-it/';
+      location.href = 'http://192.168.0.115:8000/ua/lets-try-it/';
     }
   }
 </script>
@@ -30,7 +30,7 @@
 <!--            <input name="e-mail" placeholder="E-mail">-->
 <!--        </div>-->
         <div class="password">
-            <input name="password" placeholder="Пароль" required>
+            <input name="password" type="password" placeholder="Пароль" required>
         </div>
         <div class="row">
             <div>

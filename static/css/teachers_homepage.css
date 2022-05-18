@@ -59,27 +59,8 @@ body {
     color: #ACB0B1;
 }
 
-.btn-price-list {
-    margin-top: -1%;
-    margin-left: auto;
-    margin-right: 6%;
-
-    width: 60px;
-    height: 60px;
-    border-radius: 100%;
-
-    color: #505050;
-
-    background: #C4C4C4;
-}
-
-.btn-price-list:hover {
-    background: rgba(70, 70, 70, 0.5);
-    color: #DDDDDD;
-}
-
 .sidebar {
-    margin-top: 11%;
+    margin-top: 15%;
 
     position: fixed;
     display: grid;
