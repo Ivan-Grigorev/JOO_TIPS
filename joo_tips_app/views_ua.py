@@ -242,13 +242,78 @@ def pupils_homepage_ua(request):
 
 
 # @login_required(login_url='log_in_ua')
+def pupils_event_ua(request):
+    return render(request, template_name='ua/pupils_event_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def pupils_exam_ua(request):
+    return render(request, template_name='ua/pupils_exam_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def pupils_rating_ua(request):
+    return render(request, template_name='ua/pupils_rating_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def pupils_mentor_ua(request):
+    return render(request, template_name='ua/pupils_mentor_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def pupils_pvp_ua(request):
+    return render(request, template_name='ua/pupils_pvp_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def pupils_tvt_ua(request):
+    return render(request, template_name='ua/pupils_tvt_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
 def teachers_homepage_ua(request):
     return render(request, template_name='ua/teachers_homepage_ua.html')
 
 
 # @login_required(login_url='log_in_ua')
+def teachers_event_ua(request):
+    return render(request, template_name='ua/teachers_event_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def teachers_exam_ua(request):
+    return render(request, template_name='ua/teachers_exam_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def teachers_rating_ua(request):
+    return render(request, template_name='ua/teachers_rating_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def teachers_mentor_ua(request):
+    return render(request, template_name='ua/teachers_mentor_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
 def mentors_homepage_ua(request):
     return render(request, template_name='ua/mentors_homepage_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def mentors_invocation_ua(request):
+    return render(request, template_name='ua/mentors_invocation_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def mentors_session_ua(request):
+    return render(request, template_name='ua/mentors_session_ua.html')
+
+
+# @login_required(login_url='log_in_ua')
+def mentors_rating_ua(request):
+    return render(request, template_name='ua/mentors_rating_ua.html')
 
 
 @login_required(login_url='log_in_ua')

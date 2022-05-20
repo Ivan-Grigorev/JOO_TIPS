@@ -21,15 +21,15 @@
 </header>
 <div class="sidebar">
     <div class="left-sidebar">
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'mentors_invocation' %}">
             <i class="fa fa-hand-paper-o" style="font-size: 25px;"></i>
         </button>
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'mentors_session' %}">
             <i class="fa fa-video-camera" style="font-size: 25px;"></i>
         </button>
     </div>
     <div class="right-sidebar">
-        <button class="right-button">
+        <button class="right-button" onclick="location.href={% url 'mentors_rating' %}">
             <i class="fa fa-graduation-cap" style="font-size: 25px;"></i>
         </button>
     </div>

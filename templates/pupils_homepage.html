@@ -21,24 +21,24 @@
 </header>
 <div class="sidebar">
     <div class="left-sidebar">
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'pupils_event' %}">
             <i class="fa fa-trophy" style="font-size: 25px;"></i>
         </button>
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'pupils_exam' %}">
             <i class="fa fa-pencil-square-o" style="font-size: 25px;"></i>
         </button>
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'pupils_rating' %}">
             <i class="fa fa-graduation-cap" style="font-size: 25px;"></i>
         </button>
     </div>
     <div class="right-sidebar">
-        <button class="right-button">
+        <button class="right-button" onclick="location.href={% url 'pupils_mentor' %}">
             <i class="fa fa-umbrella" style="font-size: 25px;"></i>
         </button>
-        <button class="right-button">
+        <button class="right-button" onclick="location.href={% url 'pupils_pvp' %}">
             <span style="font-weight: 700">PvP</span>
         </button>
-        <button class="right-button">
+        <button class="right-button" onclick="location.href={% url 'pupils_tvt' %}">
             <span style="font-weight: 700">TvT</span>
         </button>
     </div>

@@ -1,0 +1,11 @@
+.card-1 {
+    width: 95%;
+    min-height: 95vh;
+    height: auto;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    text-align: center;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}

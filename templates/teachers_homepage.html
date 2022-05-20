@@ -21,18 +21,18 @@
 </header>
 <div class="sidebar">
     <div class="left-sidebar">
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'teachers_event' %}">
             <i class="fa fa-trophy" style="font-size: 25px;"></i>
         </button>
-        <button class="left-button">
+        <button class="left-button" onclick="location.href={% url 'teachers_exam' %}">
             <i class="fa fa-pencil-square-o" style="font-size: 25px;"></i>
         </button>
     </div>
     <div class="right-sidebar">
-        <button class="right-button">
+        <button class="right-button" onclick="location.href={% url 'teachers_rating' %}">
             <i class="fa fa-graduation-cap" style="font-size: 25px;"></i>
         </button>
-        <button class="right-button">
+        <button class="right-button" onclick="location.href={% url 'teachers_mentor' %}">
             <i class="fa fa-umbrella" style="font-size: 25px;"></i>
         </button>
     </div>

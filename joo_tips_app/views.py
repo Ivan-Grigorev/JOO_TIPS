@@ -242,13 +242,78 @@ def pupils_homepage(request):
 
 
 # @login_required(login_url='log_in')
+def pupils_event(request):
+    return render(request, template_name='pupils_event.html')
+
+
+# @login_required(login_url='log_in')
+def pupils_exam(request):
+    return render(request, template_name='pupils_exam.html')
+
+
+# @login_required(login_url='log_in')
+def pupils_rating(request):
+    return render(request, template_name='pupils_rating.html')
+
+
+# @login_required(login_url='log_in')
+def pupils_mentor(request):
+    return render(request, template_name='pupils_mentor.html')
+
+
+# @login_required(login_url='log_in')
+def pupils_pvp(request):
+    return render(request, template_name='pupils_pvp.html')
+
+
+# @login_required(login_url='log_in')
+def pupils_tvt(request):
+    return render(request, template_name='pupils_tvt.html')
+
+
+# @login_required(login_url='log_in')
 def teachers_homepage(request):
     return render(request, template_name='teachers_homepage.html')
 
 
 # @login_required(login_url='log_in')
+def teachers_event(request):
+    return render(request, template_name='teachers_event.html')
+
+
+# @login_required(login_url='log_in')
+def teachers_exam(request):
+    return render(request, template_name='teachers_exam.html')
+
+
+# @login_required(login_url='log_in')
+def teachers_rating(request):
+    return render(request, template_name='teachers_rating.html')
+
+
+# @login_required(login_url='log_in')
+def teachers_mentor(request):
+    return render(request, template_name='teachers_mentor.html')
+
+
+# @login_required(login_url='log_in')
 def mentors_homepage(request):
     return render(request, template_name='mentors_homepage.html')
+
+
+# @login_required(login_url='log_in')
+def mentors_invocation(request):
+    return render(request, template_name='mentors_invocation.html')
+
+
+# @login_required(login_url='log_in')
+def mentors_session(request):
+    return render(request, template_name='mentors_session.html')
+
+
+# @login_required(login_url='log_in')
+def mentors_rating(request):
+    return render(request, template_name='mentors_rating.html')
 
 
 @login_required(login_url='log_in')
