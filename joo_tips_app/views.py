@@ -278,7 +278,11 @@ def teachers_homepage(request):
 
 # @login_required(login_url='log_in')
 def teachers_event(request):
-    return render(request, template_name='teachers_event.html')
+    # all events
+    if request.method == 'POST':
+        if request.POST.get('option') == 'create_event':
+            return render(request, template_name='teachers_create_event.html')
+    return render(request, template_name='teachers_event_overview.html')
 
 
 # @login_required(login_url='log_in')

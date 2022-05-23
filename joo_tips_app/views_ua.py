@@ -278,7 +278,11 @@ def teachers_homepage_ua(request):
 
 # @login_required(login_url='log_in_ua')
 def teachers_event_ua(request):
-    return render(request, template_name='ua/teachers_event_ua.html')
+    # all events
+    if request.method == 'POST':
+        if request.POST.get('option') == 'create_event':
+            return render(request, template_name='ua/teachers_create_event_ua.html')
+    return render(request, template_name='ua/teachers_event_overview_ua.html')
 
 
 # @login_required(login_url='log_in_ua')
