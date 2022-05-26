@@ -1,0 +1,252 @@
+{% extends 'teachers_homepage.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/teachers_create_exam.css' %}">
+<div class="card-1">
+    <h1 class="label">Exam dates</h1>
+    <div class="row">
+        <div class="card-2">
+            <input name="tournament_start_date" type="date">
+        </div>
+        <div class="card-3">
+            <input name="tournament_end_date" type="date">
+        </div>
+    </div>
+    <h1>Registration dates</h1>
+    <div class="row">
+        <div class="card-2">
+            <input name="registration_start_date" type="date">
+        </div>
+        <div class="card-3">
+            <input name="registration_end_date" type="date">
+        </div>
+    </div>
+    <h1>Exam time</h1>
+    <div class="row">
+        <div class="card-2">
+            <input name="tournament_start_time" type="time">
+        </div>
+        <div class="card-3">
+            <input name="tournament_end_time" type="time">
+        </div>
+    </div>
+    <h1 class="label">Participants</h1>
+    <div class="row-participants">
+        <button class="btn-all-participants">ALL</button>
+        <div class="row">
+            <div class="card-4">
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+                <button class="card-4-button"></button>
+            </div>
+            <div class="card-5">
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+                <button class="card-5-button"></button>
+            </div>
+            <div class="card-6">
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+                <button class="card-6-button"></button>
+            </div>
+        </div>
+    </div>
+    <h1 class="label">Programming languages</h1>
+    <div class="row">
+        <div class="card-7">
+            <button class="card-7-button">
+                <img src="{% static 'images/python.png' %}">
+            </button>
+            <button class="card-7-button">
+                <img src="{% static 'images/golang.png' %}" style="width: 90px;">
+            </button>
+            <button class="card-7-button">
+                <img src="{% static 'images/c#.png' %}">
+            </button>
+            <button class="card-7-button">
+                <img src="{% static 'images/c++.png' %}">
+            </button>
+        </div>
+        <div class="card-8">
+            <button class="card-8-button">
+                <img src="{% static 'images/javascript.png' %}">
+            </button>
+            <button class="card-8-button">
+                <img src="{% static 'images/php.png' %}" style="width: 80px;">
+            </button>
+            <button class="card-8-button">
+                <img src="{% static 'images/java.png' %}" style="width: 80px;">
+            </button>
+            <button class="card-8-button">
+                <img src="{% static 'images/r.png' %}">
+            </button>
+        </div>
+    </div>
+    <h1 class="label">Themes</h1>
+    <div class="row">
+        <div class="card-9">
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+            <button class="card-9-button">Theme</button>
+        </div>
+        <div class="card-10">
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+            <button class="card-10-button">Theme</button>
+        </div>
+        <div class="card-11">
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+            <button class="card-11-button">Theme</button>
+        </div>
+        <div class="card-12">
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+            <button class="card-12-button">Theme</button>
+        </div>
+    </div>
+    <h1 class="label">Complexity</h1>
+    <div class="row">
+        <div class="card-13">
+            <button class="card-13-button">Easy</button>
+            <button class="card-13-button">Middle</button>
+        </div>
+        <div class="card-14">
+            <button class="card-14-button">Hard</button>
+            <button class="card-14-button">Very hard</button>
+        </div>
+    </div>
+    <h1 class="label">Exam duration</h1>
+    <div class="row">
+        <div class="card-15">
+            <button class="card-15-button">5 min</button>
+            <button class="card-15-button">10 min</button>
+            <button class="card-15-button">15 min</button>
+        </div>
+        <div class="card-16">
+            <button class="card-16-button">20 min</button>
+            <button class="card-16-button">25 min</button>
+            <button class="card-16-button">30 min</button>
+        </div>
+    </div>
+    <h1 class="label">Theory / Practice</h1>
+    <div class="row">
+        <div class="card-17">
+            <button class="card-17-button">20/80</button>
+            <button class="card-17-button">40/60</button>
+        </div>
+        <div class="card-18">
+            <button class="card-18-button">60/40</button>
+            <button class="card-18-button">80/20</button>
+        </div>
+    </div>
+    <h1 class="label">Title selection</h1>
+    <div class="row">
+        <div class="card-19">
+            <button class="card-19-button">Weekly</button>
+            <button class="card-19-button">Monthly</button>
+            <button class="card-19-button">Credit</button>
+            <button class="card-19-button">Control</button>
+        </div>
+        <div class="card-20">
+            <button class="card-20-button">Autumn</button>
+            <button class="card-20-button">Winter</button>
+            <button class="card-20-button">Spring</button>
+            <button class="card-20-button">Summer</button>
+        </div>
+        <div class="card-21">
+            <button class="card-21-button">Tournament</button>
+            <button class="card-21-button">Championship</button>
+            <button class="card-21-button">Challenge</button>
+            <button class="card-21-button">Final</button>
+        </div>
+    </div>
+    <h1 class="label">Badge selection</h1>
+    <div class="row">
+        <div class="card-22">
+            <button class="card-22-button"></button>
+            <button class="card-22-button"></button>
+            <button class="card-22-button"></button>
+            <button class="card-22-button"></button>
+        </div>
+        <div class="card-23">
+            <button class="card-23-button"></button>
+            <button class="card-23-button"></button>
+            <button class="card-23-button"></button>
+            <button class="card-23-button"></button>
+        </div>
+        <div class="card-24">
+            <button class="card-24-button"></button>
+            <button class="card-24-button"></button>
+            <button class="card-24-button"></button>
+            <button class="card-24-button"></button>
+        </div>
+        <div class="card-25">
+            <button class="card-25-button"></button>
+            <button class="card-25-button"></button>
+            <button class="card-25-button"></button>
+            <button class="card-25-button"></button>
+        </div>
+        <div class="card-26">
+            <button class="card-26-button"></button>
+            <button class="card-26-button"></button>
+            <button class="card-26-button"></button>
+            <button class="card-26-button"></button>
+        </div>
+        <div class="card-27">
+            <button class="card-27-button"></button>
+            <button class="card-27-button"></button>
+            <button class="card-27-button"></button>
+            <button class="card-27-button"></button>
+        </div>
+        <div class="card-28">
+            <button class="card-28-button"></button>
+            <button class="card-28-button"></button>
+            <button class="card-28-button"></button>
+            <button class="card-28-button"></button>
+        </div>
+        <div class="card-29">
+            <button class="card-29-button"></button>
+            <button class="card-29-button"></button>
+            <button class="card-29-button"></button>
+            <button class="card-29-button"></button>
+        </div>
+    </div>
+    <button class="btn-confirm">CONFIRM EXAM</button>
+</div>
+{% endblock %}

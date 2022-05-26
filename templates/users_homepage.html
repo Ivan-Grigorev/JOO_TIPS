@@ -12,32 +12,38 @@
 </head>
 <script type="text/javascript">
   function showMessageEvent(){
-    if (confirm("Dear {{ request.user.username }},\nThe 'Event' available only in paid version.\n\nOpen store page?")) {
+    if (confirm("Dear {{ request.user.username }},\nThe 'Event' available only in paid version.
+        \n\nOpen store page?")) {
       location.href = 'http://192.168.0.115:8000/users-store/';
     }
   }
   function showMessageExam(){
-    if (confirm("Dear {{ request.user.username }},\nThe 'Exam' available only in paid version.\n\nOpen store page?")) {
+    if (confirm("Dear {{ request.user.username }},\nThe 'Exam' available only in paid version.
+        \n\nOpen store page?")) {
       location.href = 'http://192.168.0.115:8000/users-store/';
     }
   }
   function showMessageRating(){
-    if (confirm("Dear {{ request.user.username }},\nThe 'Rating' available only in paid version.\n\nOpen store page?")) {
+    if (confirm("Dear {{ request.user.username }},\nThe 'Rating' available only in paid version.
+        \n\nOpen store page?")) {
       location.href = 'http://192.168.0.115:8000/users-store/';
     }
   }
   function showMessageMentor(){
-    if (confirm("Dear {{ request.user.username }},\nThe 'Mentor' available only in paid version.\n\nOpen store page?")) {
+    if (confirm("Dear {{ request.user.username }},\nThe 'Mentor' available only in paid version.
+        \n\nOpen store page?")) {
       location.href = 'http://192.168.0.115:8000/users-store/';
     }
   }
   function showMessagePvp(){
-    if (confirm("Dear {{ request.user.username }},\nThe 'PvP' available only in paid version.\n\nOpen store page?")) {
+    if (confirm("Dear {{ request.user.username }},\nThe 'PvP' available only in paid version.
+        \n\nOpen store page?")) {
       location.href = 'http://192.168.0.115:8000/users-store/';
     }
   }
   function showMessageTvt(){
-    if (confirm("Dear {{ request.user.username }},\nThe 'TvT' available only in paid version.\n\nOpen store page?")) {
+    if (confirm("Dear {{ request.user.username }},\nThe 'TvT' available only in paid version.
+        \n\nOpen store page?")) {
       location.href = 'http://192.168.0.115:8000/users-store/';
     }
   }
@@ -51,8 +57,8 @@
         {{ request.user.username }}
     </div>
     <button class="btn-price-list" onclick="location.href={% url 'users_store' %}">
-        <i class="fa fa-industry" aria-hidden="false" style="font-size: 25px;"></i>
-<!--            <img src="{% static 'images/dollar.png' %}" height="45" width="45">-->
+<!--        <i class="fa fa-industry" aria-hidden="false" style="font-size: 25px;"></i>-->
+        <img src="{% static 'images/dollar.png' %}" height="45" width="45">
     </button>
 </header>
 <div class="sidebar">

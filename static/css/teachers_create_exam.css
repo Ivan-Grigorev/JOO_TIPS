@@ -1,0 +1,437 @@
+.card-1 {
+    width: 95%;
+    min-height: 95vh;
+    height: auto;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    text-align: center;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}
+
+.label {
+    padding-top: 90px;
+    padding-bottom: 10px;
+}
+
+h1 {
+    padding-bottom: 10px;
+
+    font-size: 40px;
+
+    color: #ABABAB;
+}
+
+.row, .row-participants {
+    display: flex;
+}
+
+.card-2 {
+    margin-left: auto;
+    margin-right: 5%;
+
+    width: 400px;
+    height: 70px;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-3 {
+    margin-right: auto;
+
+    width: 400px;
+    height: 70px;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+input {
+    border: none;
+
+    font-size: 50px;
+    color: #ABABAB;
+
+    background: none;
+}
+
+.btn-all-participants {
+    margin-left: 10%;
+
+    width: 70px;
+    height: 430px;
+
+    font-weight: 700;
+    font-size: 30px;
+
+    color: #505050;
+
+    background: #C4C4C4;
+    border-radius: 20px;
+}
+
+.card-4-button, .card-5-button, .card-6-button {
+    margin-bottom: 15px;
+
+    width: 300px;
+    height: 40px;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-7 {
+    margin-left: auto;
+    margin-right: 10%;
+
+    display: grid;
+}
+
+.card-8 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+
+.card-7-button, .card-8-button {
+    margin-bottom: 20px;
+
+    width: 330px;
+    height: 70px;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
+
+.card-9 {
+    margin-left: auto;
+    margin-right: 2.5%;
+
+    display: grid;
+}
+
+.card-10 {
+    margin-right: 2.5%;
+
+    display: grid;
+}
+
+.card-11 {
+    margin-right: 2.5%;
+
+    display: grid;
+}
+
+.card-12 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+.card-9-button, .card-10-button, .card-11-button, .card-12-button {
+    margin-bottom: 15px;
+
+    width: 200px;
+    height: 35px;
+
+    font-size: 20px;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-13 {
+    margin-left: auto;
+    margin-right: 10%;
+
+    display: grid;
+}
+
+.card-14 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+.card-13-button, .card-14-button {
+    margin-bottom: 30px;
+
+    width: 300px;
+    height: 150px;
+
+    font-size: 35px;
+    font-weight: 700;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-15 {
+    margin-left: auto;
+    margin-right: 10%;
+
+    display: grid;
+}
+
+.card-16 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+.card-15-button, .card-16-button {
+    margin-bottom: 30px;
+
+    width: 350px;
+    height: 70px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-17 {
+    margin-left: auto;
+    margin-right: 10%;
+
+    display: grid;
+}
+
+.card-18 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+.card-17-button, .card-18-button {
+    margin-bottom: 30px;
+
+    width: 300px;
+    height: 150px;
+
+    font-size: 35px;
+    font-weight: 700;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-19 {
+    margin-left: auto;
+    margin-right: 5%;
+
+    display: grid;
+}
+
+.card-20 {
+    margin-right: 5%;
+
+    display: grid;
+}
+
+.card-21 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+.card-19-button, .card-20-button, .card-21-button {
+    margin-bottom: 15px;
+
+    width: 250px;
+    height: 60px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.card-22 {
+    margin-left: auto;
+    margin-right: 3%;
+
+    display: grid;
+}
+
+.card-23, .card-24, .card-25, .card-26, .card-27, .card-28 {
+    margin-right: 3%;
+
+    display: grid;
+}
+
+.card-29 {
+    margin-right: auto;
+
+    display: grid;
+}
+
+.card-22-button, .card-23-button, .card-24-button, .card-25-button,
+ .card-26-button, .card-27-button, .card-28-button, .card-29-button {
+    margin-bottom: 15px;
+
+    width: 95px;
+    height: 60px;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.btn-confirm {
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 150px;
+
+    width: 320px;
+    height: 55px;
+
+    font-weight: 700;
+    font-size: 20px;
+
+    color: #505050;
+
+    background: #C4C4C4;
+    border-radius: 20px;
+}
+
+button:hover {
+    background: rgba(70, 70, 70);
+    color: #DDDDDD;
+}
+
+
+@media screen and (max-width: 600px) {
+    .row, .row-participants {
+        display: grid;
+    }
+
+    h1 {
+        margin-left: 15%;
+    }
+
+    input {
+        font-size: 35px;
+    }
+
+    .card-2, .card-3 {
+        margin-left: 20%;
+        margin-right: auto;
+        margin-bottom: 20px;
+
+        width: 270px;
+    }
+
+    .btn-all-participants {
+        margin-left: 27%;
+        margin-bottom: 20px;
+
+        width: 250px;
+        height: 70px;
+    }
+
+    .card-4, .card-5, .card-6, .card-7, .card-8, .card-9, .card-10, .card-11, .card-12,
+     .card-13, .card-14, .card-15, .card-16, .card-17, .card-18, .card-19, .card-20, .card-21 {
+        margin-left: 20%;
+        margin-right: auto;
+    }
+
+    .card-4-button, .card-5-button, .card-6-button, .card-7-button, .card-8-button, .card-9-button, .card-10-button,
+     .card-11-button, .card-12-button, .card-15-button, .card-16-button, .card-19-button, .card-20-button,
+      .card-21-button {
+        width: 270px;
+    }
+
+    .card-13-button, .card-14-button, .card-17-button, .card-18-button {
+        width: 270px;
+        height: 80px;
+    }
+
+    .card-22, .card-23, .card-24, .card-25, .card-26, .card-27, .card-28, .card-29 {
+        margin-left: 20%;
+        margin-right: auto;
+
+        display: flex;
+    }
+
+    .card-22-button, .card-23-button, .card-24-button, .card-25-button, .card-26-button, .card-27-button,
+     .card-28-button, .card-29-button {
+        margin-right: 5px;
+
+        width: 70px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    .row-participants {
+        display: grid;
+    }
+
+    .card-2, .card-3 {
+        width: 270px;
+    }
+
+    .btn-all-participants {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+
+        width: 430px;
+        height: 70px;
+    }
+
+    .card-4-button, .card-5-button, .card-6-button {
+        width: 200px;
+    }
+
+    .card-9-button, .card-10-button, .card-11-button, .card-12-button {
+        width: 130px;
+    }
+
+    .card-7-button, .card-8-button, .card-15-button, .card-16-button {
+        width: 270px;
+    }
+
+    .card-19-button, .card-20-button, .card-21-button {
+        width: 200px;
+
+        padding: 0;
+
+        font-size: 25px;
+    }
+
+    .card-22-button, .card-23-button, .card-24-button, .card-25-button, .card-26-button, .card-27-button,
+     .card-28-button, .card-29-button {
+        margin-right: 2px;
+
+        width: 70px;
+    }
+}

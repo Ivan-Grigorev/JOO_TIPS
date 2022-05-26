@@ -32,9 +32,14 @@
         <div class="password">
             <input name="password" type="password" placeholder="Password" required>
         </div>
+        <div class="message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
         <div class="row">
             <div>
-                <button class="btn-login">Log in</button>
+                <button class="btn-login" type="submit">Log in</button>
             </div>
             <div>
                 <button class="btn-signup" onclick="showMessage()">Sign up</button>

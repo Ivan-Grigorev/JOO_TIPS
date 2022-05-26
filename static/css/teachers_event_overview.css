@@ -86,7 +86,7 @@
     border-radius: 20px;
 }
 
-.btn:hover, .btn-event:hover {
+button:hover {
     background: rgba(70, 70, 70);
     color: #DDDDDD;
 }

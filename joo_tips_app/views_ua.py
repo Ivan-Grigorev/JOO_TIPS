@@ -211,13 +211,15 @@ def register_ua(request):
     return render(request, template_name='ua/register_ua.html')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def log_in_ua(request):
-    user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
-    if user is not None:
-        login(request, user)
-        return redirect('users_homepage_ua')
-    else:
-        messages.error(request, 'Ім`я користувача або пароль не існує!')
+    if request.method == 'POST':
+        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+        if user is not None:
+            login(request, user)
+            return redirect('users_homepage_ua')
+        else:
+            messages.error(request, 'Ім`я користувача або пароль не існує!')
     return render(request, template_name='ua/login_ua.html')
 
 
@@ -243,12 +245,12 @@ def pupils_homepage_ua(request):
 
 # @login_required(login_url='log_in_ua')
 def pupils_event_ua(request):
-    return render(request, template_name='ua/pupils_event_ua.html')
+    return render(request, template_name='ua/pupils_event_overview_ua.html')
 
 
 # @login_required(login_url='log_in_ua')
 def pupils_exam_ua(request):
-    return render(request, template_name='ua/pupils_exam_ua.html')
+    return render(request, template_name='ua/pupils_exam_overview_ua.html')
 
 
 # @login_required(login_url='log_in_ua')
@@ -278,7 +280,7 @@ def teachers_homepage_ua(request):
 
 # @login_required(login_url='log_in_ua')
 def teachers_event_ua(request):
-    # all events
+    # all events overview
     if request.method == 'POST':
         if request.POST.get('option') == 'create_event':
             return render(request, template_name='ua/teachers_create_event_ua.html')
@@ -287,7 +289,11 @@ def teachers_event_ua(request):
 
 # @login_required(login_url='log_in_ua')
 def teachers_exam_ua(request):
-    return render(request, template_name='ua/teachers_exam_ua.html')
+    # all exams overview
+    if request.method == 'POST':
+        if request.POST.get('option') == 'create_exam':
+            return render(request, template_name='ua/teachers_create_exam_ua.html')
+    return render(request, template_name='ua/teachers_exam_overview_ua.html')
 
 
 # @login_required(login_url='log_in_ua')

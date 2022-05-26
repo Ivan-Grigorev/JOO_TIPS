@@ -53,12 +53,24 @@
     border: 1px dashed rgba(227, 227, 227, 0.1);
 }
 
+.btn-exam {
+    font-weight: 500;
+    font-size: 18px;
+
+    color: #ACB0B1;
+
+    background: transparent;
+    border: none;
+}
+
 .card-3 {
+    margin-top: 40px;
+
     display: grid;
 }
 
 .btn {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     width: 320px;
     height: 60px;
@@ -89,12 +101,8 @@
     border-radius: 20px;
 }
 
-.btn:hover {
-    background: rgba(70, 70, 70);
-    color: #DDDDDD;
-}
 
-.btn-go:hover {
+button:hover {
     background: rgba(70, 70, 70);
     color: #DDDDDD;
 }
@@ -139,7 +147,7 @@
     }
 
     .card-3 {
-        margin-bottom: 100px;
+        margin-bottom: 150px;
     }
 
     .btn {

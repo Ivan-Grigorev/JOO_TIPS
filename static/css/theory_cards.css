@@ -78,43 +78,6 @@ body {
     white-space: pre-wrap;
 }
 
-.arrow-left {
-    margin-top: 450px;
-
-    border: solid rgba(146, 157, 160, 1);
-    border-width: 0 3px 3px 0;
-
-    display: inline-block;
-    padding: 15px;
-
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-}
-
-.arrow-right {
-    margin-top: 450px;
-
-    border: solid rgba(146, 157, 160, 1);
-    border-width: 0 3px 3px 0;
-    border-radius: 1px;
-
-    display: inline-block;
-    padding: 15px;
-
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-}
-
-.arrow-left:hover {
-  border-color: black;
-  border-width: 0 3px 3px 0;
-}
-
-.arrow-right:hover {
-  border-color: black;
-  border-width: 0 3px 3px 0;
-}
-
 .btn-start {
     width: 290px;
     height: 50px;

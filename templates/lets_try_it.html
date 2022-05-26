@@ -3,10 +3,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/lets_try_it.css' %}">
 <div>
-    <button class="btn-install" type="submit">Install PWA application</button>
-</div>
-<div>
-    <button class="btn-use"><a style="text-decoration: none; color: #ABABAB;"
-                               href="{% url 'programing_language_choice' %}">Use WEB version</a></button>
+    <button class="btn-use" onclick="location.href={% url 'programing_language_choice' %}">
+        Use WEB version
+    </button>
 </div>
 {% endblock %}

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.contrib.messages import get_messages
+
 
 from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions, \
     PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
@@ -211,13 +213,15 @@ def register(request):
     return render(request, template_name='register.html')
 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def log_in(request):
-    user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
-    if user is not None:
-        login(request, user)
-        return redirect('users_homepage')
-    else:
-        messages.error(request, 'Username or password does not exist!')
+    if request.method == 'POST':
+        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+        if user is not None:
+            login(request, user)
+            return redirect('users_homepage')
+        else:
+            messages.error(request, 'Username or password does not exist!')
     return render(request, template_name='login.html')
 
 
@@ -243,12 +247,12 @@ def pupils_homepage(request):
 
 # @login_required(login_url='log_in')
 def pupils_event(request):
-    return render(request, template_name='pupils_event.html')
+    return render(request, template_name='pupils_event_overview.html')
 
 
 # @login_required(login_url='log_in')
 def pupils_exam(request):
-    return render(request, template_name='pupils_exam.html')
+    return render(request, template_name='pupils_exam_overview.html')
 
 
 # @login_required(login_url='log_in')
@@ -278,7 +282,7 @@ def teachers_homepage(request):
 
 # @login_required(login_url='log_in')
 def teachers_event(request):
-    # all events
+    # all events overview
     if request.method == 'POST':
         if request.POST.get('option') == 'create_event':
             return render(request, template_name='teachers_create_event.html')
@@ -287,7 +291,11 @@ def teachers_event(request):
 
 # @login_required(login_url='log_in')
 def teachers_exam(request):
-    return render(request, template_name='teachers_exam.html')
+    # all exams overview
+    if request.method == 'POST':
+        if request.POST.get('option') == 'create_exam':
+            return render(request, template_name='teachers_create_exam.html')
+    return render(request, template_name='teachers_exam_overview.html')
 
 
 # @login_required(login_url='log_in')

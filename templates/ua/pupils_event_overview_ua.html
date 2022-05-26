@@ -1,9 +1,7 @@
-{% extends 'ua/teachers_homepage_ua.html' %}
+{% extends 'ua/pupils_homepage_ua.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/teachers_event_overview.css' %}">
-<form method="POST">
-{% csrf_token %}
+<link rel="stylesheet" href="{% static 'css/pupils_event_overview.css' %}">
 <div class="card-1">
     <div class="row">
         <div class="card-2">
@@ -12,6 +10,7 @@
                     <td style="text-align: left;">
                         <button class="btn-event">Осінній чемпіонат класу</button>
                     </td>
+                    <td>&#128309</td>
                     <td>&#128993</td>
                     <td></td>
                 </tr>
@@ -20,12 +19,14 @@
                         <button class="btn-event">Весняний чемпіонат класу</button>
                     </td>
                     <td></td>
+                    <td></td>
                     <td>&#128994</td>
                 </tr>
                 <tr>
                     <td style="text-align: left;">
                         <button class="btn-event">Зимовий чемпіонат класу</button>
                     </td>
+                    <td></td>
                     <td>&#128993</td>
                     <td></td>
                 </tr>
@@ -33,17 +34,18 @@
                     <td style="text-align: left;">
                         <button class="btn-event">Літній чемпіонат класу</button>
                     </td>
+                    <td></td>
                     <td>&#128993</td>
                     <td></td>
                 </tr>
             </table>
         </div>
         <div class="card-3">
-            <button name="option" value="create_event" class="btn">СТВОРИТИ ПОДІЮ</button>
-            <button name="option" value="delete_event" class="btn">ВИДАЛИТИ ПОДІЮ</button>
-            <button name="option" value="statistics" class="btn">СТАТИСТИКА</button>
+            <button class="btn">ВЗЯТИ УЧАСТЬ</button>
+            <button class="btn">ВИЙТИ З ПОДІЇ</button>
+            <button class="btn">СТАТИСТИКА</button>
+            <button class="btn-go">ВПЕРЕД</button>
         </div>
     </div>
 </div>
-</form>
 {% endblock %}

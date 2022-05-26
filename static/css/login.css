@@ -69,7 +69,7 @@ input {
 .message {
     height: 20px;
 
-    color: #ABABAB;
+    color: red;
 
     font-weight: 300;
     font-size: 25px;

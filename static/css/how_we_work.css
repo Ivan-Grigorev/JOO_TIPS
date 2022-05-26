@@ -27,7 +27,7 @@ body {
     margin-left: 1%;
 
     width: 40%;
-    min-height: 120px;
+    min-height: 180px;
     height: auto;
 
     background: rgba(196, 196, 196, 0.05);
@@ -47,7 +47,7 @@ body {
     margin-right: 1%;
 
     width: 60%;
-    min-height: 120px;
+    min-height: 180px;
     height: auto;
 
     background: rgba(196, 196, 196, 0.05);
@@ -64,9 +64,10 @@ body {
 
 .card-3 {
     margin-left: 1%;
+    margin-bottom: 70px;
 
     width: 40%;
-    min-height: 120px;
+    min-height: 180px;
     height: auto;
 
     background: rgba(196, 196, 196, 0.05);
@@ -84,56 +85,16 @@ body {
 .card-4 {
     margin-left: 30px;
     margin-right: 1%;
+    margin-bottom: 70px;
 
     width: 60%;
-    min-height: 120px;
+    min-height: 180px;
     height: auto;
 
     background: rgba(196, 196, 196, 0.05);
 }
 
 .card-4-container {
-    padding: 10px;
-
-    font-weight: 300;
-    font-size: 25px;
-
-    color: #ABABAB;
-}
-
-.card-5 {
-    margin-left: 1%;
-    margin-bottom: 70px;
-
-    width: 40%;
-    min-height: 120px;
-    height: auto;
-
-    background: rgba(196, 196, 196, 0.05);
-}
-
-.card-5-container {
-    padding: 10px;
-
-    font-weight: 300;
-    font-size: 30px;
-
-    color: #ABABAB;
-}
-
-.card-6 {
-    margin-left: 30px;
-    margin-right: 1%;
-    margin-bottom: 70px;
-
-    width: 60%;
-    min-height: 120px;
-    height: auto;
-
-    background: rgba(196, 196, 196, 0.05);
-}
-
-.card-6-container {
     padding: 10px;
 
     font-weight: 300;
@@ -164,16 +125,6 @@ body {
     }
 
     .card-4 {
-        margin-bottom: 30px;
-        width: 90%;
-    }
-
-    .card-5 {
-        margin-bottom: 10px;
-        width: 90%;
-    }
-
-    .card-6 {
         margin-bottom: 70px;
         width: 90%;
     }

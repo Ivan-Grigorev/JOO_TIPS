@@ -1,7 +1,7 @@
-{% extends 'ua/teachers_homepage_ua.html' %}
+{% extends 'teachers_homepage.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/teachers_event_overview.css' %}">
+<link rel="stylesheet" href="{% static 'css/teachers_exam_overview.css' %}">
 <form method="POST">
 {% csrf_token %}
 <div class="card-1">
@@ -10,28 +10,28 @@
             <table id="events">
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-event">Осінній чемпіонат класу</button>
+                        <button class="btn-event">Autumn exam</button>
                     </td>
                     <td>&#128993</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-event">Весняний чемпіонат класу</button>
+                        <button class="btn-event">Spring exam</button>
                     </td>
                     <td></td>
                     <td>&#128994</td>
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-event">Зимовий чемпіонат класу</button>
+                        <button class="btn-event">Winter exam</button>
                     </td>
                     <td>&#128993</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-event">Літній чемпіонат класу</button>
+                        <button class="btn-event">Summer exam</button>
                     </td>
                     <td>&#128993</td>
                     <td></td>
@@ -39,9 +39,9 @@
             </table>
         </div>
         <div class="card-3">
-            <button name="option" value="create_event" class="btn">СТВОРИТИ ПОДІЮ</button>
-            <button name="option" value="delete_event" class="btn">ВИДАЛИТИ ПОДІЮ</button>
-            <button name="option" value="statistics" class="btn">СТАТИСТИКА</button>
+            <button name="option" value="create_exam" class="btn">CREATE EXAM</button>
+            <button name="option" value="delete_exam" class="btn">DELETE EXAM</button>
+            <button name="option" value="statistics" class="btn">STATISTICS</button>
         </div>
     </div>
 </div>
