@@ -318,7 +318,10 @@ def mentors_invocation_ua(request):
 
 # @login_required(login_url='log_in_ua')
 def mentors_session_ua(request):
-    return render(request, template_name='ua/mentors_session_ua.html')
+    if request.method == 'POST':
+        if request.POST.get('option') == 'create_session':
+            return render(request, template_name='ua/mentors_create_session_ua.html')
+    return render(request, template_name='ua/mentors_session_overview_ua.html')
 
 
 # @login_required(login_url='log_in_ua')

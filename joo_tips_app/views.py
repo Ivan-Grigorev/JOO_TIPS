@@ -320,7 +320,10 @@ def mentors_invocation(request):
 
 # @login_required(login_url='log_in')
 def mentors_session(request):
-    return render(request, template_name='mentors_session.html')
+    if request.method == 'POST':
+        if request.POST.get('option') == 'create_session':
+            return render(request, template_name='mentors_create_session.html')
+    return render(request, template_name='mentors_session_overview.html')
 
 
 # @login_required(login_url='log_in')
