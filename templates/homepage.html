@@ -10,38 +10,258 @@
     <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
 </head>
 <body>
-<header class="header">
-    <div class="top-nav">
-        <div>
-            <button class="btn-login"><a style="text-decoration: none; color: #ABABAB;"
-                             href="{% url 'log_in' %}">Log in</a></button>
-        </div>
-        <div class="language">
-            <a href="{% url 'homepage' %}"><img src="{% static 'images/en-us.png' %}" width="40"></a>
-            <a href="{% url 'homepage_ua' %}"><img src="{% static 'images/ua.png' %}" width="40"></a>
-        </div>
-    </div>
-    <div class="title">
-        <div class="joo-header">
+    <div class="card-main">
+        <header class="header">
+            <div class="title">
+                <div class="joo-header">
+                    JOO
+                </div>
+                <div class="tips-header">
+                    TIPS
+                </div>
+            </div>
+            <nav class="navbar">
+                <a href="#who-we-are">WHO WE ARE</a>
+                <a href="#how-we-work">HOW WE WORK</a>
+                <a href="#for-teams-schools">FOR TEAMS</a>
+                <a href="#for-teams-schools">FOR SCHOOLS</a>
+            </nav>
+            <button class="btn-login" onclick="location.href={% url 'log_in' %}">
+                LOG IN
+            </button>
+            <select class="language" onchange="this.options[this.selectedIndex].value &&
+                                                (window.location = this.options[this.selectedIndex].value);">
+                <option value="http://192.168.0.115:8000">
+                    EN
+                </option>
+                <option value="http://192.168.0.115:8000/ua/">
+                    UA
+                </option>
+            </select>
+        </header>
+        <div class="joo-background">
             JOO
         </div>
-        <div class="tips-header">
+        <div class="row">
+            <div class="it-profession">
+                <h1><span style="color: #EB1034">IT - </span>PROFESSION</h1>
+                <h4>for pupils and adults</h4>
+                <p class="text-main">Hundreds of cards-tips, thousands of different tests, lessons from 5 to 30 minutes
+                    at a time convenient for you and of course all sorts of things from the game world -
+                    championships, cups, PvP, and that's not all!</p>
+                <button class="btn-try-it-1" onclick="location.href={% url 'programing_language_choice' %}">
+                    TRY IT<span style="padding-left: 15px;"> ></span>
+                </button>
+            </div>
+            <img class="main-cube" src="{% static 'images/cube.svg' %}">
+        </div>
+        <div class="tips-background">
             TIPS
         </div>
     </div>
-    <nav class="navbar">
-        <a href="{% url 'who_we_are' %}">WHO WE ARE</a>
-        <a href="{% url 'how_we_work' %}">HOW WE WORK</a>
-        <a href="{% url 'lets_try_it' %}">LET'S TRY IT</a>
-        <a href="{% url 'for_teams' %}">FOR TEAMS</a>
-        <a href="{% url 'for_schools' %}">FOR SCHOOLS</a>
-    </nav>
-</header>
-<main>
-    {% block content %}
+    <div class="vertical-line-1">
 
+    </div>
+    <div class="card-goals">
+        <h4 class="goals-title">WHAT COURSES GIVE YOU</h4>
+        <div class="row">
+            <div class="lamp-brain">
+                <img src="{% static 'images/lamp_brain.png' %}" width="130">
+                <h5>SKILLS DEVELOPMENT</h5>
+            </div>
+            <img src="{% static 'images/arrow_1.svg' %}" width="90" style="margin-top: 90px;">
+            <div class="lamp-gear">
+                <img src="{% static 'images/lamp_gear.png' %}" width="130">
+                <h5>USEFUL HOBBY</h5>
+            </div>
+            <img src="{% static 'images/arrow_2.svg' %}" width="90" style="margin-top: -30px;">
+            <div class="lamp-target">
+                <img src="{% static 'images/lamp_target.png' %}" width="130">
+                <h5>PROSPECTIVE PROFESSION</h5>
+            </div>
+        </div>
+    </div>
+    <div class="grid-1">
+        <img src="{% static 'images/grid_1.svg' %}">
+    </div>
+    <div class="vertical-line-2">
 
-    {% endblock %}
-</main>
+    </div>
+    <div class="card-who-we-are"><a id="who-we-are"></a>
+        <h4 class="who-we-are-title">WHO WE ARE</h4>
+        <img class="background-arrows-1" src="{% static 'images/background_arrows.svg' %}">
+        <div class="row">
+            <img class="green-lock" src="{% static 'images/green_lock.svg' %}">
+            <div class="who-we-are-text">
+                <hr class="line-1">
+                <p>JOO TIPS is a digital game academy that helps middle and high classes pupils, as well as
+                students, learn the most common programming languages conveniently and without congestion.</p>
+                <p>Thanks to the convenient format of educational material, which is presented by small cards-tips
+                and to the system of theoretical and practical tests, the user acquires the necessary knowledge and
+                    immediately learn to use them in practice.</p>
+                <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice' %}">
+                    TRY IT<span style="padding-left: 25px;"> ></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="vertical-line-3">
+
+    </div>
+    <div class="card-languages">
+        <h4 class="languages-title">PROGRAMMING LANGUAGES</h4>
+        <img class="grid-2" src="{% static 'images/grid_1.svg' %}">
+        <div class="row">
+            <div class="card-python">
+                <img src="{% static 'images/python_logo.svg' %}"
+                     width="200" height="130" style="padding-top: 30px; padding-bottom: 10px;">
+                <label>PYTHON</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+            <div class="card-javascript">
+                <img src="{% static 'images/javascript_logo.svg' %}"
+                     width="200" height="120" style="padding-top: 40px; padding-bottom: 10px;">
+                <label>JAVASCRIPT</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+            <div class="card-java">
+                <img src="{% static 'images/java_logo.svg' %}"
+                     width="220" height="130" style="padding-top: 30px; padding-bottom: 10px;">
+                <label>JAVA</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+            <div class="card-swift">
+                <img src="{% static 'images/swift_logo.svg' %}"
+                     width="200" height="130" style="padding-top: 30px; padding-bottom: 10px;">
+                <label>SWIFT</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card-csharp">
+                <img src="{% static 'images/csharp_logo.svg' %}"
+                     width="250" height="120" style="padding-top: 30px; padding-bottom: 20px;">
+                <label>C#</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+            <div class="card-cplusplus">
+                <img src="{% static 'images/cplusplus_logo.svg' %}"
+                     width="250" height="120" style="padding-top: 30px; padding-bottom: 20px;">
+                <label>C++</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8;">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+            <div class="card-golang">
+                <img src="{% static 'images/golang_logo.svg' %}"
+                    width="200" height="160" style="padding-top: 10px;">
+                <label>GOLANG</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+            <div class="card-php">
+                <img src="{% static 'images/php_logo.svg' %}"
+                     width="250" height="170">
+                <label>PHP</label>
+                <hr>
+                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                    Learn<span style="margin-left: 5px;">&#8594</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="vertical-line-4">
+
+    </div>
+    <div class="card-how-we-work"><a id="how-we-work"></a>
+        <h4 class="how-to-start-title">HOW TO START LEARNING</h4>
+        <div class="row">
+            <div class="steps-images">
+                <img class="steps-group" src="{% static 'images/steps_group.png' %}">
+                <img class="grid-3" src="{% static 'images/grid_2.svg' %}">
+            </div>
+            <div class="steps-description">
+                <p style="margin-top: 0; margin-left: -50px;">
+                    To start learning, go to the link "Learn", "TRY IT" or "LOG IN".</p>
+                <p style="margin-top: 130px; margin-left: 30px;">
+                    Choose the language you want to learn and read theory from few cards-tips. Then take the tests
+                from 2 theoretical and 6 practical tasks.</p>
+                <p style="margin-top: 120px; margin-left: -50px;">
+                    Sign up and start learning with us!</p>
+                <button class="btn-try-it-3" onclick="location.href={% url 'programing_language_choice' %}">
+                    TRY IT<span style="padding-left: 25px;"> ></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="vertical-line-5">
+
+    </div>
+    <div class="card-for-teams-schools"><a id="for-teams-schools"></a>
+        <div class="row">
+            <div class="for-schools">
+                <label style="margin-top: 70px; margin-bottom: 50px;">FOR SCHOOLS</label>
+                <img src="{% static 'images/for_schools.png' %}"
+                     style="margin-left: auto; margin-right: auto; margin-bottom: 25px;">
+                <div class="email-input">
+                    <input placeholder="Enter E-MAIL">
+                    <button class="btn-join">JOIN</button>
+                </div>
+            </div>
+            <div class="for-teams">
+                <label style="margin-top: 70px;">FOR TEAMS</label>
+                <img src="{% static 'images/for_teams.png' %}"
+                     style="margin-left: auto; margin-right: auto; margin-bottom: 40px;">
+                <div class="email-input">
+                    <input placeholder="Enter E-MAIL">
+                    <button class="btn-join">JOIN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="footer-title">
+                <div class="joo-header">
+                    JOO
+                </div>
+                <div class="tips-header">
+                    TIPS
+                </div>
+            </div>
+            <nav class="footer-navbar">
+                <a href="#who-we-are">WHO WE ARE</a>
+                <a href="#how-we-work">HOW WE WORK</a>
+                <a href="#for-teams-schools">FOR TEAMS</a>
+                <a href="#for-teams-schools">FOR SCHOOLS</a>
+            </nav>
+            <div class="social-links">
+                <img src="{% static 'images/instagram_logo.png' %}" width="50">
+                <img src="{% static 'images/google_logo.png' %}" width="50" style="padding: 50px 20px 0 20px;">
+                <img src="{% static 'images/facebook_logo.png' %}" width="50">
+            </div>
+        </div>
+        <div class="copyright">
+            &#169; All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
