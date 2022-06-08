@@ -36,26 +36,6 @@ def homepage_ua(request):
     return render(request, template_name='ua/homepage_ua.html')
 
 
-def who_we_are_ua(request):
-    return render(request, template_name='ua/who_we_are_ua.html')
-
-
-def how_we_work_ua(request):
-    return render(request, template_name='ua/how_we_work_ua.html')
-
-
-def lets_try_it_ua(request):
-    return render(request, template_name='ua/lets_try_it_ua.html')
-
-
-def for_teams_ua(request):
-    return render(request, template_name='ua/for_teams_ua.html')
-
-
-def for_schools_ua(request):
-    return render(request, template_name='ua/for_schools_ua.html')
-
-
 def programing_language_choice_ua(request):
     record = GuestsVisitStatistic(lets_try_it_date=datetime.now(),
                                   language='UKR',

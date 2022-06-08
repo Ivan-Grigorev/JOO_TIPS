@@ -23,7 +23,7 @@
             </div>
             <nav class="navbar">
                 <a href="#who-we-are">ХТО МИ Є</a>
-                <a href="#how-we-work">ЯК МИ ПРАЦЮЄМО</a>
+                <a href="#start-learning">РОЗПОЧАТИ НАВЧАННЯ</a>
                 <a href="#for-teams-schools">ДЛЯ КОМАНД</a>
                 <a href="#for-teams-schools">ДЛЯ ШКОЛИ</a>
             </nav>
@@ -47,11 +47,12 @@
             <div class="it-profession">
                 <h1><span style="color: #EB1034">IT - </span>ПРОФЕСІЯ</h1>
                 <h4>для школярiв та дорослих</h4>
-                <p class="text-main">Тебе чекають сотні карточок-підсказок, тисячі різноманітних тестів, уроки від 5
+                <p class="text-main" style="width: 650px;">
+                    Тебе чекають сотні карточок-підсказок, тисячі різноманітних тестів, уроки від 5
                     до 30 хвилин в зручний для тебе час і звичайно всілякі штуки з ігрового світу - чемпіонати, кубки,
                     PvP, і це ще не все!</p>
-                <button class="btn-try-it-1" onclick="location.href={% url 'programing_language_choice' %}">
-                    СПРОБУВАТИ<span style="padding-left: 15px;"> ></span>
+                <button class="btn-try-it-1" onclick="location.href={% url 'programing_language_choice_ua' %}">
+                    СПРОБУВАТИ<span style="padding-left: 15px;">&#10095;</span>
                 </button>
             </div>
             <img class="main-cube" src="{% static 'images/cube.svg' %}">
@@ -90,18 +91,40 @@
     </div>
     <div class="card-who-we-are"><a id="who-we-are"></a>
         <h4 class="who-we-are-title">ПРО НАС</h4>
+        <img class="background-arrows-1" src="{% static 'images/background_arrows.svg' %}">
         <div class="row">
-            <img class="cube-2" src="{% static 'images/green_lock.svg' %}">
-            <div class="who-we-are-text">
+            <img class="green-lock" src="{% static 'images/green_lock.svg' %}">
+            <div style="display: grid;">
                 <hr class="line-1">
-                <p>JOO TIPS - це цифрова ігро-академія, яка допомагає школярам середніх та старших класів, а також
-                    свічерам, зручно та без перевантажень вчити найбільш поширені мови програмування - і не тільки.</p>
-                <p>Завдяки зручному формату навчального матеріалу, який подається маленькими картками-підказками, та
-                    системи теоретичних та практични тестів користувач опановує необхідні знання та зразу ж бачить
-                    і вчиться їх використовувати на практиці.</p>
-                <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice' %}">
-                    TRY IT<span style="padding-left: 25px;"> ></span>
-                </button>
+                <div class="who-we-are-text" id="who-we-are-text">
+                    <div style="width: 1400px; display: flex;">
+                        <div class="who-we-are-text-left">
+                            <p>JOO TIPS - це цифрова ігро-академія, яка допомагає школярам середніх та старших класів,
+                                а також свічерам, зручно та без перевантажень вчити найбільш поширені мови
+                                програмування - і не тільки.</p>
+                            <p>Завдяки зручному формату навчального матеріалу, який подається маленькими картками-
+                                підказками, та системи теоретичних та практични тестів користувач опановує необхідні
+                                знання та зразу ж бачить і вчиться їх використовувати на практиці.</p>
+                        </div>
+                        <div class="who-we-are-text-right" style="margin-left: 50px;">
+                            <p>Завдяки інновативному  формату навчання, який складається з уроків від 5 до 30 хвилин,
+                                в поєднанні з найпоширенішими механіками з багатокористувацьких ігор - індивідуальними
+                                та колективними матчами, чемпіонатами та челенджами, користувачі зможуть відволіктись
+                                від рутини класичного навчального процесу і зосередитись на власному прогресі.</p>
+                            <p>Допомагати користувачам на платформі будуть як вчителі, які будуть організовувати
+                                змагальницький процес, так і ментори, які будуть ділитись цінними знаннями та
+                                успішними кейсами.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <button class="btn-slide-left" id="slideLeft" type="button">
+                        &#10094;
+                    </button>
+                    <button class="btn-slide-right" id="slideRight" type="button" style="margin-left: 20px;">
+                        &#10095;
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -110,6 +133,7 @@
     </div>
     <div class="card-languages">
         <h4 class="languages-title">МОВИ ПРОГРАМУВАННЯ</h4>
+        <img class="grid-2" src="{% static 'images/grid_1.svg' %}">
         <div class="row">
             <div class="card-python">
                 <img src="{% static 'images/python_logo.svg' %}"
@@ -190,19 +214,88 @@
     <div class="vertical-line-4">
 
     </div>
-    <div class="card-how-we-work"><a id="how-we-work"></a>
+    <div class="card-how-we-work"><a id="start-learning"></a>
+        <h4 class="how-to-start-title">ЯК РОЗПОЧАТИ НАВЧАННЯ</h4>
+        <div class="row">
+            <div class="steps-images">
+                <img class="steps-group" src="{% static 'images/steps_group_ua.png' %}">
+                <img class="grid-3" src="{% static 'images/grid_2.svg' %}">
+            </div>
+            <div class="steps-description">
+                <p style="margin-top: 0; margin-left: -50px;">
+                    Щоб розпочати навчання перейди за посиланням “Вивчати”, “Спробувати”або “Вхід”.</p>
+                <p style="margin-top: 90px; margin-left: 30px;">
+                    Виберіть мову, яку хочете вивчити, і почитайте теорію з кількох карток-порад. Потім здайте тести
+                 з 2 теоретичних та 6 практичних завдань.</p>
+                <p style="margin-top: 100px; margin-left: -50px;">
+                    Заєреструйся і починай вчитися разом за нами.</p>
+                <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice_ua' %}">
+                    СПРОБУВАТИ<span style="padding-left: 15px;">&#10095;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="vertical-line-5">
 
     </div>
     <div class="card-for-teams-schools"><a id="for-teams-schools"></a>
-
+        <div class="row">
+            <div class="for-schools">
+                <label style="margin-top: 70px; margin-bottom: 50px;">ДЛЯ ШКОЛИ</label>
+                <img src="{% static 'images/for_schools.png' %}"
+                     style="margin-left: auto; margin-right: auto; margin-bottom: 25px;">
+                <div class="email-input">
+                    <input placeholder="Введіть E-MAIL">
+                    <button class="btn-join">ПРИЄДНАТИСЯ</button>
+                </div>
+            </div>
+            <div class="for-teams">
+                <label style="margin-top: 70px;">ДЛЯ КОМАНДИ</label>
+                <img src="{% static 'images/for_teams.png' %}"
+                     style="margin-left: auto; margin-right: auto; margin-bottom: 40px;">
+                <div class="email-input">
+                    <input placeholder="Введіть E-MAIL">
+                    <button class="btn-join">ПРИЄДНАТИСЯ</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <footer>
+        <div class="row">
+            <div class="footer-title">
+                <div class="joo-header">
+                    JOO
+                </div>
+                <div class="tips-header">
+                    TIPS
+                </div>
+            </div>
+            <nav class="footer-navbar">
+                <a href="#who-we-are">ХТО МИ Є</a>
+                <a href="#start-learning">РОЗПОЧАТИ НАВЧАННЯ</a>
+                <a href="#for-teams-schools">ДЛЯ КОМАНД</a>
+                <a href="#for-teams-schools">ДЛЯ ШКОЛИ</a>
+            </nav>
+            <div class="social-links">
+                <img src="{% static 'images/instagram_logo.png' %}" width="50">
+                <img src="{% static 'images/google_logo.png' %}" width="50" style="padding: 50px 20px 0 20px;">
+                <img src="{% static 'images/facebook_logo.png' %}" width="50">
+            </div>
+        </div>
+        <div class="copyright">
+            &#169; Всі права захищенні.
+        </div>
+    </footer>
+<script type="text/javascript">
+    const buttonRight = document.getElementById('slideRight');
+    const buttonLeft = document.getElementById('slideLeft');
 
-
-<!--<main>-->
-<!--    {% block content %}-->
-
-
-<!--    {% endblock %}-->
-<!--</main>-->
+    buttonRight.onclick = function () {
+        document.getElementById('who-we-are-text').scrollLeft += 700;
+    };
+    buttonLeft.onclick = function () {
+        document.getElementById('who-we-are-text').scrollLeft -= 700;
+    };
+</script>
 </body>
 </html>

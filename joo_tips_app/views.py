@@ -38,26 +38,6 @@ def homepage(request):
     return render(request, template_name='homepage.html')
 
 
-def who_we_are(request):
-    return render(request, template_name='who_we_are.html')
-
-
-def how_we_work(request):
-    return render(request, template_name='how_we_work.html')
-
-
-def lets_try_it(request):
-    return render(request, template_name='lets_try_it.html')
-
-
-def for_teams(request):
-    return render(request, template_name='for_teams.html')
-
-
-def for_schools(request):
-    return render(request, template_name='for_schools.html')
-
-
 def programing_language_choice(request):
     record = GuestsVisitStatistic(lets_try_it_date=datetime.now(),
                                   language='EN',

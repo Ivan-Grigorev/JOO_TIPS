@@ -22,7 +22,7 @@
             </div>
             <nav class="navbar">
                 <a href="#who-we-are">WHO WE ARE</a>
-                <a href="#how-we-work">HOW WE WORK</a>
+                <a href="#start-learning">START LEARNING</a>
                 <a href="#for-teams-schools">FOR TEAMS</a>
                 <a href="#for-teams-schools">FOR SCHOOLS</a>
             </nav>
@@ -50,7 +50,7 @@
                     at a time convenient for you and of course all sorts of things from the game world -
                     championships, cups, PvP, and that's not all!</p>
                 <button class="btn-try-it-1" onclick="location.href={% url 'programing_language_choice' %}">
-                    TRY IT<span style="padding-left: 15px;"> ></span>
+                    TRY IT<span style="padding-left: 15px;">&#10095;</span>
                 </button>
             </div>
             <img class="main-cube" src="{% static 'images/cube.svg' %}">
@@ -92,16 +92,35 @@
         <img class="background-arrows-1" src="{% static 'images/background_arrows.svg' %}">
         <div class="row">
             <img class="green-lock" src="{% static 'images/green_lock.svg' %}">
-            <div class="who-we-are-text">
+            <div style="display: grid;">
                 <hr class="line-1">
-                <p>JOO TIPS is a digital game academy that helps middle and high classes pupils, as well as
-                students, learn the most common programming languages conveniently and without congestion.</p>
-                <p>Thanks to the convenient format of educational material, which is presented by small cards-tips
-                and to the system of theoretical and practical tests, the user acquires the necessary knowledge and
-                    immediately learn to use them in practice.</p>
-                <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice' %}">
-                    TRY IT<span style="padding-left: 25px;"> ></span>
-                </button>
+                <div class="who-we-are-text" id="who-we-are-text">
+                    <div style="width: 1400px; display: flex;">
+                        <div class="who-we-are-text-left">
+                            <p>JOO TIPS is a digital game academy that helps middle and high classes pupils, as well as
+                                students, learn the most common programming languages conveniently and without congestion.</p>
+                            <p>Thanks to the convenient format of educational material, which is presented by small cards-tips
+                                and to the system of theoretical and practical tests, the user acquires the necessary knowledge
+                                and immediately learn to use them in practice.</p>
+                        </div>
+                        <div class="who-we-are-text-right" style="margin-left: 50px;">
+                            <p>Thanks to the innovative learning format, which consists of lessons from 5 to 30 minutes,
+                                combined with the most common mechanics of multiplayer games - individual and team matches,
+                                championships and challenges, users can distract from the routine of the classic learning process
+                                and focus on their own progress.</p>
+                            <p>Users on the platform will be assisted by teachers who will organize the competition process
+                                and mentors who will share valuable knowledge and successful cases.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <button class="btn-slide-left" id="slideLeft" type="button">
+                        &#10094;
+                    </button>
+                    <button class="btn-slide-right" id="slideRight" type="button" style="margin-left: 20px;">
+                        &#10095;
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -191,7 +210,7 @@
     <div class="vertical-line-4">
 
     </div>
-    <div class="card-how-we-work"><a id="how-we-work"></a>
+    <div class="card-how-we-work"><a id="start-learning"></a>
         <h4 class="how-to-start-title">HOW TO START LEARNING</h4>
         <div class="row">
             <div class="steps-images">
@@ -206,8 +225,8 @@
                 from 2 theoretical and 6 practical tasks.</p>
                 <p style="margin-top: 120px; margin-left: -50px;">
                     Sign up and start learning with us!</p>
-                <button class="btn-try-it-3" onclick="location.href={% url 'programing_language_choice' %}">
-                    TRY IT<span style="padding-left: 25px;"> ></span>
+                <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice' %}">
+                    TRY IT<span style="padding-left: 25px;">&#10095;</span>
                 </button>
             </div>
         </div>
@@ -249,7 +268,7 @@
             </div>
             <nav class="footer-navbar">
                 <a href="#who-we-are">WHO WE ARE</a>
-                <a href="#how-we-work">HOW WE WORK</a>
+                <a href="#start-learning">START LEARNING</a>
                 <a href="#for-teams-schools">FOR TEAMS</a>
                 <a href="#for-teams-schools">FOR SCHOOLS</a>
             </nav>
@@ -263,5 +282,16 @@
             &#169; All rights reserved.
         </div>
     </footer>
+<script type="text/javascript">
+    const buttonRight = document.getElementById('slideRight');
+    const buttonLeft = document.getElementById('slideLeft');
+
+    buttonRight.onclick = function () {
+        document.getElementById('who-we-are-text').scrollLeft += 700;
+    };
+    buttonLeft.onclick = function () {
+        document.getElementById('who-we-are-text').scrollLeft -= 700;
+    };
+</script>
 </body>
 </html>

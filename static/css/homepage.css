@@ -304,31 +304,45 @@ h4 {
 }
 
 .green-lock {
+    margin-top: -70px;
     margin-left: 2%;
 }
 
 .who-we-are-text {
-    margin: 0 50px 30px 50px;
+    margin: -20px 50px 30px 50px;
+
+    width: 650px;
+    height: 430px;
 
     text-align: left;
+
+    display: flex;
+
+    overflow-x: scroll;
+    overflow-x: hidden;
 
     font-size: 25px;
     font-weight: 300;
     color: #FFFFFF;
 }
 
+.who-we-are-text-left, .who-we-are-text-right {
+    width: 650px;
+}
+
 .line-1 {
-    margin: 50px 0 70px 0;
+    margin: 30px 0 50px 50px;
 
     width: 120px;
 
     border: 1px solid #FBFBFB;
 }
 
-.btn-try-it-2 {
-    margin-top: 70px;
+.btn-slide-left, .btn-slide-right {
+    margin-top: 10px;
+    margin-left: 50px;
 
-    width: 200px;
+    width: 80px;
     height: 60px;
 
     font-weight: 500;
@@ -341,7 +355,7 @@ h4 {
     border: 2px solid #FCBC7D;
 }
 
-.btn-try-it-2:hover {
+.btn-slide-left:hover, .btn-slide-right:hover {
     color: #123257;
 
     background: #FCBC7D;
@@ -430,6 +444,17 @@ hr {
     background: linear-gradient(135.79deg, #123054 52.16%, #163A65 87.53%);
 }
 
+.how-to-start-title {
+    padding-top: 150px;
+    padding-bottom: 90px;
+
+    text-align: center;
+
+    font-size: 30px;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
 .steps-group {
     margin-top: -70px;
     margin-left: 100px;
@@ -454,18 +479,8 @@ hr {
     color: #FFFFFF;
 }
 
-.how-to-start-title {
-    padding-top: 150px;
-    padding-bottom: 90px;
 
-    text-align: center;
-
-    font-size: 30px;
-    font-weight: 500;
-    color: #FFFFFF;
-}
-
-.btn-try-it-3 {
+.btn-try-it-2 {
     margin-top: 100px;
     margin-left: 100px;
 
@@ -482,7 +497,7 @@ hr {
     border: 2px solid #FCBC7D;
 }
 
-.btn-try-it-3:hover {
+.btn-try-it-2:hover {
     color: #123257;
 
     background: #FCBC7D;
