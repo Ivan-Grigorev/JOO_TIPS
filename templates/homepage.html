@@ -23,8 +23,8 @@
             <nav class="navbar">
                 <a href="#who-we-are">WHO WE ARE</a>
                 <a href="#start-learning">START LEARNING</a>
-                <a href="#for-teams-schools">FOR TEAMS</a>
-                <a href="#for-teams-schools">FOR SCHOOLS</a>
+                <a href="#for-teams">FOR TEAMS</a>
+                <a href="#for-schools">FOR SCHOOLS</a>
             </nav>
             <button class="btn-login" onclick="location.href={% url 'log_in' %}">
                 LOG IN
@@ -38,22 +38,52 @@
                     UA
                 </option>
             </select>
+            <!---------Mobile version-------->
+            <nav class="mobile-navbar">
+                <label for="mobile-dropdown">
+                    <img src="{% static 'images/mobile_bar.svg' %}" width="50" height="50">
+                </label>
+                <input type="checkbox" id="mobile-dropdown">
+                <div class="dropdown-slide">
+                        <a href="#who-we-are">WHO WE ARE</a>
+                        <a href="#start-learning">START LEARNING</a>
+                        <a href="#for-schools">FOR SCHOOLS</a>
+                        <a href="#for-teams">FOR TEAMS</a>
+                    <div style="display: flex;">
+                        <button class="mobile-btn-login" onclick="location.href={% url 'log_in' %}">
+                            LOG IN
+                        </button>
+                        <select class="mobile-language" onchange="this.options[this.selectedIndex].value &&
+                        (window.location = this.options[this.selectedIndex].value);">
+                            <option value="http://192.168.0.115:8000">
+                                EN
+                            </option>
+                            <option value="http://192.168.0.115:8000/ua/">
+                                UA
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </nav>
+            <!------------------------------->
         </header>
         <div class="joo-background">
             JOO
         </div>
         <div class="row">
             <div class="it-profession">
-                <h1><span style="color: #EB1034">IT - </span>PROFESSION</h1>
+                <h1><span style="color: #EB4510;">IT - </span>PROFESSION</h1>
                 <h4>for pupils and adults</h4>
-                <p class="text-main">Hundreds of cards-tips, thousands of different tests, lessons from 5 to 30 minutes
+                <p class="text-main">
+                    Hundreds of cards-tips, thousands of different tests, lessons from 5 to 30 minutes
                     at a time convenient for you and of course all sorts of things from the game world -
                     championships, cups, PvP, and that's not all!</p>
                 <button class="btn-try-it-1" onclick="location.href={% url 'programing_language_choice' %}">
                     TRY IT<span style="padding-left: 15px;">&#10095;</span>
                 </button>
             </div>
-            <img class="main-cube" src="{% static 'images/cube.svg' %}">
+            <img class="cube-1" src="{% static 'images/cube_1.svg' %}">
+            <img class="cube-2" src="{% static 'images/cube_2.svg' %}">
         </div>
         <div class="tips-background">
             TIPS
@@ -66,17 +96,17 @@
         <h4 class="goals-title">WHAT COURSES GIVE YOU</h4>
         <div class="row">
             <div class="lamp-brain">
-                <img src="{% static 'images/lamp_brain.png' %}" width="130">
+                <img src="{% static 'images/lamp_brain.png' %}" width="106">
                 <h5>SKILLS DEVELOPMENT</h5>
             </div>
-            <img src="{% static 'images/arrow_1.svg' %}" width="90" style="margin-top: 90px;">
+            <img class="arrow-1" src="{% static 'images/arrow_1.svg' %}">
             <div class="lamp-gear">
-                <img src="{% static 'images/lamp_gear.png' %}" width="130">
+                <img src="{% static 'images/lamp_gear.png' %}" width="106">
                 <h5>USEFUL HOBBY</h5>
             </div>
-            <img src="{% static 'images/arrow_2.svg' %}" width="90" style="margin-top: -30px;">
+            <img class="arrow-2" src="{% static 'images/arrow_2.svg' %}">
             <div class="lamp-target">
-                <img src="{% static 'images/lamp_target.png' %}" width="130">
+                <img src="{% static 'images/lamp_target.png' %}" width="106">
                 <h5>PROSPECTIVE PROFESSION</h5>
             </div>
         </div>
@@ -91,7 +121,8 @@
         <h4 class="who-we-are-title">WHO WE ARE</h4>
         <img class="background-arrows-1" src="{% static 'images/background_arrows.svg' %}">
         <div class="row">
-            <img class="green-lock" src="{% static 'images/green_lock.svg' %}">
+            <img class="green-lock-1" src="{% static 'images/green_lock_1.svg' %}">
+            <img class="green-lock-2" src="{% static 'images/green_lock_2.svg' %}">
             <div style="display: grid;">
                 <hr class="line-1">
                 <div class="who-we-are-text" id="who-we-are-text">
@@ -99,17 +130,17 @@
                         <div class="who-we-are-text-left">
                             <p>JOO TIPS is a digital game academy that helps middle and high classes pupils, as well as
                                 students, learn the most common programming languages conveniently and without congestion.</p>
-                            <p>Thanks to the convenient format of educational material, which is presented by small cards-tips
-                                and to the system of theoretical and practical tests, the user acquires the necessary knowledge
-                                and immediately learn to use them in practice.</p>
+                            <p>Thanks to the convenient format of educational material, which is presented by small
+                                cards-tips and to the system of theoretical and practical tests, the user acquires the
+                                necessary knowledge and immediately learn to use them in practice.</p>
                         </div>
                         <div class="who-we-are-text-right" style="margin-left: 50px;">
                             <p>Thanks to the innovative learning format, which consists of lessons from 5 to 30 minutes,
                                 combined with the most common mechanics of multiplayer games - individual and team matches,
-                                championships and challenges, users can distract from the routine of the classic learning process
-                                and focus on their own progress.</p>
-                            <p>Users on the platform will be assisted by teachers who will organize the competition process
-                                and mentors who will share valuable knowledge and successful cases.</p>
+                                championships and challenges, users can distract from the routine of the classic
+                                learning process and focus on their own progress.</p>
+                            <p>Users on the platform will be assisted by teachers who will organize the competition
+                                process and mentors who will share valuable knowledge and successful cases.</p>
                         </div>
                     </div>
                 </div>
@@ -120,6 +151,14 @@
                     <button class="btn-slide-right" id="slideRight" type="button" style="margin-left: 20px;">
                         &#10095;
                     </button>
+                    <!--       Mobile version       -->
+                    <button class="mobile-btn-slide-left" id="mobileSlideLeft" type="button">
+                        &#10094;
+                    </button>
+                    <button class="mobile-btn-slide-right" id="mobileSlideRight" type="button" style="margin-left: 20px;">
+                        &#10095;
+                    </button>
+                    <!--------------------------------->
                 </div>
             </div>
         </div>
@@ -130,100 +169,97 @@
     <div class="card-languages">
         <h4 class="languages-title">PROGRAMMING LANGUAGES</h4>
         <img class="grid-2" src="{% static 'images/grid_1.svg' %}">
-        <div class="row">
-            <div class="card-python">
-                <img src="{% static 'images/python_logo.svg' %}"
-                     width="200" height="130" style="padding-top: 30px; padding-bottom: 10px;">
-                <label>PYTHON</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
+        <div class="cards-row" >
+            <div class="row" style="margin-bottom: 80px;">
+                <div class="card-python">
+                    <img class="python-logo-image" src="{% static 'images/python_logo.svg' %}">
+                    <label>PYTHON</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
+                <div class="card-javascript">
+                    <img class="javascript-logo-image" src="{% static 'images/javascript_logo.svg' %}">
+                    <label>JAVASCRIPT</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
+                <div class="card-java">
+                    <img class="java-logo-image" src="{% static 'images/java_logo.svg' %}">
+                    <label>JAVA</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
+                <div class="card-swift">
+                    <img class="swift-logo-image" src="{% static 'images/swift_logo.svg' %}">
+                    <label>SWIFT</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
             </div>
-            <div class="card-javascript">
-                <img src="{% static 'images/javascript_logo.svg' %}"
-                     width="200" height="120" style="padding-top: 40px; padding-bottom: 10px;">
-                <label>JAVASCRIPT</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
-            </div>
-            <div class="card-java">
-                <img src="{% static 'images/java_logo.svg' %}"
-                     width="220" height="130" style="padding-top: 30px; padding-bottom: 10px;">
-                <label>JAVA</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
-            </div>
-            <div class="card-swift">
-                <img src="{% static 'images/swift_logo.svg' %}"
-                     width="200" height="130" style="padding-top: 30px; padding-bottom: 10px;">
-                <label>SWIFT</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="card-csharp">
-                <img src="{% static 'images/csharp_logo.svg' %}"
-                     width="250" height="120" style="padding-top: 30px; padding-bottom: 20px;">
-                <label>C#</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
-            </div>
-            <div class="card-cplusplus">
-                <img src="{% static 'images/cplusplus_logo.svg' %}"
-                     width="250" height="120" style="padding-top: 30px; padding-bottom: 20px;">
-                <label>C++</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8;">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
-            </div>
-            <div class="card-golang">
-                <img src="{% static 'images/golang_logo.svg' %}"
-                    width="200" height="160" style="padding-top: 10px;">
-                <label>GOLANG</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
-            </div>
-            <div class="card-php">
-                <img src="{% static 'images/php_logo.svg' %}"
-                     width="250" height="170">
-                <label>PHP</label>
-                <hr>
-                <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                    Learn<span style="margin-left: 5px;">&#8594</span>
-                </a>
+            <div class="row">
+                <div class="card-csharp">
+                    <img class="csharp-logo-image" src="{% static 'images/csharp_logo.svg' %}">
+                    <label>C#</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
+                <div class="card-cplusplus">
+                    <img class="cplusplus-logo-image" src="{% static 'images/cplusplus_logo.svg' %}">
+                    <label>C++</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8;">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
+                <div class="card-golang">
+                    <img class="golang-logo-image" src="{% static 'images/golang_logo.svg' %}">
+                    <label>GOLANG</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
+                <div class="card-php">
+                    <img class="php-logo-image" src="{% static 'images/php_logo.svg' %}">
+                    <label>PHP</label>
+                    <hr>
+                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
+                        Learn<span style="margin-left: 5px;">&#8594</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     <div class="vertical-line-4">
 
     </div>
-    <div class="card-how-we-work"><a id="start-learning"></a>
+    <div class="card-how-to-start"><a id="start-learning"></a>
         <h4 class="how-to-start-title">HOW TO START LEARNING</h4>
         <div class="row">
             <div class="steps-images">
-                <img class="steps-group" src="{% static 'images/steps_group.png' %}">
+                <img class="steps-group-image" src="{% static 'images/steps_group.png' %}">
                 <img class="grid-3" src="{% static 'images/grid_2.svg' %}">
             </div>
             <div class="steps-description">
-                <p style="margin-top: 0; margin-left: -50px;">
+                <img class="step-01-image" src="{% static 'images/step_01.svg' %}">
+                <p class="step-01">
                     To start learning, go to the link "Learn", "TRY IT" or "LOG IN".</p>
-                <p style="margin-top: 130px; margin-left: 30px;">
+                <img class="step-02-image" src="{% static 'images/step_02.svg' %}">
+                <p class="step-02">
                     Choose the language you want to learn and read theory from few cards-tips. Then take the tests
                 from 2 theoretical and 6 practical tasks.</p>
-                <p style="margin-top: 120px; margin-left: -50px;">
+                <img class="step-03-image" src="{% static 'images/step_03.svg' %}">
+                <p class="step-03">
                     Sign up and start learning with us!</p>
                 <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice' %}">
                     TRY IT<span style="padding-left: 25px;">&#10095;</span>
@@ -234,21 +270,19 @@
     <div class="vertical-line-5">
 
     </div>
-    <div class="card-for-teams-schools"><a id="for-teams-schools"></a>
+    <div class="card-for-teams-schools">
         <div class="row">
-            <div class="for-schools">
-                <label style="margin-top: 70px; margin-bottom: 50px;">FOR SCHOOLS</label>
-                <img src="{% static 'images/for_schools.png' %}"
-                     style="margin-left: auto; margin-right: auto; margin-bottom: 25px;">
+            <div class="for-schools"><a id="for-schools"></a>
+                <label class="for-schools-title">FOR SCHOOLS</label>
+                <img class="for-schools-image" src="{% static 'images/for_schools.png' %}">
                 <div class="email-input">
                     <input placeholder="Enter E-MAIL">
                     <button class="btn-join">JOIN</button>
                 </div>
             </div>
-            <div class="for-teams">
-                <label style="margin-top: 70px;">FOR TEAMS</label>
-                <img src="{% static 'images/for_teams.png' %}"
-                     style="margin-left: auto; margin-right: auto; margin-bottom: 40px;">
+            <div class="for-teams"><a id="for-teams"></a>
+                <label class="for-teams-title">FOR TEAMS</label>
+                <img class="for-teams-image" src="{% static 'images/for_teams.png' %}">
                 <div class="email-input">
                     <input placeholder="Enter E-MAIL">
                     <button class="btn-join">JOIN</button>
@@ -269,13 +303,13 @@
             <nav class="footer-navbar">
                 <a href="#who-we-are">WHO WE ARE</a>
                 <a href="#start-learning">START LEARNING</a>
-                <a href="#for-teams-schools">FOR TEAMS</a>
-                <a href="#for-teams-schools">FOR SCHOOLS</a>
+                <a href="#for-teams">FOR TEAMS</a>
+                <a href="#for-schools">FOR SCHOOLS</a>
             </nav>
             <div class="social-links">
                 <img src="{% static 'images/instagram_logo.png' %}" width="50">
                 <img src="{% static 'images/google_logo.png' %}" width="50" style="padding: 50px 20px 0 20px;">
-                <img src="{% static 'images/facebook_logo.png' %}" width="50">
+                <img src="{% static 'images/facebook_logo.svg' %}" width="50">
             </div>
         </div>
         <div class="copyright">
@@ -286,11 +320,22 @@
     const buttonRight = document.getElementById('slideRight');
     const buttonLeft = document.getElementById('slideLeft');
 
+    const mobileButtonRight = document.getElementById('mobileSlideRight');
+    const mobileButtonLeft = document.getElementById('mobileSlideLeft');
+
+
     buttonRight.onclick = function () {
         document.getElementById('who-we-are-text').scrollLeft += 700;
     };
+    mobileButtonRight.onclick = function () {
+        document.getElementById('who-we-are-text').scrollLeft += 400;
+    };
+
     buttonLeft.onclick = function () {
         document.getElementById('who-we-are-text').scrollLeft -= 700;
+    };
+    mobileButtonLeft.onclick = function () {
+        document.getElementById('who-we-are-text').scrollLeft -= 400;
     };
 </script>
 </body>

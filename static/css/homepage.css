@@ -88,7 +88,7 @@ body {
 
 .navbar a {
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 20px;
     text-decoration: none;
 
     font-weight: 300;
@@ -99,6 +99,10 @@ body {
 
 .navbar a:hover {
     color: #FCBC7D;
+}
+
+.mobile-navbar {
+    display: none;
 }
 
 .btn-login {
@@ -124,6 +128,10 @@ body {
     border: 1px solid #FFFFFF;
 }
 
+.mobile-btn-login {
+    display: none;
+}
+
 .language {
     margin-top: 80px;
     margin-right: 32px;
@@ -145,12 +153,20 @@ body {
     color: #FCBC7D;
 }
 
-.main-cube {
+.mobile-language {
+    display: none;
+}
+
+.cube-1 {
     margin-top: 30px;
     margin-left: auto;
     margin-right: 5%;
 
     width: 40%;
+}
+
+.cube-2 {
+    display: none;
 }
 
 .joo-background {
@@ -271,6 +287,16 @@ h4 {
     color: #0C3059;
 }
 
+.arrow-1 {
+    margin-top: 90px;
+    width:90px;
+}
+
+.arrow-2 {
+    margin-top: -30px;
+    width: 90px;
+}
+
 .grid-1 {
     margin-top: -60px;
     margin-left: 10px;
@@ -303,9 +329,13 @@ h4 {
 
 }
 
-.green-lock {
+.green-lock-1 {
     margin-top: -70px;
     margin-left: 2%;
+}
+
+.green-lock-2 {
+    display: none;
 }
 
 .who-we-are-text {
@@ -359,6 +389,10 @@ h4 {
     color: #123257;
 
     background: #FCBC7D;
+}
+
+.mobile-btn-slide-left, .mobile-btn-slide-right {
+    display: none;
 }
 
 .vertical-line-3, .vertical-line-4, .vertical-line-5 {
@@ -429,13 +463,58 @@ h4 {
     margin-right: auto;
 }
 
+.python-logo-image, .swift-logo-image {
+    padding-top: 30px;
+    padding-bottom: 10px;
+
+    width: 200px;
+    height: 130px;
+}
+
+.javascript-logo-image {
+    padding-top: 40px;
+    padding-bottom: 10px;
+
+    width: 200px;
+    height: 120px;
+}
+
+.java-logo-image {
+    padding-top: 30px;
+    padding-bottom: 10px;
+
+    width: 220px;
+    height: 130px;
+}
+
+.csharp-logo-image, .cplusplus-logo-image {
+    padding-top: 30px;
+    padding-bottom: 20px;
+
+    width: 250px;
+    height: 120px;
+}
+
+.golang-logo-image {
+    padding-top: 10px;
+
+    width: 200px;
+    height: 160px;
+}
+
+.php-logo-image {
+    width: 250px;
+    height: 170px;
+}
+
+
 hr {
     margin-bottom: 0;
 
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.card-how-we-work {
+.card-how-to-start {
     width: 100%;
     height: 1000px;
 
@@ -455,7 +534,7 @@ hr {
     color: #FFFFFF;
 }
 
-.steps-group {
+.steps-group-image {
     margin-top: -70px;
     margin-left: 100px;
 
@@ -467,8 +546,8 @@ hr {
     margin-left: 350px;
 }
 
-.steps-images {
-
+.step-01-image, .step-02-image, .step-03-image {
+    display: none;
 }
 
 .steps-description {
@@ -479,6 +558,20 @@ hr {
     color: #FFFFFF;
 }
 
+.step-01 {
+    margin-top: 0;
+    margin-left: -50px;
+}
+
+.step-02 {
+    margin-top: 130px;
+    margin-left: 30px;
+}
+
+.step-03 {
+    margin-top: 120px;
+    margin-left: -50px;
+}
 
 .btn-try-it-2 {
     margin-top: 100px;
@@ -512,6 +605,15 @@ hr {
     background: #FFFFFF;
 }
 
+.for-schools-title {
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+
+.for-teams-title {
+    margin-top: 70px;
+}
+
 .for-schools {
     margin-top: 100px;
     margin-left: auto;
@@ -533,6 +635,12 @@ hr {
     border-radius: 16px;
 }
 
+.for-schools-image {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+}
+
 .for-teams {
     margin-top: 100px;
     margin-right: auto;
@@ -551,6 +659,12 @@ hr {
     background: #FFFFFF;
     box-shadow: 0px 21.1862px 48.9932px -7.94484px rgba(16, 24, 40, 0.2);
     border-radius: 16px;
+}
+
+.for-teams-image {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
 }
 
 .email-input {
@@ -596,6 +710,13 @@ input {
     border: none;
 }
 
+.btn-join:hover {
+    color: #13355C;
+
+    background: #FFFFFF;
+    border: 2px solid #13355C;
+}
+
 footer {
     width: 100%;
     height: 350px;
@@ -628,7 +749,7 @@ footer {
     text-decoration: none;
 
     font-weight: 300;
-    font-size: 20px;
+    font-size: 15px;
 
     color: rgba(255, 255, 255, 0.49);
 }
@@ -655,24 +776,449 @@ footer {
     color: rgba(255, 255, 255, 0.28);
 }
 
-/*
-@media screen and (max-width: 600px) {
-    .navbar {
-        display: block;
 
-        font-size: 25px;
+@media screen and (max-width: 600px) {
+    .title {
+        margin-top: 10px;
+        margin-left: 10px;
+
+        width: 200px;
+        height: 50px;
     }
 
-    .navbar a {
+    .joo-background {
+        margin-left: -50px;
+        margin-top: 50px;
+    }
+
+    .mobile-btn-bar {
+        margin-top: 50px;
+        margin-left: 30%;
+
+        display: block;
+
+        width: 70px;
+
+        background: transparent;
+        border: none;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .btn-login {
+        display: none;
+    }
+
+    .language {
+        display: none;
+    }
+
+    .mobile-navbar {
+        margin-top: 50px;
+        margin-left: 110px;
+
+        width: 100px;
+        height: 20px;
+
+        display: block;
+    }
+
+    .dropdown-slide {
+        margin-left: -180px;
+
+        width: 250px;
+        height: 0px;
+
+        display: block;
+
+        overflow: hidden;
+        text-align: left;
+
+        background: rgba(252, 252, 237, 0.37);
+        backdrop-filter: blur(55px);
+        -webkit-backdrop-filter: blur(55px);
+        border-radius: 6px;
+    }
+
+    .dropdown-slide a {
+        padding-top: 25px;
+        padding-left: 20px;
+
+        display: grid;
+
+        font-weight: 300;
+        font-size: 18px;
+        color: #FFFFFF;
+
+        text-decoration: none;
+    }
+
+    #mobile-dropdown {opacity: 0; height: 0px;}
+
+    #mobile-dropdown:checked + .dropdown-slide {height: 300px;}
+
+    .mobile-btn-login {
+        margin-top: 50px;
+        margin-left: 20px;
+
+        width: 80px;
+        height: 40px;
+
+        display: block;
+
+        font-size: 12px;
+        font-weight: 300;
+        color: #FCBC7D;
+
+        background: transparent;
+        border-radius: 5px;
+        border: 1px solid #FCBC7D;
+    }
+
+    .mobile-language {
+        margin-top: 45px;
+        margin-left: 65px;
+
+        width: 100px;
+        height: 50px;
+
         display: block;
 
         text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
+
+        font-size: 30px;
+        color: #FFFFFF;
+
+        border: none;
+        -webkit-appearance: none;
+        background: transparent;
+    }
+
+    .mobile-btn-login:hover {
+        color: #FFFFFF;
+
+        border: 1px solid #FFFFFF;
+    }
+
+    .it-profession {
+        margin-top: 80px;
+        margin-left: 15px;
+
+        width: 100%;
+    }
+
+    h1 {
+        margin-top: 70px;
 
         font-weight: 500;
+        font-size: 48px;
+    }
+
+    h4 {
+        font-weight: 500;
+        font-size: 33px;
+    }
+
+    .text-main {
+        width: 380px;
+
+        font-weight: 300;
+        font-size: 22px;
+    }
+
+    .btn-try-it-1 {
+        width: 180px;
+        height: 55px;
+
+        font-size: 14px;
+    }
+
+    .cube-1 {
+        display: none;
+    }
+
+    .cube-2 {
+        margin-top: -110px;
+        margin-left: 250px;
+
+        display: block;
+    }
+
+    .tips-background {
+        display: none;
+    }
+
+    .vertical-line-1, .vertical-line-2, .vertical-line-3, .vertical-line-4, .vertical-line-5 {
+        margin-left: 35%;
+    }
+
+    .row {
+        display: grid;
+    }
+
+    .card-goals {
+        height: 900px;
+    }
+
+    .goals-title {
+        padding-top: 100px;
+    }
+
+    .lamp-brain, .lamp-gear, .lamp-target {
+        margin: 0;
+    }
+
+    .arrow-1, .arrow-2 {
+        display: none;
+    }
+
+    .grid-1, .grid-2, .grid-3 {
+        display: none;
+    }
+
+    .green-lock-1 {
+        display: none;
+    }
+
+    .green-lock-2 {
+        display: block;
+
+        position: absolute;
+    }
+
+    .line-1 {
+        display: none;
+    }
+
+    .who-we-are-text {
+        margin-left: 30px;
+
+        width: 360px;
+        height: 560px;
+
+        text-align: center;
+
+        font-size: 20px;
+    }
+
+    .who-we-are-text-left, .who-we-are-text-right {
+        width: 350px;
+    }
+
+    .btn-slide-left, .btn-slide-right {
+        display: none;
+    }
+
+    .mobile-btn-slide-left, .mobile-btn-slide-right {
+        margin-top: 10px;
+        margin-left: 120px;
+
+        display: block;
+
+        width: 80px;
+        height: 60px;
+
+        font-weight: 500;
+        font-size: 20px;
+
+        color: #FCBC7D;
+
+        background: transparent;
+        border-radius: 10px;
+        border: 2px solid #FCBC7D;
+    }
+
+    .mobile-btn-slide-left:hover, .mobile-btn-slide-right:hover {
+        color: #123257;
+
+        background: #FCBC7D;
+    }
+
+    .card-languages {
+        height: auto;
+    }
+
+    .languages-title {
+        padding-top: 150px;
+    }
+
+    .cards-row {
+        display: flex;
+    }
+
+    .card-python, .card-javascript, .card-java, .card-swift {
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+
+        width: 170px;
+        height: 200px;
+
         font-size: 25px;
 
-        color: rgba(171, 171, 171, 0.8);
+        border-radius: 8px;
+    }
+
+    .card-csharp, .card-cplusplus, .card-golang, .card-php {
+        margin-top: -70px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+
+        width: 170px;
+        height: 200px;
+
+        font-size: 25px;
+
+        border-radius: 8px;
+    }
+
+    .card-python, .card-csharp {
+        margin-top: 50px;
+    }
+
+    .python-logo-image, .java-logo-image, .golang-logo-image, .php-logo-image {
+        width: 120px;
+        height: 70px;
+    }
+
+    .csharp-logo-image, .cplusplus-logo-image {
+        padding-top: 20px;
+
+        width: 135px;
+        height: 70px;
+    }
+
+    .javascript-logo-image, .swift-logo-image {
+        padding-top: 30px;
+
+        width: 110px;
+        height: 70px;
+    }
+
+    .golang-logo-image {
+        width: 170px;
+        height: 100px;
+    }
+
+    .php-logo-image {
+        width: 160px;
+        height: 110px;
+    }
+
+    .card-how-to-start {
+        height: auto;
+    }
+
+    .steps-group-image {
+        display: none;
+    }
+
+    .steps-description {
+        margin: -40px auto 50px auto;
+
+        width: 90%;
+
+        text-align: center;
+
+        font-size: 20px;
+    }
+
+    .step-01-image, .step-02-image, .step-03-image {
+        margin-left: auto;
+        margin-right: auto;
+
+        display: block;
+    }
+
+    .step-01, .step-02, .step-03 {
+        margin: 0 auto 50px auto;
+    }
+
+    .btn-try-it-2 {
+        margin: 40px auto 70px auto;
+
+        width: 180px;
+        height: 55px;
+
+        font-size: 14px;
+    }
+
+    .card-for-teams-schools {
+        height: auto;
+
+        text-align: center;
+    }
+
+    .for-schools {
+        margin: 110px auto 40px auto;
+
+        width: 380px;
+    }
+
+    .for-teams {
+        margin: 0 auto 70px auto;
+
+        width: 380px;
+    }
+
+    .for-teams-image {
+        width: 380px;
+    }
+
+    .email-input {
+        width: 350px;
+        height: 50px;
+
+        display: flex;
+    }
+
+    input {
+        margin-top: 5px;
+
+        width: 150px;
+        height: 30px;
+    }
+
+    .btn-join {
+        margin-right: 5px;
+
+        width: 145px;
+        height: 40px;
+
+        font-size: 15px;
+    }
+
+    footer {
+        text-align: center;
+
+        height: auto;
+    }
+
+    .footer-title {
+        margin-left: auto;
+        margin-right: auto;
+
+        border-right: none;
+        border-bottom: 2px solid #244267;
+    }
+
+    .footer-navbar {
+        margin-top: 50px;
+
+        display: grid;
+    }
+
+    .social-links {
+        margin-left: auto;
+        margin-right: auto;
+
+        border: none;
+    }
+
+    .copyright {
+        padding-bottom: 40px;
     }
 }
