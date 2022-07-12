@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import homepage, programing_language_choice, python_themes_time, python_themes_time_guests, \
+from .views import HomePage, programing_language_choice, python_themes_time, python_themes_time_guests, \
     golang_themes_time, javascript_themes_time, python_theory_cards, python_theoretical_test, python_practical_test, \
     progress_statistic_guests, \
     register, log_in, log_out, \
@@ -8,7 +8,7 @@ from .views import homepage, programing_language_choice, python_themes_time, pyt
     pupils_homepage, pupils_event, pupils_exam, pupils_rating, pupils_mentor, pupils_pvp, pupils_tvt, \
     teachers_homepage, teachers_event, teachers_exam, teachers_rating, teachers_mentor, \
     mentors_homepage, mentors_invocation, mentors_session, mentors_rating
-from .views_ua import homepage_ua, programing_language_choice_ua, python_themes_time_ua, python_themes_time_guests_ua,\
+from .views_ua import HomePageUa, programing_language_choice_ua, python_themes_time_ua, python_themes_time_guests_ua,\
     python_theory_cards_ua, golang_themes_time_ua, javascript_themes_time_ua, python_theoretical_test_ua, \
     python_practical_test_ua, progress_statistic_guests_ua,\
     register_ua, log_in_ua, log_out_ua, \
@@ -19,9 +19,9 @@ from .views_ua import homepage_ua, programing_language_choice_ua, python_themes_
     mentors_homepage_ua, mentors_invocation_ua, mentors_session_ua, mentors_rating_ua
 
 
-url_patterns = [
-    path('', homepage, name='homepage'),
-    path('ua/', homepage_ua, name='homepage_ua'),
+urlpatterns = [
+    path('', HomePage.as_view(), name='homepage'),
+    path('ua/', HomePageUa.as_view(), name='homepage_ua'),
 
     path('programing-language-choice/', programing_language_choice, name='programing_language_choice'),
 

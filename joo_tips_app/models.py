@@ -693,3 +693,28 @@ class GuestsVisitStatistic(models.Model):
 
     class Meta:
         db_table = 'guests_visit_statistic'
+
+
+class JooTipsErrorsStatistic(models.Model):
+    guests_ip = models.TextField(null=True)
+    guests_location = models.TextField(null=True)
+    guests_hostname = models.TextField(null=True)
+    error_400 = models.BooleanField(default=False)
+    error_403 = models.BooleanField(default=False)
+    error_404 = models.BooleanField(default=False)
+    error_500 = models.BooleanField(default=False)
+    record_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.guests_ip\
+               or self.guests_location\
+               or self.guests_hostname\
+               or self.error_400\
+               or self.error_403\
+               or self.error_404\
+               or self.error_500\
+               or self.record_date
+
+    class Meta:
+        db_table = 'joo_tips_site_errors_statistic'
+

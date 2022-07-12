@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/themes_time.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+</head>
+<body>
+    <form method="POST">
+    {% csrf_token %}
+        <div class="card-1">
+            <div class="container">
+                <h1 class="text">Виберіть свій рівень знань Python</h1>
+                    <select class="level" name="level" required>
+                        <option value="zero">Я нічого не знаю, але хочу почати з початку</option>
+                        <option value="first">Я знаю основи Python</option>
+                        <option value="second">Я можу написати кілька рядків на Python</option>
+                        <option value="third">Я створюю невеликі програми на Python</option>
+                    </select>
+<!--                <h1>Виберіть тему Python</h1>-->
+<!--                <select class="themes" name="themes" required>-->
+<!--                    <option value="basics">Основи</option>-->
+<!--                    <option value="types">Типи</option>-->
+<!--                    <option value="commands">Команди</option>-->
+<!--                    <option value="syntax">Синтаксис</option>-->
+<!--                    <option value="constructions">Конструкції</option>-->
+<!--                    <option value="classes">Класи</option>-->
+<!--                </select>-->
+                <h1>Установіть час</h1>
+                <select class="time" name="time" required>
+                    <option value="5">5 хв</option>
+                    <option value="10" disabled>*10 хв</option>
+                    <option value="15" disabled>*15 хв</option>
+                    <option value="20" disabled>*20 хв</option>
+                    <option value="25" disabled>*25 хв</option>
+                    <option value="30" disabled>*30 хв</option>
+                    <option disabled></option>
+                    <option disabled>* - Доступно лише для авторизованих користувачів</option>
+                </select>
+                <div>
+                    <button class="btn" type="submit">СТАРТ</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

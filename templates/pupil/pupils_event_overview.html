@@ -1,0 +1,51 @@
+{% extends 'pupils_homepage.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pupils_event_overview.css' %}">
+<div class="card-1">
+    <div class="row">
+        <div class="card-2">
+            <table id="events">
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-event">Autumn class championship</button>
+                    </td>
+                    <td>&#128309</td>
+                    <td>&#128993</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-event">Spring class championship</button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>&#128994</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-event">Winter class championship</button>
+                    </td>
+                    <td></td>
+                    <td>&#128993</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-event">Summer class championship</button>
+                    </td>
+                    <td></td>
+                    <td>&#128993</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-3">
+            <button class="btn">TAKE PART</button>
+            <button class="btn">LEAVE EVENT</button>
+            <button class="btn">STATISTICS</button>
+            <button class="btn-go">GO</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

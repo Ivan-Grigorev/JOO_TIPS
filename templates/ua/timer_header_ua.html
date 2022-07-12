@@ -9,61 +9,13 @@
     <link rel="stylesheet" href="{% static 'css/timer_header.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
-<script type="text/javascript">
-  var lesson_timer = setInterval(function() {
-
-  var now = new Date();
-  var nowUTC = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
-               now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-  var distance = new Date("{{ lesson_time }}").getTime() - nowUTC;
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  if (minutes < 10) minutes = "0" + minutes;
-  if (seconds < 10) seconds = "0" + seconds;
-
-  if (minutes == "00" && seconds < "31") {
-    document.getElementById("lesson_timer").style.color = "red";
-  }
-
-  document.getElementById("lesson_timer").innerHTML = "Час уроку: " + minutes + ":" + seconds;
-
-  if (distance < 0) {
-    clearInterval(lesson_timer);
-    document.getElementById("lesson_timer").innerHTML = "Час уроку: 00:00";
-  }
-  }, 1000);
-</script>
+<input type="hidden" id="lesson_time" value="{{ lesson_time }}">
 <nav class="timer" id="lesson_timer">
     <div>
         <h1>{{ lesson_timer }}</h1>
     </div>
 </nav>
-<script type="text/javascript">
-  var test_timer = setInterval(function() {
-
-  var now = new Date();
-  var nowUTC = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),
-               now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-  var distance = new Date("{{ timer }}").getTime() - nowUTC;
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  if (minutes < 10) minutes = "0" + minutes;
-  if (seconds < 10) seconds = "0" + seconds;
-
-  if (minutes == "00" && seconds < "31") {
-    document.getElementById("test_timer").style.color = "red";
-  }
-
-  document.getElementById("test_timer").innerHTML = "Час тесту: " + minutes + ":" + seconds;
-
-  if (distance < 0) {
-    clearInterval(test_timer);
-    document.getElementById("test_timer").innerHTML = "Час тесту: 00:00";
-  }
-  }, 1000);
-</script>
+<input type="hidden" id="timer" value="{{ timer }}">
 <nav class="timer" id="test_timer">
     <div>
         <h1>{{ test_timer }}</h1>
@@ -74,5 +26,7 @@
 
 
 {% endblock %}
+<script src="{% static 'js/lesson_timer_ua.js' %}" type="module"></script>
+<script src="{% static 'js/test_timer_ua.js' %}" type="module"></script>
 </body>
 </html>

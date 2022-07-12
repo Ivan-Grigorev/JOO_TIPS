@@ -1,0 +1,24 @@
+{% extends 'ua/timer_header_ua.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/theory_cards.css' %}">
+<div class="card-1">
+    <div class="hs">
+        <div></div>
+        {% for context_ua in text_ua %}
+        <div class="card-1-container">
+            <pre class="text">{{ context_ua.text_ua }}</pre>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+    <form method="POST">
+        {% csrf_token %}
+            <button class="btn-start" type="submit" onclick="location.href={% url 'python_theoretical_test_ua' %}">
+                ПОЧAТИ ТЕСТ
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock%}

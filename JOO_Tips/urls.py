@@ -16,18 +16,17 @@ Including another URLconf
 from django.contrib import admin
 
 from django.urls import path
-
 from django.conf.urls import include
 
-from joo_tips_app.urls import url_patterns
+from joo_tips_app.views import Error400Page, Error403Page, Error404Page, Error500Page
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(url_patterns))
+    path('', include('joo_tips_app.urls'))
 ]
 
-handler400 = 'joo_tips_app.views.bad_request_view'
-handler403 = 'joo_tips_app.views.permission_denied_view'
-handler404 = 'joo_tips_app.views.page_not_found_view'
-handler500 = 'joo_tips_app.views.server_error_view'
+handler400 = Error400Page.as_view()
+handler403 = Error403Page.as_view()
+handler404 = Error404Page.as_view()
+handler500 = Error500Page.as_view()

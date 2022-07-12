@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_control
+from django.views.generic import TemplateView
 
 from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
@@ -26,14 +27,30 @@ import importlib
 import ipinfo
 
 
-def homepage_ua(request):
-    # record = GuestsVisitStatistic(guests_ip=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().ip,
-    #                               guests_location=[ipinfo.getHandler('c3ef7fe9b908a3').getDetails().city,
-    #                                                ipinfo.getHandler('c3ef7fe9b908a3').getDetails().country_name],
-    #                               guests_hostname=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().hostname,
-    #                               visit_date=datetime.now())
-    # record.save()
-    return render(request, template_name='ua/homepage_ua.html')
+class HomePageUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                                      if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     visit_date=datetime.now())
+        # record.save()
+        return render(request, template_name='ua/homepage.html')
+
+    def post(self, request, *args, **kwargs):
+        return render(request, template_name='ua/homepage.html')
 
 
 def programing_language_choice_ua(request):

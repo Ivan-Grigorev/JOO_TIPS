@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_control
+from django.views.generic import TemplateView
 
 from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
@@ -20,7 +21,9 @@ from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataT
     PythonBasicsTheoreticalTest, PythonVariablesTheoreticalTest, PythonDataTypesTheoreticalTest, \
     GolangTheory, \
     JavaScriptTheory, \
-    GuestsVisitStatistic
+    GuestsVisitStatistic, \
+    JooTipsErrorsStatistic
+
 
 from datetime import datetime, timedelta
 import random
@@ -28,14 +31,30 @@ import importlib
 import ipinfo
 
 
-def homepage(request):
-    # record = GuestsVisitStatistic(guests_ip=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().ip,
-    #                               guests_location=[ipinfo.getHandler('c3ef7fe9b908a3').getDetails().city,
-    #                                                ipinfo.getHandler('c3ef7fe9b908a3').getDetails().country_name],
-    #                               guests_hostname=ipinfo.getHandler('c3ef7fe9b908a3').getDetails().hostname,
-    #                               visit_date=datetime.now())
-    # record.save()
-    return render(request, template_name='homepage.html')
+class HomePage(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                                      if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     visit_date=datetime.now())
+        # record.save()
+        return render(request, template_name='homepage.html')
+
+    def post(self, request, *args, **kwargs):
+        return render(request, template_name='homepage.html')
 
 
 def programing_language_choice(request):
@@ -333,17 +352,93 @@ def javascript_themes_time(request):
     return render(request, template_name='javascript_themes_time.html')
 
 
-def bad_request_view(request, exception=None):
-    return render(request, template_name='errors_views/400.html', status=400)
+class Error400Page(TemplateView):
+    model = JooTipsErrorsStatistic
+    template_name = 'errors_views/error_view.html'
+
+    def get(self, request, *args, **kwargs):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_400=True)
+        record.save()
+        return render(request, template_name='errors_views/400.html', status=400)
 
 
-def permission_denied_view(request, exception=None):
-    return render(request, template_name='errors_views/403.html', status=403)
+class Error403Page(TemplateView):
+    model = JooTipsErrorsStatistic
+    template_name = 'errors_views/error_view.html'
+
+    def get(self, request, *args, **kwargs):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_403=True)
+        record.save()
+        return render(request, template_name='errors_views/403.html', status=403)
 
 
-def page_not_found_view(request, exception=None):
-    return render(request, template_name='errors_views/404.html', status=404)
+class Error404Page(TemplateView):
+    model = JooTipsErrorsStatistic
+    template_name = 'errors_views/error_view.html'
+
+    def get(self, request, *args, **kwargs):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_404=True)
+        record.save()
+        return render(request, template_name='errors_views/404.html', status=404)
 
 
-def server_error_view(request, exception=None):
-    return render(request, template_name='errors_views/500.html', status=500)
+class Error500Page(TemplateView):
+    model = JooTipsErrorsStatistic
+    template_name = 'errors_views/error_view.html'
+
+    def get(self, request, *args, **kwargs):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_500=True)
+        record.save()
+        return render(request, template_name='errors_views/500.html', status=500)
