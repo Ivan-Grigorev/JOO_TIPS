@@ -3,7 +3,7 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title></title>
     <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
@@ -111,7 +111,7 @@
     <div class="card-who-we-are"><a id="who-we-are"></a>
         <h4 class="who-we-are-title">WHO WE ARE</h4>
         <img class="who-we-are-underline" src="{% static 'images/who_we_are_underline.svg' %}">
-        <img class="background-arrows-1" src="{% static 'images/background_arrows.svg' %}">
+        <img class="mobile-who-we-are" src="{% static 'images/mobile_who_we_are.svg' %}">
         <img class="who-we-are-image" src="{% static 'images/who_we_are.svg' %}">
         <div class="who-we-are-text">
             <p>JOO TIPS is a digital game academy that helps middle and high classes pupils, as well as
@@ -123,7 +123,6 @@
     </div>
 
     <div class="card-languages">
-        <img class="grid-2" src="{% static 'images/grid_2.svg' %}">
         <h4 class="languages-title">PROGRAMMING LANGUAGES</h4>
         <div class="cards-row" >
             <div class="row">
@@ -201,22 +200,23 @@
         <div class="row">
             <div class="for-schools"><a id="for-schools"></a>
                 <label class="for-schools-title">FOR SCHOOLS</label>
-                <img class="for-schools-image" src="{% static 'images/for_schools.png' %}">
+                <img class="for-schools-image" src="{% static 'images/for_schools.svg' %}">
                 <div class="email-input">
-                    <input placeholder="Enter E-MAIL">
+                    <input name="school-email" placeholder="Enter E-MAIL" type="email" required>
                     <button class="btn-join">JOIN</button>
                 </div>
             </div>
             <div class="for-teams"><a id="for-teams"></a>
                 <label class="for-teams-title">FOR TEAMS</label>
-                <img class="for-teams-image" src="{% static 'images/for_teams.png' %}">
+                <img class="for-teams-image" src="{% static 'images/for_teams.svg' %}">
                 <div class="email-input">
-                    <input placeholder="Enter E-MAIL">
+                    <input name="team-email" placeholder="Enter E-MAIL" type="email" required>
                     <button class="btn-join">JOIN</button>
                 </div>
             </div>
         </div>
     </div>
+
     <footer>
         <div class="row">
             <div class="footer-title">
@@ -234,15 +234,12 @@
                 <a href="#for-schools">FOR SCHOOLS</a>
             </nav>
             <div class="social-links">
-                <img src="{% static 'images/instagram_logo.png' %}" width="50">
-                <img src="{% static 'images/google_logo.png' %}" width="50" style="padding: 50px 20px 0 20px;">
-                <img src="{% static 'images/facebook_logo.svg' %}" width="50">
+                <a href=""><img src="{% static 'images/linkedin_logo.svg' %}" width="50"></a>
             </div>
         </div>
         <div class="copyright">
             &#169; All rights reserved.
         </div>
     </footer>
-<script src="{% static 'js/slider.js' %}" type="text/javascript"></script>
 </body>
 </html>

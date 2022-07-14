@@ -47,10 +47,10 @@ class HomePageUa(TemplateView):
         #                                      if 'hostname' in http_data.__dict__['details'].keys() else None,
         #                     visit_date=datetime.now())
         # record.save()
-        return render(request, template_name='ua/homepage.html')
+        return render(request, template_name='ua/homepage_ua.html')
 
     def post(self, request, *args, **kwargs):
-        return render(request, template_name='ua/homepage.html')
+        return render(request, template_name='ua/homepage_ua.html')
 
 
 def programing_language_choice_ua(request):

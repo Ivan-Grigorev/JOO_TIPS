@@ -3,7 +3,7 @@
 {% load static %}
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title></title>
     <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
@@ -90,9 +90,7 @@
             TIPS
         </div>
     </div>
-    <div class="vertical-line-1">
 
-    </div>
     <div class="card-goals">
         <h4 class="goals-title">ЩО ВАМ ДАЮТЬ КУРСИ</h4>
         <div class="row">
@@ -100,184 +98,111 @@
                 <img src="{% static 'images/lamp_brain.png' %}" width="106">
                 <h5>РОЗВИТОК ЗДІБНОСТЕЙ</h5>
             </div>
-            <img class="arrow-1" src="{% static 'images/arrow_1.svg' %}">
             <div class="lamp-gear">
                 <img src="{% static 'images/lamp_gear.png' %}" width="106">
                 <h5>КОРИСНЕ ХОБІ</h5>
             </div>
-            <img class="arrow-2" src="{% static 'images/arrow_2.svg' %}">
             <div class="lamp-target">
                 <img src="{% static 'images/lamp_target.png' %}" width="106">
                 <h5>ПЕРСПЕКТИВНА ПРОФЕСІЯ</h5>
             </div>
         </div>
     </div>
-    <div class="grid-1">
-        <img src="{% static 'images/grid_1.svg' %}">
-    </div>
-    <div class="vertical-line-2">
 
-    </div>
     <div class="card-who-we-are"><a id="who-we-are"></a>
         <h4 class="who-we-are-title">ПРО НАС</h4>
-        <img class="background-arrows-1" src="{% static 'images/background_arrows.svg' %}">
-        <div class="row">
-            <img class="green-lock-1" src="{% static 'images/green_lock_1.svg' %}">
-            <img class="green-lock-2" src="{% static 'images/green_lock_2.svg' %}">
-            <div style="display: grid;">
-                <hr class="line-1">
-                <div class="who-we-are-text" id="who-we-are-text">
-                    <div style="width: 1400px; display: flex;">
-                        <div class="who-we-are-text-left">
-                            <p>JOO TIPS - це цифрова ігро-академія, яка допомагає школярам середніх та старших класів,
-                                а також свічерам, зручно та без перевантажень вчити найбільш поширені мови
-                                програмування - і не тільки.</p>
-                            <p>Завдяки зручному формату навчального матеріалу, який подається маленькими картками-
-                                підказками, та системи теоретичних та практични тестів користувач опановує необхідні
-                                знання та зразу ж бачить і вчиться їх використовувати на практиці.</p>
-                        </div>
-                        <div class="who-we-are-text-right" style="margin-left: 50px;">
-                            <p>Завдяки інновативному  формату навчання, який складається з уроків від 5 до 30 хвилин,
-                                в поєднанні з найпоширенішими механіками з багатокористувацьких ігор - індивідуальними
-                                та колективними матчами, чемпіонатами та челенджами, користувачі зможуть відволіктись
-                                від рутини класичного навчального процесу і зосередитись на власному прогресі.</p>
-                            <p>Допомагати користувачам на платформі будуть як вчителі, які будуть організовувати
-                                змагальницький процес, так і ментори, які будуть ділитись цінними знаннями та
-                                успішними кейсами.</p>
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex;">
-                    <button class="btn-slide-left" id="slideLeft" type="button">
-                        &#10094;
-                    </button>
-                    <button class="btn-slide-right" id="slideRight" type="button" style="margin-left: 20px;">
-                        &#10095;
-                    </button>
-                    <!--       Mobile version       -->
-                    <button class="mobile-btn-slide-left" id="mobileSlideLeft" type="button">
-                        &#10094;
-                    </button>
-                    <button class="mobile-btn-slide-right" id="mobileSlideRight" type="button" style="margin-left: 20px;">
-                        &#10095;
-                    </button>
-                    <!--------------------------------->
-                </div>
-            </div>
+        <img class="who-we-are-underline" src="{% static 'images/who_we_are_underline.svg' %}">
+        <img class="mobile-who-we-are" src="{% static 'images/mobile_who_we_are.svg' %}">
+        <img class="who-we-are-image" src="{% static 'images/who_we_are.svg' %}">
+        <div class="who-we-are-text">
+            <p>JOO TIPS - це цифрова ігро-академія, яка допомагає школярам середніх та старших класів,
+                а також свічерам, зручно та без перевантажень вчити найбільш поширені мови
+                програмування - і не тільки.</p>
+            <p>Завдяки зручному формату навчального матеріалу, який подається маленькими картками-
+                підказками, та системи теоретичних та практични тестів користувач опановує необхідні
+                знання та зразу ж бачить і вчиться їх використовувати на практиці.</p>
         </div>
     </div>
-    <div class="vertical-line-3">
 
-    </div>
     <div class="card-languages">
         <h4 class="languages-title">МОВИ ПРОГРАМУВАННЯ </h4>
-        <img class="grid-2" src="{% static 'images/grid_1.svg' %}">
         <div class="cards-row" >
-            <div class="row" style="margin-bottom: 80px;">
+            <div class="row">
                 <div class="card-python">
                     <img class="python-logo-image" src="{% static 'images/python_logo.svg' %}">
                     <label>PYTHON</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
                 <div class="card-javascript">
                     <img class="javascript-logo-image" src="{% static 'images/javascript_logo.svg' %}">
                     <label>JAVASCRIPT</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
                 <div class="card-java">
                     <img class="java-logo-image" src="{% static 'images/java_logo.svg' %}">
                     <label>JAVA</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
                 <div class="card-swift">
                     <img class="swift-logo-image" src="{% static 'images/swift_logo.svg' %}">
                     <label>SWIFT</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
             </div>
             <div class="row">
                 <div class="card-csharp">
                     <img class="csharp-logo-image" src="{% static 'images/csharp_logo.svg' %}">
                     <label>C#</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
                 <div class="card-cplusplus">
                     <img class="cplusplus-logo-image" src="{% static 'images/cplusplus_logo.svg' %}">
                     <label>C++</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8;">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
                 <div class="card-golang">
                     <img class="golang-logo-image" src="{% static 'images/golang_logo.svg' %}">
                     <label>GOLANG</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
                 <div class="card-php">
                     <img class="php-logo-image" src="{% static 'images/php_logo.svg' %}">
                     <label>PHP</label>
-                    <hr>
-                    <a href="" style="text-decoration: none; font-weight: 300; font-size: 20px; color: #5666F8">
-                        Вивчати<span style="margin-left: 5px;">&#8594</span>
-                    </a>
+                    <a href="">Вивчати &#8594</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="vertical-line-4">
 
-    </div>
     <div class="card-how-to-start"><a id="start-learning"></a>
         <h4 class="how-to-start-title">ЯК РОЗПОЧАТИ НАВЧАННЯ</h4>
         <div class="row">
-            <div class="steps-images">
-                <img class="steps-group-image" src="{% static 'images/steps_group_ua.png' %}">
-                <img class="grid-3" src="{% static 'images/grid_2.svg' %}">
-            </div>
             <div class="steps-description">
-                <img class="step-01-image" src="{% static 'images/step_01.svg' %}">
-                <p class="step-01">
-                    Щоб розпочати навчання перейди за посиланням “Вивчати”, “Спробувати”або “Вхід”.</p>
-                <img class="step-02-image" src="{% static 'images/step_02.svg' %}">
-                <p class="step-02">
-                    Виберіть мову, яку хочете вивчити, і почитайте теорію з кількох карток-порад. Потім здайте тести
-                 з 2 теоретичних та 6 практичних завдань.</p>
-                 <img class="step-03-image" src="{% static 'images/step_03.svg' %}">
-                <p class="step-03">
-                    Заєреструйся і починай вчитися разом за нами.</p>
-                <button class="btn-try-it-2" onclick="location.href={% url 'programing_language_choice_ua' %}">
-                    СПРОБУВАТИ<span style="padding-left: 15px;">&#10095;</span>
-                </button>
+                <img class="mobile-step-01-image" src="{% static 'images/mobile_step_01.svg' %}">
+                <div class="step-01">
+                    <img class="step-1-image" src="{% static 'images/step_1_ua.svg' %}">
+                    <p>Щоб розпочати навчання перейди за посиланням “Вивчати”, “Спробувати”або “Вхід”.</p>
+                </div>
+                <img class="mobile-step-02-image" src="{% static 'images/mobile_step_02.svg' %}">
+                <div class="step-02">
+                    <img class="step-2-image" src="{% static 'images/step_2_ua.svg' %}">
+                    <p>Виберіть мову, яку хочете вивчити, і почитайте теорію з кількох карток-порад. Потім здайте тести
+                        з 2 теоретичних та 6 практичних завдань.</p>
+                </div>
+                <img class="mobile-step-03-image" src="{% static 'images/mobile_step_03.svg' %}">
+                <div class="step-03">
+                    <img class="step-3-image" src="{% static 'images/step_3_ua.svg' %}">
+                    <p>Заєреструйся і починай вчитися разом за нами.</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="vertical-line-5">
 
-    </div>
     <div class="card-for-teams-schools">
         <div class="row">
             <div class="for-schools"><a id="for-schools"></a>
                 <label class="for-schools-title">ДЛЯ ШКОЛИ</label>
-                <img class="for-schools-image" src="{% static 'images/for_schools.png' %}">
+                <img class="for-schools-image" src="{% static 'images/for_schools.svg' %}">
                 <div class="email-input">
                     <input placeholder="Введіть E-MAIL">
                     <button class="btn-join">ПРИЄДНАТИСЯ</button>
@@ -285,7 +210,7 @@
             </div>
             <div class="for-teams"><a id="for-teams"></a>
                 <label class="for-teams-title">ДЛЯ КОМАНДИ</label>
-                <img class="for-teams-image" src="{% static 'images/for_teams.png' %}">
+                <img class="for-teams-image" src="{% static 'images/for_teams.svg' %}">
                 <div class="email-input">
                     <input placeholder="Введіть E-MAIL">
                     <button class="btn-join">ПРИЄДНАТИСЯ</button>
@@ -293,6 +218,7 @@
             </div>
         </div>
     </div>
+
     <footer>
         <div class="row">
             <div class="footer-title">
@@ -310,14 +236,12 @@
                 <a href="#for-schools">ДЛЯ ШКОЛИ</a>
             </nav>
             <div class="social-links">
-                <img src="{% static 'images/instagram_logo.png' %}" width="50">
-                <img src="{% static 'images/google_logo.png' %}" width="50" style="padding: 50px 20px 0 20px;">
-                <img src="{% static 'images/facebook_logo.png' %}" width="50">
+                <img src="{% static 'images/linkedin_logo.svg' %}" width="50">
             </div>
         </div>
         <div class="copyright">
             &#169; Всі права захищенні.
         </div>
     </footer>
-<script src="{% static 'js/slider.js' %}" type="text/javascript"></script></body>
+</body>
 </html>
