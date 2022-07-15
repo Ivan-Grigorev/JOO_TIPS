@@ -9,18 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
-<script type="text/javascript">
-  var check = function() {
-    if (document.getElementById('password').value.length >= 6 &&
-      document.getElementById('password').value == document.getElementById('confirm_password').value) {
-      document.getElementById('message').innerHTML = 'Password matching!';
-      document.getElementById('submit').disabled = false;
-    } else {
-      document.getElementById('message').innerHTML = 'Password must be min 6 symbols and match with confirm!';
-      document.getElementById('submit').disabled = true;
-    }
-  }
-</script>
 <body>
 <form method="POST">
     {% csrf_token %}
@@ -41,8 +29,10 @@
         <div class="password">
             <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Confirm password"
                    min="6" required>
-            <div class="message">
-                <span class="message" id="message"></span>
+            <div class="message" id="message">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
             </div>
         </div>
         <div class="row">
@@ -72,5 +62,6 @@
         </div>
     </div>
 </form>
+<script src="{% static 'js/check_password.js' %}"></script>
 </body>
 </html>

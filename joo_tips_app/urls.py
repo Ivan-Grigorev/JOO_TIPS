@@ -1,40 +1,39 @@
 from django.urls import path
 
-from .views import HomePage, programing_language_choice, python_themes_time, python_themes_time_guests, \
-    golang_themes_time, javascript_themes_time, python_theory_cards, python_theoretical_test, python_practical_test, \
-    progress_statistic_guests, \
-    register, log_in, log_out, \
-    users_homepage, users_store, \
-    pupils_homepage, pupils_event, pupils_exam, pupils_rating, pupils_mentor, pupils_pvp, pupils_tvt, \
-    teachers_homepage, teachers_event, teachers_exam, teachers_rating, teachers_mentor, \
-    mentors_homepage, mentors_invocation, mentors_session, mentors_rating
-from .views_ua import HomePageUa, programing_language_choice_ua, python_themes_time_ua, python_themes_time_guests_ua,\
-    python_theory_cards_ua, golang_themes_time_ua, javascript_themes_time_ua, python_theoretical_test_ua, \
-    python_practical_test_ua, progress_statistic_guests_ua,\
-    register_ua, log_in_ua, log_out_ua, \
-    users_homepage_ua, users_store_ua, \
-    pupils_homepage_ua, pupils_event_ua, pupils_exam_ua, pupils_rating_ua, pupils_mentor_ua, pupils_pvp_ua, \
-    pupils_tvt_ua, \
-    teachers_homepage_ua, teachers_event_ua, teachers_exam_ua, teachers_rating_ua, teachers_mentor_ua, \
-    mentors_homepage_ua, mentors_invocation_ua, mentors_session_ua, mentors_rating_ua
+from .views import *
+from .views_ua import *
 
 
 urlpatterns = [
     path('', HomePage.as_view(), name='homepage'),
     path('ua/', HomePageUa.as_view(), name='homepage_ua'),
 
-    path('programing-language-choice/', programing_language_choice, name='programing_language_choice'),
+    path('programing-language-choice/', ProgrammingLanguageChoice.as_view(), name='programing_language_choice'),
 
-    path('py/themes-time-guests/', python_themes_time_guests, name='python_themes_time_guests'),
+    path('py/themes-time-guest/', ThemesTimeGuest.as_view(), name='themes_time_guest'),
     path('py/themes-time/', python_themes_time, name='python_themes_time'),
     path('py/theory-cards/', python_theory_cards, name='python_theory_cards'),
     path('py/theoretical-test/', python_theoretical_test, name='python_theoretical_test'),
     path('py/practical-test/', python_practical_test, name='python_practical_test'),
     path('py/progress-statistic-guests/', progress_statistic_guests, name='progress_statistic_guests'),
 
-    path('register/', register, name='register'),
-    path('login/', log_in, name='log_in'),
-    path('logout', log_out, name='log_out'),
+    path('js/themes-time-guest/', ThemesTimeGuest.as_view(), name='javascript_themes_time_guest'),
+
+    path('go/themes-time-guest/', ThemesTimeGuest.as_view(), name='golang_themes_time_guest'),
+
+    path('java/themes-time-guest/', ThemesTimeGuest.as_view(), name='java_themes_time_guest'),
+
+    path('swift/themes-time-guest/', ThemesTimeGuest.as_view(), name='swift_themes_time_guest'),
+
+    path('php/themes-time-guest/', ThemesTimeGuest.as_view(), name='php_themes_time_guest'),
+
+    path('c-sharp/themes-time-guest/', ThemesTimeGuest.as_view(), name='c_sharp_themes_time_guest'),
+
+    path('c-plus-plus/themes-time-guest/', ThemesTimeGuest.as_view(), name='c_plus_plus_themes_time-guest'),
+
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='log_in'),
+    path('logout', LogoutView.as_view(), name='log_out'),
 
     path('users-homepage/', users_homepage, name='users_homepage'),
     path('users-store/', users_store, name='users_store'),
@@ -58,22 +57,32 @@ urlpatterns = [
     path('mentors-session/', mentors_session, name='mentors_session'),
     path('mentors-rating/', mentors_rating, name='mentors_rating'),
 
-    path('go/themes-time/', golang_themes_time, name='golang_themes_time'),
+    path('ua/programing-language-choice/', ProgrammingLanguageChoiceUa.as_view(), name='programing_language_choice_ua'),
 
-    path('js/themes-time/', javascript_themes_time, name='javascript_themes_time'),
-
-    path('ua/programing-language-choice/', programing_language_choice_ua, name='programing_language_choice_ua'),
-
+    path('ua/py/themes-time-guests/', ThemesTimeGuestUa.as_view(), name='python_themes_time_guests_ua'),
     path('ua/py/themes-time/', python_themes_time_ua, name='python_themes_time_ua'),
-    path('ua/py/themes-time-guests/', python_themes_time_guests_ua, name='python_themes_time_guests_ua'),
     path('ua/py/theory-cards/', python_theory_cards_ua, name='python_theory_cards_ua'),
     path('ua/py/theoretical-test/', python_theoretical_test_ua, name='python_theoretical_test_ua'),
     path('ua/py/practical-test/', python_practical_test_ua, name='python_practical_test_ua'),
     path('ua/py/progress-statistic-guests/', progress_statistic_guests_ua, name='progress_statistic_guests_ua'),
 
-    path('ua/register/', register_ua, name='register_ua'),
-    path('ua/login/', log_in_ua, name='log_in_ua'),
-    path('ua/logout/', log_out_ua, name='log_out_ua'),
+    path('ua/js/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='javascript_themes_time_guest_ua'),
+
+    path('ua/go/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='golang_themes_time_guest_ua'),
+
+    path('ua/java/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='java_themes_time_guest_ua'),
+
+    path('ua/swift/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='swift_themes_time_guest_ua'),
+
+    path('ua/php/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='php_themes_time_guest_ua'),
+
+    path('ua/c-sharp/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='c_sharp_themes_time_guest_ua'),
+
+    path('ua/c-plus-plus/themes-time-guest/', ThemesTimeGuestUa.as_view(), name='c_plus_plus_themes_time_guest_ua'),
+
+    path('ua/register/', RegisterViewUa.as_view(), name='register_ua'),
+    path('ua/login/', LoginViewUa.as_view(), name='log_in_ua'),
+    path('ua/logout/', LogoutViewUa.as_view(), name='log_out_ua'),
 
     path('ua/users-homepage/', users_homepage_ua, name='users_homepage_ua'),
     path('ua/users-store/', users_store_ua, name='users_store_ua'),
@@ -96,8 +105,4 @@ urlpatterns = [
     path('ua/mentors-invocation/', mentors_invocation_ua, name='mentors_invocation_ua'),
     path('ua/mentors-session/', mentors_session_ua, name='mentors_session_ua'),
     path('ua/mentors-rating/', mentors_rating_ua, name='mentors_rating_ua'),
-
-    path('ua/go/themes-time/', golang_themes_time_ua, name='golang_themes_time_ua'),
-
-    path('ua/js/themes-time/', javascript_themes_time_ua, name='javascript_themes_time_ua'),
 ]

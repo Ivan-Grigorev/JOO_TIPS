@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class PythonTheoryBasics(models.Model):
+class PythonBasicsTheory(models.Model):
     theme = models.TextField()
     text = models.TextField()
     text_ua = models.TextField()
@@ -11,518 +11,50 @@ class PythonTheoryBasics(models.Model):
         return self.text or self.text_ua
 
     class Meta:
-        db_table = 'python_theory_basics'
-
-
-class PythonTheoryVariables(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_variables'
-
-
-class PythonTheoryDataTypes(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_data_types'
-
-
-class PythonTheoryExceptions(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_exceptions'
-
-
-class PythonTheoryStrings(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_strings'
-
-
-class PythonTheoryLists(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_lists'
-
-
-class PythonTheoryTuples(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_tuples'
-
-
-class PythonTheoryDictionaries(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_dictionaries'
-
-
-class PythonTheorySets(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_sets'
-
-
-class PythonTheoryArraysRelatedLists(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_arrays_related_lists'
-
-
-class PythonTheoryStacsQueues(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_stacs_queues'
-
-
-class PythonTheoryHashTables(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_hash_tables'
-
-
-class PythonTheoryIterators(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_iterators'
-
-
-class PythonTheoryFiles(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_files'
-
-
-class PythonTheoryRecursion(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_recursion'
-
-
-class PythonTheorySorting(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_sorting'
-
-
-class PythonTheoryFunctionsBuiltinFunctions(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_functions_builtin_functions'
-
-
-class PythonTheoryLambdaFunctions(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_lambda_functions'
-
-
-class PythonTheoryDecorators(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_decorators'
-
-
-class PythonTheoryRegularExpressions(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_regular_expressions'
-
-
-class PythonTheoryClasses(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_classes'
-
-
-class PythonTheoryMagicMethods(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_magic_methods'
-
-
-class PythonTheoryModules(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_modules'
-
-
-class PythonTheoryPipPypi(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_pip_pypi'
-
-
-class PythonTheoryBasicGit(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_basic_git'
-
-
-class PythonTheoryGithubGitlabBitbucket(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_github_gitlab_bitbucket'
-
-
-class PythonTheoryFlask(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_flask'
-
-
-class PythonTheoryPyramid(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_pyramid'
-
-
-class PythonTheoryDjango(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_django'
-
-
-class PythonTheoryGevent(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_gevent'
-
-
-class PythonTheorySanic(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_sanic'
-
-
-class PythonTheoryTornado(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_tornado'
-
-
-class PythonTheoryAiohttp(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_aiohttp'
-
-
-class PythonTheoryNose(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_nose'
-
-
-class PythonTheoryPytest(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_pytest'
-
-
-class PythonTheoryDoctest(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_doctest'
-
-
-class PythonTheoryUnittestPyunit(models.Model):
-    theme = models.TextField()
-    text = models.TextField()
-    text_ua = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.text or self.text_ua
-
-    class Meta:
-        db_table = 'python_theory_unittest_pyunit'
+        db_table = 'python_basics_theory'
 
 
 class PythonBasicsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonTheoryBasics, to_field='id', on_delete=models.CASCADE)
-    theme = models.TextField()
+    card_id = models.ForeignKey(PythonBasicsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
 
-    question = models.TextField()
-    level_1_slot_1_right_answer = models.TextField()
-    level_1_slot_2_wrong_answer = models.TextField()
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
 
-    level_2_slot_1_right_answer = models.TextField()
-    level_2_slot_2_wrong_answer = models.TextField()
-    level_2_slot_3_wrong_answer = models.TextField()
-    level_2_slot_4_wrong_answer = models.TextField()
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
 
-    level_3_slot_1_right_answer = models.TextField()
-    level_3_slot_2_right_answer = models.TextField()
-    level_3_slot_3_wrong_answer = models.TextField()
-    level_3_slot_4_wrong_answer = models.TextField()
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
 
-    level_4_slot_1_right_answer = models.TextField()
-    level_4_slot_2_wrong_answer = models.TextField()
-    level_4_slot_3_wrong_answer = models.TextField()
-    level_4_slot_4_wrong_answer = models.TextField()
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
 
-    question_ua = models.TextField()
-    level_1_slot_1_right_answer_ua = models.TextField()
-    level_1_slot_2_wrong_answer_ua = models.TextField()
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
 
-    level_2_slot_1_right_answer_ua = models.TextField()
-    level_2_slot_2_wrong_answer_ua = models.TextField()
-    level_2_slot_3_wrong_answer_ua = models.TextField()
-    level_2_slot_4_wrong_answer_ua = models.TextField()
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
 
-    level_3_slot_1_right_answer_ua = models.TextField()
-    level_3_slot_2_right_answer_ua = models.TextField()
-    level_3_slot_3_wrong_answer_ua = models.TextField()
-    level_3_slot_4_wrong_answer_ua = models.TextField()
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
 
-    level_4_slot_1_right_answer_ua = models.TextField()
-    level_4_slot_2_wrong_answer_ua = models.TextField()
-    level_4_slot_3_wrong_answer_ua = models.TextField()
-    level_4_slot_4_wrong_answer_ua = models.TextField()
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -534,47 +66,60 @@ class PythonBasicsTheoreticalTest(models.Model):
         db_table = 'python_basics_theoretical_test'
 
 
-class PythonVariablesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonTheoryVariables, to_field='id', on_delete=models.CASCADE)
+class PythonVariablesTheory(models.Model):
     theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
 
-    question = models.TextField()
-    level_1_slot_1_right_answer = models.TextField()
-    level_1_slot_2_wrong_answer = models.TextField()
+    def __str__(self):
+        return self.text or self.text_ua
 
-    level_2_slot_1_right_answer = models.TextField()
-    level_2_slot_2_wrong_answer = models.TextField()
-    level_2_slot_3_wrong_answer = models.TextField()
-    level_2_slot_4_wrong_answer = models.TextField()
+    class Meta:
+        db_table = 'python_variables_theory'
 
-    level_3_slot_1_right_answer = models.TextField()
-    level_3_slot_2_right_answer = models.TextField()
-    level_3_slot_3_wrong_answer = models.TextField()
-    level_3_slot_4_wrong_answer = models.TextField()
 
-    level_4_slot_1_right_answer = models.TextField()
-    level_4_slot_2_wrong_answer = models.TextField()
-    level_4_slot_3_wrong_answer = models.TextField()
-    level_4_slot_4_wrong_answer = models.TextField()
+class PythonVariablesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonVariablesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
 
-    question_ua = models.TextField()
-    level_1_slot_1_right_answer_ua = models.TextField()
-    level_1_slot_2_wrong_answer_ua = models.TextField()
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
 
-    level_2_slot_1_right_answer_ua = models.TextField()
-    level_2_slot_2_wrong_answer_ua = models.TextField()
-    level_2_slot_3_wrong_answer_ua = models.TextField()
-    level_2_slot_4_wrong_answer_ua = models.TextField()
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
 
-    level_3_slot_1_right_answer_ua = models.TextField()
-    level_3_slot_2_right_answer_ua = models.TextField()
-    level_3_slot_3_wrong_answer_ua = models.TextField()
-    level_3_slot_4_wrong_answer_ua = models.TextField()
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
 
-    level_4_slot_1_right_answer_ua = models.TextField()
-    level_4_slot_2_wrong_answer_ua = models.TextField()
-    level_4_slot_3_wrong_answer_ua = models.TextField()
-    level_4_slot_4_wrong_answer_ua = models.TextField()
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -586,47 +131,60 @@ class PythonVariablesTheoreticalTest(models.Model):
         db_table = 'python_variables_theoretical_test'
 
 
-class PythonDataTypesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonTheoryDataTypes, to_field='id', on_delete=models.CASCADE)
+class PythonDataTypesTheory(models.Model):
     theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
 
-    question = models.TextField()
-    level_1_slot_1_right_answer = models.TextField()
-    level_1_slot_2_wrong_answer = models.TextField()
+    def __str__(self):
+        return self.text or self.text_ua
 
-    level_2_slot_1_right_answer = models.TextField()
-    level_2_slot_2_wrong_answer = models.TextField()
-    level_2_slot_3_wrong_answer = models.TextField()
-    level_2_slot_4_wrong_answer = models.TextField()
+    class Meta:
+        db_table = 'python_data_types_theory'
 
-    level_3_slot_1_right_answer = models.TextField()
-    level_3_slot_2_right_answer = models.TextField()
-    level_3_slot_3_wrong_answer = models.TextField()
-    level_3_slot_4_wrong_answer = models.TextField()
 
-    level_4_slot_1_right_answer = models.TextField()
-    level_4_slot_2_wrong_answer = models.TextField()
-    level_4_slot_3_wrong_answer = models.TextField()
-    level_4_slot_4_wrong_answer = models.TextField()
+class PythonDataTypesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
 
-    question_ua = models.TextField()
-    level_1_slot_1_right_answer_ua = models.TextField()
-    level_1_slot_2_wrong_answer_ua = models.TextField()
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
 
-    level_2_slot_1_right_answer_ua = models.TextField()
-    level_2_slot_2_wrong_answer_ua = models.TextField()
-    level_2_slot_3_wrong_answer_ua = models.TextField()
-    level_2_slot_4_wrong_answer_ua = models.TextField()
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
 
-    level_3_slot_1_right_answer_ua = models.TextField()
-    level_3_slot_2_right_answer_ua = models.TextField()
-    level_3_slot_3_wrong_answer_ua = models.TextField()
-    level_3_slot_4_wrong_answer_ua = models.TextField()
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
 
-    level_4_slot_1_right_answer_ua = models.TextField()
-    level_4_slot_2_wrong_answer_ua = models.TextField()
-    level_4_slot_3_wrong_answer_ua = models.TextField()
-    level_4_slot_4_wrong_answer_ua = models.TextField()
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
 
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -638,7 +196,7 @@ class PythonDataTypesTheoreticalTest(models.Model):
         db_table = 'python_data_types_theoretical_test'
 
 
-class GolangTheory(models.Model):
+class PythonExceptionsTheory(models.Model):
     theme = models.TextField()
     text = models.TextField()
     text_ua = models.TextField()
@@ -648,10 +206,62 @@ class GolangTheory(models.Model):
         return self.text or self.text_ua
 
     class Meta:
-        db_table = 'golang_theory'
+        db_table = 'python_exceptions_theory'
 
 
-class JavaScriptTheory(models.Model):
+class PythonExceptionsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonExceptionsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_exceptions_theoretical_test'
+
+
+class PythonStringsTheory(models.Model):
     theme = models.TextField()
     text = models.TextField()
     text_ua = models.TextField()
@@ -661,7 +271,2139 @@ class JavaScriptTheory(models.Model):
         return self.text or self.text_ua
 
     class Meta:
-        db_table = 'javascript_theory'
+        db_table = 'python_strings_theory'
+
+
+class PythonStringsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonStringsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_strings_theoretical_test'
+
+
+class PythonListsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_lists_theory'
+
+
+class PythonListsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonListsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_lists_theoretical_test'
+
+
+class PythonTuplesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_tuples_theory'
+
+
+class PythonTuplesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonTuplesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_tuples_theoretical_test'
+
+
+class PythonDictionariesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_dictionaries_theory'
+
+
+class PythonDictionariesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonDictionariesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_dictionaries_theoretical_test'
+
+
+class PythonSetsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_sets_theory'
+
+
+class PythonSetsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonSetsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_sets_theoretical_test'
+
+
+class PythonArraysRelatedListsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_arrays_related_lists_theory'
+
+
+class PythonArraysRelatedListsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonArraysRelatedListsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_arrays_related_lists_theoretical_test'
+
+
+class PythonStacsQueuesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_stacs_queues_theory'
+
+
+class PythonStacsQueuesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonStacsQueuesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_stacs_queues_theoretical_test'
+
+
+class PythonHashTablesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_hash_tables_theory'
+
+
+class PythonHashTablesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonHashTablesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_hash_tables_theoretical_test'
+
+
+class PythonIteratorsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_iterators_theory'
+
+
+class PythonIteratorsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonIteratorsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_iterators_theoretical_test'
+
+
+class PythonFilesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_files_theory'
+
+
+class PythonFilesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonFilesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_files_theoretical_test'
+
+
+class PythonRecursionTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_recursion_theory'
+
+
+class PythonRecursionTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonRecursionTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_recursion_theoretical_test'
+
+
+class PythonSortingTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_sorting_theory'
+
+
+class PythonSortingTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonSortingTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_sorting_theoretical_test'
+
+
+class PythonFunctionsBuiltinFunctionsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_functions_builtin_functions_theory'
+
+
+class PythonFunctionsBuiltinFunctionsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_functions_builtin_functions_theoretical_test'
+
+
+class PythonLambdaFunctionsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_lambda_functions_theory'
+
+
+class PythonLambdaFunctionsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonLambdaFunctionsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_lambda_theoretical_test'
+
+
+class PythonDecoratorsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_decorators_theory'
+
+
+class PythonDecoratorsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonDecoratorsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_decorators_theoretical_test'
+
+
+class PythonRegularExpressionsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_regular_expressions_theory'
+
+
+class PythonRegularExpressionsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonRegularExpressionsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_regular_expressions_theoretical_test'
+
+
+class PythonClassesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_classes_theory'
+
+
+class PythonClassesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonClassesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_classes_theoretical_test'
+
+
+class PythonMagicMethodsTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_magic_methods_theory'
+
+
+class PythonMagicMethodsTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonMagicMethodsTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_magic_methods_theoretical_test'
+
+
+class PythonModulesTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_modules_theory'
+
+
+class PythonModulesTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonModulesTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_modules_theoretical_test'
+
+
+class PythonPipPypiTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_pip_pypi_theory'
+
+
+class PythonPipPypiTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonPipPypiTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_pip_pypi_theoretical_test'
+
+
+class PythonBasicGitTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_basic_git_theory'
+
+
+class PythonBasicGitTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonBasicGitTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_basic_git_theoretical_test'
+
+
+class PythonGithubGitlabBitbucketTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_github_gitlab_bitbucket_theory'
+
+
+class PythonGithubGitlabBitbucketTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonGithubGitlabBitbucketTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_github_gitlab_bitbucket_theoretical_test'
+
+
+class PythonFlaskTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_flask_theory'
+
+
+class PythonFlaskTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonFlaskTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_flask_theoretical_test'
+
+
+class PythonPyramidTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_pyramid_theory'
+
+
+class PythonPyramidTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonPyramidTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_pyramid_theoretical_test'
+
+
+class PythonDjangoTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_django_theory'
+
+
+class PythonDjangoTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonDjangoTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_django_theoretical_test'
+
+
+class PythonGeventTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_gevent_theory'
+
+
+class PythonGeventTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonGeventTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_gevent_theoretical_test'
+
+
+class PythonSanicTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_sanic_theory'
+
+
+class PythonSanicTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonSanicTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_sanic_theoretical_test'
+
+
+class PythonTornadoTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_tornado_theory'
+
+
+class PythonTornadoTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonTornadoTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_tornado_theoretical_test'
+
+
+class PythonAiohttpTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_aiohttp_theory'
+
+
+class PythonAiohttpTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonAiohttpTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_aiohttp_theoretical_test'
+
+
+class PythonNoseTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_nose_theory'
+
+
+class PythonNoseTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonNoseTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_nose_theoretical_test'
+
+
+class PythonPytestTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_pytest_theory'
+
+
+class PythonPytestTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonPytestTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_pytest_theoretical_test'
+
+
+class PythonDoctestTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_doctest_theory'
+
+
+class PythonDoctestTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonDoctestTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_doctest_theoretical_test'
+
+
+class PythonUnittestPyunitTheory(models.Model):
+    theme = models.TextField()
+    text = models.TextField()
+    text_ua = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text or self.text_ua
+
+    class Meta:
+        db_table = 'python_unittest_pyunit_theory'
+
+
+class PythonUnittestPyunitTheoreticalTest(models.Model):
+    card_id = models.ForeignKey(PythonUnittestPyunitTheory, to_field='id', on_delete=models.CASCADE)
+    theme = models.TextField(null=True)
+
+    question = models.TextField(null=True)
+    level_1_slot_1_right_answer = models.TextField(null=True)
+    level_1_slot_2_wrong_answer = models.TextField(null=True)
+
+    level_2_slot_1_right_answer = models.TextField(null=True)
+    level_2_slot_2_wrong_answer = models.TextField(null=True)
+    level_2_slot_3_wrong_answer = models.TextField(null=True)
+    level_2_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_3_slot_1_right_answer = models.TextField(null=True)
+    level_3_slot_2_right_answer = models.TextField(null=True)
+    level_3_slot_3_wrong_answer = models.TextField(null=True)
+    level_3_slot_4_wrong_answer = models.TextField(null=True)
+
+    level_4_slot_1_right_answer = models.TextField(null=True)
+    level_4_slot_2_right_answer = models.TextField(null=True)
+    level_4_slot_3_right_answer = models.TextField(null=True)
+    level_4_slot_4_wrong_answer = models.TextField(null=True)
+
+    question_ua = models.TextField(null=True)
+    level_1_slot_1_right_answer_ua = models.TextField(null=True)
+    level_1_slot_2_wrong_answer_ua = models.TextField(null=True)
+
+    level_2_slot_1_right_answer_ua = models.TextField(null=True)
+    level_2_slot_2_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_2_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_3_slot_1_right_answer_ua = models.TextField(null=True)
+    level_3_slot_2_right_answer_ua = models.TextField(null=True)
+    level_3_slot_3_wrong_answer_ua = models.TextField(null=True)
+    level_3_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    level_4_slot_1_right_answer_ua = models.TextField(null=True)
+    level_4_slot_2_right_answer_ua = models.TextField(null=True)
+    level_4_slot_3_right_answer_ua = models.TextField(null=True)
+    level_4_slot_4_wrong_answer_ua = models.TextField(null=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
+               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+
+    class Meta:
+        db_table = 'python_unittest_pyunit_theoretical_test'
 
 
 class GuestsVisitStatistic(models.Model):

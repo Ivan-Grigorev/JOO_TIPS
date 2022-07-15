@@ -5,25 +5,10 @@ from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from django.contrib.messages import get_messages
 
-
-from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions, \
-    PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
-    PythonTheoryFiles, PythonTheoryDjango, PythonTheoryDoctest, PythonTheoryGevent, PythonTheoryAiohttp, \
-    PythonTheoryClasses, PythonTheorySorting, PythonTheoryRecursion, PythonTheoryTornado, PythonTheoryFlask, \
-    PythonTheoryModules, PythonTheorySanic, PythonTheoryPyramid, PythonTheoryNose, PythonTheoryIterators, \
-    PythonTheoryPytest, PythonTheoryBasicGit, PythonTheoryDecorators, PythonTheoryPipPypi, PythonTheoryHashTables, \
-    PythonTheoryStacsQueues, PythonTheoryUnittestPyunit, PythonTheoryMagicMethods, PythonTheoryLambdaFunctions, \
-    PythonTheoryRegularExpressions, PythonTheoryArraysRelatedLists, PythonTheoryGithubGitlabBitbucket, \
-    PythonTheoryFunctionsBuiltinFunctions, \
-    PythonBasicsTheoreticalTest, PythonVariablesTheoreticalTest, PythonDataTypesTheoreticalTest, \
-    GolangTheory, \
-    JavaScriptTheory, \
-    GuestsVisitStatistic, \
-    JooTipsErrorsStatistic
-
+from .models import *
 
 from datetime import datetime, timedelta
 import random
@@ -54,17 +39,32 @@ class HomePage(TemplateView):
         return render(request, template_name='homepage.html')
 
     def post(self, request, *args, **kwargs):
+        # record = self.model(schools_email=request.POST.get('school-email'),
+        #                     teams_email=request.POST.get('team-email'))
+        # record.save()
         return render(request, template_name='homepage.html')
 
 
-def programing_language_choice(request):
-    record = GuestsVisitStatistic(lets_try_it_date=datetime.now(),
-                                  language='EN',
-                                  programming_language='Python')
-    # record.save()
-    return render(request, template_name='programing_language_choice.html')
+class ProgrammingLanguageChoice(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        # record = self.model(lets_try_it_date=datetime.now(),
+        #                     language='EN')  # programming_language=
+        # record.save()
+        return render(request, template_name='web_site_in_process.html')
 
 
+class ThemesTimeGuest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='web_site_in_process.html')
+
+
+# TODO
 def python_themes_time_guests(request):
     global test_time, lesson_time
     if request.method == 'POST':
@@ -86,24 +86,25 @@ def python_themes_time_guests(request):
     return render(request, template_name='python_themes_time_guests.html')
 
 
+# class TheoryCards TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theory_cards(request):
     global guests_card_1, guests_card_2, guests_card_3
     guests_card_1 = random.randint(1, 10)
-    theme_1 = PythonTheoryBasics.objects.all().filter(id=guests_card_1)
+    theme_1 = PythonBasicsTheory.objects.all().filter(id=guests_card_1)
     guests_card_2 = random.randint(1, 4)
-    theme_2 = PythonTheoryVariables.objects.all().filter(id=guests_card_2)
+    theme_2 = PythonVariablesTheory.objects.all().filter(id=guests_card_2)
     guests_card_3 = random.randint(1, 4)
-    theme_3 = PythonTheoryDataTypes.objects.all().filter(id=guests_card_3)
-    theme_4 = random.choice([PythonTheoryBasics.objects.all().filter(id=random.randint(1, 10)),
-                             PythonTheoryVariables.objects.all().filter(id=random.randint(1, 4)),
-                             PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
+    theme_3 = PythonDataTypesTheory.objects.all().filter(id=guests_card_3)
+    theme_4 = random.choice([PythonBasicsTheory.objects.all().filter(id=random.randint(1, 10)),
+                             PythonVariablesTheory.objects.all().filter(id=random.randint(1, 4)),
+                             PythonDataTypesTheory.objects.all().filter(id=random.randint(1, 4))
                              ])
     text = [theme_1[0], theme_2[0], theme_3[0], theme_4[0]]
     if theme_4[0] == theme_1[0] or theme_4[0] == theme_2[0] or theme_4[0] == theme_3[0]:
-        theme_4 = random.choice([PythonTheoryBasics.objects.all().filter(id=random.randint(1, 10)),
-                                 PythonTheoryVariables.objects.all().filter(id=random.randint(1, 4)),
-                                 PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
+        theme_4 = random.choice([PythonBasicsTheory.objects.all().filter(id=random.randint(1, 10)),
+                                 PythonVariablesTheory.objects.all().filter(id=random.randint(1, 4)),
+                                 PythonDataTypesTheory.objects.all().filter(id=random.randint(1, 4))
                                  ])
         text[3] = theme_4[0]
     if request.method == 'POST':
@@ -121,6 +122,7 @@ right_answers = []
 tests_results = []
 
 
+# class TheoreticalTest TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theoretical_test(request):
     global question_theme, theoretical_test_counter, right_answers, tests_results
@@ -154,6 +156,7 @@ def python_theoretical_test(request):
                            'right_slot': right_slot})
 
 
+# class PracticalTest TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_practical_test(request):
     global practical_test_counter, right_answers
@@ -185,6 +188,7 @@ def python_practical_test(request):
                            'answers': answers})
 
 
+# class ProgressStatistic TODO
 def progress_statistic_guests(request):
     test_result = sum(tests_results)
     day_result = 0
@@ -199,39 +203,50 @@ def progress_statistic_guests(request):
                                                                              'year_result': year_result})
 
 
-def register(request):
-    if request.method == 'POST':
-        user = User.objects.create_user(username=request.POST.get('username'),
-                                        email=request.POST.get('email'),
-                                        password=request.POST.get('password'))
-        user.save()
-        record = GuestsVisitStatistic(register_date=datetime.now())
-        # record.save()
-        login(request, user)
-        return redirect('users_homepage')
-    return render(request, template_name='register.html')
+class RegisterView(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'  # register.html
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, f"{username} already exist!")
+        else:
+            user = User.objects.create_user(username=username,
+                                            email=request.POST.get('email'),
+                                            password=request.POST.get('password'))
+            record = self.model(register_date=datetime.now())
+            # record.save()
+            login(request, user)
+            return redirect('users_homepage')
+        return render(request, template_name='web_site_in_process.html')  # register.html
 
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
-def log_in(request):
-    if request.method == 'POST':
-        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+class LoginView(TemplateView):
+    template_name = 'web_site_in_process.html'  # login.html
+
+    def post(self, request, *args, **kwargs):
+        user = authenticate(request, username=request.POST.get('username'),
+                                     password=request.POST.get('password'))
         if user is not None:
             login(request, user)
             return redirect('users_homepage')
         else:
             messages.error(request, 'Username or password does not exist!')
-    return render(request, template_name='login.html')
+        return render(request, template_name='web_site_in_process.html')  # login.html
 
 
-def log_out(request):
-    logout(request)
-    return redirect('homepage')
+class LogoutView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('homepage')
 
 
+# class UsersHomePage TODO
 @login_required(login_url='log_in')
 def users_homepage(request):
-    return render(request, template_name='python_clipboards_desk.html')
+    return render(request, template_name='user/users_homepage.html')
 
 
 @login_required(login_url='log_in')
@@ -239,46 +254,55 @@ def users_store(request):
     return render(request, template_name='users_store.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_homepage(request):
     return render(request, template_name='pupils_homepage.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_event(request):
     return render(request, template_name='pupils_event_overview.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_exam(request):
     return render(request, template_name='pupils_exam_overview.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_rating(request):
     return render(request, template_name='pupils_rating.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_mentor(request):
     return render(request, template_name='pupils_mentor.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_pvp(request):
     return render(request, template_name='pupils_pvp.html')
 
 
+# class PupilsHomePage TODO
 # @login_required(login_url='log_in')
 def pupils_tvt(request):
     return render(request, template_name='pupils_tvt.html')
 
 
+# class TeachersHomePage TODO
 # @login_required(login_url='log_in')
 def teachers_homepage(request):
     return render(request, template_name='teachers_homepage.html')
 
 
+# class TeachersHomePage TODO
 # @login_required(login_url='log_in')
 def teachers_event(request):
     # all events overview
@@ -288,6 +312,7 @@ def teachers_event(request):
     return render(request, template_name='teachers_event_overview.html')
 
 
+# class TeachersHomePage TODO
 # @login_required(login_url='log_in')
 def teachers_exam(request):
     # all exams overview
@@ -297,26 +322,31 @@ def teachers_exam(request):
     return render(request, template_name='teachers_exam_overview.html')
 
 
+# class TeachersHomePage TODO
 # @login_required(login_url='log_in')
 def teachers_rating(request):
     return render(request, template_name='teachers_rating.html')
 
 
+# class TeachersHomePage TODO
 # @login_required(login_url='log_in')
 def teachers_mentor(request):
     return render(request, template_name='teachers_mentor.html')
 
 
+# class TeachersHomePage TODO
 # @login_required(login_url='log_in')
 def mentors_homepage(request):
     return render(request, template_name='mentors_homepage.html')
 
 
+# class MentorsHomePage TODO
 # @login_required(login_url='log_in')
 def mentors_invocation(request):
     return render(request, template_name='mentors_invocation.html')
 
 
+# class MentorsHomePage TODO
 # @login_required(login_url='log_in')
 def mentors_session(request):
     if request.method == 'POST':
@@ -325,11 +355,13 @@ def mentors_session(request):
     return render(request, template_name='mentors_session_overview.html')
 
 
+# class MentorsHomePage TODO
 # @login_required(login_url='log_in')
 def mentors_rating(request):
     return render(request, template_name='mentors_rating.html')
 
 
+# TODO
 @login_required(login_url='log_in')
 def python_themes_time(request):
     if request.method == 'POST':
@@ -339,17 +371,9 @@ def python_themes_time(request):
         timer = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
                                           end_date_sep[4], end_date_sep[3])
         users_level = request.POST.get('level')
-        text = PythonTheoryBasics.objects.all()
+        text = PythonBasicsTheory.objects.all()
         return render(request=request, template_name='python_theory.html', context={'timer': timer, 'text': text})
     return render(request, template_name='python_themes_time.html')
-
-
-def golang_themes_time(request):
-    return render(request, template_name='golang_themes_time.html')
-
-
-def javascript_themes_time(request):
-    return render(request, template_name='javascript_themes_time.html')
 
 
 class Error400Page(TemplateView):
@@ -362,16 +386,16 @@ class Error400Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        record = self.model(guests_ip=ip,
-                            guests_location=[http_data.city
-                                             if 'city' in http_data.__dict__['details'].keys() else None,
-                                             http_data.country_name
-                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
-                            guests_hostname=http_data.hostname
-                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
-                            error_400=True)
-        record.save()
+        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     error_400=True)
+        # record.save()
         return render(request, template_name='errors_views/400.html', status=400)
 
 
@@ -385,16 +409,16 @@ class Error403Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        record = self.model(guests_ip=ip,
-                            guests_location=[http_data.city
-                                             if 'city' in http_data.__dict__['details'].keys() else None,
-                                             http_data.country_name
-                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
-                            guests_hostname=http_data.hostname
-                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
-                            error_403=True)
-        record.save()
+        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     error_403=True)
+        # record.save()
         return render(request, template_name='errors_views/403.html', status=403)
 
 
@@ -408,16 +432,16 @@ class Error404Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        record = self.model(guests_ip=ip,
-                            guests_location=[http_data.city
-                                             if 'city' in http_data.__dict__['details'].keys() else None,
-                                             http_data.country_name
-                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
-                            guests_hostname=http_data.hostname
-                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
-                            error_404=True)
-        record.save()
+        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     error_404=True)
+        # record.save()
         return render(request, template_name='errors_views/404.html', status=404)
 
 
@@ -431,14 +455,14 @@ class Error500Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        record = self.model(guests_ip=ip,
-                            guests_location=[http_data.city
-                                             if 'city' in http_data.__dict__['details'].keys() else None,
-                                             http_data.country_name
-                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
-                            guests_hostname=http_data.hostname
-                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
-                            error_500=True)
-        record.save()
+        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     error_500=True)
+        # record.save()
         return render(request, template_name='errors_views/500.html', status=500)

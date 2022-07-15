@@ -22,13 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#&7i*l1)7m6n^oi!_bz5gf#50g=iw0gnqw(*4@@0z&m52qqh@l'
+
+with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.115']
+ALLOWED_HOSTS = ['localhost', '192.168.0.115']
+# ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
 
 
 # Application definition
@@ -130,8 +134,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# LOGIN settings
+
+LOGIN_URL = 'log_in'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CSRF settings
+
+# CSRF_TRUSTED_ORIGINS = ['https://*.joo.tips', 'https://*.127.0.0.1']

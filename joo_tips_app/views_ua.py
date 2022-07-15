@@ -7,19 +7,7 @@ from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
-from .models import PythonTheoryBasics, PythonTheoryVariables, PythonTheoryDataTypes, PythonTheoryExceptions,\
-    PythonTheoryStrings, PythonTheoryTuples, PythonTheoryLists, PythonTheoryDictionaries, PythonTheorySets, \
-    PythonTheoryFiles, PythonTheoryDjango, PythonTheoryDoctest, PythonTheoryGevent, PythonTheoryAiohttp, \
-    PythonTheoryClasses, PythonTheorySorting, PythonTheoryRecursion, PythonTheoryTornado, PythonTheoryFlask, \
-    PythonTheoryModules, PythonTheorySanic, PythonTheoryPyramid, PythonTheoryNose, PythonTheoryIterators, \
-    PythonTheoryPytest, PythonTheoryBasicGit, PythonTheoryDecorators, PythonTheoryPipPypi, PythonTheoryHashTables,\
-    PythonTheoryStacsQueues, PythonTheoryUnittestPyunit, PythonTheoryMagicMethods, PythonTheoryLambdaFunctions, \
-    PythonTheoryRegularExpressions, PythonTheoryArraysRelatedLists, PythonTheoryGithubGitlabBitbucket, \
-    PythonTheoryFunctionsBuiltinFunctions, \
-    PythonBasicsTheoreticalTest, PythonVariablesTheoreticalTest, PythonDataTypesTheoreticalTest, \
-    GolangTheory, \
-    JavaScriptTheory, \
-    GuestsVisitStatistic
+from .models import *
 
 from datetime import datetime, timedelta
 import random
@@ -50,17 +38,32 @@ class HomePageUa(TemplateView):
         return render(request, template_name='ua/homepage_ua.html')
 
     def post(self, request, *args, **kwargs):
+        # record = self.model(schools_email=request.POST.get('school-email'),
+        #                     teams_email=request.POST.get('team-email'))
+        # record.save()
         return render(request, template_name='ua/homepage_ua.html')
 
 
-def programing_language_choice_ua(request):
-    record = GuestsVisitStatistic(lets_try_it_date=datetime.now(),
-                                  language='UKR',
-                                  programming_language='Python')
-    # record.save()
-    return render(request, template_name='ua/programing_language_choice_ua.html')
+class ProgrammingLanguageChoiceUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        # record = self.model(lets_try_it_date=datetime.now(),
+        #                     language='UKR')  # programming_language=
+        # record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
 
 
+class ThemesTimeGuestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+# TODO
 def python_themes_time_guests_ua(request):
     global test_time, lesson_time
     if request.method == 'POST':
@@ -82,24 +85,25 @@ def python_themes_time_guests_ua(request):
     return render(request, template_name='ua/python_themes_time_guests_ua.html')
 
 
+# class TheoryCardsUa
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theory_cards_ua(request):
     global guests_card_1, guests_card_2, guests_card_3
     guests_card_1 = random.randint(1, 10)
-    theme_1 = PythonTheoryBasics.objects.all().filter(id=guests_card_1)
+    theme_1 = PythonBasicsTheory.objects.all().filter(id=guests_card_1)
     guests_card_2 = random.randint(1, 4)
-    theme_2 = PythonTheoryVariables.objects.all().filter(id=guests_card_2)
+    theme_2 = PythonVariablesTheory.objects.all().filter(id=guests_card_2)
     guests_card_3 = random.randint(1, 4)
-    theme_3 = PythonTheoryDataTypes.objects.all().filter(id=guests_card_3)
-    theme_4 = random.choice([PythonTheoryBasics.objects.all().filter(id=random.randint(1, 10)),
-                             PythonTheoryVariables.objects.all().filter(id=random.randint(1, 4)),
-                             PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
+    theme_3 = PythonDataTypesTheory.objects.all().filter(id=guests_card_3)
+    theme_4 = random.choice([PythonBasicsTheory.objects.all().filter(id=random.randint(1, 10)),
+                             PythonVariablesTheory.objects.all().filter(id=random.randint(1, 4)),
+                             PythonDataTypesTheory.objects.all().filter(id=random.randint(1, 4))
                              ])
     text_ua = [theme_1[0], theme_2[0], theme_3[0], theme_4[0]]
     if theme_4[0] == theme_1[0] or theme_4[0] == theme_2[0] or theme_4[0] == theme_3[0]:
-        theme_4 = random.choice([PythonTheoryBasics.objects.all().filter(id=random.randint(1, 10)),
-                                 PythonTheoryVariables.objects.all().filter(id=random.randint(1, 4)),
-                                 PythonTheoryDataTypes.objects.all().filter(id=random.randint(1, 4))
+        theme_4 = random.choice([PythonBasicsTheory.objects.all().filter(id=random.randint(1, 10)),
+                                 PythonVariablesTheory.objects.all().filter(id=random.randint(1, 4)),
+                                 PythonDataTypesTheory.objects.all().filter(id=random.randint(1, 4))
                                  ])
         text_ua[3] = theme_4[0]
     if request.method == 'POST':
@@ -117,6 +121,7 @@ right_answers = []
 tests_results = []
 
 
+# class TheoreticalTestUa
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theoretical_test_ua(request):
     global question_theme_ua, theoretical_test_counter, right_answers, tests_results
@@ -150,6 +155,7 @@ def python_theoretical_test_ua(request):
                            'right_slot': right_slot})
 
 
+# class PracticalTestUa
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_practical_test_ua(request):
     global practical_test_counter, right_answers
@@ -181,6 +187,7 @@ def python_practical_test_ua(request):
                            'answers': answers})
 
 
+# class ProgressStatisticUa
 def progress_statistic_guests_ua(request):
     test_result = sum(tests_results)
     day_result = 0
@@ -195,86 +202,107 @@ def progress_statistic_guests_ua(request):
                                                                                    'year_result': year_result})
 
 
-def register_ua(request):
-    if request.method == 'POST':
-        user = User.objects.create_user(username=request.POST.get('username'),
-                                        email=request.POST.get('email'),
-                                        password=request.POST.get('password'))
-        user.save()
-        record = GuestsVisitStatistic(register_date=datetime.now())
-        # record.save()
-        login(request, user)
-        return redirect('users_homepage_ua')
-    return render(request, template_name='ua/register_ua.html')
+class RegisterViewUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'  # register_ua.html
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, f"{username} already exist!")
+        else:
+            user = User.objects.create_user(username=username,
+                                            email=request.POST.get('email'),
+                                            password=request.POST.get('password'))
+            record = self.model(register_date=datetime.now())
+            # record.save()
+            login(request, user)
+            return redirect('users_homepage')
+        return render(request, template_name='ua/web_site_in_process_ua.html')  # register_ua.html
 
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
-def log_in_ua(request):
-    if request.method == 'POST':
-        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+class LoginViewUa(TemplateView):
+    template_name = 'ua/web_site_in_process_ua.html'  # login_ua.html
+
+    def post(self, request, *args, **kwargs):
+        user = authenticate(request, username=request.POST.get('username'),
+                                     password=request.POST.get('password'))
         if user is not None:
             login(request, user)
-            return redirect('users_homepage_ua')
+            return redirect('users_homepage')
         else:
-            messages.error(request, 'Ім`я користувача або пароль не існує!')
-    return render(request, template_name='ua/login_ua.html')
+            messages.error(request, 'Username or password does not exist!')
+        return render(request, template_name='ua/web_site_in_process_ua.html')  # login_ua.html
 
 
-def log_out_ua(request):
-    logout(request)
-    return redirect('homepage_ua')
+class LogoutViewUa(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('homepage_ua')
 
 
+# class UsersHomePageUa TODO
 @login_required(login_url='log_in_ua')
 def users_homepage_ua(request):
     return render(request, template_name='ua/python_clipboards_desk_ua.html')
 
 
+# class UsersHomePageUa TODO
 @login_required(login_url='log_in_ua')
 def users_store_ua(request):
     return render(request, template_name='ua/users_store_ua.html')
 
 
+# class PupilsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_homepage_ua(request):
     return render(request, template_name='ua/pupils_homepage_ua.html')
 
 
+# class PupilsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_event_ua(request):
     return render(request, template_name='ua/pupils_event_overview_ua.html')
 
 
+# class PupilsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_exam_ua(request):
     return render(request, template_name='ua/pupils_exam_overview_ua.html')
 
 
+# class UsersHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_rating_ua(request):
     return render(request, template_name='ua/pupils_rating_ua.html')
 
 
+# class PupilsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_mentor_ua(request):
     return render(request, template_name='ua/pupils_mentor_ua.html')
 
 
+# class PupilsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_pvp_ua(request):
     return render(request, template_name='ua/pupils_pvp_ua.html')
 
 
+# class PupilsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def pupils_tvt_ua(request):
     return render(request, template_name='ua/pupils_tvt_ua.html')
 
 
+# class TeachersHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def teachers_homepage_ua(request):
     return render(request, template_name='ua/teachers_homepage_ua.html')
 
 
+# class TeachersHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def teachers_event_ua(request):
     # all events overview
@@ -284,6 +312,7 @@ def teachers_event_ua(request):
     return render(request, template_name='ua/teachers_event_overview_ua.html')
 
 
+# class TeachersHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def teachers_exam_ua(request):
     # all exams overview
@@ -293,26 +322,31 @@ def teachers_exam_ua(request):
     return render(request, template_name='ua/teachers_exam_overview_ua.html')
 
 
+# class TeachersHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def teachers_rating_ua(request):
     return render(request, template_name='ua/teachers_rating_ua.html')
 
 
+# class TeachersHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def teachers_mentor_ua(request):
     return render(request, template_name='ua/teachers_mentor_ua.html')
 
 
+# class MentorsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def mentors_homepage_ua(request):
     return render(request, template_name='ua/mentors_homepage_ua.html')
 
 
+# class MentorsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def mentors_invocation_ua(request):
     return render(request, template_name='ua/mentors_invocation_ua.html')
 
 
+# class MentorsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def mentors_session_ua(request):
     if request.method == 'POST':
@@ -321,11 +355,13 @@ def mentors_session_ua(request):
     return render(request, template_name='ua/mentors_session_overview_ua.html')
 
 
+# class MentorsHomePageUa TODO
 # @login_required(login_url='log_in_ua')
 def mentors_rating_ua(request):
     return render(request, template_name='ua/mentors_rating_ua.html')
 
 
+# TODO
 @login_required(login_url='log_in_ua')
 def python_themes_time_ua(request):
     if request.method == 'POST':
@@ -334,15 +370,7 @@ def python_themes_time_ua(request):
         # Jan 5, 2022 15:37:25
         timer = end_date_sep[1] + ' ' + end_date_sep[2] + ', ' + end_date_sep[4] + ' ' + end_date_sep[3]
         users_level = request.POST.get('level')
-        text_ua = PythonTheoryDataTypes.objects.values('text_ua')
+        text_ua = PythonDataTypesTheory.objects.values('text_ua')
         return render(request=request, template_name='ua/python_theory_ua.html', context={'timer': timer,
                                                                                           'text_ua': text_ua})
     return render(request, template_name='ua/python_themes_time_ua.html')
-
-
-def golang_themes_time_ua(request):
-    return render(request, template_name='ua/golang_themes_time_ua.html')
-
-
-def javascript_themes_time_ua(request):
-    return render(request, template_name='ua/javascript_themes_time_ua.html')

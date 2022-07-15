@@ -9,13 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
-<script type="text/javascript">
-  function showMessage(){
-    if (confirm("Hello dear Guest,\nFor get possibility to register on our website you need to pass your first test.\n\nLet`s try it?")) {
-      location.href = 'http://192.168.0.115:8000/programing-language-choice/';
-    }
-  }
-</script>
 <body>
 <form method="POST">
     {% csrf_token %}
@@ -64,5 +57,12 @@
         </div>
     </div>
 </form>
+<script type="text/javascript">
+  function showMessage(){
+    if (confirm("Hello dear Guest,\nFor get possibility to register on our website you need to pass your first test.\n\nLet`s try it?")) {
+      location.href = 'http://192.168.0.115:8000/programing-language-choice/';
+    }
+  }
+</script>
 </body>
 </html>
