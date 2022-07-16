@@ -138,7 +138,7 @@ class PythonDataTypesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_data_types_theory'
@@ -2412,6 +2412,9 @@ class GuestsVisitStatistic(models.Model):
     guests_hostname = models.TextField(null=True)
     visit_date = models.TextField(null=True)
 
+    schools_email = models.TextField(null=True)
+    teams_email = models.TextField(null=True)
+
     lets_try_it_date = models.TextField(null=True)
     language = models.TextField(null=True)
     programming_language = models.TextField(null=True)
@@ -2437,7 +2440,7 @@ class GuestsVisitStatistic(models.Model):
         db_table = 'guests_visit_statistic'
 
 
-class JooTipsErrorsStatistic(models.Model):
+class JooTipsSiteErrorsStatistic(models.Model):
     guests_ip = models.TextField(null=True)
     guests_location = models.TextField(null=True)
     guests_hostname = models.TextField(null=True)

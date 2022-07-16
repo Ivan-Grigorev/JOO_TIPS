@@ -377,7 +377,7 @@ def python_themes_time(request):
 
 
 class Error400Page(TemplateView):
-    model = JooTipsErrorsStatistic
+    model = JooTipsSiteErrorsStatistic
     template_name = 'errors_views/error_view.html'
 
     def get(self, request, *args, **kwargs):
@@ -400,7 +400,7 @@ class Error400Page(TemplateView):
 
 
 class Error403Page(TemplateView):
-    model = JooTipsErrorsStatistic
+    model = JooTipsSiteErrorsStatistic
     template_name = 'errors_views/error_view.html'
 
     def get(self, request, *args, **kwargs):
@@ -423,7 +423,7 @@ class Error403Page(TemplateView):
 
 
 class Error404Page(TemplateView):
-    model = JooTipsErrorsStatistic
+    model = JooTipsSiteErrorsStatistic
     template_name = 'errors_views/error_view.html'
 
     def get(self, request, *args, **kwargs):
@@ -446,7 +446,7 @@ class Error404Page(TemplateView):
 
 
 class Error500Page(TemplateView):
-    model = JooTipsErrorsStatistic
+    model = JooTipsSiteErrorsStatistic
     template_name = 'errors_views/error_view.html'
 
     def get(self, request, *args, **kwargs):

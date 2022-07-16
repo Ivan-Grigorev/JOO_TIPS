@@ -31,18 +31,18 @@ admin.site.register(PythonVariablesTheory, AdminPythonTheoryVariables)
 admin.site.register(PythonVariablesTheoreticalTest, AdminPythonVariablesTheoreticalTest)
 
 
-class AdminPythonTheoryDataTypes(models.Model):
-    model = PythonDataTypesTheory
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonDataTypesTheoreticalTest(admin.ModelAdmin):
-    model = PythonDataTypesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
-
-
-admin.site.register(PythonDataTypesTheory, AdminPythonTheoryDataTypes)
-admin.site.register(PythonDataTypesTheoreticalTest, AdminPythonDataTypesTheoreticalTest)
+# class AdminPythonDataTypesTheory(models.Model):
+#     model = PythonDataTypesTheory
+#     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+#
+#
+# class AdminPythonDataTypesTheoreticalTest(admin.ModelAdmin):
+#     model = PythonDataTypesTheoreticalTest
+#     list_display = [field.name for field in model._meta.get_fields()]
+#
+#
+# admin.site.register(PythonDataTypesTheory, AdminPythonDataTypesTheory)
+# admin.site.register(PythonDataTypesTheoreticalTest, AdminPythonDataTypesTheoreticalTest)
 
 
 class AdminPythonExceptionsTheory(admin.ModelAdmin):
@@ -128,142 +128,410 @@ class AdminPythonSetsTheoreticalTest(admin.ModelAdmin):
 admin.site.register(PythonSetsTheory, AdminPythonSetsTheory)
 admin.site.register(PythonSetsTheoreticalTest, AdminPythonSetsTheoreticalTest)
 
-# TODO
-class AdminPythonTheoryArraysRelatedLists(admin.ModelAdmin):
-    model = PythonTheoryArraysRelatedLists
+
+class AdminPythonArraysRelatedListsTheory(admin.ModelAdmin):
+    model = PythonArraysRelatedListsTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryStacsQueues(admin.ModelAdmin):
-    model = PythonTheoryStacsQueues
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryHashTables(admin.ModelAdmin):
-    model = PythonTheoryHashTables
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryIterators(admin.ModelAdmin):
-    model = PythonTheoryIterators
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryFiles(admin.ModelAdmin):
-    model = PythonTheoryFiles
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryRecursion(admin.ModelAdmin):
-    model = PythonTheoryRecursion
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheorySorting(admin.ModelAdmin):
-    model = PythonTheorySorting
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryFunctionsBuiltinFunctions(admin.ModelAdmin):
-    model = PythonTheoryFunctionsBuiltinFunctions
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryLambdaFunctions(admin.ModelAdmin):
-    model = PythonTheoryLambdaFunctions
-    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-
-
-class AdminPythonTheoryDecorators(admin.ModelAdmin):
-    model = PythonTheoryDecorators
+class AdminPythonArraysRelatedListsTheoreticalTest(admin.ModelAdmin):
+    model = PythonArraysRelatedListsTheoreticalTest
     list_display = [field.name for field in model._meta.get_fields()]
 
 
-class AdminPythonTheoryRegularExpressions(admin.ModelAdmin):
-    model = PythonTheoryRegularExpressions
+admin.site.register(PythonArraysRelatedListsTheory, AdminPythonArraysRelatedListsTheory)
+admin.site.register(PythonArraysRelatedListsTheoreticalTest, AdminPythonArraysRelatedListsTheoreticalTest)
+
+
+class AdminPythonStacsQueuesTheory(admin.ModelAdmin):
+    model = PythonStacsQueuesTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryClasses(admin.ModelAdmin):
-    model = PythonTheoryClasses
+class AdminPythonStacsQueuesTheoreticalTest(admin.ModelAdmin):
+    model = PythonStacsQueuesTheoreticalTest
     list_display = [field.name for field in model._meta.get_fields()]
 
 
-class AdminPythonTheoryMagicMethods(admin.ModelAdmin):
-    model = PythonTheoryMagicMethods
+admin.site.register(PythonStacsQueuesTheory, AdminPythonStacsQueuesTheory)
+admin.site.register(PythonStacsQueuesTheoreticalTest, AdminPythonStacsQueuesTheoreticalTest)
+
+
+class AdminPythonHashTablesTheory(admin.ModelAdmin):
+    model = PythonHashTablesTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryModules(admin.ModelAdmin):
+class AdminPythonHashTablesTheoreticalTest(admin.ModelAdmin):
+    model = PythonHashTablesTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonHashTablesTheory, AdminPythonHashTablesTheory)
+admin.site.register(PythonHashTablesTheoreticalTest, AdminPythonHashTablesTheoreticalTest)
+
+
+class AdminPythonIteratorsTheory(admin.ModelAdmin):
+    model = PythonIteratorsTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonIteratorsTheoreticalTest(admin.ModelAdmin):
+    model = PythonIteratorsTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonIteratorsTheory, AdminPythonIteratorsTheory)
+admin.site.register(PythonIteratorsTheoreticalTest, AdminPythonIteratorsTheoreticalTest)
+
+
+class AdminPythonFilesTheory(admin.ModelAdmin):
+    model = PythonFilesTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonFilesTheoreticalTest(admin.ModelAdmin):
+    model = PythonFilesTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonFilesTheory, AdminPythonFilesTheory)
+admin.site.register(PythonFilesTheoreticalTest, AdminPythonFilesTheoreticalTest)
+
+
+class AdminPythonRecursionTheory(admin.ModelAdmin):
+    model = PythonRecursionTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonRecursionTheoreticalTest(admin.ModelAdmin):
+    model = PythonRecursionTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonRecursionTheory, AdminPythonRecursionTheory)
+admin.site.register(PythonRecursionTheoreticalTest, AdminPythonRecursionTheoreticalTest)
+
+
+class AdminPythonSortingTheory(admin.ModelAdmin):
+    model = PythonSortingTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonSortingTheoreticalTest(admin.ModelAdmin):
+    model = PythonSortingTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonSortingTheory, AdminPythonSortingTheory)
+admin.site.register(PythonSortingTheoreticalTest, AdminPythonSortingTheoreticalTest)
+
+
+class AdminPythonFunctionsBuiltinFunctionsTheory(admin.ModelAdmin):
+    model = PythonFunctionsBuiltinFunctionsTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonFunctionsBuiltinFunctionsTheoreticalTest(admin.ModelAdmin):
+    model = PythonFunctionsBuiltinFunctionsTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonFunctionsBuiltinFunctionsTheory, AdminPythonFunctionsBuiltinFunctionsTheory)
+admin.site.register(PythonFunctionsBuiltinFunctionsTheoreticalTest, AdminPythonFunctionsBuiltinFunctionsTheoreticalTest)
+
+
+class AdminPythonLambdaFunctionsTheory(admin.ModelAdmin):
+    model = PythonLambdaFunctionsTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonLambdaFunctionsTheoreticalTest(admin.ModelAdmin):
+    model = PythonLambdaFunctionsTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonLambdaFunctionsTheory, AdminPythonLambdaFunctionsTheory)
+admin.site.register(PythonLambdaFunctionsTheoreticalTest, AdminPythonLambdaFunctionsTheoreticalTest)
+
+
+class AdminPythonDecoratorsTheory(admin.ModelAdmin):
+    model = PythonDecoratorsTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonDecoratorsTheoreticalTest(admin.ModelAdmin):
+    model = PythonDecoratorsTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonDecoratorsTheory, AdminPythonDecoratorsTheory)
+admin.site.register(PythonDecoratorsTheoreticalTest, AdminPythonDecoratorsTheoreticalTest)
+
+
+class AdminPythonRegularExpressionsTheory(admin.ModelAdmin):
+    model = PythonRegularExpressionsTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonRegularExpressionsTheoreticalTest(admin.ModelAdmin):
+    model = PythonRegularExpressionsTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonRegularExpressionsTheory, AdminPythonRegularExpressionsTheory)
+admin.site.register(PythonRegularExpressionsTheoreticalTest, AdminPythonRegularExpressionsTheoreticalTest)
+
+
+class AdminPythonClassesTheory(admin.ModelAdmin):
+    model = PythonClassesTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonClassesTheoreticalTest(admin.ModelAdmin):
+    model = PythonClassesTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonClassesTheory, AdminPythonClassesTheory)
+admin.site.register(PythonClassesTheoreticalTest, AdminPythonClassesTheoreticalTest)
+
+
+class AdminPythonMagicMethodsTheory(admin.ModelAdmin):
+    model = PythonMagicMethodsTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonMagicMethodsTheoreticalTest(admin.ModelAdmin):
+    model = PythonMagicMethodsTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonMagicMethodsTheory, AdminPythonMagicMethodsTheory)
+admin.site.register(PythonMagicMethodsTheoreticalTest, AdminPythonMagicMethodsTheoreticalTest)
+
+
+class AdminPythonModulesTheory(admin.ModelAdmin):
     model = PythonModulesTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryPipPypi(admin.ModelAdmin):
+class AdminPythonModulesTheoreticalTest(admin.ModelAdmin):
+    model = PythonModulesTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonModulesTheory, AdminPythonModulesTheory)
+admin.site.register(PythonModulesTheoreticalTest, AdminPythonModulesTheoreticalTest)
+
+
+class AdminPythonPipPypiTheory(admin.ModelAdmin):
     model = PythonPipPypiTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryBasicGit(admin.ModelAdmin):
+class AdminPythonPipPypiTheoreticalTest(admin.ModelAdmin):
+    model = PythonPipPypiTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonPipPypiTheory, AdminPythonPipPypiTheory)
+admin.site.register(PythonPipPypiTheoreticalTest, AdminPythonPipPypiTheoreticalTest)
+
+
+class AdminPythonBasicGitTheory(admin.ModelAdmin):
     model = PythonBasicGitTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryGithubGitlabBitbucket(admin.ModelAdmin):
+class AdminPythonBasicGitTheoreticalTest(admin.ModelAdmin):
+    model = PythonBasicGitTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonBasicGitTheory, AdminPythonBasicGitTheory)
+admin.site.register(PythonBasicGitTheoreticalTest, AdminPythonBasicGitTheoreticalTest)
+
+
+class AdminPythonGithubGitlabBitbucketTheory(admin.ModelAdmin):
     model = PythonGithubGitlabBitbucketTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryFlask(admin.ModelAdmin):
+class AdminPythonGithubGitlabBitbucketTheoreticalTest(admin.ModelAdmin):
+    model = PythonGithubGitlabBitbucketTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonGithubGitlabBitbucketTheory, AdminPythonGithubGitlabBitbucketTheory)
+admin.site.register(PythonGithubGitlabBitbucketTheoreticalTest, AdminPythonGithubGitlabBitbucketTheoreticalTest)
+
+
+class AdminPythonFlaskTheory(admin.ModelAdmin):
     model = PythonFlaskTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryPyramid(admin.ModelAdmin):
-    model = PythonTheoryPyramid
+class AdminPythonFlaskTheoreticalTest(admin.ModelAdmin):
+    model = PythonFlaskTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonFlaskTheory, AdminPythonFlaskTheory)
+admin.site.register(PythonFlaskTheoreticalTest, AdminPythonFlaskTheoreticalTest)
+
+
+class AdminPythonPyramidTheory(admin.ModelAdmin):
+    model = PythonPyramidTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryDjango(admin.ModelAdmin):
-    model = PythonTheoryDjango
+class AdminPythonPyramidTheoreticalTest(admin.ModelAdmin):
+    model = PythonPyramidTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonPyramidTheory, AdminPythonPyramidTheory)
+admin.site.register(PythonPyramidTheoreticalTest, AdminPythonPyramidTheoreticalTest)
+
+
+class AdminPythonDjangoTheory(admin.ModelAdmin):
+    model = PythonDjangoTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryGevent(admin.ModelAdmin):
+class AdminPythonDjangoTheoreticalTest(admin.ModelAdmin):
+    model = PythonDjangoTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonDjangoTheory, AdminPythonDjangoTheory)
+admin.site.register(PythonDjangoTheoreticalTest, AdminPythonDjangoTheoreticalTest)
+
+
+class AdminPythonGeventTheory(admin.ModelAdmin):
     model = PythonGeventTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheorySanic(admin.ModelAdmin):
-    model = PythonTheorySanic
+class AdminPythonGeventTheoreticalTest(admin.ModelAdmin):
+    model = PythonGeventTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonGeventTheory, AdminPythonGeventTheory)
+admin.site.register(PythonGeventTheoreticalTest, AdminPythonGeventTheoreticalTest)
+
+
+class AdminPythonSanicTheory(admin.ModelAdmin):
+    model = PythonSanicTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryTornado(admin.ModelAdmin):
+class AdminPythonSanicTheoreticalTest(admin.ModelAdmin):
+    model = PythonSanicTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonSanicTheory, AdminPythonSanicTheory)
+admin.site.register(PythonSanicTheoreticalTest, AdminPythonSanicTheoreticalTest)
+
+
+class AdminPythonTornadoTheory(admin.ModelAdmin):
     model = PythonTornadoTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryAiohttp(admin.ModelAdmin):
-    model = PythonTheoryAiohttp
+class AdminPythonTornadoTheoreticalTest(admin.ModelAdmin):
+    model = PythonTornadoTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonTornadoTheory, AdminPythonTornadoTheory)
+admin.site.register(PythonTornadoTheoreticalTest, AdminPythonTornadoTheoreticalTest)
+
+
+class AdminPythonAiohttpTheory(admin.ModelAdmin):
+    model = PythonAiohttpTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryNose(admin.ModelAdmin):
-    model = PythonTheoryNose
+class AdminPythonAiohttpTheoreticalTest(admin.ModelAdmin):
+    model = PythonAiohttpTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonAiohttpTheory, AdminPythonAiohttpTheory)
+admin.site.register(PythonAiohttpTheoreticalTest, AdminPythonAiohttpTheoreticalTest)
+
+
+class AdminPythonNoseTheory(admin.ModelAdmin):
+    model = PythonNoseTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryPytest(admin.ModelAdmin):
+class AdminPythonNoseTheoreticalTest(admin.ModelAdmin):
+    model = PythonNoseTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonNoseTheory, AdminPythonNoseTheory)
+admin.site.register(PythonNoseTheoreticalTest, AdminPythonNoseTheoreticalTest)
+
+
+class AdminPythonPytestTheory(admin.ModelAdmin):
     model = PythonPytestTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryDoctest(admin.ModelAdmin):
+class AdminPythonPytestTheoreticalTest(admin.ModelAdmin):
+    model = PythonPytestTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonPytestTheory, AdminPythonPytestTheory)
+admin.site.register(PythonPytestTheoreticalTest, AdminPythonPytestTheoreticalTest)
+
+
+class AdminPythonDoctestTheory(admin.ModelAdmin):
     model = PythonDoctestTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
 
 
-class AdminPythonTheoryUnittestPyunit(admin.ModelAdmin):
+class AdminPythonDoctestTheoreticalTest(admin.ModelAdmin):
+    model = PythonDoctestTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonDoctestTheory, AdminPythonDoctestTheory)
+admin.site.register(PythonDoctestTheoreticalTest, AdminPythonDoctestTheoreticalTest)
+
+
+class AdminPythonUnittestPyunitTheory(admin.ModelAdmin):
     model = PythonUnittestPyunitTheory
     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonUnittestPyunitTheoreticalTest(admin.ModelAdmin):
+    model = PythonUnittestPyunitTheoreticalTest
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(PythonUnittestPyunitTheory, AdminPythonUnittestPyunitTheory)
+admin.site.register(PythonUnittestPyunitTheoreticalTest, AdminPythonUnittestPyunitTheoreticalTest)
+
+
+class AdminGuestsVisitStatistic(admin.ModelAdmin):
+    model = GuestsVisitStatistic
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(GuestsVisitStatistic, AdminGuestsVisitStatistic)
+
+
+class AdminJooTipsSiteErrorsStatistic(admin.ModelAdmin):
+    model = JooTipsSiteErrorsStatistic
+    list_display = [field.name for field in model._meta.get_fields()]
+
+
+admin.site.register(JooTipsSiteErrorsStatistic, AdminJooTipsSiteErrorsStatistic)
