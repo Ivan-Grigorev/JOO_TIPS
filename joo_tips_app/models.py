@@ -15,7 +15,7 @@ class PythonBasicsTheory(models.Model):
 
 
 class PythonBasicsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonBasicsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonBasicsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -80,7 +80,7 @@ class PythonVariablesTheory(models.Model):
 
 
 class PythonVariablesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonVariablesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonVariablesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -138,14 +138,14 @@ class PythonDataTypesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.theme or self.text or self.text_ua or self.created_date
+        return self.text or self.text_ua
 
     class Meta:
         db_table = 'python_data_types_theory'
 
 
 class PythonDataTypesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -210,7 +210,7 @@ class PythonExceptionsTheory(models.Model):
 
 
 class PythonExceptionsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonExceptionsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonExceptionsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -275,7 +275,7 @@ class PythonStringsTheory(models.Model):
 
 
 class PythonStringsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonStringsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonStringsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -340,7 +340,7 @@ class PythonListsTheory(models.Model):
 
 
 class PythonListsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonListsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonListsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -405,7 +405,7 @@ class PythonTuplesTheory(models.Model):
 
 
 class PythonTuplesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonTuplesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonTuplesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -470,7 +470,7 @@ class PythonDictionariesTheory(models.Model):
 
 
 class PythonDictionariesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonDictionariesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonDictionariesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -535,7 +535,7 @@ class PythonSetsTheory(models.Model):
 
 
 class PythonSetsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonSetsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonSetsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -600,7 +600,7 @@ class PythonArraysRelatedListsTheory(models.Model):
 
 
 class PythonArraysRelatedListsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonArraysRelatedListsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonArraysRelatedListsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -665,7 +665,7 @@ class PythonStacsQueuesTheory(models.Model):
 
 
 class PythonStacsQueuesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonStacsQueuesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonStacsQueuesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -730,7 +730,7 @@ class PythonHashTablesTheory(models.Model):
 
 
 class PythonHashTablesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonHashTablesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonHashTablesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -795,7 +795,7 @@ class PythonIteratorsTheory(models.Model):
 
 
 class PythonIteratorsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonIteratorsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonIteratorsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -860,7 +860,7 @@ class PythonFilesTheory(models.Model):
 
 
 class PythonFilesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonFilesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonFilesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -925,7 +925,7 @@ class PythonRecursionTheory(models.Model):
 
 
 class PythonRecursionTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonRecursionTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonRecursionTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -990,7 +990,7 @@ class PythonSortingTheory(models.Model):
 
 
 class PythonSortingTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonSortingTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonSortingTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1055,7 +1055,7 @@ class PythonFunctionsBuiltinFunctionsTheory(models.Model):
 
 
 class PythonFunctionsBuiltinFunctionsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1120,7 +1120,7 @@ class PythonLambdaFunctionsTheory(models.Model):
 
 
 class PythonLambdaFunctionsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonLambdaFunctionsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonLambdaFunctionsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1185,7 +1185,7 @@ class PythonDecoratorsTheory(models.Model):
 
 
 class PythonDecoratorsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonDecoratorsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonDecoratorsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1250,7 +1250,7 @@ class PythonRegularExpressionsTheory(models.Model):
 
 
 class PythonRegularExpressionsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonRegularExpressionsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonRegularExpressionsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1315,7 +1315,7 @@ class PythonClassesTheory(models.Model):
 
 
 class PythonClassesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonClassesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonClassesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1380,7 +1380,7 @@ class PythonMagicMethodsTheory(models.Model):
 
 
 class PythonMagicMethodsTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonMagicMethodsTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonMagicMethodsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1445,7 +1445,7 @@ class PythonModulesTheory(models.Model):
 
 
 class PythonModulesTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonModulesTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonModulesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1510,7 +1510,7 @@ class PythonPipPypiTheory(models.Model):
 
 
 class PythonPipPypiTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonPipPypiTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonPipPypiTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1575,7 +1575,7 @@ class PythonBasicGitTheory(models.Model):
 
 
 class PythonBasicGitTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonBasicGitTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonBasicGitTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1640,7 +1640,7 @@ class PythonGithubGitlabBitbucketTheory(models.Model):
 
 
 class PythonGithubGitlabBitbucketTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonGithubGitlabBitbucketTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonGithubGitlabBitbucketTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1705,7 +1705,7 @@ class PythonFlaskTheory(models.Model):
 
 
 class PythonFlaskTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonFlaskTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonFlaskTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1770,7 +1770,7 @@ class PythonPyramidTheory(models.Model):
 
 
 class PythonPyramidTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonPyramidTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonPyramidTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1835,7 +1835,7 @@ class PythonDjangoTheory(models.Model):
 
 
 class PythonDjangoTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonDjangoTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonDjangoTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1900,7 +1900,7 @@ class PythonGeventTheory(models.Model):
 
 
 class PythonGeventTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonGeventTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonGeventTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1965,7 +1965,7 @@ class PythonSanicTheory(models.Model):
 
 
 class PythonSanicTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonSanicTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonSanicTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2030,7 +2030,7 @@ class PythonTornadoTheory(models.Model):
 
 
 class PythonTornadoTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonTornadoTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonTornadoTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2095,7 +2095,7 @@ class PythonAiohttpTheory(models.Model):
 
 
 class PythonAiohttpTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonAiohttpTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonAiohttpTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2160,7 +2160,7 @@ class PythonNoseTheory(models.Model):
 
 
 class PythonNoseTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonNoseTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonNoseTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2225,7 +2225,7 @@ class PythonPytestTheory(models.Model):
 
 
 class PythonPytestTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonPytestTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonPytestTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2290,7 +2290,7 @@ class PythonDoctestTheory(models.Model):
 
 
 class PythonDoctestTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonDoctestTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonDoctestTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2355,7 +2355,7 @@ class PythonUnittestPyunitTheory(models.Model):
 
 
 class PythonUnittestPyunitTheoreticalTest(models.Model):
-    card_id = models.ForeignKey(PythonUnittestPyunitTheory, to_field='id', on_delete=models.CASCADE)
+    card = models.ForeignKey(PythonUnittestPyunitTheory, to_field='id', on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)

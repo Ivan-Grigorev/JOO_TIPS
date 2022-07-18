@@ -31,7 +31,7 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.0.115']
+ALLOWED_HOSTS = ['192.168.0.115']
 # ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
 
 
@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'JOO_Tips.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'joo_tips',
-        'USER': 'postgres',
-        'PASSWORD': 'pstgr_28.09_ig',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

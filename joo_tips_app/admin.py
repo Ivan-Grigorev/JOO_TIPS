@@ -10,7 +10,23 @@ class AdminPythonBasicsTheory(admin.ModelAdmin):
 
 class AdminPythonBasicsTheoreticalTest(admin.ModelAdmin):
     model = PythonBasicsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonBasicsTheory, AdminPythonBasicsTheory)
@@ -24,25 +40,57 @@ class AdminPythonTheoryVariables(admin.ModelAdmin):
 
 class AdminPythonVariablesTheoreticalTest(admin.ModelAdmin):
     model = PythonVariablesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonVariablesTheory, AdminPythonTheoryVariables)
 admin.site.register(PythonVariablesTheoreticalTest, AdminPythonVariablesTheoreticalTest)
 
 
-# class AdminPythonDataTypesTheory(models.Model):
-#     model = PythonDataTypesTheory
-#     list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
-#
-#
-# class AdminPythonDataTypesTheoreticalTest(admin.ModelAdmin):
-#     model = PythonDataTypesTheoreticalTest
-#     list_display = [field.name for field in model._meta.get_fields()]
-#
-#
-# admin.site.register(PythonDataTypesTheory, AdminPythonDataTypesTheory)
-# admin.site.register(PythonDataTypesTheoreticalTest, AdminPythonDataTypesTheoreticalTest)
+class AdminPythonDataTypesTheory(admin.ModelAdmin):
+    model = PythonDataTypesTheory
+    list_display = ('id', 'theme', 'text', 'text_ua', 'created_date')
+
+
+class AdminPythonDataTypesTheoreticalTest(admin.ModelAdmin):
+    model = PythonDataTypesTheoreticalTest
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
+
+
+admin.site.register(PythonDataTypesTheory, AdminPythonDataTypesTheory)
+admin.site.register(PythonDataTypesTheoreticalTest, AdminPythonDataTypesTheoreticalTest)
 
 
 class AdminPythonExceptionsTheory(admin.ModelAdmin):
@@ -52,7 +100,23 @@ class AdminPythonExceptionsTheory(admin.ModelAdmin):
 
 class AdminPythonExceptionsTheoreticalTest(admin.ModelAdmin):
     model = PythonExceptionsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonExceptionsTheory, AdminPythonExceptionsTheory)
@@ -66,7 +130,23 @@ class AdminPythonStringsTheory(admin.ModelAdmin):
 
 class AdminPythonStringsTheoreticalTest(admin.ModelAdmin):
     model = PythonStringsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonStringsTheory, AdminPythonStringsTheory)
@@ -80,7 +160,23 @@ class AdminPythonListsTheory(admin.ModelAdmin):
 
 class AdminPythonListsTheoreticalTest(admin.ModelAdmin):
     model = PythonListsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonListsTheory, AdminPythonListsTheory)
@@ -94,7 +190,23 @@ class AdminPythonTuplesTheory(admin.ModelAdmin):
 
 class AdminPythonTuplesTheoreticalTest(admin.ModelAdmin):
     model = PythonTuplesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonTuplesTheory, AdminPythonTuplesTheory)
@@ -108,7 +220,23 @@ class AdminPythonDictionariesTheory(admin.ModelAdmin):
 
 class AdminPythonDictionariesTheoreticalTest(admin.ModelAdmin):
     model = PythonDictionariesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonDictionariesTheory, AdminPythonDictionariesTheory)
@@ -122,7 +250,23 @@ class AdminPythonSetsTheory(admin.ModelAdmin):
 
 class AdminPythonSetsTheoreticalTest(admin.ModelAdmin):
     model = PythonSetsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonSetsTheory, AdminPythonSetsTheory)
@@ -136,7 +280,23 @@ class AdminPythonArraysRelatedListsTheory(admin.ModelAdmin):
 
 class AdminPythonArraysRelatedListsTheoreticalTest(admin.ModelAdmin):
     model = PythonArraysRelatedListsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonArraysRelatedListsTheory, AdminPythonArraysRelatedListsTheory)
@@ -150,7 +310,23 @@ class AdminPythonStacsQueuesTheory(admin.ModelAdmin):
 
 class AdminPythonStacsQueuesTheoreticalTest(admin.ModelAdmin):
     model = PythonStacsQueuesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonStacsQueuesTheory, AdminPythonStacsQueuesTheory)
@@ -164,7 +340,23 @@ class AdminPythonHashTablesTheory(admin.ModelAdmin):
 
 class AdminPythonHashTablesTheoreticalTest(admin.ModelAdmin):
     model = PythonHashTablesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonHashTablesTheory, AdminPythonHashTablesTheory)
@@ -178,7 +370,23 @@ class AdminPythonIteratorsTheory(admin.ModelAdmin):
 
 class AdminPythonIteratorsTheoreticalTest(admin.ModelAdmin):
     model = PythonIteratorsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonIteratorsTheory, AdminPythonIteratorsTheory)
@@ -192,7 +400,23 @@ class AdminPythonFilesTheory(admin.ModelAdmin):
 
 class AdminPythonFilesTheoreticalTest(admin.ModelAdmin):
     model = PythonFilesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonFilesTheory, AdminPythonFilesTheory)
@@ -206,7 +430,23 @@ class AdminPythonRecursionTheory(admin.ModelAdmin):
 
 class AdminPythonRecursionTheoreticalTest(admin.ModelAdmin):
     model = PythonRecursionTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonRecursionTheory, AdminPythonRecursionTheory)
@@ -220,7 +460,23 @@ class AdminPythonSortingTheory(admin.ModelAdmin):
 
 class AdminPythonSortingTheoreticalTest(admin.ModelAdmin):
     model = PythonSortingTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonSortingTheory, AdminPythonSortingTheory)
@@ -234,7 +490,23 @@ class AdminPythonFunctionsBuiltinFunctionsTheory(admin.ModelAdmin):
 
 class AdminPythonFunctionsBuiltinFunctionsTheoreticalTest(admin.ModelAdmin):
     model = PythonFunctionsBuiltinFunctionsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonFunctionsBuiltinFunctionsTheory, AdminPythonFunctionsBuiltinFunctionsTheory)
@@ -248,7 +520,23 @@ class AdminPythonLambdaFunctionsTheory(admin.ModelAdmin):
 
 class AdminPythonLambdaFunctionsTheoreticalTest(admin.ModelAdmin):
     model = PythonLambdaFunctionsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonLambdaFunctionsTheory, AdminPythonLambdaFunctionsTheory)
@@ -262,7 +550,23 @@ class AdminPythonDecoratorsTheory(admin.ModelAdmin):
 
 class AdminPythonDecoratorsTheoreticalTest(admin.ModelAdmin):
     model = PythonDecoratorsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonDecoratorsTheory, AdminPythonDecoratorsTheory)
@@ -276,7 +580,23 @@ class AdminPythonRegularExpressionsTheory(admin.ModelAdmin):
 
 class AdminPythonRegularExpressionsTheoreticalTest(admin.ModelAdmin):
     model = PythonRegularExpressionsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonRegularExpressionsTheory, AdminPythonRegularExpressionsTheory)
@@ -290,7 +610,23 @@ class AdminPythonClassesTheory(admin.ModelAdmin):
 
 class AdminPythonClassesTheoreticalTest(admin.ModelAdmin):
     model = PythonClassesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonClassesTheory, AdminPythonClassesTheory)
@@ -304,7 +640,23 @@ class AdminPythonMagicMethodsTheory(admin.ModelAdmin):
 
 class AdminPythonMagicMethodsTheoreticalTest(admin.ModelAdmin):
     model = PythonMagicMethodsTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonMagicMethodsTheory, AdminPythonMagicMethodsTheory)
@@ -318,7 +670,23 @@ class AdminPythonModulesTheory(admin.ModelAdmin):
 
 class AdminPythonModulesTheoreticalTest(admin.ModelAdmin):
     model = PythonModulesTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonModulesTheory, AdminPythonModulesTheory)
@@ -332,7 +700,23 @@ class AdminPythonPipPypiTheory(admin.ModelAdmin):
 
 class AdminPythonPipPypiTheoreticalTest(admin.ModelAdmin):
     model = PythonPipPypiTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonPipPypiTheory, AdminPythonPipPypiTheory)
@@ -346,7 +730,23 @@ class AdminPythonBasicGitTheory(admin.ModelAdmin):
 
 class AdminPythonBasicGitTheoreticalTest(admin.ModelAdmin):
     model = PythonBasicGitTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonBasicGitTheory, AdminPythonBasicGitTheory)
@@ -360,7 +760,23 @@ class AdminPythonGithubGitlabBitbucketTheory(admin.ModelAdmin):
 
 class AdminPythonGithubGitlabBitbucketTheoreticalTest(admin.ModelAdmin):
     model = PythonGithubGitlabBitbucketTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonGithubGitlabBitbucketTheory, AdminPythonGithubGitlabBitbucketTheory)
@@ -374,7 +790,23 @@ class AdminPythonFlaskTheory(admin.ModelAdmin):
 
 class AdminPythonFlaskTheoreticalTest(admin.ModelAdmin):
     model = PythonFlaskTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonFlaskTheory, AdminPythonFlaskTheory)
@@ -388,7 +820,23 @@ class AdminPythonPyramidTheory(admin.ModelAdmin):
 
 class AdminPythonPyramidTheoreticalTest(admin.ModelAdmin):
     model = PythonPyramidTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonPyramidTheory, AdminPythonPyramidTheory)
@@ -402,7 +850,23 @@ class AdminPythonDjangoTheory(admin.ModelAdmin):
 
 class AdminPythonDjangoTheoreticalTest(admin.ModelAdmin):
     model = PythonDjangoTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonDjangoTheory, AdminPythonDjangoTheory)
@@ -416,7 +880,23 @@ class AdminPythonGeventTheory(admin.ModelAdmin):
 
 class AdminPythonGeventTheoreticalTest(admin.ModelAdmin):
     model = PythonGeventTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonGeventTheory, AdminPythonGeventTheory)
@@ -430,7 +910,23 @@ class AdminPythonSanicTheory(admin.ModelAdmin):
 
 class AdminPythonSanicTheoreticalTest(admin.ModelAdmin):
     model = PythonSanicTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonSanicTheory, AdminPythonSanicTheory)
@@ -444,7 +940,23 @@ class AdminPythonTornadoTheory(admin.ModelAdmin):
 
 class AdminPythonTornadoTheoreticalTest(admin.ModelAdmin):
     model = PythonTornadoTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonTornadoTheory, AdminPythonTornadoTheory)
@@ -458,7 +970,23 @@ class AdminPythonAiohttpTheory(admin.ModelAdmin):
 
 class AdminPythonAiohttpTheoreticalTest(admin.ModelAdmin):
     model = PythonAiohttpTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonAiohttpTheory, AdminPythonAiohttpTheory)
@@ -472,7 +1000,23 @@ class AdminPythonNoseTheory(admin.ModelAdmin):
 
 class AdminPythonNoseTheoreticalTest(admin.ModelAdmin):
     model = PythonNoseTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonNoseTheory, AdminPythonNoseTheory)
@@ -486,7 +1030,23 @@ class AdminPythonPytestTheory(admin.ModelAdmin):
 
 class AdminPythonPytestTheoreticalTest(admin.ModelAdmin):
     model = PythonPytestTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonPytestTheory, AdminPythonPytestTheory)
@@ -500,7 +1060,23 @@ class AdminPythonDoctestTheory(admin.ModelAdmin):
 
 class AdminPythonDoctestTheoreticalTest(admin.ModelAdmin):
     model = PythonDoctestTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonDoctestTheory, AdminPythonDoctestTheory)
@@ -514,7 +1090,23 @@ class AdminPythonUnittestPyunitTheory(admin.ModelAdmin):
 
 class AdminPythonUnittestPyunitTheoreticalTest(admin.ModelAdmin):
     model = PythonUnittestPyunitTheoreticalTest
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('id', 'card_id', 'theme', 'question',
+                    'level_1_slot_1_right_answer', 'level_1_slot_2_wrong_answer',
+                    'level_2_slot_1_right_answer', 'level_2_slot_2_wrong_answer',
+                    'level_2_slot_3_wrong_answer', 'level_2_slot_4_wrong_answer',
+                    'level_3_slot_1_right_answer', 'level_3_slot_2_right_answer',
+                    'level_3_slot_3_wrong_answer', 'level_3_slot_4_wrong_answer',
+                    'level_4_slot_1_right_answer', 'level_4_slot_2_right_answer',
+                    'level_4_slot_3_right_answer', 'level_4_slot_4_wrong_answer',
+                    'question_ua',
+                    'level_1_slot_1_right_answer_ua', 'level_1_slot_2_wrong_answer_ua',
+                    'level_2_slot_1_right_answer_ua', 'level_2_slot_2_wrong_answer_ua',
+                    'level_2_slot_3_wrong_answer_ua', 'level_2_slot_4_wrong_answer_ua',
+                    'level_3_slot_1_right_answer_ua', 'level_3_slot_2_right_answer_ua',
+                    'level_3_slot_3_wrong_answer_ua', 'level_3_slot_4_wrong_answer_ua',
+                    'level_4_slot_1_right_answer_ua', 'level_4_slot_2_right_answer_ua',
+                    'level_4_slot_3_right_answer_ua', 'level_4_slot_4_wrong_answer_ua',
+                    'created_date')
 
 
 admin.site.register(PythonUnittestPyunitTheory, AdminPythonUnittestPyunitTheory)
@@ -523,7 +1115,11 @@ admin.site.register(PythonUnittestPyunitTheoreticalTest, AdminPythonUnittestPyun
 
 class AdminGuestsVisitStatistic(admin.ModelAdmin):
     model = GuestsVisitStatistic
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('guests_ip', 'guests_location', 'guests_hostname', 'visit_date', 'schools_email',
+                    'teams_email', 'lets_try_it_date', 'language', 'programming_language', 'guests_level',
+                    'lesson_time', 'test_time', 'start_lesson_time', 'start_test_time',
+                    'end_theoretical_start_practical_test_time', 'end_test_time', 'theoretical_test_result',
+                    'practical_test_result', 'register_date', 'statistic_date')
 
 
 admin.site.register(GuestsVisitStatistic, AdminGuestsVisitStatistic)
@@ -531,7 +1127,8 @@ admin.site.register(GuestsVisitStatistic, AdminGuestsVisitStatistic)
 
 class AdminJooTipsSiteErrorsStatistic(admin.ModelAdmin):
     model = JooTipsSiteErrorsStatistic
-    list_display = [field.name for field in model._meta.get_fields()]
+    list_display = ('guests_ip', 'guests_location', 'guests_hostname',
+                    'error_400', 'error_403', 'error_404', 'error_500', 'record_date')
 
 
 admin.site.register(JooTipsSiteErrorsStatistic, AdminJooTipsSiteErrorsStatistic)

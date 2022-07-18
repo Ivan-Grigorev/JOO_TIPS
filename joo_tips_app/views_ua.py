@@ -125,9 +125,9 @@ tests_results = []
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theoretical_test_ua(request):
     global question_theme_ua, theoretical_test_counter, right_answers, tests_results
-    question_theme_ua = random.choice([PythonBasicsTheoreticalTest.objects.all().filter(card_id_id=guests_card_1),
-                                       PythonVariablesTheoreticalTest.objects.all().filter(card_id_id=guests_card_2),
-                                       PythonDataTypesTheoreticalTest.objects.all().filter(card_id_id=guests_card_3)])
+    question_theme_ua = random.choice([PythonBasicsTheoreticalTest.objects.all().filter(card_id=guests_card_1),
+                                       PythonVariablesTheoreticalTest.objects.all().filter(card_id=guests_card_2),
+                                       PythonDataTypesTheoreticalTest.objects.all().filter(card_id=guests_card_3)])
     right_answer = question_theme_ua.values_list('level_1_slot_1_right_answer_ua', flat=True)
     right_answers.append(right_answer[0])
     wrong_answer = question_theme_ua.values_list('level_1_slot_2_wrong_answer_ua', flat=True)
@@ -161,7 +161,7 @@ def python_practical_test_ua(request):
     global practical_test_counter, right_answers
     folder = question_theme_ua.values_list('theme', flat=True)[0]
     theme = folder
-    card = question_theme_ua.values_list('card_id_id', flat=True)[0]
+    card = question_theme_ua.values_list('card_id', flat=True)[0]
     test_number = random.choice([1, 2])
     test_file = importlib.import_module(f"joo_tips_app.practical_tests.python.{folder}.{theme}_{card}_{test_number}")
     total_tests = 6
