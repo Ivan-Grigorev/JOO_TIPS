@@ -8,7 +8,7 @@ class PythonBasicsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_basics_theory'
@@ -59,8 +59,10 @@ class PythonBasicsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_basics_theoretical_test'
@@ -73,7 +75,7 @@ class PythonVariablesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_variables_theory'
@@ -124,8 +126,10 @@ class PythonVariablesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_variables_theoretical_test'
@@ -138,7 +142,7 @@ class PythonDataTypesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_data_types_theory'
@@ -189,8 +193,10 @@ class PythonDataTypesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_data_types_theoretical_test'
@@ -203,7 +209,7 @@ class PythonExceptionsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_exceptions_theory'
@@ -254,8 +260,10 @@ class PythonExceptionsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_exceptions_theoretical_test'
@@ -268,7 +276,7 @@ class PythonStringsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_strings_theory'
@@ -319,8 +327,10 @@ class PythonStringsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_strings_theoretical_test'
@@ -333,7 +343,7 @@ class PythonListsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_lists_theory'
@@ -384,8 +394,10 @@ class PythonListsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_lists_theoretical_test'
@@ -398,7 +410,7 @@ class PythonTuplesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_tuples_theory'
@@ -449,8 +461,10 @@ class PythonTuplesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_tuples_theoretical_test'
@@ -463,7 +477,7 @@ class PythonDictionariesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_dictionaries_theory'
@@ -514,8 +528,10 @@ class PythonDictionariesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_dictionaries_theoretical_test'
@@ -528,7 +544,7 @@ class PythonSetsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_sets_theory'
@@ -579,8 +595,10 @@ class PythonSetsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_sets_theoretical_test'
@@ -593,7 +611,7 @@ class PythonArraysRelatedListsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_arrays_related_lists_theory'
@@ -644,8 +662,10 @@ class PythonArraysRelatedListsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_arrays_related_lists_theoretical_test'
@@ -658,7 +678,7 @@ class PythonStacsQueuesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_stacs_queues_theory'
@@ -709,8 +729,10 @@ class PythonStacsQueuesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_stacs_queues_theoretical_test'
@@ -723,7 +745,7 @@ class PythonHashTablesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_hash_tables_theory'
@@ -774,8 +796,10 @@ class PythonHashTablesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_hash_tables_theoretical_test'
@@ -788,7 +812,7 @@ class PythonIteratorsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_iterators_theory'
@@ -839,8 +863,10 @@ class PythonIteratorsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_iterators_theoretical_test'
@@ -853,7 +879,7 @@ class PythonFilesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_files_theory'
@@ -904,8 +930,10 @@ class PythonFilesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_files_theoretical_test'
@@ -918,7 +946,7 @@ class PythonRecursionTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_recursion_theory'
@@ -969,8 +997,10 @@ class PythonRecursionTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_recursion_theoretical_test'
@@ -983,7 +1013,7 @@ class PythonSortingTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_sorting_theory'
@@ -1034,8 +1064,10 @@ class PythonSortingTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_sorting_theoretical_test'
@@ -1048,7 +1080,7 @@ class PythonFunctionsBuiltinFunctionsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_functions_builtin_functions_theory'
@@ -1099,8 +1131,10 @@ class PythonFunctionsBuiltinFunctionsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_functions_builtin_functions_theoretical_test'
@@ -1113,7 +1147,7 @@ class PythonLambdaFunctionsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_lambda_functions_theory'
@@ -1164,8 +1198,10 @@ class PythonLambdaFunctionsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_lambda_theoretical_test'
@@ -1178,7 +1214,7 @@ class PythonDecoratorsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_decorators_theory'
@@ -1229,8 +1265,10 @@ class PythonDecoratorsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_decorators_theoretical_test'
@@ -1243,7 +1281,7 @@ class PythonRegularExpressionsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_regular_expressions_theory'
@@ -1294,8 +1332,10 @@ class PythonRegularExpressionsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_regular_expressions_theoretical_test'
@@ -1308,7 +1348,7 @@ class PythonClassesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_classes_theory'
@@ -1359,8 +1399,10 @@ class PythonClassesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_classes_theoretical_test'
@@ -1373,7 +1415,7 @@ class PythonMagicMethodsTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_magic_methods_theory'
@@ -1424,8 +1466,10 @@ class PythonMagicMethodsTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_magic_methods_theoretical_test'
@@ -1438,7 +1482,7 @@ class PythonModulesTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_modules_theory'
@@ -1489,8 +1533,10 @@ class PythonModulesTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_modules_theoretical_test'
@@ -1503,7 +1549,7 @@ class PythonPipPypiTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_pip_pypi_theory'
@@ -1554,8 +1600,10 @@ class PythonPipPypiTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_pip_pypi_theoretical_test'
@@ -1568,7 +1616,7 @@ class PythonBasicGitTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_basic_git_theory'
@@ -1619,8 +1667,10 @@ class PythonBasicGitTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_basic_git_theoretical_test'
@@ -1633,7 +1683,7 @@ class PythonGithubGitlabBitbucketTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_github_gitlab_bitbucket_theory'
@@ -1684,8 +1734,10 @@ class PythonGithubGitlabBitbucketTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_github_gitlab_bitbucket_theoretical_test'
@@ -1698,7 +1750,7 @@ class PythonFlaskTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_flask_theory'
@@ -1749,8 +1801,10 @@ class PythonFlaskTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_flask_theoretical_test'
@@ -1763,7 +1817,7 @@ class PythonPyramidTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_pyramid_theory'
@@ -1814,8 +1868,10 @@ class PythonPyramidTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_pyramid_theoretical_test'
@@ -1828,7 +1884,7 @@ class PythonDjangoTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_django_theory'
@@ -1879,8 +1935,10 @@ class PythonDjangoTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_django_theoretical_test'
@@ -1893,7 +1951,7 @@ class PythonGeventTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_gevent_theory'
@@ -1944,8 +2002,10 @@ class PythonGeventTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_gevent_theoretical_test'
@@ -1958,7 +2018,7 @@ class PythonSanicTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_sanic_theory'
@@ -2009,8 +2069,10 @@ class PythonSanicTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_sanic_theoretical_test'
@@ -2023,7 +2085,7 @@ class PythonTornadoTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_tornado_theory'
@@ -2074,8 +2136,10 @@ class PythonTornadoTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_tornado_theoretical_test'
@@ -2088,7 +2152,7 @@ class PythonAiohttpTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_aiohttp_theory'
@@ -2139,8 +2203,10 @@ class PythonAiohttpTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_aiohttp_theoretical_test'
@@ -2153,7 +2219,7 @@ class PythonNoseTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_nose_theory'
@@ -2204,8 +2270,10 @@ class PythonNoseTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_nose_theoretical_test'
@@ -2218,7 +2286,7 @@ class PythonPytestTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_pytest_theory'
@@ -2269,8 +2337,10 @@ class PythonPytestTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_pytest_theoretical_test'
@@ -2283,7 +2353,7 @@ class PythonDoctestTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_doctest_theory'
@@ -2334,8 +2404,10 @@ class PythonDoctestTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_doctest_theoretical_test'
@@ -2348,7 +2420,7 @@ class PythonUnittestPyunitTheory(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.text or self.text_ua
+        return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
         db_table = 'python_unittest_pyunit_theory'
@@ -2399,8 +2471,10 @@ class PythonUnittestPyunitTheoreticalTest(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.question or self.level_1_slot_1_right_answer or self.level_1_slot_2_wrong_answer or \
-               self.question_ua or self.level_1_slot_1_right_answer_ua or self.level_1_slot_2_wrong_answer_ua
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'python_unittest_pyunit_theoretical_test'
@@ -2412,12 +2486,12 @@ class GuestsVisitStatistic(models.Model):
     guests_hostname = models.TextField(null=True)
     visit_date = models.TextField(null=True)
 
-    schools_email = models.TextField(null=True)
-    teams_email = models.TextField(null=True)
-
     lets_try_it_date = models.TextField(null=True)
     language = models.TextField(null=True)
     programming_language = models.TextField(null=True)
+
+    schools_email = models.TextField(null=True)
+    teams_email = models.TextField(null=True)
 
     guests_level = models.TextField(null=True)
     lesson_time = models.TextField(null=True)
@@ -2434,7 +2508,10 @@ class GuestsVisitStatistic(models.Model):
     statistic_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.guests_location  # get_all_fields()
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'guests_visit_statistic'
@@ -2451,14 +2528,10 @@ class JooTipsSiteErrorsStatistic(models.Model):
     record_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.guests_ip\
-               or self.guests_location\
-               or self.guests_hostname\
-               or self.error_400\
-               or self.error_403\
-               or self.error_404\
-               or self.error_500\
-               or self.record_date
+        field_values = []
+        for field in self._meta.get_fields():
+            field_values.append(str(getattr(self, field.name, '')))
+        return ' '.join(field_values)
 
     class Meta:
         db_table = 'joo_tips_site_errors_statistic'

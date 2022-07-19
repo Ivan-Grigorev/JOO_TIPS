@@ -17,7 +17,7 @@ import ipinfo
 
 class HomePageUa(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'ua/homepage.html'
+    template_name = 'ua/homepage_ua.html'
 
     def get(self, request, *args, **kwargs):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -25,41 +25,121 @@ class HomePageUa(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                                      if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     visit_date=datetime.now())
-        # record.save()
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            visit_date=datetime.now())
+        record.save()
         return render(request, template_name='ua/homepage_ua.html')
 
     def post(self, request, *args, **kwargs):
-        # record = self.model(schools_email=request.POST.get('school-email'),
-        #                     teams_email=request.POST.get('team-email'))
-        # record.save()
+        record = self.model(schools_email=request.POST.get('school-email'),
+                            teams_email=request.POST.get('team-email'))
+        record.save()
         return render(request, template_name='ua/homepage_ua.html')
 
 
 class ProgrammingLanguageChoiceUa(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'web_site_in_process.html'
+    template_name = 'ua/web_site_in_process_ua.html'
 
     def get(self, request, *args, **kwargs):
-        # record = self.model(lets_try_it_date=datetime.now(),
-        #                     language='UKR')  # programming_language=
-        # record.save()
+        record = self.model(lets_try_it_date=datetime.now(),
+                            language='Ukrainian')
+        record.save()
         return render(request, template_name='ua/web_site_in_process_ua.html')
 
 
-class ThemesTimeGuestUa(TemplateView):
+class PythonLessonTestUa(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'web_site_in_process.html'
+    template_name = 'ua/web_site_in_process_ua.html'
 
     def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='Python')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class JavaScriptLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='JavaScript')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class JavaLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='Java')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class SwiftLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='Swift')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class CsharpLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='C#')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class CplusplusLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='C++')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class GolangLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='Golang')
+        record.save()
+        return render(request, template_name='ua/web_site_in_process_ua.html')
+
+
+class PhpLessonTestUa(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'ua/web_site_in_process_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='Ukrainian',
+                            programming_language='PHP')
+        record.save()
         return render(request, template_name='ua/web_site_in_process_ua.html')
 
 

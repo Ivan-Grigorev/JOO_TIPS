@@ -51,7 +51,7 @@
                         <a href="#for-schools">ДЛЯ КОМАНД</a>
                         <a href="#for-teams">ДЛЯ ШКОЛИ</a>
                     <div style="display: flex;">
-                        <button class="mobile-btn-login" onclick="location.href={% url 'log_in' %}">
+                        <button class="mobile-btn-login" onclick="location.href='{% url 'log_in_ua' %}'">
                             ВХІД
                         </button>
                         <select class="mobile-language" onchange="this.options[this.selectedIndex].value &&
@@ -203,18 +203,24 @@
             <div class="for-schools"><a id="for-schools"></a>
                 <label class="for-schools-title">ДЛЯ ШКОЛИ</label>
                 <img class="for-schools-image" src="{% static 'images/for_schools.svg' %}">
-                <div class="email-input">
-                    <input placeholder="Введіть E-MAIL">
-                    <button class="btn-join">ПРИЄДНАТИСЯ</button>
-                </div>
+                <form method="POST">
+                {% csrf_token %}
+                    <div class="email-input">
+                        <input placeholder="Введіть E-MAIL" type="email" name="school-email">
+                        <button class="btn-join">ПРИЄДНАТИСЯ</button>
+                    </div>
+                </form>
             </div>
             <div class="for-teams"><a id="for-teams"></a>
                 <label class="for-teams-title">ДЛЯ КОМАНДИ</label>
                 <img class="for-teams-image" src="{% static 'images/for_teams.svg' %}">
-                <div class="email-input">
-                    <input placeholder="Введіть E-MAIL">
-                    <button class="btn-join">ПРИЄДНАТИСЯ</button>
-                </div>
+                <form method="POST">
+                {% csrf_token %}
+                    <div class="email-input">
+                        <input placeholder="Введіть E-MAIL" type="email" name="team-email" required>
+                        <button class="btn-join">ПРИЄДНАТИСЯ</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -236,7 +242,9 @@
                 <a href="#for-schools">ДЛЯ ШКОЛИ</a>
             </nav>
             <div class="social-links">
-                <img src="{% static 'images/linkedin_logo.svg' %}" width="50">
+                <a href="https://www.linkedin.com/company/joo-tips/about/">
+                    <img src="{% static 'images/linkedin_logo.svg' %}" width="50">
+                </a>
             </div>
         </div>
         <div class="copyright">

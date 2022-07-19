@@ -1115,7 +1115,7 @@ admin.site.register(PythonUnittestPyunitTheoreticalTest, AdminPythonUnittestPyun
 
 class AdminGuestsVisitStatistic(admin.ModelAdmin):
     model = GuestsVisitStatistic
-    list_display = ('guests_ip', 'guests_location', 'guests_hostname', 'visit_date', 'schools_email',
+    list_display = ('id', 'guests_ip', 'guests_location', 'guests_hostname', 'visit_date', 'schools_email',
                     'teams_email', 'lets_try_it_date', 'language', 'programming_language', 'guests_level',
                     'lesson_time', 'test_time', 'start_lesson_time', 'start_test_time',
                     'end_theoretical_start_practical_test_time', 'end_test_time', 'theoretical_test_result',
@@ -1127,7 +1127,7 @@ admin.site.register(GuestsVisitStatistic, AdminGuestsVisitStatistic)
 
 class AdminJooTipsSiteErrorsStatistic(admin.ModelAdmin):
     model = JooTipsSiteErrorsStatistic
-    list_display = ('guests_ip', 'guests_location', 'guests_hostname',
+    list_display = ('id', 'guests_ip', 'guests_location', 'guests_hostname',
                     'error_400', 'error_403', 'error_404', 'error_500', 'record_date')
 
 

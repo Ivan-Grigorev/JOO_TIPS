@@ -166,7 +166,7 @@
                 <div class="card-php">
                     <img class="php-logo-image" src="{% static 'images/php_logo.svg' %}">
                     <label>PHP</label>
-                    <a href="">Learn &#8594</a>
+                    <a href="php/themes-time-guest/">Learn &#8594</a>
                 </div>
             </div>
         </div>
@@ -201,18 +201,24 @@
             <div class="for-schools"><a id="for-schools"></a>
                 <label class="for-schools-title">FOR SCHOOLS</label>
                 <img class="for-schools-image" src="{% static 'images/for_schools.svg' %}">
-                <div class="email-input">
-                    <input name="school-email" placeholder="Enter E-MAIL" type="email" required>
-                    <button class="btn-join">JOIN</button>
-                </div>
+                <form method="POST">
+                {% csrf_token %}
+                    <div class="email-input">
+                        <input name="school-email" placeholder="Enter E-MAIL" type="email" required>
+                        <button class="btn-join" type="submit">JOIN</button>
+                    </div>
+                </form>
             </div>
             <div class="for-teams"><a id="for-teams"></a>
                 <label class="for-teams-title">FOR TEAMS</label>
                 <img class="for-teams-image" src="{% static 'images/for_teams.svg' %}">
-                <div class="email-input">
-                    <input name="team-email" placeholder="Enter E-MAIL" type="email" required>
-                    <button class="btn-join">JOIN</button>
-                </div>
+                <form method="POST">
+                {% csrf_token %}
+                    <div class="email-input">
+                        <input name="team-email" placeholder="Enter E-MAIL" type="email" required>
+                        <button class="btn-join" type="submit">JOIN</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -234,7 +240,9 @@
                 <a href="#for-schools">FOR SCHOOLS</a>
             </nav>
             <div class="social-links">
-                <a href=""><img src="{% static 'images/linkedin_logo.svg' %}" width="50"></a>
+                <a href="https://www.linkedin.com/company/joo-tips/about/">
+                    <img src="{% static 'images/linkedin_logo.svg' %}" width="50">
+                </a>
             </div>
         </div>
         <div class="copyright">

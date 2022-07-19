@@ -112,9 +112,9 @@ body {
 }
 
 .dropdown-slide {
-    margin-left: -180px;
+    margin-left: -210px;
 
-    width: 250px;
+    width: 280px;
     height: 0px;
 
     overflow: hidden;
@@ -125,10 +125,8 @@ body {
 
     z-index: 1000;
 
-    background: rgba(252, 252, 237, 0.37);
-    backdrop-filter: blur(55px);
-    -webkit-backdrop-filter: blur(55px);
-    border-radius: 6px;
+    background: #1A4579;
+    border-radius: 10px;
 }
 
 .dropdown-slide a {
@@ -154,12 +152,12 @@ body {
     margin-top: 50px;
     margin-left: 20px;
 
-    width: 80px;
+    width: 90px;
     height: 40px;
 
     display: block;
 
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     color: #FCBC7D;
 
@@ -170,9 +168,9 @@ body {
 
 .mobile-language {
     margin-top: 45px;
-    margin-left: 65px;
+    margin-left: 45px;
 
-    width: 100px;
+    width: 120px;
     height: 50px;
 
     display: block;
@@ -266,7 +264,7 @@ h4 {
 
 .cube-2 {
     margin-top: -110px;
-    margin-left: 250px;
+    margin-left: 248px;
 
     display: block;
 }
@@ -435,6 +433,9 @@ h4 {
 
 .card-python:hover, .card-javascript:hover, .card-java:hover, .card-swift:hover,
  .card-csharp:hover, .card-cplusplus:hover, .card-golang:hover, .card-php:hover {
+    width: 165px;
+    height: 195px;
+
     border: 2px solid #4CA2E6;
 }
 
@@ -749,6 +750,280 @@ footer {
 }
 
 
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    /* ---------- /Card Main/ ---------- */
+    .card-main {
+        height: 800px;
+
+        background: url('/static/images/card_main_background.svg');
+        background-repeat: no-repeat;
+    }
+
+    .title {
+        margin: 0;
+
+        width: 270px;
+        height: 130px;
+    }
+
+    .tips-header {
+        margin-left: 190px;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .btn-login {
+        display: none;
+    }
+
+    .language {
+        display: none;
+    }
+
+    .mobile-navbar {
+        margin: 30px 0 0 400px;
+    }
+
+    .cube-1 {
+        display: none;
+    }
+
+    .cube-2 {
+        margin: 300px 0 0 -15px;
+
+        display: block;
+    }
+
+    .joo-background {
+        display: none;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .it-profession {
+        margin: 0 0 0 50px;
+
+        width: 600px;
+    }
+
+    h1 {
+        font-weight: 450;
+        font-size: 55px;
+    }
+
+    h4 {
+        margin-top: -35px;
+
+        font-weight: 350;
+        font-size: 40px;
+    }
+
+    .text-main {
+        margin-top: -20px;
+        margin-bottom: 50px;
+
+        width: 650px;
+    }
+
+    .text-main:lang(uk) {
+        font-size: 22px;
+    }
+
+    .btn-try-it-1 {
+        margin: 0;
+
+        width: 200px;
+        height: 60px;
+
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .btn-try-it-1:hover {
+        color: #FCBC7D;
+
+        background: transparent;
+    }
+
+    .tips-background {
+        display: none;
+    }
+
+    .vertical-line-1, .vertical-line-2 {
+        margin-top: -35px;
+        margin-left: 45%;
+    }
+
+    /* ---------- /Card Goals/ ---------- */
+
+    .card-goals {
+        height: 600px;
+    }
+
+    .goals-title {
+        padding-top: 70px;
+    }
+
+    .lamp-brain, .lamp-gear, .lamp-target {
+        margin: 20px auto 0 auto;
+    }
+
+    .lamp-brain:lang(uk), .lamp-gear:lang(uk), .lamp-target:lang(uk) {
+        font-size: 22px;
+    }
+
+    /* ---------- /Card Who we are/ ---------- */
+    .card-who-we-are {
+        height: 800px;
+
+        display: flex;
+
+        background: url('/static/images/card_who_we_are_background.svg');
+        background-repeat: no-repeat;
+    }
+
+    .who-we-are-title {
+        margin: -30px 0 0 330px;
+
+        padding: 0;
+
+        height: 50px;
+
+        position: absolute;
+    }
+
+    .who-we-are-underline {
+        margin: 20px 0 0 230px;
+
+        display: block;
+
+        position: absolute;
+    }
+
+    .who-we-are-image {
+        margin: 180px 0 0 10px;
+
+        height: 320px;
+
+        display: block;
+    }
+
+    .mobile-who-we-are {
+        display: none;
+    }
+
+    .who-we-are-text {
+        margin: 140px 0 0 60px;
+
+        padding: 0;
+
+        width: 550px;
+        height: 410px;
+
+        text-align: left;
+
+        position: relative;
+
+        display: grid;
+
+        font-size: 22px;
+        font-weight: 300;
+
+        background: none;
+    }
+
+    .who-we-are-text:lang(uk) {
+        margin-top: 130px;
+
+        padding: 0;
+
+        font-size: 20px;
+    }
+
+    /* ---------- /Card Programming languages/ ---------- */
+
+    .card-languages {
+        height: 650px;
+    }
+
+    .languages-title {
+        margin-top: -30px;
+
+        padding: 0;
+    }
+
+    .grid-2 {
+        right: 0;
+        display: block;
+
+        position: absolute;
+    }
+
+    .cards-row {
+        display: grid;
+    }
+
+    .card-python, .card-javascript, .card-java, .card-swift {
+        margin: -120px 10px 0 20px;
+    }
+
+    .card-csharp, .card-cplusplus, .card-golang, .card-php {
+        margin: -80px 10px 0 20px;
+    }
+
+    /* ---------- /Card For teams for schools/ ---------- */
+
+    .for-teams {
+        margin-top: 30px;
+    }
+
+    .for-teams-title {
+        margin-top: 52px;
+        margin-bottom: 22px;
+    }
+
+    .for-teams-title:lang(uk) {
+        margin-top: 45px;
+        margin-bottom: 25px;
+    }
+
+    /* ---------- /Footer/ ---------- */
+    footer {
+        height: 350px;
+    }
+
+    .footer-title {
+        margin: 50px 0 0 -20px;
+
+        width: 450px;
+        height: 180px;
+
+        border-right: 2px solid #244267;
+        border-bottom: none;
+    }
+
+    .footer-navbar {
+        margin: 40px auto 0 auto;
+
+        width: 550px;
+        height: 100px;
+
+        display: grid;
+    }
+
+    .social-links {
+        width: 400px;
+        height: 180px;
+
+        border-left: 2px solid #244267;
+    }
+}
+
+
 @media screen and (min-width: 1024px) {
     /* ---------- /Card Main/ ---------- */
     .card-main {
@@ -1045,6 +1320,12 @@ footer {
         font-size: 25px;
     }
 
+    .card-python:hover, .card-javascript:hover, .card-java:hover, .card-swift:hover,
+     .card-csharp:hover, .card-cplusplus:hover, .card-golang:hover, .card-php:hover {
+        width: 270px;
+        height: 285px;
+    }
+
     .card-csharp, .card-cplusplus, .card-golang, .card-php {
         margin-top: -80px;
         margin-bottom: 150px;
@@ -1302,277 +1583,3 @@ footer {
         border-left: 2px solid #244267;
     }
 }
-
-@media screen and (min-width: 750px) and (max-width: 1024px) {
-    /* ---------- /Card Main/ ---------- */
-    .card-main {
-        height: 800px;
-
-        background: url('/static/images/card_main_background.svg');
-        background-repeat: no-repeat;
-    }
-
-    .title {
-        margin: 0;
-
-        width: 270px;
-        height: 130px;
-    }
-
-    .tips-header {
-        margin-left: 190px;
-    }
-
-    .navbar {
-        display: none;
-    }
-
-    .btn-login {
-        display: none;
-    }
-
-    .language {
-        display: none;
-    }
-
-    .mobile-navbar {
-        margin: 30px 0 0 400px;
-    }
-
-    .cube-1 {
-        display: none;
-    }
-
-    .cube-2 {
-        margin: 300px 0 0 -15px;
-
-        display: block;
-    }
-
-    .joo-background {
-        display: none;
-    }
-
-    .row {
-        display: flex;
-    }
-
-    .it-profession {
-        margin: 0 0 0 50px;
-
-        width: 600px;
-    }
-
-    h1 {
-        font-weight: 450;
-        font-size: 55px;
-    }
-
-    h4 {
-        margin-top: -35px;
-
-        font-weight: 350;
-        font-size: 40px;
-    }
-
-    .text-main {
-        margin-top: -20px;
-        margin-bottom: 50px;
-
-        width: 650px;
-    }
-
-    .text-main:lang(uk) {
-        font-size: 22px;
-    }
-
-    .btn-try-it-1 {
-        margin: 0;
-
-        width: 200px;
-        height: 60px;
-
-        font-weight: 700;
-        font-size: 16px;
-    }
-
-    .btn-try-it-1:hover {
-        color: #FCBC7D;
-
-        background: transparent;
-    }
-
-    .tips-background {
-        display: none;
-    }
-
-    .vertical-line-1, .vertical-line-2 {
-        margin-top: -35px;
-        margin-left: 45%;
-    }
-
-    /* ---------- /Card Goals/ ---------- */
-
-    .card-goals {
-        height: 600px;
-    }
-
-    .goals-title {
-        padding-top: 70px;
-    }
-
-    .lamp-brain, .lamp-gear, .lamp-target {
-        margin: 20px auto 0 auto;
-    }
-
-    .lamp-brain:lang(uk), .lamp-gear:lang(uk), .lamp-target:lang(uk) {
-        font-size: 22px;
-    }
-
-    /* ---------- /Card Who we are/ ---------- */
-    .card-who-we-are {
-        height: 800px;
-
-        display: flex;
-
-        background: url('/static/images/card_who_we_are_background.svg');
-        background-repeat: no-repeat;
-    }
-
-    .who-we-are-title {
-        margin: -30px 0 0 330px;
-
-        padding: 0;
-
-        height: 50px;
-
-        position: absolute;
-    }
-
-    .who-we-are-underline {
-        margin: 20px 0 0 230px;
-
-        display: block;
-
-        position: absolute;
-    }
-
-    .who-we-are-image {
-        margin: 180px 0 0 10px;
-
-        height: 320px;
-
-        display: block;
-    }
-
-    .mobile-who-we-are {
-        display: none;
-    }
-
-    .who-we-are-text {
-        margin: 140px 0 0 60px;
-
-        padding: 0;
-
-        width: 550px;
-        height: 410px;
-
-        text-align: left;
-
-        position: relative;
-
-        display: grid;
-
-        font-size: 22px;
-        font-weight: 300;
-
-        background: none;
-    }
-
-    .who-we-are-text:lang(uk) {
-        margin-top: 130px;
-
-        padding: 0;
-
-        font-size: 20px;
-    }
-
-    /* ---------- /Card Programming languages/ ---------- */
-
-    .card-languages {
-        height: 650px;
-    }
-
-    .languages-title {
-        margin-top: -30px;
-
-        padding: 0;
-    }
-
-    .grid-2 {
-        right: 0;
-        display: block;
-
-        position: absolute;
-    }
-
-    .cards-row {
-        display: grid;
-    }
-
-    .card-python, .card-javascript, .card-java, .card-swift {
-        margin: -120px 10px 0 20px;
-    }
-
-    .card-csharp, .card-cplusplus, .card-golang, .card-php {
-        margin: -80px 10px 0 20px;
-    }
-
-    /* ---------- /Card For teams for schools/ ---------- */
-
-    .for-teams {
-        margin-top: 30px;
-    }
-
-    .for-teams-title {
-        margin-top: 52px;
-        margin-bottom: 22px;
-    }
-
-    .for-teams-title:lang(uk) {
-        margin-top: 45px;
-        margin-bottom: 25px;
-    }
-
-    /* ---------- /Footer/ ---------- */
-    footer {
-        height: 350px;
-    }
-
-    .footer-title {
-        margin: 50px 0 0 -20px;
-
-        width: 450px;
-        height: 180px;
-
-        border-right: 2px solid #244267;
-        border-bottom: none;
-    }
-
-    .footer-navbar {
-        margin: 40px auto 0 auto;
-
-        width: 550px;
-        height: 100px;
-
-        display: grid;
-    }
-
-    .social-links {
-        width: 400px;
-        height: 180px;
-
-        border-left: 2px solid #244267;
-    }
-}
-

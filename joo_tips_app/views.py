@@ -5,7 +5,6 @@ from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
 from .models import *
@@ -26,22 +25,22 @@ class HomePage(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                                      if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     visit_date=datetime.now())
-        # record.save()
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                                             if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            visit_date=datetime.now())
+        record.save()
         return render(request, template_name='homepage.html')
 
     def post(self, request, *args, **kwargs):
-        # record = self.model(schools_email=request.POST.get('school-email'),
-        #                     teams_email=request.POST.get('team-email'))
-        # record.save()
+        record = self.model(schools_email=request.POST.get('school-email'),
+                            teams_email=request.POST.get('team-email'))
+        record.save()
         return render(request, template_name='homepage.html')
 
 
@@ -50,17 +49,97 @@ class ProgrammingLanguageChoice(TemplateView):
     template_name = 'web_site_in_process.html'
 
     def get(self, request, *args, **kwargs):
-        # record = self.model(lets_try_it_date=datetime.now(),
-        #                     language='EN')  # programming_language=
-        # record.save()
+        record = self.model(lets_try_it_date=datetime.now(),
+                            language='English')
+        record.save()
         return render(request, template_name='web_site_in_process.html')
 
 
-class ThemesTimeGuest(TemplateView):
+class PythonLessonTest(TemplateView):
     model = GuestsVisitStatistic
     template_name = 'web_site_in_process.html'
 
     def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='Python')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class JavaScriptLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='JavaScript')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class JavaLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='Java')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class SwiftLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='Swift')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class CsharpLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='C#')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class CplusplusLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='C++')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class GolangLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='Golang')
+        record.save()
+        return render(request, template_name='web_site_in_process.html')
+
+
+class PhpLessonTest(TemplateView):
+    model = GuestsVisitStatistic
+    template_name = 'web_site_in_process.html'
+
+    def get(self, request, *args, **kwargs):
+        record = self.model(language='English',
+                            programming_language='PHP')
+        record.save()
         return render(request, template_name='web_site_in_process.html')
 
 
@@ -216,7 +295,7 @@ class RegisterView(TemplateView):
                                             email=request.POST.get('email'),
                                             password=request.POST.get('password'))
             record = self.model(register_date=datetime.now())
-            # record.save()
+            record.save()
             login(request, user)
             return redirect('users_homepage')
         return render(request, template_name='web_site_in_process.html')  # register.html
