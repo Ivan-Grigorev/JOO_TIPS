@@ -31,9 +31,7 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.0.115']
-# ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
-
+ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
 
 # Application definition
 
@@ -130,9 +128,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-# LOGIN settings
-
-LOGIN_URL = 'log_in'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -141,4 +136,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CSRF settings
 
-# CSRF_TRUSTED_ORIGINS = ['https://*.joo.tips', 'https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.joo.tips', 'https://*.127.0.0.1']
