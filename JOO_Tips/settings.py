@@ -29,9 +29,10 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
+# ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
+ALLOWED_HOSTS = ['192.168.1.46']
 
 # Application definition
 
@@ -136,4 +137,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CSRF settings
 
-CSRF_TRUSTED_ORIGINS = ['https://*.joo.tips', 'https://*.127.0.0.1']
+# CSRF_TRUSTED_ORIGINS = ['https://*.joo.tips', 'https://*.127.0.0.1']

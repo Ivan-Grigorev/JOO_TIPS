@@ -10,59 +10,81 @@
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
 <body>
-<form method="POST">
-    {% csrf_token %}
-    <div class="card-1">
+    <header>
         <div class="title">
-            <p>My account</p>
-        </div>
-        <div class="name">
-            <input name="username" placeholder="Name" required>
-        </div>
-<!--        <div class="e-mail">-->
-<!--            <input name="e-mail" placeholder="E-mail">-->
-<!--        </div>-->
-        <div class="password">
-            <input name="password" type="password" placeholder="Password" required>
-        </div>
-        <div class="message">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        </div>
-        <div class="row">
-            <div>
-                <button class="btn-login" type="submit">Log in</button>
+            <div class="joo-header">
+                JOO
             </div>
-            <div>
-                <button class="btn-signup" onclick="showMessage()">Sign up</button>
+            <div class="tips-header">
+                TIPS
             </div>
         </div>
-        <div class="card-2">
-            <div class="container">
-                <button class="btn-social">Log in with Facebook</button>
+    </header>
+    <h1><span>Log In</span>Sign Up</h1>
+    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+    <label for="reg-log"></label>
+    <div class="card-3d-wrap">
+        <div class="card-3d-wrapper">
+            <div class="card-front">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="card-title">
+                        <p>Log in</p>
+                    </div>
+                    <div class="name">
+                        <img class="user-image" src="{% static 'images/login_user.svg' %}">
+                        <input name="username" placeholder="Name" required>
+                    </div>
+                    <div class="password">
+                        <img class="user-image" src="{% static 'images/login_lock_open.svg' %}">
+                        <input name="password" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="message">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                    <button class="btn-login" type="submit">
+                        Log in
+                    </button>
+                </form>
             </div>
-            <div>
-                <button class="btn-social">Log in with Google</button>
+            <div class="card-back">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="card-title">
+                        <p>Registration</p>
+                    </div>
+                    <div class="name">
+                        <img class="user-image" src="{% static 'images/login_user.svg' %}">
+                        <input name="username" placeholder="Name" minlength="3" disabled>
+                    </div>
+                    <div class="e-mail">
+                        <img class="email-image" src="{% static 'images/login_at.svg' %}">
+                        <input name="email" type="email" placeholder="E-mail" disabled>
+                    </div>
+                    <div class="password">
+                        <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
+                        <input name="password" id="password" onkeyup="check();" placeholder="Password"
+                               min="6" maxlength="30" disabled>
+                    </div>
+                    <div class="password">
+                        <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
+                        <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Confirm password"
+                               min="6" disabled>
+                    </div>
+                    <div class="message" id="message">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    <div>
+                        <button class="btn-signup" onclick="showMessage()">Sign up</button>
+                    </div>
+                </form>
             </div>
-            <div>
-                <button class="btn-social">Log in with Apple</button>
-            </div>
-            <div>
-                <button class="btn-social">Corporate log in</button>
-            </div>
-        </div>
-        <div class="not-now">
-            <a href="/" style="color: #DDDDDD;">Not now</a>
         </div>
     </div>
-</form>
-<script type="text/javascript">
-  function showMessage(){
-    if (confirm("Hello dear Guest,\nFor get possibility to register on our website you need to pass your first test.\n\nLet`s try it?")) {
-      location.href = 'http://192.168.0.115:8000/programing-language-choice/';
-    }
-  }
-</script>
+<script src="{% static 'js/login_message.js' %}"></script>
 </body>
 </html>

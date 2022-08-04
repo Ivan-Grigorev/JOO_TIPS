@@ -10,58 +10,50 @@
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
 </head>
 <body>
-<form method="POST">
-    {% csrf_token %}
-    <div class="card-1">
+    <header>
         <div class="title">
-            <p>Register page</p>
+            <div class="joo-header">
+                JOO
+            </div>
+            <div class="tips-header">
+                TIPS
+            </div>
         </div>
-        <div class="name">
-            <input name="username" placeholder="Name" minlength="3" required>
-        </div>
-        <div class="e-mail">
-            <input name="email" type="email" placeholder="E-mail" required>
-        </div>
-        <div class="password">
-            <input name="password" id="password" onkeyup="check();" placeholder="Password"
-                   min="6" maxlength="30" required>
-        </div>
-        <div class="password">
-            <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Confirm password"
-                   min="6" required>
+    </header>
+    <div class="card-main">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card-main-title">
+                <p>Registration</p>
+            </div>
+            <div class="name">
+                <img class="user-image" src="{% static 'images/login_user.svg' %}">
+                <input name="username" placeholder="Name" minlength="3" required>
+            </div>
+            <div class="e-mail">
+                <img class="email-image" src="{% static 'images/login_at.svg' %}">
+                <input name="email" type="email" placeholder="E-mail" required>
+            </div>
+            <div class="password">
+                <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
+                <input name="password" id="password" onkeyup="check();" placeholder="Password"
+                       min="6" maxlength="30" required>
+            </div>
+            <div class="password">
+                <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
+                <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Confirm password"
+                       min="6" required>
+            </div>
             <div class="message" id="message">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-        </div>
-        <div class="row">
-            <div>
-                <button class="btn-login" type="submit" onclick="location.href='{% url 'log_in' %}'">Log in</button>
-            </div>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
             <div>
                 <button class="btn-signup" type="submit" id="submit" disabled>Sign up</button>
             </div>
-        </div>
-        <div class="card-2">
-            <div class="container">
-                <button class="btn-social">Sign in with Facebook</button>
-            </div>
-            <div>
-                <button class="btn-social">Sign in with Google</button>
-            </div>
-            <div>
-                <button class="btn-social">Sign in with Apple</button>
-            </div>
-            <div>
-                <button class="btn-social">Corporate sign in</button>
-            </div>
-        </div>
-        <div class="not-now">
-            <a href="/" style="color: #DDDDDD;">Not now</a>
-        </div>
+        </form>
     </div>
-</form>
 <script src="{% static 'js/check_password.js' %}"></script>
 </body>
 </html>

@@ -8,69 +8,53 @@
     <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish">
 </head>
-<script type="text/javascript">
-  var check = function() {
-    if (document.getElementById('password').value.length >= 6 &&
-      document.getElementById('password').value == document.getElementById('confirm_password').value) {
-      document.getElementById('message').innerHTML = 'Відповідність пароля!';
-      document.getElementById('submit').disabled = false;
-    } else {
-      document.getElementById('message').innerHTML = 'Пароль має містити не менше 6 символів і збігатися з підтвердженням!';
-      document.getElementById('submit').disabled = true;
-    }
-  }
-</script>
 <body>
-<form method="POST">
-    {% csrf_token %}
-    <div class="card-1">
+<header>
         <div class="title">
-            <p>Сторінка реєстрації</p>
-        </div>
-        <div class="name">
-            <input name="username" placeholder="Ім'я" minlength="3" required>
-        </div>
-        <div class="e-mail">
-            <input name="e-mail" type="email" placeholder="E-mail" required>
-        </div>
-        <div class="password">
-            <input name="password" id="password" onkeyup="check();" placeholder="Пароль"
-            min="6" maxlength="30" required>
-        </div>
-        <div class="password">
-            <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Підтвердьте пароль"
-            min="6" required>
-            <div class="message">
-                <span class="message" id="message"></span>
+            <div class="joo-header">
+                JOO
+            </div>
+            <div class="tips-header">
+                TIPS
             </div>
         </div>
-        <div class="row">
+    </header>
+    <div class="card-main">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card-main-title">
+                <p>Реєстрація</p>
+            </div>
+            <div class="name">
+                <img class="user-image" src="{% static 'images/login_user.svg' %}">
+                <input name="username" placeholder="Ім'я" minlength="3" required>
+            </div>
+            <div class="e-mail">
+                <img class="email-image" src="{% static 'images/login_at.svg' %}">
+                <input name="email" type="email" placeholder="E-mail" required>
+            </div>
+            <div class="password">
+                <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
+                <input name="password" id="password" onkeyup="check();" placeholder="Пароль"
+                       min="6" maxlength="30" required>
+            </div>
+            <div class="password">
+                <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
+                <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Підтвердьте пароль"
+                       min="6" required>
+            </div>
+            <div class="message" id="message">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
             <div>
-                <button class="btn-login" type="submit" onclick="location.href='{% url 'log_in_ua' %}'">Увійти</button>
+                <button class="btn-signup" type="submit" id="submit" disabled>Зареєструватися</button>
             </div>
-            <div>
-                <button class="btn-signup" type="submit" disabled>Зареєструватися</button>
-            </div>
-        </div>
-        <div class="card-2">
-            <div class="container">
-                <button class="btn-social">Зареєструватися через Facebook</button>
-            </div>
-            <div>
-                <button class="btn-social">Зареєструватися через Google</button>
-            </div>
-            <div>
-                <button class="btn-social">Зареєструватися через Apple</button>
-            </div>
-            <div>
-                <button class="btn-social">Корпоративна реєстрація</button>
-            </div>
-        </div>
-        <div class="not-now">
-            <a href="/" style="color: #DDDDDD;">Не зараз</a>
-        </div>
+        </form>
     </div>
-</form>
+<script src="{% static 'js/check_password_ua.js' %}"></script>
 </body>
 </html>
