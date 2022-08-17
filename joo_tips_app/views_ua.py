@@ -3,7 +3,6 @@ from django.views.decorators.cache import cache_control
 from django.views.generic import TemplateView
 
 from django.contrib.auth.models import User
-from django.contrib.auth.views import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -309,11 +308,20 @@ class LoginViewUa(TemplateView):
         user = authenticate(request, username=request.POST.get('username'),
                                      password=request.POST.get('password'))
         if user is not None:
+            if user.groups.filter(name='Pupils').exists():
+                login(request, user)
+                return redirect('pupils_homepage_ua')
+            if user.groups.filter(name='Teachers').exists():
+                login(request, user)
+                return redirect('teachers_homepage_ua')
+            if user.groups.filter(name='Mentors').exists():
+                login(request, user)
+                return redirect('mentors_homepage_ua')
             if user.groups.filter(name='Tech writers').exists():
                 login(request, user)
                 return redirect('tech_writers_page_ua')
             login(request, user)
-            return redirect('users_homepage')
+            return redirect('users_homepage_ua')
         else:
             messages.error(request, 'Username or password does not exist!')
         return render(request, template_name='ua/login_ua.html')
@@ -326,143 +334,196 @@ class LogoutViewUa(TemplateView):
         return redirect('homepage_ua')
 
 
-class TechWritersUa(LoginRequiredMixin, TemplateView):
+class UsersHomePageUa(LoginRequiredMixin, TemplateView):
     login_url = '/ua/login'
+    # model =
+    template_name = 'ua/user_ua/users_homepage_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/user_ua/users_homepage_ua.html')
+
+
+class UsersStorePageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model =
+    template_name = 'ua/user_ua/users_store_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/user_ua/users_store_ua.html')
+
+
+class PupilsHomePageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model =
+    template_name = 'ua/pupil_ua/pupils_homepage_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_homepage_ua.html')
+
+
+class PupilsEventPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/pupil_ua/pupils_event_overview_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_event_overview_ua.html')
+
+
+class PupilsExamPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/pupil_ua/pupils_exam_overview_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_exam_overview_ua.html')
+
+
+class PupilsRatingPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/pupil_ua/pupils_rating_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_rating_ua.html')
+
+
+class PupilsMentorPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/pupil_ua/pupils_mentor_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_mentor_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class PupilsPvpPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/pupil_ua/pupils_pvp_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_pvp_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class PupilsTvtPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/pupil_ua/pupils_tvt_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/pupil_ua/pupils_tvt_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class TeachersHomePageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/teacher_ua/teachers_homepage_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/teacher_ua/teachers_homepage_ua.html')
+
+
+class TeachersEventPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/teacher_ua/teachers_event_overview_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/teacher_ua/teachers_event_overview_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('option') == 'create_event':
+            return render(request, template_name='ua/teacher_ua/teachers_create_event_ua.html')
+        # return render(request, template_name='ua/teacher/teachers_event_overview_ua.html')
+
+
+class TeachersExamPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/teacher_ua/teachers_exam_overview_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/teacher_ua/teachers_exam_overview_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('option') == 'create_exam':
+            return render(request, template_name='ua/teacher_ua/teachers_create_exam_ua.html')
+        # return render(request, template_name='ua/teacher/teachers_exam_overview_ua.html')
+
+
+class TeachersRatingPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/teacher_ua/teachers_rating_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/teacher_ua/teachers_rating_ua.html')
+
+
+class TeachersMentorPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/teacher_ua/teachers_mentor_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/teacher_ua/teachers_mentor_ua.html')
+
+
+class MentorsHomePageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/mentor_ua/mentors_homepage_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/mentor_ua/mentors_homepage_ua.html')
+
+
+class MentorsInvocationPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/mentor_ua/mentors_invocation_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/mentor_ua/mentors_invocation_ua.html')
+
+
+class MentorsSessionPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/mentor_ua/mentors_session_overview_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/mentor_ua/mentors_session_overview_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('option') == 'create_session':
+            return render(request, template_name='ua/mentor_ua/mentors_create_session_ua.html')
+        # return render(request, template_name='ua/mentor/mentors_session_overview_ua.html')
+
+
+class MentorsRatingPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
+    template_name = 'ua/mentor_ua/mentors_rating_ua.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='ua/mentor_ua/mentors_rating_ua.html')
+
+
+class TechWritersPageUa(LoginRequiredMixin, TemplateView):
+    login_url = '/ua/login'
+    # model
     template_name = 'ua/tech_writers_page_ua.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, template_name='ua/tech_writers_page_ua.html')
-
-
-# class UsersHomePageUa TODO
-@login_required(login_url='log_in_ua')
-def users_homepage_ua(request):
-    return render(request, template_name='ua/python_clipboards_desk_ua.html')
-
-
-# class UsersHomePageUa TODO
-@login_required(login_url='log_in_ua')
-def users_store_ua(request):
-    return render(request, template_name='ua/users_store_ua.html')
-
-
-# class PupilsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_homepage_ua(request):
-    return render(request, template_name='ua/pupils_homepage_ua.html')
-
-
-# class PupilsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_event_ua(request):
-    return render(request, template_name='ua/pupils_event_overview_ua.html')
-
-
-# class PupilsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_exam_ua(request):
-    return render(request, template_name='ua/pupils_exam_overview_ua.html')
-
-
-# class UsersHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_rating_ua(request):
-    return render(request, template_name='ua/pupils_rating_ua.html')
-
-
-# class PupilsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_mentor_ua(request):
-    return render(request, template_name='ua/pupils_mentor_ua.html')
-
-
-# class PupilsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_pvp_ua(request):
-    return render(request, template_name='ua/pupils_pvp_ua.html')
-
-
-# class PupilsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def pupils_tvt_ua(request):
-    return render(request, template_name='ua/pupils_tvt_ua.html')
-
-
-# class TeachersHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def teachers_homepage_ua(request):
-    return render(request, template_name='ua/teachers_homepage_ua.html')
-
-
-# class TeachersHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def teachers_event_ua(request):
-    # all events overview
-    if request.method == 'POST':
-        if request.POST.get('option') == 'create_event':
-            return render(request, template_name='ua/teachers_create_event_ua.html')
-    return render(request, template_name='ua/teachers_event_overview_ua.html')
-
-
-# class TeachersHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def teachers_exam_ua(request):
-    # all exams overview
-    if request.method == 'POST':
-        if request.POST.get('option') == 'create_exam':
-            return render(request, template_name='ua/teachers_create_exam_ua.html')
-    return render(request, template_name='ua/teachers_exam_overview_ua.html')
-
-
-# class TeachersHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def teachers_rating_ua(request):
-    return render(request, template_name='ua/teachers_rating_ua.html')
-
-
-# class TeachersHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def teachers_mentor_ua(request):
-    return render(request, template_name='ua/teachers_mentor_ua.html')
-
-
-# class MentorsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def mentors_homepage_ua(request):
-    return render(request, template_name='ua/mentors_homepage_ua.html')
-
-
-# class MentorsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def mentors_invocation_ua(request):
-    return render(request, template_name='ua/mentors_invocation_ua.html')
-
-
-# class MentorsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def mentors_session_ua(request):
-    if request.method == 'POST':
-        if request.POST.get('option') == 'create_session':
-            return render(request, template_name='ua/mentors_create_session_ua.html')
-    return render(request, template_name='ua/mentors_session_overview_ua.html')
-
-
-# class MentorsHomePageUa TODO
-# @login_required(login_url='log_in_ua')
-def mentors_rating_ua(request):
-    return render(request, template_name='ua/mentors_rating_ua.html')
-
-
-# TODO
-@login_required(login_url='log_in_ua')
-def python_themes_time_ua(request):
-    if request.method == 'POST':
-        end_date = (datetime.now() + timedelta(minutes=int(request.POST.get('time')))).ctime()
-        end_date_sep = end_date.split(' ')
-        # Jan 5, 2022 15:37:25
-        timer = end_date_sep[1] + ' ' + end_date_sep[2] + ', ' + end_date_sep[4] + ' ' + end_date_sep[3]
-        users_level = request.POST.get('level')
-        text_ua = PythonDataTypesTheory.objects.values('text_ua')
-        return render(request=request, template_name='ua/python_theory_ua.html', context={'timer': timer,
-                                                                                          'text_ua': text_ua})
-    return render(request, template_name='ua/python_themes_time_ua.html')

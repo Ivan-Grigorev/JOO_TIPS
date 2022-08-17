@@ -12,32 +12,32 @@
 </head>
 <script type="text/javascript">
   function showMessageEvent(){
-    if (confirm("Шановний {{ request.user.username }}!\n'Чемпіонат' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
+    if (confirm("Шановний {{ self.user.username }}!\n'Чемпіонат' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
       location.href = 'http://192.168.0.115:8000/ua/users-store/';
     }
   }
   function showMessageExam(){
-    if (confirm("Шановний {{ request.user.username }}!\n'Іспит' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
+    if (confirm("Шановний {{ self.user.username }}!\n'Іспит' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
       location.href = 'http://192.168.0.115:8000/ua/users-store/';
     }
   }
   function showMessageRating(){
-    if (confirm("Шановний {{ request.user.username }}!\n'Рейтинг' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
+    if (confirm("Шановний {{ self.user.username }}!\n'Рейтинг' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
       location.href = 'http://192.168.0.115:8000/ua/users-store/';
     }
   }
   function showMessageMentor(){
-    if (confirm("Шановний {{ request.user.username }},\n'Наставник' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
+    if (confirm("Шановний {{ self.user.username }},\n'Наставник' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
       location.href = 'http://192.168.0.115:8000/ua/users-store/';
     }
   }
   function showMessagePvp(){
-    if (confirm("Шановний {{ request.user.username }},\n'PvP' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
+    if (confirm("Шановний {{ self.user.username }},\n'PvP' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
       location.href = 'http://192.168.0.115:8000/ua/users-store/';
     }
   }
   function showMessageTvt(){
-    if (confirm("Шановний {{ request.user.username }},\n'TvT' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
+    if (confirm("Шановний {{ self.user.username }},\n'TvT' доступний лише в платній версії.\n\nВідкрити сторінку магазину?")) {
       location.href = 'http://192.168.0.115:8000/ua/users-store/';
     }
   }
@@ -48,7 +48,7 @@
     </button>
     <div class="user">
         <img src="{% static 'images/login.png' %}" height="35" width="40" style="margin-right: 15px;">
-        {{ request.user.username }}
+        {{ self.user.username }}
     </div>
     <button class="btn-price-list" onclick="location.href='{% url 'users_store_ua' %}'">
 <!--        <i class="fa fa-industry" aria-hidden="false" style="font-size: 25px;"></i>-->

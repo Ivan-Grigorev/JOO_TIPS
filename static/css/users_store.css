@@ -1,20 +1,10 @@
 body {
-    background: linear-gradient(133.33deg, #031417 9.8%,
-        rgba(17, 63, 73, 0.718241) 99.75%,
-        rgba(69, 80, 83, 0) 100%,
-        rgba(123, 160, 168, 0.152517) 100%,
-        rgba(38, 91, 103, 0.391034) 100%);
-    background-repeat: no-repeat;
-    background-position: center 0;
-    background-attachment: fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -ms-background-size: cover;
+    margin: 0;
 
     font-family: Galatea;
     font-style: normal;
+
+    background: #163A65;
 }
 
 .card-1 {

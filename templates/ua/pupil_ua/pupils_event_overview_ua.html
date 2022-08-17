@@ -1,22 +1,22 @@
-{% extends 'ua/pupils_homepage_ua.html' %}
+{% extends 'ua/pupil_ua/pupils_homepage_ua.html' %}
 {% block content %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/pupils_exam_overview.css' %}">
+<link rel="stylesheet" href="{% static 'css/pupils_event_overview.css' %}">
 <div class="card-1">
     <div class="row">
         <div class="card-2">
             <table id="events">
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-exam">Осінній екзамен</button>
+                        <button class="btn-event">Осінній чемпіонат класу</button>
                     </td>
-                    <td>&#128308</td>
-                    <td></td>
+                    <td>&#128309</td>
+                    <td>&#128993</td>
                     <td></td>
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-exam">Весняний екзамен</button>
+                        <button class="btn-event">Весняний чемпіонат класу</button>
                     </td>
                     <td></td>
                     <td></td>
@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-exam">Зимовий екзамен</button>
+                        <button class="btn-event">Зимовий чемпіонат класу</button>
                     </td>
                     <td></td>
                     <td>&#128993</td>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <button class="btn-exam">Літній екзамен</button>
+                        <button class="btn-event">Літній чемпіонат класу</button>
                     </td>
                     <td></td>
                     <td>&#128993</td>
@@ -41,6 +41,8 @@
             </table>
         </div>
         <div class="card-3">
+            <button class="btn">ВЗЯТИ УЧАСТЬ</button>
+            <button class="btn">ВИЙТИ З ПОДІЇ</button>
             <button class="btn">СТАТИСТИКА</button>
             <button class="btn-go">ВПЕРЕД</button>
         </div>

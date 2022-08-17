@@ -23,7 +23,7 @@
     <div class="card-main">
         <form method="POST">
             {% csrf_token %}
-            <div class="card-main-title">
+            <div class="card-title">
                 <p>Registration</p>
             </div>
             <div class="name">
@@ -45,10 +45,10 @@
                        min="6" required>
             </div>
             <div class="message" id="message">
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </div>
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
             <div>
                 <button class="btn-signup" type="submit" id="submit" disabled>Sign up</button>
             </div>

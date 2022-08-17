@@ -3,7 +3,6 @@ from django.views.decorators.cache import cache_control
 from django.views.generic import TemplateView
 
 from django.contrib.auth.models import User
-from django.contrib.auth.views import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -27,14 +26,14 @@ class HomePage(TemplateView):
         else:
             ip = request.META.get('REMOTE_ADDR')
         http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        record = self.model(guests_ip=ip,
-                            guests_location=[http_data.city
-                                             if 'city' in http_data.__dict__['details'].keys() else None,
-                                             http_data.country_name
-                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
-                            guests_hostname=http_data.hostname
-                            if 'hostname' in http_data.__dict__['details'].keys() else None,
-                            visit_date=datetime.now())
+        # record = self.model(guests_ip=ip,
+        #                     guests_location=[http_data.city
+        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
+        #                                      http_data.country_name
+        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
+        #                     guests_hostname=http_data.hostname
+        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
+        #                     visit_date=datetime.now())
         # record.save()
         return render(request, template_name='homepage.html')
 
@@ -63,7 +62,7 @@ class PythonLessonTest(TemplateView):
     def get(self, request, *args, **kwargs):
         record = self.model(language='English',
                             programming_language='Python')
-        record.save()
+        # record.save()
         return render(request, template_name='web_site_in_process.html')
 
 
@@ -107,7 +106,7 @@ class CsharpLessonTest(TemplateView):
     def get(self, request, *args, **kwargs):
         record = self.model(language='English',
                             programming_language='C#')
-        record.save()
+        # record.save()
         return render(request, template_name='web_site_in_process.html')
 
 
@@ -309,6 +308,15 @@ class LoginView(TemplateView):
         user = authenticate(request, username=request.POST.get('username'),
                             password=request.POST.get('password'))
         if user is not None:
+            if user.groups.filter(name='Pupils').exists():
+                login(request, user)
+                return redirect('pupils_homepage')
+            if user.groups.filter(name='Teachers').exists():
+                login(request, user)
+                return redirect('teachers_homepage')
+            if user.groups.filter(name='Mentors').exists():
+                login(request, user)
+                return redirect('mentors_homepage')
             if user.groups.filter(name='Tech writers').exists():
                 login(request, user)
                 return redirect('tech_writers_page')
@@ -326,8 +334,195 @@ class LogoutView(TemplateView):
         return redirect('homepage')
 
 
-class TechWriters(LoginRequiredMixin, TemplateView):
+class UsersHomePage(LoginRequiredMixin, TemplateView):
     login_url = '/login'
+    # model =
+    template_name = 'user/users_homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='user/users_homepage.html')
+
+
+class UsersStorePage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model =
+    template_name = 'user/users_homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='user/users_store.html')
+
+
+class PupilsHomePage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model =
+    template_name = 'pupil/pupils_homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_homepage.html')
+
+
+class PupilsEventPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'pupil/pupils_event_overview.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_event_overview.html')
+
+
+class PupilsExamPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'pupil/pupils_exam_overview.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_exam_overview.html')
+
+
+class PupilsRatingPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'pupil/pupils_rating.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_rating.html')
+
+
+class PupilsMentorPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'pupil/pupils_mentor.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_mentor.html')
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class PupilsPvpPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'pupil/pupils_pvp.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_pvp.html')
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class PupilsTvtPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'pupil/pupils_tvt.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='pupil/pupils_tvt.html')
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class TeachersHomePage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'teacher/teachers_homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='teacher/teachers_homepage.html')
+
+
+class TeachersEventPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'teacher/teachers_event_overview.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='teacher/teachers_event_overview.html')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('option') == 'create_event':
+            return render(request, template_name='teacher/teachers_create_event.html')
+        # return render(request, template_name='teacher/teachers_event_overview.html')
+
+
+class TeachersExamPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'teacher/teachers_exam_overview.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='teacher/teachers_exam_overview.html')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('option') == 'create_exam':
+            return render(request, template_name='teacher/teachers_create_exam.html')
+        # return render(request, template_name='teacher/teachers_exam_overview.html')
+
+
+class TeachersRatingPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'teacher/teachers_rating.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='teacher/teachers_rating.html')
+
+
+class TeachersMentorPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'teacher/teachers_mentor.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='teacher/teachers_mentor.html')
+
+
+class MentorsHomePage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'mentor/mentors_homepage.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='mentor/mentors_homepage.html')
+
+
+class MentorsInvocationPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'mentor/mentors_invocation.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='mentor/mentors_invocation.html')
+
+
+class MentorsSessionPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'mentor/mentors_session_overview.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='mentor/mentors_session_overview.html')
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('option') == 'create_session':
+            return render(request, template_name='mentor/mentors_create_session.html')
+        # return render(request, template_name='mentor/mentors_session_overview.html')
+
+
+class MentorsRatingPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
+    template_name = 'mentor/mentors_rating.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, template_name='mentor/mentors_rating.html')
+
+
+class TechWritersPage(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
+    # model
     template_name = 'tech_writers_page.html'
 
     def get(self, request, *args, **kwargs):
@@ -344,15 +539,15 @@ class Error400Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     error_400=True)
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                            if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_400=True)
         # record.save()
         return render(request, template_name='errors_views/400.html', status=400)
 
@@ -367,15 +562,15 @@ class Error403Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     error_403=True)
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                            if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_403=True)
         # record.save()
         return render(request, template_name='errors_views/403.html', status=403)
 
@@ -390,15 +585,15 @@ class Error404Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     error_404=True)
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                            if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_404=True)
         # record.save()
         return render(request, template_name='errors_views/404.html', status=404)
 
@@ -413,147 +608,14 @@ class Error500Page(TemplateView):
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        # http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     error_500=True)
+        http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                            if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            error_500=True)
         # record.save()
         return render(request, template_name='errors_views/500.html', status=500)
-
-
-# class UsersHomePage TODO
-@login_required(login_url='log_in')
-def users_homepage(request):
-    return render(request, template_name='user/users_homepage.html')
-
-
-@login_required(login_url='log_in')
-def users_store(request):
-    return render(request, template_name='users_store.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_homepage(request):
-    return render(request, template_name='pupils_homepage.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_event(request):
-    return render(request, template_name='pupils_event_overview.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_exam(request):
-    return render(request, template_name='pupils_exam_overview.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_rating(request):
-    return render(request, template_name='pupils_rating.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_mentor(request):
-    return render(request, template_name='pupils_mentor.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_pvp(request):
-    return render(request, template_name='pupils_pvp.html')
-
-
-# class PupilsHomePage TODO
-# @login_required(login_url='log_in')
-def pupils_tvt(request):
-    return render(request, template_name='pupils_tvt.html')
-
-
-# class TeachersHomePage TODO
-# @login_required(login_url='log_in')
-def teachers_homepage(request):
-    return render(request, template_name='teachers_homepage.html')
-
-
-# class TeachersHomePage TODO
-# @login_required(login_url='log_in')
-def teachers_event(request):
-    # all events overview
-    if request.method == 'POST':
-        if request.POST.get('option') == 'create_event':
-            return render(request, template_name='teachers_create_event.html')
-    return render(request, template_name='teachers_event_overview.html')
-
-
-# class TeachersHomePage TODO
-# @login_required(login_url='log_in')
-def teachers_exam(request):
-    # all exams overview
-    if request.method == 'POST':
-        if request.POST.get('option') == 'create_exam':
-            return render(request, template_name='teachers_create_exam.html')
-    return render(request, template_name='teachers_exam_overview.html')
-
-
-# class TeachersHomePage TODO
-# @login_required(login_url='log_in')
-def teachers_rating(request):
-    return render(request, template_name='teachers_rating.html')
-
-
-# class TeachersHomePage TODO
-# @login_required(login_url='log_in')
-def teachers_mentor(request):
-    return render(request, template_name='teachers_mentor.html')
-
-
-# class TeachersHomePage TODO
-# @login_required(login_url='log_in')
-def mentors_homepage(request):
-    return render(request, template_name='mentors_homepage.html')
-
-
-# class MentorsHomePage TODO
-# @login_required(login_url='log_in')
-def mentors_invocation(request):
-    return render(request, template_name='mentors_invocation.html')
-
-
-# class MentorsHomePage TODO
-# @login_required(login_url='log_in')
-def mentors_session(request):
-    if request.method == 'POST':
-        if request.POST.get('option') == 'create_session':
-            return render(request, template_name='mentors_create_session.html')
-    return render(request, template_name='mentors_session_overview.html')
-
-
-# class MentorsHomePage TODO
-# @login_required(login_url='log_in')
-def mentors_rating(request):
-    return render(request, template_name='mentors_rating.html')
-
-
-# TODO
-@login_required(login_url='log_in')
-def python_themes_time(request):
-    if request.method == 'POST':
-        end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')))
-        end_date_sep = end_date.ctime().split(' ')
-        # Jan 5, 2024 15:37:25
-        timer = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
-                                          end_date_sep[4], end_date_sep[3])
-        users_level = request.POST.get('level')
-        text = PythonBasicsTheory.objects.all()
-        return render(request=request, template_name='python_theory.html', context={'timer': timer, 'text': text})
-    return render(request, template_name='python_themes_time.html')
