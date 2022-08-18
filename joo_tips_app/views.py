@@ -26,14 +26,14 @@ class HomePage(TemplateView):
         else:
             ip = request.META.get('REMOTE_ADDR')
         http_data = ipinfo.getHandler('001b08d2dda8e6').getDetails(ip)
-        # record = self.model(guests_ip=ip,
-        #                     guests_location=[http_data.city
-        #                                      if 'city' in http_data.__dict__['details'].keys() else None,
-        #                                      http_data.country_name
-        #                                      if 'country_name' in http_data.__dict__['details'].keys() else None],
-        #                     guests_hostname=http_data.hostname
-        #                     if 'hostname' in http_data.__dict__['details'].keys() else None,
-        #                     visit_date=datetime.now())
+        record = self.model(guests_ip=ip,
+                            guests_location=[http_data.city
+                                             if 'city' in http_data.__dict__['details'].keys() else None,
+                                             http_data.country_name
+                                             if 'country_name' in http_data.__dict__['details'].keys() else None],
+                            guests_hostname=http_data.hostname
+                            if 'hostname' in http_data.__dict__['details'].keys() else None,
+                            visit_date=datetime.now())
         # record.save()
         return render(request, template_name='homepage.html')
 
@@ -46,24 +46,31 @@ class HomePage(TemplateView):
 
 class ProgrammingLanguageChoice(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'web_site_in_process.html'
+    template_name = 'programming_language_choice.html'
 
     def get(self, request, *args, **kwargs):
         record = self.model(lets_try_it_date=datetime.now(),
                             language='English')
         # record.save()
-        return render(request, template_name='web_site_in_process.html')
+        return render(request, template_name='programming_language_choice.html')
 
 
 class PythonLessonTest(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'web_site_in_process.html'
+    template_name = 'python/python_themes_time.html'
+    test_time = ''
+    guest_level = ''
 
     def get(self, request, *args, **kwargs):
         record = self.model(language='English',
                             programming_language='Python')
         # record.save()
-        return render(request, template_name='web_site_in_process.html')
+        return render(request, template_name='python/python_themes_time.html')
+
+    def post(self, request, *args, **kwargs):
+        self.test_time = request.POST.get('time')
+        self.guest_level = request.POST.get('level')
+        return render(request, template_name='python/python_theory.html', context={'timer': self.test_time})
 
 
 class JavaScriptLessonTest(TemplateView):
@@ -162,7 +169,7 @@ def python_themes_time_guests(request):
                                       start_lesson_time=datetime.now())
         # record.save()
         return redirect('python_theory_cards')
-    return render(request, template_name='python_themes_time_guests.html')
+    return render(request, template_name='python_themes_time.html')
 
 
 # class TheoryCards TODO

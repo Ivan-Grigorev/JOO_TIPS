@@ -49,6 +49,13 @@ body {
     color: #ACB0B1;
 }
 
+.user input {
+    margin: 0;
+
+    background: transparent;
+    border: none;
+}
+
 .btn-price-list {
     margin-top: -1%;
     margin-left: auto;

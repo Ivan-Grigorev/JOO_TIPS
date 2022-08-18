@@ -8,25 +8,36 @@
     <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/timer_header.css' %}">
     <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish">
 </head>
-<input type="hidden" id="lesson_time" value="{{ lesson_time }}">
-<nav class="timer" id="lesson_timer">
-    <div>
-        <h1>{{ lesson_timer }}</h1>
-    </div>
-</nav>
-<input type="hidden" id="timer" value="{{ timer }}">
-<nav class="timer" id="test_timer">
-    <div>
-        <h1>{{ test_timer }}</h1>
-    </div>
-</nav>
 <body>
-{% block content %}
+    <header>
+        <div class="title">
+            <div class="joo-header">
+                JOO
+            </div>
+            <div class="tips-header">
+                TIPS
+            </div>
+        </div>
+        <input type="hidden" id="lesson_time" value="{{ lesson_time }}">
+        <nav class="timer" id="lesson_timer">
+            <div>
+                Час уроку: {{ lesson_timer }}
+            </div>
+        </nav>
+        <input type="hidden" id="timer" value="{{ timer }}">
+        <nav class="timer" id="test_timer">
+            <div>
+                Час тесту: {{ test_timer }}
+            </div>
+        </nav>
+    </header>
+    {% block content %}
 
 
-{% endblock %}
-<script src="{% static 'js/lesson_timer_ua.js' %}" type="module"></script>
-<script src="{% static 'js/test_timer_ua.js' %}" type="module"></script>
+    {% endblock %}
+<script src="{% static 'js/lesson_timer.js' %}"></script>
+<script src="{% static 'js/test_timer.js' %}"></script>
 </body>
 </html>

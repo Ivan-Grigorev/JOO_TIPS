@@ -18,11 +18,11 @@ var lesson_timer = setInterval(function() {
         document.getElementById("lesson_timer").style.color = "red";
     }
 
-    document.getElementById("lesson_timer").innerHTML = "Lesson time: " + minutes + ":" + seconds;
+    document.getElementById("lesson_timer").innerHTML = minutes + ":" + seconds;
 
     if (distance < 0) {
         clearInterval(lesson_timer);
-        document.getElementById("lesson_timer").innerHTML = "Lesson time: 00:00";
+        document.getElementById("lesson_timer").innerHTML = "00:00";
     }
 
 }, 1000);

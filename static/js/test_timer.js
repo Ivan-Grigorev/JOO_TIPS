@@ -18,11 +18,11 @@ var test_timer = setInterval(function() {
         document.getElementById("test_timer").style.color = "red";
     }
 
-    document.getElementById("test_timer").innerHTML = "Test time: " + minutes + ":" + seconds;
+    document.getElementById("test_timer").innerHTML = minutes + ":" + seconds;
 
     if (distance < 0) {
         clearInterval(test_timer);
-        document.getElementById("test_timer").innerHTML = "Test time: 00:00";
+        document.getElementById("test_timer").innerHTML = "00:00";
     }
 
 }, 1000);

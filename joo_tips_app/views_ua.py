@@ -46,24 +46,31 @@ class HomePageUa(TemplateView):
 
 class ProgrammingLanguageChoiceUa(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'ua/web_site_in_process_ua.html'
+    template_name = 'ua/programming_language_choice_ua.html'
 
     def get(self, request, *args, **kwargs):
         record = self.model(lets_try_it_date=datetime.now(),
                             language='Ukrainian')
         # record.save()
-        return render(request, template_name='ua/web_site_in_process_ua.html')
+        return render(request, template_name='ua/programming_language_choice_ua.html')
 
 
 class PythonLessonTestUa(TemplateView):
     model = GuestsVisitStatistic
-    template_name = 'ua/web_site_in_process_ua.html'
+    template_name = 'ua/python_ua/python_themes_time_ua.html'
+    test_time = ''
+    guest_level = ''
 
     def get(self, request, *args, **kwargs):
         record = self.model(language='Ukrainian',
                             programming_language='Python')
         # record.save()
-        return render(request, template_name='ua/web_site_in_process_ua.html')
+        return render(request, template_name='ua/python_ua/python_themes_time_ua.html')
+
+    def post(self, request, *args, **kwargs):
+        self.test_time = request.POST.get('time')
+        self.guest_level = request.POST.get('level')
+        return render(request, template_name='ua/python_ua/python_theory_ua.html', context={'timer': self.test_time})
 
 
 class JavaScriptLessonTestUa(TemplateView):
@@ -162,7 +169,7 @@ def python_themes_time_guests_ua(request):
                                       start_lesson_time=datetime.now())
         # record.save()
         return redirect('python_theory_cards_ua')
-    return render(request, template_name='ua/python_themes_time_guests_ua.html')
+    return render(request, template_name='ua/python_themes_time_ua.html')
 
 
 # class TheoryCardsUa

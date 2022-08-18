@@ -1,40 +1,82 @@
 body {
-    background: linear-gradient(133.33deg, #031417 9.8%,
-        rgba(17, 63, 73, 0.718241) 99.75%,
-        rgba(69, 80, 83, 0) 100%,
-        rgba(123, 160, 168, 0.152517) 100%,
-        rgba(38, 91, 103, 0.391034) 100%);
-    background-repeat: no-repeat;
-    background-position: center 0;
-    background-attachment: fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -ms-background-size: cover;
+    margin: 0;
 
     font-family: Galatea;
     font-style: normal;
+
+    background: linear-gradient(135.79deg, #163A65 24.66%, #163A65 87.53%);
 }
 
 :lang(uk) {
-    font-family: Arial;
+    font-family: Mulish;
     font-style: normal;
 }
 
-.timer {
-    margin-right: 2.5%;
+.title {
     margin-top: 10px;
+    margin-left: 10px;
 
-    text-align: right;
-    font-weight: 800;
-    font-size: 40px;
+    width: 200px;
+    height: 50px;
+}
+
+.joo-header {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 200px;
+    height: 110px;
+
+    font-weight: 900;
+    font-size: 100px;
+    font-family: Galatea;
+
+    background-image: linear-gradient(90deg, #F3F3F3 -2.8%, rgba(108, 99, 99, 0) 130.07%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.tips-header {
+    margin-top: -15px;
+    margin-left: 165px;
+
+    font-weight: 100;
+    font-size: 30px;
+    font-family: Galatea;
+
+    text-align: center;
 
     color: #ABABAB;
 }
 
+.timer {
+    margin: -10px 40px 0 0;
 
-@media screen and (max-width: 600px) {
-    .timer {
-        font-size: 33px;
+    text-align: right;
+
+    font-weight: 800;
+    font-size: 33px;
+
+    color: #FFFFFF;
+}
+
+.lesson-timer {
+    margin: -30px 40px 0 0;
+
+    text-align: right;
+
+    font-weight: 800;
+    font-size: 33px;
+
+    color: #FFFFFF;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .timer, .lesson-timer {
+        font-size: 40px;
     }

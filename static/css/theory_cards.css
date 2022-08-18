@@ -25,7 +25,7 @@ body {
 
     text-align: center;
 
-    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    background: #1A4579;
     border-radius: 20px;
 }
 
@@ -51,8 +51,7 @@ body {
 }
 
 .card-1-container {
-    width: 500px;
-    min-height: 690px;
+    width: 300px;
     height: auto;
 
     background: rgba(196, 196, 196, 0.5);
@@ -73,46 +72,41 @@ body {
     font-weight: 300;
     font-size: 18px;
 
-    color: #C1C1C1;
+    color: #FFFFFF;
 
     white-space: pre-wrap;
 }
 
 .btn-start {
+    margin: 50px auto 80px auto;
+
     width: 290px;
     height: 50px;
-
-    margin-top: 50px;
-    margin-bottom: 80px;
-    margin-left: auto;
-    margin-right: auto;
 
     text-align: center;
 
     font-weight: 300;
     font-size: 25px;
 
-    color: black;
+    color: #123257;
 
-    background: rgba(196, 196, 196, 0.5);
-    border-radius: 30px;
+    background: #FCBC7D;
+    border-radius: 12px;
+    border: none;
+}
+
+.btn-start:hover {
+    color: #FCBC7D;
+
+    background: #123257;
+    border: 2px solid #FCBC7D;
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 1024px) {
     .card-1-container {
-        width: 300px;
+        width: 500px;
+        min-height: 690px;
         height: auto;
     }
 }
-
-/*
-.no-scrollbar {
-  scrollbar-width: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-*/

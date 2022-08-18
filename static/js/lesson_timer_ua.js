@@ -22,7 +22,7 @@ var lesson_timer = setInterval(function() {
 
     if (distance < 0) {
         clearInterval(lesson_timer);
-        document.getElementById("lesson_timer").innerHTML = "Час уроку: 00:00";
+        document.getElementById("lesson_timer").innerHTML = "00:00";
     }
 
 }, 1000);

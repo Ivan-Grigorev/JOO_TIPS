@@ -10,26 +10,25 @@ urlpatterns = [
 
     path('programming-language-choice/', ProgrammingLanguageChoice.as_view(), name='programming_language_choice'),
 
-    path('py/themes-time-guest/', PythonLessonTest.as_view(), name='themes_time_guest'),
-    # path('py/themes-time/', python_themes_time, name='python_themes_time'),
+    path('py/themes-time/', PythonLessonTest.as_view(), name='python_themes_time'),
     path('py/theory-cards/', python_theory_cards, name='python_theory_cards'),
     path('py/theoretical-test/', python_theoretical_test, name='python_theoretical_test'),
     path('py/practical-test/', python_practical_test, name='python_practical_test'),
     path('py/progress-statistic-guests/', progress_statistic_guests, name='progress_statistic_guests'),
 
-    path('js/themes-time-guest/', JavaScriptLessonTest.as_view(), name='javascript_themes_time_guest'),
+    path('js/themes-time/', JavaScriptLessonTest.as_view(), name='javascript_themes_time'),
 
-    path('go/themes-time-guest/', GolangLessonTest.as_view(), name='golang_themes_time_guest'),
+    path('go/themes-time/', GolangLessonTest.as_view(), name='golang_themes_time'),
 
-    path('java/themes-time-guest/', JavaLessonTest.as_view(), name='java_themes_time_guest'),
+    path('java/themes-time/', JavaLessonTest.as_view(), name='java_themes_time'),
 
-    path('swift/themes-time-guest/', SwiftLessonTest.as_view(), name='swift_themes_time_guest'),
+    path('swift/themes-time/', SwiftLessonTest.as_view(), name='swift_themes_time'),
 
-    path('php/themes-time-guest/', PhpLessonTest.as_view(), name='php_themes_time_guest'),
+    path('php/themes-time/', PhpLessonTest.as_view(), name='php_themes_time'),
 
-    path('c-sharp/themes-time-guest/', CsharpLessonTest.as_view(), name='c_sharp_themes_time_guest'),
+    path('c-sharp/themes-time/', CsharpLessonTest.as_view(), name='c_sharp_themes_time'),
 
-    path('c-plus-plus/themes-time-guest/', CplusplusLessonTest.as_view(), name='c_plus_plus_themes_time-guest'),
+    path('c-plus-plus/themes-time/', CplusplusLessonTest.as_view(), name='c_plus_plus_themes_time'),
 
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='log_in'),
@@ -61,26 +60,25 @@ urlpatterns = [
 
     path('ua/programming-language-choice/', ProgrammingLanguageChoiceUa.as_view(), name='programming_language_choice_ua'),
 
-    path('ua/py/themes-time-guest/', PythonLessonTestUa.as_view(), name='python_themes_time_guests_ua'),
-    # path('ua/py/themes-time/', python_themes_time_ua, name='python_themes_time_ua'),
+    path('ua/py/themes-time/', PythonLessonTestUa.as_view(), name='python_themes_time_ua'),
     path('ua/py/theory-cards/', python_theory_cards_ua, name='python_theory_cards_ua'),
     path('ua/py/theoretical-test/', python_theoretical_test_ua, name='python_theoretical_test_ua'),
     path('ua/py/practical-test/', python_practical_test_ua, name='python_practical_test_ua'),
     path('ua/py/progress-statistic-guests/', progress_statistic_guests_ua, name='progress_statistic_guests_ua'),
 
-    path('ua/js/themes-time-guest/', JavaScriptLessonTestUa.as_view(), name='javascript_themes_time_guest_ua'),
+    path('ua/js/themes-time/', JavaScriptLessonTestUa.as_view(), name='javascript_themes_time_ua'),
 
-    path('ua/go/themes-time-guest/', GolangLessonTestUa.as_view(), name='golang_themes_time_guest_ua'),
+    path('ua/go/themes-time/', GolangLessonTestUa.as_view(), name='golang_themes_time_ua'),
 
-    path('ua/java/themes-time-guest/', JavaLessonTestUa.as_view(), name='java_themes_time_guest_ua'),
+    path('ua/java/themes-time/', JavaLessonTestUa.as_view(), name='java_themes_time_ua'),
 
-    path('ua/swift/themes-time-guest/', SwiftLessonTest.as_view(), name='swift_themes_time_guest_ua'),
+    path('ua/swift/themes-time/', SwiftLessonTest.as_view(), name='swift_themes_time_ua'),
 
-    path('ua/php/themes-time-guest/', PhpLessonTestUa.as_view(), name='php_themes_time_guest_ua'),
+    path('ua/php/themes-time/', PhpLessonTestUa.as_view(), name='php_themes_time_ua'),
 
-    path('ua/c-sharp/themes-time-guest/', CsharpLessonTestUa.as_view(), name='c_sharp_themes_time_guest_ua'),
+    path('ua/c-sharp/themes-time/', CsharpLessonTestUa.as_view(), name='c_sharp_themes_time_ua'),
 
-    path('ua/c-plus-plus/themes-time-guest/', CplusplusLessonTest.as_view(), name='c_plus_plus_themes_time_guest_ua'),
+    path('ua/c-plus-plus/themes-time/', CplusplusLessonTest.as_view(), name='c_plus_plus_themes_time_ua'),
 
     path('ua/register/', RegisterViewUa.as_view(), name='register_ua'),
     path('ua/login/', LoginViewUa.as_view(), name='log_in_ua'),
