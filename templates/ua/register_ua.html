@@ -24,7 +24,7 @@
     <div class="card-main">
         <form method="POST">
             {% csrf_token %}
-            <div class="card-main-title">
+            <div class="card-title">
                 <p>Реєстрація</p>
             </div>
             <div class="name">
@@ -37,12 +37,12 @@
             </div>
             <div class="password">
                 <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
-                <input name="password" id="password" onkeyup="check();" placeholder="Пароль"
+                <input name="password" id="password" onkeyup="checkUa();" placeholder="Пароль"
                        min="6" maxlength="30" required>
             </div>
             <div class="password">
                 <img class="lock-image" src="{% static 'images/login_lock_open.svg' %}">
-                <input name="confirm-password" id="confirm_password" onkeyup="check();" placeholder="Підтвердьте пароль"
+                <input name="confirm-password" id="confirm_password" onkeyup="checkUa();" placeholder="Підтвердьте пароль"
                        min="6" required>
             </div>
             <div class="message" id="message">
@@ -55,6 +55,6 @@
             </div>
         </form>
     </div>
-<script src="{% static 'js/check_password_ua.js' %}"></script>
+<script src="{% static 'js/check_password.js' %}"></script>
 </body>
 </html>

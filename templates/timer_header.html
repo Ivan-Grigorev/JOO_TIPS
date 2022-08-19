@@ -20,23 +20,22 @@
             </div>
         </div>
         <input type="hidden" id="lesson_time" value="{{ lesson_time }}">
-        <nav class="lesson-timer" id="lesson_timer">
-            <div>
-                Lesson time: {{ lesson_timer }}
-            </div>
-        </nav>
         <input type="hidden" id="timer" value="{{ timer }}">
-        <nav class="timer" id="test_timer">
-            <div>
-                Test time: {{ test_timer }}
-            </div>
-        </nav>
+        <table>
+            <tr class="timer">
+                <td>Lesson time:</td>
+                <td id="lesson_timer">{{ lesson_timer }}</td>
+            </tr>
+            <tr class="timer">
+                <td>Test time:</td>
+                <td id="test_timer">{{ test_timer }}</td>
+            </tr>
+        </table>
     </header>
     {% block content %}
 
 
     {% endblock %}
-<script src="{% static 'js/lesson_timer.js' %}"></script>
 <script src="{% static 'js/test_timer.js' %}"></script>
 </body>
 </html>

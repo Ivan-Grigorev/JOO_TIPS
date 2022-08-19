@@ -54,25 +54,26 @@ body {
 }
 
 .timer {
-    margin: -10px 40px 0 0;
-
-    text-align: right;
-
-    font-weight: 800;
-    font-size: 33px;
+    font-weight: 500;
+    font-size: 30px;
 
     color: #FFFFFF;
 }
 
-.lesson-timer {
-    margin: -30px 40px 0 0;
+table {
+    margin: -40px 20px 0 0;
 
+    float: right;
+
+    border: none;
+}
+
+table td {
     text-align: right;
+}
 
-    font-weight: 800;
-    font-size: 33px;
-
-    color: #FFFFFF;
+table #test_timer {
+    width: 120px;
 }
 
 

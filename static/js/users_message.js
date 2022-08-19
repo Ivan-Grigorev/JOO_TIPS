@@ -33,3 +33,40 @@ function showMessageTvt(){
         location.href = 'http://192.168.0.115:8000/users-store/';
     }
 }
+
+function showMessageEventUa() {
+    if (confirm(`Шановний ${document.getElementById('username').value}!\n'Чемпіонат' доступний лише в платній версії.\n\nВідкрити сторінку магазину?`)) {
+        location.href = 'http://192.168.0.115:8000/ua/users-store/';
+    }
+}
+
+function showMessageExamUa() {
+    if (confirm(`Шановний ${document.getElementById('username').value}!\n'Іспит' доступний лише в платній версії.\n\nВідкрити сторінку магазину?`)) {
+        location.href = 'http://192.168.0.115:8000/ua/users-store/';
+    }
+}
+
+function showMessageRatingUa() {
+    if (confirm(`Шановний ${document.getElementById('username').value}!\n'Рейтинг' доступний лише в платній версії.\n\nВідкрити сторінку магазину?`)) {
+        location.href = 'http://192.168.0.115:8000/ua/users-store/';
+    }
+}
+
+function showMessageMentorUa(){
+    if (confirm(`Шановний ${document.getElementById('username').value},\n'Наставник' доступний лише в платній версії.\n\nВідкрити сторінку магазину?`)) {
+        location.href = 'http://192.168.0.115:8000/ua/users-store/';
+    }
+}
+
+function showMessagePvpUa(){
+    if (confirm(`Шановний ${document.getElementById('username').value},\n'PvP' доступний лише в платній версії.\n\nВідкрити сторінку магазину?`)) {
+        location.href = 'http://192.168.0.115:8000/ua/users-store/';
+    }
+}
+
+function showMessageTvtUa(){
+    if (confirm(`Шановний ${document.getElementById('username').value},\n'TvT' доступний лише в платній версії.\n\nВідкрити сторінку магазину?`)) {
+        location.href = 'http://192.168.0.115:8000/ua/users-store/';
+    }
+}
+

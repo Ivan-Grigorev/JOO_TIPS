@@ -59,6 +59,7 @@ class PythonLessonTest(TemplateView):
     model = GuestsVisitStatistic
     template_name = 'python/python_themes_time.html'
     test_time = ''
+    lesson_time = ''
     guest_level = ''
 
     def get(self, request, *args, **kwargs):
@@ -68,9 +69,16 @@ class PythonLessonTest(TemplateView):
         return render(request, template_name='python/python_themes_time.html')
 
     def post(self, request, *args, **kwargs):
-        self.test_time = request.POST.get('time')
+        self.test_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get('time')))).ctime()
+        self.lesson_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get('time')) / 2)).ctime()
         self.guest_level = request.POST.get('level')
-        return render(request, template_name='python/python_theory.html', context={'timer': self.test_time})
+        record = self.model(guests_level=self.guest_level,
+                            test_time=self.test_time,
+                            lesson_time=self.lesson_time,
+                            start_lesson_time=datetime.now())
+        # record.save()
+        return render(request, template_name='python/python_theory.html', context={'lesson_time': self.lesson_time,
+                                                                                         'timer': self.test_time})
 
 
 class JavaScriptLessonTest(TemplateView):
@@ -150,28 +158,6 @@ class PhpLessonTest(TemplateView):
         return render(request, template_name='web_site_in_process.html')
 
 
-# TODO
-def python_themes_time_guests(request):
-    global test_time, lesson_time
-    if request.method == 'POST':
-        lesson_end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')) / 2)
-        end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')))
-        lesson_end_date_sep = lesson_end_date.ctime().split(' ')
-        end_date_sep = end_date.ctime().split(' ')
-        # Jan 5, 2024 15:37:25
-        lesson_time = '{0} {1}, {2} {3}'.format(lesson_end_date_sep[1], lesson_end_date_sep[2],
-                                                lesson_end_date_sep[4], lesson_end_date_sep[3])
-        test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
-                                              end_date_sep[4], end_date_sep[3])
-        record = GuestsVisitStatistic(guests_level=request.POST.get('level'),
-                                      test_time=request.POST.get('time'),
-                                      lesson_time=int(request.POST.get('time')) / 2,
-                                      start_lesson_time=datetime.now())
-        # record.save()
-        return redirect('python_theory_cards')
-    return render(request, template_name='python_themes_time.html')
-
-
 # class TheoryCards TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theory_cards(request):
@@ -197,9 +183,7 @@ def python_theory_cards(request):
         record = GuestsVisitStatistic(start_test_time=datetime.now())
         # record.save()
         return redirect('python_theoretical_test')
-    return render(request=request, template_name='python_theory.html', context={'lesson_time': lesson_time,
-                                                                                'timer': test_time,
-                                                                                'text': text})
+    return render(request=request, template_name='python_theory.html', context={'text': text})
 
 
 theoretical_test_counter = 0
@@ -236,10 +220,11 @@ def python_theoretical_test(request):
     return render(request, template_name='python_theoretical_test.html',
                   context={'test_counter': theoretical_test_counter + 1,
                            'total_tests': total_tests,
-                           'timer': test_time,
+                           # 'timer': test_time,
                            'question': question_theme.values_list('question', flat=True)[0],
                            'left_slot': left_slot,
                            'right_slot': right_slot})
+    # return render(request, template_name='python/python_theoretical_test.html')
 
 
 # class PracticalTest TODO
@@ -268,7 +253,7 @@ def python_practical_test(request):
     return render(request, template_name='python_practical_test.html',
                   context={'test_counter': practical_test_counter + 1,
                            'total_tests': total_tests,
-                           'timer': test_time,
+                           # 'timer': test_time,
                            'question': test_file.question,
                            'code': test_file.var_u_screen,
                            'answers': answers})

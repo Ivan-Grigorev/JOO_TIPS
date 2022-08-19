@@ -59,6 +59,7 @@ class PythonLessonTestUa(TemplateView):
     model = GuestsVisitStatistic
     template_name = 'ua/python_ua/python_themes_time_ua.html'
     test_time = ''
+    lesson_time = ''
     guest_level = ''
 
     def get(self, request, *args, **kwargs):
@@ -68,9 +69,16 @@ class PythonLessonTestUa(TemplateView):
         return render(request, template_name='ua/python_ua/python_themes_time_ua.html')
 
     def post(self, request, *args, **kwargs):
-        self.test_time = request.POST.get('time')
+        self.test_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get('time')))).ctime()
+        self.lesson_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get('time')) / 2)).ctime()
         self.guest_level = request.POST.get('level')
-        return render(request, template_name='ua/python_ua/python_theory_ua.html', context={'timer': self.test_time})
+        record = self.model(guests_level=self.guest_level,
+                            test_time=self.test_time,
+                            lesson_time=self.lesson_time,
+                            start_lesson_time=datetime.now())
+        # record.save()
+        return render(request, template_name='ua/python_ua/python_theory_ua.html', context={'lesson_time': self.lesson_time,
+                                                                                                  'timer': self.test_time})
 
 
 class JavaScriptLessonTestUa(TemplateView):
@@ -150,29 +158,7 @@ class PhpLessonTestUa(TemplateView):
         return render(request, template_name='ua/web_site_in_process_ua.html')
 
 
-# TODO
-def python_themes_time_guests_ua(request):
-    global test_time, lesson_time
-    if request.method == 'POST':
-        lesson_end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')) / 2)
-        end_date = datetime.now() + timedelta(minutes=int(request.POST.get('time')))
-        lesson_end_date_sep = lesson_end_date.ctime().split(' ')
-        end_date_sep = end_date.ctime().split(' ')
-        # Jan 5, 2024 15:37:25
-        lesson_time = '{0} {1}, {2} {3}'.format(lesson_end_date_sep[1], lesson_end_date_sep[2],
-                                                lesson_end_date_sep[4], lesson_end_date_sep[3])
-        test_time = '{0} {1}, {2} {3}'.format(end_date_sep[1], end_date_sep[2],
-                                              end_date_sep[4], end_date_sep[3])
-        record = GuestsVisitStatistic(guests_level=request.POST.get('level'),
-                                      test_time=request.POST.get('time'),
-                                      lesson_time=int(request.POST.get('time')) / 2,
-                                      start_lesson_time=datetime.now())
-        # record.save()
-        return redirect('python_theory_cards_ua')
-    return render(request, template_name='ua/python_themes_time_ua.html')
-
-
-# class TheoryCardsUa
+# class TheoryCardsUa TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theory_cards_ua(request):
     global guests_card_1, guests_card_2, guests_card_3
@@ -197,9 +183,7 @@ def python_theory_cards_ua(request):
         record = GuestsVisitStatistic(start_test_time=datetime.now())
         # record.save()
         return redirect('python_theoretical_test_ua')
-    return render(request=request, template_name='ua/python_theory_ua.html', context={'lesson_time': lesson_time,
-                                                                                      'timer': test_time,
-                                                                                      'text_ua': text_ua})
+    return render(request=request, template_name='ua/python_theory_ua.html', context={'text_ua': text_ua})
 
 
 theoretical_test_counter = 0
@@ -208,7 +192,7 @@ right_answers = []
 tests_results = []
 
 
-# class TheoreticalTestUa
+# class TheoreticalTestUa TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_theoretical_test_ua(request):
     global question_theme_ua, theoretical_test_counter, right_answers, tests_results
@@ -236,13 +220,13 @@ def python_theoretical_test_ua(request):
     return render(request, template_name='ua/python_theoretical_test_ua.html',
                   context={'test_counter': theoretical_test_counter + 1,
                            'total_tests': total_tests,
-                           'timer': test_time,
+                           # 'timer': test_time,
                            'question_ua': question_theme_ua.values_list('question_ua', flat=True)[0],
                            'left_slot': left_slot,
                            'right_slot': right_slot})
 
 
-# class PracticalTestUa
+# class PracticalTestUa TODO
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def python_practical_test_ua(request):
     global practical_test_counter, right_answers
@@ -268,13 +252,13 @@ def python_practical_test_ua(request):
     return render(request, template_name='ua/python_practical_test_ua.html',
                   context={'test_counter': practical_test_counter + 1,
                            'total_tests': total_tests,
-                           'timer': test_time,
+                           # 'timer': test_time,
                            'question_ua': test_file.question_ua,
                            'code': test_file.var_u_screen,
                            'answers': answers})
 
 
-# class ProgressStatisticUa
+# class ProgressStatisticUa TODO
 def progress_statistic_guests_ua(request):
     test_result = sum(tests_results)
     day_result = 0
@@ -296,7 +280,7 @@ class RegisterViewUa(TemplateView):
     def post(self, request, *args, **kwargs):
         username = request.POST.get('username')
         if User.objects.filter(username=username).exists():
-            messages.error(request, f"{username} already exist!")
+            messages.error(request, f"{username} вже існує!")
         else:
             user = User.objects.create_user(username=username,
                                             email=request.POST.get('email'),
@@ -330,7 +314,7 @@ class LoginViewUa(TemplateView):
             login(request, user)
             return redirect('users_homepage_ua')
         else:
-            messages.error(request, 'Username or password does not exist!')
+            messages.error(request, 'Логін або пароль не існує!')
         return render(request, template_name='ua/login_ua.html')
 
 
