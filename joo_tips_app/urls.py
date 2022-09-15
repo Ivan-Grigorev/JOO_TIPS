@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('py/themes-time/', PythonLessonTest.as_view(), name='python_themes_time'),
     path('py/theory-cards/', python_theory_cards, name='python_theory_cards'),
-    path('py/theoretical-test/', python_theoretical_test, name='python_theoretical_test'),
+    path('py/theoretical-test/', PythonTheoreticalTest.as_view(), name='python_theoretical_test'),
     path('py/practical-test/', python_practical_test, name='python_practical_test'),
     path('py/progress-statistic-guests/', progress_statistic_guests, name='progress_statistic_guests'),
 

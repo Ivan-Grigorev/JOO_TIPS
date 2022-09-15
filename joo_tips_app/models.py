@@ -2535,4 +2535,3 @@ class JooTipsSiteErrorsStatistic(models.Model):
 
     class Meta:
         db_table = 'joo_tips_site_errors_statistic'
-

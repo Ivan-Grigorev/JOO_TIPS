@@ -32,7 +32,7 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 DEBUG = True
 
 # ALLOWED_HOSTS = ['www.joo.tips', 'joo.tips']
-ALLOWED_HOSTS = ['192.168.1.46']
+ALLOWED_HOSTS = ['192.168.1.46', '*']
 
 # Application definition
 

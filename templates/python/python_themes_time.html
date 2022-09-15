@@ -31,6 +31,7 @@
                 <option value="third">I create small programs in Python</option>
             </select>
             <h1>Set time</h1>
+            {% if user.is_authenticated %}
             <select class="time" name="time" required>
                 <option value="5">5 min</option>
                 <option value="10">10 min</option>
@@ -39,6 +40,18 @@
                 <option value="25">25 min</option>
                 <option value="30">30 min</option>
             </select>
+            {% else %}
+            <select class="time" name="time" required>
+                <option value="5">5 min</option>
+                <option value="10" disabled>*10 min</option>
+                <option value="15" disabled>*15 min</option>
+                <option value="20" disabled>*20 min</option>
+                <option value="25" disabled>*25 min</option>
+                <option value="30" disabled>*30 min</option>
+                <option disabled></option>
+                <option disabled>* - Available only after authorization</option>
+            </select>
+            {% endif %}
             <div>
                 <button class="btn" type="submit">START</button>
             </div>

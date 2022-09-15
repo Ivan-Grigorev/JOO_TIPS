@@ -19,4 +19,3 @@ var checkUa = function() {
       document.getElementById('submit').disabled = true;
     }
 }
-

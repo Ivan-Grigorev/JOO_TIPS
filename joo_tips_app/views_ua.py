@@ -40,7 +40,7 @@ class HomePageUa(TemplateView):
     def post(self, request, *args, **kwargs):
         record = self.model(schools_email=request.POST.get('school-email'),
                             teams_email=request.POST.get('team-email'))
-        record.save()
+        # record.save()
         return render(request, template_name='ua/homepage_ua.html')
 
 
