@@ -1,4 +1,6 @@
-from datetime import datetime
+import importlib
+import random
+from datetime import datetime, timedelta
 
 import ipinfo
 from django.contrib import messages
@@ -53,14 +55,213 @@ class ProgrammingLanguageChoice(TemplateView):
         return render(request, template_name="programming_language_choice.html")
 
 
+# class PythonLesson(TemplateView):
+#     model = GuestsVisitStatistic
+#     template_name = "web_site_in_process.html"
+#
+#     def get(self, request, *args, **kwargs):
+#         record = self.model(language="English", programming_language="Python")
+#         record.save()
+#         return render(request, template_name="web_site_in_process.html")
+
+
+# TODO
+class PythonLessonTime:
+    lesson_time = ""
+    test_time = ""
+
+
 class PythonLesson(TemplateView):
     model = GuestsVisitStatistic
-    template_name = "web_site_in_process.html"
+    template_name = "python/python_themes_time.html"
+    test_time = ""
+    lesson_time = ""
+    guest_level = ""
 
     def get(self, request, *args, **kwargs):
         record = self.model(language="English", programming_language="Python")
         record.save()
-        return render(request, template_name="web_site_in_process.html")
+        if not self.request.user.is_authenticated:
+            return render(request, template_name="web_site_in_process.html")
+        return render(request, template_name="python/python_themes_time.html")
+
+    def post(self, request, *args, **kwargs):
+        self.test_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get("time")))).ctime()
+        self.lesson_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get("time")) / 2)).ctime()
+        PythonLessonTime.test_time = (datetime.utcnow() + timedelta(minutes=int(request.POST.get("time")))).ctime()
+        PythonLessonTime.lesson_time = (
+            datetime.utcnow() + timedelta(minutes=int(request.POST.get("time")) / 2)
+        ).ctime()
+        self.guest_level = request.POST.get("level")
+        record = self.model(
+            guests_level=self.guest_level,
+            test_time=self.test_time,
+            lesson_time=self.lesson_time,
+            start_lesson_time=datetime.now(),
+        )
+        record.save()
+        return render(
+            request,
+            template_name="python/python_theory.html",
+            context={"lesson_time": self.lesson_time, "timer": self.test_time},
+        )
+
+
+# TODO
+class PythonTheoreticalTask(TemplateView):
+    # model = PythonTheoreticalTest
+    template_name = "python/python_theoretical_test.html"
+
+    def get(self, request, *args, **kwargs):
+        print(f"Timers in PythonLessonTestTime: {PythonLessonTime.test_time}, {PythonLessonTime.lesson_time}")
+        print(f"Timers in PythonLessonTime: {PythonLesson.test_time}, {PythonLesson.lesson_time}")
+        return render(
+            request,
+            template_name="python/python_theoretical_test.html",
+            context={"lesson_time": PythonLessonTime.lesson_time, "timer": PythonLessonTime.test_time},
+        )
+
+
+# class TheoryCards TODO
+# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def python_theory_cards(request):
+    global guests_card_1, guests_card_2, guests_card_3
+    guests_card_1 = random.randint(1, 10)
+    theme_1 = PythonBasicsTheory.objects.all().filter(id=guests_card_1)
+    guests_card_2 = random.randint(1, 4)
+    theme_2 = PythonVariablesTheory.objects.all().filter(id=guests_card_2)
+    guests_card_3 = random.randint(1, 4)
+    theme_3 = PythonDataTypesTheory.objects.all().filter(id=guests_card_3)
+    theme_4 = random.choice(
+        [
+            PythonBasicsTheory.objects.all().filter(id=random.randint(1, 10)),
+            PythonVariablesTheory.objects.all().filter(id=random.randint(1, 4)),
+            PythonDataTypesTheory.objects.all().filter(id=random.randint(1, 4)),
+        ]
+    )
+    text = [theme_1[0], theme_2[0], theme_3[0], theme_4[0]]
+    if theme_4[0] == theme_1[0] or theme_4[0] == theme_2[0] or theme_4[0] == theme_3[0]:
+        theme_4 = random.choice(
+            [
+                PythonBasicsTheory.objects.all().filter(id=random.randint(1, 10)),
+                PythonVariablesTheory.objects.all().filter(id=random.randint(1, 4)),
+                PythonDataTypesTheory.objects.all().filter(id=random.randint(1, 4)),
+            ]
+        )
+        text[3] = theme_4[0]
+    if request.method == "POST":
+        record = GuestsVisitStatistic(start_test_time=datetime.now())
+        record.save()
+        return redirect("python_theoretical_test")
+    return render(request=request, template_name="python_theory.html", context={"text": text})
+
+
+theoretical_test_counter = 0
+practical_test_counter = 0
+right_answers = []
+tests_results = []
+
+
+# class TheoreticalTest TODO
+# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def python_theoretical_test(request):
+    global question_theme, theoretical_test_counter, right_answers, tests_results
+    question_theme = random.choice(
+        [
+            PythonBasicsTheoreticalTask.objects.all().filter(card_id=guests_card_1),
+            PythonVariablesTheoreticalTask.objects.all().filter(card_id=guests_card_2),
+            PythonDataTypesTheoreticalTask.objects.all().filter(card_id=guests_card_3),
+        ]
+    )
+    right_answer = question_theme.values_list("level_1_slot_1_right_answer", flat=True)
+    right_answers.append(right_answer[0])
+    wrong_answer = question_theme.values_list("level_1_slot_2_wrong_answer", flat=True)
+    left_slot = random.choice([right_answer, wrong_answer])
+    right_slot = wrong_answer if left_slot == right_answer else right_answer
+    total_tests = 2
+    if request.method == "POST":
+        right_answers.append(right_answer[0])
+        tests_results.extend([1 if request.POST.get("slot") in right_answers else 0])
+        theoretical_test_counter += 1
+        if theoretical_test_counter == total_tests:
+            right_answers.extend([right_answer[0]])
+            theoretical_test_counter -= total_tests
+            record = GuestsVisitStatistic(
+                end_theoretical_start_practical_test_time=datetime.now(), theoretical_test_result=tests_results
+            )
+            record.save()
+            return redirect("python_practical_test")
+        return redirect("python_theoretical_test")
+    return render(
+        request,
+        template_name="python_theoretical_test.html",
+        context={
+            "test_counter": theoretical_test_counter + 1,
+            "total_tests": total_tests,
+            # 'timer': test_time,
+            "question": question_theme.values_list("question", flat=True)[0],
+            "left_slot": left_slot,
+            "right_slot": right_slot,
+        },
+    )
+    # return render(request, template_name='python/python_theoretical_test.html')
+
+
+# class PracticalTest TODO
+# @cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def python_practical_test(request):
+    global practical_test_counter, right_answers
+    folder = question_theme.values_list("theme", flat=True)[0]
+    theme = folder
+    card = question_theme.values_list("card_id", flat=True)[0]
+    test_number = random.choice([1, 2])
+    test_file = importlib.import_module(f"joo_tips_app.practical_tests.python.{folder}.{theme}_{card}_{test_number}")
+    total_tests = 6
+    answers = [test_file.var_r, test_file.var_w]
+    right_answers.append(test_file.var_r)
+    if request.method == "POST":
+        right_answers.append(test_file.var_r)
+        tests_results.extend([1 if request.POST.get("slot") in right_answers else 0])
+        practical_test_counter += 1
+        if practical_test_counter == total_tests:
+            practical_test_counter -= total_tests
+            record = GuestsVisitStatistic(practical_test_result=tests_results[2:], end_test_time=datetime.now())
+            record.save()
+            return redirect("progress_statistic_guests")
+        return redirect("python_practical_test")
+    return render(
+        request,
+        template_name="python_practical_test.html",
+        context={
+            "test_counter": practical_test_counter + 1,
+            "total_tests": total_tests,
+            # 'timer': test_time,
+            "question": test_file.question,
+            "code": test_file.var_u_screen,
+            "answers": answers,
+        },
+    )
+
+
+# class ProgressStatistic TODO
+def progress_statistic_guests(request):
+    test_result = sum(tests_results)
+    day_result = 0
+    week_result = 0
+    month_result = 0
+    year_result = 0
+    tests_results.clear()
+    return render(
+        request,
+        template_name="progress_statistic.html",
+        context={
+            "test_result": test_result,
+            "day_result": day_result,
+            "week_result": week_result,
+            "month_result": month_result,
+            "year_result": year_result,
+        },
+    )
 
 
 class JavaScriptLesson(TemplateView):
