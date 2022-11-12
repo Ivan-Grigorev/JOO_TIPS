@@ -25,7 +25,6 @@
 
 import random
 
-
 var1 = ["a", "b", "c"]
 var2 = ["d", "e", "f"]
 var3 = ["+", "-"]
@@ -52,13 +51,9 @@ f9 = var9[0] if type(f5) == str else var9[1]
 question = "What is the result of the code in the example?"
 question_ua = "Який результат коду в прикладі?"
 
-var_u_screen = f"{f1} = {f8}{f4}{f8}\n" \
-               f"{f2} = {f9}{f5}{f9}\n" \
-               f"print({f7}({f1}) {f3} {f7}({f2}))"
+var_u_screen = f"{f1} = {f8}{f4}{f8}\n" f"{f2} = {f9}{f5}{f9}\n" f"print({f7}({f1}) {f3} {f7}({f2}))"
 
-var_u = f"{f1} = {f8}{f4}{f8}\n" \
-        f"{f2} = {f9}{f5}{f9}\nvar_r = {f7}({f1}) {f3} {f7}({f2})\n" \
-        f"print(var_r)"
+var_u = f"{f1} = {f8}{f4}{f8}\n" f"{f2} = {f9}{f5}{f9}\nvar_r = {f7}({f1}) {f3} {f7}({f2})\n" f"print(var_r)"
 
 print(question)
 print(var_u_screen)

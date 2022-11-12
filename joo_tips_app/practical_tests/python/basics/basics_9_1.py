@@ -25,11 +25,10 @@
 
 import random
 
-
 var1 = ["a", "b", "c"]
 var2 = ["d", "e", "f"]
 var2_1 = ["g", "h", "i"]
-var3_1 = ['\n', ""]
+var3_1 = ["\n", ""]
 var3_2 = ["(", ""]
 var3_3 = [")", ""]
 var3_4 = ["+", "-"]
@@ -53,16 +52,17 @@ f6_2 = var6[1] if f6_1 == var6[0] else var6[0]
 question = "What is the result of the code in the example?"
 question_ua = "Який результат коду в прикладі?"
 
-var_u_screen = f"{f1} = {f4}\n" \
-               f"{f2} = {f5}\n" \
-               f"{f2_1} = {f3_2}{f1}{f3_4}{f2}{f3_4}{f1}{f3_4}{f2}{f3_3}\n" \
-               f"print({f2_1})"
+var_u_screen = (
+    f"{f1} = {f4}\n" f"{f2} = {f5}\n" f"{f2_1} = {f3_2}{f1}{f3_4}{f2}{f3_4}{f1}{f3_4}{f2}{f3_3}\n" f"print({f2_1})"
+)
 
-var_u = f"{f1} = {f4}\n" \
-        f"{f2} = {f5}\n" \
-        f"{f2_1} = {f3_2}{f1}{f3_4}{f2}{f3_4}{f1}{f3_4}{f2}{f3_3}\n" \
-        f"var_r = {f2_1}\n" \
-        f"print(var_r)"
+var_u = (
+    f"{f1} = {f4}\n"
+    f"{f2} = {f5}\n"
+    f"{f2_1} = {f3_2}{f1}{f3_4}{f2}{f3_4}{f1}{f3_4}{f2}{f3_3}\n"
+    f"var_r = {f2_1}\n"
+    f"print(var_r)"
+)
 
 print(question)
 print(var_u_screen)

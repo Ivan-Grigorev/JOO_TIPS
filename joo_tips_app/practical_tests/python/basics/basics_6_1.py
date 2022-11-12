@@ -25,7 +25,6 @@
 
 import random
 
-
 var1 = ["a", "b", "c", "d", "e", "f"]  # class name
 var2 = ["g", "h", "i", "j", "k", "l"]  # class name
 var3 = ["'", '"']  # quotes format
@@ -48,16 +47,19 @@ f6_2 = var6[1] if f6_1 == var6[0] else var6[0]
 question = "What is the result of the code in the example?"
 question_ua = "Який результат коду в прикладі?"
 
-var_u_screen = f"class {f1}(object):\n" \
-               f"    {f3_1}{f3_1}{f3_1} class docstring {f3_2}{f3_2}{f3_2}\n" \
-               f"    pass\n" \
-               f"print({f1}.__doc__)" \
-
-var_u = f"class {f1}(object):\n" \
-        f"    {f3_1}{f3_1}{f3_1} class docstring {f3_2}{f3_2}{f3_2}\n" \
-        f"    pass\n" \
-        f"var_r = {f1}.__doc__\n" \
-        f"print(var_r)"
+var_u_screen = (
+    f"class {f1}(object):\n"
+    f"    {f3_1}{f3_1}{f3_1} class docstring {f3_2}{f3_2}{f3_2}\n"
+    f"    pass\n"
+    f"print({f1}.__doc__)"
+)
+var_u = (
+    f"class {f1}(object):\n"
+    f"    {f3_1}{f3_1}{f3_1} class docstring {f3_2}{f3_2}{f3_2}\n"
+    f"    pass\n"
+    f"var_r = {f1}.__doc__\n"
+    f"print(var_r)"
+)
 
 print(question)
 print(var_u_screen)

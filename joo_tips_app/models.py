@@ -11,11 +11,11 @@ class PythonBasicsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_basics_theory'
+        db_table = "python_basics_theory"
 
 
-class PythonBasicsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonBasicsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonBasicsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonBasicsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -61,11 +61,11 @@ class PythonBasicsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_basics_theoretical_test'
+        db_table = "python_basics_theoretical_task"
 
 
 class PythonVariablesTheory(models.Model):
@@ -78,11 +78,11 @@ class PythonVariablesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_variables_theory'
+        db_table = "python_variables_theory"
 
 
-class PythonVariablesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonVariablesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonVariablesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonVariablesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -128,11 +128,11 @@ class PythonVariablesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_variables_theoretical_test'
+        db_table = "python_variables_theoretical_task"
 
 
 class PythonDataTypesTheory(models.Model):
@@ -145,11 +145,11 @@ class PythonDataTypesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_data_types_theory'
+        db_table = "python_data_types_theory"
 
 
-class PythonDataTypesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonDataTypesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonDataTypesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -195,11 +195,11 @@ class PythonDataTypesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_data_types_theoretical_test'
+        db_table = "python_data_types_theoretical_task"
 
 
 class PythonExceptionsTheory(models.Model):
@@ -212,11 +212,11 @@ class PythonExceptionsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_exceptions_theory'
+        db_table = "python_exceptions_theory"
 
 
-class PythonExceptionsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonExceptionsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonExceptionsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonExceptionsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -262,11 +262,11 @@ class PythonExceptionsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_exceptions_theoretical_test'
+        db_table = "python_exceptions_theoretical_task"
 
 
 class PythonStringsTheory(models.Model):
@@ -279,11 +279,11 @@ class PythonStringsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_strings_theory'
+        db_table = "python_strings_theory"
 
 
-class PythonStringsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonStringsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonStringsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonStringsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -329,11 +329,11 @@ class PythonStringsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_strings_theoretical_test'
+        db_table = "python_strings_theoretical_task"
 
 
 class PythonListsTheory(models.Model):
@@ -346,11 +346,11 @@ class PythonListsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_lists_theory'
+        db_table = "python_lists_theory"
 
 
-class PythonListsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonListsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonListsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonListsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -396,11 +396,11 @@ class PythonListsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_lists_theoretical_test'
+        db_table = "python_lists_theoretical_task"
 
 
 class PythonTuplesTheory(models.Model):
@@ -413,11 +413,11 @@ class PythonTuplesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_tuples_theory'
+        db_table = "python_tuples_theory"
 
 
-class PythonTuplesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonTuplesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonTuplesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonTuplesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -463,11 +463,11 @@ class PythonTuplesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_tuples_theoretical_test'
+        db_table = "python_tuples_theoretical_task"
 
 
 class PythonDictionariesTheory(models.Model):
@@ -480,11 +480,11 @@ class PythonDictionariesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_dictionaries_theory'
+        db_table = "python_dictionaries_theory"
 
 
-class PythonDictionariesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonDictionariesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonDictionariesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonDictionariesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -530,11 +530,11 @@ class PythonDictionariesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_dictionaries_theoretical_test'
+        db_table = "python_dictionaries_theoretical_task"
 
 
 class PythonSetsTheory(models.Model):
@@ -547,11 +547,11 @@ class PythonSetsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_sets_theory'
+        db_table = "python_sets_theory"
 
 
-class PythonSetsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonSetsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonSetsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonSetsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -597,11 +597,11 @@ class PythonSetsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_sets_theoretical_test'
+        db_table = "python_sets_theoretical_task"
 
 
 class PythonArraysRelatedListsTheory(models.Model):
@@ -614,11 +614,11 @@ class PythonArraysRelatedListsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_arrays_related_lists_theory'
+        db_table = "python_arrays_related_lists_theory"
 
 
-class PythonArraysRelatedListsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonArraysRelatedListsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonArraysRelatedListsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonArraysRelatedListsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -664,11 +664,11 @@ class PythonArraysRelatedListsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_arrays_related_lists_theoretical_test'
+        db_table = "python_arrays_related_lists_theoretical_task"
 
 
 class PythonStacsQueuesTheory(models.Model):
@@ -681,11 +681,11 @@ class PythonStacsQueuesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_stacs_queues_theory'
+        db_table = "python_stacs_queues_theory"
 
 
-class PythonStacsQueuesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonStacsQueuesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonStacsQueuesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonStacsQueuesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -731,11 +731,11 @@ class PythonStacsQueuesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_stacs_queues_theoretical_test'
+        db_table = "python_stacs_queues_theoretical_task"
 
 
 class PythonHashTablesTheory(models.Model):
@@ -748,11 +748,11 @@ class PythonHashTablesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_hash_tables_theory'
+        db_table = "python_hash_tables_theory"
 
 
-class PythonHashTablesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonHashTablesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonHashTablesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonHashTablesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -798,11 +798,11 @@ class PythonHashTablesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_hash_tables_theoretical_test'
+        db_table = "python_hash_tables_theoretical_task"
 
 
 class PythonIteratorsTheory(models.Model):
@@ -815,11 +815,11 @@ class PythonIteratorsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_iterators_theory'
+        db_table = "python_iterators_theory"
 
 
-class PythonIteratorsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonIteratorsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonIteratorsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonIteratorsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -865,11 +865,11 @@ class PythonIteratorsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_iterators_theoretical_test'
+        db_table = "python_iterators_theoretical_task"
 
 
 class PythonFilesTheory(models.Model):
@@ -882,11 +882,11 @@ class PythonFilesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_files_theory'
+        db_table = "python_files_theory"
 
 
-class PythonFilesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonFilesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonFilesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonFilesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -932,11 +932,11 @@ class PythonFilesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_files_theoretical_test'
+        db_table = "python_files_theoretical_task"
 
 
 class PythonRecursionTheory(models.Model):
@@ -949,11 +949,11 @@ class PythonRecursionTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_recursion_theory'
+        db_table = "python_recursion_theory"
 
 
-class PythonRecursionTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonRecursionTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonRecursionTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonRecursionTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -999,11 +999,11 @@ class PythonRecursionTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_recursion_theoretical_test'
+        db_table = "python_recursion_theoretical_task"
 
 
 class PythonSortingTheory(models.Model):
@@ -1016,11 +1016,11 @@ class PythonSortingTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_sorting_theory'
+        db_table = "python_sorting_theory"
 
 
-class PythonSortingTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonSortingTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonSortingTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonSortingTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1066,11 +1066,11 @@ class PythonSortingTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_sorting_theoretical_test'
+        db_table = "python_sorting_theoretical_task"
 
 
 class PythonFunctionsBuiltinFunctionsTheory(models.Model):
@@ -1083,11 +1083,11 @@ class PythonFunctionsBuiltinFunctionsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_functions_builtin_functions_theory'
+        db_table = "python_functions_builtin_functions_theory"
 
 
-class PythonFunctionsBuiltinFunctionsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonDataTypesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonFunctionsBuiltinFunctionsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonDataTypesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1133,11 +1133,11 @@ class PythonFunctionsBuiltinFunctionsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_functions_builtin_functions_theoretical_test'
+        db_table = "python_functions_builtin_functions_theoretical_task"
 
 
 class PythonLambdaFunctionsTheory(models.Model):
@@ -1150,11 +1150,11 @@ class PythonLambdaFunctionsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_lambda_functions_theory'
+        db_table = "python_lambda_functions_theory"
 
 
-class PythonLambdaFunctionsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonLambdaFunctionsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonLambdaFunctionsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonLambdaFunctionsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1200,11 +1200,11 @@ class PythonLambdaFunctionsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_lambda_theoretical_test'
+        db_table = "python_lambda_theoretical_task"
 
 
 class PythonDecoratorsTheory(models.Model):
@@ -1217,11 +1217,11 @@ class PythonDecoratorsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_decorators_theory'
+        db_table = "python_decorators_theory"
 
 
-class PythonDecoratorsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonDecoratorsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonDecoratorsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonDecoratorsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1267,11 +1267,11 @@ class PythonDecoratorsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_decorators_theoretical_test'
+        db_table = "python_decorators_theoretical_task"
 
 
 class PythonRegularExpressionsTheory(models.Model):
@@ -1284,11 +1284,11 @@ class PythonRegularExpressionsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_regular_expressions_theory'
+        db_table = "python_regular_expressions_theory"
 
 
-class PythonRegularExpressionsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonRegularExpressionsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonRegularExpressionsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonRegularExpressionsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1334,11 +1334,11 @@ class PythonRegularExpressionsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_regular_expressions_theoretical_test'
+        db_table = "python_regular_expressions_theoretical_task"
 
 
 class PythonClassesTheory(models.Model):
@@ -1351,11 +1351,11 @@ class PythonClassesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_classes_theory'
+        db_table = "python_classes_theory"
 
 
-class PythonClassesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonClassesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonClassesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonClassesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1401,11 +1401,11 @@ class PythonClassesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_classes_theoretical_test'
+        db_table = "python_classes_theoretical_task"
 
 
 class PythonMagicMethodsTheory(models.Model):
@@ -1418,11 +1418,11 @@ class PythonMagicMethodsTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_magic_methods_theory'
+        db_table = "python_magic_methods_theory"
 
 
-class PythonMagicMethodsTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonMagicMethodsTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonMagicMethodsTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonMagicMethodsTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1468,11 +1468,11 @@ class PythonMagicMethodsTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_magic_methods_theoretical_test'
+        db_table = "python_magic_methods_theoretical_task"
 
 
 class PythonModulesTheory(models.Model):
@@ -1485,11 +1485,11 @@ class PythonModulesTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_modules_theory'
+        db_table = "python_modules_theory"
 
 
-class PythonModulesTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonModulesTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonModulesTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonModulesTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1535,11 +1535,11 @@ class PythonModulesTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_modules_theoretical_test'
+        db_table = "python_modules_theoretical_task"
 
 
 class PythonPipPypiTheory(models.Model):
@@ -1552,11 +1552,11 @@ class PythonPipPypiTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_pip_pypi_theory'
+        db_table = "python_pip_pypi_theory"
 
 
-class PythonPipPypiTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonPipPypiTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonPipPypiTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonPipPypiTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1602,11 +1602,11 @@ class PythonPipPypiTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_pip_pypi_theoretical_test'
+        db_table = "python_pip_pypi_theoretical_task"
 
 
 class PythonBasicGitTheory(models.Model):
@@ -1619,11 +1619,11 @@ class PythonBasicGitTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_basic_git_theory'
+        db_table = "python_basic_git_theory"
 
 
-class PythonBasicGitTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonBasicGitTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonBasicGitTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonBasicGitTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1669,11 +1669,11 @@ class PythonBasicGitTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_basic_git_theoretical_test'
+        db_table = "python_basic_git_theoretical_task"
 
 
 class PythonGithubGitlabBitbucketTheory(models.Model):
@@ -1686,11 +1686,11 @@ class PythonGithubGitlabBitbucketTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_github_gitlab_bitbucket_theory'
+        db_table = "python_github_gitlab_bitbucket_theory"
 
 
-class PythonGithubGitlabBitbucketTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonGithubGitlabBitbucketTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonGithubGitlabBitbucketTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonGithubGitlabBitbucketTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1736,11 +1736,11 @@ class PythonGithubGitlabBitbucketTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_github_gitlab_bitbucket_theoretical_test'
+        db_table = "python_github_gitlab_bitbucket_theoretical_task"
 
 
 class PythonFlaskTheory(models.Model):
@@ -1753,11 +1753,11 @@ class PythonFlaskTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_flask_theory'
+        db_table = "python_flask_theory"
 
 
-class PythonFlaskTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonFlaskTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonFlaskTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonFlaskTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1803,11 +1803,11 @@ class PythonFlaskTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_flask_theoretical_test'
+        db_table = "python_flask_theoretical_task"
 
 
 class PythonPyramidTheory(models.Model):
@@ -1820,11 +1820,11 @@ class PythonPyramidTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_pyramid_theory'
+        db_table = "python_pyramid_theory"
 
 
-class PythonPyramidTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonPyramidTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonPyramidTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonPyramidTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1870,11 +1870,11 @@ class PythonPyramidTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_pyramid_theoretical_test'
+        db_table = "python_pyramid_theoretical_task"
 
 
 class PythonDjangoTheory(models.Model):
@@ -1887,11 +1887,11 @@ class PythonDjangoTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_django_theory'
+        db_table = "python_django_theory"
 
 
-class PythonDjangoTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonDjangoTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonDjangoTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonDjangoTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -1937,11 +1937,11 @@ class PythonDjangoTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_django_theoretical_test'
+        db_table = "python_django_theoretical_task"
 
 
 class PythonGeventTheory(models.Model):
@@ -1954,11 +1954,11 @@ class PythonGeventTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_gevent_theory'
+        db_table = "python_gevent_theory"
 
 
-class PythonGeventTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonGeventTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonGeventTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonGeventTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2004,11 +2004,11 @@ class PythonGeventTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_gevent_theoretical_test'
+        db_table = "python_gevent_theoretical_task"
 
 
 class PythonSanicTheory(models.Model):
@@ -2021,11 +2021,11 @@ class PythonSanicTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_sanic_theory'
+        db_table = "python_sanic_theory"
 
 
-class PythonSanicTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonSanicTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonSanicTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonSanicTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2071,11 +2071,11 @@ class PythonSanicTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_sanic_theoretical_test'
+        db_table = "python_sanic_theoretical_task"
 
 
 class PythonTornadoTheory(models.Model):
@@ -2088,11 +2088,11 @@ class PythonTornadoTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_tornado_theory'
+        db_table = "python_tornado_theory"
 
 
-class PythonTornadoTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonTornadoTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonTornadoTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonTornadoTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2138,11 +2138,11 @@ class PythonTornadoTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_tornado_theoretical_test'
+        db_table = "python_tornado_theoretical_task"
 
 
 class PythonAiohttpTheory(models.Model):
@@ -2155,11 +2155,11 @@ class PythonAiohttpTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_aiohttp_theory'
+        db_table = "python_aiohttp_theory"
 
 
-class PythonAiohttpTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonAiohttpTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonAiohttpTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonAiohttpTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2205,11 +2205,11 @@ class PythonAiohttpTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_aiohttp_theoretical_test'
+        db_table = "python_aiohttp_theoretical_task"
 
 
 class PythonNoseTheory(models.Model):
@@ -2222,11 +2222,11 @@ class PythonNoseTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_nose_theory'
+        db_table = "python_nose_theory"
 
 
-class PythonNoseTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonNoseTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonNoseTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonNoseTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2272,11 +2272,11 @@ class PythonNoseTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_nose_theoretical_test'
+        db_table = "python_nose_theoretical_task"
 
 
 class PythonPytestTheory(models.Model):
@@ -2289,11 +2289,11 @@ class PythonPytestTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_pytest_theory'
+        db_table = "python_pytest_theory"
 
 
-class PythonPytestTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonPytestTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonPytestTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonPytestTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2339,11 +2339,11 @@ class PythonPytestTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_pytest_theoretical_test'
+        db_table = "python_pytest_theoretical_task"
 
 
 class PythonDoctestTheory(models.Model):
@@ -2356,11 +2356,11 @@ class PythonDoctestTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_doctest_theory'
+        db_table = "python_doctest_theory"
 
 
-class PythonDoctestTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonDoctestTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonDoctestTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonDoctestTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2406,11 +2406,11 @@ class PythonDoctestTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_doctest_theoretical_test'
+        db_table = "python_doctest_theoretical_task"
 
 
 class PythonUnittestPyunitTheory(models.Model):
@@ -2423,11 +2423,11 @@ class PythonUnittestPyunitTheory(models.Model):
         return self.theme or self.text or self.text_ua or self.created_date
 
     class Meta:
-        db_table = 'python_unittest_pyunit_theory'
+        db_table = "python_unittest_pyunit_theory"
 
 
-class PythonUnittestPyunitTheoreticalTest(models.Model):
-    card = models.ForeignKey(PythonUnittestPyunitTheory, to_field='id', on_delete=models.CASCADE, editable=True)
+class PythonUnittestPyunitTheoreticalTask(models.Model):
+    card = models.ForeignKey(PythonUnittestPyunitTheory, to_field="id", on_delete=models.CASCADE, editable=True)
     theme = models.TextField(null=True)
 
     question = models.TextField(null=True)
@@ -2473,11 +2473,11 @@ class PythonUnittestPyunitTheoreticalTest(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'python_unittest_pyunit_theoretical_test'
+        db_table = "python_unittest_pyunit_theoretical_task"
 
 
 class GuestsVisitStatistic(models.Model):
@@ -2510,11 +2510,11 @@ class GuestsVisitStatistic(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'guests_visit_statistic'
+        db_table = "guests_visit_statistic"
 
 
 class JooTipsSiteErrorsStatistic(models.Model):
@@ -2530,8 +2530,8 @@ class JooTipsSiteErrorsStatistic(models.Model):
     def __str__(self):
         field_values = []
         for field in self._meta.get_fields():
-            field_values.append(str(getattr(self, field.name, '')))
-        return ' '.join(field_values)
+            field_values.append(str(getattr(self, field.name, "")))
+        return " ".join(field_values)
 
     class Meta:
-        db_table = 'joo_tips_site_errors_statistic'
+        db_table = "joo_tips_site_errors_statistic"

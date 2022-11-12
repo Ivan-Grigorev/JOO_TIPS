@@ -25,7 +25,6 @@
 
 import random
 
-
 var1_1 = ["a", "b", "c"]
 var1_2 = ["d", "e", "f"]
 var1_3 = ["g", "h", "i"]
@@ -62,12 +61,13 @@ z = [f2_1, f2_2, f2_3, f2_4]
 question = "What is the result of the code in the example?"
 question_ua = "Який результат коду в прикладі?"
 
-var_u_screen = f"{f3_1}{f1_1},{f3_2}{f1_2},{f3_3}{f1_3} = {f2_1}, {f2_2}, {f2_3}, {f2_4}\n" \
-               f"print({yx_1} {f4} {yx_2})"
+var_u_screen = f"{f3_1}{f1_1},{f3_2}{f1_2},{f3_3}{f1_3} = {f2_1}, {f2_2}, {f2_3}, {f2_4}\n" f"print({yx_1} {f4} {yx_2})"
 
-var_u = f"{f3_1}{f1_1},{f3_2}{f1_2},{f3_3}{f1_3} = {f2_1}, {f2_2}, {f2_3}, {f2_4}\n" \
-        f"var_r = {yx_1}{f4}{yx_2}\n" \
-        f"print(var_r)"
+var_u = (
+    f"{f3_1}{f1_1},{f3_2}{f1_2},{f3_3}{f1_3} = {f2_1}, {f2_2}, {f2_3}, {f2_4}\n"
+    f"var_r = {yx_1}{f4}{yx_2}\n"
+    f"print(var_r)"
+)
 
 print(question)
 print(var_u_screen)

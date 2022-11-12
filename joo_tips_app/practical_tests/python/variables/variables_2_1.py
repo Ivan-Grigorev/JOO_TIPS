@@ -25,7 +25,6 @@
 
 import random
 
-
 var1 = ["a", "b", "c"]
 var2 = ["d", "e", "f"]
 var3 = ["=", "=="]
@@ -47,12 +46,9 @@ f6_2 = var6[1] if f6_1 == var6[0] else var6[0]
 question = "What is the result of the code in the example?"
 question_ua = "Який результат коду в прикладі?"
 
-var_u_screen = f"{f1} {f3_1} {f4}\n" \
-               f"print({f1})"
+var_u_screen = f"{f1} {f3_1} {f4}\n" f"print({f1})"
 
-var_u = f"{f1} {f3_1} {f4}\n" \
-        f"var_r = {f1}\n" \
-        f"print(var_r)"
+var_u = f"{f1} {f3_1} {f4}\n" f"var_r = {f1}\n" f"print(var_r)"
 
 print(question)
 print(var_u_screen)

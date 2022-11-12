@@ -25,7 +25,6 @@
 
 import random
 
-
 var1 = ["a", "В", "1", "7", "_", "__", "c"]
 random.shuffle(var1)
 var2 = ["c", "K", "5", "_", "__", "d"]
@@ -46,14 +45,9 @@ f6_2 = var6[1] if f6_1 == var6[0] else var6[0]
 question = "What is the result of the code in the example?"
 question_ua = "Який результат коду в прикладі?"
 
-var_u_screen = f"{f1} = {f3_1}\n" \
-               f"{f2} = {f3_2}\n" \
-               f"print({f1} {f4} {f2})"
+var_u_screen = f"{f1} = {f3_1}\n" f"{f2} = {f3_2}\n" f"print({f1} {f4} {f2})"
 
-var_u = f"{f1} = {f3_1}\n" \
-        f"{f2} = {f3_2}\n" \
-        f"var_r = {f1} {f4} {f2}\n" \
-        f"print(var_r)"
+var_u = f"{f1} = {f3_1}\n" f"{f2} = {f3_2}\n" f"var_r = {f1} {f4} {f2}\n" f"print(var_r)"
 
 print(question)
 print(var_u_screen)
