@@ -9,3 +9,4 @@ function showMessageUa (){
       location.href = 'http://192.168.1.46:8002/ua/programming-language-choice/';
     }
 }
+
