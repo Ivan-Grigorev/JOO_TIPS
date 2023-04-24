@@ -5,13 +5,15 @@ import HomeMobileHeader from "./HomeMobileHeader";
 const HomeHeader = () => {
   return (
     <>
-      <header className="header container">
-        <Navigation />
+      <div className="header-wrap">
+        <header className="header container">
+          <Navigation />
 
-        <LoginBTN />
+          <LoginBTN />
 
-        <HomeMobileHeader />
-      </header>
+          <HomeMobileHeader />
+        </header>
+      </div>
     </>
   );
 };

@@ -1,17 +1,30 @@
-header {
+.header-wrap {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(135.79deg, #123054 52.16%, #163a65 87.53%);
+  width: 100%;
+}
+
+.header {
   display: flex;
   justify-content: space-between;
 
-  margin-bottom: 115px;
   // on figma margin-bottom is 135px
-
+  // margin-bottom: 115px;
   z-index: 10;
 
   align-items: center;
 
   @media screen and (min-width: 1024px) {
-    justify-content: flex-start;
     padding-top: 25px;
+  }
+  @media screen and (min-width: 1680px) {
+    justify-content: space-between;
+
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 110px;
+    padding-left: 110px;
   }
 }
 .logo-header {
@@ -28,6 +41,7 @@ header {
   }
 }
 .navbar {
+  display: flex;
   z-index: 10;
   margin-right: 125px;
   @media screen and (max-width: 1023px) {
@@ -39,6 +53,9 @@ header {
     font-size: 16px;
   }
 
+  @media screen and (min-width: 1680px) {
+    gap: 60px;
+  }
   & a {
     text-transform: uppercase;
   }
