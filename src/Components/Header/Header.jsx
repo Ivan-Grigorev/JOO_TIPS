@@ -1,5 +1,6 @@
 import HomeHeader from "./HomeHeader/HomeHeader";
-import './Header.scss'
+
+import "./Header.scss";
 
 const Header = () => {
   return (
