@@ -1,5 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
+
+import "./Layout.scss";
+
 import Header from "../../Components/Header/Header";
 
 const Layout = () => {
