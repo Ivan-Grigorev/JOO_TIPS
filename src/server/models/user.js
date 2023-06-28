@@ -4,7 +4,7 @@ const user = new mongoose.Schema(
   {
     userIP: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type: String,
@@ -20,7 +20,7 @@ const user = new mongoose.Schema(
     subscription: {
       type: String,
       enum: ["Free trial", "school"],
-      default: null,
+      default: "Free trial",
     },
     token: {
       type: String,
@@ -32,4 +32,4 @@ const user = new mongoose.Schema(
 
 const User = mongoose.model("User", user);
 
-module.exports = { User };
+module.exports = User;
