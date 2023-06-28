@@ -21,6 +21,5 @@ async function mongoDB() {
   }
 }
 
-mongoDB()
 
 export default mongoDB;
