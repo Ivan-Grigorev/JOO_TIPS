@@ -1,10 +1,21 @@
-import express from "express";
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 
 app.use(cors());
 
-app.use(express.json());
+app.use(express.json()); // body parser
 
-export { app };
+app.use("/users", authRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({ message: "Not found" });
+});
+
+app.use((err, req, res, next) => {
+  res.status(500).json({ message: err.message });
+});
+
+module.exports = app;

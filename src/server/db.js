@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import "colors";
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+require("colors");
 dotenv.config();
 
 const URL = process.env.DB_URL;
@@ -21,5 +21,4 @@ async function mongoDB() {
   }
 }
 
-
-export default mongoDB;
+module.exports = mongoDB;
