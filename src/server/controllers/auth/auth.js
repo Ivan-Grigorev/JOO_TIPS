@@ -2,6 +2,7 @@ const User = require("../../models/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const parser = require("ua-parser-js");
+const { getUserMac } = require("../../utils/utils.js");
 
 require("colors");
 
@@ -10,6 +11,7 @@ async function register(req, res, next) {
     const { email, password } = req.body;
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
     const ua = parser(req.headers["user-agent"] || "");
+    // const macAddress = await getUserMac()
 
     const deviceInfo = {
       browser: ua.browser.name || "Unknown",
@@ -35,6 +37,7 @@ async function register(req, res, next) {
             device: deviceInfo.device,
             browser: deviceInfo.browser,
           },
+          // macAddress: macAddress,
           registrationDate: new Date(),
         };
 

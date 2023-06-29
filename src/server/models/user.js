@@ -33,6 +33,10 @@ const user = new mongoose.Schema(
         default: null,
       },
     },
+    // macAddress: {
+    //   type: String,
+    //   required: true,
+    // },
     deviceInfo: {
       os: {
         type: String,
