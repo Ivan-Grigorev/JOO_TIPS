@@ -42,7 +42,7 @@ async function updateLastIP(req, res, next) {
   }
 }
 
-async function alreadyRegistered(req, res, next) {
+async function isEmailInUse(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email });
 
@@ -69,4 +69,4 @@ async function isUserExist(req, res, next) {
   }
 }
 
-module.exports = { auth, alreadyRegistered, isUserExist, updateLastIP };
+module.exports = { auth, isEmailInUse, isUserExist, updateLastIP };
