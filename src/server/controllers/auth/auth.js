@@ -52,9 +52,9 @@ async function register(req, res, next) {
               lastUserIP: userIP,
             },
             deviceInfo: {
-              os: user.os,
-              device: user.device,
-              browser: user.browser,
+              os: user.os || "Unknown os",
+              device: user.device || "Unknown device",
+              browser: user.browser || "Unknown browser",
             },
             registrationDate: new Date(),
           },
