@@ -29,8 +29,7 @@ const user = new mongoose.Schema(
       },
       lastUserIP: {
         type: String,
-        // required: true,
-        default: null,
+        required: true,
       },
     },
     // macAddress: {
