@@ -15,7 +15,14 @@ async function register(req, res, next) {
       bcrypt.hash(password, salt, (err, hash) => {
         if (err) return next(err);
 
-        const user = { email, password: hash, firstUserIP: userIP, browser };
+        const user = {
+          email,
+          password: hash,
+          firstUserIP: userIP,
+          lastUserIP: userIP,
+          browser,
+          registrationDate: new Date(),
+        };
 
         User.create(user);
 
@@ -23,7 +30,9 @@ async function register(req, res, next) {
           user: {
             email: user.email,
             subscription: user.subscription || "Free trial",
-            userIP,
+            firstUserIP: userIP,
+            browser,
+            registrationDate: new Date(),
           },
         });
       });
