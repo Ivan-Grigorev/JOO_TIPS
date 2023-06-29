@@ -9,13 +9,18 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
 
   font-family: Mulish, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
   font-style: normal;
 
-  background: #ffffff;
+  line-height: normal;
+
+  background-color: #ffffff;
 }
 :lang(uk) {
   font-family: Mulish;
@@ -34,11 +39,11 @@ ul {
 .container {
   width: 100%;
 }
+
 .section {
   padding-top: 81.5px;
   padding-bottom: 81.5px;
 }
-/* ! */
 
 .row {
   position: relative;
