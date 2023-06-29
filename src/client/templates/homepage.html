@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- {% load static %} -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>JooTips</title>
+    <link
+      rel="icon"
+      href="{% static 'images/JOO_Tips.jpeg' %}"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jomolhari&family=Mulish:ital,wght@0,300;0,400;0,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="{% static 'css/homepage.css' %}" /> -->
+    <link rel="stylesheet" href="/css/main.min.css" />
+    <!-- <link rel="stylesheet" href="/static/css/homepage-optimized.css" /> -->
+    <!-- <link rel="stylesheet" href="/static/css/homepage.css"> -->
+  </head>
+  <body>
+    <!--  header -->
+    <div class="card-main">
+      <header class="header container">
+        <a href="/templates/homepage.html" class="logo-header">
+          <img src="/static/images/logo.svg" alt="logo" />
+        </a>
+        <nav class="navbar">
+          <a href="#who-we-are">Who we are</a>
+          <a href="#start-learning">Start learning</a>
+          <a href="#for-teams">For teams</a>
+          <a href="#for-schools">For schools</a>
+        </nav>
+        <button class="btn-login" onclick="location.href={% url 'log_in' %}">
+          LOG IN
+        </button>
+
+        <!-- ! my vers -->
+        <div class="current-flag">
+          <ul class="flag-list">
+            <li>
+              <a href="#"
+                ><img src="/static/images/ukraine-flag.svg" alt="ukraine-flag"
+              /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="/static/images/poland-flag.svg" alt="poland-flag"
+              /></a>
+            </li>
+            <li>
+              <a href="#"
+                ><img src="/static/images/romania-flag.svg" alt="romania-flag"
+              /></a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ! Ivan code -->
+        <!-- <select class="language" onchange="this.options[this.selectedIndex].value &&
+                                                (window.location = this.options[this.selectedIndex].value);">
+                <option value="http://www.joo.tips" class="ukrain-flag">
+                    EN
+                </option>
+                <option value="http://www.joo.tips/ua/">
+                    UA
+                </option>
+            </select> -->
+        <!-- ! -->
+
+        <!---------Mobile version-------->
+        <nav class="mobile-navbar">
+          <label for="mobile-dropdown">
+            <!-- ! бургер меню -->
+            <!-- <img src="{% static 'images/mobile_bar.svg' %}" width="50" height="50"> -->
+            <img
+              src="/static/images/mobile_bar.svg"
+              alt="mobile-bar"
+              width="50"
+              height="50"
+            />
+          </label>
+          <input type="checkbox" id="mobile-dropdown" />
+          <div class="dropdown-slide">
+            <a href="#who-we-are">WHO WE ARE</a>
+            <a href="#start-learning">START LEARNING</a>
+            <a href="#for-schools">FOR SCHOOLS</a>
+            <a href="#for-teams">FOR TEAMS</a>
+            <div style="display: flex">
+              <button
+                class="mobile-btn-login is-hidden"
+                onclick="location.href={% url 'log_in' %}"
+              >
+                LOG IN
+              </button>
+              <select
+                class="mobile-language"
+                onchange="this.options[this.selectedIndex].value &&
+                        (window.location = this.options[this.selectedIndex].value);"
+              >
+                <option value="http://www.joo.tips">EN</option>
+                <option value="http://www.joo.tips/ua/">UA</option>
+              </select>
+            </div>
+          </div>
+        </nav>
+        <!------------------------------->
+      </header>
+
+      <!-- ? grid img ? -->
+
+      <div>
+        <img src="/static/images/grid-1.png" alt="grid" class="grid-1" />
+        <img src="/static/images/grid-1.png" alt="grid" class="grid-2" />
+        <img src="/static/images/grid-1.png" alt="grid" class="grid-3" />
+        <img src="/static/images/grid-2.png" alt="grid" class="grid-4" />
+        <!-- grid for +1680px -->
+        <img src="/static/images/grid-1.png" alt="grid" class="grid-1680px" />
+      </div>
+
+      <!-- ? grid img ? -->
+
+      <section class="pre-main-section">
+        <div class="it-profession">
+          <h1 class="it-profession__text">
+            <span class="it-profession__textSecond">it - </span>profession
+            <img
+              src="/static/images/sparkle.svg"
+              alt="title-sparkle"
+              class="title-sparkle"
+            />
+          </h1>
+          <h4 class="it-profession__subtext">for pupils and adults</h4>
+          <p class="text-main">
+            Hundreds of cards-tips, thousands of different tests, lessons from 5
+            to 30 minutes at a time convenient for you and of course all sorts
+            of things from the game world - championships, cups, PvP, and that's
+            not all!
+          </p>
+          <button class="btn-try-it-1">
+            try it<span style="padding-left: 15px">&#10095;</span>
+          </button>
+        </div>
+        <picture>
+          <source
+            srcset="/static/images/homepage/cube-w380px.png"
+            media="(max-width: 767px)"
+          />
+          <source
+            srcset="/static/images/homepage/cube-w768px.png"
+            media="(min-width: 768px) and (max-width: 1024px)"
+          />
+          <source srcset="/static/images/homepage/cube-w1440px.png" />
+          <img
+            src="/static/images/Homepage/cube-w768px.png"
+            alt="cube"
+            class="cube"
+          />
+        </picture>
+      </section>
+    </div>
+
+    <!-- ! main -->
+    <main>
+      <section class="goals-section section">
+        <p class="goals-title">What courses give you</p>
+        <!-- ! I can remove this class if it doesn't cause me problems in other versions -->
+        <div class="goals-list-container">
+          <div class="lamp-brain">
+            <!-- <img src="{% static 'images/lamp_brain.png' %}" alt="lamp_brain" width="106"> -->
+            <img
+              src="/static/images/lamp_brain.svg"
+              alt="lamp_brain"
+              width="106"
+              class="card-goals__images"
+            />
+            <p class="card-goals__text">Skills development</p>
+          </div>
+          <div class="lamp-gear">
+            <!-- <img src="{% static 'images/lamp_gear.png' %}" alt="lamp_gear" width="106"> -->
+            <img
+              src="/static/images/lamp_gear.svg"
+              alt="lamp_gear"
+              width="106"
+              class="card-goals__images"
+            />
+            <p class="card-goals__text">Useful hobby</p>
+          </div>
+          <div class="lamp-target">
+            <!-- <img src="{% static 'images/lamp_target.png' %}" alt="lamp_target" width="106"> -->
+            <img
+              src="/static/images/lamp_target.svg"
+              alt="lamp_target"
+              width="106"
+              class="card-goals__images"
+            />
+            <p class="card-goals__text">Prospective profession</p>
+          </div>
+        </div>
+        <!-- ? arrow -->
+        <img
+          src="/static/images/arrow.svg"
+          alt="arrow"
+          class="arrow-theFirst"
+        />
+        <img
+          src="/static/images/arrow.svg"
+          alt="arrow"
+          class="arrow-theSecond"
+        />
+      </section>
+
+      <!-- ? who we are section ? -->
+      <section class="who-we-are-section section">
+        <a id="who-we-are"></a>
+        <p class="who-we-are__title">Who we are</p>
+        <!-- <img class="who-we-are-underline" src="{% static 'images/who_we_are_underline.svg' %}"> -->
+        <img
+          class="who-we-are-underline"
+          src="/static/images/who_we_are_underline.svg"
+          alt="underline"
+        />
+        <img
+          class="who-we-are-image is-hidden"
+          src="/static/images/who_we_are.svg"
+          alt="who-we-are"
+        />
+        <!-- <img class="who-we-are-image" src="{% static 'images/who_we_are.svg' %}"> -->
+        <div class="who-we-are__textMobileContainer">
+          <img
+            src="/static/images/mobile_who_we_are.svg"
+            alt="who-we-are-mobile"
+            class="who-we-are__mobileImg"
+          />
+          <!-- <img src="/static/images/who_we_are.svg" alt="" class="who-we-are__mobileImg"> -->
+          <!-- Ivan img -->
+          <!-- <img class="mobile-who-we-are" src="{% static 'images/mobile_who_we_are.svg' %}"> -->
+          <div class="who-we-are-text">
+            <p class="who-we-are__firstText">
+              JOO TIPS is a digital game academy that helps middle and high
+              classes pupils, as well as students, learn the most common
+              programming languages conveniently and without congestion.
+            </p>
+            <p class="who-we-are__secondText">
+              Thanks to the convenient format of educational material, which is
+              presented by small cards-tips and to the system of theoretical and
+              practical tests, the user acquires the necessary knowledge and
+              immediately learn to use them in practice.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ? languages section ? -->
+      <section class="languages-section section">
+        <p class="languages-title">Programming languages</p>
+        <div class="language-cards-list">
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="python-logo-image" src="{% static 'images/python_logo.svg' %}" alt="python-logo"> -->
+              <img
+                src="/static/images/python_logo.svg"
+                alt="python-logo"
+                class="python-logo"
+              />
+              <p class="card__text">Python</p>
+              <a href="py/themes-time-guest/">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="javascript-logo-image" src="{% static 'images/javascript_logo.svg' %}" alt="javascript-logo"> -->
+              <img
+                src="/static/images/javascript_logo.svg"
+                alt="javascript-logo"
+                class="javascript-logo"
+              />
+              <p class="card__text">JavaScript</p>
+              <a href="py/themes-time-guest/">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="java-logo-image" src="{% static 'images/java_logo.svg' %}" alt="java-logo"> -->
+              <img
+                src="/static/images/java_logo.svg"
+                alt="java-logo"
+                class="java-logo-image"
+              />
+              <p class="card__text">Java</p>
+              <a href="py/themes-time-guest">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="swift-logo-image" src="{% static 'images/swift_logo.svg' %}" alt="swift-logo"> -->
+              <img
+                src="/static/images/swift_logo.svg"
+                alt="swift-logo"
+                class="swift-logo-image"
+              />
+              <p class="card__text">Swift</p>
+              <a href="py/themes-time-guest">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="csharp-logo-image" src="{% static 'images/csharp_logo.svg' %}" alt="csharp_logo"> -->
+              <img
+                src="/static/images/csharp_logo.svg"
+                alt="csharp-logo"
+                class="csharp-logo-image"
+              />
+              <p class="card__text">C#</p>
+              <a href="py/themes-time-guest/">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="cplusplus-logo-image" src="{% static 'images/cplusplus_logo.svg' %}" alt="c_plus_plus-logo"> -->
+              <img
+                src="/static/images/cplusplus_logo.svg"
+                alt="cplus-plus-logo"
+                class="cplusplus-logo-image"
+              />
+              <p class="card__text">C++</p>
+              <a href="py/themes-time-guest/">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="golang-logo-image" src="{% static 'images/golang_logo.svg' %}" alt="golang-logo"> -->
+              <img
+                src="/static/images/golang_logo.svg"
+                alt="golang-logo"
+                class="golang-logo-image"
+              />
+              <p class="card__text">Golang</p>
+              <a href="py/themes-time-guest/">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="card">
+              <!-- <img class="php-logo-image" src="{% static 'images/php_logo.svg' %}" alt="php-logo"> -->
+              <img
+                src="/static/images/php_logo.svg"
+                alt="php-logo"
+                class="php-logo-image"
+              />
+              <p class="card__text">php</p>
+              <a href="py/themes-time-guest/">Learn</a>
+              <div class="card-shine"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ? how to start section ? -->
+      <section class="how-to-start-section section">
+        <a id="start-learning"></a>
+        <p class="how-to-start-title">How to start learning</p>
+        <img
+          src="/static/images/how-to-start-snake.svg"
+          alt="snake"
+          class="how-to-start-snake"
+        />
+        <div class="how-to-start-list">
+          <div class="how-to-start-list__item">
+            <!-- <img class="mobile-step-01-image" src="{% static 'images/mobile_step_01.svg' %}"> -->
+            <img
+              src="/static/images/mobile_step_01.svg"
+              alt="first-mobile-step"
+              class="mobile-step"
+            />
+            <div class="step-01">
+              <!-- <img class="step-1-image" src="{% static 'images/step_1.svg' %}"> -->
+              <img
+                src="/static/images/step_1.svg"
+                alt="step-1"
+                class="step-1-image is-hidden"
+              />
+              <p class="how-to-start__stepText">
+                To start learning, go to the link "Learn", "TRY IT" or "LOG IN".
+              </p>
+            </div>
+            <!-- <img class="mobile-step-02-image" src="{% static 'images/mobile_step_02.svg' %}"> -->
+            <img
+              src="/static/images/mobile_step_02.svg"
+              alt="sec-step"
+              class="mobile-step"
+            />
+            <div class="step-02">
+              <!-- <img class="step-2-image" src="{% static 'images/step_2.svg' %}"> -->
+              <img
+                src="/static/images/step_2.svg"
+                alt=""
+                class="step-2-image is-hidden"
+              />
+              <p class="how-to-start__stepText">
+                Choose the language you want to learn and read theory from few
+                cards-tips. Then take the tests from 2 theoretical and 6
+                practical tasks.
+              </p>
+            </div>
+            <!-- <img class="mobile-step-03-image" src="{% static 'images/mobile_step_03.svg' %}"> -->
+            <img
+              src="/static/images/mobile_step_03.svg"
+              alt="third-step"
+              class="mobile-step"
+            />
+            <div class="step-03">
+              <!-- <img class="step-3-image" src="{% static 'images/step_3.svg' %}"> -->
+              <img
+                src="/static/images/step_3.svg"
+                alt="third-step"
+                class="step-3-image is-hidden"
+              />
+              <p class="how-to-start__stepText">
+                Sign up and start learning with us!
+              </p>
+            </div>
+          </div>
+          <button type="button" class="how-to-start__beginButton">
+            Begin
+            <a href="#"></a>
+          </button>
+        </div>
+      </section>
+
+      <!-- ? join section ? -->
+      <section class="join-section section">
+        <div class="join-card" id="for-schools">
+          <p class="join-card__title">For schools</p>
+          <!-- <img class="for-schools-image" src="{% static 'images/for_schools.svg' %}"> -->
+          <img
+            src="/static/images/for_schools.svg"
+            alt="for-schools"
+            class="join-section__image"
+          />
+          <form method="POST">
+            <!-- {% csrf_token %} -->
+            <label class="join-section__inputContainer">
+              <input
+                name="school-email"
+                placeholder="Enter E-MAIL"
+                type="email"
+                required
+                class="join-section__input"
+              />
+              <button class="join-section__btn" type="submit">JOIN</button>
+            </label>
+          </form>
+        </div>
+        <div class="join-card" id="for-teams">
+          <p class="join-card__title">For teams</p>
+          <!-- <img class="for-teams-image" src="{% static 'images/for_teams.svg' %}"> -->
+          <img
+            src="/static/images/for_teams.svg"
+            alt="for-teams"
+            class="join-section__image"
+          />
+          <form method="POST">
+            <!-- {% csrf_token %} -->
+            <label class="join-section__inputContainer">
+              <!-- <div class="email-input"> -->
+              <input
+                name="team-email"
+                placeholder="Enter E-MAIL"
+                type="email"
+                required
+                class="join-section__input"
+              />
+              <button class="join-section__btn" type="submit">JOIN</button>
+              <!-- </div> -->
+            </label>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-flex-container">
+        <a href="/templates/homepage.html" class="logo-footer">
+          <img
+            src="/static/images/logo.svg"
+            alt="logo"
+            class="logo-footer-img"
+          />
+        </a>
+
+        <div class="footer-string"></div>
+        <nav class="footer-navbar">
+          <a href="#who-we-are">WHO WE ARE</a>
+          <a href="#start-learning">START LEARNING</a>
+          <a href="#for-teams">FOR TEAMS</a>
+          <a href="#for-schools">FOR SCHOOLS</a>
+        </nav>
+        <div class="footer-string is-hidden"></div>
+        <!-- ! social links -->
+        <div class="footer-social-links">
+          <a href="#">
+            <img src="/static/images/instagram-icon.svg" alt="instagram-icon" />
+          </a>
+          <a href="#">
+            <img src="/static/images/google-icon.svg" alt="google-icon" />
+          </a>
+          <a href="#">
+            <img src="/static/images/facebook-icon.svg" alt="facebook-icon" />
+          </a>
+          <a href="#"
+            ><img src="/static/images/linkedin-icon.svg" alt="linkedin-icon"
+          /></a>
+        </div>
+      </div>
+      <div class="copyright">&#169; All rights reserved.</div>
+    </footer>
+
+    <script src="/static/js/modal-language-window.js"></script>
+    <script src="/static/js/language-choose.js"></script>
+  </body>
+</html>

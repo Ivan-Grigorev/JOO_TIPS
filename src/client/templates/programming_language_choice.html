@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/programming_language_choice.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+</head>
+<body>
+    <header class="header">
+        <div class="title">
+            <div class="joo-header">
+                JOO
+            </div>
+            <div class="tips-header">
+                TIPS
+            </div>
+        </div>
+    </header>
+    <h4 class="languages-title">PROGRAMMING LANGUAGES</h4>
+    <div class="cards-row" >
+        <div class="row">
+            <div class="card-python">
+                <button class="card-python-btn" onclick="location.href='{% url 'python_themes_time' %}'">
+                    <img class="python-logo-image" src="{% static 'images/python_logo.svg' %}">
+                    <label>PYTHON</label>
+                </button>
+            </div>
+            <div class="card-javascript">
+                <button class="card-javascript-btn" onclick="location.href='{% url 'javascript_themes_time' %}'">
+                    <img class="javascript-logo-image" src="{% static 'images/javascript_logo.svg' %}">
+                    <label>JAVASCRIPT</label>
+                </button>
+            </div>
+            <div class="card-java">
+                <button class="card-java-btn" onclick="location.href='{% url 'java_themes_time' %}'">
+                    <img class="java-logo-image" src="{% static 'images/java_logo.svg' %}">
+                    <label>JAVA</label>
+                </button>
+            </div>
+            <div class="card-swift">
+                <button class="card-swift-btn" onclick="location.href='{% url 'swift_themes_time' %}'">
+                    <img class="swift-logo-image" src="{% static 'images/swift_logo.svg' %}">
+                    <label>SWIFT</label>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card-csharp">
+                <button class="card-csharp-btn" onclick="location.href='{% url 'c_sharp_themes_time' %}'">
+                    <img class="csharp-logo-image" src="{% static 'images/csharp_logo.svg' %}">
+                    <label>C#</label>
+                </button>
+            </div>
+            <div class="card-cplusplus">
+                <button class="card-cplusplus-btn" onclick="location.href='{% url 'c_plus_plus_themes_time' %}'">
+                    <img class="cplusplus-logo-image" src="{% static 'images/cplusplus_logo.svg' %}">
+                    <label>C++</label>
+                </button>
+            </div>
+            <div class="card-golang">
+                <button class="card-golang-btn" onclick="location.href='{% url 'golang_themes_time' %}'">
+                    <img class="golang-logo-image" src="{% static 'images/golang_logo.svg' %}">
+                    <label>GOLANG</label>
+                </button>
+            </div>
+            <div class="card-php">
+                <button class="card-php-btn" onclick="location.href='{% url 'php_themes_time' %}'">
+                    <img class="php-logo-image" src="{% static 'images/php_logo.svg' %}">
+                    <label>PHP</label>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

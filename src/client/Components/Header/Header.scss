@@ -1,0 +1,182 @@
+.header-wrap {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(135.79deg, #123054 52.16%, #163a65 87.53%);
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  // on figma margin-bottom is 135px
+  // margin-bottom: 115px;
+  z-index: 10;
+
+  align-items: center;
+
+  @media screen and (min-width: 1024px) {
+    padding-top: 25px;
+  }
+  @media screen and (min-width: 1680px) {
+    justify-content: space-between;
+
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-right: 110px;
+    padding-left: 110px;
+  }
+}
+.logo-header {
+  margin-left: 15px;
+  margin-top: 35px;
+  z-index: 10;
+
+  @media screen and (min-width: 768px) and (max-width: 1200px) {
+    margin-left: 30px;
+  }
+  @media screen and (min-width: 1024px) {
+    margin-right: 95px;
+    margin-top: 0;
+  }
+}
+.navbar {
+  display: flex;
+  z-index: 10;
+  margin-right: 125px;
+  @media screen and (max-width: 1023px) {
+    display: none;
+  }
+  @media screen and (min-width: 1024px) and (max-width: 1240px) {
+    display: flex;
+    gap: 21px;
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 1680px) {
+    gap: 60px;
+  }
+  & a {
+    text-transform: uppercase;
+  }
+}
+.btn-login {
+  display: none;
+  z-index: 10;
+
+  width: 99px;
+  height: 47px;
+
+  border: 1.5px solid #fcbc7d;
+  border-radius: 8px;
+
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: calc(18 / 14);
+
+  color: #fcbc7d;
+  background-color: transparent;
+
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+}
+.mobile-navbar {
+  width: 100px;
+  height: 20px;
+
+  z-index: 10;
+  position: absolute;
+  right: -35px;
+  top: 35px;
+
+  @media screen and (min-width: 1024px) {
+    display: none;
+  }
+}
+.dropdown-slide {
+  margin-left: -176px;
+
+  width: 180px;
+  height: 0px;
+
+  overflow: hidden;
+  text-align: left;
+
+  position: absolute;
+  display: block;
+
+  z-index: 1000;
+
+  background: #1a4579;
+  border-radius: 10px;
+
+  transition-property: height;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  & a {
+    padding-top: 25px;
+    padding-left: 20px;
+
+    display: grid;
+
+    font-weight: 300;
+    font-size: 18px;
+    color: #ffffff;
+
+    text-decoration: none;
+  }
+}
+
+#mobile-dropdown {
+  opacity: 0;
+  height: 0px;
+
+  &:checked + .dropdown-slide {
+    height: 300px;
+  }
+}
+.mobile-btn-login {
+  margin-top: 50px;
+  margin-left: 20px;
+
+  width: 130px;
+  height: 40px;
+
+  display: block;
+
+  font-size: 14px;
+  font-weight: 300;
+  color: #fcbc7d;
+
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid #fcbc7d;
+
+  &:hover {
+    color: #ffffff;
+
+    border: 1px solid #ffffff;
+  }
+}
+
+.mobile-language {
+  margin-top: 45px;
+
+  width: 120px;
+  height: 50px;
+
+  display: block;
+
+  text-align: center;
+
+  font-size: 30px;
+  color: #ffffff;
+
+  border: none;
+  -webkit-appearance: none;
+  background: transparent;
+}

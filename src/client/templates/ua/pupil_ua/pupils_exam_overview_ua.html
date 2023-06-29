@@ -1,0 +1,49 @@
+{% extends 'ua/pupil_ua/pupils_homepage_ua.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/pupil/pupils_exam_overview.css' %}">
+<div class="card-1">
+    <div class="row">
+        <div class="card-2">
+            <table id="events">
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-exam">Осінній екзамен</button>
+                    </td>
+                    <td>&#128308</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-exam">Весняний екзамен</button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>&#128994</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-exam">Зимовий екзамен</button>
+                    </td>
+                    <td></td>
+                    <td>&#128993</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <button class="btn-exam">Літній екзамен</button>
+                    </td>
+                    <td></td>
+                    <td>&#128993</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-3">
+            <button class="btn">СТАТИСТИКА</button>
+            <button class="btn-go">ВПЕРЕД</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

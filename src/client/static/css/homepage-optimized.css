@@ -1,0 +1,154 @@
+/* ? language */
+/* .current-flag {
+    position: relative;
+    margin-top: 82px;
+  
+    width: 32px;
+    height: 32px;
+  
+    background-image: url(/static/images/uk-flag.svg);
+    background-repeat: no-repeat;
+  
+    cursor: pointer;
+  
+    outline: none;
+    border: none;
+    background-color: transparent;
+    z-index: 1;
+  
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+  .flag-list {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: -40px;
+    top: 20px;
+  
+    transition-property: opacity;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  
+    opacity: 0;
+  }
+  .current-flag:hover .flag-list {
+    opacity: 1;
+  }
+  .flag-list li {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  } */
+/* ? language */
+
+/* ! containers & section */
+
+/* ---------- /Card Main/ ---------- */
+
+/* - - - - - */
+/* How to start */
+
+/* - - - - - */
+/* join section */
+
+/* - - - - - */
+
+
+
+
+/* ! mobile hided */
+.mobile-hide,
+.step-1-image,
+.step-2-image,
+.step-3-image {
+  display: none;
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .card-main {
+    width: 100%;
+  }
+  .logo-header-image {
+    margin-left: 15px;
+    margin-bottom: 100px;
+    margin-right: 260px;
+  }
+  /* - - - - - */
+  .it-profession__text {
+    font-size: 38px;
+    line-height: calc(48 / 38);
+  }
+
+  .who-we-are__firstText {
+    padding-top: 58px;
+  }
+  .who-we-are-text {
+    width: 435px;
+  }
+
+  .card {
+    width: 170px;
+
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .join-card {
+    width: 435px;
+  }
+  .join-section__input {
+    width: 210px;
+  }
+  .join-section__inputContainer {
+    width: 400px;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1680px) {
+  .footer-string {
+    width: 101px;
+
+    margin-top: 129px;
+    margin-right: 44px;
+
+    transform: rotate(-90deg);
+  }
+}
+@media screen and (min-width: 1680px) {
+  .logo-header {
+    margin-left: 110px;
+    margin-right: 124px;
+    margin-top: 82px;
+
+    z-index: 1;
+  }
+
+  /* ? grid */
+  .grid-1 {
+    position: absolute;
+    top: -110px;
+    left: -210px;
+  }
+  .grid-2 {
+    position: absolute;
+    top: -200px;
+    right: 0px;
+  }
+  .grid-3 {
+    position: absolute;
+
+    bottom: -124px;
+    left: -276px;
+  }
+  .grid-4 {
+    position: absolute;
+    right: 0;
+    bottom: -96px;
+
+    /* width: 1000px;
+      height: 500px; */
+  }
+  .grid-1680px {
+    display: none;
+  }
+  /* ? */
+}
+
+

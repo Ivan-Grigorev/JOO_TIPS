@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+
+    font-family: Galatea;
+    font-style: normal;
+
+    background: linear-gradient(135.79deg, #163A65 24.66%, #163A65 87.53%);
+}
+
+:lang(uk) {
+    font-family: Mulish;
+    font-style: normal;
+}
+
+.title {
+    margin-top: 10px;
+    margin-left: 10px;
+
+    width: 200px;
+    height: 50px;
+}
+
+.joo-header {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 200px;
+    height: 110px;
+
+    font-weight: 900;
+    font-size: 100px;
+    font-family: Galatea;
+
+    background-image: linear-gradient(90deg, #F3F3F3 -2.8%, rgba(108, 99, 99, 0) 130.07%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.tips-header {
+    margin-top: -15px;
+    margin-left: 165px;
+
+    font-weight: 100;
+    font-size: 30px;
+    font-family: Galatea;
+
+    text-align: center;
+
+    color: #ABABAB;
+}
+
+.timer {
+    font-weight: 500;
+    font-size: 30px;
+
+    color: #FFFFFF;
+}
+
+table {
+    margin: -40px 20px 0 0;
+
+    float: right;
+
+    border: none;
+}
+
+table td {
+    text-align: right;
+}
+
+table #test_timer {
+    width: 120px;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .timer, .lesson-timer {
+        font-size: 40px;
+    }

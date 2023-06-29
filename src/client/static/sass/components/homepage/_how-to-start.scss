@@ -1,0 +1,51 @@
+.how-to-start-section {
+  text-align: center;
+}
+.how-to-start-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: calc(25 / 20);
+
+  text-transform: uppercase;
+
+  color: #153a65;
+}
+.how-to-start-snake {
+  margin-bottom: 67px;
+  padding-right: 40px;
+}
+.mobile-step {
+  margin-bottom: 40px;
+}
+.how-to-start__stepText {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: calc(23 / 15);
+
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-bottom: 40px;
+
+  color: #153a65;
+}
+.how-to-start__beginButton {
+  width: 144px;
+  height: 43.64px;
+
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: calc(15 / 12);
+
+  text-transform: uppercase;
+
+  border: 1.45455px solid #fcbc7d;
+  border-radius: 6px;
+  color: #13345a;
+  background-color: #fcbc7d;
+}
+.how-to-start__beginButton:hover {
+}

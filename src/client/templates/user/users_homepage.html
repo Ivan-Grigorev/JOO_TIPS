@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/user/users_homepage.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <button class="btn-logout" onclick="location.href='{% url 'log_out' %}'">
+            <i class="fa fa-sign-out" style="font-size: 30px;"></i>
+        </button>
+        <div class="user">
+            <img src="{% static 'images/login.png' %}" height="35" width="40" style="margin-right: 15px;">
+            <input class="user" value="{{ request.user.username }}" id="username" disabled>
+        </div>
+        <button class="btn-price-list" onclick="location.href={% url 'users_store' %}">
+    <!--        <i class="fa fa-industry" aria-hidden="false" style="font-size: 25px;"></i>-->
+            <img src="{% static 'images/dollar.png' %}" height="45" width="45">
+        </button>
+    </header>
+    <div class="sidebar">
+        <div class="left-sidebar">
+            <button class="left-button" onclick="showMessageEvent()">
+                <i class="fa fa-trophy" style="font-size: 25px;"></i>
+            </button>
+            <button class="left-button" onclick="showMessageExam()">
+                <i class="fa fa-pencil-square-o" style="font-size: 25px;"></i>
+            </button>
+            <button class="left-button" onclick="showMessageRating()">
+                <i class="fa fa-graduation-cap" style="font-size: 25px;"></i>
+            </button>
+        </div>
+        <div class="right-sidebar">
+            <button class="right-button" onclick="showMessageMentor()">
+                <i class="fa fa-umbrella" style="font-size: 25px;"></i>
+            </button>
+            <button class="right-button" onclick="showMessagePvp()">
+                <span style="font-weight: 700">PvP</span>
+            </button>
+            <button class="right-button" onclick="showMessageTvt()">
+                <span style="font-weight: 700">TvT</span>
+            </button>
+        </div>
+    </div>
+    <main>
+        {% block content %}
+
+
+        {% endblock %}
+    </main>
+    <footer class="footer">
+        <button class="btn-footer">
+            <i class="fa fa-book" style="font-size: 25px"></i><span class="footer-span"> Themes</span>
+        </button>
+        <button class="btn-footer">
+            <i class="fa fa-check" style="font-size: 25px"></i><span class="footer-span"> Tests</span>
+        </button>
+        <button class="btn-footer">
+            <i class="fa fa-pie-chart" style="font-size: 25px"></i><span class="footer-span"> Results</span>
+        </button>
+        <button class="btn-footer">
+            <i class="fa fa-bar-chart" style="font-size: 25px"></i><span class="footer-span"> Leaders</span>
+        </button>
+        <button class="btn-footer">
+            <i class="fa fa-shopping-cart" style="font-size: 25px"></i><span class="footer-span"> Shop</span>
+        </button>
+    </footer>
+    <script src="{% static 'js/users_message.js' %}"></script>
+</body>
+</html>

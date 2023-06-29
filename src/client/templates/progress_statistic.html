@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" href="{% static 'images/JOO_Tips.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/progress_statistic.css' %}">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/galatea">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+<div class="card-1">
+    <div class="title">
+        Guests {{ guests_counter }} result
+    </div>
+    <div class="row">
+        <div class="card-2">
+            <div>
+                <div>
+                    <label for="test" style="margin-right: 40px;">Points for the test</label>
+                    <input id="test" type="text" value="{{ test_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="today" style="margin-right: 53px;">Points for today</label>
+                    <input id="today" type="text" value="{{ day_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="week" style="margin-right: 60px;">Points for week</label>
+                    <input id="week" type="text" value="{{ week_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="month" style="margin-right: 46px;">Points for month</label>
+                    <input id="month" type="text" value="{{ month_result }}" readonly/>
+                </div>
+                <div>
+                    <label for="year" style="margin-right: 65px;">Points for year</label>
+                    <input id="year" type="text" value="{{ year_result }}" readonly/>
+                </div>
+            </div>
+            <div class="card-3">
+                <table id="users">
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Jack Smith</td>
+                        <td style="text-align: right;">42</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Anna Donald's</td>
+                        <td  style="text-align: right;">31</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Ray Farrel</td>
+                        <td style="text-align: right;">27</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;">Albert Thomson</td>
+                        <td style="text-align: right;">18</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%"><img src="{% static 'images/login.png' %}" height="25" width="30"></td>
+                        <td style="text-align: left;"><b>Guest</b></td>
+                        <td style="text-align: right;">{{ test_result }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="card-4">
+            <div class="statistic-chart">
+            <canvas id="statistic_chart" style="width: 700px; height: 500px;"></canvas>
+            <script type="text/javascript">
+                var xValues = ["1 day", "2 day", "3 day", "4 day", "5 day", "6 day", "7 day"];
+                var yValues = [{{ test_result }}];
+
+                new Chart("statistic_chart", {
+                    type: "line",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                          fill: false,
+                          lineTension: 0,
+                          backgroundColor: "#ACB0B1",
+                          borderColor: "white",
+                          data: yValues,
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                            scales: {
+                                xAxes: [{ticks: {min: 0, max: 7, fontColor: "#ACB0B1"}}],
+                                yAxes: [{ticks: {min: 0, max: 200, fontColor: "#ACB0B1"}}],
+                            }
+                    }
+                });
+            </script>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="btn-signin" onclick="location.href='{% url 'register' %}'">Sign in</button>
+    </div>
+</div>
+</body>
+</html>

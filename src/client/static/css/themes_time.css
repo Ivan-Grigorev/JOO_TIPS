@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+
+    text-align: center;
+
+    font-family: Galatea;
+    font-style: normal;
+
+    background: linear-gradient(135.79deg, #163A65 24.66%, #163A65 87.53%);
+}
+
+:lang(uk) {
+    font-family: Mulish;
+    font-style: normal;
+}
+
+.title {
+    margin-top: 10px;
+    margin-left: 10px;
+
+    width: 200px;
+    height: 50px;
+}
+
+.joo-header {
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 200px;
+    height: 110px;
+
+    font-weight: 900;
+    font-size: 100px;
+    font-family: Galatea;
+
+    background-image: linear-gradient(90deg, #F3F3F3 -2.8%, rgba(108, 99, 99, 0) 130.07%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.tips-header {
+    margin-top: -15px;
+    margin-left: 165px;
+
+    font-weight: 100;
+    font-size: 30px;
+    font-family: Galatea;
+
+    text-align: center;
+
+    color: #ABABAB;
+}
+
+/*----------/Card Main/----------*/
+
+.card-main {
+    margin: 100px auto 0 auto;
+
+    width: 380px;
+    height: 600px;
+
+    text-align: center;
+
+    background: #1A4579;
+    border-radius: 37px;
+}
+
+h1 {
+    padding-top: 30px;
+
+    font-size: 40px;
+    weight: 500;
+    color: #FFFFFF;
+}
+
+.level, .time {
+    width: 330px;
+    height: 60px;
+
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+    color: #FFFFFF;
+
+    background: #163A65;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    border: none;
+}
+
+.btn {
+    margin-top: 70px;
+
+    width: 290px;
+    height: 50px;
+
+    text-align: center;
+
+    font-weight: 300;
+    font-size: 25px;
+
+    color: #123257;
+
+    background: #FCBC7D;
+    border-radius: 8px;
+    border: none;
+}
+
+.btn:hover {
+    color: #FCBC7D;
+
+    background: #123257;
+    border: 2px solid #FCBC7D;
+}
+
+
+@media screen and (min-width: 750px) and (max-width: 1024px) {
+    .card-main {
+        margin: 100px auto 0 auto;
+
+        width: 700px;
+    }
+
+    h1 {
+        padding-top: 50px;
+    }
+
+    .level, .time {
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .card-main {
+        margin: 70px auto 0 auto;
+
+        width: 900px;
+    }
+
+    h1 {
+        padding-top: 50px;
+    }
+
+    .level, .time {
+        width: 400px;
+    }
+}

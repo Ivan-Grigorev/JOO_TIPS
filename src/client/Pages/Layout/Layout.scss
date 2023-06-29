@@ -1,0 +1,47 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+
+  font-family: Mulish, sans-serif;
+  font-style: normal;
+
+  background: #ffffff;
+}
+:lang(uk) {
+  font-family: Mulish;
+  font-style: normal;
+}
+
+a,
+li {
+  text-decoration: none;
+  color: white;
+}
+ul {
+  list-style-type: none;
+}
+
+.container {
+  width: 100%;
+}
+.section {
+  padding-top: 81.5px;
+  padding-bottom: 81.5px;
+}
+/* ! */
+
+.row {
+  position: relative;
+}
+.is-hidden {
+  display: none;
+}

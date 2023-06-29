@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+
+    font-family: Galatea;
+    font-style: normal;
+
+    background: #163A65;
+}
+
+.card-1 {
+    width: 95%;
+    height: 95vh;
+    margin: 2.5% 2.5% 2.5% 2.5%;
+
+    text-align: center;
+
+    background: linear-gradient(92.42deg, #233C42 -4.28%, #44636A 109.69%);
+    border-radius: 20px;
+}
+
+.label {
+    padding-top: 20px;
+
+    font-weight: 200;
+    font-size: 30px;
+
+    color: #ABABAB;
+}
+
+.card-2 {
+    margin-left: auto;
+    margin-right: auto;
+
+    font-weight: 300;
+    font-size: 20px;
+
+    text-align: center;
+
+    color: #ABABAB;
+
+    padding: 5px;
+
+    width: 430px;
+    height: 200px;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+}
+
+.row {
+    display: grid;
+}
+
+.text {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 430px;
+    height: 65px;
+
+    font-weight: 300;
+    font-size: 20px;
+
+    text-align: center;
+
+    color: #ABABAB;
+
+    background: rgba(196, 196, 196, 0.1);
+    border-radius: 30px;
+    border: none;
+}
+
+
+@media screen and (max-width: 600px) {
+    .card-2 {
+        width: 80%;
+        height: auto;
+    }
+
+    .text {
+        width: 80%;
+        height: auto;
+
+        overflow-wrap: break-word;
+    }
+}
