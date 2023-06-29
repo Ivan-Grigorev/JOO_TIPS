@@ -107,7 +107,19 @@ async function login(req, res, next) {
   }
 }
 
+async function logout(req, res, next) {
+  try {
+    await User.findByIdAndUpdate(req.user.id, { token: null }); // set the token
+
+    return res.status(204).end();
+  } catch (error) {
+    console.error(`${error}`.red);
+    return res.status(500).json({ message: "Logout error" });
+  }
+}
+
 module.exports = {
   register,
   login,
+  logout,
 };

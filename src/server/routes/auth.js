@@ -8,4 +8,6 @@ router.post("/register", auth.register);
 
 router.post("/login", middlewares.isUserExist, auth.login);
 
+router.post("/logout", middlewares.auth, auth.logout);
+
 module.exports = router;
