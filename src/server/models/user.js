@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const user = new mongoose.Schema(
   {
-    userIP: {
-      type: String,
-      // required: true,
-    },
     email: {
       type: String,
       required: [true, "Email is required."],
@@ -26,6 +22,15 @@ const user = new mongoose.Schema(
       type: String,
       default: null,
     },
+    firstUserIP: {
+      type: String,
+      required: true,
+    },
+    // lastUserIP: {
+    //   type: String,
+    //   required: true,
+    //   default: null,
+    // },
   },
   { versionKey: false }
 );

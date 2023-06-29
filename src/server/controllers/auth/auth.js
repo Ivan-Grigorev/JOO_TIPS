@@ -5,7 +5,8 @@ require("colors");
 
 async function register(req, res, next) {
   try {
-    const { email, password, userIP } = req.body;
+    const { email, password } = req.body;
+    const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) return next(err);
@@ -13,7 +14,7 @@ async function register(req, res, next) {
       bcrypt.hash(password, salt, (err, hash) => {
         if (err) return next(err);
 
-        const user = { email, password: hash };
+        const user = { email, password: hash, firstUserIP: userIP };
 
         User.create(user);
 
@@ -33,5 +34,5 @@ async function register(req, res, next) {
 }
 
 module.exports = {
-  register
+  register,
 };

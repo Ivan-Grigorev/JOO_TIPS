@@ -15,4 +15,4 @@ async function setIP(req, res, next) {
   }
 }
 
-export { setIP };
+module.exports = setIP;
