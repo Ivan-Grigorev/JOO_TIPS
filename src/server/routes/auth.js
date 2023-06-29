@@ -10,11 +10,18 @@ router.post("/register", joiUser, middlewares.isEmailInUse, auth.register);
 
 router.post(
   "/login",
+  joiUser,
   middlewares.isUserExist,
   middlewares.updateLastIP,
   auth.login
 );
 
-router.post("/logout", middlewares.auth, middlewares.updateLastIP, auth.logout);
+router.post(
+  "/logout",
+  joiUser,
+  middlewares.auth,
+  middlewares.updateLastIP,
+  auth.logout
+);
 
 module.exports = router;
