@@ -1,13 +1,21 @@
 const User = require("../../models/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const parser = require("ua-parser-js");
+
 require("colors");
 
 async function register(req, res, next) {
   try {
     const { email, password } = req.body;
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
-    const browser = req.headers["user-agent"];
+    const ua = parser(req.headers["user-agent"] || "");
+
+    const deviceInfo = {
+      browser: ua.browser.name || "Unknown",
+      os: ua.os.name || "Unknown",
+      device: ua.device.model || "Unknown",
+    };
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) return next(err);
@@ -20,7 +28,9 @@ async function register(req, res, next) {
           password: hash,
           firstUserIP: userIP,
           lastUserIP: userIP,
-          browser,
+          os: deviceInfo.os,
+          device: deviceInfo.device,
+          browser: deviceInfo.browser,
           registrationDate: new Date(),
         };
 
@@ -31,7 +41,9 @@ async function register(req, res, next) {
             email: user.email,
             subscription: user.subscription || "Free trial",
             firstUserIP: userIP,
-            browser,
+            os: user.os,
+            device: user.device,
+            browser: user.browser,
             registrationDate: new Date(),
           },
         });

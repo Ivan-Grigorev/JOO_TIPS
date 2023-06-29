@@ -31,13 +31,21 @@ const user = new mongoose.Schema(
       // required: true,
       default: null,
     },
+    os: {
+      type: String,
+      required: true,
+    },
+    device: {
+      type: String,
+      required: true,
+    },
     browser: {
       type: String,
       required: true,
     },
     registrationDate: {
       type: String,
-      required: true, 
+      required: true,
     },
   },
   { versionKey: false }
