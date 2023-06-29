@@ -6,8 +6,13 @@ const router = express.Router();
 
 router.post("/register", auth.register);
 
-router.post("/login", middlewares.isUserExist, auth.login);
+router.post(
+  "/login",
+  middlewares.isUserExist,
+  middlewares.updateLastIP,
+  auth.login
+);
 
-router.post("/logout", middlewares.auth, auth.logout);
+router.post("/logout", middlewares.auth, middlewares.updateLastIP, auth.logout);
 
 module.exports = router;

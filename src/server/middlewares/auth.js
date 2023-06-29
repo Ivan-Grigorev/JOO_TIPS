@@ -30,17 +30,15 @@ async function auth(req, res, next) {
   }
 }
 
-async function setIP(req, res, next) {
+async function updateLastIP(req, res, next) {
   try {
-    const { userID } = req.params;
-    const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
-
-    await User.findByIdAndUpdate(userID, { userIP });
+    const lastUserIP =
+      req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
+    req.user.IP.lastUserIP = lastUserIP; //? update lastUserIP property for saving when user log in. (next action)
     next();
   } catch (error) {
-    console.error(`Error while middleware getIP: ${error}`.red);
-    next();
-    // return res.status(500).json({ message: "Internal server error" });
+    console.error(`Error while middleware updateLastIP: ${error}`.red);
+    return res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -48,16 +46,15 @@ async function isUserExist(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    if (user === null) {
-      return res.status(401).json({ error: "Email or password is wrong." });
-    }
+    if (user === null) return res.status(401).json({ error: "Email or password is wrong." }); // prettier-ignore
 
     req.user = user; //* store user in the request body
+
+    next();
   } catch (error) {
     console.error(`${error}`.red);
     return res.status(500).json({ error: "Internal server error" });
   }
-  next();
 }
 
-module.exports = { auth, setIP, isUserExist };
+module.exports = { auth, updateLastIP, isUserExist };
