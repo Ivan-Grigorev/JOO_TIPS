@@ -26,6 +26,10 @@ const user = new mongoose.Schema(
       type: String,
       required: true,
     },
+    browser: {
+      type: String,
+      required: true,
+    },
     // lastUserIP: {
     //   type: String,
     //   required: true,
