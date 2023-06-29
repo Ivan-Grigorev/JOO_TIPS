@@ -79,9 +79,7 @@ async function login(req, res, next) {
     bcrypt.compare(password, userPassword, async (err, result) => {
       if (err) return next(err);
 
-      if (result === false) {
-        return res.status(401).json({ error: "Email or password is wrong." });
-      }
+      if (result === false) return res.status(401).json({ error: "Email or password is wrong." }); // prettier-ignore
 
       const token = jwt.sign(
         { id: req.user._id }, // hashed id
@@ -97,7 +95,8 @@ async function login(req, res, next) {
         token: req.user.token,
         user: {
           email: req.user.email,
-          subscription: req.user.subscription || "starter",
+          subscription: req.user.subscription || "Free trial",
+          IP: req.user.IP,
         },
       });
     });
