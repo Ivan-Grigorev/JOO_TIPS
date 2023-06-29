@@ -4,7 +4,7 @@ const middlewares = require("../middlewares/auth.js");
 
 const router = express.Router();
 
-router.post("/register", auth.register);
+router.post("/register", middlewares.alreadyRegistered, auth.register);
 
 router.post(
   "/login",

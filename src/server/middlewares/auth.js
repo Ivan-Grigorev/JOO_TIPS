@@ -42,6 +42,18 @@ async function updateLastIP(req, res, next) {
   }
 }
 
+async function alreadyRegistered(req, res, next) {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (user !== null) return res.status(409).json({ message: "Email in use" });
+
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 async function isUserExist(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -57,4 +69,4 @@ async function isUserExist(req, res, next) {
   }
 }
 
-module.exports = { auth, updateLastIP, isUserExist };
+module.exports = { auth, alreadyRegistered, isUserExist, updateLastIP };
