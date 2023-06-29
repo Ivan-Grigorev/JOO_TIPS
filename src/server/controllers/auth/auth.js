@@ -26,11 +26,15 @@ async function register(req, res, next) {
         const user = {
           email,
           password: hash,
-          firstUserIP: userIP,
-          lastUserIP: userIP,
-          os: deviceInfo.os,
-          device: deviceInfo.device,
-          browser: deviceInfo.browser,
+          IP: {
+            firstUserIP: userIP,
+            lastUserIP: userIP,
+          },
+          deviceInfo: {
+            os: deviceInfo.os,
+            device: deviceInfo.device,
+            browser: deviceInfo.browser,
+          },
           registrationDate: new Date(),
         };
 
@@ -40,10 +44,15 @@ async function register(req, res, next) {
           user: {
             email: user.email,
             subscription: user.subscription || "Free trial",
-            firstUserIP: userIP,
-            os: user.os,
-            device: user.device,
-            browser: user.browser,
+            IP: {
+              firstUserIP: userIP,
+              lastUserIP: userIP,
+            },
+            deviceInfo: {
+              os: user.os,
+              device: user.device,
+              browser: user.browser,
+            },
             registrationDate: new Date(),
           },
         });
