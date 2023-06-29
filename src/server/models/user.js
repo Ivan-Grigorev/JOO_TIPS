@@ -22,26 +22,30 @@ const user = new mongoose.Schema(
       type: String,
       default: null,
     },
-    firstUserIP: {
-      type: String,
-      required: true,
+    IP: {
+      firstUserIP: {
+        type: String,
+        required: true,
+      },
+      lastUserIP: {
+        type: String,
+        // required: true,
+        default: null,
+      },
     },
-    lastUserIP: {
-      type: String,
-      // required: true,
-      default: null,
-    },
-    os: {
-      type: String,
-      required: true,
-    },
-    device: {
-      type: String,
-      required: true,
-    },
-    browser: {
-      type: String,
-      required: true,
+    deviceInfo: {
+      os: {
+        type: String,
+        required: true,
+      },
+      device: {
+        type: String,
+        required: true,
+      },
+      browser: {
+        type: String,
+        required: true,
+      },
     },
     registrationDate: {
       type: String,
