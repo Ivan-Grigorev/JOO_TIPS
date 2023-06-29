@@ -1,5 +1,34 @@
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 require("colors");
+
+async function auth(req, res, next) {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) return res.status(401).json({ message: "Not authorized" });
+
+    const [bearer, token] = authHeader.split(" ", 2);
+    const noBearer = bearer !== "Bearer";
+
+    if (noBearer) return res.status(401).json({ message: "Not authorized" });
+
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      if (err) return res.status(401).json({ message: "Invalid token" });
+
+      const currentUser = await User.findById(decoded.id);
+
+      if (currentUser && currentUser.token === token) {
+        req.user = decoded;
+        return next();
+      }
+      return res.status(401).json({ message: "Not authorized" });
+    });
+  } catch (error) {
+    console.error(`Auth error: ${error}`.red);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 async function setIP(req, res, next) {
   try {
@@ -31,4 +60,4 @@ async function isUserExist(req, res, next) {
   next();
 }
 
-module.exports = { setIP, isUserExist };
+module.exports = { auth, setIP, isUserExist };
