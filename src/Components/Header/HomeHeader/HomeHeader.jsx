@@ -1,7 +1,7 @@
 import Navigation from "./Navigation/Nav";
 import LoginBTN from "./LoginBTN/LoginBTN";
 import HomeMobileHeader from "./HomeMobileHeader";
-import Title from "./TextBlock/Title";
+import HeaderContent from "../HeaderContent/HeaderContent";
 
 const HomeHeader = () => {
   return (
@@ -14,7 +14,8 @@ const HomeHeader = () => {
 
           <HomeMobileHeader />
         </header>
-        <Title />
+
+        <HeaderContent />
       </div>
     </>
   );

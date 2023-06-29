@@ -1,0 +1,23 @@
+@import "/src/scss/variables.scss";
+
+.button {
+  color: $button-text-color;
+  background-color: $button-bg-color;
+
+  font-family: Mulish;
+  font-size: $button-text-font-size;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+
+  width: 135px;
+  height: 40px;
+
+
+  @media screen and (min-width: 768px) {
+    width: 198px;
+    height: 60px;
+
+
+  }
+}
