@@ -26,15 +26,19 @@ const user = new mongoose.Schema(
       type: String,
       required: true,
     },
+    lastUserIP: {
+      type: String,
+      // required: true,
+      default: null,
+    },
     browser: {
       type: String,
       required: true,
     },
-    // lastUserIP: {
-    //   type: String,
-    //   required: true,
-    //   default: null,
-    // },
+    registrationDate: {
+      type: String,
+      required: true, 
+    },
   },
   { versionKey: false }
 );
