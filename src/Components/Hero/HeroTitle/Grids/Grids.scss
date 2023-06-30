@@ -1,0 +1,18 @@
+.grid {
+  position: absolute;
+}
+
+.grid-1 {
+  top: -292px;
+  left: -545px;
+  
+  z-index: 100;
+}
+
+.grid-2 {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+}

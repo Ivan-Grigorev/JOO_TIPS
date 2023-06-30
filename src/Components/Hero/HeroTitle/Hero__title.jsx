@@ -3,7 +3,8 @@ import Cube from "./Cube/Cube";
 import MobileArrow from "./MobileArrow/MobileArrow";
 import Title from "./TextBlock/Title";
 
-import './Hero_title.scss'
+import "./Hero_title.scss";
+import Grids from "./Grids/Grids";
 
 export default function HeroTitle() {
   return (
@@ -13,6 +14,8 @@ export default function HeroTitle() {
       <TryButton text="Спробувати" />
 
       <Cube />
+
+      <Grids />
 
       <MobileArrow />
     </section>
