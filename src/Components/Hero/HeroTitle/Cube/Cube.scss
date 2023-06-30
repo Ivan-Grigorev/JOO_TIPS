@@ -5,7 +5,7 @@
   right: 0;
 
   @media screen and (min-width: 768px) {
-    bottom: -127px;
+    bottom: 28px;
     width: 250px;
   }
 }
@@ -13,4 +13,5 @@
 .large-cube {
   right: 100px;
   bottom: 35%;
+  z-index: 150;
 }

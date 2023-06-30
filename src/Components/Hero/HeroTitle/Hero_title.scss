@@ -4,9 +4,12 @@
   position: relative;
   padding: 0 0 255px 15px;
 
-
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) and (max-width: 1320px) {
     padding: 0 30px 255px 45px;
+  }
+
+  @media screen and (min-width: 1320px) {
+    padding: 0 30px 170px 45px;
   }
 
   background-color: $header-bg-color;

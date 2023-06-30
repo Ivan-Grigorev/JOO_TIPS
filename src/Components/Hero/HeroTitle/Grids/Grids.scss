@@ -5,14 +5,27 @@
 .grid-1 {
   top: -292px;
   left: -545px;
-  
+
   z-index: 100;
+
+  @media screen and (min-width: 768px) and (max-width: 1319px) {
+    left: 178px;
+  }
+
+  @media screen and (min-width: 1320px) {
+    left: auto;
+    right: -363px;
+  }
 }
 
 .grid-2 {
   display: none;
+  z-index: 1;
 
   @media screen and (min-width: 768px) {
     display: block;
+
+    left: -420px;
+    bottom: -116px;
   }
 }

@@ -5,7 +5,7 @@
   background-color: $button-bg-color;
 
   font-family: Mulish;
-  font-size:14px;
+  font-size: 14px;
   font-weight: 700;
   font-style: normal;
   line-height: normal;
@@ -22,6 +22,8 @@
   }
 }
 
-.header-wrap button.try {
-  margin-bottom: 250px;
+.hero__title button.try {
+  position: relative;
+
+  z-index: 100;
 }
