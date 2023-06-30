@@ -11,12 +11,15 @@
   align-items: center;
 
   @media screen and (min-width: 768px) {
-    padding-bottom: 150px;
-    padding-left: 45px;
+    padding: 0 0 150px 45px;
   }
 
   @media screen and (min-width: 1024px) {
-    padding-top: 25px;
+    padding: 25px 0 150px 45px;
+  }
+
+  @media screen and (min-width: 1320px) {
+    padding: 25px 35px 150px 45px;
   }
   @media screen and (min-width: 1680px) {
     justify-content: space-between;
@@ -43,15 +46,17 @@
   display: none;
   z-index: 10;
   margin-right: 125px;
-  @media screen and (min-width: 1440px) {
+
+  @media screen and (min-width: 1320px) {
     display: flex;
-    gap: 21px;
+    gap: 80px;
     font-size: 16px;
   }
 
   @media screen and (min-width: 1680px) {
     gap: 60px;
   }
+
   & a {
     text-transform: uppercase;
   }
@@ -75,7 +80,7 @@
   color: #fcbc7d;
   background-color: transparent;
 
-  @media screen and (min-width: 1440px) {
+  @media screen and (min-width: 1320px) {
     display: block;
   }
 }
