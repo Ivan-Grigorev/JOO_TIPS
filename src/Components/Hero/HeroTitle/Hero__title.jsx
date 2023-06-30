@@ -3,7 +3,7 @@ import Cube from "./Cube/Cube";
 import MobileArrow from "./MobileArrow/MobileArrow";
 import Title from "./TextBlock/Title";
 
-import './Hero_title.css'
+import './Hero_title.scss'
 
 export default function HeroTitle() {
   return (

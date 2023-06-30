@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import bigCube from "./bigCube.svg";
 import smallCube from "./smallCube.svg";
 
-import './Cube.css'
+import './Cube.scss'
 
 export default function Cube() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

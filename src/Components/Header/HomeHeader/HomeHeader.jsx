@@ -10,7 +10,7 @@ const HomeHeader = () => {
 
         <LoginBTN />
 
-        <HomeMobileHeader />
+        {/* <HomeMobileHeader /> */}
       </header>
     </>
   );

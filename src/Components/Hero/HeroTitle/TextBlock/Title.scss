@@ -9,10 +9,22 @@
   & h2,
   & h3 {
     font-weight: 300;
+
+    @media screen and (min-width: 768px) {
+      font-weight: 400;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    padding-right: 35px;
   }
 }
 .textBlock h1 {
   font-size: 38px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 60px;
+  }
 
   & span {
     color: $header-IT-accent;
@@ -21,6 +33,10 @@
 
 .textBlock h2 {
   margin-bottom: 43px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 45px;
+  }
 }
 
 .textBlock h3 {
@@ -29,5 +45,11 @@
 
   @media screen and (min-width: 360px) {
     width: auto;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+
+    margin-bottom: 130px;
   }
 }

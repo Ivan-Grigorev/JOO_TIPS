@@ -1,0 +1,9 @@
+.mobile-cube {
+  position: absolute;
+  right: 0;
+
+  @media screen and (min-width: 768px) {
+    bottom: -127px;
+    width: 250px;
+  }
+}
