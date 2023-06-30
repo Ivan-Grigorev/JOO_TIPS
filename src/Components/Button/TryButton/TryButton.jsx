@@ -3,7 +3,7 @@ import "./TryButton.scss";
 function TryButton({ text }) {
   return (
     <>
-      <button type="button" className="button">
+      <button type="button" className="button try">
         {text} {">"}
       </button>
     </>
