@@ -4,12 +4,40 @@
   display: flex;
   flex-direction: column;
   gap: 80px;
+
+  padding-bottom: 100px;
 }
 
 .hero__what-course-gives ul {
+  position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 80px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 160px;
+  }
+}
+
+.hero__what-course-gives ul li.arrow {
+  position: absolute;
+
+  &-list-item-1 {
+    left: 184px;
+    bottom: 63px;
+  }
+
+  &-list-item-2 {
+    transform: scale(1, -1);
+    right: 193px;
+    bottom: 75px;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    display: none;
+  }
 }
 
 .hero__what-course-gives ul li {
