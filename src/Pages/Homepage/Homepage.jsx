@@ -1,8 +1,6 @@
+import HeroTitle from "../../Components/Hero/HeroTitle/Hero__title";
+
 const Homepage = () => {
-  return (
-    <>
-      <></>
-    </>
-  );
+  return <HeroTitle />;
 };
-export default Homepage
+export default Homepage;

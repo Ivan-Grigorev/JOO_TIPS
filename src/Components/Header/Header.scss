@@ -1,23 +1,14 @@
-.header-wrap {
-  position: relative;
-  // overflow-x: hidden;
-  width: 100%;
-
-  padding: 0 15px;
-  background: linear-gradient(135.79deg, #123054 52.16%, #163a65 87.53%);
-}
-
 .header {
   display: flex;
   justify-content: space-between;
 
+  background: linear-gradient(328deg, #123054 52.16%, #163a65 87.53%);
+
   // on figma margin-bottom is 135px
-  margin-bottom: 115px;
+  padding: 0 0 115px 15px;
   z-index: 10;
 
   align-items: center;
-
-
 
   @media screen and (min-width: 1024px) {
     padding-top: 25px;

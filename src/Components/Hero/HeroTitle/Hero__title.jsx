@@ -3,9 +3,11 @@ import Cube from "./Cube/Cube";
 import MobileArrow from "./MobileArrow/MobileArrow";
 import Title from "./TextBlock/Title";
 
-export default function HeaderContent() {
+import './Hero_title.css'
+
+export default function HeroTitle() {
   return (
-    <>
+    <section className="hero__title">
       <Title />
 
       <TryButton text="Спробувати" />
@@ -13,6 +15,6 @@ export default function HeaderContent() {
       <Cube />
 
       <MobileArrow />
-    </>
+    </section>
   );
 }
