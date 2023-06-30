@@ -1,0 +1,30 @@
+@import "/src/scss/variables.scss";
+
+.hero__what-course-gives {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.hero__what-course-gives ul {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.hero__what-course-gives ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.hero__what-course-gives ul li p {
+  font-size: 12px;
+  font-weight: 500;
+
+  color: $body-titles;
+
+  text-transform: uppercase;
+}
