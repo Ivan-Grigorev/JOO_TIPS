@@ -1,9 +1,12 @@
-.hero__title {
-  padding: 0 0 255px 15px;
+@import "/src/scss/variables.scss";
 
+.hero__title {
+  position: relative;
+  padding: 0 0 255px 15px;
+  
   @media screen and (min-width: 768px) {
     padding: 0 30px 255px 45px;
   }
-
-  background: linear-gradient(135.79deg, #123054 52.16%, #163a65 87.53%);
+  
+  background-color: $header-bg-color;
 }

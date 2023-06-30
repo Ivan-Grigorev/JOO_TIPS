@@ -1,9 +1,16 @@
-.mobile-cube {
+.cube {
   position: absolute;
+}
+.mobile-cube {
   right: 0;
 
   @media screen and (min-width: 768px) {
     bottom: -127px;
     width: 250px;
   }
+}
+
+.large-cube {
+  right: 100px;
+  bottom: 35%;
 }

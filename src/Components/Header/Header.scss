@@ -1,8 +1,11 @@
+@import "/src/scss/variables.scss";
+
 .header {
   display: flex;
   justify-content: space-between;
 
-  background: linear-gradient(328deg, #123054 52.16%, #163a65 87.53%);
+  border: 1px solid transparent;
+  background-color: $header-bg-color;
 
   // on figma margin-bottom is 135px
   padding: 0 0 115px 15px;
@@ -19,7 +22,7 @@
   }
 
   @media screen and (min-width: 1320px) {
-    padding: 25px 35px 150px 45px;
+    padding: 24px 35px 150px 45px;
   }
   @media screen and (min-width: 1680px) {
     justify-content: space-between;
