@@ -5,7 +5,7 @@ import loginUser from "../.././icons/login_user.svg";
 export default function SingupFormFields() {
   return (
     <>
-      <div className="form-field name">
+      <label className="form-field name" htmlFor="name">
         <img className="auth-icons user-image" src={loginUser} alt="user" />
         <input
           type="text"
@@ -14,25 +14,26 @@ export default function SingupFormFields() {
           minlength="3"
           // disabled
         />
-      </div>
-      <div className="form-field e-mail">
+      </label>
+
+      <label className="form-field e-mail" htmlFor="email">
         <img className="auth-icons email-image" src={loginAt} alt="email" />
         <input
-          type="text"
+          type="email"
           name="email"
           placeholder="E-mail"
           // disabled
         />
-      </div>
+      </label>
 
-      <div className="form-field password">
+      <label className="form-field password" htmlFor="password">
         <img
           className="auth-icons lock-image"
           src={loginLockOpen}
           alt="lock icon"
         />
         <input
-          type="text"
+          type="password"
           name="password"
           id="password"
           onkeyup="check();"
@@ -41,12 +42,12 @@ export default function SingupFormFields() {
           maxlength="30"
           // disabled
         />
-      </div>
+      </label>
 
-      <div className="form-field password">
+      <label className="form-field password" htmlFor="confirm-password">
         <img className="auth-icons lock-image" src={loginLockOpen} alt="lock" />
         <input
-          type="text"
+          type="password"
           name="confirm-password"
           id="confirm_password"
           onkeyup="check();"
@@ -54,7 +55,7 @@ export default function SingupFormFields() {
           min="6"
           // disabled
         />
-      </div>
+      </label>
 
       {/* <div className="message" id="message">
                 {% for message in messages %}

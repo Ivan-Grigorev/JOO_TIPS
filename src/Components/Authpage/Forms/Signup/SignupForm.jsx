@@ -5,7 +5,7 @@ export default function SignupForm() {
     <form method="POST">
       {/* {% csrf_token %} */}
       <div className="card-title">
-        <p>Registration</p>
+        <p>Sign up</p>
       </div>
 
       <SingupFormFields />

@@ -10,7 +10,22 @@
   flex-direction: column;
   align-items: center;
 
+  min-height: 100vh;
+
   background: linear-gradient(160deg, #163a65 43.75%, #163a65 100%);
+}
+.signup-login .logo-header {
+  margin: 37px 0 0 0;
+}
+
+.form-field input {
+  outline: transparent;
+  border: 1px solid transparent;
+
+  &:hover {
+    // border-color: #265b9c;
+    border: 1px solid #265b9c;
+  }
 }
 
 .signup-login form {
@@ -207,8 +222,6 @@
 }
 
 .signup-login .form-field {
-  margin: 0 auto 10px auto;
-
   width: 300px;
   height: 60px;
 
@@ -337,91 +350,87 @@
 //   }
 // }
 
-// @media screen and (min-width: 1024px) {
-//   h1 {
-//     margin-top: 20px;
-//   }
+@media screen and (min-width: 1024px) {
+  .signup-login h1 {
+    margin-top: 20px;
+  }
 
-//   h1:lang(uk) {
-//     margin-right: 510px;
-//   }
+  .signup-login h1:lang(uk) {
+    margin-right: 510px;
+  }
 
-//   h1 span {
-//     margin-right: 80px;
-//   }
+  .signup-login h1 span {
+    margin-right: 80px;
+  }
 
-//   .checkbox:checked + label,
-//   .checkbox:not(:checked) + label {
-//     margin: 10px auto 10px auto;
-//   }
+  .signup-login .checkbox:checked + label,
+  .signup-login .checkbox:not(:checked) + label {
+    margin: 10px auto 10px auto;
+  }
 
-//   .card-3d-wrap {
-//     margin: -10px auto 50px auto;
+  .signup-login .card-3d-wrap {
+    width: 570px;
+  }
 
-//     width: 570px;
-//   }
+  .signup-login .card-front,
+  .signup-login .card-back,
+  .signup-login .card-main {
+    margin: 30px auto 0 auto;
 
-//   .card-front,
-//   .card-back,
-//   .card-main {
-//     margin: 30px auto 0 auto;
+    width: 570px;
+    min-height: 500px;
+    height: auto;
+  }
 
-//     width: 570px;
-//     min-height: 500px;
-//     height: auto;
-//   }
+  .signup-login .card-title {
+    padding: 10px;
+  }
 
-//   .card-title {
-//     padding: 10px;
-//   }
+  .signup-login .name,
+  .signup-login .e-mail,
+  .signup-login .password {
+    width: 460px;
+    height: 70px;
+  }
 
-//   .name,
-//   .e-mail,
-//   .password {
-//     width: 460px;
-//     height: 70px;
-//   }
+  .signup-login input {
+    width: 360px;
+    height: 40px;
 
-//   input {
-//     margin-top: 15px;
+    font-size: 25px;
+  }
 
-//     width: 360px;
-//     height: 40px;
+  .signup-login ::placeholder {
+    font-size: 22px;
+  }
 
-//     font-size: 25px;
-//   }
+  .signup-login .message {
+    margin: 0 auto 0 auto;
 
-//   ::placeholder {
-//     font-size: 22px;
-//   }
+    width: 450px;
+    min-height: 50px;
+    height: auto;
 
-//   .message {
-//     margin: 0 auto 0 auto;
+    font-size: 22px;
+  }
 
-//     width: 450px;
-//     min-height: 50px;
-//     height: auto;
+  .signup-login .message:lang(uk) {
+    font-size: 21px;
+  }
 
-//     font-size: 22px;
-//   }
+  .signup-login .btn-login,
+  .signup-login .btn-signup {
+    width: 200px;
+    height: 60px;
 
-//   .message:lang(uk) {
-//     font-size: 21px;
-//   }
+    font-size: 25px;
+  }
 
-//   .btn-login,
-//   .btn-signup {
-//     width: 200px;
-//     height: 60px;
+  .signup-login .btn-signup:lang(uk) {
+    width: 200px;
 
-//     font-size: 25px;
-//   }
+    padding: 0;
 
-//   .btn-signup:lang(uk) {
-//     width: 200px;
-
-//     padding: 0;
-
-//     font-size: 22px;
-//   }
-// }
+    font-size: 22px;
+  }
+}

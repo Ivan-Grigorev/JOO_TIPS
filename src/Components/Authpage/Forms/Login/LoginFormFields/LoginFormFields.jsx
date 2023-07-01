@@ -5,11 +5,12 @@ import loginUser from "../.././icons/login_user.svg";
 export default function LoginFormFields() {
   return (
     <>
-      <div className="form-field name">
+      <label className="form-field name" htmlFor="username">
         <img className="auth-icons user-image" src={loginUser} alt="user" />
         <input name="username" placeholder="Name" required />
-      </div>
-      <div className="form-field password">
+      </label>
+
+      <label className="form-field password" htmlFor="password">
         <img className="auth-icons user-image" src={loginLockOpen} alt="user" />
         <input
           name="password"
@@ -17,7 +18,7 @@ export default function LoginFormFields() {
           placeholder="Password"
           required
         />
-      </div>
+      </label>
       <div className="message">
         {/* {% for message in messages %}
                 {{ message }}
