@@ -2,14 +2,22 @@ import loginAt from "../.././icons/login_at.svg";
 import loginLockOpen from "../.././icons/login_lock_open.svg";
 import loginUser from "../.././icons/login_user.svg";
 
-export default function SingupFormFields() {
+const SingupFormFields = ({
+  handleChange,
+  nameValue,
+  emailValue,
+  passwordValue,
+  confirmPasswordValue,
+}) => {
   return (
     <>
       <label className="form-field name" htmlFor="name">
         <img className="auth-icons user-image" src={loginUser} alt="user" />
         <input
           type="text"
-          name="username"
+          name="name"
+          onChange={handleChange}
+          value={nameValue}
           placeholder="Name"
           minlength="3"
           // disabled
@@ -21,6 +29,8 @@ export default function SingupFormFields() {
         <input
           type="email"
           name="email"
+          onChange={handleChange}
+          value={emailValue}
           placeholder="E-mail"
           // disabled
         />
@@ -35,6 +45,8 @@ export default function SingupFormFields() {
         <input
           type="password"
           name="password"
+          onChange={handleChange}
+          value={passwordValue}
           id="password"
           onkeyup="check();"
           placeholder="Password"
@@ -48,7 +60,9 @@ export default function SingupFormFields() {
         <img className="auth-icons lock-image" src={loginLockOpen} alt="lock" />
         <input
           type="password"
-          name="confirm-password"
+          name="confirmed-password"
+          onChange={handleChange}
+          value={confirmPasswordValue}
           id="confirm_password"
           onkeyup="check();"
           placeholder="Confirm password"
@@ -64,4 +78,6 @@ export default function SingupFormFields() {
             </div> */}
     </>
   );
-}
+};
+
+export default SingupFormFields;

@@ -8,7 +8,7 @@ require("colors");
 
 async function signup(req, res, next) {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
     const ua = parser(req.headers["user-agent"] || "");
     // const macAddress = await getUserMac()
@@ -26,6 +26,7 @@ async function signup(req, res, next) {
         if (err) return next(err);
 
         const user = {
+          name,
           email,
           password: hash,
           IP: {

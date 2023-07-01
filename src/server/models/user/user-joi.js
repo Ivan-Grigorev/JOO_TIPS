@@ -3,6 +3,7 @@ require("colors");
 
 function userJoi(req, res, next) {
   const userSchema = Joi.object({
+    name: Joi.string().min(3),
     email: Joi.string().email().required(),
     password: Joi.string().min(3),
     token: Joi.string(),
