@@ -18,14 +18,25 @@
   }
 }
 
-.grid-2 {
+.grid-2,
+.grid-3 {
   display: none;
   z-index: 1;
+}
 
-  @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
+  .grid-2,
+  .grid-3 {
     display: block;
+  }
 
+  .grid-2 {
     left: -420px;
     bottom: -116px;
+  }
+
+  .grid-3 {
+    left: -381px;
+    top: -627px;
   }
 }
