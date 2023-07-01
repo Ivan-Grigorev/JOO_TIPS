@@ -1,7 +1,17 @@
-const LoginBTN = ({isHidden}) => {
+import { useNavigate } from "react-router-dom/dist";
+
+import "./LoginBtn.scss";
+
+const LoginBTN = () => {
+  const navigation = useNavigate();
+
+  const handleLogIn = () => navigation("/registration");
+
   return (
     <>
-      <button className={`btn-login ${isHidden}`}>Вхiд</button>
+      <button className="btn-login" onClick={handleLogIn}>
+        Вхiд
+      </button>
     </>
   );
 };
