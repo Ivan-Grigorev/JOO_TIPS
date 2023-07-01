@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 // ? Chakra
-// import { ChakraProvider, Spinner } from "@chakra-ui/react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Spinner } from "@chakra-ui/react";
 // ? Redux
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
@@ -16,7 +15,17 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate
+          loading={
+            <Spinner
+              color="#7e0039c2"
+              size={"xl"}
+              emptyColor="gray.200"
+              speed="900ms"
+            />
+          }
+          persistor={persistor}
+        >
           <ChakraProvider>
             <App />
           </ChakraProvider>
