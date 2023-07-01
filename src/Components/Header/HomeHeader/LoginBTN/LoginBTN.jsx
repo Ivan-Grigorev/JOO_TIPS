@@ -1,7 +1,7 @@
 const LoginBTN = ({isHidden}) => {
   return (
     <>
-      <button className={`btn-login ${isHidden}`}>LOG IN</button>
+      <button className={`btn-login ${isHidden}`}>Вхiд</button>
     </>
   );
 };
