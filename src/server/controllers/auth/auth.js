@@ -6,7 +6,7 @@ const { getUserMac } = require("../../utils/utils.js");
 
 require("colors");
 
-async function register(req, res, next) {
+async function signup(req, res, next) {
   try {
     const { email, password } = req.body;
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
@@ -118,7 +118,7 @@ async function logout(req, res, next) {
 }
 
 module.exports = {
-  register,
+  signup,
   login,
   logout,
 };

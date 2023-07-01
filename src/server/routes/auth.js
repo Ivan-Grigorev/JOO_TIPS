@@ -6,7 +6,7 @@ const joiUser = require("../models/user/user-joi.js");
 
 const router = express.Router();
 
-router.post("/register", joiUser, middlewares.isEmailInUse, auth.register);
+router.post("signup", joiUser, middlewares.isEmailInUse, auth.signup);
 
 router.post(
   "/login",
