@@ -3,7 +3,7 @@ import { lazy } from "react";
 
 import Layout from "./Pages/Layout/Layout";
 import Homepage from "./Pages/Homepage/Homepage";
-import SignupLogin from "./Pages/Signup-Login/Signup-Login";
+import AuthPage from "./Pages/Signup-Login/AuthPage";
 import "./scss/global.scss"; // do not delete
 
 const InDev = lazy(() => import("./Pages/InDev/InDev"));
@@ -14,7 +14,7 @@ function App() {
       <Route path="" element={<Layout />}>
         <Route index element={<Homepage />} />
       </Route>
-      <Route path="signup" element={<SignupLogin />} />
+      <Route path="signup" element={<AuthPage />} />
 
       <Route path="*" element={<InDev />} />
     </Routes>

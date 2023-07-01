@@ -5,7 +5,7 @@ import "./LoginBtn.scss";
 const LoginBTN = () => {
   const navigation = useNavigate();
 
-  const handleLogIn = () => navigation("/registration");
+  const handleLogIn = () => navigation("/signup");
 
   return (
     <>

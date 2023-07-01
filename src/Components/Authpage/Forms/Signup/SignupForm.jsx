@@ -56,9 +56,7 @@ const SignupForm = () => {
       />
 
       <div>
-        <button className="btn-signup" onclick="showMessage()">
-          Sign up
-        </button>
+        <button className="btn-signup">Sign up</button>
       </div>
     </form>
   );

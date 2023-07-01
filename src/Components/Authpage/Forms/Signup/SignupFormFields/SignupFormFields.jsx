@@ -19,7 +19,7 @@ const SingupFormFields = ({
           onChange={handleChange}
           value={nameValue}
           placeholder="Name"
-          minlength="3"
+          minLength="3"
           // disabled
         />
       </label>
@@ -48,10 +48,9 @@ const SingupFormFields = ({
           onChange={handleChange}
           value={passwordValue}
           id="password"
-          onkeyup="check();"
           placeholder="Password"
           min="6"
-          maxlength="30"
+          maxLength="30"
           // disabled
         />
       </label>
@@ -64,7 +63,6 @@ const SingupFormFields = ({
           onChange={handleChange}
           value={confirmPasswordValue}
           id="confirm_password"
-          onkeyup="check();"
           placeholder="Confirm password"
           min="6"
           // disabled

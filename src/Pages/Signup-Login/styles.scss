@@ -18,12 +18,11 @@
   margin: 37px 0 0 0;
 }
 
-.form-field input {
+.card-3d-wrap label {
   outline: transparent;
   border: 1px solid transparent;
 
   &:hover {
-    // border-color: #265b9c;
     border: 1px solid #265b9c;
   }
 }
