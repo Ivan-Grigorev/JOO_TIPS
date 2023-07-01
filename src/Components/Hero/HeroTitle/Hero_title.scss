@@ -8,8 +8,12 @@
     padding: 0 30px 255px 45px;
   }
 
-  @media screen and (min-width: 1320px) {
+  @media screen and (min-width: 1320px) and (max-width: 1439px) {
     padding: 0 30px 170px 45px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 0 30px 170px 105px;
   }
 
   background-color: $header-bg-color;
