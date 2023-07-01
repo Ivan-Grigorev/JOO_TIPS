@@ -1,22 +1,20 @@
-import loginAt from ".././icons/login_at.svg";
-import loginLockOpen from ".././icons/login_lock_open.svg";
-import loginUser from ".././icons/login_user.svg";
+import loginAt from "../.././icons/login_at.svg";
+import loginLockOpen from "../.././icons/login_lock_open.svg";
+import loginUser from "../.././icons/login_user.svg";
 
-export default function SignupForm() {
+export default function SingupFormFields() {
   return (
-    <form method="POST">
-      {/* {% csrf_token %} */}
-      <div className="card-title">
-        <p>Registration</p>
-      </div>
+    <>
       <div className="name">
         <img className="user-image" src={loginUser} alt="user" />
         <input name="username" placeholder="Name" minlength="3" disabled />
       </div>
+
       <div className="e-mail">
         <img className="email-image" src={loginAt} alt="email" />
         <input name="email" type="email" placeholder="E-mail" disabled />
       </div>
+
       <div className="password">
         <img className="lock-image" src={loginLockOpen} alt="lock icon" />
         <input
@@ -29,6 +27,7 @@ export default function SignupForm() {
           disabled
         />
       </div>
+
       <div className="password">
         <img className="lock-image" src={loginLockOpen} alt="lock" />
         <input
@@ -40,16 +39,12 @@ export default function SignupForm() {
           disabled
         />
       </div>
+
       {/* <div className="message" id="message">
                 {% for message in messages %}
                     {{ message }}
                 {% endfor %}
             </div> */}
-      <div>
-        <button className="btn-signup" onclick="showMessage()">
-          Sign up
-        </button>
-      </div>
-    </form>
+    </>
   );
 }
