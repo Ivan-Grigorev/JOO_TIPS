@@ -1,5 +1,5 @@
 import SingupFormFields from "./SignupFormFields/SignupFormFields";
-import * as authOperations from "../../../../redux/auth/auth-operations";
+import { register } from "../../../../redux/auth/auth-operations";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
+    dispatch(register({ name, email, password }));
 
     setName(""); // reset
     setEmail(""); // reset
@@ -42,7 +42,6 @@ const SignupForm = () => {
 
   return (
     <form method="POST" onSubmit={handleSubmit}>
-      {/* {% csrf_token %} */}
       <div className="card-title">
         <p>Sign up</p>
       </div>
