@@ -14,8 +14,9 @@ const user = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    username: {
+    avatar: {
       type: String,
+      default: null,
     },
     subscription: {
       type: String,

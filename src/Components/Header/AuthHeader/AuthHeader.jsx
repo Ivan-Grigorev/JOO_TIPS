@@ -1,14 +1,12 @@
-import LogoLink from "../HomeHeader/Navigation/Links/LogoLink";
 import "./AuthHeader.scss";
+import User from "./User/User";
 
-export default function AuthHeader() {
+const AuthHeader = () => {
   return (
     <>
-      <header className="auth-header container">
-        <LogoLink />
-
-        
-      </header>
+      <User />
     </>
   );
-}
+};
+
+export default AuthHeader;
