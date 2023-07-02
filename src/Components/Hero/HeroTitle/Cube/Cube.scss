@@ -1,11 +1,17 @@
 .cube {
   position: absolute;
+  display: none;
+
   z-index: 3;
 }
 .mobile-cube {
   right: 0;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (max-width: 1439px) {
+    display: block;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1439px) {
     bottom: 28px;
     width: 250px;
   }
@@ -15,4 +21,7 @@
   right: 100px;
   bottom: 35%;
 
+  @media screen and (min-width: 1440px) {
+    display: block;
+  }
 }
