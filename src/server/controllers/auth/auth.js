@@ -99,7 +99,6 @@ async function login(req, res, next) {
           avatar: req.user.avatar,
           email: req.user.email,
           subscription: req.user.subscription || "Free trial",
-          IP: req.user.IP,
         },
       });
     });
