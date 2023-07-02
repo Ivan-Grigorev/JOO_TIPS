@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.hero__title *:not(.grid, .cube) {
+  z-index: 5;
+  position: relative;
+}
 html {
   scroll-behavior: smooth;
 }
