@@ -18,7 +18,10 @@ import {
 } from "../../../redux/auth/auth-selectors";
 import "./AuthHeader.scss";
 import styled from "styled-components";
-
+import { useDispatch } from "react-redux";
+// import logout from '../../../'
+import { logOut } from "../../../redux/auth/auth-operations";
+import { useNavigate } from "react-router-dom";
 const Div = styled.div`
   display: flex;
   align-items: center;
@@ -29,6 +32,14 @@ const Div = styled.div`
 export default function AuthHeader() {
   const username = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
+  const dispatch = useDispatch();
+  const navigation = useNavigate();
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+
+    setTimeout(() => navigation("/"), 500);
+  };
 
   return (
     <>
@@ -58,7 +69,7 @@ export default function AuthHeader() {
             <MenuGroup title="Профiль">
               <MenuItem>Мiй профiль</MenuItem>
               <MenuItem>Налаштування</MenuItem>
-              <MenuItem>Вийти</MenuItem>
+              <MenuItem onClick={handleLogOut}>Вийти</MenuItem>
             </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Help">

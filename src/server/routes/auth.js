@@ -16,12 +16,6 @@ router.post(
   auth.login
 );
 
-router.post(
-  "/logout",
-  joiUser,
-  middlewares.auth,
-  middlewares.updateLastIP,
-  auth.logout
-);
+router.post("/logout", joiUser, middlewares.auth, auth.logout);
 
 module.exports = router;

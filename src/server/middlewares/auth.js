@@ -35,6 +35,7 @@ async function updateLastIP(req, res, next) {
     const lastUserIP =
       req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
     req.user.IP.lastUserIP = lastUserIP; //? update lastUserIP property for saving when user log in. (next action)
+
     next();
   } catch (error) {
     console.error(`Error while middleware updateLastIP: ${error}`.red);

@@ -110,6 +110,7 @@ async function login(req, res, next) {
 
 async function logout(req, res, next) {
   try {
+    console.log(req.user);
     await User.findByIdAndUpdate(req.user.id, { token: null }); // set the token
 
     return res.status(204).end();
