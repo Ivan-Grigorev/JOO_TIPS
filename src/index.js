@@ -9,28 +9,40 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 // ? Redux-persist
 import { PersistGate } from "redux-persist/integration/react";
+import { Suspense } from "react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
-        <PersistGate
-          loading={
-            <Spinner
-              color="#7e0039c2"
-              size={"xl"}
-              emptyColor="gray.200"
-              speed="900ms"
-            />
-          }
-          persistor={persistor}
-        >
-          <ChakraProvider>
-            <App />
-          </ChakraProvider>
-        </PersistGate>
-      </Provider>
+      <Suspense
+        fallback={
+          <Spinner
+            color="#7e0039c2"
+            size={"xl"}
+            emptyColor="gray.200"
+            speed="900ms"
+          />
+        }
+      >
+        <Provider store={store}>
+          <PersistGate
+            loading={
+              <Spinner
+                color="#7e0039c2"
+                size={"xl"}
+                emptyColor="gray.200"
+                speed="900ms"
+              />
+            }
+            persistor={persistor}
+          >
+            <ChakraProvider>
+              <App />
+            </ChakraProvider>
+          </PersistGate>
+        </Provider>
+      </Suspense>
     </BrowserRouter>
   </React.StrictMode>
 );
