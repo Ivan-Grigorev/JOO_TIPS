@@ -95,6 +95,8 @@ async function login(req, res, next) {
       res.status(200).json({
         token: req.user.token,
         user: {
+          name: req.user.name,
+          avatar: req.user.avatar,
           email: req.user.email,
           subscription: req.user.subscription || "Free trial",
           IP: req.user.IP,

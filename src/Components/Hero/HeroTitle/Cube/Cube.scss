@@ -1,5 +1,6 @@
 .cube {
   position: absolute;
+  z-index: 3;
 }
 .mobile-cube {
   right: 0;
@@ -13,5 +14,5 @@
 .large-cube {
   right: 100px;
   bottom: 35%;
-  z-index: 150;
+
 }
