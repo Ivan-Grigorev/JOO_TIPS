@@ -1,4 +1,5 @@
 import { RxAvatar } from "react-icons/rx";
+import { BsChevronDown } from "react-icons/bs";
 import {
   Menu,
   MenuButton,
@@ -16,24 +17,42 @@ import {
   selectUserName,
 } from "../../../redux/auth/auth-selectors";
 import "./AuthHeader.scss";
+import styled from "styled-components";
+
+const Div = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+`;
 
 export default function AuthHeader() {
   const username = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
 
-  console.log(userAvatar);
   return (
     <>
       <div className="account-menu">
-        {userAvatar ? (
+        <RxAvatar className="user-avatar" />
+        {/* {userAvatar ? (
           <img src={userAvatar} alt="your avatar" />
         ) : (
           <RxAvatar className="user-avatar" />
-        )}
+        )} */}
 
         <Menu>
-          <MenuButton as={Button} colorScheme="pink">
-            {username}
+          <MenuButton
+            as={Button}
+            width="100px"
+            colorScheme="#123054"
+            color="#fcbc7d"
+            border="1px"
+            borderColor="#fcbc7d"
+            _hover={{ bg: "#fcbc7d", color: "#123054" }}
+          >
+            <Div>
+              {username} <BsChevronDown />
+            </Div>
           </MenuButton>
           <MenuList>
             <MenuGroup title="Профiль">

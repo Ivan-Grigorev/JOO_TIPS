@@ -96,7 +96,7 @@ async function login(req, res, next) {
         token: req.user.token,
         user: {
           name: req.user.name,
-          avatar: req.user.avatar || null,
+          avatar: req.user.avatar,
           email: req.user.email,
           subscription: req.user.subscription || "Free trial",
         },
