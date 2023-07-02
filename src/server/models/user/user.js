@@ -30,6 +30,14 @@ const user = new mongoose.Schema(
       type: String,
       default: null,
     },
+    type: {
+      type: String,
+      enum: ["School", "Simple"],
+    },
+    status: {
+      type: String,
+      enum: ["Premium", "Free"],
+    },
     IP: {
       firstUserIP: {
         type: String,

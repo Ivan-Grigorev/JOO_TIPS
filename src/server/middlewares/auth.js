@@ -16,12 +16,13 @@ async function auth(req, res, next) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) return res.status(401).json({ message: "Invalid token" });
 
-      const currentUser = await User.findById(decoded.id);
+      const currentUser = await User.find({ email: decoded.email });
 
-      if (currentUser && currentUser.token === token) {
+      if (currentUser && currentUser[0].token === token) {
         req.user = decoded;
         return next();
       }
+
       return res.status(401).json({ message: "Not authorized" });
     });
   } catch (error) {
@@ -48,6 +49,8 @@ async function isEmailInUse(req, res, next) {
     const user = await User.findOne({ email: req.body.email });
 
     if (user !== null) return res.status(409).json({ message: "Email in use" });
+
+    req.user = { ...req.body };
 
     next();
   } catch (error) {

@@ -10,6 +10,8 @@
   flex-direction: column;
   align-items: center;
 
+  overflow-y: hidden;
+
   min-height: 100vh;
 
   background: linear-gradient(160deg, #163a65 43.75%, #163a65 100%);

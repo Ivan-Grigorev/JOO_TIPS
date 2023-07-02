@@ -25,9 +25,18 @@ async function signup(req, res, next) {
       bcrypt.hash(password, salt, (err, hash) => {
         if (err) return next(err);
 
+        const token = jwt.sign(
+          { email: req.user.email }, // hashed email
+          process.env.JWT_SECRET, // secret password
+          { expiresIn: "12h" } // life-time of the token
+        );
+
+        req.user.token = token;
+
         const user = {
           name,
           email,
+          token,
           password: hash,
           IP: {
             firstUserIP: userIP,
@@ -46,12 +55,10 @@ async function signup(req, res, next) {
 
         return res.status(201).json({
           user: {
+            name: user.name,
             email: user.email,
+            token,
             subscription: user.subscription || "Free trial",
-            IP: {
-              firstUserIP: userIP,
-              lastUserIP: userIP,
-            },
             deviceInfo: {
               os: user.os || "Unknown os",
               device: user.device || "Unknown device",
@@ -83,7 +90,7 @@ async function login(req, res, next) {
       if (result === false) return res.status(401).json({ error: "Email or password is wrong." }); // prettier-ignore
 
       const token = jwt.sign(
-        { id: req.user._id }, // hashed id
+        { email: req.user.email }, // hashed email
         process.env.JWT_SECRET, // secret password
         { expiresIn: "12h" } // life-time of the token
       );
@@ -110,8 +117,7 @@ async function login(req, res, next) {
 
 async function logout(req, res, next) {
   try {
-    console.log(req.user);
-    await User.findByIdAndUpdate(req.user.id, { token: null }); // set the token
+    await User.findOneAndUpdate({ email: req.user.email }, { token: null }); // set the token
 
     return res.status(204).end();
   } catch (error) {

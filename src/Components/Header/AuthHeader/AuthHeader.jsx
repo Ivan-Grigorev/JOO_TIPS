@@ -75,6 +75,9 @@ export default function AuthHeader() {
             <MenuGroup title="Help">
               <MenuItem>FAQ</MenuItem>
             </MenuGroup>
+            <MenuGroup title="Пiдписка">
+              <MenuItem>Перейти на премiум пiдписку!</MenuItem>
+            </MenuGroup>
           </MenuList>
         </Menu>
       </div>
