@@ -1,15 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { logIn, logOut, refreshUser, register } from './auth-operations';
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  // getUserAvatar,
+  logIn,
+  logOut,
+  refreshUser,
+  register,
+} from "./auth-operations";
 
 const initialState = {
-  user: { name: null, email: null },
+  user: { name: null, email: null, avatar: null },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   extraReducers: {
     [register.fulfilled](state, action) {
@@ -38,6 +44,12 @@ const authSlice = createSlice({
     [refreshUser.rejected](state) {
       state.isRefreshing = false;
     },
+    // [getUserAvatar.fulfilled](state, action) {
+    //   state.user.avatar = action.payload;
+    // },
+    // [getUserAvatar.pending](state) {
+    //   state.isRefreshing = true;
+    // },
   },
 });
 

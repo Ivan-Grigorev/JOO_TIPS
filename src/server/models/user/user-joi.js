@@ -5,6 +5,7 @@ function userJoi(req, res, next) {
   const userSchema = Joi.object({
     name: Joi.string().min(3),
     email: Joi.string().email().required(),
+    avatar: Joi.string().min(5),
     password: Joi.string().min(3),
     token: Joi.string(),
     subscription: Joi.string(),

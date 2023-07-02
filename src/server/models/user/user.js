@@ -22,6 +22,10 @@ const user = new mongoose.Schema(
       enum: ["Free trial", "school"],
       default: "Free trial",
     },
+    avatar: {
+      type: String,
+      default: null,
+    },
     token: {
       type: String,
       default: null,

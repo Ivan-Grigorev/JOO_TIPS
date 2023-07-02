@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import User from "../../server/models/user/user";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -66,5 +67,19 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+// const getUserAvatar = createAsyncThunk(
+//   "auth/login",
+//   async (credentials, thunkAPI) => {
+//     try {
+//       console.log("credentials", credentials);
+//       const user = await User.findOne({ email: credentials });
+//       console.log("user in getUserAvatar", user);
+//     } catch (error) {
+//       console.error(`Error getting user avatar: ${error.message}`);
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );
 
 export { token, register, logIn };

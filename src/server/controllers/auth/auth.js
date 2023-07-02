@@ -74,9 +74,9 @@ async function login(req, res, next) {
     const userPassword = req.user.password; //* take a password from the user, stored on the past middleware
     const userVerify = req.user.verify; //* take an verify status from the user
 
-    if (userVerify === false) {
-      req.status(400).json({ message: "Not verified." });
-    }
+    if (userVerify === false)
+      return req.status(400).json({ message: "Not verified." });
+
     bcrypt.compare(password, userPassword, async (err, result) => {
       if (err) return next(err);
 
@@ -96,7 +96,7 @@ async function login(req, res, next) {
         token: req.user.token,
         user: {
           name: req.user.name,
-          avatar: req.user.avatar,
+          avatar: req.user.avatar || null,
           email: req.user.email,
           subscription: req.user.subscription || "Free trial",
         },
