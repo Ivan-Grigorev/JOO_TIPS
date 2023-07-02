@@ -3,6 +3,7 @@ import arrow from "./MobileArrow.svg";
 import "./MobileArrow.css";
 
 export default function MobileArrow() {
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {

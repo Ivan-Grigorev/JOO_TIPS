@@ -1,19 +1,22 @@
-import { useNavigate } from "react-router-dom/dist";
+import { Link } from "react-router-dom/dist";
 
 import "./LoginBtn.scss";
 
+import { memo } from "react";
+
 const LoginBTN = () => {
-  const navigation = useNavigate();
-
-  const handleLogIn = () => navigation("/signup");
-
   return (
     <>
-      <button className="btn-login" onClick={handleLogIn}>
-        Вхiд
-      </button>
+      <Link to="/signup">
+        <button
+          className="btn-login"
+          // onClick={handleLogIn}
+        >
+          Вхiд
+        </button>
+      </Link>
     </>
   );
 };
 
-export default LoginBTN;
+export default memo(LoginBTN);

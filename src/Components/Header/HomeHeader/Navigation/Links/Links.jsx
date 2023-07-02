@@ -1,13 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { memo } from "react";
+import { Link } from "react-router-dom";
 
 const Links = () => {
   return (
     <>
-      <NavLink to="#who-we-are">Про нас</NavLink>
-      <NavLink to="#start-learning">Розпочати навчання</NavLink>
-      <NavLink to="#for-schools">Для школи</NavLink>
-      <NavLink to="#for-teams">Для команди</NavLink>
+      <Link to="#who-we-are">Про нас</Link>
+      <Link to="#start-learning">Розпочати навчання</Link>
+      <Link to="#for-schools">Для школи</Link>
+      <Link to="#for-teams">Для команди</Link>
     </>
   );
 };
-export default Links;
+export default memo(Links);

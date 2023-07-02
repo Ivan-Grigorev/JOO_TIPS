@@ -1,5 +1,6 @@
 import Links from "./Links/Links";
 import LogoLink from "./Links/LogoLink";
+import { memo } from "react";
 
 const Navigation = () => {
   return (
@@ -13,4 +14,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default memo(Navigation);

@@ -1,6 +1,7 @@
 import "./TryButton.scss";
+import { memo } from "react";
 
-function TryButton({ text }) {
+const TryButton = memo(({ text }) => {
   return (
     <>
       <button type="button" className="button try">
@@ -8,6 +9,6 @@ function TryButton({ text }) {
       </button>
     </>
   );
-}
+});
 
 export default TryButton;

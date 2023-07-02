@@ -5,8 +5,9 @@ import Title from "./TextBlock/Title";
 
 import "./Hero_title.scss";
 import Grids from "./Grids/Grids";
+import { memo } from "react";
 
-export default function HeroTitle() {
+const HeroTitle = memo(() => {
   return (
     <section className="hero__title">
       <Title />
@@ -20,4 +21,6 @@ export default function HeroTitle() {
       <MobileArrow />
     </section>
   );
-}
+});
+
+export default HeroTitle;

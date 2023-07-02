@@ -8,4 +8,4 @@ const LogoLink = () => {
     </Link>
   );
 };
-export default LogoLink
+export default LogoLink;

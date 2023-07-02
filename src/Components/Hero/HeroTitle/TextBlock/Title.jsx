@@ -1,5 +1,9 @@
 import "./Title.scss";
-const Title = () => {
+
+import { memo } from "react";
+
+const Title = memo(() => {
+
   return (
     <>
       <div className="textBlock">
@@ -15,6 +19,6 @@ const Title = () => {
       </div>
     </>
   );
-};
+});
 
 export default Title;

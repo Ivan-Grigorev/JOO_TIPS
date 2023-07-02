@@ -1,7 +1,7 @@
 import grid from "./grid.png";
 import "./Grids.scss";
 
-export default function Grids() {
+const Grids = () => {
   return (
     <>
       <img src={grid} alt="decoration grid icon" className="grid grid-1" />
@@ -9,4 +9,6 @@ export default function Grids() {
       <img src={grid} alt="decoration grid icon" className="grid grid-3" />
     </>
   );
-}
+};
+
+export default Grids;

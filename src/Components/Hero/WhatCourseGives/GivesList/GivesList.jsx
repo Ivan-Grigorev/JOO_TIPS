@@ -4,7 +4,9 @@ import optimization from "./icons/optimization 1.svg";
 import target from "./icons/target 1.svg";
 import arrow from "./icons/Arrow 6.svg";
 
-export default function GivesList() {
+import { memo } from "react";
+
+const GivesList = () => {
   return (
     <>
       <ul>
@@ -33,4 +35,6 @@ export default function GivesList() {
       </ul>
     </>
   );
-}
+};
+
+export default memo(GivesList);

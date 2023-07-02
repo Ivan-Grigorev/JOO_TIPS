@@ -3,8 +3,12 @@ import bigCube from "./bigCube.svg";
 import smallCube from "./smallCube.svg";
 
 import "./Cube.scss";
+import { memo } from "react";
 
-export default function Cube() {
+const Cube = () => {
+  // console.log("Im render again (Cube)");
+  // TODO обязательно поставить медиаправила, вместо этого стейта
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -38,4 +42,6 @@ export default function Cube() {
       )}
     </>
   );
-}
+};
+
+export default memo(Cube);
