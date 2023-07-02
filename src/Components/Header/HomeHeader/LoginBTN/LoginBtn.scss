@@ -23,8 +23,7 @@
   transition-duration: 350ms;
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 
-  &:hover,
-  &:focus {
+  &:is(:hover, :focus) {
     color: $button-hover-text-color;
     background-color: $button-hover-bg-color;
   }
