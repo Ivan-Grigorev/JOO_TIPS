@@ -4,4 +4,8 @@
   bottom: 17px;
 
   width: 165px;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 }
