@@ -1,14 +1,13 @@
 import LogoLink from "../HomeHeader/Navigation/Links/LogoLink";
+import { RxAvatar } from "react-icons/rx";
 import "./AuthHeader.scss";
 
 export default function AuthHeader() {
   return (
     <>
-      <header className="auth-header container">
-        <LogoLink />
-
-        
-      </header>
+        <div className="avatar-container">
+          <RxAvatar className="user-avatar" />
+        </div>
     </>
   );
 }

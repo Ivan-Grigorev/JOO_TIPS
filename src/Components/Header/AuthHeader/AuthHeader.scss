@@ -10,3 +10,11 @@
   border: 1px solid transparent;
   background-color: $auth-header-bg-color;
 }
+
+.user-avatar {
+  width: 55px;
+  height: 55px;
+  color: white;
+
+  cursor: pointer;
+}

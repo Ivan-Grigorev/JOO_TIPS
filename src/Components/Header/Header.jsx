@@ -2,10 +2,12 @@ import HomeHeader from "./HomeHeader/HomeHeader";
 
 import "./Header.scss";
 import { useLocation } from "react-router";
-import AuthHeader from "./AuthHeader/AuthHeader";
+
+import { selectIsLoggedIn } from "../../redux/auth/auth-selectors";
 
 const Header = () => {
   const location = useLocation();
+
   const homepage = location.pathname === "/";
   const authpage = location.pathname === "/registration";
 
@@ -15,6 +17,7 @@ const Header = () => {
       {/* {!authpage && <HomeHeader />} */}
       {/* {!authpage && <AuthHeader />} */}
       <HomeHeader />
+      
     </>
   );
 };
