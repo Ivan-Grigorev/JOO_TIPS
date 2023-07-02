@@ -14,12 +14,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { selectUser, selectUserName } from "../../../redux/auth/auth-selectors";
+import { selectUserName } from "../../../redux/auth/auth-selectors";
 
 export default function AuthHeader() {
   const username = useSelector(selectUserName);
-  console.log(useSelector(selectUser));
-  console.log(useSelector(selectUserName));
 
   return (
     <>
