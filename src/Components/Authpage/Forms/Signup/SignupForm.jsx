@@ -37,7 +37,7 @@ const SignupForm = () => {
     setEmail(""); // reset
     setPassword(""); // reset
 
-    navigate("/");
+    setTimeout(() => navigate("/"), 500);
   };
 
   return (
