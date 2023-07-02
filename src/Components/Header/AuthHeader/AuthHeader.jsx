@@ -1,7 +1,4 @@
-import LogoLink from "../HomeHeader/Navigation/Links/LogoLink";
 import { RxAvatar } from "react-icons/rx";
-import "./AuthHeader.scss";
-
 import {
   Menu,
   MenuButton,
@@ -14,27 +11,38 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { selectUserName } from "../../../redux/auth/auth-selectors";
+import {
+  selectUserAvatar,
+  selectUserName,
+} from "../../../redux/auth/auth-selectors";
+import "./AuthHeader.scss";
 
 export default function AuthHeader() {
   const username = useSelector(selectUserName);
+  const userAvatar = useSelector(selectUserAvatar);
 
+  console.log(userAvatar);
   return (
     <>
-      <div className="avatar-container">
+      <div className="account-menu">
+        {userAvatar ? (
+          <img src={userAvatar} alt="your avatar" />
+        ) : (
+          <RxAvatar className="user-avatar" />
+        )}
+
         <Menu>
           <MenuButton as={Button} colorScheme="pink">
             {username}
-            {/* <RxAvatar className="user-avatar" /> */}
           </MenuButton>
           <MenuList>
-            <MenuGroup title="Profile">
-              <MenuItem>My Account</MenuItem>
-              <MenuItem>Payments </MenuItem>
+            <MenuGroup title="Профiль">
+              <MenuItem>Мiй профiль</MenuItem>
+              <MenuItem>Налаштування</MenuItem>
+              <MenuItem>Вийти</MenuItem>
             </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Help">
-              <MenuItem>Docs</MenuItem>
               <MenuItem>FAQ</MenuItem>
             </MenuGroup>
           </MenuList>

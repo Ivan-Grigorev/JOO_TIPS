@@ -1,5 +1,11 @@
 @import "/src/scss/variables.scss";
 
+.account-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .user-avatar {
   width: 55px;
   height: 55px;
