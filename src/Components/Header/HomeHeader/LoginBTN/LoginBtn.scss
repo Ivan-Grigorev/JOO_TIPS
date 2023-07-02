@@ -1,3 +1,5 @@
+@import "/src/scss/variables.scss";
+
 .btn-login {
   display: none;
   z-index: 10;
@@ -5,7 +7,7 @@
   width: 99px;
   height: 47px;
 
-  border: 1.5px solid #fcbc7d;
+  border: 1.5px solid $button-bg-color;
   border-radius: 8px;
 
   font-family: "Mulish";
@@ -14,8 +16,18 @@
   font-size: 14px;
   line-height: calc(18 / 14);
 
-  color: #fcbc7d;
+  color: $button-text-color;
   background-color: transparent;
+
+  transition-property: color, background-color;
+  transition-duration: 350ms;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+
+  &:hover,
+  &:focus {
+    color: $button-hover-text-color;
+    background-color: $button-hover-bg-color;
+  }
 
   @media screen and (min-width: 1320px) {
     display: block;
