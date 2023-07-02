@@ -6,7 +6,8 @@
   box-sizing: border-box;
 }
 
-.hero__title *:not(.grid, .cube) {
+.hero__title *:not(.grid, .cube),
+header *:not(.grid, .cube) {
   z-index: 5;
   position: relative;
 }
