@@ -55,7 +55,7 @@ const SignupForm = () => {
       />
 
       <div>
-        <button className="btn-signup" type="submit">Sign up</button>
+        <button className="btn-signup">Sign up</button>
       </div>
     </form>
   );
