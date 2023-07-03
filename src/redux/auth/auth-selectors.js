@@ -7,3 +7,5 @@ export const selectUserEmail = (state) => state.auth.user.email;
 export const selectUserAvatar = (state) => state.auth.user.avatar;
 
 export const selectUser = (state) => state.auth.user;
+
+export const selectUserError = (state) => state.auth.error;

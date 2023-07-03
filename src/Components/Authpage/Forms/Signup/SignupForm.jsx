@@ -1,8 +1,9 @@
 import SingupFormFields from "./SignupFormFields/SignupFormFields";
 import { register } from "../../../../redux/auth/auth-operations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
 import { useState } from "react";
+import { selectUserError } from "../../../../redux/auth/auth-selectors";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
+  const error = useSelector(selectUserError);
+
+  error && console.log(error);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -29,15 +33,15 @@ const SignupForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(register({ name, email, password }));
+    await dispatch(register({ name, email, password }));
 
     setName(""); // reset
     setEmail(""); // reset
     setPassword(""); // reset
 
-    setTimeout(() => navigate("/"), 500);
+    // setTimeout(() => navigate("/"), 500);
   };
 
   return (
