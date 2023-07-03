@@ -15,8 +15,6 @@ const SignupForm = () => {
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const error = useSelector(selectUserError);
 
-  error && console.log(error);
-
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
       case "name":
@@ -35,13 +33,12 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(register({ name, email, password }));
+    dispatch(register({ name, email, password }));
 
     setName(""); // reset
     setEmail(""); // reset
     setPassword(""); // reset
 
-    // setTimeout(() => navigate("/"), 500);
   };
 
   return (
