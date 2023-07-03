@@ -87,7 +87,7 @@ async function login(req, res, next) {
     bcrypt.compare(password, userPassword, async (err, result) => {
       if (err) return next(err);
 
-      if (result === false) return res.status(401).json({ error: "Email or password is wrong." }); // prettier-ignore
+      if (result === false) return res.status(401).json({ message: "Email or password is wrong." }); // prettier-ignore
 
       const token = jwt.sign(
         { email: req.user.email }, // hashed email
