@@ -28,7 +28,7 @@ const LoginForm = () => {
     setEmail(""); // reset
     setPassword(""); // reset
 
-    // dot need a navigate to homepage, because authpage is a restricted route (see App.jsx)
+    // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
   };
 
   return (
