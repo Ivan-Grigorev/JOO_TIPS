@@ -18,12 +18,12 @@ const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post("/users/signup", credentials);
-      
+
       token.set(data.user.token);
 
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -34,7 +34,7 @@ const logIn = createAsyncThunk("auth/login", async (credentials, thunkAPI) => {
     token.set(data.token);
     return data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 });
 
@@ -43,7 +43,7 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await axios.post("/users/logout");
     token.unset();
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 });
 
@@ -65,7 +65,7 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get("/users/current");
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -79,7 +79,8 @@ export const refreshUser = createAsyncThunk(
 //       console.log("user in getUserAvatar", user);
 //     } catch (error) {
 //       console.error(`Error getting user avatar: ${error.message}`);
-//       return thunkAPI.rejectWithValue(error.message);
+//                  return thunkAPI.rejectWithValue(error.response.data.message);
+
 //     }
 //   }
 // );
