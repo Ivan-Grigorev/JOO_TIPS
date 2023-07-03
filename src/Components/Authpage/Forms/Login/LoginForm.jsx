@@ -1,13 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginFormFields from "./LoginFormFields/LoginFormFields";
 import { useState } from "react";
 import { logIn } from "../../../../redux/auth/auth-operations";
+import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const errors = useSelector(selectUserErrors);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -25,9 +27,6 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(logIn({ email, password }));
 
-    setEmail(""); // reset
-    setPassword(""); // reset
-
     // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
   };
 
@@ -42,6 +41,7 @@ const LoginForm = () => {
           handleChange={handleChange}
           emailValue={email}
           password={password}
+          errors={errors.login}
         />
 
         <button className="btn-login" type="submit">

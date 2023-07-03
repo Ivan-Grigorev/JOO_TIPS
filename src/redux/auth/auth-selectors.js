@@ -8,4 +8,4 @@ export const selectUserAvatar = (state) => state.auth.user.avatar;
 
 export const selectUser = (state) => state.auth.user;
 
-export const selectUserError = (state) => state.auth.error;
+export const selectUserErrors = (state) => state.auth.error;

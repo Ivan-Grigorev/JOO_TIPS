@@ -1,9 +1,9 @@
-import SingupFormFields from "./SignupFormFields/SignupFormFields";
+import SignupFormFields from "./SignupFormFields/SignupFormFields";
 import { register } from "../../../../redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
 import { useState } from "react";
-import { selectUserError } from "../../../../redux/auth/auth-selectors";
+import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,8 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
-  const error = useSelector(selectUserError);
+
+  const errors = useSelector(selectUserErrors);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -35,12 +36,7 @@ const SignupForm = () => {
     e.preventDefault();
     dispatch(register({ name, email, password }));
 
-    setName(""); // reset
-    setEmail(""); // reset
-    setPassword(""); // reset
-
     // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
-
   };
 
   return (
@@ -49,12 +45,13 @@ const SignupForm = () => {
         <p>Sign up</p>
       </div>
 
-      <SingupFormFields
+      <SignupFormFields
         handleChange={handleChange}
         nameValue={name}
         emailValue={email}
         password={password}
         confirmPasswordValue={confirmedPassword}
+        errors={errors.signup}
       />
 
       <div>

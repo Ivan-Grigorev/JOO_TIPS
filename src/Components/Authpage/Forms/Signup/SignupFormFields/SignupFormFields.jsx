@@ -2,12 +2,13 @@ import loginAt from "../.././icons/login_at.svg";
 import loginLockOpen from "../.././icons/login_lock_open.svg";
 import loginUser from "../.././icons/login_user.svg";
 
-const SingupFormFields = ({
+const SignupFormFields = ({
   handleChange,
   nameValue,
   emailValue,
   passwordValue,
   confirmPasswordValue,
+  errors,
 }) => {
   return (
     <>
@@ -20,7 +21,6 @@ const SingupFormFields = ({
           value={nameValue}
           placeholder="Name"
           minLength="3"
-          // disabled
         />
       </label>
 
@@ -32,7 +32,6 @@ const SingupFormFields = ({
           onChange={handleChange}
           value={emailValue}
           placeholder="E-mail"
-          // disabled
         />
       </label>
 
@@ -51,7 +50,6 @@ const SingupFormFields = ({
           placeholder="Password"
           min="6"
           maxLength="30"
-          // disabled
         />
       </label>
 
@@ -69,13 +67,9 @@ const SingupFormFields = ({
         />
       </label>
 
-      {/* <div className="message" id="message">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div> */}
+      <div className="message" id="message">{errors} </div>
     </>
   );
 };
 
-export default SingupFormFields;
+export default SignupFormFields;

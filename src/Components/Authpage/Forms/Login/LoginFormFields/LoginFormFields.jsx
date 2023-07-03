@@ -5,6 +5,7 @@ export default function LoginFormFields({
   handleChange,
   emailValue,
   passwordValue,
+  errors,
 }) {
   return (
     <>
@@ -13,6 +14,7 @@ export default function LoginFormFields({
         <input
           name="email"
           placeholder="Email"
+          type="email"
           onChange={handleChange}
           value={emailValue}
           required
@@ -35,11 +37,7 @@ export default function LoginFormFields({
         />
       </label>
 
-      <div className="message">
-        {/* {% for message in messages %}
-                {{ message }}
-            {% endfor %} */}
-      </div>
+      <div className="message">{errors}</div>
     </>
   );
 }
