@@ -26,12 +26,9 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(logIn({ email, password }));
-    // dispatch(getUserAvatar(email));
 
     setEmail(""); // reset
     setPassword(""); // reset
-
-    setTimeout(() => navigate("/"), 500);
   };
 
   return (
