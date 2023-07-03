@@ -1,12 +1,10 @@
 import { useDispatch } from "react-redux";
 import LoginFormFields from "./LoginFormFields/LoginFormFields";
-import { useNavigate } from "react-router-dom/dist";
 import { useState } from "react";
 import { logIn } from "../../../../redux/auth/auth-operations";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +27,8 @@ const LoginForm = () => {
 
     setEmail(""); // reset
     setPassword(""); // reset
+
+    // dot need a navigate to homepage, because authpage is a restricted route (see App.jsx)
   };
 
   return (
