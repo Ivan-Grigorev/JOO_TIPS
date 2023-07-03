@@ -4,20 +4,26 @@
 
   z-index: 3;
 }
+
 .mobile-cube {
   right: 0;
 
-  @media screen and (max-width: 1439px) {
+  @media screen and (max-width: 767px) {
     display: block;
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 1439px) {
-    bottom: 28px;
-    width: 250px;
   }
 }
 
-.large-cube {
+.tablet-cube {
+  bottom: 28px;
+  right: 0;
+  
+  width: 250px;
+  @media screen and (min-width: 768px) and (max-width: 1439px) {
+    display: block;
+  }
+}
+
+.desktop-cube {
   right: 100px;
   bottom: 35%;
 

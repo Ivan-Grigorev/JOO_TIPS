@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import bigCube from "./bigCube.svg";
-import smallCube from "./smallCube.svg";
+import mobileCube from "./cube-w380px.png";
+import tabletCube from "./cube-w768px.png";
+import desktopCube from "./cube-w1440px.png";
 
 import "./Cube.scss";
 import { memo } from "react";
@@ -11,14 +11,24 @@ const Cube = () => {
   return (
     <>
       <img
-        src={smallCube}
-        alt="a decoration small/medium cube"
+        src={mobileCube}
+        alt="a mobile cube"
         className="cube mobile-cube"
+        loading="lazy"
       />
+
       <img
-        src={bigCube}
-        alt="a decoration big cube"
-        className="cube large-cube"
+        src={tabletCube}
+        alt="a tablet cube"
+        className="cube tablet-cube"
+        loading="lazy"
+      />
+
+      <img
+        src={desktopCube}
+        alt="a big cube"
+        className="cube desktop-cube"
+        loading="lazy"
       />
     </>
   );
