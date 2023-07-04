@@ -14,10 +14,11 @@ const SignupFormFields = ({
   useEffect(() => {
     const inputs = Array.from(document.querySelectorAll("#signup-form input"));
     const messages = document.querySelector("#signup-form .message");
-
-    inputs.some((input) => input.value.length > 0)
-      ? (messages.style.opacity = 1)
-      : (messages.style.opacity = 0);
+    const show = () => (messages.style.opacity = 1);
+    const hide = () => (messages.style.opacity = 0);
+    
+    // it's get it more smoothly
+    if (errors.length > 0) inputs.some((input) => input.value.length > 0) ? show() : hide(); // prettier-ignore
   });
   return (
     <>

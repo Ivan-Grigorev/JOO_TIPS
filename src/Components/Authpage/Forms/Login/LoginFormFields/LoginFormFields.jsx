@@ -11,10 +11,11 @@ export default function LoginFormFields({
   useEffect(() => {
     const inputs = Array.from(document.querySelectorAll("#login-form input"));
     const messages = document.querySelector("#login-form .message");
+    const show = () => (messages.style.opacity = 1);
+    const hide = () => (messages.style.opacity = 0);
 
-    inputs.some((input) => input.value.length > 0)
-      ? (messages.style.opacity = 1)
-      : (messages.style.opacity = 0);
+    // it's get it more smoothly
+    if (errors.length > 0) inputs.some((input) => input.value.length > 0) ? show() : hide(); // prettier-ignore
   });
 
   return (
@@ -47,7 +48,7 @@ export default function LoginFormFields({
         />
       </label>
 
-      <div className="message" >
+      <div className="message">
         {errors.map((error) => (
           <p key={error}>{error}</p>
         ))}

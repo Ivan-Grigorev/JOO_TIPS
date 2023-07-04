@@ -265,6 +265,10 @@
   transition: opacity 350ms ease;
 }
 
+.signup-login .message {
+  opacity: 0;
+}
+
 .signup-login .message:lang(uk) {
   font-size: 16px;
 }
