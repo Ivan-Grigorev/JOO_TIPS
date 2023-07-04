@@ -67,7 +67,11 @@ const SignupFormFields = ({
         />
       </label>
 
-      <div className="message" id="message">{errors} </div>
+      <div className="message" id="message">
+        {errors.map((error) => (
+          <p key={error}>{error}</p>
+        ))}
+      </div>
     </>
   );
 };

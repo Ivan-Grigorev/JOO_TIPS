@@ -1,20 +1,18 @@
 import SignupFormFields from "./SignupFormFields/SignupFormFields";
 import { register } from "../../../../redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom/dist";
 import { useState } from "react";
 import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
 
-  const errors = useSelector(selectUserErrors);
+  const { signup } = useSelector(selectUserErrors); // errors
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -35,7 +33,6 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(register({ name, email, password }));
-
     // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
   };
 
@@ -51,7 +48,7 @@ const SignupForm = () => {
         emailValue={email}
         password={password}
         confirmPasswordValue={confirmedPassword}
-        errors={errors.signup}
+        errors={signup}
       />
 
       <div>

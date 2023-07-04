@@ -12,7 +12,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
-  error: { signup: null, login: null },
+  error: { signup: [], login: [] },
 };
 
 const authSlice = createSlice({
@@ -25,10 +25,14 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.error.signup = null;
+        state.error.signup = initialState.error.signup;
       })
       .addCase(register.rejected, (state, action) => {
-        state.error.signup = action.payload;
+        state.error.signup = []; // reset
+
+        if (!state.error.signup.includes(action.payload)) {
+          state.error.signup.push(action.payload);
+        }
       })
 
       .addCase(logIn.fulfilled, (state, action) => {
@@ -37,8 +41,13 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.error = initialState.error;
       })
+
       .addCase(logIn.rejected, (state, action) => {
-        state.error.login = action.payload;
+        state.error.login = []; // reset
+
+        if (!state.error.login.includes(action.payload)) {
+          state.error.login.push(action.payload);
+        }
       })
 
       .addCase(logOut.fulfilled, (state) => {

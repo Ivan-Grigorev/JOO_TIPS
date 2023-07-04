@@ -9,7 +9,8 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const errors = useSelector(selectUserErrors);
+
+  const { login } = useSelector(selectUserErrors); // errors
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -41,7 +42,7 @@ const LoginForm = () => {
           handleChange={handleChange}
           emailValue={email}
           password={password}
-          errors={errors.login}
+          errors={login}
         />
 
         <button className="btn-login" type="submit">

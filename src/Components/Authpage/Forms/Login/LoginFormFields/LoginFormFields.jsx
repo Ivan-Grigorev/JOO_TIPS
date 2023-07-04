@@ -37,7 +37,11 @@ export default function LoginFormFields({
         />
       </label>
 
-      <div className="message">{errors}</div>
+      <div className="message">
+        {errors.map((error) => (
+          <p key={error}>{error}</p>
+        ))}
+      </div>
     </>
   );
 }
