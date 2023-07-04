@@ -13,7 +13,7 @@ export default function LoginFormFields({
     const messages = document.querySelector("#login-form .message");
     const show = () => (messages.style.opacity = 1);
     const hide = () => (messages.style.opacity = 0);
-
+    
     // it's get it more smoothly
     if (errors.length > 0) inputs.some((input) => input.value.length > 0) ? show() : hide(); // prettier-ignore
   });
