@@ -33,7 +33,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <form method="POST" onSubmit={handleSubmit}>
+      <form method="POST" onSubmit={handleSubmit} id="login-form">
         <div className="card-title">
           <p>Log in</p>
         </div>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import loginAt from "../.././icons/login_at.svg";
 import loginLockOpen from "../.././icons/login_lock_open.svg";
 import loginUser from "../.././icons/login_user.svg";
@@ -10,6 +11,14 @@ const SignupFormFields = ({
   confirmPasswordValue,
   errors,
 }) => {
+  useEffect(() => {
+    const inputs = Array.from(document.querySelectorAll("#signup-form input"));
+    const messages = document.querySelector("#signup-form .message");
+
+    inputs.some((input) => input.value.length > 0)
+      ? (messages.style.opacity = 1)
+      : (messages.style.opacity = 0);
+  });
   return (
     <>
       <label className="form-field name" htmlFor="name">
@@ -21,6 +30,7 @@ const SignupFormFields = ({
           value={nameValue}
           placeholder="Name"
           minLength="3"
+          required
         />
       </label>
 
@@ -32,6 +42,7 @@ const SignupFormFields = ({
           onChange={handleChange}
           value={emailValue}
           placeholder="E-mail"
+          required
         />
       </label>
 
@@ -50,6 +61,7 @@ const SignupFormFields = ({
           placeholder="Password"
           min="6"
           maxLength="30"
+          required
         />
       </label>
 
@@ -63,7 +75,7 @@ const SignupFormFields = ({
           id="confirm_password"
           placeholder="Confirm password"
           min="6"
-          // disabled
+          required
         />
       </label>
 

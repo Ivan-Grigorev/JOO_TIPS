@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import loginAt from "../.././icons/login_at.svg";
 import loginLockOpen from "../.././icons/login_lock_open.svg";
 
@@ -7,6 +8,15 @@ export default function LoginFormFields({
   passwordValue,
   errors,
 }) {
+  useEffect(() => {
+    const inputs = Array.from(document.querySelectorAll("#login-form input"));
+    const messages = document.querySelector("#login-form .message");
+
+    inputs.some((input) => input.value.length > 0)
+      ? (messages.style.opacity = 1)
+      : (messages.style.opacity = 0);
+  });
+
   return (
     <>
       <label className="form-field name" htmlFor="email">
@@ -37,7 +47,7 @@ export default function LoginFormFields({
         />
       </label>
 
-      <div className="message">
+      <div className="message" >
         {errors.map((error) => (
           <p key={error}>{error}</p>
         ))}
