@@ -7,6 +7,7 @@ function userJoi(req, res, next) {
     email: Joi.string().email(),
     avatar: Joi.string().min(5),
     password: Joi.string().min(3),
+    confirmedPassword: Joi.string().min(3),
     token: Joi.string(),
     subscription: Joi.string(),
   });

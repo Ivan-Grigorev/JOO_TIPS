@@ -32,7 +32,7 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(register({ name, email, password }));
+    dispatch(register({ name, email, password, confirmedPassword }));
     // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
   };
 

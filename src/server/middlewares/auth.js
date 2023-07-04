@@ -54,7 +54,7 @@ async function isEmailInUse(req, res, next) {
 
     next();
   } catch (error) {
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -69,8 +69,33 @@ async function isUserExist(req, res, next) {
     next();
   } catch (error) {
     console.error(`${error}`.red);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 }
 
-module.exports = { auth, isEmailInUse, isUserExist, updateLastIP };
+async function isPasswordsMatch(req, res, next) {
+  try {
+    const { password } = req.body;
+    const { confirmedPassword } = req.body;
+
+    const match = password === confirmedPassword;
+
+    if (!match) return res.status(400).json({ message: "Passwords must match" }) // prettier-ignore
+
+    next();
+  } catch (error) {
+    console.error(`Error while checking passwords: ${error.message}`);
+
+    res
+      .status(500)
+      .json({ message: `Middleware password matching error: ${error}` });
+  }
+}
+
+module.exports = {
+  auth,
+  isEmailInUse,
+  isUserExist,
+  updateLastIP,
+  isPasswordsMatch,
+};
