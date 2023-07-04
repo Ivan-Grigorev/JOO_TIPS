@@ -86,7 +86,7 @@ async function isPasswordsMatch(req, res, next) {
   } catch (error) {
     console.error(`Error while checking passwords: ${error.message}`);
 
-    res
+    return res
       .status(500)
       .json({ message: `Middleware password matching error: ${error}` });
   }
