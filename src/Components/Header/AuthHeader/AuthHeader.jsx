@@ -41,7 +41,6 @@ const AuthHeader = () => {
   return (
     <>
       <div className="account-menu">
-        {/* <RxAvatar className="user-avatar" /> */}
         {userAvatar ? (
           <img src={userAvatar} alt="your avatar" className="user-avatar" />
         ) : (

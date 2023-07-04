@@ -12,6 +12,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isLoading: false,
   error: { signup: [], login: [] },
 };
 
@@ -24,11 +25,18 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+
         state.isLoggedIn = true;
         state.error.signup = initialState.error.signup;
+
+        state.isLoading = initialState.isLoading;
+      })
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(register.rejected, (state, action) => {
         state.error.signup = []; // reset
+        state.isLoading = initialState.isLoading;
 
         if (!state.error.signup.includes(action.payload)) {
           state.error.signup.push(action.payload);
@@ -38,12 +46,17 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+
         state.isLoggedIn = true;
         state.error = initialState.error;
+        state.isLoading = initialState.isLoading;
       })
-
+      .addCase(logIn.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(logIn.rejected, (state, action) => {
         state.error.login = []; // reset
+        state.isLoading = initialState.isLoading;
 
         if (!state.error.login.includes(action.payload)) {
           state.error.login.push(action.payload);
@@ -56,19 +69,28 @@ const authSlice = createSlice({
         state.isLoggedIn = initialState.isLoggedIn;
         state.error = initialState.error;
       })
-
-      .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
-        state.error = null;
+      .addCase(logOut.pending, (state) => {
+        state.isLoading = true;
       })
+      .addCase(logOut.rejected, (state) => {
+        state.isLoading = initialState.isLoading;
+      })
+
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
+
         state.isLoggedIn = true;
+        state.isLoading = initialState.isLoading;
         state.isRefreshing = false;
         state.error = null;
       })
-      .addCase(refreshUser.rejected, (state, action) => {
+      .addCase(refreshUser.pending, (state) => {
+        state.isRefreshing = true;
+        state.isLoading = true;
+      })
+      .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
+        state.isLoading = initialState.isLoading;
       });
     // .addCase(getUserAvatar.fulfilled, (state, action) => {
     //   state.user.avatar = action.payload;

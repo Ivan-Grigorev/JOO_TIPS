@@ -3,40 +3,22 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 // ? Chakra
-import { ChakraProvider, Spinner } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 // ? Redux
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 // ? Redux-persist
 import { PersistGate } from "redux-persist/integration/react";
 import { Suspense } from "react";
+import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Suspense
-        fallback={
-          <Spinner
-            color="#7e0039c2"
-            size={"xl"}
-            emptyColor="gray.200"
-            speed="900ms"
-          />
-        }
-      >
+      <Suspense fallback={<ChakraSpinner />}>
         <Provider store={store}>
-          <PersistGate
-            loading={
-              <Spinner
-                color="#7e0039c2"
-                size={"xl"}
-                emptyColor="gray.200"
-                speed="900ms"
-              />
-            }
-            persistor={persistor}
-          >
+          <PersistGate loading={<ChakraSpinner />} persistor={persistor}>
             <ChakraProvider>
               <App />
             </ChakraProvider>
