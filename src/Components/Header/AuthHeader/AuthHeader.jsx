@@ -20,7 +20,7 @@ import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/auth/auth-operations";
-import { useNavigate } from "react-router-dom";
+
 const Div = styled.div`
   display: flex;
   align-items: center;
@@ -32,26 +32,21 @@ const AuthHeader = () => {
   const username = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
 
-  console.log(userAvatar);
-
   const dispatch = useDispatch();
-  const navigation = useNavigate();
 
   const handleLogOut = () => {
     dispatch(logOut());
-
-    setTimeout(() => navigation("/"), 500);
   };
 
   return (
     <>
       <div className="account-menu">
-        <RxAvatar className="user-avatar" />
-        {/* {userAvatar ? (
-          <img src={userAvatar} alt="your avatar" />
+        {/* <RxAvatar className="user-avatar" /> */}
+        {userAvatar ? (
+          <img src={userAvatar} alt="your avatar" className="user-avatar" />
         ) : (
           <RxAvatar className="user-avatar" />
-        )} */}
+        )}
 
         <Menu>
           <MenuButton

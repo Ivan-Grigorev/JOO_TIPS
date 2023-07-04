@@ -11,5 +11,8 @@
   height: 55px;
   color: white;
 
+  border-radius: 50%;
+  border: $auth-header-user-border;
+
   cursor: pointer;
 }
