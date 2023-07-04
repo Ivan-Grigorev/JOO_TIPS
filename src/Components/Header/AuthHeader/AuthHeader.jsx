@@ -19,7 +19,6 @@ import {
 import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-// import logout from '../../../'
 import { logOut } from "../../../redux/auth/auth-operations";
 import { useNavigate } from "react-router-dom";
 const Div = styled.div`
@@ -29,9 +28,12 @@ const Div = styled.div`
   gap: 8px;
 `;
 
-export default function AuthHeader() {
+const AuthHeader = () => {
   const username = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
+
+  console.log(userAvatar);
+
   const dispatch = useDispatch();
   const navigation = useNavigate();
 
@@ -83,4 +85,5 @@ export default function AuthHeader() {
       </div>
     </>
   );
-}
+};
+export default AuthHeader;
