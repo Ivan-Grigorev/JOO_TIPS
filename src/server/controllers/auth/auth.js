@@ -1,10 +1,11 @@
 const User = require("../../models/user/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const moment = require("moment-timezone");
 const parser = require("ua-parser-js");
 const { getUserMac } = require("../../utils/utils.js");
-
 require("colors");
+moment.tz.setDefault("Europe/Prague");
 
 async function signup(req, res, next) {
   try {
@@ -119,7 +120,7 @@ async function login(req, res, next) {
     });
   } catch (error) {
     console.error(`Error while logging in: ${error}`.red);
-    return res.status(401).json({ message: error.message });
+    return res.status(401).json({ message: error });
   }
 }
 
@@ -151,7 +152,16 @@ async function getCurrentUser(req, res, next) {
 async function updateUserSubscription(req, res, next) {
   try {
     const email = req.user.email;
-    const subscription = req.body.subscription;
+    const currentDate = moment().valueOf();
+
+    const subscription = {
+      type: req.body.subscription.type,
+      isPremium: req.body.subscription.isPremium,
+      expired: {
+        startDate: currentDate,
+        endDate: req.body.subscription.expired.endDate,
+      },
+    };
 
     const user = await User.findOneAndUpdate({ email }, { subscription });
     return res.status(200).json(user);
