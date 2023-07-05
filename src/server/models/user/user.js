@@ -17,17 +17,23 @@ const user = new mongoose.Schema(
     username: {
       type: String,
     },
+
     subscription: {
       type: {
         type: String,
-        default: "Free",
-        enum: ["Free", "Premium"],
+        default: "Common",
+        enum: ["Common", "School"],
+      },
+      isPremium: {
+        type: Boolean,
+        default: false,
       },
       expiredIn: {
-        type: String,
+        type: Number,
         default: null,
       },
     },
+
     avatar: {
       type: String,
       default: null,

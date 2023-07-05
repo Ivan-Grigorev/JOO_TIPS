@@ -39,7 +39,8 @@ async function signup(req, res, next) {
           token,
           password: hash,
           subscription: {
-            type: "Free",
+            type: "Common",
+            isPremium: false,
             expiredIn: null,
           },
           IP: {
@@ -144,9 +145,25 @@ async function getCurrentUser(req, res, next) {
   }
 }
 
+async function updateUserSubscription(req, res, next) {
+  try {
+    const userEmail = req.user.email;
+
+    // console.log("req.body in updateUserSubscription", req.body);
+    const user = await User.findOneAndUpdate({ email: userEmail }, req.body);
+
+    // console.log("user after updating subscription", user);
+    res.status(200).send(user).end();
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+    console.error(`Error while updating user subscription: ${error}`.red);
+  }
+}
+
 module.exports = {
   signup,
   login,
   logout,
   getCurrentUser,
+  updateUserSubscription,
 };

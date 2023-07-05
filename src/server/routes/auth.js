@@ -24,6 +24,13 @@ router.post(
 
 router.post("/logout", joiUser, middlewares.auth, auth.logout);
 
-router.get('/current', joiUser, middlewares.auth, auth.getCurrentUser)
+router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for persisting token
+
+router.patch(
+  "/",
+  middlewares.isUserExist,
+  middlewares.auth,
+  auth.updateUserSubscription
+);
 
 module.exports = router;
