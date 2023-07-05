@@ -18,9 +18,14 @@ const user = new mongoose.Schema(
       type: String,
     },
     subscription: {
-      type: String,
-      enum: ["Free trial", "school"],
-      default: "Free trial",
+      type: {
+        type: String,
+        default: "Free",
+      },
+      expiredIn: {
+        type: String,
+        default: null,
+      },
     },
     avatar: {
       type: String,

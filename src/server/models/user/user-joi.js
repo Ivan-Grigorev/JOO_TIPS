@@ -9,7 +9,7 @@ function userJoi(req, res, next) {
     password: Joi.string(),
     confirmedPassword: Joi.string(),
     token: Joi.string(),
-    subscription: Joi.string(),
+    // subscription: Joi.string(),
   });
 
   const { error } = userSchema.validate(req.body);
