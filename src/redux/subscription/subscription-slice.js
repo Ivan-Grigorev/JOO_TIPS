@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserSubscription } from "./subscription-operations";
+import { getUserSubscriptionTime } from "./subscription-operations";
 
 const initialState = {
   data: {
@@ -8,6 +8,7 @@ const initialState = {
     expired: {
       startDate: null,
       endDate: null,
+      remainingTime: null,
     },
   },
   loading: false,
@@ -19,16 +20,18 @@ const subscriptionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getUserSubscription.fulfilled, (state, action) => {
+    builder.addCase(getUserSubscriptionTime.fulfilled, (state, action) => {
       state.loading = false;
-      state.data = action.payload;
+      // console.log("Action payload in subscr-slice.js");
+      // console.log(action.payload);
+      state.data.expired.remainingTime = action.payload;
+      // console.log(state.data);
     });
-    builder.addCase(getUserSubscription.pending, (state) => {
+    builder.addCase(getUserSubscriptionTime.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-
-    builder.addCase(getUserSubscription.rejected, (state, action) => {
+    builder.addCase(getUserSubscriptionTime.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
     });

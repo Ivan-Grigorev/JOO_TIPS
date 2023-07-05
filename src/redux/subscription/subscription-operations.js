@@ -2,10 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Создаем асинхронный thunk для получения подписки
-export const getUserSubscription = createAsyncThunk(
+export const getUserSubscriptionTime = createAsyncThunk(
   "subscription/fetchSubscription",
-  async () => {
-    const response = await axios.get("/subscription");
-    return response.data.subscription;
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.get("/users/subscription", credentials);
+      return data;
+    } catch (error) {
+      console.error(`Error fetching subscription: ${error}`);
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );

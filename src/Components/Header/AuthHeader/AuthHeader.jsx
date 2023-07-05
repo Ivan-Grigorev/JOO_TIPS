@@ -13,13 +13,18 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import {
+  selectIsLoggedIn,
   selectUserAvatar,
+  selectUserEmail,
   selectUserName,
 } from "../../../redux/auth/auth-selectors";
 import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/auth/auth-operations";
+import { useEffect, useState } from "react";
+import { getUserSubscriptionTime } from "../../../redux/subscription/subscription-operations";
+import { selectRemainingTime } from "../../../redux/subscription/subscription-selectors";
 
 const Div = styled.div`
   display: flex;
@@ -29,10 +34,19 @@ const Div = styled.div`
 `;
 
 const AuthHeader = () => {
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(selectIsLoggedIn);
   const username = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
+  const userEmail = useSelector(selectUserEmail);
+  const remainingTime = useSelector(selectRemainingTime);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    loggedIn && dispatch(getUserSubscriptionTime({ email: userEmail }));
+    // console.log("remainingTime", remainingTime);
+
+    // todo возможно убрать вообще зависимости
+  }, [loggedIn, dispatch, userEmail]);
 
   const handleLogOut = () => {
     dispatch(logOut());
