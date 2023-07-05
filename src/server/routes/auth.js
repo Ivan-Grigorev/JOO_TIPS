@@ -3,6 +3,7 @@ const auth = require("../controllers/auth/auth.js");
 const middlewares = require("../middlewares/auth.js");
 
 const joiUser = require("../models/user/user-joi.js");
+const joiSubscription = require("../models/user/subscription-joi.js");
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for p
 
 router.patch(
   "/",
+  joiSubscription,
   middlewares.isUserExist,
   middlewares.auth,
   auth.updateUserSubscription

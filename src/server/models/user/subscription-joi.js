@@ -3,6 +3,7 @@ require("colors");
 
 function subscriptionJoi(req, res, next) {
   const subscriptionSchema = Joi.object({
+    email: Joi.string().email(),
     subscription: {
       type: Joi.string(),
       isPremium: Joi.boolean(),

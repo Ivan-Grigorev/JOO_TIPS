@@ -148,9 +148,14 @@ async function getCurrentUser(req, res, next) {
 async function updateUserSubscription(req, res, next) {
   try {
     const userEmail = req.user.email;
+    const subscription = req.body.subscription;
 
-    // console.log("req.body in updateUserSubscription", req.body);
-    const user = await User.findOneAndUpdate({ email: userEmail }, req.body);
+    console.log("req.body ===>", req.body);
+    const user = await User.findOneAndUpdate(
+      { email: userEmail },
+      subscription,
+      { new: true }
+    );
 
     // console.log("user after updating subscription", user);
     res.status(200).send(user).end();
