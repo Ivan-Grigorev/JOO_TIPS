@@ -67,6 +67,7 @@ const authSlice = createSlice({
         state.user = initialState.user;
         state.token = initialState.token;
         state.isLoggedIn = initialState.isLoggedIn;
+        state.isLoading = initialState.isLoading;
         state.error = initialState.error;
       })
       .addCase(logOut.pending, (state) => {

@@ -24,4 +24,6 @@ router.post(
 
 router.post("/logout", joiUser, middlewares.auth, auth.logout);
 
+router.get('/current', joiUser, middlewares.auth, auth.getCurrentUser)
+
 module.exports = router;

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import User from "../../server/models/user/user";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -54,10 +53,8 @@ export const refreshUser = createAsyncThunk(
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
-    if (persistedToken === null) {
-      // If there is no token, exit without performing any request
-      return thunkAPI.rejectWithValue("Unable to fetch user");
-    }
+    // If there is no token, exit without performing any request
+    if (persistedToken === null)  return thunkAPI.rejectWithValue("Unable to fetch user"); // prettier-ignore
 
     try {
       // If there is a token, add it to the HTTP header and perform the request
@@ -65,24 +62,9 @@ export const refreshUser = createAsyncThunk(
       const res = await axios.get("/users/current");
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-// const getUserAvatar = createAsyncThunk(
-//   "auth/login",
-//   async (credentials, thunkAPI) => {
-//     try {
-//       console.log("credentials", credentials);
-//       const user = await User.findOne({ email: credentials });
-//       console.log("user in getUserAvatar", user);
-//     } catch (error) {
-//       console.error(`Error getting user avatar: ${error.message}`);
-//                  return thunkAPI.rejectWithValue(error.response.data.message);
-
-//     }
-//   }
-// );
 
 export { token, register, logIn };
