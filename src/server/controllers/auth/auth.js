@@ -38,6 +38,10 @@ async function signup(req, res, next) {
           email,
           token,
           password: hash,
+          subscription: {
+            type: "Free",
+            expiredIn: null,
+          },
           IP: {
             firstUserIP: userIP,
             lastUserIP: userIP,
@@ -58,7 +62,7 @@ async function signup(req, res, next) {
             name: user.name,
             email: user.email,
             token,
-            subscription: user.subscription || "Free trial",
+            subscription: user.subscription,
             deviceInfo: {
               os: user.os || "Unknown os",
               device: user.device || "Unknown device",

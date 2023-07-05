@@ -21,6 +21,7 @@ const user = new mongoose.Schema(
       type: {
         type: String,
         default: "Free",
+        enum: ["Free", "Premium"],
       },
       expiredIn: {
         type: String,
@@ -34,14 +35,6 @@ const user = new mongoose.Schema(
     token: {
       type: String,
       default: null,
-    },
-    type: {
-      type: String,
-      enum: ["School", "Simple"],
-    },
-    status: {
-      type: String,
-      enum: ["Premium", "Free"],
     },
     IP: {
       firstUserIP: {
