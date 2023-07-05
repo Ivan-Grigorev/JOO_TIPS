@@ -27,6 +27,8 @@ router.post("/logout", joiUser, middlewares.auth, auth.logout);
 
 router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for persisting token
 
+router.get("/subscription", middlewares.auth, auth.getSubscriptionTime);
+
 router.patch(
   "/subscription",
   joiSubscription,

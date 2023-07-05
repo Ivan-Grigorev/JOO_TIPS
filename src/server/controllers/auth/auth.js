@@ -151,22 +151,32 @@ async function getCurrentUser(req, res, next) {
 
 async function getSubscriptionTime(req, res, next) {
   try {
+    const currentTime = moment();
+    const { email } = req.user;
+    const user = await User.findOne({ email });
+    const expirationDate = moment(user.subscription.expired.endDate);
+
+    const remainingTime = expirationDate.diff(currentTime);
+
+    res.status(200).json({ remainingTime });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
+    console.error(`Error while getting subscription time: ${error}`.red);
   }
 }
 
 async function updateUserSubscription(req, res, next) {
   try {
     const email = req.user.email;
-    const currentDate = moment().valueOf();
 
     const subscription = {
       type: req.body.subscription.type,
       isPremium: req.body.subscription.isPremium,
       expired: {
-        startDate: currentDate,
-        endDate: req.body.subscription.expired.endDate * 60 * 1000, // this numbers will multiply datas coming from the form
+        startDate: moment().valueOf(),
+        endDate: moment()
+          .add(req.body.subscription.expired.endDate, "days")
+          .valueOf(), // make from number (day) a multiseconds
       },
     };
 
