@@ -4,7 +4,7 @@ const user = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, "Username is required."],
     },
     email: {
       type: String,
@@ -22,15 +22,21 @@ const user = new mongoose.Schema(
       type: {
         type: String,
         default: "Common",
-        enum: ["Common", "School"],
+        // enum: ["Common", "School"],
       },
       isPremium: {
         type: Boolean,
         default: false,
       },
-      expiredIn: {
-        type: Number,
-        default: null,
+      expired: {
+        startDate: {
+          type: Number,
+          default: null,
+        },
+        endDate: {
+          type: Number,
+          default: null,
+        },
       },
     },
 

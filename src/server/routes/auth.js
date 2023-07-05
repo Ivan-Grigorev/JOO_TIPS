@@ -32,6 +32,7 @@ router.patch(
   joiSubscription,
   middlewares.isUserExist,
   middlewares.auth,
+  // middlewares.updateLastIP,
   auth.updateUserSubscription
 );
 

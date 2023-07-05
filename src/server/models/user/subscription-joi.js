@@ -4,11 +4,14 @@ require("colors");
 function subscriptionJoi(req, res, next) {
   const subscriptionSchema = Joi.object({
     email: Joi.string().email(),
-    subscription: {
+    subscription: Joi.object({
       type: Joi.string(),
       isPremium: Joi.boolean(),
-      expiredIn: Joi.number(),
-    },
+      expired: {
+        startDate: Joi.number(),
+        endDate: Joi.number(),
+      },
+    }),
   });
 
   const { error } = subscriptionSchema.validate(req.body);
