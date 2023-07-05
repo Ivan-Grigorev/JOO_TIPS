@@ -149,6 +149,13 @@ async function getCurrentUser(req, res, next) {
   }
 }
 
+async function getSubscriptionTime(req, res, next) {
+  try {
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 async function updateUserSubscription(req, res, next) {
   try {
     const email = req.user.email;
@@ -159,11 +166,15 @@ async function updateUserSubscription(req, res, next) {
       isPremium: req.body.subscription.isPremium,
       expired: {
         startDate: currentDate,
-        endDate: req.body.subscription.expired.endDate,
+        endDate: req.body.subscription.expired.endDate * 60 * 1000, // this numbers will multiply datas coming from the form
       },
     };
 
-    const user = await User.findOneAndUpdate({ email }, { subscription });
+    const user = await User.findOneAndUpdate(
+      { email },
+      { subscription },
+      { new: true }
+    );
     return res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
@@ -176,5 +187,6 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
+  getSubscriptionTime,
   updateUserSubscription,
 };
