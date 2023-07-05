@@ -22,7 +22,7 @@ import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/auth/auth-operations";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getUserSubscriptionTime } from "../../../redux/subscription/subscription-operations";
 import { selectRemainingTime } from "../../../redux/subscription/subscription-selectors";
 
@@ -41,9 +41,10 @@ const AuthHeader = () => {
   const userEmail = useSelector(selectUserEmail);
   const remainingTime = useSelector(selectRemainingTime);
 
+  // console.log(Number(remainingTime.remainingTime) / 3600000);
+
   useEffect(() => {
     loggedIn && dispatch(getUserSubscriptionTime({ email: userEmail }));
-    // console.log("remainingTime", remainingTime);
 
     // todo возможно убрать вообще зависимости
   }, [loggedIn, dispatch, userEmail]);
@@ -87,6 +88,13 @@ const AuthHeader = () => {
             </MenuGroup>
             <MenuGroup title="Пiдписка">
               <MenuItem>Перейти на премiум пiдписку!</MenuItem>
+              {remainingTime !== null && (
+                <MenuItem>
+                  Ваша пiдписка триватиме ще{" "}
+                  {Math.floor(Number(remainingTime.remainingTime / 3600000))}{" "}
+                  часи
+                </MenuItem>
+              )}
             </MenuGroup>
           </MenuList>
         </Menu>
