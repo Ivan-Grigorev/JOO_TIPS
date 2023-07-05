@@ -1,5 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/auth-slice";
+import subscriptionReducer from "./subscription/subscription-slice";
 
 import {
   persistStore,
@@ -31,9 +32,10 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
+    subscription: subscriptionReducer,
   },
   middleware,
-//   devTools: process.env.NODE_ENV === "development",
+  //   devTools: process.env.NODE_ENV === "development",
 });
 
 export const persistor = persistStore(store);
