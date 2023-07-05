@@ -64,12 +64,9 @@ async function isUserExist(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email });
 
-    // console.log("req.body", req.body);
-
     if (user === null) return res.status(401).json({ message: "Email or password is wrong." }); // prettier-ignore
 
     req.user = user; //* store user in the request body
-    // console.log("req.user", req.user);
 
     next();
   } catch (error) {
@@ -106,18 +103,8 @@ async function setUserDevice(req, res, next) {
       device: ua.device.model || "Unknown",
     };
 
-    const user = {
-      deviceInfo: {
-        os: deviceInfo.os,
-        device: deviceInfo.device,
-        browser: deviceInfo.browser,
-      },
-    };
-
-    console.log("Юзер в setUserDevice");
     req.user.deviceInfo = deviceInfo;
 
-    console.log(req.user);
     next();
   } catch (error) {
     res.status(500).json({ message: `Error updating user device: ${error}` });
