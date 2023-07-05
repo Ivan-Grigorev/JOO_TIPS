@@ -19,18 +19,15 @@ const subscriptionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // Обработка успешного получения подписки
     builder.addCase(getUserSubscription.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
     });
-    // Обработка начала запроса
     builder.addCase(getUserSubscription.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
 
-    // Обработка ошибки при получении подписки
     builder.addCase(getUserSubscription.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
