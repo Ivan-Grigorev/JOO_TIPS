@@ -130,13 +130,13 @@ async function getCurrentUser(req, res, next) {
   try {
     const { email } = req.user;
     const userInfo = await User.findOne({ email });
-    console.log("userInfo", userInfo);
     res.status(200).json({
       name: userInfo.name,
       avatar: userInfo.avatar,
     });
   } catch (error) {
     console.log(`${error}`.red);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
