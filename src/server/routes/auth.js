@@ -12,6 +12,7 @@ router.post(
   joiUser,
   middlewares.isEmailInUse,
   middlewares.isPasswordsMatch,
+  middlewares.setUserDevice,
   auth.signup
 );
 
@@ -19,11 +20,18 @@ router.post(
   "/login",
   joiUser,
   middlewares.isUserExist,
+  middlewares.setUserDevice,
   middlewares.updateLastIP,
   auth.login
 );
 
-router.post("/logout", joiUser, middlewares.auth, auth.logout);
+router.post(
+  "/logout",
+  joiUser,
+  middlewares.auth,
+  middlewares.setUserDevice,
+  auth.logout
+);
 
 router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for persisting token
 

@@ -2,7 +2,6 @@ const User = require("../../models/user/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
-const parser = require("ua-parser-js");
 const { getUserMac } = require("../../utils/utils.js");
 require("colors");
 moment.tz.setDefault("Europe/Prague");
@@ -11,14 +10,8 @@ async function signup(req, res, next) {
   try {
     const { name, email, password } = req.body;
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
-    const ua = parser(req.headers["user-agent"] || "");
-    // const macAddress = await getUserMac()
 
-    const deviceInfo = {
-      browser: ua.browser.name || "Unknown",
-      os: ua.os.name || "Unknown",
-      device: ua.device.model || "Unknown",
-    };
+    // const macAddress = await getUserMac()
 
     bcrypt.genSalt(10, (err, salt) => {
       if (err) return next(err);
@@ -52,10 +45,11 @@ async function signup(req, res, next) {
             lastUserIP: userIP,
           },
           deviceInfo: {
-            os: deviceInfo.os,
-            device: deviceInfo.device,
-            browser: deviceInfo.browser,
+            os: req.user.deviceInfo.os,
+            device: req.user.deviceInfo.device,
+            browser: req.user.deviceInfo.browser,
           },
+
           // macAddress: macAddress,
           registrationDate: new Date(),
         };
@@ -68,11 +62,6 @@ async function signup(req, res, next) {
             email: user.email,
             token,
             subscription: user.subscription,
-            deviceInfo: {
-              os: user.os || "Unknown os",
-              device: user.device || "Unknown device",
-              browser: user.browser || "Unknown browser",
-            },
             registrationDate: new Date(),
           },
         });

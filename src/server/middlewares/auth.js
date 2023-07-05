@@ -1,5 +1,6 @@
 const User = require("../models/user/user");
 const jwt = require("jsonwebtoken");
+const parser = require("ua-parser-js");
 require("colors");
 
 async function auth(req, res, next) {
@@ -46,11 +47,12 @@ async function updateLastIP(req, res, next) {
 
 async function isEmailInUse(req, res, next) {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const { name, email, password, confirmedPassword } = req.body;
+    const user = await User.findOne({ email });
+    const body = { name, email, password };
+    req.user = Object.assign({}, body);
 
     if (user !== null) return res.status(409).json({ message: "Email in use" });
-
-    req.user = { ...req.body };
 
     next();
   } catch (error) {
@@ -95,10 +97,38 @@ async function isPasswordsMatch(req, res, next) {
   }
 }
 
+async function setUserDevice(req, res, next) {
+  try {
+    const ua = parser(req.headers["user-agent"] || "");
+    const deviceInfo = {
+      browser: ua.browser.name || "Unknown",
+      os: ua.os.name || "Unknown",
+      device: ua.device.model || "Unknown",
+    };
+
+    const user = {
+      deviceInfo: {
+        os: deviceInfo.os,
+        device: deviceInfo.device,
+        browser: deviceInfo.browser,
+      },
+    };
+
+    console.log("Юзер в setUserDevice");
+    req.user.deviceInfo = deviceInfo;
+
+    console.log(req.user);
+    next();
+  } catch (error) {
+    res.status(500).json({ message: `Error updating user device: ${error}` });
+  }
+}
+
 module.exports = {
   auth,
   isEmailInUse,
   isUserExist,
   updateLastIP,
   isPasswordsMatch,
+  setUserDevice,
 };
