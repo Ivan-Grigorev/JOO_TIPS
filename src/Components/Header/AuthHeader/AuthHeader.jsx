@@ -57,11 +57,16 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
-  const getSubscriptionTime = (ms) => {
-    const days = Math.floor(ms / 86400000);
-    const hours = Math.floor((ms % 86400000) / 3600000);
+  const handleDeleteAccount = () => {};
 
-    return `Subscription time: ${days} days ${hours} hours`;
+  // count remaining time for subscription
+  const getSubscriptionTime = (ms) => {
+    let days = `${Math.floor(ms / 86400000)} day(s)`;
+    const hours = `${Math.floor((ms % 86400000) / 3600000)} hour(s)`;
+
+    if (days === "0 day(s)") days = "";
+
+    return `Subscription time: ${days} ${hours} `;
   };
 
   // update subscription
@@ -97,7 +102,7 @@ const AuthHeader = () => {
   return (
     <>
       <div className="account-menu">
-        <UserAvatar/>
+        <UserAvatar />
 
         <Menu>
           <MenuButton
@@ -119,6 +124,7 @@ const AuthHeader = () => {
               <MenuItem>Мiй профiль</MenuItem>
               <MenuItem>Налаштування</MenuItem>
               <MenuItem onClick={handleLogOut}>Вийти</MenuItem>
+              <MenuItem onClick={handleDeleteAccount}>Видалити акаунт</MenuItem>
             </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Help">
