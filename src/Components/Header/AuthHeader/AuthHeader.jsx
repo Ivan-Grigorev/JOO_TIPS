@@ -58,7 +58,6 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
-
   // update subscription
   const handleUpdateSubscription = () => {
     const updatedSubscription = {
@@ -85,20 +84,7 @@ const AuthHeader = () => {
 
   // reset subscription
   useEffect(() => {
-    if (remainingTime !== null && remainingTime <= 0) {
-      // alert("Subscription must be dropped.");
-      dispatch(resetSubscription({ subscriptionType }));
-    }
-
-    // set interval if user has a subscription
-    isPremium &&
-      setInterval(() => {
-        if (remainingTime <= 0) {
-          // TODO пофиксить баг
-          dispatch(resetSubscription({ subscriptionType }));
-          // alert("Subscription is dropped.");
-        }
-      }, 3600000); // 1 hour interval
+    if (remainingTime !== null && remainingTime <= 0) dispatch(resetSubscription({ subscriptionType })); // prettier-ignore
   });
 
   return (
