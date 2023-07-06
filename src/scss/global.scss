@@ -60,3 +60,7 @@ ul {
 .is-hidden {
   display: none;
 }
+.visually-hidden {
+  opacity: 0 !important;
+  user-select: none;
+}
