@@ -14,20 +14,23 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserName } from "../../../../redux/auth/auth-selectors";
 import "./styles.scss";
 import { useState } from "react";
+import { deleteUser } from "../../../../redux/auth/auth-operations";
 const MenuDeleteAccountItem = () => {
   const userName = useSelector(selectUserName);
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false); // ? chakra
-  const handleClick = () => setShow(!show); // ? chakra
   const { isOpen, onOpen, onClose } = useDisclosure(); // ? chakra
-  //   const handleDeleteAccount = () => {
-  //     dispatch(deleteUser());
-  // we don't need to attach an email, because browser send request with token,
-  // and token'd be decoded, where hashed an user email.
-  //   };
+  const handleInputClick = () => setShow(!show); // ? chakra
+
+  const handleDeleteAccount = () => {
+    dispatch(deleteUser());
+    // we don't need to attach an email, because browser send request with token,
+    // and token'd be decoded, where hashed an user email.
+  };
 
   return (
     <>
@@ -91,9 +94,10 @@ const MenuDeleteAccountItem = () => {
                     placeholder="Confirm your password"
                     pr="4.5rem"
                     type={show ? "text" : "password"}
+                    name="confirmedPassword"
                   />
                   <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    <Button h="1.75rem" size="sm" onClick={handleInputClick}>
                       {show ? "Hide" : "Show"}
                     </Button>
                   </InputRightElement>
@@ -105,7 +109,7 @@ const MenuDeleteAccountItem = () => {
               <Button colorScheme="blue" mr={3} onClick={onClose}>
                 Скасувати
               </Button>
-              <Button colorScheme="red" onClick={() => alert("Deleted")}>
+              <Button colorScheme="red" onClick={handleDeleteAccount}>
                 Видалити акаунт
               </Button>
             </ModalFooter>
