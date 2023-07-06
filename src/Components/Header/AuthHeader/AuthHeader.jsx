@@ -24,6 +24,7 @@ import { logOut } from "../../../redux/auth/auth-operations";
 import {
   getSubscriptionDetails,
   resetSubscription,
+  updateSubscription,
 } from "../../../redux/subscription/subscription-operations";
 import {
   selectAccountType,
@@ -57,23 +58,45 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
-  // add premium border to avatar
+
+  // update subscription
+  const handleUpdateSubscription = () => {
+    const updatedSubscription = {
+      email: userEmail,
+      subscription: {
+        type: "School",
+        isPremium: true,
+        expired: { startDate: 123456, endDate: 1 },
+      },
+    };
+    dispatch(updateSubscription(updatedSubscription));
+  };
+
+  // add premium border to avatar, get subscription details
   useEffect(() => {
-    isPremium &&
-      document.querySelector(".user-avatar").classList.add("premium-avatar");
-  });
+    dispatch(getSubscriptionDetails({ email: userEmail }));
+
+    isPremium
+      ? document.querySelector(".user-avatar").classList.add("premium-avatar")
+      : document
+          .querySelector(".user-avatar")
+          .classList.remove("premium-avatar");
+  }, [dispatch, isPremium, userEmail]);
+
   // reset subscription
   useEffect(() => {
     if (remainingTime !== null && remainingTime <= 0) {
-      alert("Subscription must be dropped.");
+      // alert("Subscription must be dropped.");
+      dispatch(resetSubscription({ subscriptionType }));
     }
 
     // set interval if user has a subscription
     isPremium &&
       setInterval(() => {
         if (remainingTime <= 0) {
+          // TODO пофиксить баг
           dispatch(resetSubscription({ subscriptionType }));
-          alert("Subscription is dropped.");
+          // alert("Subscription is dropped.");
         }
       }, 3600000); // 1 hour interval
   });
@@ -121,7 +144,9 @@ const AuthHeader = () => {
                   </MenuItem>
                 </>
               ) : (
-                <MenuItem>Перейти на премiум пiдписку!</MenuItem>
+                <MenuItem onClick={handleUpdateSubscription}>
+                  Перейти на премiум пiдписку!
+                </MenuItem>
               )}
             </MenuGroup>
           </MenuList>

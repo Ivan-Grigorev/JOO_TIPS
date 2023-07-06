@@ -13,11 +13,23 @@ export const getSubscriptionDetails = createAsyncThunk(
   }
 );
 
+export const updateSubscription = createAsyncThunk(
+  "subscription/update",
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.patch("/users/subscription", credentials);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const resetSubscription = createAsyncThunk(
   "subscription/reset",
   async (credentials, thunkAPI) => {
     try {
-      await axios.patch("/users/subscription", credentials);
+      await axios.patch("/users/subscription/reset", credentials);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

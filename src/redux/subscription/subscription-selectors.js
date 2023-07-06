@@ -3,4 +3,8 @@ export const selectRemainingTime = (state) =>
 
 export const selectAccountType = (state) => state.subscription.data.type;
 
-export const selectIsPremium = (state) => state.subscription.data.isPremium;
+export const selectIsPremium = (state) => {
+  console.log(state.subscription.data.isPremium);
+  console.log(state.subscription.data);
+  return  state.subscription.data.isPremium;
+};

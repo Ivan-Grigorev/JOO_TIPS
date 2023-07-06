@@ -95,16 +95,17 @@ async function login(req, res, next) {
 
       req.user.token = token;
 
-      await User.findByIdAndUpdate(req.user.id, req.user); // set the token
+      const user = await User.findByIdAndUpdate(req.user.id, req.user, {
+        new: true,
+      }); // set the token
 
       res.status(200).json({
-        token: req.user.token,
         user: {
-          name: req.user.name,
-          avatar: req.user.avatar,
-          email: req.user.email,
-          subscription: req.user.subscription || "Free trial",
+          name: user.name,
+          avatar: user.avatar,
+          email: user.email,
         },
+        token: user.token,
       });
     });
   } catch (error) {
@@ -137,19 +138,6 @@ async function getCurrentUser(req, res, next) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
-
-// async function getSubscriptionDetails(req, res, next) {
-//   try {
-//     const { email } = req.user;
-//     const user = await User.findOne({ email });
-
-//     res.json({ ...user.subscription });
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ message: "Internal server error while getSubscriptionDetails" });
-//   }
-// }
 
 async function getSubscriptionDetails(req, res, next) {
   try {
@@ -187,7 +175,9 @@ async function updateUserSubscription(req, res, next) {
       { subscription },
       { new: true }
     );
-    return res.status(200).json(user);
+
+    console.log(user.subscription);
+    return res.status(200).json(user.subscription);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
     console.error(`Error while updating user subscription: ${error}`.red);
