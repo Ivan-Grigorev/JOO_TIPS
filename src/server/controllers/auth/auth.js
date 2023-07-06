@@ -194,6 +194,33 @@ async function updateUserSubscription(req, res, next) {
   }
 }
 
+async function resetUserSubscription(req, res, next) {
+  try {
+    const email = req.user.email;
+    const userOldSubscriptionType = req.body.subscriptionType;
+
+    const initialSubscription = {
+      type: userOldSubscriptionType,
+      isPremium: false,
+      expired: {
+        startDate: null,
+        endDate: null,
+      },
+    };
+
+    const user = await User.findOneAndUpdate(
+      { email },
+      { subscription: initialSubscription },
+      { new: true }
+    );
+    return res.status(200).json(user.subscription);
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error while reseting user subscription",
+    });
+  }
+}
+
 module.exports = {
   signup,
   login,
@@ -201,4 +228,5 @@ module.exports = {
   getCurrentUser,
   updateUserSubscription,
   getSubscriptionDetails,
+  resetUserSubscription,
 };

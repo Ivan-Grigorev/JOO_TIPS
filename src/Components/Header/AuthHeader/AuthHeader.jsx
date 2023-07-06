@@ -61,6 +61,20 @@ const AuthHeader = () => {
       document.querySelector(".user-avatar").classList.add("premium-avatar");
   });
 
+  useEffect(() => {
+    if (remainingTime !== null && remainingTime <= 0) {
+      alert("Subscription must be dropped.");
+    }
+
+    // set interval if user has a subscription
+    isPremium &&
+      setInterval(() => {
+        if (remainingTime <= 0) {
+          alert("Subscription must be dropped.");
+        }
+      }, 3600000);
+  });
+
   return (
     <>
       <div className="account-menu">

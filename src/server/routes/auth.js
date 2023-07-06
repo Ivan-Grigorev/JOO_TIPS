@@ -37,6 +37,12 @@ router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for p
 
 router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
 
+router.patch(
+  "/subscription/reset",
+  middlewares.auth,
+  auth.resetUserSubscription
+);
+
 // router.get("/subscription/time", middlewares.auth, auth.getSubscriptionTime);
 
 router.patch(
