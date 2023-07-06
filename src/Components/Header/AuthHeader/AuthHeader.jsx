@@ -49,6 +49,22 @@ const AuthHeader = () => {
   const remainingTime = useSelector(selectRemainingTime);
   const subscriptionType = useSelector(selectAccountType);
 
+  // add premium border to avatar, get subscription details
+  useEffect(() => {
+    dispatch(getSubscriptionDetails({ email: userEmail }));
+
+    isPremium
+      ? document.querySelector(".user-avatar").classList.add("premium-avatar")
+      : document
+          .querySelector(".user-avatar")
+          .classList.remove("premium-avatar");
+  }, [dispatch, isPremium, userEmail]);
+
+  // reset subscription
+  useEffect(() => {
+    if (remainingTime !== null && remainingTime <= 0) dispatch(resetSubscription({ subscriptionType })); // prettier-ignore
+  });
+
   const onMenuOpen = () => {
     dispatch(getSubscriptionDetails({ email: userEmail }));
   };
@@ -86,22 +102,6 @@ const AuthHeader = () => {
 
     dispatch(updateSubscription(updatedSubscription));
   };
-
-  // add premium border to avatar, get subscription details
-  useEffect(() => {
-    dispatch(getSubscriptionDetails({ email: userEmail }));
-
-    isPremium
-      ? document.querySelector(".user-avatar").classList.add("premium-avatar")
-      : document
-          .querySelector(".user-avatar")
-          .classList.remove("premium-avatar");
-  }, [dispatch, isPremium, userEmail]);
-
-  // reset subscription
-  useEffect(() => {
-    if (remainingTime !== null && remainingTime <= 0) dispatch(resetSubscription({ subscriptionType })); // prettier-ignore
-  });
 
   return (
     <>
