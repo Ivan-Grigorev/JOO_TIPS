@@ -58,6 +58,13 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
+  const getSubscriptionTime = (ms) => {
+    const days = Math.floor(ms / 86400000);
+    const hours = Math.floor((ms % 86400000) / 3600000);
+
+    return `Subscription time: ${days} days ${hours} hours`;
+  };
+
   // update subscription
   const handleUpdateSubscription = () => {
     const updatedSubscription = {
@@ -125,10 +132,7 @@ const AuthHeader = () => {
             <MenuGroup title="Пiдписка">
               {isPremium && remainingTime !== null ? (
                 <>
-                  <MenuItem>
-                    Ваша пiдписка триватиме ще{" "}
-                    {Math.floor(Number(remainingTime / 3600000))} часи
-                  </MenuItem>
+                  <MenuItem>{getSubscriptionTime(remainingTime)}</MenuItem>
                 </>
               ) : (
                 <MenuItem onClick={handleUpdateSubscription}>
