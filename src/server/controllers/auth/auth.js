@@ -60,10 +60,10 @@ async function signup(req, res, next) {
           user: {
             name: user.name,
             email: user.email,
-            token,
             subscription: user.subscription,
             registrationDate: new Date(),
           },
+          token: user.token,
         });
       });
     });
