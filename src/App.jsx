@@ -8,7 +8,6 @@ import { refreshUser } from "./redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing, selectLoadingStatus } from "./redux/selectors";
 import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
-import { selectIsLoggedIn } from "./redux/auth/auth-selectors";
 
 const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
@@ -18,12 +17,11 @@ const App = () => {
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectLoadingStatus);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const { isRefreshing } = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    isLoggedIn && dispatch(refreshUser());
-  }, [isLoggedIn, dispatch]);
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   return isRefreshing ? (
     <ChakraSpinner />
