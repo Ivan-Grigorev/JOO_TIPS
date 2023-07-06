@@ -39,11 +39,15 @@ const MenuDeleteAccountItem = () => {
 
   // This function toggles the visibility of the input field by updating 'inputClass' state.
   const handleCheckboxChange = (e) => {
+    const input = document.querySelector(".chakra-input");
     setIsCheckboxChecked(e.target.checked);
     if (e.target.checked) {
       setInputClass("");
+      input.disabled = false;
     } else {
       setInputClass("visually-hidden");
+      input.disabled = true;
+      input.style.cursor = "default";
     }
   };
 
@@ -115,8 +119,10 @@ const MenuDeleteAccountItem = () => {
                     className="confirm-password-input"
                     type={show ? "text" : "password"}
                     placeholder="Confirm your password"
-                    pr="4.5rem"
                     onChange={(e) => setPassword(e.target.value)}
+                    pr="4.5rem"
+                    style={{ cursor: isCheckboxChecked ? "auto" : "default" }}
+                    disabled
                   />
                   <InputRightElement width="4.5rem">
                     <Button

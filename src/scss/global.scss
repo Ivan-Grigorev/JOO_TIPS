@@ -63,4 +63,8 @@ ul {
 .visually-hidden {
   opacity: 0 !important;
   user-select: none;
+
+  &:hover {
+    cursor: default !important;
+  }
 }
