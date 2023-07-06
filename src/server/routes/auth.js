@@ -33,6 +33,8 @@ router.post(
   auth.logout
 );
 
+router.delete("/current", middlewares.auth, auth.deleteCurrentUser);
+
 router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for persisting token
 
 router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);

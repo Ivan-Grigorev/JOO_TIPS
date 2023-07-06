@@ -68,7 +68,6 @@ async function signup(req, res, next) {
       });
     });
   } catch (error) {
-    console.error(`Registration error: ${error}`.red);
     return res.status(500).json({ message: "Internal server error" });
   }
 }
@@ -80,7 +79,7 @@ async function login(req, res, next) {
     const userVerify = req.user.verify; //* take an verify status from the user
 
     if (userVerify === false)
-      return req.status(400).json({ message: "Not verified." });
+      res.status(403).json({ message: "Not verified." });
 
     bcrypt.compare(password, userPassword, async (err, result) => {
       if (err) return next(err);
@@ -136,6 +135,18 @@ async function getCurrentUser(req, res, next) {
     });
   } catch (error) {
     console.log(`${error}`.red);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+async function deleteCurrentUser(req, res, next) {
+  try {
+    const email = req.user.email;
+
+    const user = await User.deleteOne({ email });
+
+    res.status(204).json(user);
+  } catch (error) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
@@ -219,4 +230,5 @@ module.exports = {
   updateUserSubscription,
   getSubscriptionDetails,
   resetUserSubscription,
+  deleteCurrentUser,
 };

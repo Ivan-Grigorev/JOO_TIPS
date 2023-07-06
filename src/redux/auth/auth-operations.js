@@ -37,7 +37,7 @@ const logIn = createAsyncThunk("auth/login", async (credentials, thunkAPI) => {
   }
 });
 
-export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/logout");
     token.unset();
@@ -67,4 +67,4 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export { token, register, logIn };
+export { token, register, logOut, logIn };

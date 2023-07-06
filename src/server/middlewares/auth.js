@@ -64,6 +64,7 @@ async function isUserExist(req, res, next) {
   try {
     const user = await User.findOne({ email: req.body.email });
 
+    // status 401 is needed because we don't want to hacker known is user exists
     if (user === null) return res.status(401).json({ message: "Email or password is wrong." }); // prettier-ignore
 
     req.user = user; //* store user in the request body
