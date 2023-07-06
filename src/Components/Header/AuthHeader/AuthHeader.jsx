@@ -134,6 +134,13 @@ const AuthHeader = () => {
               {isPremium && remainingTime !== null ? (
                 <>
                   <MenuItem>{getSubscriptionTime(remainingTime)}</MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      dispatch(resetSubscription({ subscriptionType }))
+                    }
+                  >
+                    Reset subscription
+                  </MenuItem>
                 </>
               ) : (
                 <MenuItem onClick={handleUpdateSubscription}>
