@@ -24,4 +24,19 @@ function subscriptionJoi(req, res, next) {
   next();
 }
 
-module.exports = subscriptionJoi;
+function resetSubscriptionJoi(req, res, next) {
+  const resetSubscriptionSchema = Joi.object({
+    subscriptionType: Joi.string().min(3).required(),
+  });
+
+  const { error } = resetSubscriptionSchema.validate(req.body);
+
+  if (error) {
+    console.error(`Joi subscription error: ${error.message}`.red);
+    return res.status(400).json({ message: error.message }).end();
+  }
+
+  next();
+}
+
+module.exports = { subscriptionJoi, resetSubscriptionJoi };

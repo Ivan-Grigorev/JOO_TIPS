@@ -39,15 +39,14 @@ router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
 
 router.patch(
   "/subscription/reset",
+  joiSubscription.resetSubscriptionJoi,
   middlewares.auth,
   auth.resetUserSubscription
 );
 
-// router.get("/subscription/time", middlewares.auth, auth.getSubscriptionTime);
-
 router.patch(
   "/subscription",
-  joiSubscription,
+  joiSubscription.subscriptionJoi,
   middlewares.isUserExist,
   middlewares.auth,
   // middlewares.updateLastIP,
