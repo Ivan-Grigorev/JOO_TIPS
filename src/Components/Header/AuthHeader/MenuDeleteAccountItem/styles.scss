@@ -1,0 +1,15 @@
+.modal-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  font-size: 16px;
+}
+
+.modal-text-block ol {
+  padding-left: 35px;
+}
+
+.modal-text-block li {
+  color: black;
+}

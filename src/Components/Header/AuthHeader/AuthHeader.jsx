@@ -9,17 +9,24 @@ import {
   MenuOptionGroup,
   MenuDivider,
   Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import {
-  selectUserAvatar,
   selectUserEmail,
   selectUserName,
 } from "../../../redux/auth/auth-selectors";
 import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { deleteUser, logOut } from "../../../redux/auth/auth-operations";
+import { logOut } from "../../../redux/auth/auth-operations";
 import {
   getSubscriptionDetails,
   resetSubscription,
@@ -32,6 +39,8 @@ import {
 } from "../../../redux/subscription/subscription-selectors";
 import { useEffect } from "react";
 import UserAvatar from "./AccountMenu/UserAvatar";
+import MenuDeleteAccountItem from "./MenuDeleteAccountItem/MenuDeleteAccountItem";
+import MenuHelpItem from "./MenuHelpItem/MenuHelpItem";
 
 const Div = styled.div`
   display: flex;
@@ -73,12 +82,6 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
-  const handleDeleteAccount = () => {
-    dispatch(deleteUser());
-    // we don't need to attach an email, because browser send request with token,
-    // and token'd be decoded, where hashed an user email.
-  };
-
   // count remaining time for subscription
   const getSubscriptionTime = (ms) => {
     let days = `${Math.floor(ms / 86400000)} day(s)`;
@@ -107,7 +110,6 @@ const AuthHeader = () => {
     <>
       <div className="account-menu">
         <UserAvatar />
-
         <Menu>
           <MenuButton
             as={Button}
@@ -128,12 +130,13 @@ const AuthHeader = () => {
               <MenuItem>Мiй профiль</MenuItem>
               <MenuItem>Налаштування</MenuItem>
               <MenuItem onClick={handleLogOut}>Вийти</MenuItem>
-              <MenuItem onClick={handleDeleteAccount}>Видалити акаунт</MenuItem>
+
+              <MenuDeleteAccountItem />
             </MenuGroup>
             <MenuDivider />
-            <MenuGroup title="Help">
-              <MenuItem>FAQ</MenuItem>
-            </MenuGroup>
+
+            <MenuHelpItem />
+
             <MenuGroup title="Пiдписка">
               {isPremium && remainingTime !== null ? (
                 <>
