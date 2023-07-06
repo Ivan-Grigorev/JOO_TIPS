@@ -68,6 +68,8 @@ const AuthHeader = () => {
         expired: { startDate: 123456, endDate: 1 },
       },
     };
+
+    console.log(userEmail);
     dispatch(updateSubscription(updatedSubscription));
   };
 

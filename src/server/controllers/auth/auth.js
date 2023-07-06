@@ -132,6 +132,7 @@ async function getCurrentUser(req, res, next) {
     res.status(200).json({
       name: userInfo.name,
       avatar: userInfo.avatar,
+      email: userInfo.email,
     });
   } catch (error) {
     console.log(`${error}`.red);
