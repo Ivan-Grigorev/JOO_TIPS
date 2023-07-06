@@ -1,5 +1,9 @@
 import {
   Button,
+  Checkbox,
+  Input,
+  InputGroup,
+  InputRightElement,
   MenuItem,
   Modal,
   ModalBody,
@@ -13,16 +17,17 @@ import {
 import { useSelector } from "react-redux";
 import { selectUserName } from "../../../../redux/auth/auth-selectors";
 import "./styles.scss";
+import { useState } from "react";
 const MenuDeleteAccountItem = () => {
   const userName = useSelector(selectUserName);
-
+  const [show, setShow] = useState(false); // ? chakra
+  const handleClick = () => setShow(!show); // ? chakra
+  const { isOpen, onOpen, onClose } = useDisclosure(); // ? chakra
   //   const handleDeleteAccount = () => {
   //     dispatch(deleteUser());
   // we don't need to attach an email, because browser send request with token,
   // and token'd be decoded, where hashed an user email.
   //   };
-
-  const { isOpen, onOpen, onClose } = useDisclosure(); // ? chakra
 
   return (
     <>
@@ -75,6 +80,24 @@ const MenuDeleteAccountItem = () => {
                   альтернативи видаленню облікового запису, будь ласка,
                   зверніться до нашої служби підтримки.
                 </p>
+
+                <Checkbox value="accept">
+                  Я прочитав(ла) та розумію наслідки видалення мого облікового
+                  запису.
+                </Checkbox>
+
+                <InputGroup size="md">
+                  <Input
+                    placeholder="Confirm your password"
+                    pr="4.5rem"
+                    type={show ? "text" : "password"}
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? "Hide" : "Show"}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
               </div>
             </ModalBody>
 
