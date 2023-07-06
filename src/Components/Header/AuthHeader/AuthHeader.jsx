@@ -69,7 +69,6 @@ const AuthHeader = () => {
       },
     };
 
-    console.log(userEmail);
     dispatch(updateSubscription(updatedSubscription));
   };
 
