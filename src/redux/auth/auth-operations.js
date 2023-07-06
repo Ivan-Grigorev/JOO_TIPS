@@ -64,17 +64,14 @@ const refreshUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
   }
 });
 
-const deleteUser = createAsyncThunk(
-  "auth/deleteUser",
-  async (credentials, thunkAPI) => {
-    try {
-      const { data } = await axios.delete("/users/current");
-      token.unset();
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
+const deleteUser = createAsyncThunk("auth/deleteUser", async (_, thunkAPI) => {
+  try {
+    const { data } = await axios.delete("/users/current");
+    token.unset();
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
   }
-);
+});
 
 export { token, register, logOut, logIn, refreshUser, deleteUser };
