@@ -157,7 +157,7 @@ async function getSubscriptionDetails(req, res, next) {
 
 async function updateUserSubscription(req, res, next) {
   try {
-    const email = req.user.email;
+    const email = req.body.email;
 
     const subscription = {
       type: req.body.subscription.type,
@@ -176,7 +176,6 @@ async function updateUserSubscription(req, res, next) {
       { new: true }
     );
 
-    console.log(user.subscription);
     return res.status(200).json(user.subscription);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });

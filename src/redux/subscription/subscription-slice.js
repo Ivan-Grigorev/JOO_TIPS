@@ -25,7 +25,6 @@ const subscriptionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getSubscriptionDetails.fulfilled, (state, action) => {
-      console.log('action.payload',action.payload)
       state.data = action.payload;
       state.loading = false;
     });
@@ -38,8 +37,6 @@ const subscriptionSlice = createSlice({
     });
 
     builder.addCase(updateSubscription.fulfilled, (state, action) => {
-      // todo ошибка тут
-
       state.data = action.payload;
       state.loading = false;
     });
