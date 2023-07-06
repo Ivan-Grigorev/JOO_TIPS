@@ -138,7 +138,20 @@ async function getCurrentUser(req, res, next) {
   }
 }
 
-async function getSubscriptionTime(req, res, next) {
+// async function getSubscriptionDetails(req, res, next) {
+//   try {
+//     const { email } = req.user;
+//     const user = await User.findOne({ email });
+
+//     res.json({ ...user.subscription });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ message: "Internal server error while getSubscriptionDetails" });
+//   }
+// }
+
+async function getSubscriptionDetails(req, res, next) {
   try {
     const currentTime = moment();
     const { email } = req.user;
@@ -147,7 +160,7 @@ async function getSubscriptionTime(req, res, next) {
 
     const remainingTime = expirationDate.diff(currentTime);
 
-    res.status(200).json({ remainingTime });
+    res.status(200).json({ ...user.subscription, remainingTime });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
     console.error(`Error while getting subscription time: ${error}`.red);
@@ -186,6 +199,6 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
-  getSubscriptionTime,
   updateUserSubscription,
+  getSubscriptionDetails,
 };

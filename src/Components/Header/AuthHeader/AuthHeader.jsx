@@ -22,9 +22,15 @@ import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/auth/auth-operations";
+import {
+  getSubscriptionDetails,
+  getUserSubscriptionTime,
+} from "../../../redux/subscription/subscription-operations";
+import {
+  selectIsPremium,
+  selectRemainingTime,
+} from "../../../redux/subscription/subscription-selectors";
 import { useEffect } from "react";
-import { getUserSubscriptionTime } from "../../../redux/subscription/subscription-operations";
-import { selectRemainingTime } from "../../../redux/subscription/subscription-selectors";
 
 const Div = styled.div`
   display: flex;
@@ -35,23 +41,25 @@ const Div = styled.div`
 
 const AuthHeader = () => {
   const dispatch = useDispatch();
-  const loggedIn = useSelector(selectIsLoggedIn);
   const username = useSelector(selectUserName);
   const userAvatar = useSelector(selectUserAvatar);
   const userEmail = useSelector(selectUserEmail);
+
+  const isPremium = useSelector(selectIsPremium);
   const remainingTime = useSelector(selectRemainingTime);
 
-  // console.log(Number(remainingTime.remainingTime) / 3600000);
-
-  useEffect(() => {
-    loggedIn && dispatch(getUserSubscriptionTime({ email: userEmail }));
-
-    // todo возможно убрать вообще зависимости
-  }, [loggedIn, dispatch, userEmail]);
+  const onMenuOpen = () => {
+    dispatch(getSubscriptionDetails({ email: userEmail }));
+  };
 
   const handleLogOut = () => {
     dispatch(logOut());
   };
+
+  useEffect(() => {
+    isPremium &&
+      document.querySelector(".user-avatar").classList.add("premium-avatar");
+  });
 
   return (
     <>
@@ -71,6 +79,7 @@ const AuthHeader = () => {
             border="1px"
             borderColor="#fcbc7d"
             _hover={{ bg: "#fcbc7d", color: "#123054" }}
+            onClick={onMenuOpen}
           >
             <Div>
               {username} <BsChevronDown />
@@ -87,13 +96,15 @@ const AuthHeader = () => {
               <MenuItem>FAQ</MenuItem>
             </MenuGroup>
             <MenuGroup title="Пiдписка">
-              <MenuItem>Перейти на премiум пiдписку!</MenuItem>
-              {remainingTime !== null && (
-                <MenuItem>
-                  Ваша пiдписка триватиме ще{" "}
-                  {Math.floor(Number(remainingTime.remainingTime / 3600000))}{" "}
-                  часи
-                </MenuItem>
+              {isPremium && remainingTime !== null ? (
+                <>
+                  <MenuItem>
+                    Ваша пiдписка триватиме ще{" "}
+                    {Math.floor(Number(remainingTime / 3600000))} часи
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem>Перейти на премiум пiдписку!</MenuItem>
               )}
             </MenuGroup>
           </MenuList>
