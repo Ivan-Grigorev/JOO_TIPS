@@ -32,6 +32,7 @@ import {
   selectRemainingTime,
 } from "../../../redux/subscription/subscription-selectors";
 import { useEffect } from "react";
+import UserAvatar from "./AccountMenu/UserAvatar";
 
 const Div = styled.div`
   display: flex;
@@ -43,7 +44,6 @@ const Div = styled.div`
 const AuthHeader = () => {
   const dispatch = useDispatch();
   const username = useSelector(selectUserName);
-  const userAvatar = useSelector(selectUserAvatar);
   const userEmail = useSelector(selectUserEmail);
 
   const isPremium = useSelector(selectIsPremium);
@@ -98,11 +98,7 @@ const AuthHeader = () => {
   return (
     <>
       <div className="account-menu">
-        {userAvatar ? (
-          <img src={userAvatar} alt="your avatar" className="user-avatar" />
-        ) : (
-          <RxAvatar className="user-avatar" />
-        )}
+        <UserAvatar/>
 
         <Menu>
           <MenuButton
