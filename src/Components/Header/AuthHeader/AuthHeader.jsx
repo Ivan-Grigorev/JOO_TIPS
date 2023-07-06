@@ -19,7 +19,7 @@ import {
 import "./AuthHeader.scss";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { logOut } from "../../../redux/auth/auth-operations";
+import { deleteUser, logOut } from "../../../redux/auth/auth-operations";
 import {
   getSubscriptionDetails,
   resetSubscription,
@@ -57,7 +57,11 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
-  const handleDeleteAccount = () => {};
+  const handleDeleteAccount = () => {
+    dispatch(deleteUser());
+    // we don't need to attach an email, because browser send request with token,
+    // and token'd be decoded, where hashed an user email.
+  };
 
   // count remaining time for subscription
   const getSubscriptionTime = (ms) => {

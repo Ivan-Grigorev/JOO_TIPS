@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  deleteUser,
   // getUserAvatar,
   logIn,
   logOut,
@@ -92,13 +93,21 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
         state.isLoading = initialState.isLoading;
+      })
+
+      .addCase(deleteUser.fulfilled, (state) => {
+        state.user = initialState.user;
+        state.token = initialState.token;
+        state.isLoggedIn = initialState.isLoggedIn;
+        state.isLoading = initialState.isLoading;
+        state.error = initialState.error;
+      })
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUser.rejected, (state) => {
+        state.isLoading = initialState.isLoading;
       });
-    // .addCase(getUserAvatar.fulfilled, (state, action) => {
-    //   state.user.avatar = action.payload;
-    // })
-    // .addCase(getUserAvatar.pending, (state) => {
-    //   state.isRefreshing = true;
-    // });
   },
 });
 

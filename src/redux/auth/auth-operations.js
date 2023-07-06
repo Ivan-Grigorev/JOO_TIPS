@@ -46,25 +46,35 @@ const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
-export const refreshUser = createAsyncThunk(
-  "auth/refresh",
-  async (_, thunkAPI) => {
-    // Reading the token from the state via getState()
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+const refreshUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
+  // Reading the token from the state via getState()
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
 
-    // If there is no token, exit without performing any request
-    if (persistedToken === null)  return thunkAPI.rejectWithValue("Unable to fetch user"); // prettier-ignore
+  // If there is no token, exit without performing any request
+  if (persistedToken === null)  return thunkAPI.rejectWithValue("Unable to fetch user"); // prettier-ignore
 
+  try {
+    // If there is a token, add it to the HTTP header and perform the request
+    token.set(persistedToken);
+    const { data } = await axios.get("/users/current");
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+const deleteUser = createAsyncThunk(
+  "auth/deleteUser",
+  async (credentials, thunkAPI) => {
     try {
-      // If there is a token, add it to the HTTP header and perform the request
-      token.set(persistedToken);
-      const { data } = await axios.get("/users/current");
+      const { data } = await axios.delete("/users/current");
+      token.unset();
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export { token, register, logOut, logIn };
+export { token, register, logOut, logIn, refreshUser, deleteUser };
