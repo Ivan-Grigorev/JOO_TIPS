@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSubscriptionDetails } from "./subscription-operations";
+import {
+  getSubscriptionDetails,
+  resetSubscription,
+} from "./subscription-operations";
 
 const initialState = {
   data: {
@@ -27,6 +30,17 @@ const subscriptionSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getSubscriptionDetails.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+
+    builder.addCase(resetSubscription.fulfilled, (state, action) => {
+      state.data = action.payload;
+    });
+    builder.addCase(resetSubscription.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(resetSubscription.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
     });

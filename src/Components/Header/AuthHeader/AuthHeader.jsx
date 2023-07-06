@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import {
-  selectIsLoggedIn,
   selectUserAvatar,
   selectUserEmail,
   selectUserName,
@@ -24,9 +23,10 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/auth/auth-operations";
 import {
   getSubscriptionDetails,
-  getUserSubscriptionTime,
+  resetSubscription,
 } from "../../../redux/subscription/subscription-operations";
 import {
+  selectAccountType,
   selectIsPremium,
   selectRemainingTime,
 } from "../../../redux/subscription/subscription-selectors";
@@ -47,6 +47,7 @@ const AuthHeader = () => {
 
   const isPremium = useSelector(selectIsPremium);
   const remainingTime = useSelector(selectRemainingTime);
+  const subscriptionType = useSelector(selectAccountType);
 
   const onMenuOpen = () => {
     dispatch(getSubscriptionDetails({ email: userEmail }));
@@ -56,11 +57,12 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
+  // add premium border to avatar
   useEffect(() => {
     isPremium &&
       document.querySelector(".user-avatar").classList.add("premium-avatar");
   });
-
+  // reset subscription
   useEffect(() => {
     if (remainingTime !== null && remainingTime <= 0) {
       alert("Subscription must be dropped.");
@@ -70,9 +72,10 @@ const AuthHeader = () => {
     isPremium &&
       setInterval(() => {
         if (remainingTime <= 0) {
-          alert("Subscription must be dropped.");
+          dispatch(resetSubscription({ subscriptionType }));
+          alert("Subscription is dropped.");
         }
-      }, 3600000);
+      }, 3600000); // 1 hour interval
   });
 
   return (
