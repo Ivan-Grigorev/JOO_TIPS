@@ -1,4 +1,3 @@
-import { RxAvatar } from "react-icons/rx";
 import { BsChevronDown } from "react-icons/bs";
 import {
   Menu,
