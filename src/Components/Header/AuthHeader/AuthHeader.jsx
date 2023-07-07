@@ -88,12 +88,15 @@ const AuthHeader = () => {
 
   // Function to calculate remaining subscription time
   const getSubscriptionTime = (ms) => {
-    let days = `${Math.floor(ms / 86400000)} day(s)`;
+    const days = `${Math.floor(ms / 86400000)} day(s)`;
     const hours = `${Math.floor((ms % 86400000) / 3600000)} hour(s)`;
+    const minutes = `${Math.floor(ms / 60000)} minute(s)`;
 
-    if (days === "0 day(s)") days = "";
+    if (days === "0 day(s)" && hours === "0 hour(s)") return `Subscription time: ${minutes}`; // prettier-ignore
 
-    return `Subscription time: ${days} ${hours} `;
+    if (days === "0 day(s)") return `Subscription time: ${hours}`;
+
+    return `Subscription time: ${days} ${hours}`;
   };
 
   const handleUpdateSubscription = () => {
