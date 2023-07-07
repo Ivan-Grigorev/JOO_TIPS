@@ -17,25 +17,54 @@ async function getUserMac() {
 
 async function autoCheckSubscriptionTime() {
   try {
+    // Get the current time
     const currentTime = moment();
+    // Define the length of one day in milliseconds
+    const oneDayInMs = 24 * 60 * 60 * 1000;
+    // Define the length of seven days (one week) in milliseconds
+    const sevenDaysInMs = oneDayInMs * 7;
 
+    // Fetch all users
     const users = await User.find({}).exec();
 
+    // Loop over each user
     for (const user of users) {
+      // Get the subscription expiration date of the user
       const expirationDate = moment(user.subscription.expired.endDate);
-      const remainingTime = expirationDate.diff(currentTime);
+      // Calculate the remaining time of the subscription in milliseconds
+      const remainingTimeInMs = expirationDate.diff(currentTime);
 
-      const endDate = moment(user.subscription.expired.endDate).format(
-        "DD-MM-YYYY"
-      );
-      const endTime = moment(user.subscription.expired.endTime).format("HH:mm");
+      // Check if the subscription has already expired
+      if (remainingTimeInMs <= 0) {
+        console.log(`User ${user.email} - subscription time has expired`);
+        // Skip to the next user (end this iteration)
+        continue;
+      }
 
-      if (remainingTime <= 0) console.log(`Пользователь ${user.email} - время подписки истекло`); // prettier-ignore
+      // Check if the subscription will expire within one day
+      if (remainingTimeInMs <= oneDayInMs) {
+        console.log(`User ${user.email} - subscription will expire in 1 day`);
+        // Skip to the next user (end this iteration)
+        continue;
+      }
 
-      sendRemind.sendWeekSubscriptionRemind(user.email, user.name, endDate, endTime);
+      // Check if the subscription will expire within one week
+      if (remainingTimeInMs <= sevenDaysInMs) {
+        // Format the expiration date and time
+        const endDate = moment(user.subscription.expired.endDate).format("DD-MM-YYYY"); // prettier-ignore
+        const endTime = moment(user.subscription.expired.endTime).format("HH:mm"); // prettier-ignore
+        // Send an email reminder for the subscription
+        sendRemind.sendWeekSubscriptionRemind(
+          user.email,
+          user.name,
+          endDate,
+          endTime
+        );
+      }
     }
   } catch (error) {
-    console.error("Ошибка при проверке времени подписки:", error);
+    // Log any errors that occur during the execution of the function
+    console.error("Error when checking subscription time:", error);
   }
 }
 
