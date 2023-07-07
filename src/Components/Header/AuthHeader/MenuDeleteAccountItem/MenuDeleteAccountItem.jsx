@@ -1,3 +1,6 @@
+// Importing necessary libraries and hooks
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Checkbox,
@@ -14,34 +17,34 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+
+// Importing Redux actions and selectors
+import { deleteUser } from "../../../../redux/auth/auth-operations";
+import { resetDeleteErrors } from "../../../../redux/auth/auth-slice";
 import {
   selectUserEmail,
   selectUserErrors,
   selectUserName,
 } from "../../../../redux/auth/auth-selectors";
-import { resetDeleteErrors } from "../../../../redux/auth/auth-slice";
+
 import "./styles.scss";
-import { useEffect, useState } from "react";
-import { deleteUser } from "../../../../redux/auth/auth-operations";
 
+// MenuDeleteAccountItem component
 const MenuDeleteAccountItem = () => {
-  // useDispatch hook lets us dispatch actions to modify Redux store.
-  const dispatch = useDispatch();
-  // useSelector lets us extract a specific value from Redux store.
-  const userName = useSelector(selectUserName);
+  const dispatch = useDispatch(); // To dispatch actions
+  const userName = useSelector(selectUserName); // Getting username from the Redux store
+  const email = useSelector(selectUserEmail); // Getting email from the Redux store
+  const errors = useSelector(selectUserErrors); // Getting user errors from the Redux store
 
-  // useDisclosure is a custom hook from Chakra UI to handle common disclosure components
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  // useState is a hook that lets us add React state to function components
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
+
+  // useState hooks to handle internal component state
   const [show, setShow] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [password, setPassword] = useState("");
   const [inputClass, setInputClass] = useState("visually-hidden");
 
-  const email = useSelector(selectUserEmail);
-  const errors = useSelector(selectUserErrors);
-
+  // Effect to handle user errors
   useEffect(() => {
     const input = document.querySelector(".confirm-password-input");
     const messages = document.querySelector(".modal-text-block .message");
@@ -59,23 +62,17 @@ const MenuDeleteAccountItem = () => {
     }
   });
 
-  // This function toggles the visibility of the input field by updating 'inputClass' state.
+  // Handles the Checkbox onChange event
   const handleCheckboxChange = (e) => {
     const input = document.querySelector(".chakra-input");
-    setIsCheckboxChecked(e.target.checked);
-    if (e.target.checked) {
-      setInputClass("");
-      input.disabled = false;
-    } else {
-      setInputClass("visually-hidden");
-      input.disabled = true;
-      input.style.cursor = "default";
-    }
+    setIsCheckboxChecked(e.target.checked); // Toggling the checkbox value
+    setInputClass(e.target.checked ? "" : "visually-hidden"); // Toggling input visibility
+    input.disabled = !e.target.checked; // Disabling input when checkbox is unchecked
   };
 
-  // This function dispatches an action to delete the user account.
+  // Handles account deletion
   const handleDeleteAccount = () => {
-    dispatch(deleteUser({ email, password }));
+    dispatch(deleteUser({ email, password })); // Dispatches the deleteUser action
   };
 
   return (
