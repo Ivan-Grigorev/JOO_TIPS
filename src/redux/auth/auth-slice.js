@@ -20,7 +20,11 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    resetDeleteErrors: (state) => {
+      state.error.delete = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -81,10 +85,10 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
 
+        state.isRefreshing = false;
         state.isLoggedIn = true;
         state.isLoading = initialState.isLoading;
-        state.isRefreshing = false;
-        state.error = null;
+        state.error = initialState.error;
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
@@ -116,5 +120,6 @@ const authSlice = createSlice({
   },
 });
 
+export const { resetDeleteErrors } = authSlice.actions;
 export default authSlice.reducer;
 export const authReducer = authSlice.reducer;
