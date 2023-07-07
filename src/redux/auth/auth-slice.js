@@ -14,7 +14,7 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
-  error: { signup: [], login: [] },
+  error: { signup: [], login: [], delete: [] },
 };
 
 const authSlice = createSlice({
@@ -106,7 +106,12 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deleteUser.rejected, (state, action) => {
+        state.error.delete = []; // reset
         state.isLoading = initialState.isLoading;
+
+        if (!state.error.delete.includes(action.payload)) {
+          state.error.delete.push(action.payload);
+        }
       });
   },
 });
