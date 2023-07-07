@@ -74,8 +74,6 @@ const deleteUser = createAsyncThunk(
 
       token.unset();
     } catch (error) {
-      toast.error("Сталася помилка при видаленні облікового запису");
-
       console.error("error from auth-operations", error.response.data.message);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
