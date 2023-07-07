@@ -42,7 +42,9 @@ const App = () => {
 
         <Route path="*" element={<InDev />} />
       </Routes>
+
       {isLoading && <ChakraSpinner />}
+
       <ToastContainer
         position="top-right"
         transition={Flip}
@@ -55,6 +57,7 @@ const App = () => {
         draggable
         pauseOnHover
         theme="dark"
+        limit={3}
       />
     </>
   );

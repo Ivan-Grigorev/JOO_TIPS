@@ -70,11 +70,12 @@ const deleteUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       await axios.put("/users/current", credentials);
-      toast.success("Ваш аккаунт был удалён");
+      toast.success("Ваш обліковий запис був видалений");
 
       token.unset();
     } catch (error) {
-      toast.error("Произошла ошибка при удалении аккаунта");
+      toast.error("Сталася помилка при видаленні облікового запису");
+
       console.error("error from auth-operations", error.response.data.message);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
