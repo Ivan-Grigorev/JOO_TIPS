@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -69,9 +70,11 @@ const deleteUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       await axios.put("/users/current", credentials);
+      toast.success("Ваш аккаунт был удалён");
 
       token.unset();
     } catch (error) {
+      toast.error("Произошла ошибка при удалении аккаунта");
       console.error("error from auth-operations", error.response.data.message);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }

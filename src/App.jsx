@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing, selectLoadingStatus } from "./redux/selectors";
 import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
+import { Flip, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
@@ -39,8 +42,20 @@ const App = () => {
 
         <Route path="*" element={<InDev />} />
       </Routes>
-
       {isLoading && <ChakraSpinner />}
+      <ToastContainer
+        position="top-right"
+        transition={Flip}
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   );
 };
