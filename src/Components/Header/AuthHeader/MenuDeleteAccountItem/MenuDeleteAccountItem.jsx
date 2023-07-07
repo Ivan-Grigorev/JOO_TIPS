@@ -42,6 +42,23 @@ const MenuDeleteAccountItem = () => {
   const email = useSelector(selectUserEmail);
   const errors = useSelector(selectUserErrors);
 
+  useEffect(() => {
+    const input = document.querySelector(".confirm-password-input");
+    const messages = document.querySelector(".modal-text-block .message");
+    const show = () => (messages.style.opacity = 1);
+    const hide = () => (messages.style.opacity = 0);
+
+    // it's get it more smoothly
+    if (input) {
+      if (errors.delete.length > 0) {
+        input.style.border = "2px solid red";
+        show();
+      } else {
+        hide();
+      }
+    }
+  });
+
   // This function toggles the visibility of the input field by updating 'inputClass' state.
   const handleCheckboxChange = (e) => {
     const input = document.querySelector(".chakra-input");
@@ -130,12 +147,6 @@ const MenuDeleteAccountItem = () => {
                   запису.
                 </Checkbox>
 
-                <div className="errors-block">
-                  {errors.delete.map((error) => (
-                    <p key={error}>{error}</p>
-                  ))}
-                </div>
-
                 <InputGroup size="md" className={inputClass}>
                   <Input
                     name="confirmedPassword"
@@ -145,6 +156,7 @@ const MenuDeleteAccountItem = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     pr="4.5rem"
                     style={{ cursor: isCheckboxChecked ? "auto" : "default" }}
+                    errorBorderColor="red.300"
                     disabled
                   />
                   <InputRightElement width="4.5rem">
@@ -157,6 +169,12 @@ const MenuDeleteAccountItem = () => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
+
+                <div className="message">
+                  {errors.delete.map((error) => (
+                    <p key={error}>{error}</p>
+                  ))}
+                </div>
               </div>
             </ModalBody>
 

@@ -21,3 +21,15 @@
 .chakra-input__group {
     transition: opacity 350ms ease;
 }
+
+.modal-text-block .message {
+  height: 20px;
+
+  color: red;
+
+  font-weight: 300;
+  font-size: 20px;
+
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
