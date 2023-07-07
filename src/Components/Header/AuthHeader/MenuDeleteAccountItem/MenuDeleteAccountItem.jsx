@@ -17,8 +17,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
+  selectUserErrors,
   selectUserName,
 } from "../../../../redux/auth/auth-selectors";
+import { resetDeleteErrors } from "../../../../redux/auth/auth-slice";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { deleteUser } from "../../../../redux/auth/auth-operations";
@@ -38,10 +40,7 @@ const MenuDeleteAccountItem = () => {
   const [inputClass, setInputClass] = useState("visually-hidden");
 
   const email = useSelector(selectUserEmail);
-
-  // useEffect lets us perform side effects in function components.
-  // Here it sets the initial state for 'inputClass'.
-  useEffect(() => setInputClass("visually-hidden"), []);
+  const errors = useSelector(selectUserErrors);
 
   // This function toggles the visibility of the input field by updating 'inputClass' state.
   const handleCheckboxChange = (e) => {
@@ -64,9 +63,21 @@ const MenuDeleteAccountItem = () => {
 
   return (
     <>
-      <MenuItem onClick={onOpen}>
+      <MenuItem
+        onClick={() => {
+          onOpen();
+          setInputClass("visually-hidden"); // Here it sets the initial state for 'inputClass'.
+        }}
+      >
         Видалити акаунт
-        <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
+        <Modal
+          isOpen={isOpen}
+          onClose={() => {
+            onClose();
+            dispatch(resetDeleteErrors());
+          }}
+          size={"xl"}
+        >
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Підтвердження видалення облікового запису</ModalHeader>
@@ -118,6 +129,12 @@ const MenuDeleteAccountItem = () => {
                   Я прочитав(ла) та розумію наслідки видалення мого облікового
                   запису.
                 </Checkbox>
+
+                <div className="errors-block">
+                  {errors.delete.map((error) => (
+                    <p key={error}>{error}</p>
+                  ))}
+                </div>
 
                 <InputGroup size="md" className={inputClass}>
                   <Input
