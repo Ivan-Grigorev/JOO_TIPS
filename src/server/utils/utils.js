@@ -30,9 +30,8 @@ async function autoCheckSubscriptionTime() {
   }
 }
 
-autoCheckSubscriptionTime();
-// setInterval(checkSubscription, 5000); // 3600000 миллисекунд - 1 час
 
 module.exports = {
   getUserMac,
+  autoCheckSubscriptionTime,
 };
