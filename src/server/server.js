@@ -1,6 +1,7 @@
 const mongoDB = require("./db.js");
 const app = require("./app.js");
 const { autoCheckSubscriptionTime } = require("./utils/utils.js");
+require("./cronJobs.js");
 require("colors");
 
 const PORT = process.env.PORT || 3000;
