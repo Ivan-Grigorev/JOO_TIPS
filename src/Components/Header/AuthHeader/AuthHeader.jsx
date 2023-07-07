@@ -1,5 +1,6 @@
 import { BsChevronDown } from "react-icons/bs";
 import {
+  // Importing necessary components from Chakra UI
   Menu,
   MenuButton,
   MenuList,
@@ -42,6 +43,7 @@ import UserAvatar from "./AccountMenu/UserAvatar";
 import MenuDeleteAccountItem from "./MenuDeleteAccountItem/MenuDeleteAccountItem";
 import MenuHelpItem from "./MenuHelpItem/MenuHelpItem";
 
+// Styled component using styled-components
 const Div = styled.div`
   display: flex;
   align-items: center;
@@ -54,11 +56,12 @@ const AuthHeader = () => {
   const username = useSelector(selectUserName);
   const userEmail = useSelector(selectUserEmail);
 
+  // Get data from Redux state
   const isPremium = useSelector(selectIsPremium);
   const remainingTime = useSelector(selectRemainingTime);
   const subscriptionType = useSelector(selectAccountType);
 
-  // add premium border to avatar, get subscription details
+  // Add class to user avatar based on subscription type
   useEffect(() => {
     dispatch(getSubscriptionDetails({ email: userEmail }));
 
@@ -69,9 +72,10 @@ const AuthHeader = () => {
           .classList.remove("premium-avatar");
   }, [dispatch, isPremium, userEmail]);
 
-  // reset subscription
+  // Reset subscription when time expires
   useEffect(() => {
-    if (remainingTime !== null && remainingTime <= 0) dispatch(resetSubscription({ subscriptionType })); // prettier-ignore
+    if (remainingTime !== null && remainingTime <= 0)
+      dispatch(resetSubscription({ subscriptionType }));
   });
 
   const onMenuOpen = () => {
@@ -82,7 +86,7 @@ const AuthHeader = () => {
     dispatch(logOut());
   };
 
-  // count remaining time for subscription
+  // Function to calculate remaining subscription time
   const getSubscriptionTime = (ms) => {
     let days = `${Math.floor(ms / 86400000)} day(s)`;
     const hours = `${Math.floor((ms % 86400000) / 3600000)} hour(s)`;
@@ -92,8 +96,8 @@ const AuthHeader = () => {
     return `Subscription time: ${days} ${hours} `;
   };
 
-  // update subscription
   const handleUpdateSubscription = () => {
+    // Update subscription
     const updatedSubscription = {
       email: userEmail,
       subscription: {
@@ -110,6 +114,7 @@ const AuthHeader = () => {
     <>
       <div className="account-menu">
         <UserAvatar />
+
         <Menu>
           <MenuButton
             as={Button}
@@ -137,7 +142,7 @@ const AuthHeader = () => {
 
             <MenuHelpItem />
 
-            <MenuGroup title="Пiдписка">
+            <MenuGroup title="Subscription">
               {isPremium && remainingTime !== null ? (
                 <>
                   <MenuItem>{getSubscriptionTime(remainingTime)}</MenuItem>
@@ -151,7 +156,7 @@ const AuthHeader = () => {
                 </>
               ) : (
                 <MenuItem onClick={handleUpdateSubscription}>
-                  Перейти на премiум пiдписку!
+                  Upgrade to Premium!
                 </MenuItem>
               )}
             </MenuGroup>
