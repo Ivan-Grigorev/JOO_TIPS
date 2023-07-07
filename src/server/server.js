@@ -9,7 +9,5 @@ app.listen(PORT, async () => {
 
   await mongoDB();
 
-  autoCheckSubscriptionTime()
-
   setInterval(autoCheckSubscriptionTime, 3600000); // 3600000 миллисекунд - 1 час
 });
