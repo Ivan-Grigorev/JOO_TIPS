@@ -9,6 +9,7 @@ const user = new mongoose.Schema(
     email: {
       type: String,
       required: [true, "Email is required."],
+      unique: true,
     },
     password: {
       type: String,
@@ -27,15 +28,19 @@ const user = new mongoose.Schema(
       isPremium: {
         type: Boolean,
         default: false,
+        index: 1,
       },
       expired: {
         startDate: {
           type: Number,
           default: null,
+
+          index: 1.1,
         },
         endDate: {
           type: Number,
           default: null,
+          index: 1.2,
         },
       },
     },
