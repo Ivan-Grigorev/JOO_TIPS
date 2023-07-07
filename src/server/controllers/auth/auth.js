@@ -178,7 +178,7 @@ async function updateUserSubscription(req, res, next) {
       expired: {
         startDate: moment().valueOf(),
         endDate: moment()
-          .add(req.body.subscription.expired.endDate, "minutes")
+          .add(req.body.subscription.expired.endDate, "days")
           .valueOf(), // make from number (day) a multiseconds
       },
     };
