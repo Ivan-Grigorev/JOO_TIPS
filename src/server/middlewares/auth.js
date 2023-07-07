@@ -1,5 +1,6 @@
 const User = require("../models/user/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const parser = require("ua-parser-js");
 require("colors");
 
@@ -18,6 +19,10 @@ async function auth(req, res, next) {
       if (err) return res.status(401).json({ message: "Invalid token" });
 
       const currentUser = await User.find({ email: decoded.email });
+
+      if (!currentUser || !currentUser[0]) {
+        return res.status(500).json({ message: "InternalServerError" });
+      }
 
       if (currentUser && currentUser[0].token === token) {
         req.user = decoded;
@@ -76,6 +81,7 @@ async function isUserExist(req, res, next) {
   }
 }
 
+// middleware for signup
 async function isPasswordsMatch(req, res, next) {
   try {
     const { password } = req.body;
@@ -92,6 +98,27 @@ async function isPasswordsMatch(req, res, next) {
     return res
       .status(500)
       .json({ message: `Middleware password matching error: ${error}` });
+  }
+}
+
+// middleware for delete user
+async function confirmPassword(req, res, next) {
+  try {
+    const password = req.body.password;
+    const email = req.body.email;
+
+    const user = await User.findOne({ email });
+
+    bcrypt.compare(password, user.password, async (err, result) => {
+      if (err) return res.status(500).json({ message: "Error compairing passwords" }); // prettier-ignore
+
+      if (result === false) return res.status(401).json({ message: "Password is wrong." }); // prettier-ignore
+
+      next();
+    });
+  } catch (error) {
+    console.error(`Error compairing passwords: ${error.message}`.yellow);
+    res.status(500).json({ message: "Internal server error." });
   }
 }
 
@@ -119,4 +146,5 @@ module.exports = {
   updateLastIP,
   isPasswordsMatch,
   setUserDevice,
+  confirmPassword,
 };

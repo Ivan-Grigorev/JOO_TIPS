@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   "/signup",
-  joiUser,
+  joiUser.userJoi,
   middlewares.isEmailInUse,
   middlewares.isPasswordsMatch,
   middlewares.setUserDevice,
@@ -18,7 +18,7 @@ router.post(
 
 router.post(
   "/login",
-  joiUser,
+  joiUser.userJoi,
   middlewares.isUserExist,
   middlewares.setUserDevice,
   middlewares.updateLastIP,
@@ -27,15 +27,22 @@ router.post(
 
 router.post(
   "/logout",
-  joiUser,
+  joiUser.userJoi,
   middlewares.auth,
   middlewares.setUserDevice,
   auth.logout
 );
 
-router.delete("/current", middlewares.auth, auth.deleteCurrentUser);
+router.put(
+  "/current",
+  joiUser.userDeleteJoi,
+  middlewares.isUserExist,
+  middlewares.auth,
+  middlewares.confirmPassword,
+  auth.deleteCurrentUser
+);
 
-router.get("/current", joiUser, middlewares.auth, auth.getCurrentUser); // for persisting token
+router.get("/current", joiUser.userJoi, middlewares.auth, auth.getCurrentUser); // for persisting token
 
 router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
 
@@ -51,7 +58,6 @@ router.patch(
   joiSubscription.subscriptionJoi,
   middlewares.isUserExist,
   middlewares.auth,
-  // middlewares.updateLastIP,
   auth.updateUserSubscription
 );
 

@@ -147,7 +147,8 @@ async function deleteCurrentUser(req, res, next) {
 
     res.status(204).json(user);
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: `Internal server error.` });
+    // .json({ message: "Internal server error in deleteCurrentUser" });
   }
 }
 

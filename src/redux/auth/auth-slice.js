@@ -105,7 +105,7 @@ const authSlice = createSlice({
       .addCase(deleteUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteUser.rejected, (state) => {
+      .addCase(deleteUser.rejected, (state, action) => {
         state.isLoading = initialState.isLoading;
       });
   },

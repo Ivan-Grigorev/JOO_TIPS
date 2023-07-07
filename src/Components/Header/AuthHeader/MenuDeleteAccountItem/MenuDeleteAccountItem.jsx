@@ -15,10 +15,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserName } from "../../../../redux/auth/auth-selectors";
+import {
+  selectUserEmail,
+  selectUserName,
+} from "../../../../redux/auth/auth-selectors";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { deleteUser } from "../../../../redux/auth/auth-operations";
+
 const MenuDeleteAccountItem = () => {
   // useDispatch hook lets us dispatch actions to modify Redux store.
   const dispatch = useDispatch();
@@ -32,6 +36,8 @@ const MenuDeleteAccountItem = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [password, setPassword] = useState("");
   const [inputClass, setInputClass] = useState("visually-hidden");
+
+  const email = useSelector(selectUserEmail);
 
   // useEffect lets us perform side effects in function components.
   // Here it sets the initial state for 'inputClass'.
@@ -53,7 +59,7 @@ const MenuDeleteAccountItem = () => {
 
   // This function dispatches an action to delete the user account.
   const handleDeleteAccount = () => {
-    dispatch(deleteUser());
+    dispatch(deleteUser({ email, password }));
   };
 
   return (
