@@ -172,16 +172,16 @@ async function getSubscriptionDetails(req, res, next) {
 async function updateUserSubscription(req, res, next) {
   try {
     const email = req.body.email;
+    const expiration = req.body.subscription.expirationDate; // from redux dispatch
+
+    const endDate = moment(moment().valueOf())
+      .add(expiration, "days")
+      .valueOf();
 
     const subscription = {
       type: req.body.subscription.type,
-      isPremium: req.body.subscription.isPremium,
-      expired: {
-        startDate: moment().valueOf(),
-        endDate: moment()
-          .add(req.body.subscription.expired.endDate, "days")
-          .valueOf(), // make from number (day) a multiseconds
-      },
+      isPremium: true,
+      expired: { startDate: moment().valueOf(), endDate },
     };
 
     const user = await User.findOneAndUpdate(
@@ -189,9 +189,9 @@ async function updateUserSubscription(req, res, next) {
       { subscription },
       { new: true }
     );
-    
-    const ms = moment(user.subscription.expired.endDate).diff(moment()); // prettier-ignore
-    const expirationDate = `${Math.floor(moment.duration(ms).asDays())} днiв.`;
+
+    const ms = moment(endDate).diff(moment()); // prettier-ignore
+    const expirationDate = `${Math.ceil(moment.duration(ms).asDays())} днiв.`;
 
     const subject = "Підтвердження платної підписки на сервісі JooTips";
     const HTML = `<p>Шановний користувачу,</p>
