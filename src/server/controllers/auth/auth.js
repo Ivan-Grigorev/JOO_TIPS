@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
 const { getUserMac } = require("../../utils/utils.js");
+const sendMail = require("../../utils/mailer.js");
 require("colors");
 moment.tz.setDefault("Europe/Prague");
 
@@ -188,8 +189,22 @@ async function updateUserSubscription(req, res, next) {
       { subscription },
       { new: true }
     );
+    
+    const ms = moment(user.subscription.expired.endDate).diff(moment()); // prettier-ignore
+    const expirationDate = `${Math.floor(moment.duration(ms).asDays())} днi.`;
 
-    return res.status(200).json(user.subscription);
+    const subject = "Підтвердження платної підписки на сервісі JooTips";
+    const HTML = `<p>Шановний користувачу,</p>
+    <p>Ми хотіли б висловити щиру вдячність за ваше рішення укласти платну підписку на ${expirationDate} на нашому сервісі JooTips. Ваш вибір означає для нас набагато більше, ніж просто фінансову підтримку. Він підтверджує, що ви довіряєте нам і нашій роботі, а також визнаєте цінність, яку ми надаємо.</p>
+    <p>Ми прагнемо постійно поліпшувати наш сервіс і надавати вам найактуальніші та корисні поради. Ваша підписка дозволить нам продовжувати вкладати ресурси у дослідження, розробку та якість контенту, щоб ви могли отримувати максимальну користь від JooTips. </p>
+    <p>Ваша довіра і підтримка означають для нас дуже багато. Ми зобов'язуємося продовжувати радувати вас цікавим і корисним матеріалом, постійно прагнути до поліпшення нашого сервісу та задоволення ваших потреб.</p>
+    <p>Ще раз висловлюємо вам нашу вдячність за вибір JooTips. Якщо у вас є які-небудь питання, пропозиції або відгуки, будь ласка, не соромтеся звертатися до нас. Ми завжди готові допомогти вам.</p>
+    <p>З найкращими побажаннями,</p>
+    <p>Команда <strong>JooTips</strong>.</p>`;
+
+    res.status(200).json(user.subscription);
+
+    await sendMail(user.email, user.name, subject, HTML);
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
     console.error(`Error while updating user subscription: ${error}`.red);

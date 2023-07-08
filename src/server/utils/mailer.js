@@ -13,21 +13,21 @@ const smtpConfig = {
 
 const transporter = nodemailer.createTransport(smtpConfig);
 
-const sendSubscriptionRemind = async (emailTO, username, subject, html) => {
+const sendMail = async (emailTO, username, subject, html) => {
   try {
     const mailOptions = {
       from: process.env.SENDEREMAIL,
       to: emailTO,
       subject,
-      html
+      html,
     };
 
     await transporter.sendMail(mailOptions);
-    console.log(`Remind mail to ${emailTO} for user ${username} is successfully sent!`.yellow);
+    console.log(`Mail to ${emailTO} for user ${username} is successfully sent!`.yellow); // prettier-ignore
   } catch (error) {
-    console.error(`Oups, something went wrong while sending subscription remind :(`.red);
+    console.error( `Oups, something went wrong while sending subscription remind :(`.red ); // prettier-ignore
     console.error(`${error.message}`.red);
   }
 };
 
-module.exports = { sendSubscriptionRemind };
+module.exports = sendMail;

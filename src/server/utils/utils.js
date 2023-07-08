@@ -1,7 +1,7 @@
 // Import the necessary modules
 const User = require("../models/user/user");
 const moment = require("moment");
-const mails = require("./mailer.js");
+const sendMail = require("./mailer.js");
 require("colors");
 
 // Define an asynchronous function to check the subscription time for all users
@@ -61,22 +61,12 @@ async function autoCheckSubscriptionTime() {
       // Check if the subscription will expire within one day
       if (remainingTimeInMs <= oneDayInMs) {
         console.log(`User ${user.email} - subscription will expire in 1 day`);
-        emailPromise = mails.sendSubscriptionRemind(
-          user.email,
-          user.name,
-          daySubject,
-          dayHTML
-        );
+        emailPromise = sendMail(user.email, user.name, daySubject, dayHTML);
       }
       // Check if the subscription will expire within one week
       else if (remainingTimeInMs <= sevenDaysInMs) {
         console.log(`User ${user.email} - subscription will expire in 1 week`);
-        emailPromise = mails.sendSubscriptionRemind(
-          user.email,
-          user.name,
-          weekSubject,
-          weekHTML
-        );
+        emailPromise = sendMail(user.email, user.name, weekSubject, weekHTML);
       }
 
       // If there is an email to be sent, add its promise to the array
