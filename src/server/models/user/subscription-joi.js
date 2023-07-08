@@ -6,11 +6,7 @@ function subscriptionJoi(req, res, next) {
     email: Joi.string().email(),
     subscription: Joi.object({
       type: Joi.string(),
-      isPremium: Joi.boolean(),
-      expired: {
-        startDate: Joi.number(),
-        endDate: Joi.number(),
-      },
+      expirationDate: Joi.number(),
     }),
   });
 
