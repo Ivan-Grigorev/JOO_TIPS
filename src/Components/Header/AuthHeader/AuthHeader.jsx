@@ -107,7 +107,7 @@ const AuthHeader = () => {
       email: userEmail,
       subscription: {
         type: "School",
-        expirationDate: 1,
+        expirationDate: 63,
       },
     };
 
