@@ -191,7 +191,7 @@ async function updateUserSubscription(req, res, next) {
     );
     
     const ms = moment(user.subscription.expired.endDate).diff(moment()); // prettier-ignore
-    const expirationDate = `${Math.floor(moment.duration(ms).asDays())} днi.`;
+    const expirationDate = `${Math.floor(moment.duration(ms).asDays())} днiв.`;
 
     const subject = "Підтвердження платної підписки на сервісі JooTips";
     const HTML = `<p>Шановний користувачу,</p>
