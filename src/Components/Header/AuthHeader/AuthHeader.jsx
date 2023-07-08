@@ -100,14 +100,12 @@ const AuthHeader = () => {
   };
 
   const handleUpdateSubscription = () => {
-    // Вычисляем дату окончания подписки как дату начала плюс полгода (180 дней)
-
     // Update subscription
     const updatedSubscription = {
       email: userEmail,
       subscription: {
         type: "School",
-        expirationDate: 63,
+        expirationDate: 90,
       },
     };
 
