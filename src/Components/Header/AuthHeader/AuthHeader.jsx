@@ -42,6 +42,7 @@ import { useEffect } from "react";
 import UserAvatar from "./AccountMenu/UserAvatar";
 import MenuDeleteAccountItem from "./MenuDeleteAccountItem/MenuDeleteAccountItem";
 import MenuHelpItem from "./MenuHelpItem/MenuHelpItem";
+import moment from "moment";
 
 // Styled component using styled-components
 const Div = styled.div`
@@ -100,13 +101,14 @@ const AuthHeader = () => {
   };
 
   const handleUpdateSubscription = () => {
+    // Вычисляем дату окончания подписки как дату начала плюс полгода (180 дней)
+
     // Update subscription
     const updatedSubscription = {
       email: userEmail,
       subscription: {
         type: "School",
-        isPremium: true,
-        expired: { startDate: 123456, endDate: 1 },
+        expirationDate: 3,
       },
     };
 
