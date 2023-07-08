@@ -42,7 +42,6 @@ import { useEffect } from "react";
 import UserAvatar from "./AccountMenu/UserAvatar";
 import MenuDeleteAccountItem from "./MenuDeleteAccountItem/MenuDeleteAccountItem";
 import MenuHelpItem from "./MenuHelpItem/MenuHelpItem";
-import moment from "moment";
 
 // Styled component using styled-components
 const Div = styled.div`
@@ -89,15 +88,15 @@ const AuthHeader = () => {
 
   // Function to calculate remaining subscription time
   const getSubscriptionTime = (ms) => {
-    const days = `${Math.floor(ms / 86400000)} day(s)`;
-    const hours = `${Math.floor((ms % 86400000) / 3600000)} hour(s)`;
-    const minutes = `${Math.floor(ms / 60000)} minute(s)`;
+    const minutes = Math.floor(ms / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
 
-    if (days === "0 day(s)" && hours === "0 hour(s)") return `Subscription time: ${minutes}`; // prettier-ignore
-
-    if (days === "0 day(s)") return `Subscription time: ${hours}`;
-
-    return `Subscription time: ${days} ${hours}`;
+    if (months >= 1) return `${months} month(s), ${days % 30} day(s)`;
+    if (days >= 1) return `${days} day(s), ${hours % 24} hour(s)`;
+    if (hours >= 1) return `${hours} hour(s), ${minutes % 60} minute(s)`;
+    return `${minutes} minute(s)`;
   };
 
   const handleUpdateSubscription = () => {
@@ -108,7 +107,7 @@ const AuthHeader = () => {
       email: userEmail,
       subscription: {
         type: "School",
-        expirationDate: 3,
+        expirationDate: 1,
       },
     };
 
@@ -150,7 +149,9 @@ const AuthHeader = () => {
             <MenuGroup title="Subscription">
               {isPremium && remainingTime !== null ? (
                 <>
-                  <MenuItem>{getSubscriptionTime(remainingTime)}</MenuItem>
+                  <MenuItem>
+                    Subscription time: {getSubscriptionTime(remainingTime)}
+                  </MenuItem>
                   <MenuItem
                     onClick={() =>
                       dispatch(resetSubscription({ subscriptionType }))
