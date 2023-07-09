@@ -34,7 +34,7 @@ const user = new mongoose.Schema(
         unique: true,
         default: null,
       },
-      interfaceLang: {
+      interfaceLanguage: {
         type: String,
         enum: ["English", "Polish", "German"],
         default: "English",
