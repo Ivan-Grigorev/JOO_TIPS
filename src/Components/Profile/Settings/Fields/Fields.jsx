@@ -1,5 +1,5 @@
 import "./Fields.scss";
-import { Input, Text } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, Switch, Text } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
@@ -133,6 +133,7 @@ const Fields = () => {
         }}
       />
 
+      {/* ЗАМЕНИТЬ НА TEXTAREA */}
       <Text fontWeight="400">
         {userProfile.about || "You'll be a great programmer!"}
       </Text>
@@ -159,7 +160,7 @@ const Fields = () => {
         }}
       />
 
-      <Text fontWeight="400">{userProfile.interfaceLanguage}</Text>
+      {/* <Text fontWeight="400">{userProfile.interfaceLanguage}</Text> */}
       <Select
         placeholder={userProfile.interfaceLanguage}
         borderTop="none"
@@ -174,17 +175,12 @@ const Fields = () => {
         <option value="France">France</option>
       </Select>
 
-      <Text fontWeight="400">{language}</Text>
-      <Select
-        borderTop="none"
-        borderLeft="none"
-        borderRight="none"
-        borderBottom="1px solid"
-        borderColor="gray.500"
-      >
-        <option value="enable">Enable</option>
-        <option value="disable">Disable</option>
-      </Select>
+      <FormControl display="flex" alignItems="center">
+        <FormLabel htmlFor="notifications" mb="0">
+          Enable notifications?
+        </FormLabel>
+        <Switch id="notifications" size="lg" />
+      </FormControl>
     </div>
   );
 };
