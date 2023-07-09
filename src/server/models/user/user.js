@@ -18,6 +18,32 @@ const user = new mongoose.Schema(
     username: {
       type: String,
     },
+    phone: {
+      type: Number,
+      unique: true,
+      default: null,
+    },
+
+    site: {
+      about: {
+        type: String,
+        default: null,
+      },
+      avatarName: {
+        type: String,
+        unique: true,
+        default: null,
+      },
+      interfaceLang: {
+        type: String,
+        enum: ["English", "Polish", "German"],
+        default: "English",
+      },
+      notifications: {
+        type: Boolean,
+        default: true,
+      },
+    },
 
     subscription: {
       type: {
