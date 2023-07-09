@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
+const NotFound = lazy(() => import("./Components/Errors/404"));
+const Settings = null;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,12 +37,14 @@ const App = () => {
           <Route index element={<Homepage />} />
         </Route>
 
+        <Route path="/profile/settings" elemtn={<Settings />} />
+
         <Route
           path="signup"
           element={<RestrictedRoute redirectTo="/" component={<AuthPage />} />}
         />
 
-        <Route path="*" element={<InDev />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {isLoading && <ChakraSpinner />}

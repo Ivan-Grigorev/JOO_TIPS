@@ -42,6 +42,7 @@ import { useEffect } from "react";
 import UserAvatar from "./AccountMenu/UserAvatar";
 import MenuDeleteAccountItem from "./MenuDeleteAccountItem/MenuDeleteAccountItem";
 import MenuHelpItem from "./MenuHelpItem/MenuHelpItem";
+import { Link } from "react-router-dom";
 
 // Styled component using styled-components
 const Div = styled.div`
@@ -134,8 +135,12 @@ const AuthHeader = () => {
           </MenuButton>
           <MenuList>
             <MenuGroup title="Профiль">
-              <MenuItem>Мiй профiль</MenuItem>
-              <MenuItem>Налаштування</MenuItem>
+              <MenuItem>
+                <Link to={"/profile"}>Мiй профiль</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={"/profile/settings"}>Налаштування</Link>
+              </MenuItem>
               <MenuItem onClick={handleLogOut}>Вийти</MenuItem>
 
               <MenuDeleteAccountItem />
