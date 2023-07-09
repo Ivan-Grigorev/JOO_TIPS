@@ -128,11 +128,14 @@ async function logout(req, res, next) {
 async function getCurrentUser(req, res, next) {
   try {
     const { email } = req.user;
-    const userInfo = await User.findOne({ email });
+    const user = await User.findOne({ email });
     res.status(200).json({
-      name: userInfo.name,
-      avatar: userInfo.avatar,
-      email: userInfo.email,
+      user: {
+        name: user.name,
+        avatar: user.avatar,
+        email: user.email,
+      },
+      site: { ...user.site },
     });
   } catch (error) {
     console.log(`${error}`.red);
