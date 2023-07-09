@@ -16,7 +16,9 @@ const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
 const NotFound = lazy(() => import("./Components/Errors/404"));
-const Settings = null;
+const ProfileLayout = lazy(() => import("./Components/Profile/Layout/Layout"));
+const Profile = lazy(() => import("./Components/Profile/Profile"));
+const Settings = lazy(() => import("./Components/Profile/Settings/Settings"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,7 +39,10 @@ const App = () => {
           <Route index element={<Homepage />} />
         </Route>
 
-        <Route path="/profile/settings" elemtn={<Settings />} />
+        <Route path="/profile" element={<ProfileLayout />}>
+          <Route index elemtn={<Profile />} />
+          <Route path="/profile/settings" elemtn={<Settings />} />
+        </Route>
 
         <Route
           path="signup"
