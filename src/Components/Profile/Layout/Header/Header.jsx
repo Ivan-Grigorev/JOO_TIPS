@@ -11,7 +11,7 @@ const Header = () => {
         <div>Меню</div>
         <LogoLink />
 
-        <Avatar />
+        {/* <Avatar /> */}
       </header>
     </>
   );

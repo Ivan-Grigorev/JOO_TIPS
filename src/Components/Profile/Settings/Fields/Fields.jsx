@@ -1,6 +1,8 @@
 import "./Fields.scss";
 import { Input, Text } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
 import { useState } from "react";
+import { MdArrowDropDown } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
@@ -23,8 +25,6 @@ const Fields = () => {
   const [about, setAbout] = useState("");
   const [language, setLanguage] = useState("");
   const [notifications, setNotifications] = useState("");
-
-  console.log(userProfile);
 
   // Define a single onChange handler
   const handleChange = (event) => {
@@ -160,52 +160,31 @@ const Fields = () => {
       />
 
       <Text fontWeight="400">{userProfile.interfaceLanguage}</Text>
-      <Input
-        value={language}
-        name="language"
-        autoComplete="off"
-        onChange={handleChange}
-        placeholder="Tap to change language"
-        size="sm"
+      <Select
+        placeholder={userProfile.interfaceLanguage}
         borderTop="none"
         borderLeft="none"
         borderRight="none"
         borderBottom="1px solid"
         borderColor="gray.500"
-        _hover={{
-          borderBottomColor: "blue.500",
-        }}
-        _focus={{
-          borderBottomColor: "blue.500",
-        }}
-        _focusVisible={{
-          borderBottomColor: "blue.500",
-        }}
-      />
+      >
+        <option value="Ukrainian">Ukrainian</option>
+        <option value="English">English</option>
+        <option value="Poland">Poland</option>
+        <option value="France">France</option>
+      </Select>
 
-      <Text fontWeight="400">{userNotifications}</Text>
-      <Input
-        value={notifications}
-        name="notifications"
-        autoComplete="off"
-        onChange={handleChange}
-        placeholder="Tap to change setting"
-        size="sm"
+      <Text fontWeight="400">{language}</Text>
+      <Select
         borderTop="none"
         borderLeft="none"
         borderRight="none"
         borderBottom="1px solid"
         borderColor="gray.500"
-        _hover={{
-          borderBottomColor: "blue.500",
-        }}
-        _focus={{
-          borderBottomColor: "blue.500",
-        }}
-        _focusVisible={{
-          borderBottomColor: "blue.500",
-        }}
-      />
+      >
+        <option value="enable">Enable</option>
+        <option value="disable">Disable</option>
+      </Select>
     </div>
   );
 };

@@ -1,7 +1,12 @@
 .profile-hero .fields {
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
-.profile-hero .fields input {
-    margin-bottom: 30px;
+.profile-hero .fields input,
+.profile-hero .chakra-select__wrapper {
+  margin-bottom: 30px;
+}
+
+.profile-hero .chakra-select__wrapper option {
+  background-color: #163a65 !important;
 }

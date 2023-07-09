@@ -1,10 +1,17 @@
+import { useSelector } from "react-redux";
 import "./UpdateAvatar.scss";
 import { RxAvatar } from "react-icons/rx";
+import { selectUserAvatar } from "../../../../redux/auth/auth-selectors";
 
 const UpdateAvatar = () => {
+  const userAvatar = useSelector(selectUserAvatar);
   return (
     <>
-      <RxAvatar className="user-avatar" />
+      {userAvatar ? (
+        <img src={userAvatar} alt="user" className="user-avatar" />
+      ) : (
+        <RxAvatar className="user-avatar" />
+      )}
     </>
   );
 };
