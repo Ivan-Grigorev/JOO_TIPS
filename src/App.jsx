@@ -40,8 +40,8 @@ const App = () => {
         </Route>
 
         <Route path="/profile" element={<ProfileLayout />}>
-          <Route index elemtn={<Profile />} />
-          <Route path="/profile/settings" elemtn={<Settings />} />
+          <Route index element={<Profile />} />
+          <Route path="/profile/settings" element={<Settings />} />
         </Route>
 
         <Route
