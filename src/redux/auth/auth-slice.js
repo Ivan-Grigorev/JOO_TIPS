@@ -9,7 +9,13 @@ import {
 } from "./auth-operations";
 
 const initialState = {
-  user: { name: null, email: null, avatar: null },
+  user: { name: null, email: null, avatar: null, phone: null },
+  profile: {
+    about: null,
+    avatarName: null,
+    interfaceLanguage: null,
+    notifications: null,
+  },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -83,6 +89,9 @@ const authSlice = createSlice({
       })
 
       .addCase(refreshUser.fulfilled, (state, action) => {
+        // TODO узнать что приходит в action.payload
+        // todo и потом поставить в profile то что базе данных как site
+        console.log("action.payload", action.payload);
         state.user = action.payload;
 
         state.isRefreshing = false;
