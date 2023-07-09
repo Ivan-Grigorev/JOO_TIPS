@@ -89,10 +89,8 @@ const authSlice = createSlice({
       })
 
       .addCase(refreshUser.fulfilled, (state, action) => {
-        // TODO узнать что приходит в action.payload
-        // todo и потом поставить в profile то что базе данных как site
-        console.log("action.payload", action.payload);
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.profile = action.payload.site;
 
         state.isRefreshing = false;
         state.isLoggedIn = true;
