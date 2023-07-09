@@ -1,8 +1,21 @@
 import "./Fields.scss";
 import { Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectUserEmail,
+  selectUserPhone,
+  selectUserProfileInfo,
+} from "../../../../redux/auth/auth-selectors";
 
 const Fields = () => {
+  // const dispatch = useDispatch();
+  const userProfile = useSelector(selectUserProfileInfo);
+  const userPhone = useSelector(selectUserPhone);
+  const userEmail = useSelector(selectUserEmail);
+  const userNotifications = userProfile.notifications
+    ? "Notifications enabled"
+    : "Notifications disabled";
   // Define the state for each input field
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -10,6 +23,8 @@ const Fields = () => {
   const [about, setAbout] = useState("");
   const [language, setLanguage] = useState("");
   const [notifications, setNotifications] = useState("");
+
+  console.log(userProfile);
 
   // Define a single onChange handler
   const handleChange = (event) => {
@@ -42,7 +57,9 @@ const Fields = () => {
 
   return (
     <div className="fields">
-      <Text fontWeight="700">+380 (50) 111 11 11</Text>
+      <Text fontWeight="400">
+        {userPhone || "There'd be your phone number"}
+      </Text>
       <Input
         value={number} // Use the corresponding state
         name="number"
@@ -67,7 +84,7 @@ const Fields = () => {
       />
 
       {/* Similar changes for the other input fields... */}
-      <Text fontWeight="700">joker@gmail.com</Text>
+      <Text fontWeight="400">{userEmail}</Text>
       <Input
         value={email} // Use the corresponding state
         name="email"
@@ -90,7 +107,9 @@ const Fields = () => {
         }}
       />
 
-      <Text fontWeight="700">@Frog_frog</Text>
+      <Text fontWeight="400">
+        @{userProfile.avatarName || "There'd be your avatar name"}
+      </Text>
       <Input
         value={avatarName}
         name="avatarName"
@@ -114,7 +133,9 @@ const Fields = () => {
         }}
       />
 
-      <Text fontWeight="700">I'll be a genius programmer</Text>
+      <Text fontWeight="400">
+        {userProfile.about || "You'll be a great programmer!"}
+      </Text>
       <Input
         value={about}
         name="about"
@@ -138,7 +159,7 @@ const Fields = () => {
         }}
       />
 
-      <Text fontWeight="700">English</Text>
+      <Text fontWeight="400">{userProfile.interfaceLanguage}</Text>
       <Input
         value={language}
         name="language"
@@ -161,7 +182,8 @@ const Fields = () => {
           borderBottomColor: "blue.500",
         }}
       />
-      <Text fontWeight="700">Sound and vibration</Text>
+
+      <Text fontWeight="400">{userNotifications}</Text>
       <Input
         value={notifications}
         name="notifications"

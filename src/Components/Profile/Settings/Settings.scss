@@ -4,3 +4,10 @@
   font-size: 16px;
   font-weight: 500;
 }
+
+.settings-buttons {
+  display: flex;
+  justify-content: space-between;
+  
+  padding-bottom: 15px;
+}
