@@ -134,6 +134,7 @@ async function getCurrentUser(req, res, next) {
         name: user.name,
         avatar: user.avatar,
         email: user.email,
+        phone: user.phone,
       },
       site: { ...user.site },
     });
