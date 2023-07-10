@@ -38,4 +38,24 @@ function userDeleteJoi(req, res, next) {
   next();
 }
 
-module.exports = { userJoi, userDeleteJoi };
+function userUpdateProfile(req, res, next) {
+  const userDeleteSchema = Joi.object({
+    site: Joi.object({
+      about: Joi.string().min(5).max(50),
+      avatarName: Joi.string().min(4).max(10),
+      notifications: Joi.boolean(),
+      interfaceLanguage: Joi.string(),
+    }),
+  });
+
+  const { error } = userDeleteSchema.validate(req.body);
+
+  if (error) {
+    console.error(`Joi Error: ${error}`.red);
+    return res.status(400).json({ message: error.message }).end();
+  }
+
+  next();
+}
+
+module.exports = { userJoi, userDeleteJoi, userUpdateProfile };
