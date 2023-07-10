@@ -1,36 +1,41 @@
-import "./Fields.scss";
-import { FormControl, FormLabel, Input, Switch, Text } from "@chakra-ui/react";
-import { Select } from "@chakra-ui/react";
-import { useState } from "react";
-import { MdArrowDropDown } from "react-icons/md";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Switch,
+  Text,
+  Textarea,
+  Select,
+  Button as ChakraButton,
+} from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
   selectUserPhone,
   selectUserProfileInfo,
 } from "../../../../redux/auth/auth-selectors";
+import "./Form.scss";
 
-const Fields = () => {
-  // const dispatch = useDispatch();
+const Form = () => {
+  const dispatch = useDispatch();
   const userProfile = useSelector(selectUserProfileInfo);
   const userPhone = useSelector(selectUserPhone);
   const userEmail = useSelector(selectUserEmail);
-  const userNotifications = userProfile.notifications
-    ? "Notifications enabled"
-    : "Notifications disabled";
-  // Define the state for each input field
+
+  // Измените эти начальные значения состояния на данные из Redux store
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [avatarName, setAvatarName] = useState("");
   const [about, setAbout] = useState("");
-  const [language, setLanguage] = useState("");
-  const [notifications, setNotifications] = useState("");
+  const [language, setLanguage] = useState(userProfile.interfaceLanguage || "");
+  const [notifications, setNotifications] = useState(
+    userProfile.notifications || true
+  );
 
-  // Define a single onChange handler
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, type, checked } = event.target;
 
-    // Update the correct state based on the input field
     switch (name) {
       case "number":
         setNumber(value);
@@ -48,15 +53,40 @@ const Fields = () => {
         setLanguage(value);
         break;
       case "notifications":
-        setNotifications(value);
+        setNotifications(checked); // Switch возвращает checked, а не value
         break;
       default:
         break;
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("subimt");
+    // dispatch(
+    //   updateUserProfile({
+    //     number,
+    //     email,
+    //     avatarName,
+    //     about,
+    //     language,
+    //     notifications,
+    //   })
+    // );
+  };
+
+  const handleReset = () => {
+    // Здесь мы просто восстанавливаем значения состояния обратно к начальным данным
+    setNumber("");
+    setEmail("");
+    setAvatarName("");
+    setAbout("");
+    setLanguage(userProfile.interfaceLanguage || "");
+    setNotifications(userProfile.notifications || false);
+  };
+
   return (
-    <div className="fields">
+    <form className="form" onSubmit={handleSubmit} onReset={handleReset}>
       <Text fontWeight="400">
         {userPhone || "There'd be your phone number"}
       </Text>
@@ -181,8 +211,18 @@ const Fields = () => {
         </FormLabel>
         <Switch id="notifications" size="lg" />
       </FormControl>
-    </div>
+
+      <div className="settings-buttons">
+        <ChakraButton colorScheme="green" type="submit">
+          Зберегти
+        </ChakraButton>
+
+        <ChakraButton colorScheme="red" type="reset">
+          Скасувати
+        </ChakraButton>
+      </div>
+    </form>
   );
 };
 
-export default Fields;
+export default Form;

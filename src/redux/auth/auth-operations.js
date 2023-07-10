@@ -65,6 +65,17 @@ const refreshUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
   }
 });
 
+const updateUserProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (credentials, thunkAPI) => {
+    try {
+      await axios.patch("/users/current/profile", credentials);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const deleteUser = createAsyncThunk(
   "auth/deleteUser",
   async (credentials, thunkAPI) => {
@@ -80,4 +91,12 @@ const deleteUser = createAsyncThunk(
   }
 );
 
-export { token, register, logOut, logIn, refreshUser, deleteUser };
+export {
+  token,
+  register,
+  logOut,
+  logIn,
+  refreshUser,
+  updateUserProfile,
+  deleteUser,
+};

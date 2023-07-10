@@ -6,10 +6,16 @@ import {
   logOut,
   refreshUser,
   register,
+  updateUserProfile,
 } from "./auth-operations";
 
 const initialState = {
-  user: { name: null, email: null, avatar: null, phone: null },
+  user: {
+    name: null,
+    email: null,
+    avatar: null,
+    phone: null,
+  },
   profile: {
     about: null,
     avatarName: null,
@@ -91,6 +97,8 @@ const authSlice = createSlice({
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.profile = action.payload.site;
+        console.log(action.payload.user);
+        console.log(action.payload.site);
 
         state.isRefreshing = false;
         state.isLoggedIn = true;
@@ -102,6 +110,23 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(refreshUser.rejected, (state) => {
+        state.isRefreshing = false;
+        state.isLoading = initialState.isLoading;
+      })
+
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.profile = action.payload;
+
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
+        state.isLoading = initialState.isLoading;
+        state.error = initialState.error;
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.isRefreshing = true;
+        state.isLoading = true;
+      })
+      .addCase(updateUserProfile.rejected, (state) => {
         state.isRefreshing = false;
         state.isLoading = initialState.isLoading;
       })

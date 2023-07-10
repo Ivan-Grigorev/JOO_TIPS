@@ -129,6 +129,7 @@ async function getCurrentUser(req, res, next) {
   try {
     const { email } = req.user;
     const user = await User.findOne({ email });
+
     res.status(200).json({
       user: {
         name: user.name,
@@ -154,7 +155,7 @@ async function updateUserProfile(req, res, next) {
       { new: true, runValidators: true, useFindAndModify: false }
     );
 
-    res.status(200).send(user);
+    res.status(200).send(user.site);
   } catch (e) {
     console.error(`Error while updating user profile (auth): ${e}`);
     res.status(500).json({ message: "Internal server error." });
