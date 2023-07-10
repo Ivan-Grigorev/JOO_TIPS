@@ -44,6 +44,13 @@ router.put(
 
 router.get("/current", joiUser.userJoi, middlewares.auth, auth.getCurrentUser); // for persisting token
 
+router.patch(
+  "/current/profile",
+  joiUser.userUpdateProfile,
+  middlewares.auth,
+  auth.updateUserProfile
+);
+
 router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
 
 router.patch(
