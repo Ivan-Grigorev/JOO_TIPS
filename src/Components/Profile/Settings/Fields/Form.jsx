@@ -62,17 +62,8 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("subimt");
-    // dispatch(
-    //   updateUserProfile({
-    //     number,
-    //     email,
-    //     avatarName,
-    //     about,
-    //     language,
-    //     notifications,
-    //   })
-    // );
+
+    // dispatch();
   };
 
   const handleReset = () => {
@@ -205,7 +196,7 @@ const Form = () => {
         <option value="France">France</option>
       </Select>
 
-      <FormControl display="flex" alignItems="center">
+      <FormControl display="flex" alignItems="center" className="notification-radio-group">
         <FormLabel htmlFor="notifications" mb="0">
           Enable notifications?
         </FormLabel>
