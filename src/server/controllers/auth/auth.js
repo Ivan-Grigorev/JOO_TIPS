@@ -144,6 +144,23 @@ async function getCurrentUser(req, res, next) {
   }
 }
 
+async function updateUserProfile(req, res, next) {
+  try {
+    const email = req.user.email;
+    // Обновляем пользовательские данные по идентификатору пользователя
+    const user = await User.findOneAndUpdate(
+      { email },
+      { $set: req.body },
+      { new: true, runValidators: true, useFindAndModify: false }
+    );
+
+    res.status(200).send(user);
+  } catch (e) {
+    console.error(`Error while updating user profile (auth): ${e}`);
+    res.status(500).json({ message: "Internal server error." });
+  }
+}
+
 async function deleteCurrentUser(req, res, next) {
   try {
     const email = req.user.email;
@@ -248,6 +265,7 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
+  updateUserProfile,
   updateUserSubscription,
   getSubscriptionDetails,
   resetUserSubscription,
