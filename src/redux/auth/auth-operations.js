@@ -72,7 +72,7 @@ const updateUserProfile = createAsyncThunk(
       const { data } = await axios.patch("/users/current/profile", credentials);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
