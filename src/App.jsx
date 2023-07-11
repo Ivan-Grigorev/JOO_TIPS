@@ -11,6 +11,7 @@ import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./Routes/PrivateRoute";
 
 const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
@@ -42,13 +43,11 @@ const App = () => {
         <Route path="/profile" element={<ProfileLayout />}>
           <Route
             index
-            element={<RestrictedRoute redirectTo="/" component={<Profile />} />}
+            element={<PrivateRoute redirectTo="/" component={<Profile />} />}
           />
           <Route
             path="/profile/settings"
-            element={
-              <RestrictedRoute redirectTo="/" component={<Settings />} />
-            }
+            element={<PrivateRoute redirectTo="/" component={<Settings />} />}
           />
         </Route>
 
