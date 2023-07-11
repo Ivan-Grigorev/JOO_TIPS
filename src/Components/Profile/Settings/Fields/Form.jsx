@@ -205,7 +205,7 @@ const Form = () => {
       >
         <option value="Ukrainian">Ukrainian</option>
         <option value="English">English</option>
-        <option value="Poland">Poland</option>
+        <option value="Polish">Polish</option>
         <option value="France">France</option>
       </Select>
 
