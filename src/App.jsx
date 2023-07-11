@@ -40,8 +40,16 @@ const App = () => {
         </Route>
 
         <Route path="/profile" element={<ProfileLayout />}>
-          <Route index element={<Profile />} />
-          <Route path="/profile/settings" element={<Settings />} />
+          <Route
+            index
+            element={<RestrictedRoute redirectTo="/" component={<Profile />} />}
+          />
+          <Route
+            path="/profile/settings"
+            element={
+              <RestrictedRoute redirectTo="/" component={<Settings />} />
+            }
+          />
         </Route>
 
         <Route
