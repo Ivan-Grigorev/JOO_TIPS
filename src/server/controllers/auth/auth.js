@@ -155,7 +155,10 @@ async function updateUserProfile(req, res, next) {
       { new: true, runValidators: true, useFindAndModify: false }
     );
 
-    res.status(200).send(user.site);
+    res.status(200).send({
+      profile: { ...user.site },
+      user: { phone: user.phone, email: user.email },
+    });
   } catch (e) {
     console.error(`Error while updating user profile (auth): ${e}`);
     res.status(500).json({ message: "Internal server error." });

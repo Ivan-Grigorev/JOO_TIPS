@@ -33,13 +33,6 @@ const Form = () => {
   const [language, setLanguage] = useState("");
   const [notifications, setNotifications] = useState(true);
 
-  const currentAvatarName = userProfile.avatarName;
-
-  useEffect(() => {
-    setLanguage(userProfile.language);
-    setNotifications(userProfile.notifications);
-  }, [userProfile]);
-
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
@@ -81,7 +74,11 @@ const Form = () => {
       },
     };
 
+    const emptyForm = !phone && !email && !avatarName && !about && !language;
+    if (emptyForm)return alert("Please fill at least one field before submitting!"); // prettier-ignore
+
     dispatch(updateUserProfile(sentData));
+    handleReset();
   };
 
   const handleReset = () => {

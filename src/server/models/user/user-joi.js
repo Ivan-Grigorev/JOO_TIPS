@@ -45,10 +45,10 @@ function userUpdateProfile(req, res, next) {
     site: Joi.object({
       about: Joi.string().max(50).allow(null),
       avatarName: Joi.string().min(5).max(10).allow(null),
-      notifications: Joi.boolean(),
-      interfaceLanguage: Joi.string(),
-    }),
-  });
+      notifications: Joi.boolean().optional(),
+      interfaceLanguage: Joi.string().optional(),
+    }).or("about", "avatarName", "notifications", "interfaceLanguage"),
+  }).or("phone", "email", "site");
 
   const { error } = userDeleteSchema.validate(req.body);
 
