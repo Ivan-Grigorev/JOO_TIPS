@@ -1,3 +1,4 @@
+// Importing necessary components and hooks from Chakra UI, React, and Redux.
 import {
   FormControl,
   FormLabel,
@@ -9,23 +10,33 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// Importing selectors and operations from the auth section of Redux.
 import {
+  selectUserAvatarName,
   selectUserEmail,
   selectUserErrors,
   selectUserPhone,
   selectUserProfileInfo,
 } from "../../../../redux/auth/auth-selectors";
-import "./Form.scss";
 import { updateUserProfile } from "../../../../redux/auth/auth-operations";
 
+// Importing styles and external libraries.
+import "./Form.scss";
+import { toast } from "react-toastify";
+import { debounce } from "lodash";
+
+// Declaring the Form component.
 const Form = () => {
+  // Hooking into the Redux store.
   const dispatch = useDispatch();
   const userProfile = useSelector(selectUserProfileInfo);
   const userPhone = useSelector(selectUserPhone);
   const userEmail = useSelector(selectUserEmail);
+  const userAvatarname = useSelector(selectUserAvatarName);
   const errors = useSelector(selectUserErrors).profile;
 
-  // Измените эти начальные значения состояния на данные из Redux store
+  // Declaring states for form fields with initial values.
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [avatarName, setAvatarName] = useState("");
@@ -33,6 +44,7 @@ const Form = () => {
   const [language, setLanguage] = useState("");
   const [notifications, setNotifications] = useState(false);
 
+  // Updating the notifications and language states when the userProfile is updated.
   useEffect(() => {
     if (userProfile.notifications && userProfile.interfaceLanguage) {
       setNotifications(userProfile.notifications);
@@ -40,18 +52,17 @@ const Form = () => {
     }
   }, [userProfile]);
 
+  // Showing or hiding error messages based on the length of errors.
   useEffect(() => {
     const messages = document.querySelector(".profile-hero .message");
     const show = () => (messages.style.opacity = 1);
     const hide = () => (messages.style.opacity = 0);
-
-    // it's get it more smoothly
     errors.length > 0 ? show() : hide();
   });
 
+  // Handling changes to the form fields and updating the corresponding states.
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
-
     switch (name) {
       case "phone":
         setPhone(value);
@@ -69,27 +80,40 @@ const Form = () => {
         setLanguage(value);
         break;
       case "notifications":
-        setNotifications(checked); // Используйте checked вместо !notifications
+        setNotifications(checked);
         break;
       default:
         break;
     }
   };
 
+  // Declaring a debounced function to dispatch the updateUserProfile action.
+  const debouncedSubmit = debounce((sentData) => {
+    dispatch(updateUserProfile(sentData));
+    handleReset();
+  }, 500);
+
+  // Handling the form submission event.
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Preparing the data to be sent.
     const sentData = {
       phone: phone.trim().length === 0 ? userPhone : phone,
       email: email.trim().length === 0 ? userEmail : email,
       profile: {
-        avatarName: avatarName.trim().length === 0 ? userProfile.avatarName : avatarName, // prettier-ignore
+        avatarName:
+          avatarName.trim().length === 0 ? userProfile.avatarName : avatarName,
         about: about.trim().length === 0 ? userProfile.about : about,
-        interfaceLanguage: language.trim().length === 0 ? userProfile.interfaceLanguage : language, // prettier-ignore
+        interfaceLanguage:
+          language.trim().length === 0
+            ? userProfile.interfaceLanguage
+            : language,
         notifications: notifications ?? userProfile.notifications,
       },
     };
 
+    // Checking if the form is empty or no changes are made.
     const emptyForm =
       phone.trim().length === 0 &&
       email.trim().length === 0 &&
@@ -98,14 +122,24 @@ const Form = () => {
       language === userProfile.interfaceLanguage &&
       notifications === userProfile.notifications;
 
-    if (emptyForm)return alert("Please fill at least one field before submitting!"); // prettier-ignore
+    const noChanges =
+      phone.trim() === userPhone ||
+      email.trim() === userEmail ||
+      avatarName.trim() === userAvatarname ||
+      about.trim() === userProfile.about;
 
-    dispatch(updateUserProfile(sentData));
-    handleReset();
+    if (noChanges)
+      return toast.warning("You've entered identical data with those already on the server." ); // prettier-ignore
+
+    if (emptyForm)
+      return toast.warning("Please fill at least one field before submitting!");
+
+    debouncedSubmit(sentData); // Calling the debounced function.
   };
 
+  // Handling the form reset event.
   const handleReset = () => {
-    // Здесь мы просто восстанавливаем значения состояния обратно к начальным данным
+    // Resetting the states to the initial data.
     setPhone("");
     setEmail("");
     setAvatarName("");
@@ -113,6 +147,8 @@ const Form = () => {
     setLanguage(userProfile.interfaceLanguage || "");
     setNotifications(userProfile.notifications || false);
   };
+
+  // Rendering the form.
 
   return (
     <form className="form" onSubmit={handleSubmit} onReset={handleReset}>
