@@ -4,7 +4,6 @@ import {
   Input,
   Switch,
   Text,
-  Textarea,
   Select,
   Button as ChakraButton,
 } from "@chakra-ui/react";
@@ -12,8 +11,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
+  selectUserErrors,
   selectUserPhone,
-  selectUserProfile,
   selectUserProfileInfo,
 } from "../../../../redux/auth/auth-selectors";
 import "./Form.scss";
@@ -24,6 +23,7 @@ const Form = () => {
   const userProfile = useSelector(selectUserProfileInfo);
   const userPhone = useSelector(selectUserPhone);
   const userEmail = useSelector(selectUserEmail);
+  const errors = useSelector(selectUserErrors).profile;
 
   // Измените эти начальные значения состояния на данные из Redux store
   const [phone, setPhone] = useState("");
@@ -34,10 +34,20 @@ const Form = () => {
   const [notifications, setNotifications] = useState(false);
 
   useEffect(() => {
-    if (userProfile.notifications) {
+    if (userProfile.notifications && userProfile.interfaceLanguage) {
       setNotifications(userProfile.notifications);
+      setLanguage(userProfile.interfaceLanguage);
     }
   }, [userProfile]);
+
+  useEffect(() => {
+    const messages = document.querySelector(".profile-hero .message");
+    const show = () => (messages.style.opacity = 1);
+    const hide = () => (messages.style.opacity = 0);
+
+    // it's get it more smoothly
+    errors.length > 0 ? show() : hide();
+  });
 
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
@@ -71,7 +81,7 @@ const Form = () => {
 
     const sentData = {
       phone: phone.trim().length === 0 ? userPhone : phone,
-      email: email.trim().length === 0 ? userEmail : phone,
+      email: email.trim().length === 0 ? userEmail : email,
       profile: {
         avatarName: avatarName.trim().length === 0 ? userProfile.avatarName : avatarName, // prettier-ignore
         about: about.trim().length === 0 ? userProfile.about : about,
@@ -88,20 +98,6 @@ const Form = () => {
       language === userProfile.interfaceLanguage &&
       notifications === userProfile.notifications;
 
-    console.group("Form check");
-    console.log("phone.trim().length === 0 &&", phone.trim().length === 0);
-    console.log("email.trim().length === 0 &&", email.trim().length === 0);
-    console.log("avatarName.trim().length === 0 &&",  avatarName.trim().length === 0 ); // prettier-ignore
-    console.log("about.trim().length === 0 &&", about.trim().length === 0);
-    console.log("language === userProfile.interfaceLanguage", language === userProfile.interfaceLanguage); // prettier-ignore
-    console.log("language", language);
-    console.log("userProfile.interfaceLanguage", userProfile.interfaceLanguage);
-    console.log("notifications === userProfile.notifications", notifications === userProfile.notifications); // prettier-ignore
-    console.log("notifications", notifications);
-    console.log("userProfile.notifications", userProfile.notifications);
-    console.groupEnd();
-
-    console.log("emptyForm", emptyForm);
     if (emptyForm)return alert("Please fill at least one field before submitting!"); // prettier-ignore
 
     dispatch(updateUserProfile(sentData));
@@ -124,6 +120,7 @@ const Form = () => {
       <Input
         value={phone} // Use the corresponding state
         name="phone"
+        type="number"
         onChange={handleChange} // Use the shared handler
         placeholder="Tap to change phone"
         autoComplete="off"
@@ -224,6 +221,8 @@ const Form = () => {
       <Select
         placeholder={userProfile.interfaceLanguage}
         onChange={handleChange}
+        value={language}
+        name="language"
         borderTop="none"
         borderLeft="none"
         borderRight="none"
@@ -251,6 +250,12 @@ const Form = () => {
           isChecked={notifications}
         />
       </FormControl>
+
+      <div className="message">
+        {errors.map((error) => (
+          <p key={error}>{error}</p>
+        ))}
+      </div>
 
       <div className="settings-buttons">
         <ChakraButton colorScheme="green" type="submit">

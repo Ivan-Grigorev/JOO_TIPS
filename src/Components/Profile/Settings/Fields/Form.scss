@@ -18,3 +18,24 @@
 .profile-hero .form .notification-radio-group {
   margin-bottom: 25px;
 }
+
+.profile-hero .form .message {
+  opacity: 0;
+  height: 20px;
+  font-weight: 300;
+  font-size: 14px;
+
+  color: #fcbc7d;
+
+  transition: opacity 350ms ease;
+
+  @media screen and (min-width: 1024px) {
+    margin: 0 auto 0 auto;
+
+    width: 450px;
+    min-height: 50px;
+    height: auto;
+
+    font-size: 22px;
+  }
+}
