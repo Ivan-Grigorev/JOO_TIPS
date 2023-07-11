@@ -58,7 +58,8 @@ function userDeleteJoi(req, res, next) {
 
 function userUpdateProfile(req, res, next) {
   const userDeleteSchema = Joi.object({
-    phone: Joi.string().min(5).max(10).allow(null).messages({
+    phone: Joi.string().regex(/^\d+$/).min(5).max(10).allow(null).messages({
+      "string.pattern.base": "The phoneNumber must only contain digits.",
       "string.min": `Phone number should have a minimum length of {#limit}`,
       "string.max": `Phone number should have a maximum length of {#limit}`,
     }),
@@ -69,10 +70,18 @@ function userUpdateProfile(req, res, next) {
       about: Joi.string().max(50).allow(null).messages({
         "string.max": `About section should have a maximum length of {#limit}`,
       }),
-      avatarName: Joi.string().min(5).max(10).allow(null).messages({
-        "string.min": `Avatar name should have a minimum length of {#limit}`,
-        "string.max": `Avatar name should have a maximum length of {#limit}`,
-      }),
+      avatarName: Joi.string()
+        .min(5)
+        .max(10)
+        .alphanum()
+        .regex(/^[a-zA-Z0-9]+$/)
+        .allow(null)
+        .messages({
+          "string.alphanum": "The avatar name must only contain alphanumeric characters.", // prettier-ignore
+          "string.pattern.base": "The avatar name must only contain alphanumeric characters.", // prettier-ignore
+          "string.min": `Avatar name should have a minimum length of {#limit}`,
+          "string.max": `Avatar name should have a maximum length of {#limit}`,
+        }),
       notifications: Joi.boolean().optional(),
       interfaceLanguage: Joi.string().optional(),
     })
