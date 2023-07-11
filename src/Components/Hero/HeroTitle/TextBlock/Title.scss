@@ -57,7 +57,11 @@
 }
 
 .textBlock .hero__sparkles {
-  position: absolute;
-  right: -7px;
-  top: -12px;
+  display: none;
+
+  @media screen and (min-width: 1024px) {
+    position: absolute;
+    right: -7px;
+    top: -12px;
+  }
 }
