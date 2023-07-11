@@ -144,7 +144,7 @@ async function getCurrentUser(req, res, next) {
         email: user.email,
         phone: user.phone,
       },
-      site: { ...user.site },
+      profile: { ...user.profile },
     });
   } catch (error) {
     console.log(`${error}`.red);
