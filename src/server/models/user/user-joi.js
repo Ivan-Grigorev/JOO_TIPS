@@ -6,7 +6,6 @@ function userJoi(req, res, next) {
     name: Joi.string().min(4).max(20),
     email: Joi.string().email(),
     avatar: Joi.string().min(5),
-    phone: Joi.string().min(5),
     password: Joi.string(),
     confirmedPassword: Joi.string(),
     token: Joi.string(),
@@ -41,9 +40,11 @@ function userDeleteJoi(req, res, next) {
 
 function userUpdateProfile(req, res, next) {
   const userDeleteSchema = Joi.object({
+    phone: Joi.string().min(5).allow(null),
+    email: Joi.string().email().allow(null),
     site: Joi.object({
-      about: Joi.string().min(5).max(50),
-      avatarName: Joi.string().min(4).max(10),
+      about: Joi.string().max(50).allow(null),
+      avatarName: Joi.string().min(5).max(10).allow(null),
       notifications: Joi.boolean(),
       interfaceLanguage: Joi.string(),
     }),

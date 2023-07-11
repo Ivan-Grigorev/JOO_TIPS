@@ -115,6 +115,8 @@ const authSlice = createSlice({
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         state.profile = action.payload;
 
+        console.log(action.payload)
+
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.isLoading = initialState.isLoading;

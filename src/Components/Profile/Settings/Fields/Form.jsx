@@ -13,9 +13,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
   selectUserPhone,
+  selectUserProfile,
   selectUserProfileInfo,
 } from "../../../../redux/auth/auth-selectors";
 import "./Form.scss";
+import { updateUserProfile } from "../../../../redux/auth/auth-operations";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -24,21 +26,26 @@ const Form = () => {
   const userEmail = useSelector(selectUserEmail);
 
   // Измените эти начальные значения состояния на данные из Redux store
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [avatarName, setAvatarName] = useState("");
   const [about, setAbout] = useState("");
-  const [language, setLanguage] = useState(userProfile.interfaceLanguage || "");
-  const [notifications, setNotifications] = useState(
-    userProfile.notifications || true
-  );
+  const [language, setLanguage] = useState("");
+  const [notifications, setNotifications] = useState(true);
+
+  const currentAvatarName = userProfile.avatarName;
+
+  useEffect(() => {
+    setLanguage(userProfile.language);
+    setNotifications(userProfile.notifications);
+  }, [userProfile]);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
 
     switch (name) {
-      case "number":
-        setNumber(value);
+      case "phone":
+        setPhone(value);
         break;
       case "email":
         setEmail(value);
@@ -63,12 +70,23 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // dispatch();
+    const sentData = {
+      phone: phone || userPhone,
+      email: email || userEmail,
+      site: {
+        avatarName: avatarName || userProfile.avatarName,
+        about: about || userProfile.about,
+        interfaceLanguage: language || userProfile.interfaceLanguage,
+        notifications: notifications || userProfile.notifications,
+      },
+    };
+
+    dispatch(updateUserProfile(sentData));
   };
 
   const handleReset = () => {
     // Здесь мы просто восстанавливаем значения состояния обратно к начальным данным
-    setNumber("");
+    setPhone("");
     setEmail("");
     setAvatarName("");
     setAbout("");
@@ -78,14 +96,12 @@ const Form = () => {
 
   return (
     <form className="form" onSubmit={handleSubmit} onReset={handleReset}>
-      <Text fontWeight="400">
-        {userPhone || "There'd be your phone number"}
-      </Text>
+      <Text fontWeight="400">{userPhone || "There'd be your phone phone"}</Text>
       <Input
-        value={number} // Use the corresponding state
-        name="number"
+        value={phone} // Use the corresponding state
+        name="phone"
         onChange={handleChange} // Use the shared handler
-        placeholder="Tap to change number"
+        placeholder="Tap to change phone"
         autoComplete="off"
         size="sm"
         borderTop="none"
@@ -196,7 +212,11 @@ const Form = () => {
         <option value="France">France</option>
       </Select>
 
-      <FormControl display="flex" alignItems="center" className="notification-radio-group">
+      <FormControl
+        display="flex"
+        alignItems="center"
+        className="notification-radio-group"
+      >
         <FormLabel htmlFor="notifications" mb="0">
           Enable notifications?
         </FormLabel>
