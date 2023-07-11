@@ -164,7 +164,7 @@ async function updateUserProfile(req, res, next) {
 
     res.status(200).send({
       profile: { ...user.site },
-      user: { phone: user.phone, email: user.email },
+      user: { phone: user.phone, email: user.email, avatar: user.avatar },
     });
   } catch (e) {
     console.error(`Error while updating user profile (auth): ${e}`);
