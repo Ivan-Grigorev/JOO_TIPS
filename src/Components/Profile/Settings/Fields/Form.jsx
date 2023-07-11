@@ -66,7 +66,7 @@ const Form = () => {
     const sentData = {
       phone: phone || userPhone,
       email: email || userEmail,
-      site: {
+      profile: {
         avatarName: avatarName || userProfile.avatarName,
         about: about || userProfile.about,
         interfaceLanguage: language || userProfile.interfaceLanguage,

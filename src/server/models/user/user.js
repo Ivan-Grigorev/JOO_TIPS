@@ -24,7 +24,7 @@ const user = new mongoose.Schema(
       default: null,
     },
 
-    site: {
+    profile: {
       about: {
         type: String,
         default: null,

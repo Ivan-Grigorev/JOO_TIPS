@@ -107,8 +107,8 @@ async function login(req, res, next) {
           phone: user.phone,
         },
         profile: {
-          avatarName: user.site.avatarName,
-          about: user.site.about,
+          avatarName: user.profile.avatarName,
+          about: user.profile.about,
           interfaceLanguage: user.site.interfaceLanguage,
           notifications: user.site.notifications,
         },

@@ -42,13 +42,13 @@ function userUpdateProfile(req, res, next) {
   const userDeleteSchema = Joi.object({
     phone: Joi.string().min(5).allow(null),
     email: Joi.string().email().allow(null),
-    site: Joi.object({
+    profile: Joi.object({
       about: Joi.string().max(50).allow(null),
       avatarName: Joi.string().min(5).max(10).allow(null),
       notifications: Joi.boolean().optional(),
       interfaceLanguage: Joi.string().optional(),
     }).or("about", "avatarName", "notifications", "interfaceLanguage"),
-  }).or("phone", "email", "site");
+  }).or("phone", "email", "profile");
 
   const { error } = userDeleteSchema.validate(req.body);
 
