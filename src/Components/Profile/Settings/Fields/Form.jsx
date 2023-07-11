@@ -177,7 +177,6 @@ const Form = () => {
         }}
       />
 
-      {/* Similar changes for the other input fields... */}
       <Text fontWeight="400">{userEmail}</Text>
       <Input
         value={email} // Use the corresponding state
@@ -227,7 +226,6 @@ const Form = () => {
         }}
       />
 
-      {/* ЗАМЕНИТЬ НА TEXTAREA */}
       <Text fontWeight="400">
         {userProfile.about || "You'll be a great programmer!"}
       </Text>
