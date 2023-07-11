@@ -104,6 +104,13 @@ async function login(req, res, next) {
           name: user.name,
           avatar: user.avatar,
           email: user.email,
+          phone: user.phone,
+        },
+        profile: {
+          avatarName: user.site.avatarName,
+          about: user.site.about,
+          interfaceLanguage: user.site.interfaceLanguage,
+          notifications: user.site.notifications,
         },
         token: user.token,
       });
