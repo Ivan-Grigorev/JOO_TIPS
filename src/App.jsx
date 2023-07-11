@@ -4,6 +4,7 @@ import { lazy, useEffect } from "react";
 import Layout from "./Pages/Layout/Layout";
 import "./scss/global.scss"; // do not delete
 import RestrictedRoute from "./Routes/RestrictedRoute";
+import PrivateRoute from "./Routes/PrivateRoute";
 import { refreshUser } from "./redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing, selectLoadingStatus } from "./redux/selectors";
@@ -11,7 +12,6 @@ import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PrivateRoute from "./Routes/PrivateRoute";
 
 const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
