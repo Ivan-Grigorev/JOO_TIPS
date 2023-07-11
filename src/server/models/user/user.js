@@ -36,7 +36,7 @@ const user = new mongoose.Schema(
       },
       interfaceLanguage: {
         type: String,
-        enum: ["English", "Polish", "German"],
+        enum: ["English", "Ukrainian", "Polish", "German", "France"],
         default: "English",
       },
       notifications: {
