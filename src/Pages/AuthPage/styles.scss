@@ -1,23 +1,20 @@
 .auth-icons {
   width: 28px;
   height: 28px;
-
-  margin: 0 20px 0 20px;
+  margin: 0 20px;
 }
 
 .signup-login {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   overflow-y: hidden;
-
   min-height: 100vh;
-
   background: linear-gradient(160deg, #163a65 43.75%, #163a65 100%);
 }
+
 .signup-login .logo-header {
-  margin: 37px 0 0 0;
+  margin-top: 37px;
 }
 
 .signup-login form {
@@ -30,16 +27,15 @@
 .signup-login form label {
   outline: transparent;
   border: 1px solid transparent;
+}
 
-  &:hover {
-    border: 1px solid #265b9c;
-  }
+.signup-login form label:hover {
+  border: 1px solid #265b9c;
 }
 
 .signup-login .title {
   margin-top: 10px;
   margin-left: 10px;
-
   width: 200px;
   height: 50px;
 }
@@ -47,14 +43,11 @@
 .signup-login .joo-header {
   margin-left: auto;
   margin-right: auto;
-
   width: 200px;
   height: 110px;
-
   font-weight: 900;
   font-size: 100px;
   font-family: Galatea, Mulish;
-
   background-image: linear-gradient(
     90deg,
     #f3f3f3 -2.8%,
@@ -71,13 +64,10 @@
 .signup-login .tips-header {
   margin-top: -15px;
   margin-left: 165px;
-
   font-weight: 100;
   font-size: 30px;
   font-family: Galatea;
-
   text-align: center;
-
   color: #ababab;
 }
 
@@ -103,16 +93,11 @@
 .signup-login .checkbox:checked + label,
 .signup-login .checkbox:not(:checked) + label {
   margin: 20px auto -60px auto;
-
   position: relative;
-
   display: block;
-
   text-align: center;
-
   width: 100px;
   height: 30px;
-
   border: 2px solid #fcbc7d;
   border-radius: 30px;
   cursor: pointer;
@@ -122,21 +107,14 @@
 .signup-login .checkbox:checked + label:before,
 .signup-login .checkbox:not(:checked) + label:before {
   margin: -5px 0 0 -10px;
-
   width: 40px;
   height: 40px;
-
   position: absolute;
   display: block;
-
   border-radius: 50%;
   background-color: #fcbc7d;
-
-  // content: "\eb4f";
   content: "";
-
   z-index: 20;
-
   text-align: center;
   transition: all 0.5s ease;
 }
@@ -148,9 +126,7 @@
 .signup-login .card-3d-wrap {
   width: 350px;
   height: 700px;
-
   position: relative;
-
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 800px;
@@ -159,9 +135,7 @@
 .signup-login .card-3d-wrapper {
   width: 100%;
   height: 100%;
-
   position: absolute;
-
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transition: all 600ms ease-out;
@@ -170,20 +144,14 @@
 .signup-login .card-front,
 .signup-login .card-back {
   margin: 100px auto 0 auto;
-
   width: 350px;
   min-height: 420px;
   height: auto;
-
   text-align: center;
-
   background: #1a4579;
   border-radius: 37px;
-
   background-repeat: no-repeat;
-
   position: absolute;
-
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-backface-visibility: hidden;
@@ -198,13 +166,10 @@
 
 .signup-login .card-main {
   margin: 100px auto 0 auto;
-
   width: 350px;
   min-height: 420px;
   height: auto;
-
   text-align: center;
-
   background: #1a4579;
   border-radius: 37px;
 }
@@ -215,20 +180,16 @@
 
 .signup-login .card-title {
   padding-top: 5px;
-
   font-weight: 500;
   font-size: 40px;
-
   color: #ffffff;
 }
 
 .signup-login .form-field {
   width: 300px;
   height: 60px;
-
   display: flex;
   align-items: center;
-
   background-color: #163a65;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
@@ -238,30 +199,24 @@
 .signup-login input {
   width: 190px;
   height: 25px;
-
   font-weight: 300;
   font-size: 20px;
-
   color: #ffffff;
-
   background: transparent;
   border: none;
 }
+
 .signup-login ::placeholder {
   font-weight: 300;
   font-size: 19px;
-
   color: rgba(255, 255, 255, 0.77);
 }
 
 .signup-login .message {
   height: 20px;
-
   color: #fcbc7d;
-
   font-weight: 300;
   font-size: 20px;
-
   opacity: 0;
   transition: opacity 350ms ease;
 }
@@ -269,17 +224,14 @@
 .signup-login .message:lang(uk) {
   font-size: 16px;
 }
+
 .signup-login .btn-login {
   display: block;
-
   width: 150px;
   height: 40px;
-
   font-weight: 300;
   font-size: 20px;
-
   color: #123257;
-
   background: #fcbc7d;
   border-radius: 8px;
   border: none;
@@ -287,15 +239,11 @@
 
 .signup-login .btn-signup {
   margin: 30px 0 50px 0;
-
   width: 150px;
   height: 40px;
-
   font-weight: 300;
   font-size: 20px;
-
   color: #123257;
-
   background: #fcbc7d;
   border-radius: 8px;
   border: none;
@@ -303,16 +251,13 @@
 
 .signup-login .btn-signup:lang(uk) {
   width: 170px;
-
   padding: 0;
-
   font-size: 18px;
 }
 
 .signup-login .btn-login:hover,
 .signup-login .btn-signup:hover {
   color: #fcbc7d;
-
   background: #123257;
 }
 
@@ -320,38 +265,30 @@
   .signup-login h1:lang(uk) {
     margin-right: 195px;
   }
-
   .signup-login h1 span {
     margin-right: 80px;
   }
-
   .signup-login .card-3d-wrap {
     width: 450px;
   }
-
   .signup-login .card-front,
   .signup-login .card-back,
   .signup-login .card-main {
     margin-bottom: 60px;
-
     width: 450px;
   }
-
   .signup-login .name,
   .signup-login .e-mail,
   .signup-login .password {
     width: 380px;
   }
-
   .signup-login input {
     width: 260px;
   }
-
   .signup-login .btn-login,
   .signup-login .btn-signup {
     width: 180px;
     height: 50px;
-
     font-size: 25px;
   }
 }
@@ -360,81 +297,61 @@
   .signup-login h1 {
     margin-top: 20px;
   }
-
   .signup-login h1:lang(uk) {
     margin-right: 510px;
   }
-
   .signup-login h1 span {
     margin-right: 80px;
   }
-
   .signup-login .checkbox:checked + label,
   .signup-login .checkbox:not(:checked) + label {
     margin: 10px auto 10px auto;
   }
-
   .signup-login .card-3d-wrap {
     width: 570px;
   }
-
   .signup-login .card-front,
   .signup-login .card-back,
   .signup-login .card-main {
     margin: 30px auto 0 auto;
-
     width: 570px;
     min-height: 500px;
     height: auto;
   }
-
   .signup-login .card-title {
     padding: 10px;
   }
-
   .signup-login .form-field {
     width: 460px;
     height: 70px;
   }
-
   .signup-login input {
     width: 360px;
     height: 40px;
-
     font-size: 25px;
   }
-
   .signup-login ::placeholder {
     font-size: 22px;
   }
-
   .signup-login .message {
     margin: 0 auto 0 auto;
-
     width: 450px;
     min-height: 50px;
     height: auto;
-
     font-size: 22px;
   }
-
   .signup-login .message:lang(uk) {
     font-size: 21px;
   }
-
   .signup-login .btn-login,
   .signup-login .btn-signup {
     width: 200px;
     height: 60px;
-
     font-size: 25px;
   }
-
   .signup-login .btn-signup:lang(uk) {
     width: 200px;
-
     padding: 0;
-
     font-size: 22px;
   }
 }
