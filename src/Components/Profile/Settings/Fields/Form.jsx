@@ -31,10 +31,16 @@ const Form = () => {
   const [avatarName, setAvatarName] = useState("");
   const [about, setAbout] = useState("");
   const [language, setLanguage] = useState("");
-  const [notifications, setNotifications] = useState(true);
+  const [notifications, setNotifications] = useState(false);
+
+  useEffect(() => {
+    if (userProfile.notifications) {
+      setNotifications(userProfile.notifications);
+    }
+  }, [userProfile]);
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value, checked } = event.target;
 
     switch (name) {
       case "phone":
@@ -53,7 +59,7 @@ const Form = () => {
         setLanguage(value);
         break;
       case "notifications":
-        setNotifications(checked); // Switch возвращает checked, а не value
+        setNotifications(checked); // Используйте checked вместо !notifications
         break;
       default:
         break;
@@ -64,17 +70,38 @@ const Form = () => {
     event.preventDefault();
 
     const sentData = {
-      phone: phone || userPhone,
-      email: email || userEmail,
+      phone: phone.trim().length === 0 ? userPhone : phone,
+      email: email.trim().length === 0 ? userEmail : phone,
       profile: {
-        avatarName: avatarName || userProfile.avatarName,
-        about: about || userProfile.about,
-        interfaceLanguage: language || userProfile.interfaceLanguage,
-        notifications: notifications || userProfile.notifications,
+        avatarName: avatarName.trim().length === 0 ? userProfile.avatarName : avatarName, // prettier-ignore
+        about: about.trim().length === 0 ? userProfile.about : about,
+        interfaceLanguage: language.trim().length === 0 ? userProfile.interfaceLanguage : language, // prettier-ignore
+        notifications: notifications ?? userProfile.notifications,
       },
     };
 
-    const emptyForm = !phone && !email && !avatarName && !about && !language;
+    const emptyForm =
+      phone.trim().length === 0 &&
+      email.trim().length === 0 &&
+      avatarName.trim().length === 0 &&
+      about.trim().length === 0 &&
+      language === userProfile.interfaceLanguage &&
+      notifications === userProfile.notifications;
+
+    console.group("Form check");
+    console.log("phone.trim().length === 0 &&", phone.trim().length === 0);
+    console.log("email.trim().length === 0 &&", email.trim().length === 0);
+    console.log("avatarName.trim().length === 0 &&",  avatarName.trim().length === 0 ); // prettier-ignore
+    console.log("about.trim().length === 0 &&", about.trim().length === 0);
+    console.log("language === userProfile.interfaceLanguage", language === userProfile.interfaceLanguage); // prettier-ignore
+    console.log("language", language);
+    console.log("userProfile.interfaceLanguage", userProfile.interfaceLanguage);
+    console.log("notifications === userProfile.notifications", notifications === userProfile.notifications); // prettier-ignore
+    console.log("notifications", notifications);
+    console.log("userProfile.notifications", userProfile.notifications);
+    console.groupEnd();
+
+    console.log("emptyForm", emptyForm);
     if (emptyForm)return alert("Please fill at least one field before submitting!"); // prettier-ignore
 
     dispatch(updateUserProfile(sentData));
@@ -194,9 +221,9 @@ const Form = () => {
         }}
       />
 
-      {/* <Text fontWeight="400">{userProfile.interfaceLanguage}</Text> */}
       <Select
         placeholder={userProfile.interfaceLanguage}
+        onChange={handleChange}
         borderTop="none"
         borderLeft="none"
         borderRight="none"
@@ -217,7 +244,12 @@ const Form = () => {
         <FormLabel htmlFor="notifications" mb="0">
           Enable notifications?
         </FormLabel>
-        <Switch id="notifications" size="lg" />
+        <Switch
+          name="notifications"
+          size="lg"
+          onChange={handleChange}
+          isChecked={notifications}
+        />
       </FormControl>
 
       <div className="settings-buttons">
