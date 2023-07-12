@@ -20,6 +20,9 @@ const NotFound = lazy(() => import("./Components/Errors/404"));
 const ProfileLayout = lazy(() => import("./Components/Profile/Layout/Layout"));
 const Profile = lazy(() => import("./Components/Profile/Profile"));
 const Settings = lazy(() => import("./Components/Profile/Settings/Settings"));
+const RecoveringPassword = lazy(() =>
+  import("./Pages/RecoveringPassword/RecoveringPassword")
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -55,6 +58,8 @@ const App = () => {
           path="signup"
           element={<RestrictedRoute redirectTo="/" component={<AuthPage />} />}
         />
+
+        <Route path="signup/recover" element={<RecoveringPassword />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
