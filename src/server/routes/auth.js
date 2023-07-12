@@ -54,6 +54,7 @@ router.patch(
 router.post(
   "/current/reset-password",
   joiUser.userResetPassword,
+  middlewares.IsUserExistByEmail,
   auth.resetUserPassword
 );
 

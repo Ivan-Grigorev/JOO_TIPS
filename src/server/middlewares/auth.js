@@ -81,6 +81,25 @@ async function isUserExist(req, res, next) {
   }
 }
 
+//  middleware for reset password
+async function IsUserExistByEmail(req, res, next) {
+  try {
+    const email = req.body.email;
+
+    console.log("req.body", req.body);
+
+    const user = User.findOne({ email });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    next();
+  } catch (error) {
+    console.error(
+      `Error while trying to IsUserExxistByEmail: ${error.message}`
+    );
+  }
+}
+
 // middleware for signup
 async function isPasswordsMatch(req, res, next) {
   try {
@@ -147,4 +166,5 @@ module.exports = {
   isPasswordsMatch,
   setUserDevice,
   confirmPassword,
+  IsUserExistByEmail,
 };
