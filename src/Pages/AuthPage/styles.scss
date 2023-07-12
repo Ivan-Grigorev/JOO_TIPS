@@ -234,24 +234,38 @@
   display: block;
   width: 150px;
   height: 40px;
-  font-weight: 300;
+
+  font-weight: 400;
   font-size: 20px;
+
   color: #123257;
-  background: #fcbc7d;
+  background-color: #fcbc7d;
   border-radius: 8px;
   border: none;
+
+  transition-property: background-color, color;
+  transition-duration: 350ms;
+  transition-timing-function: ease;
 }
 
 .signup-login .btn-signup {
-  margin: 30px 0 50px 0;
   width: 150px;
   height: 40px;
-  font-weight: 300;
+
+  margin: 30px 0 50px 0;
+
+  font-weight: 400;
   font-size: 20px;
-  color: #123257;
-  background: #fcbc7d;
+
   border-radius: 8px;
   border: none;
+
+  color: #123257;
+  background-color: #fcbc7d;
+
+  transition-property: background-color, color;
+  transition-duration: 350ms;
+  transition-timing-function: ease;
 }
 
 .signup-login .btn-signup:lang(uk) {
