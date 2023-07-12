@@ -23,7 +23,7 @@ const RecoveringPassword = () => {
               відновлення паролю
             </p>
 
-            <label className="form-field name" htmlFor="email">
+            <label className="form-field" htmlFor="email">
               <EmailSVG />
               <input
                 name="email"
@@ -35,7 +35,11 @@ const RecoveringPassword = () => {
               />
             </label>
 
-            <button type="button" onClick={handleRecoverPassword} className="button">
+            <button
+              type="button"
+              onClick={handleRecoverPassword}
+              className="button"
+            >
               Вiдновити
             </button>
           </div>
