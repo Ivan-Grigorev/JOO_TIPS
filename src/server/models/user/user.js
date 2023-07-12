@@ -28,7 +28,6 @@ const user = new mongoose.Schema(
       },
       avatarName: {
         type: String,
-        unique: true,
         default: null,
       },
       interfaceLanguage: {
