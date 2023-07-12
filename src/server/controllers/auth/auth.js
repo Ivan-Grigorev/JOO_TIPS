@@ -160,10 +160,9 @@ async function resetUserPassword(req, res, next) {
 
 async function updateUserProfile(req, res, next) {
   try {
-    const email = req.user.email;
     // Обновляем пользовательские данные по идентификатору пользователя
-    const user = await User.findOneAndUpdate(
-      { email },
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
       { $set: req.body },
       { new: true, runValidators: true, useFindAndModify: false }
     );
@@ -185,9 +184,7 @@ async function updateUserProfile(req, res, next) {
 
 async function deleteCurrentUser(req, res, next) {
   try {
-    const email = req.user.email;
-
-    const user = await User.deleteOne({ email });
+    const user = await User.deleteOne({ _id: req.user.id });
 
     res.status(204).json(user);
   } catch (error) {
