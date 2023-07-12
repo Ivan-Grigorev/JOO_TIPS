@@ -6,6 +6,7 @@ import {
   logOut,
   refreshUser,
   register,
+  resetUserPassword,
   updateUserProfile,
 } from "./auth-operations";
 
@@ -26,7 +27,7 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
-  error: { signup: [], login: [], delete: [], profile: [] },
+  error: { signup: [], login: [], delete: [], profile: [], resetPassword: [] },
 };
 
 const authSlice = createSlice({
@@ -151,6 +152,26 @@ const authSlice = createSlice({
 
         if (!state.error.delete.includes(action.payload)) {
           state.error.delete.push(action.payload);
+        }
+      })
+
+      .addCase(resetUserPassword.fulfilled, (state, action) => {
+        console.log(action.payload);
+        // state.user = initialState.user;
+        // state.token = initialState.token;
+        state.isLoggedIn = initialState.isLoggedIn;
+        state.isLoading = initialState.isLoading;
+        state.error = initialState.error;
+      })
+      .addCase(resetUserPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resetUserPassword.rejected, (state, action) => {
+        state.error.resetPassword = []; // reset
+        state.isLoading = initialState.isLoading;
+
+        if (!state.error.resetPassword.includes(action.payload)) {
+          state.error.resetPassword.push(action.payload);
         }
       });
   },

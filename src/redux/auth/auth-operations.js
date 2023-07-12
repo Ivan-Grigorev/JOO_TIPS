@@ -92,6 +92,22 @@ const deleteUser = createAsyncThunk(
   }
 );
 
+const resetUserPassword = createAsyncThunk(
+  "auth/reset-password",
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post(
+        "/users/current/reset-password",
+        credentials
+      );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export {
   token,
   register,
@@ -100,4 +116,5 @@ export {
   refreshUser,
   updateUserProfile,
   deleteUser,
+  resetUserPassword,
 };
