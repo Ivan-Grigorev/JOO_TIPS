@@ -2,11 +2,30 @@ import LogoLink from "../../Components/Header/HomeHeader/Navigation/Links/LogoLi
 import "./RecoveringPassword.scss";
 import "../../Pages/AuthPage/styles.scss";
 import EmailSVG from "../../Components/Authpage/Forms/icons/EmailSVG";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserErrors } from "../../redux/auth/auth-selectors";
+import { resetUserPassword } from "../../redux/auth/auth-operations";
+import { useEffect, useState } from "react";
 
 const RecoveringPassword = () => {
-  const handleRecoverPassword = () => {
-    console.log("Recovering password");
+  const [email, setEmail] = useState("");
+  const errors = useSelector(selectUserErrors).resetPassword;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const messages = document.querySelector(".auth .recover-hero .message");
+    const show = () => (messages.style.opacity = 1);
+    const hide = () => (messages.style.opacity = 0);
+
+    errors.length > 0 ? show() : hide();
+  });
+
+  const handleRecoverPassword = (e) => {
+    e.preventDefault();
+    dispatch(resetUserPassword({ email }));
   };
+
+  const handleChange = async (e) => setEmail(e.target.value);
 
   return (
     <>
@@ -29,11 +48,16 @@ const RecoveringPassword = () => {
                 name="email"
                 placeholder="Email"
                 type="email"
-                // onChange={handleChange}
-                // value={emailValue}
+                onChange={handleChange}
+                value={email}
                 required
               />
             </label>
+            <div className="message">
+              {errors.map((error) => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
 
             <button
               type="button"
