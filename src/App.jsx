@@ -59,7 +59,7 @@ const App = () => {
           element={<RestrictedRoute redirectTo="/" component={<AuthPage />} />}
         />
 
-        <Route path="signup/recover" element={<RecoveringPassword />} />
+        <Route path="signup/recover-password" element={<RecoveringPassword />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
