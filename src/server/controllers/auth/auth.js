@@ -214,7 +214,7 @@ async function getSubscriptionDetails(req, res, next) {
 
 async function updateUserSubscription(req, res, next) {
   try {
-    const email = req.body.email;
+    const { id } = req.user;
     const expiration = req.body.subscription.expirationDate; // from redux dispatch
 
     const endDate = moment(moment().valueOf())
@@ -227,8 +227,8 @@ async function updateUserSubscription(req, res, next) {
       expired: { startDate: moment().valueOf(), endDate },
     };
 
-    const user = await User.findOneAndUpdate(
-      { email },
+    const user = await User.findByIdAndUpdate(
+      id,
       { subscription },
       { new: true }
     );
@@ -257,7 +257,7 @@ async function updateUserSubscription(req, res, next) {
 
 async function resetUserSubscription(req, res, next) {
   try {
-    const email = req.user.email;
+    const { id } = req.user;
     const userOldSubscriptionType = req.body.subscriptionType;
 
     const initialSubscription = {
@@ -269,8 +269,8 @@ async function resetUserSubscription(req, res, next) {
       },
     };
 
-    const user = await User.findOneAndUpdate(
-      { email },
+    const user = await User.findByIdAndUpdate(
+      id,
       { subscription: initialSubscription },
       { new: true }
     );
