@@ -50,7 +50,7 @@ const LoginForm = () => {
         />
 
         <div className="card-footer">
-          <Link>
+          <Link to="recover">
             <Button
               type="button"
               colorScheme="white"
