@@ -6,7 +6,7 @@ import LogoLink from "../../Components/Header/HomeHeader/Navigation/Links/LogoLi
 export default function AuthPage() {
   return (
     <>
-      <div className="signup-login">
+      <div className="auth">
         <LogoLink  />
 
         <Switcher />
