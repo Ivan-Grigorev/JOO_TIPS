@@ -3,6 +3,10 @@ import LoginFormFields from "./LoginFormFields/LoginFormFields";
 import { useState } from "react";
 import { logIn } from "../../../../redux/auth/auth-operations";
 import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
+import { Link } from "react-router-dom";
+
+import "./LoginForm.scss";
+import { Button } from "@chakra-ui/react";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -45,9 +49,21 @@ const LoginForm = () => {
           errors={login}
         />
 
-        <button className="btn-login" type="submit">
-          Log in
-        </button>
+        <div className="card-footer">
+          <Link>
+            <Button
+              type="button"
+              colorScheme="white"
+              variant="link"
+              fontSize={18}
+            >
+              Forget your password?
+            </Button>
+          </Link>
+          <button className="btn-login" type="submit">
+            Log in
+          </button>
+        </div>
       </form>
     </>
   );
