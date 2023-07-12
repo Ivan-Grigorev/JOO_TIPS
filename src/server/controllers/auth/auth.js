@@ -152,6 +152,14 @@ async function getCurrentUser(req, res, next) {
   }
 }
 
+async function resetUserPassword(req, res, next) {
+  try {
+    res.status(200).json({ message: "all good" });
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error" });
+  }
+}
+
 async function updateUserProfile(req, res, next) {
   try {
     const email = req.user.email;
@@ -281,6 +289,7 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
+  resetUserPassword,
   updateUserProfile,
   updateUserSubscription,
   getSubscriptionDetails,

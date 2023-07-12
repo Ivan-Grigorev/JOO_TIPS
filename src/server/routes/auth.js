@@ -51,6 +51,12 @@ router.patch(
   auth.updateUserProfile
 );
 
+router.post(
+  "/current/reset-password",
+  joiUser.userResetPassword,
+  auth.resetUserPassword
+);
+
 router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
 
 router.patch(

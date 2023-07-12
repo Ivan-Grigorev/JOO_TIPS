@@ -139,5 +139,33 @@ function userUpdateProfile(req, res, next) {
   next();
 }
 
+function userResetPassword(req, res, next) {
+  // Define schema for validation.
+  const userResetPasswordSchema = Joi.object({
+    // Email must be a valid email string and is required.
+    email: Joi.string().email().required().messages({
+      "string.email": "Email must be a valid email",
+      "any.required": "Email is a required field",
+    }),
+  });
+
+  // Validate request body against the schema.
+  const { error } = userResetPasswordSchema.validate(req.body);
+
+  // If there is validation error, print it to the console in red color and return a 400 response.
+  if (error) {
+    console.error(`Joi Error: ${error}`.red);
+    return res.status(400).json({ message: error.message }).end();
+  }
+
+  // If validation passes, proceed to the next middleware.
+  next();
+}
+
 // Export all the validation middlewares.
-module.exports = { userJoi, userDeleteJoi, userUpdateProfile };
+module.exports = {
+  userJoi,
+  userDeleteJoi,
+  userUpdateProfile,
+  userResetPassword,
+};
