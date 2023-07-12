@@ -18,13 +18,9 @@ async function auth(req, res, next) {
     jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
       if (err) return res.status(401).json({ message: "Invalid token" });
 
-      const currentUser = await User.find({ email: decoded.email });
+      const currentUser = await User.findById(decoded.id);
 
-      if (!currentUser || !currentUser[0]) {
-        return res.status(500).json({ message: "InternalServerError" });
-      }
-
-      if (currentUser && currentUser[0].token === token) {
+      if (currentUser && currentUser.token === token) {
         req.user = decoded;
         return next();
       }
@@ -73,6 +69,9 @@ async function isUserExist(req, res, next) {
     if (user === null) return res.status(401).json({ message: "Email or password is wrong." }); // prettier-ignore
 
     req.user = user; //* store user in the request body
+
+    console.log("user");
+    console.log(user);
 
     next();
   } catch (error) {

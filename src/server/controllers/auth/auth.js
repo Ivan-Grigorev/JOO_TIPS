@@ -10,29 +10,24 @@ moment.tz.setDefault("Europe/Prague");
 async function signup(req, res, next) {
   try {
     const { name, email, password } = req.body;
-    const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
+    const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-    // const macAddress = await getUserMac()
-
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, async (err, salt) => {
       if (err) return next(err);
 
-      bcrypt.hash(password, salt, (err, hash) => {
+      bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return next(err);
 
-        const token = jwt.sign(
-          { email: req.user.email }, // hashed email
-          process.env.JWT_SECRET, // secret password
-          { expiresIn: "12h" } // life-time of the token
-        );
-
-        req.user.token = token;
-
-        const user = {
+        const newUser = await User.create({
           name,
           email,
-          token,
           password: hash,
+          profile: {
+            about: null,
+            avatarName: null,
+            interfaceLanguage: "English",
+            notifications: true,
+          },
           subscription: {
             type: "Common",
             isPremium: false,
@@ -50,21 +45,26 @@ async function signup(req, res, next) {
             device: req.user.deviceInfo.device,
             browser: req.user.deviceInfo.browser,
           },
-
-          // macAddress: macAddress,
           registrationDate: new Date(),
-        };
+        });
 
-        User.create(user);
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+          expiresIn: "12h",
+        });
+
+        newUser.token = token;
+        await newUser.save();
+
+        req.user.token = token;
 
         return res.status(201).json({
           user: {
-            name: user.name,
-            email: user.email,
-            subscription: user.subscription,
-            registrationDate: new Date(),
+            name: newUser.name,
+            email: newUser.email,
+            subscription: newUser.subscription,
+            registrationDate: newUser.registrationDate,
           },
-          token: user.token,
+          token: newUser.token,
         });
       });
     });
@@ -87,11 +87,9 @@ async function login(req, res, next) {
 
       if (result === false) return res.status(401).json({ message: "Email or password is wrong." }); // prettier-ignore
 
-      const token = jwt.sign(
-        { email: req.user.email }, // hashed email
-        process.env.JWT_SECRET, // secret password
-        { expiresIn: "12h" } // life-time of the token
-      );
+      const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
+        expiresIn: "12h",
+      });
 
       req.user.token = token;
 
@@ -134,8 +132,8 @@ async function logout(req, res, next) {
 
 async function getCurrentUser(req, res, next) {
   try {
-    const { email } = req.user;
-    const user = await User.findOne({ email });
+    const { id } = req.user;
+    const user = await User.findById(id);
 
     res.status(200).json({
       user: {
@@ -201,8 +199,8 @@ async function deleteCurrentUser(req, res, next) {
 async function getSubscriptionDetails(req, res, next) {
   try {
     const currentTime = moment();
-    const { email } = req.user;
-    const user = await User.findOne({ email });
+    const { id } = req.user;
+    const user = await User.findById(id);
     const expirationDate = moment(user.subscription.expired.endDate);
 
     const remainingTime = expirationDate.diff(currentTime);
