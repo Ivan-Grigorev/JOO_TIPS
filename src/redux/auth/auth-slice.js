@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   deleteUser,
+  isTokenExpired,
   // getUserAvatar,
   logIn,
   logOut,
@@ -24,6 +25,7 @@ const initialState = {
     notifications: null,
   },
   token: null,
+  restorePasswordToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
@@ -173,6 +175,16 @@ const authSlice = createSlice({
         if (!state.error.resetPassword.includes(action.payload)) {
           state.error.resetPassword.push(action.payload);
         }
+      })
+
+      .addCase(isTokenExpired.fulfilled, (state, action) => {
+        state.restorePasswordToken = action.payload.valid;
+      })
+      .addCase(isTokenExpired.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(isTokenExpired.rejected, (state, action) => {
+        state.isLoading = initialState.isLoading;
       });
   },
 });

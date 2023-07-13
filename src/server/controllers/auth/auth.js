@@ -188,7 +188,7 @@ async function recoverUserPassword(req, res, next) {
     const html = `
       <p>Hello <strong>${user.name}</strong>,</p>
       <p>You have requested to recover your password. To proceed with this action, please follow the link below:</p>
-      <p><a href="http://localhost:3000/users/reset-password/${token}">Recover Password</a></p>
+      <p><a href="http://localhost:3001/signup/recover-password/${token}">Recover Password</a></p>
       <p>If you did not request this, please ignore this email.</p>
       <p>Best regards,</p>
       <p><strong>JooTips Team</strong></p>

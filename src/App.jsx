@@ -23,6 +23,9 @@ const Settings = lazy(() => import("./Components/Profile/Settings/Settings"));
 const RecoveringPassword = lazy(() =>
   import("./Pages/RecoveringPassword/RecoveringPassword")
 );
+const SetNewPassword = lazy(() =>
+  import("./Pages/RecoveringPassword/SetNewPassword/SetNewPassword")
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -59,7 +62,14 @@ const App = () => {
           element={<RestrictedRoute redirectTo="/" component={<AuthPage />} />}
         />
 
-        <Route path="signup/recover-password" element={<RecoveringPassword />} />
+        <Route
+          path="signup/recover-password"
+          element={<RecoveringPassword />}
+        />
+        <Route
+          path="signup/recover-password/:token"
+          element={<SetNewPassword />}
+        />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

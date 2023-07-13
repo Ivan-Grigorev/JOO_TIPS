@@ -108,6 +108,19 @@ const resetUserPassword = createAsyncThunk(
   }
 );
 
+const isTokenExpired = createAsyncThunk(
+  "auth/checkResetToken",
+  async (token, thunkAPI) => {
+    try {
+      console.log("is token expired operations");
+      const { data } = await axios.get(`/users/reset-password/${token}`);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export {
   token,
   register,
@@ -117,4 +130,5 @@ export {
   updateUserProfile,
   deleteUser,
   resetUserPassword,
+  isTokenExpired,
 };
