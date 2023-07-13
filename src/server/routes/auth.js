@@ -55,7 +55,7 @@ router.post(
   "/current/reset-password",
   joiUser.userResetPassword,
   middlewares.IsUserExistByEmail,
-  auth.resetUserPassword
+  auth.recoverUserPassword
 );
 
 router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);

@@ -70,9 +70,6 @@ async function isUserExist(req, res, next) {
 
     req.user = user; //* store user in the request body
 
-    console.log("user");
-    console.log(user);
-
     next();
   } catch (error) {
     console.error(`${error}`.red);
@@ -85,11 +82,11 @@ async function IsUserExistByEmail(req, res, next) {
   try {
     const email = req.body.email;
 
-    console.log("req.body", req.body);
-
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) return res.status(404).json({ message: "User not found" });
+
+    req.user = user;
 
     next();
   } catch (error) {

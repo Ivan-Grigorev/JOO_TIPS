@@ -15,6 +15,10 @@ const user = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
     },
+    recoverPasswordToken: {
+      type: String,
+      default: null,
+    },
     phone: {
       type: String,
       unique: true,

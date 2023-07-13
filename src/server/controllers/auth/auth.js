@@ -167,11 +167,46 @@ async function getCurrentUser(req, res, next) {
   }
 }
 
-async function resetUserPassword(req, res, next) {
+// An asynchronous function to handle user password recovery
+async function recoverUserPassword(req, res, next) {
   try {
-    res.status(200).json({ message: "all good" });
+    // Extracting user's id from the request
+    const id = req.user.id;
+
+    // Generating a JSON Web Token (JWT) based on user's id
+    // Note: process.env.JWT_SECRET should be a private key stored in your environment variables
+    const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+      expiresIn: "1h", // This token will expire in 1 hour
+    });
+
+    // Update the user document with a recovery password token
+    const user = await User.findByIdAndUpdate(id, { recoverPasswordToken: token, }); // prettier-ignore
+
+    // The subject of the recovery email
+    const subject = "Password Recovery Instructions";
+
+    // The content of the recovery email
+    const html = `
+      <p>Hello <strong>${user.name}</strong>,</p>
+      <p>You have requested to recover your password. To proceed with this action, please follow the link below:</p>
+      <p><a href="jootips/reset/${token}">Recover Password</a></p>
+      <p>If you did not request this, please ignore this email.</p>
+      <p>Best regards,</p>
+      <p><strong>YourWebsite Team</strong></p>
+    `;
+
+    // Send the recovery email
+    await sendMail(user.email, user.name, subject, html);
+
+    // Response to client that the recovery email has been sent
+    res.status(200).json({
+      message: "A recovery email has been sent to your email address.",
+    });
   } catch (error) {
-    res.status(500).send({ message: "Internal server error" });
+    // If an error occurs, send a response with status code 500 and a corresponding message
+    res
+      .status(500)
+      .send({ message: "Internal server error while recovering password" });
   }
 }
 
@@ -301,7 +336,7 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
-  resetUserPassword,
+  recoverUserPassword,
   updateUserProfile,
   updateUserSubscription,
   getSubscriptionDetails,
