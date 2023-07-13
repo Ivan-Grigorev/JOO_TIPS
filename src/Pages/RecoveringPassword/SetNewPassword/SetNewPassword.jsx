@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import "../RecoveringPassword.scss";
 import "../../../Pages/AuthPage/styles.scss";
 import Form from "../../../Components/RecoveringPage/SetNewPassword/Form";
+import LogoLink from "../../../Components/Header/HomeHeader/Navigation/Links/LogoLink";
 
 const SetNewPassword = () => {
   const dispatch = useDispatch();
@@ -20,18 +21,20 @@ const SetNewPassword = () => {
 
   return (
     <>
-      <div className="auth">
-        <header>
-          <main>
-            {isTokenFresh === true ? (
-              <>
-                <Form />
-              </>
-            ) : (
-              <div>Sorry bro</div>
-            )}
-          </main>
+      <div className="auth recover-setNewPassword">
+        <header className="recover-header">
+          <LogoLink />
         </header>
+
+        <main>
+          {isTokenFresh === true ? (
+            <>
+              <Form />
+            </>
+          ) : (
+            <div>Sorry bro</div>
+          )}
+        </main>
       </div>
     </>
   );
