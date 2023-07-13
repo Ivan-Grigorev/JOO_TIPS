@@ -2,7 +2,6 @@ const User = require("../../models/user/user.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
-const { getUserMac } = require("../../utils/utils.js");
 const sendMail = require("../../utils/mailer.js");
 require("colors");
 moment.tz.setDefault("Europe/Prague");
@@ -192,7 +191,7 @@ async function recoverUserPassword(req, res, next) {
       <p><a href="http://localhost:3000/users/reset/${token}">Recover Password</a></p>
       <p>If you did not request this, please ignore this email.</p>
       <p>Best regards,</p>
-      <p><strong>YourWebsite Team</strong></p>
+      <p><strong>JooTips Team</strong></p>
     `;
 
     // Send the recovery email
