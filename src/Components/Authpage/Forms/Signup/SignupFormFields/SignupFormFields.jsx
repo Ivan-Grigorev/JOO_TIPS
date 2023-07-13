@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import loginAt from "../.././icons/login_at.svg";
-import loginLockOpen from "../.././icons/login_lock_open.svg";
-import loginUser from "../.././icons/login_user.svg";
+import EmailSVG from "../../icons/EmailSVG";
+import UserSVG from "../../icons/UserSVG";
+import PasswordSVG from "../../icons/PasswordSVG";
 
 const SignupFormFields = ({
   handleChange,
@@ -16,14 +16,14 @@ const SignupFormFields = ({
     const messages = document.querySelector("#signup-form .message");
     const show = () => (messages.style.opacity = 1);
     const hide = () => (messages.style.opacity = 0);
-    
+
     // it's get it more smoothly
     if (errors.length > 0) inputs.some((input) => input.value.length > 0) ? show() : hide(); // prettier-ignore
   });
   return (
     <>
       <label className="form-field name" htmlFor="name">
-        <img className="auth-icons user-image" src={loginUser} alt="user" />
+        <UserSVG />
         <input
           type="text"
           name="name"
@@ -36,7 +36,7 @@ const SignupFormFields = ({
       </label>
 
       <label className="form-field e-mail" htmlFor="email">
-        <img className="auth-icons email-image" src={loginAt} alt="email" />
+        <EmailSVG />
         <input
           type="email"
           name="email"
@@ -48,11 +48,7 @@ const SignupFormFields = ({
       </label>
 
       <label className="form-field password" htmlFor="password">
-        <img
-          className="auth-icons lock-image"
-          src={loginLockOpen}
-          alt="lock icon"
-        />
+        <PasswordSVG />
         <input
           type="password"
           name="password"
@@ -67,7 +63,8 @@ const SignupFormFields = ({
       </label>
 
       <label className="form-field password" htmlFor="confirm-password">
-        <img className="auth-icons lock-image" src={loginLockOpen} alt="lock" />
+        <PasswordSVG />
+
         <input
           type="password"
           name="confirmed-password"

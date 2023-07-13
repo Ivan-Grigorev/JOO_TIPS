@@ -4,12 +4,15 @@ import { isTokenExpired } from "../../../redux/auth/auth-operations";
 import { selectRestorePasswordToken } from "../../../redux/auth/auth-selectors";
 import { useParams } from "react-router-dom";
 
+import "../RecoveringPassword.scss";
+import "../../../Pages/AuthPage/styles.scss";
+import Form from "../../../Components/RecoveringPage/SetNewPassword/Form";
+
 const SetNewPassword = () => {
   const dispatch = useDispatch();
   const { token } = useParams();
 
   const isTokenFresh = useSelector(selectRestorePasswordToken);
-  console.log(`Is token fresh? - - - ${isTokenFresh}`);
 
   useEffect(() => {
     dispatch(isTokenExpired(token));
@@ -20,7 +23,13 @@ const SetNewPassword = () => {
       <div className="auth">
         <header>
           <main>
-            {isTokenFresh === true ? "YES BLYAT" : <div>Sorry bro</div>}
+            {isTokenFresh === true ? (
+              <>
+                <Form />
+              </>
+            ) : (
+              <div>Sorry bro</div>
+            )}
           </main>
         </header>
       </div>
