@@ -33,6 +33,13 @@ router.post(
   auth.logout
 );
 
+router.post(
+  "/current/reset-password",
+  joiUser.userResetPassword,
+  middlewares.IsUserExistByEmail,
+  auth.recoverUserPassword
+);
+
 router.put(
   "/current",
   joiUser.userDeleteJoi,
@@ -44,21 +51,16 @@ router.put(
 
 router.get("/current", joiUser.userJoi, middlewares.auth, auth.getCurrentUser); // for persisting token
 
+router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
+
+router.get("/reset-password/:token", auth.isTokenValid);
+
 router.patch(
   "/current/profile",
   joiUser.userUpdateProfile,
   middlewares.auth,
   auth.updateUserProfile
 );
-
-router.post(
-  "/current/reset-password",
-  joiUser.userResetPassword,
-  middlewares.IsUserExistByEmail,
-  auth.recoverUserPassword
-);
-
-router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
 
 router.patch(
   "/subscription/reset",
