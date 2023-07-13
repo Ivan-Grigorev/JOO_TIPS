@@ -189,7 +189,7 @@ async function recoverUserPassword(req, res, next) {
     const html = `
       <p>Hello <strong>${user.name}</strong>,</p>
       <p>You have requested to recover your password. To proceed with this action, please follow the link below:</p>
-      <p><a href="jootips/reset/${token}">Recover Password</a></p>
+      <p><a href="http://localhost:3000/users/reset/${token}">Recover Password</a></p>
       <p>If you did not request this, please ignore this email.</p>
       <p>Best regards,</p>
       <p><strong>YourWebsite Team</strong></p>
@@ -207,6 +207,20 @@ async function recoverUserPassword(req, res, next) {
     res
       .status(500)
       .send({ message: "Internal server error while recovering password" });
+  }
+}
+
+async function isTokenValid(req, res, next) {
+  try {
+    // Find user with matching reset token
+    const user = await User.findOne({ recoverPasswordToken: req.params.token });
+
+    if (!user) return res.status(400).send({ message: "Invalid or expired token" }); // prettier-ignore
+
+    // Redirect user to reset password page if valid: true
+    res.status(200).json({ valid: true });
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error" });
   }
 }
 
@@ -342,4 +356,5 @@ module.exports = {
   getSubscriptionDetails,
   resetUserSubscription,
   deleteCurrentUser,
+  isTokenValid,
 };
