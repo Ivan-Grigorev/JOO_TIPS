@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("../controllers/auth/auth.js");
 const middlewares = require("../middlewares/auth.js");
+const profileMiddlewares = require("../middlewares/profile.js");
 
 const joiUser = require("../models/user/user-joi.js");
 const joiSubscription = require("../models/user/subscription-joi.js");
@@ -65,6 +66,7 @@ router.patch(
   "/current/profile",
   joiUser.userUpdateProfile,
   middlewares.auth,
+  profileMiddlewares.checkUniqueFields,
   auth.updateUserProfile
 );
 
