@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isTokenExpired } from "../../../redux/auth/auth-operations";
+import {
+  isTokenExpired,
+  setNewPassword,
+} from "../../../redux/auth/auth-operations";
 import { selectRestorePasswordToken } from "../../../redux/auth/auth-selectors";
 import { useParams } from "react-router-dom";
 
@@ -12,12 +15,33 @@ import LogoLink from "../../../Components/Header/HomeHeader/Navigation/Links/Log
 const SetNewPassword = () => {
   const dispatch = useDispatch();
   const { token } = useParams();
+  const [password, setPassword] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    switch (e.target.name) {
+      case "password":
+        setPassword(value);
+        break;
+      case "confirmedPassword":
+        setConfirmedPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   const isTokenFresh = useSelector(selectRestorePasswordToken);
 
   useEffect(() => {
-    dispatch(isTokenExpired(token));
+    dispatch(isTokenExpired({ token }));
   }, [token, dispatch]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setNewPassword({ token, password, confirmedPassword }));
+  };
 
   return (
     <>
@@ -29,7 +53,12 @@ const SetNewPassword = () => {
         <main>
           {isTokenFresh === true ? (
             <>
-              <Form />
+              <Form
+                password={password}
+                confirmedPassword={confirmedPassword}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+              />
             </>
           ) : (
             <div>Sorry bro</div>

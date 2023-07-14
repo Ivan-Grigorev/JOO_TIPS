@@ -1,27 +1,9 @@
-import { useState } from "react";
 import EmailSVG from "../../Authpage/Forms/icons/EmailSVG";
 
-const Form = () => {
-  const [password, setPassword] = useState("");
-  const [confirmedPassword, setConfirmedPassword] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    switch (e.target.name) {
-      case "password":
-        setPassword(value);
-        break;
-      case "confirmedPassword":
-        setConfirmedPassword(value);
-        break;
-      default:
-        break;
-    }
-  };
-
+const Form = ({ password, confirmedPassword, handleChange, handleSubmit }) => {
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h1>Enter your new password</h1>
         <label className="form-field" htmlFor="password">
           <EmailSVG />
@@ -46,7 +28,9 @@ const Form = () => {
           />
         </label>
 
-        <button type="submit" className="button">Recover password</button>
+        <button type="submit" className="button">
+          Recover password
+        </button>
       </form>
     </>
   );

@@ -4,7 +4,7 @@ import "../../Pages/AuthPage/styles.scss";
 import EmailSVG from "../../Components/Authpage/Forms/icons/EmailSVG";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserErrors } from "../../redux/auth/auth-selectors";
-import { resetUserPassword } from "../../redux/auth/auth-operations";
+import { sendRecoverMail } from "../../redux/auth/auth-operations";
 import { useEffect, useState } from "react";
 
 const RecoveringPassword = () => {
@@ -22,7 +22,7 @@ const RecoveringPassword = () => {
 
   const handleRecoverPassword = (e) => {
     e.preventDefault();
-    dispatch(resetUserPassword({ email }));
+    dispatch(sendRecoverMail({ email }));
   };
 
   const handleChange = async (e) => setEmail(e.target.value);
