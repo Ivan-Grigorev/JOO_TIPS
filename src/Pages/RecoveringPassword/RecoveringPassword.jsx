@@ -4,31 +4,34 @@ import "../../Pages/AuthPage/styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserErrors } from "../../redux/auth/auth-selectors";
 import { sendRecoverMail } from "../../redux/auth/auth-operations";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Hero from "../../Components/RecoveringPage/RecoveringPassword/Hero/Hero";
 import EmailWasSent from "../../Components/RecoveringPage/RecoveringPassword/EmailWasSent/EmailWasSent";
+import {
+  handleSetError,
+  resetResetPasswordErrors,
+} from "../../redux/auth/auth-slice";
+import validateEmail from "../../helpers/validate-email";
 
 const RecoveringPassword = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const errors = useSelector(selectUserErrors).resetPassword;
   const [emailWasSent, setEmailWasSent] = useState(false);
-
-  useEffect(() => {
-    const messages = document.querySelector(".auth .recover-hero .message");
-    const show = () => (messages.style.opacity = 1);
-    const hide = () => (messages.style.opacity = 0);
-
-    errors.length > 0 ? show() : hide();
-  }, [errors]);
+  const errors = useSelector(selectUserErrors).resetPassword;
 
   const handleRecoverPassword = (e) => {
     e.preventDefault();
 
-    if (email.length < 5) {
-      return alert("Email must be at least 5 characters long");
+    if (email.length < 5 || validateEmail(email) === false) {
+      dispatch(resetResetPasswordErrors());
+      return dispatch(
+        handleSetError({
+          field: "resetPassword",
+          error: "Invalid E-mail",
+        })
+      );
     }
 
     dispatch(sendRecoverMail({ email })).then(() => setEmailWasSent(true));

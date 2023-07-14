@@ -1,4 +1,5 @@
 import EmailSVG from "../../../Authpage/Forms/icons/EmailSVG";
+import ErrorMessages from "../../../Errors/ErrorMessages";
 
 const Hero = ({ email, errors, handleChange, handleRecoverPassword }) => {
   return (
@@ -18,15 +19,12 @@ const Hero = ({ email, errors, handleChange, handleRecoverPassword }) => {
             type="email"
             onChange={handleChange}
             value={email}
+            title="Your email address"
             required
           />
         </label>
 
-        <div className="message">
-          {errors.map((error) => (
-            <p key={error}>{error}</p>
-          ))}
-        </div>
+        <ErrorMessages parentClass={".auth .recover-hero"} errors={errors} />
 
         <button
           type="button"
