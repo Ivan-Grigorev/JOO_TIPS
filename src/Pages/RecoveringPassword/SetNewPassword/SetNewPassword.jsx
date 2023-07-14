@@ -5,7 +5,7 @@ import {
   setNewPassword,
 } from "../../../redux/auth/auth-operations";
 import { selectRestorePasswordToken } from "../../../redux/auth/auth-selectors";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../RecoveringPassword.scss";
 import "../../../Pages/AuthPage/styles.scss";
@@ -14,6 +14,7 @@ import LogoLink from "../../../Components/Header/HomeHeader/Navigation/Links/Log
 
 const SetNewPassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { token } = useParams();
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
@@ -41,7 +42,9 @@ const SetNewPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(setNewPassword({ token, password, confirmedPassword }));
+    dispatch(setNewPassword({ token, password, confirmedPassword })).then(() =>
+      navigate("/signup")
+    );
   };
 
   return (
