@@ -44,6 +44,9 @@ const authSlice = createSlice({
     resetDeleteErrors: (state) => {
       state.error.delete = [];
     },
+    resetResetPasswordErrors: (state) => {
+      state.error.resetPassword = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -212,6 +215,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { handleSetError, resetDeleteErrors } = authSlice.actions;
+export const { handleSetError, resetDeleteErrors, resetResetPasswordErrors } =
+  authSlice.actions;
 export default authSlice.reducer;
 export const authReducer = authSlice.reducer;
