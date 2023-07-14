@@ -6,7 +6,7 @@ const PasswordHasBeenChanged = () => {
   const navigate = useNavigate();
 
   // Using setTimeout to navigate the user to the signup page after 5 seconds
-  setTimeout(() => navigate("/signup"), 5000);
+  setTimeout(() => navigate("/signup#login"), 5000);
 
   return (
     <>
