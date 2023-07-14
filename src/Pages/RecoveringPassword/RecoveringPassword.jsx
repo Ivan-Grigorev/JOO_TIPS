@@ -1,4 +1,5 @@
 // Importing necessary components and stylesheets
+import { GoArrowLeft } from "react-icons/go";
 import LogoLink from "../../Components/Header/HomeHeader/Navigation/Links/LogoLink";
 import "./RecoveringPassword.scss";
 import "../../Pages/AuthPage/styles.scss";
@@ -7,7 +8,10 @@ import "../../Pages/AuthPage/styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserErrors } from "../../redux/auth/auth-selectors";
 import { sendRecoverMail } from "../../redux/auth/auth-operations";
-import { handleSetError, resetResetPasswordErrors } from "../../redux/auth/auth-slice";
+import {
+  handleSetError,
+  resetResetPasswordErrors,
+} from "../../redux/auth/auth-slice";
 
 // Importing useState hook from react for managing local state
 import { useState } from "react";
@@ -18,11 +22,13 @@ import EmailWasSent from "../../Components/RecoveringPage/RecoveringPassword/Ema
 
 // Importing helper function for email validation
 import validateEmail from "../../helpers/validate-email";
+import { Link, useLocation } from "react-router-dom";
 
 // Definition of RecoveringPassword component
 const RecoveringPassword = () => {
-  // Using redux hook to dispatch actions
+  // Using redux hook to dispatch actions and manipulate location
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // Setting up local state for email and emailWasSent
   const [email, setEmail] = useState("");
@@ -30,6 +36,8 @@ const RecoveringPassword = () => {
 
   // Selecting error messages from Redux store
   const errors = useSelector(selectUserErrors).resetPassword;
+
+  const backLink = location.state?.from ?? "/";
 
   // Function to handle form submission for password recovery
   const handleRecoverPassword = (e) => {
@@ -73,6 +81,15 @@ const RecoveringPassword = () => {
             <EmailWasSent />
           )}
         </main>
+
+        <footer>
+          <Link to={backLink} className="back-link">
+            <button type="button" className="button">
+              <GoArrowLeft fontSize={"24px"} />
+              Назад
+            </button>
+          </Link>
+        </footer>
       </div>
     </>
   );
