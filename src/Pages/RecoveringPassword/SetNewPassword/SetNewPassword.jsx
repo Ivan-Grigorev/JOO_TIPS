@@ -28,7 +28,7 @@ const SetNewPassword = () => {
   // Setting up local states for password, confirmed password and mail confirmation
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
-  const [mailHasBeenSent, setmailHasBeenSent] = useState(false);
+  const [passwordHasBeenChanged, setpasswordHasBeenChanged] = useState(false);
 
   // Handler function for input changes
   const handleChange = (e) => {
@@ -56,7 +56,7 @@ const SetNewPassword = () => {
 
     dispatch(setNewPassword({ token, password, confirmedPassword })).then(
       () => {
-        setmailHasBeenSent(true);
+        setpasswordHasBeenChanged(true);
       }
     );
   };
@@ -74,7 +74,7 @@ const SetNewPassword = () => {
 
             <main>
               {/* If the mail has not been sent, shows the form. Otherwise, it shows a 'password has been changed' page */}
-              {!mailHasBeenSent ? (
+              {!passwordHasBeenChanged ? (
                 <Form
                   password={password}
                   confirmedPassword={confirmedPassword}
