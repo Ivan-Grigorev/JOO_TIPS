@@ -14,9 +14,27 @@ const ChangePassword = () => {
 
   const errors = useSelector(selectUserErrors).password;
 
-  const handleChange = () => {};
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-  const handleSubmit = () => {};
+    switch (name) {
+      case "currentPassword":
+        setCurrentPassword(value);
+        break;
+      case "newPassword":
+        setNewPassword(value);
+        break;
+      case "confirmedNewPassword":
+        setConfirmedNewPassword(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="auth">

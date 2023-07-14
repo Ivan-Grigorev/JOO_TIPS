@@ -116,6 +116,26 @@ async function isPasswordsMatch(req, res, next) {
   }
 }
 
+// middleware for check is current password match with DB password
+async function isCurrentPasswordRight(req, res, next) {
+  try {
+    const { currentPassword } = req.body;
+    const { id } = req.user;
+    const userPassword = await User.findById(id).password; // TODO may not work
+
+    bcrypt.compare(currentPassword, userPassword, async (err, result) => {
+      if (err) return next(err);
+
+      if (result === false) return res.status(401).json({ message: "Password is wrong." }); // prettier-ignore
+
+      next();
+    });
+  } catch (error) {
+    console.log(`Error in isCurrentPasswordRight - ${error.message}`.red);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 // middleware for delete user
 async function confirmPassword(req, res, next) {
   try {
@@ -163,4 +183,5 @@ module.exports = {
   setUserDevice,
   confirmPassword,
   IsUserExistByEmail,
+  isCurrentPasswordRight,
 };

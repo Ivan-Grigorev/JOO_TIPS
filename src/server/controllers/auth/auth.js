@@ -229,7 +229,7 @@ async function isTokenValid(req, res, next) {
   }
 }
 
-// This function is used to update a user's password
+// This function is used to update a user's password after reseting
 async function setNewPassword(req, res, next) {
   try {
     // Extracting the new password from the request body
@@ -287,6 +287,29 @@ async function setNewPassword(req, res, next) {
   } catch (error) {
     // If there's an error, return an internal server error response
     res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+// This function is used to change user password
+async function changePassword(req, res, next) {
+  try {
+    const password = req.body.password;
+    const { id } = req.user.id;
+
+    bcrypt.genSalt(10, async (err, salt) => {
+      if (err) return next(err);
+
+      // Hash the new password with the salt
+      bcrypt.hash(password, salt, async (err, hash) => {
+        if (err) return next(err);
+
+        await User.findByIdAndUpdate(id, { password: hash });
+
+        res.status(201).json({ password });
+      });
+    });
+  } catch (error) {
+    console.error(`error while changing user password: ${error.message}`);
   }
 }
 
@@ -424,4 +447,5 @@ module.exports = {
   resetUserSubscription,
   deleteCurrentUser,
   isTokenValid,
+  changePassword,
 };

@@ -41,6 +41,13 @@ router.post(
   auth.sendRecoverMail
 );
 
+router.post(
+  "/change-password",
+  middlewares.auth,
+  middlewares.isCurrentPasswordRight,
+  auth.setNewPassword
+);
+
 router.get("/reset-password/:token", auth.isTokenValid);
 
 router.post(
