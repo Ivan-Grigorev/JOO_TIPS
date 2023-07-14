@@ -1,3 +1,7 @@
+.auth-active {
+  color: #fcbc7d;
+}
+
 .auth-icons {
   width: 28px;
   height: 28px;
@@ -72,12 +76,16 @@
 }
 
 .auth h1 {
+  display: flex;
+  gap: 70px;
+  
   font-size: 30px;
   color: #ffffff;
 }
 
 .auth h1 span {
-  margin-right: 50px;
+  // margin-right: 50px;
+  transition: color 350ms ease;
 }
 
 .auth h1:lang(uk) {
@@ -286,9 +294,7 @@
   .auth h1:lang(uk) {
     margin-right: 195px;
   }
-  .auth h1 span {
-    margin-right: 80px;
-  }
+
   .auth .card-3d-wrap {
     width: 450px;
   }
@@ -321,9 +327,7 @@
   .auth h1:lang(uk) {
     margin-right: 510px;
   }
-  .auth h1 span {
-    margin-right: 80px;
-  }
+
   .auth .checkbox:checked + label,
   .auth .checkbox:not(:checked) + label {
     margin: 10px auto 10px auto;
