@@ -187,11 +187,11 @@ const authSlice = createSlice({
       .addCase(isTokenExpired.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(isTokenExpired.rejected, (state, action) => {
+      .addCase(isTokenExpired.rejected, (state) => {
         state.isLoading = initialState.isLoading;
       })
 
-      .addCase(setNewPassword.fulfilled, (state, action) => {
+      .addCase(setNewPassword.fulfilled, (state) => {
         state.user = initialState.user;
         state.token = initialState.token;
         state.isLoggedIn = initialState.isLoggedIn;
