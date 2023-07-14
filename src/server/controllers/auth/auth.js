@@ -167,7 +167,7 @@ async function getCurrentUser(req, res, next) {
 }
 
 // An asynchronous function to handle user password recovery
-async function recoverUserPassword(req, res, next) {
+async function sendRecoverMail(req, res, next) {
   try {
     // Extracting user's id from the request
     const id = req.user.id;
@@ -220,6 +220,54 @@ async function isTokenValid(req, res, next) {
     res.status(200).json({ valid: true });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" });
+  }
+}
+
+async function setNewPassword(req, res, next) {
+  try {
+    const password = req.body.password;
+    const { token } = req.params;
+
+    console.log("token", token);
+    console.log("password", password);
+
+    const user = await User.findOne({ recoverPasswordToken: token });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    bcrypt.genSalt(10, async (err, salt) => {
+      if (err) return next(err);
+
+      bcrypt.hash(password, salt, async (err, hash) => {
+        if (err) return next(err);
+
+        user.token = null;
+        user.password = hash;
+        console.log(user.password);
+        await user.save();
+
+        const subject = "Ваш пароль успішно оновлено";
+        const HTML = `
+        <p>Шановний користувач,</p>
+        
+        <p>Ми раді повідомити вам, що ваш <strong>пароль</strong> був успішно <strong>оновлений</strong>.</p>
+        
+        <p>Якщо ви не замовляли скидання пароля, будь ласка, негайно зв'яжіться з нами. Це може свідчити про спробу несанкціонованого доступу до вашого аккаунту.</p>
+        
+        <p>Ваші дії допомагають нам забезпечити безпеку вашого аккаунту. Дякуємо вам за увагу до цього питання.</p>
+        
+        <p>Якщо у вас виникнуть які-небудь питання, не соромтеся звертатися до нас.</p>
+        
+        <p>З повагою, команда підтримки.</p>
+        `;
+
+        await sendMail(user.email, user.name, subject, HTML);
+      });
+    });
+
+    res.status(204).end();
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -349,7 +397,8 @@ module.exports = {
   login,
   logout,
   getCurrentUser,
-  recoverUserPassword,
+  sendRecoverMail,
+  setNewPassword,
   updateUserProfile,
   updateUserSubscription,
   getSubscriptionDetails,
