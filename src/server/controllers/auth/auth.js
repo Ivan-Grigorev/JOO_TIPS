@@ -71,7 +71,7 @@ async function signup(req, res, next) {
         <p>З повагою, <strong>Команда JooTips</strong></p>
         `;
 
-        await sendMail(newUser.email, newUser.name, subject, HTML);
+        // await sendMail(newUser.email, newUser.name, subject, HTML);
 
         return res.status(201).json({
           user: {
@@ -79,6 +79,12 @@ async function signup(req, res, next) {
             email: newUser.email,
             subscription: newUser.subscription,
             registrationDate: newUser.registrationDate,
+          },
+          profile: {
+            avatarName: newUser.profile.avatarName,
+            about: newUser.profile.about,
+            interfaceLanguage: newUser.profile.interfaceLanguage,
+            notifications: newUser.profile.notifications,
           },
           token: newUser.token,
         });
