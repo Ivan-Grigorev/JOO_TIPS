@@ -294,7 +294,7 @@ async function setNewPassword(req, res, next) {
 async function changePassword(req, res, next) {
   try {
     const password = req.body.password;
-    const { id } = req.user.id;
+    const { id } = req.user;
 
     bcrypt.genSalt(10, async (err, salt) => {
       if (err) return next(err);
@@ -305,6 +305,7 @@ async function changePassword(req, res, next) {
 
         await User.findByIdAndUpdate(id, { password: hash });
 
+        console.log("Changing password - Success!".green);
         res.status(201).json({ password });
       });
     });

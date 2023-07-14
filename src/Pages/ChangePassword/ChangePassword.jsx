@@ -1,13 +1,16 @@
 import { useState } from "react";
 import ChangePasswordForm from "../../Components/ChangePassword/ChangePasswordForm";
 import LogoLink from "../../Components/Header/HomeHeader/Navigation/Links/LogoLink";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserErrors } from "../../redux/auth/auth-selectors";
 
 import "../AuthPage/styles.scss";
 import "../RecoveringPassword/RecoveringPassword.scss";
+import { changePassword } from "../../redux/auth/auth-operations";
 
 const ChangePassword = () => {
+  const dispatch = useDispatch();
+
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmedNewPassword, setConfirmedNewPassword] = useState("");
@@ -34,6 +37,10 @@ const ChangePassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    dispatch(changePassword({ currentPassword, password: newPassword }));
+
+    console.log("submit");
   };
 
   return (
@@ -47,7 +54,7 @@ const ChangePassword = () => {
           <ChangePasswordForm
             currentPassword={currentPassword}
             newPassword={newPassword}
-            confirmedPassword={confirmedNewPassword}
+            confirmedNewPassword={confirmedNewPassword}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             errors={errors}

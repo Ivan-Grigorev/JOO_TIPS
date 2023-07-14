@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  changePassword,
   deleteUser,
   isTokenExpired,
   // getUserAvatar,
@@ -210,7 +211,19 @@ const authSlice = createSlice({
       })
       .addCase(setNewPassword.rejected, (state, action) => {
         state.isLoading = false;
-        state.error.resetPassword = action.error;
+        state.error.password = action.error;
+      })
+
+      .addCase(changePassword.fulfilled, (state) => {
+        state.isLoading = initialState.isLoading;
+        state.error = initialState.error;
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error.password = action.error;
       });
   },
 });

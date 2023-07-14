@@ -155,6 +155,25 @@ const setNewPassword = createAsyncThunk(
   }
 );
 
+const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post(
+        "/users/current/change-password",
+        credentials
+      );
+
+      return data;
+    } catch (error) {
+      console.error(
+        `Error while changing password(auth-operations): ${error.response.data.message}`
+      );
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export {
   token,
   register,
@@ -166,4 +185,5 @@ export {
   sendRecoverMail,
   isTokenExpired,
   setNewPassword,
+  changePassword,
 };

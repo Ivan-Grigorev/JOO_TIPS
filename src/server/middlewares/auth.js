@@ -120,10 +120,12 @@ async function isPasswordsMatch(req, res, next) {
 async function isCurrentPasswordRight(req, res, next) {
   try {
     const { currentPassword } = req.body;
-    const { id } = req.user;
-    const userPassword = await User.findById(id).password; // TODO may not work
 
-    bcrypt.compare(currentPassword, userPassword, async (err, result) => {
+    const { id } = req.user;
+    const user = await User.findById(id); // TODO may not work
+
+
+    bcrypt.compare(currentPassword, user.password, async (err, result) => {
       if (err) return next(err);
 
       if (result === false) return res.status(401).json({ message: "Password is wrong." }); // prettier-ignore

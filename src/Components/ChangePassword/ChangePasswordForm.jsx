@@ -4,7 +4,7 @@ import ErrorMessages from "../Errors/ErrorMessages";
 const ChangePasswordForm = ({
   currentPassword,
   newPassword,
-  confirmedPassword,
+  confirmedNewPassword,
   handleChange,
   handleSubmit,
   parentClass,
@@ -44,11 +44,11 @@ const ChangePasswordForm = ({
         <label className="form-field" htmlFor="confirmedPassword">
           <PasswordSVG />
           <input
-            name="confirmedPassword"
+            name="confirmedNewPassword"
             placeholder="Confirm your new password"
             type="password"
             onChange={handleChange}
-            value={confirmedPassword}
+            value={confirmedNewPassword}
             required
             title="Confirm your new password"
           />

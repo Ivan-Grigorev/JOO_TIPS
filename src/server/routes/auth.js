@@ -42,10 +42,10 @@ router.post(
 );
 
 router.post(
-  "/change-password",
+  "/current/change-password",
   middlewares.auth,
   middlewares.isCurrentPasswordRight,
-  auth.setNewPassword
+  auth.changePassword
 );
 
 router.get("/reset-password/:token", auth.isTokenValid);
