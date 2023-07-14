@@ -37,6 +37,10 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    handleSetError: (state, action) => {
+      const { field, error } = action.payload;
+      state.error[field].push(error);
+    },
     resetDeleteErrors: (state) => {
       state.error.delete = [];
     },
@@ -203,11 +207,11 @@ const authSlice = createSlice({
       })
       .addCase(setNewPassword.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error;
+        state.error.resetPassword = action.error;
       });
   },
 });
 
-export const { resetDeleteErrors } = authSlice.actions;
+export const { handleSetError, resetDeleteErrors } = authSlice.actions;
 export default authSlice.reducer;
 export const authReducer = authSlice.reducer;
