@@ -224,6 +224,8 @@
   font-size: 20px;
   opacity: 0;
   transition: opacity 350ms ease;
+
+  text-align: center;
 }
 
 .auth .message:lang(uk) {
@@ -370,7 +372,7 @@
 
     width: 170px;
     height: 50px;
-    font-size: 18px;  
+    font-size: 18px;
     font-weight: 500;
   }
   .auth .btn-signup:lang(uk) {
