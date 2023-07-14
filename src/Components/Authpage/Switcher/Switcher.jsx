@@ -9,6 +9,19 @@ const Switcher = () => {
     setIsChecked(location.hash === "#login");
   }, [location]);
 
+  useEffect(() => {
+    const signSpan = document.querySelector("span.sign");
+    const logSpan = document.querySelector("span.log");
+
+    if (isChecked) {
+      logSpan.classList.add("auth-active");
+      signSpan.classList.remove("auth-active");
+    } else {
+      logSpan.classList.remove("auth-active");
+      signSpan.classList.add("auth-active");
+    }
+  });
+
   const toggleCheck = () => {
     setIsChecked(!isChecked);
   };
@@ -16,7 +29,8 @@ const Switcher = () => {
   return (
     <>
       <h1>
-        <span>Sign up</span>Log in
+        <span className="sign">Sign up</span>{" "}
+        <span className="log">Log in</span>
       </h1>
       <input
         className="checkbox"
