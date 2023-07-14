@@ -40,6 +40,7 @@ const SetNewPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(setNewPassword({ token, password, confirmedPassword }));
   };
 
