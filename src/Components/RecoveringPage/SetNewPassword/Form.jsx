@@ -1,5 +1,6 @@
 import EmailSVG from "../../Authpage/Forms/icons/EmailSVG";
 
+// This component renders a form where the user can enter and confirm their new password
 const Form = ({ password, confirmedPassword, handleChange, handleSubmit }) => {
   return (
     <>
