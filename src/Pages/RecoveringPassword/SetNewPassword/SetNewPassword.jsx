@@ -54,11 +54,22 @@ const SetNewPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const match = password === confirmedPassword;
+    if (!match) {
+      alert("Passwords must be identical");
+      return handleReset();
+    }
+
     dispatch(setNewPassword({ token, password, confirmedPassword })).then(
       () => {
         setpasswordHasBeenChanged(true);
       }
     );
+  };
+
+  const handleReset = () => {
+    setPassword("");
+    setConfirmedPassword("");
   };
 
   // Component return
