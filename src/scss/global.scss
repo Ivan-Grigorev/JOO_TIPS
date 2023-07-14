@@ -85,12 +85,16 @@ ul {
   width: 135px;
   height: 40px;
 
-  transition-property: color, background-color;
+  border-radius: 10px;
+  border: 2px solid transparent;
+
+  transition-property: color, background-color, border-color;
   transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
   transition-duration: 350ms;
 
   &:is(:hover, :focus) {
     color: #14355c;
+    border-color: #cc8b47;
     background-color: #cc8a47;
   }
 
