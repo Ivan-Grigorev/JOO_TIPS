@@ -30,7 +30,7 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,
-  error: { signup: [], login: [], delete: [], profile: [], resetPassword: [] },
+  error: { signup: [], login: [], delete: [], profile: [], password: [] },
 };
 
 const authSlice = createSlice({
@@ -45,7 +45,7 @@ const authSlice = createSlice({
       state.error.delete = [];
     },
     resetResetPasswordErrors: (state) => {
-      state.error.resetPassword = [];
+      state.error.password = [];
     },
   },
   extraReducers: (builder) => {
@@ -180,11 +180,11 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(sendRecoverMail.rejected, (state, action) => {
-        state.error.resetPassword = []; // reset
+        state.error.password = []; // reset
         state.isLoading = initialState.isLoading;
 
-        if (!state.error.resetPassword.includes(action.payload)) {
-          state.error.resetPassword.push(action.payload);
+        if (!state.error.password.includes(action.payload)) {
+          state.error.password.push(action.payload);
         }
       })
 

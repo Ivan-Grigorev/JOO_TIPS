@@ -26,6 +26,9 @@ const RecoveringPassword = lazy(() =>
 const SetNewPassword = lazy(() =>
   import("./Pages/RecoveringPassword/SetNewPassword/SetNewPassword")
 );
+const ChangePassword = lazy(() =>
+  import("./Pages/ChangePassword/ChangePassword")
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -70,6 +73,8 @@ const App = () => {
           path="signup/recover-password/:token"
           element={<SetNewPassword />}
         />
+
+        <Route path="profile/change-password" element={<ChangePassword />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

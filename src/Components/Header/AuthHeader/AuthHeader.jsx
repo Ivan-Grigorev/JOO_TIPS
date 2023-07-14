@@ -134,6 +134,10 @@ const AuthHeader = () => {
               <MenuItem onClick={handleLogOut}>Вийти</MenuItem>
 
               <MenuDeleteAccountItem />
+
+              <MenuItem>
+                <Link to={"/profile/change-password"}>Змiнити пароль</Link>
+              </MenuItem>
             </MenuGroup>
             <MenuDivider />
 
