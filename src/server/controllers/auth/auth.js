@@ -229,25 +229,39 @@ async function isTokenValid(req, res, next) {
   }
 }
 
+// This function is used to update a user's password
 async function setNewPassword(req, res, next) {
   try {
+    // Extracting the new password from the request body
     const password = req.body.password;
+    // Extracting the token from the request parameters
     const { token } = req.params;
 
+    // Trying to find a user with the provided token
     const user = await User.findOne({ recoverPasswordToken: token });
 
-    if (!user) return res.status(404).json({ message: "User not found" });
+    // If no user was found, return an error message
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "User not found or link is not valid" });
+    }
 
+    // Generate a new salt
     bcrypt.genSalt(10, async (err, salt) => {
       if (err) return next(err);
 
+      // Hash the new password with the salt
       bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return next(err);
 
+        // Update the user's password, clear the token and save the changes
         user.token = null;
         user.password = hash;
+        user.recoverPasswordToken = null;
         await user.save();
 
+        // Set up the email content
         const subject = "Ваш пароль успішно оновлено";
         const HTML = `
         <p>Шановний користувач,</p>
@@ -263,12 +277,15 @@ async function setNewPassword(req, res, next) {
         <p>З повагою, команда підтримки.</p>
         `;
 
+        // Send the user an email to confirm their password has been changed
         await sendMail(user.email, user.name, subject, HTML);
       });
     });
 
+    // Send back a successful response
     res.status(204).end();
   } catch (error) {
+    // If there's an error, return an internal server error response
     res.status(500).json({ message: "Internal server error" });
   }
 }
