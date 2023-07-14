@@ -1,16 +1,20 @@
 import LogoLink from "../../Components/Header/HomeHeader/Navigation/Links/LogoLink";
 import "./RecoveringPassword.scss";
 import "../../Pages/AuthPage/styles.scss";
-import EmailSVG from "../../Components/Authpage/Forms/icons/EmailSVG";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserErrors } from "../../redux/auth/auth-selectors";
 import { sendRecoverMail } from "../../redux/auth/auth-operations";
 import { useEffect, useState } from "react";
 
+import Hero from "../../Components/RecoveringPage/RecoveringPassword/Hero/Hero";
+import EmailWasSent from "../../Components/RecoveringPage/RecoveringPassword/EmailWasSent/EmailWasSent";
+
 const RecoveringPassword = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const errors = useSelector(selectUserErrors).resetPassword;
-  const dispatch = useDispatch();
+  const [emailWasSent, setEmailWasSent] = useState(false);
 
   useEffect(() => {
     const messages = document.querySelector(".auth .recover-hero .message");
@@ -18,11 +22,16 @@ const RecoveringPassword = () => {
     const hide = () => (messages.style.opacity = 0);
 
     errors.length > 0 ? show() : hide();
-  });
+  }, [errors]);
 
   const handleRecoverPassword = (e) => {
     e.preventDefault();
-    dispatch(sendRecoverMail({ email }));
+
+    if (email.length < 5) {
+      return alert("Email must be at least 5 characters long");
+    }
+
+    dispatch(sendRecoverMail({ email })).then(() => setEmailWasSent(true));
   };
 
   const handleChange = async (e) => setEmail(e.target.value);
@@ -35,38 +44,16 @@ const RecoveringPassword = () => {
         </header>
 
         <main className="recover-hero">
-          <div className="recover-card">
-            <h1>Вiдновити пароль</h1>
-            <p>
-              Щоб відновити пароль впиши свій E-mail, на який прийде письмо для
-              відновлення паролю
-            </p>
-
-            <label className="form-field" htmlFor="email">
-              <EmailSVG />
-              <input
-                name="email"
-                placeholder="Email"
-                type="email"
-                onChange={handleChange}
-                value={email}
-                required
-              />
-            </label>
-            <div className="message">
-              {errors.map((error) => (
-                <p key={error}>{error}</p>
-              ))}
-            </div>
-
-            <button
-              type="button"
-              onClick={handleRecoverPassword}
-              className="button"
-            >
-              Вiдновити
-            </button>
-          </div>
+          {!emailWasSent ? (
+            <Hero
+              email={email}
+              errors={errors}
+              handleChange={handleChange}
+              handleRecoverPassword={handleRecoverPassword}
+            />
+          ) : (
+            <EmailWasSent />
+          )}
         </main>
       </div>
     </>
