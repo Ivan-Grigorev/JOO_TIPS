@@ -1,7 +1,15 @@
 import EmailSVG from "../../Authpage/Forms/icons/EmailSVG";
+import ErrorMessages from "../../Errors/ErrorMessages";
 
 // This component renders a form where the user can enter and confirm their new password
-const Form = ({ password, confirmedPassword, handleChange, handleSubmit }) => {
+const Form = ({
+  password,
+  confirmedPassword,
+  handleChange,
+  handleSubmit,
+  parentClass,
+  errors,
+}) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -28,6 +36,8 @@ const Form = ({ password, confirmedPassword, handleChange, handleSubmit }) => {
             required
           />
         </label>
+
+        <ErrorMessages parentClass={parentClass} errors={errors} />
 
         <button type="submit" className="button">
           Recover password

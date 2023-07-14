@@ -4,7 +4,10 @@ import {
   isTokenExpired,
   setNewPassword,
 } from "../../../redux/auth/auth-operations";
-import { selectRestorePasswordToken } from "../../../redux/auth/auth-selectors";
+import {
+  selectRestorePasswordToken,
+  selectUserErrors,
+} from "../../../redux/auth/auth-selectors";
 import { useParams } from "react-router-dom";
 
 // Import styles and components
@@ -14,6 +17,7 @@ import Form from "../../../Components/RecoveringPage/SetNewPassword/Form";
 import LogoLink from "../../../Components/Header/HomeHeader/Navigation/Links/LogoLink";
 import NotFound from "../../../Components/Errors/404";
 import PasswordHasBeenChanged from "../../../Components/RecoveringPage/PasswordHasBeenChanged/PasswordHasBeenChanged";
+import { handleSetError } from "../../../redux/auth/auth-slice";
 
 const SetNewPassword = () => {
   // Hooking into Redux's dispatch functionality
@@ -24,6 +28,7 @@ const SetNewPassword = () => {
 
   // Using useSelector to access the current state of the token from Redux store
   const isTokenFresh = useSelector(selectRestorePasswordToken);
+  const errors = useSelector(selectUserErrors).resetPassword;
 
   // Setting up local states for password, confirmed password and mail confirmation
   const [password, setPassword] = useState("");
@@ -56,8 +61,12 @@ const SetNewPassword = () => {
 
     const match = password === confirmedPassword;
     if (!match) {
-      alert("Passwords must be identical");
-      return handleReset();
+      return dispatch(
+        handleSetError({
+          field: "resetPassword",
+          error: "Passwords do not match",
+        })
+      );
     }
 
     dispatch(setNewPassword({ token, password, confirmedPassword })).then(
@@ -65,11 +74,6 @@ const SetNewPassword = () => {
         setpasswordHasBeenChanged(true);
       }
     );
-  };
-
-  const handleReset = () => {
-    setPassword("");
-    setConfirmedPassword("");
   };
 
   // Component return
@@ -91,6 +95,8 @@ const SetNewPassword = () => {
                   confirmedPassword={confirmedPassword}
                   handleChange={handleChange}
                   handleSubmit={handleSubmit}
+                  errors={errors}
+                  parentClass={".auth"}
                 />
               ) : (
                 <PasswordHasBeenChanged />
