@@ -7,7 +7,8 @@ import {
   logOut,
   refreshUser,
   register,
-  resetUserPassword,
+  sendRecoverMail,
+  setNewPassword,
   updateUserProfile,
 } from "./auth-operations";
 
@@ -157,7 +158,7 @@ const authSlice = createSlice({
         }
       })
 
-      .addCase(resetUserPassword.fulfilled, (state, action) => {
+      .addCase(sendRecoverMail.fulfilled, (state, action) => {
         console.log(action.payload);
         // state.user = initialState.user;
         // state.token = initialState.token;
@@ -165,10 +166,10 @@ const authSlice = createSlice({
         state.isLoading = initialState.isLoading;
         state.error = initialState.error;
       })
-      .addCase(resetUserPassword.pending, (state) => {
+      .addCase(sendRecoverMail.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(resetUserPassword.rejected, (state, action) => {
+      .addCase(sendRecoverMail.rejected, (state, action) => {
         state.error.resetPassword = []; // reset
         state.isLoading = initialState.isLoading;
 
@@ -185,6 +186,21 @@ const authSlice = createSlice({
       })
       .addCase(isTokenExpired.rejected, (state, action) => {
         state.isLoading = initialState.isLoading;
+      })
+
+      .addCase(setNewPassword.fulfilled, (state, action) => {
+        state.user = initialState.user;
+        state.token = initialState.token;
+        state.isLoggedIn = initialState.isLoggedIn;
+        state.isLoading = initialState.isLoading;
+        state.error = initialState.error;
+      })
+      .addCase(setNewPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(setNewPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error;
       });
   },
 });

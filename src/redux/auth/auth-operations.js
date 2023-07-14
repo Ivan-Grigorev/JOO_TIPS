@@ -92,7 +92,7 @@ const deleteUser = createAsyncThunk(
   }
 );
 
-const resetUserPassword = createAsyncThunk(
+const sendRecoverMail = createAsyncThunk(
   "auth/reset-password",
   async (credentials, thunkAPI) => {
     try {
@@ -110,12 +110,32 @@ const resetUserPassword = createAsyncThunk(
 
 const isTokenExpired = createAsyncThunk(
   "auth/checkResetToken",
-  async (token, thunkAPI) => {
+  async (credentials, thunkAPI) => {
     try {
-      console.log("is token expired operations");
+      const { token } = credentials; // bring token from dispatch args
+
       const { data } = await axios.get(`/users/reset-password/${token}`);
       return data;
     } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+const setNewPassword = createAsyncThunk(
+  "auth/setNewPassword",
+  async (credentials, thunkAPI) => {
+    try {
+      const { token, password, confirmedPassword } = credentials;
+
+      const { data } = await axios.post(`/users/reset-password/${token}`, {
+        password,
+        confirmedPassword,
+      });
+
+      return data;
+    } catch (error) {
+      console.error("Error creating new password");
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -129,6 +149,7 @@ export {
   refreshUser,
   updateUserProfile,
   deleteUser,
-  resetUserPassword,
+  sendRecoverMail,
   isTokenExpired,
+  setNewPassword,
 };
