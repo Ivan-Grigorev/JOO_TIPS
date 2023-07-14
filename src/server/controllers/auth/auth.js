@@ -234,9 +234,6 @@ async function setNewPassword(req, res, next) {
     const password = req.body.password;
     const { token } = req.params;
 
-    console.log("token", token);
-    console.log("password", password);
-
     const user = await User.findOne({ recoverPasswordToken: token });
 
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -249,7 +246,6 @@ async function setNewPassword(req, res, next) {
 
         user.token = null;
         user.password = hash;
-        console.log(user.password);
         await user.save();
 
         const subject = "Ваш пароль успішно оновлено";
