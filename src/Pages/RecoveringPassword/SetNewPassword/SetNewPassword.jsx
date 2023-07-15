@@ -18,6 +18,7 @@ import LogoLink from "../../../Components/Header/HomeHeader/Navigation/Links/Log
 import NotFound from "../../../Components/Errors/404";
 import PasswordHasBeenChanged from "../../../Components/RecoveringPage/PasswordHasBeenChanged/PasswordHasBeenChanged";
 import { handleSetError } from "../../../redux/auth/auth-slice";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const SetNewPassword = () => {
   // Hooking into Redux's dispatch functionality
@@ -56,7 +57,7 @@ const SetNewPassword = () => {
   }, [token, dispatch]);
 
   // Handler function for form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const match = password === confirmedPassword;
@@ -69,11 +70,14 @@ const SetNewPassword = () => {
       );
     }
 
-    dispatch(setNewPassword({ token, password, confirmedPassword })).then(
-      () => {
-        setpasswordHasBeenChanged(true);
-      }
-    );
+    try {
+      const action = await  dispatch(setNewPassword({ token, password, confirmedPassword })); // prettier-ignore
+      const originalPromiseResult = unwrapResult(action); //! do not delete!!!
+      // Если запрос успешен, то переход в след. стадию
+      setpasswordHasBeenChanged(true);
+    } catch (rejectedValueOrSerializedError) {
+      console.log(rejectedValueOrSerializedError); // Если запрос не успешен, выведет ошибку
+    }
   };
 
   // Component return

@@ -23,6 +23,7 @@ import EmailWasSent from "../../Components/RecoveringPage/RecoveringPassword/Ema
 // Importing helper function for email validation
 import validateEmail from "../../helpers/validate-email";
 import { Link, useLocation } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 // Definition of RecoveringPassword component
 const RecoveringPassword = () => {
@@ -40,7 +41,7 @@ const RecoveringPassword = () => {
   const backLink = location.state?.from ?? "/";
 
   // Function to handle form submission for password recovery
-  const handleRecoverPassword = (e) => {
+  const handleRecoverPassword = async (e) => {
     e.preventDefault();
 
     // Validation of email and dispatching error in case of invalid email
@@ -54,8 +55,14 @@ const RecoveringPassword = () => {
       );
     }
 
-    // Dispatching an action to send recovery mail and then setting local state
-    dispatch(sendRecoverMail({ email })).then(() => setEmailWasSent(true));
+    try {
+      const action = await dispatch(sendRecoverMail({ email })); // Dispatching an action to send recovery mail and then setting local state
+      const originalPromiseResult = unwrapResult(action); //! do not delete!!!
+
+      setEmailWasSent(true); // Если запрос успешен, то переход в след. стадию
+    } catch (rejectedValueOrSerializedError) {
+      console.log(rejectedValueOrSerializedError); // Если запрос не успешен, выведет ошибку
+    }
   };
 
   // Function to handle input field value change
