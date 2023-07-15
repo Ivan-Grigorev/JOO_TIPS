@@ -306,11 +306,12 @@ async function changePassword(req, res, next) {
         await User.findByIdAndUpdate(id, { password: hash });
 
         console.log("Changing password - Success!".green);
-        res.status(201).json({ password });
+        res.status(201).json({ passwordChanged: true });
       });
     });
   } catch (error) {
-    console.error(`error while changing user password: ${error.message}`);
+    console.error(`error while changing user password: ${error.message}`.red);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
