@@ -28,7 +28,7 @@ const SetNewPassword = () => {
 
   // Using useSelector to access the current state of the token from Redux store
   const isTokenFresh = useSelector(selectRestorePasswordToken);
-  const errors = useSelector(selectUserErrors).resetPassword;
+  const errors = useSelector(selectUserErrors).password;
 
   // Setting up local states for password, confirmed password and mail confirmation
   const [password, setPassword] = useState("");
@@ -63,7 +63,7 @@ const SetNewPassword = () => {
     if (!match) {
       return dispatch(
         handleSetError({
-          field: "resetPassword",
+          field: "password",
           error: "Passwords do not match",
         })
       );

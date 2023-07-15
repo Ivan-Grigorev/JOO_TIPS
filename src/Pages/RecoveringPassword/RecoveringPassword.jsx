@@ -10,7 +10,7 @@ import { selectUserErrors } from "../../redux/auth/auth-selectors";
 import { sendRecoverMail } from "../../redux/auth/auth-operations";
 import {
   handleSetError,
-  resetResetPasswordErrors,
+  resetPasswordErrors,
 } from "../../redux/auth/auth-slice";
 
 // Importing useState hook from react for managing local state
@@ -35,7 +35,7 @@ const RecoveringPassword = () => {
   const [emailWasSent, setEmailWasSent] = useState(false);
 
   // Selecting error messages from Redux store
-  const errors = useSelector(selectUserErrors).resetPassword;
+  const errors = useSelector(selectUserErrors).password;
 
   const backLink = location.state?.from ?? "/";
 
@@ -45,10 +45,10 @@ const RecoveringPassword = () => {
 
     // Validation of email and dispatching error in case of invalid email
     if (email.length < 5 || validateEmail(email) === false) {
-      dispatch(resetResetPasswordErrors());
+      dispatch(resetPasswordErrors());
       return dispatch(
         handleSetError({
-          field: "resetPassword",
+          field: "password",
           error: "Invalid E-mail",
         })
       );

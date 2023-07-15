@@ -45,7 +45,7 @@ const authSlice = createSlice({
     resetDeleteErrors: (state) => {
       state.error.delete = [];
     },
-    resetResetPasswordErrors: (state) => {
+    resetPasswordErrors: (state) => {
       state.error.password = [];
     },
   },
@@ -210,25 +210,33 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(setNewPassword.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error.password = action.error;
+        state.error.password = []; // reset
+        state.isLoading = initialState.isLoading;
+
+        if (!state.error.password.includes(action.payload)) {
+          state.error.password.push(action.payload);
+        }
       })
 
       .addCase(changePassword.fulfilled, (state) => {
         state.isLoading = initialState.isLoading;
-        state.error = initialState.error;
+        state.error.password = [];
       })
       .addCase(changePassword.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(changePassword.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error.password = action.error;
+        state.isLoading = initialState.isLoading;
+        state.error.password = [];
+        
+        if (!state.error.password.includes(action.payload)) {
+          state.error.password.push(action.payload);
+        }
       });
   },
 });
 
-export const { handleSetError, resetDeleteErrors, resetResetPasswordErrors } =
+export const { handleSetError, resetDeleteErrors, resetPasswordErrors } =
   authSlice.actions;
 export default authSlice.reducer;
 export const authReducer = authSlice.reducer;

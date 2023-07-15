@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
 // This component is used to display a message to the user after they have successfully changed their password
-const PasswordHasBeenChanged = () => {
+const PasswordWasChanged = () => {
   // The useNavigate hook provides easy navigation between the routes in a React Router application
   const navigate = useNavigate();
 
-  // Using setTimeout to navigate the user to the signup page after 5 seconds
-  setTimeout(() => navigate("/signup#login"), 5000);
+  const onButtonClick = () => navigate("/profile");
 
   return (
     <>
@@ -28,12 +27,12 @@ const PasswordHasBeenChanged = () => {
           З повагою, <br /> Команда підтримки JooTips
         </p>
 
-        <button type="button" className="button">
-          Вiйти в акаунт
+        <button type="button" className="button" onClick={onButtonClick}>
+          OK
         </button>
       </div>
     </>
   );
 };
 
-export default PasswordHasBeenChanged;
+export default PasswordWasChanged;

@@ -7,6 +7,12 @@ import { selectUserErrors } from "../../redux/auth/auth-selectors";
 import "../AuthPage/styles.scss";
 import "../RecoveringPassword/RecoveringPassword.scss";
 import { changePassword } from "../../redux/auth/auth-operations";
+import {
+  handleSetError,
+  resetPasswordErrors,
+} from "../../redux/auth/auth-slice";
+import PasswordWasChanged from "../../Components/ChangePassword/PasswordWasChanged";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
@@ -14,6 +20,7 @@ const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmedNewPassword, setConfirmedNewPassword] = useState("");
+  const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
   const errors = useSelector(selectUserErrors).password;
 
@@ -35,12 +42,28 @@ const ChangePassword = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(changePassword({ currentPassword, password: newPassword }));
+    const match = newPassword === confirmedNewPassword;
+    if (!match) {
+      dispatch(resetPasswordErrors());
+      return dispatch(
+        handleSetError({
+          field: "password",
+          error: "Passwords do not match",
+        })
+      );
+    }
 
-    console.log("submit");
+    try {
+      const action = await dispatch(changePassword({ currentPassword, password: newPassword })); // prettier-ignore
+      const originalPromiseResult = unwrapResult(action); //! do not delete!!!
+      // Если запрос успешен, то переход в след. стадию
+      setIsPasswordChanged(true);
+    } catch (rejectedValueOrSerializedError) {
+      console.log(rejectedValueOrSerializedError); // Если запрос не успешен, выведет ошибку
+    }
   };
 
   return (
@@ -51,16 +74,19 @@ const ChangePassword = () => {
         </header>
 
         <main>
-          <ChangePasswordForm
-            currentPassword={currentPassword}
-            newPassword={newPassword}
-            confirmedNewPassword={confirmedNewPassword}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            parentClass={".auth"}
-          />
-          )
+          {!isPasswordChanged ? (
+            <ChangePasswordForm
+              currentPassword={currentPassword}
+              newPassword={newPassword}
+              confirmedNewPassword={confirmedNewPassword}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              errors={errors}
+              parentClass={".auth"}
+            />
+          ) : (
+            <PasswordWasChanged />
+          )}
         </main>
       </>
     </div>
