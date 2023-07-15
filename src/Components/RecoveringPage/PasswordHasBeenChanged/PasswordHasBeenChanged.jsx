@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import '../../../Pages/RecoveringPassword/RecoveringPassword.scss'
 
 // This component is used to display a message to the user after they have successfully changed their password
 const PasswordHasBeenChanged = () => {

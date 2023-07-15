@@ -74,12 +74,12 @@ const ChangePassword = () => {
       setIsPasswordChanged(true);
     } catch (rejectedValueOrSerializedError) {
       // Log the error if the password change failed
-      console.log(rejectedValueOrSerializedError); 
+      console.log(rejectedValueOrSerializedError);
     }
   };
 
   return (
-    <div className="auth">
+    <div className="auth recover-setNewPassword">
       <>
         <header className="recover-header">
           <LogoLink />
