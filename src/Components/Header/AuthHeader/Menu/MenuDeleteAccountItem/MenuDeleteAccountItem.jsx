@@ -19,13 +19,13 @@ import {
 } from "@chakra-ui/react";
 
 // Importing Redux actions and selectors
-import { deleteUser } from "../../../../redux/auth/auth-operations";
-import { resetDeleteErrors } from "../../../../redux/auth/auth-slice";
+import { deleteUser } from "../../../../../redux/auth/auth-operations";
+import { resetDeleteErrors } from "../../../../../redux/auth/auth-slice";
 import {
   selectUserEmail,
   selectUserErrors,
   selectUserName,
-} from "../../../../redux/auth/auth-selectors";
+} from "../../../../../redux/auth/auth-selectors";
 
 import "./styles.scss";
 

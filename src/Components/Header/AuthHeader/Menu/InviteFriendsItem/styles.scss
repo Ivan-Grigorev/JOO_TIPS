@@ -1,0 +1,30 @@
+.modal-invite {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  //   align-items: center;
+  //   justify-content: center;
+}
+
+.modal-invite button.react-share__ShareButton {
+  display: flex;
+  align-items: center;
+  color: black !important;
+  text-decoration: underline;
+}
+
+.modal-invite ul {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  list-style: disc;
+
+  padding-left: 35px;
+}
+
+.modal-invite li {
+  color: #1a202c;
+}

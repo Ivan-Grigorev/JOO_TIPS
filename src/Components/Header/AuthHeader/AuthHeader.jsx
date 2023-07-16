@@ -29,10 +29,11 @@ import {
   selectRemainingTime,
 } from "../../../redux/subscription/subscription-selectors";
 import { useEffect } from "react";
-import UserAvatar from "./AccountMenu/UserAvatar";
-import MenuDeleteAccountItem from "./MenuDeleteAccountItem/MenuDeleteAccountItem";
-import MenuHelpItem from "./MenuHelpItem/MenuHelpItem";
 import { Link } from "react-router-dom";
+import UserAvatar from "./Menu/UserAvatar/UserAvatar";
+import MenuDeleteAccountItem from "./Menu/MenuDeleteAccountItem/MenuDeleteAccountItem";
+import InviteFriendsItem from "./Menu/InviteFriendsItem/InviteFriendsItem";
+import MenuHelpItem from "./Menu/MenuHelpItem/MenuHelpItem";
 
 // Styled component using styled-components
 const Div = styled.div`
@@ -138,6 +139,8 @@ const AuthHeader = () => {
               <MenuItem>
                 <Link to={"/profile/change-password"}>Змiнити пароль</Link>
               </MenuItem>
+
+              <InviteFriendsItem />
             </MenuGroup>
             <MenuDivider />
 

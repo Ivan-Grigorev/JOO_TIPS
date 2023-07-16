@@ -1,6 +1,6 @@
 import { RxAvatar } from "react-icons/rx";
 import { useSelector } from "react-redux";
-import { selectUserAvatar } from "../../../../redux/auth/auth-selectors";
+import { selectUserAvatar } from "../../../../../redux/auth/auth-selectors";
 
 const UserAvatar = () => {
   const userAvatar = useSelector(selectUserAvatar);
