@@ -14,16 +14,6 @@ import {
 } from "@chakra-ui/react";
 
 import "./styles.scss";
-import {
-  FacebookShareButton,
-  TelegramShareButton,
-  ViberShareButton,
-  TelegramIcon,
-  FacebookIcon,
-  ViberIcon,
-  LinkedinShareButton,
-  TwitterShareButton,
-} from "react-share";
 import { useSelector } from "react-redux";
 import { selectUserName } from "../../../../../redux/auth/auth-selectors";
 
@@ -31,7 +21,14 @@ const InviteFriendsItem = () => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
   const username = useSelector(selectUserName);
 
-  const shareUrl = `http://localhost:3001/signup?ref=${username}`; // your invite link
+  // Here, we are encoding the URL to make sure it can be safely included in a query string.
+  const siteAddress = "localhost:3001.com"; //* on prod status change it to real site address
+  const shareUrl = encodeURIComponent(`${siteAddress}/invite?ref=${username}`); // prettier-ignore
+  const text = encodeURIComponent('Join me on this amazing app! Here is your invite link: '); // prettier-ignore
+
+  // URLs for different platforms
+  const telegramUrl = `https://telegram.me/share/url?url=${shareUrl}&text=${text}`;
+  const whatsappUrl = `https://wa.me/?text=${text + shareUrl}`;
 
   return (
     <>
@@ -54,22 +51,43 @@ const InviteFriendsItem = () => {
                 <Text>
                   Оберіть один з доступних варіантів нижче, щоб почати:
                 </Text>
+
+                {/* These are links that will open in a new tab. When clicked, they will open the respective app with a prefilled text. */}
+                {/* Here's need to be <a> tags, not Link */}
                 <ul className="invite-links">
                   <li>
+                    <a
+                      href={telegramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Share on Telegram
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Share on WhatsApp
+                    </a>
+                  </li>
+                </ul>
+
+                {/* <ul className="invite-links">
+                  <li>
                     <TelegramShareButton url={shareUrl}>
-                      {/* <TelegramIcon /> */}
                       Надіслати запрошення через Telegram
                     </TelegramShareButton>
                   </li>
                   <li>
                     <ViberShareButton url={shareUrl}>
-                      {/* <ViberIcon /> */}
                       Надіслати запрошення через Viber
                     </ViberShareButton>
                   </li>
                   <li>
                     <FacebookShareButton url={shareUrl}>
-                      {/* <FacebookIcon /> */}
                       Надіслати запрошення через Facebook
                     </FacebookShareButton>
                   </li>
@@ -83,7 +101,8 @@ const InviteFriendsItem = () => {
                       Надіслати запрошення через Twitter
                     </TwitterShareButton>
                   </li>
-                </ul>
+                </ul> */}
+
                 <Text>
                   Кожне запрошення містить унікальне реферальне посилання, яке
                   дозволяє нам відслідковувати ваші запрошення.{" "}
