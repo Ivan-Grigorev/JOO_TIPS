@@ -23,7 +23,6 @@ const user = new mongoose.Schema(
       type: String,
       default: null,
     },
-
     profile: {
       about: {
         type: String,
@@ -43,7 +42,16 @@ const user = new mongoose.Schema(
         default: true,
       },
     },
-
+    referral: {
+      referredBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      count: {
+        type: Number,
+        default: 0,
+      },
+    },
     subscription: {
       type: {
         type: String,
