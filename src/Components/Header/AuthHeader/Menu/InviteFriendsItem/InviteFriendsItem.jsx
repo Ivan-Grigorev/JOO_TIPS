@@ -61,7 +61,7 @@ const InviteFriendsItem = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Share on Telegram
+                      <strong>Share on Telegram</strong>
                     </a>
                   </li>
                   <li>
@@ -70,38 +70,10 @@ const InviteFriendsItem = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Share on WhatsApp
+                      <strong>Share on WhatsApp</strong>
                     </a>
                   </li>
                 </ul>
-
-                {/* <ul className="invite-links">
-                  <li>
-                    <TelegramShareButton url={shareUrl}>
-                      Надіслати запрошення через Telegram
-                    </TelegramShareButton>
-                  </li>
-                  <li>
-                    <ViberShareButton url={shareUrl}>
-                      Надіслати запрошення через Viber
-                    </ViberShareButton>
-                  </li>
-                  <li>
-                    <FacebookShareButton url={shareUrl}>
-                      Надіслати запрошення через Facebook
-                    </FacebookShareButton>
-                  </li>
-                  <li>
-                    <LinkedinShareButton url={shareUrl}>
-                      Надіслати запрошення через LinkedIn
-                    </LinkedinShareButton>
-                  </li>
-                  <li>
-                    <TwitterShareButton url={shareUrl}>
-                      Надіслати запрошення через Twitter
-                    </TwitterShareButton>
-                  </li>
-                </ul> */}
 
                 <Text>
                   Кожне запрошення містить унікальне реферальне посилання, яке

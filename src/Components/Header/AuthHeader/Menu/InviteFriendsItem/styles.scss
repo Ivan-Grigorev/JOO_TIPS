@@ -27,4 +27,13 @@
 
 .modal-invite li {
   color: #1a202c;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.modal-invite li a {
+  width: 100%;
+  display: block;
 }
