@@ -28,7 +28,7 @@ const user = new mongoose.Schema(
         type: String,
         default: null,
       },
-      avatarName: {
+      username: {
         type: String,
         default: null,
       },
