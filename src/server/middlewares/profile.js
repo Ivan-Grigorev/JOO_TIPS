@@ -5,11 +5,11 @@ require("colors");
 // The checkUniqueFields function is an async function, meaning it returns a Promise.
 async function checkUniqueFields(req, res, next) {
   try {
-    // We destructure the phone, email and avatarName properties from the request body.
+    // We destructure the phone, email and username properties from the request body.
     const { id } = req.user;
     // 64af3d3bd86f396f54076f62
     const { phone, email } = req.body;
-    const avatarName = req.body.profile.avatarName;
+    const username = req.body.profile.username;
 
     // Check if a user with the same email exists
     const emailExists = await User.findOne({ email, _id: { $ne: id } });
@@ -19,17 +19,21 @@ async function checkUniqueFields(req, res, next) {
         .json({ message: "User with such email already exists" });
     }
 
-    // Check if a user with the same avatarName exists
-    const avatarNameExists = await User.findOne({"profile.avatarName": avatarName, _id: { $ne: id } }); // prettier-ignore
+    // Check if a user with the same username exists
+    const usernameExists = await User.findOne({"profile.username": username, _id: { $ne: id } }); // prettier-ignore
 
-    if (avatarNameExists) {
+    if (usernameExists) {
       return res
         .status(409)
-        .json({ message: "User with such avatarName already exists" });
+        .json({ message: "User with such username already exists" });
     }
 
     // Check if a user with the same phone number exists
-    const phoneExists = await User.findOne({ phone, _id: { $ne: id } });
+    const phoneExists = await User.findOne({
+      phone,
+      _id: { $ne: id },
+      phone: { $ne: null },
+    });
     if (phoneExists) {
       return res
         .status(409)

@@ -90,24 +90,24 @@ function userUpdateProfile(req, res, next) {
     email: Joi.string().email().allow(null).messages({
       "string.email": "Email must be a valid email",
     }),
-    // The profile is an object with properties for "about", "avatarName", "notifications", and "interfaceLanguage".
+    // The profile is an object with properties for "about", "username", "notifications", and "interfaceLanguage".
     profile: Joi.object({
       // The about property must be a string not longer than 50 characters. It's allowed to be null.
       about: Joi.string().max(50).allow(null).messages({
         "string.max": `About section should have a maximum length of {#limit}`,
       }),
-      // The avatarName property must be a alphanumeric string between 5 to 10 characters long. It's allowed to be null.
-      avatarName: Joi.string()
+      // The username property must be a alphanumeric string between 5 to 10 characters long. It's allowed to be null.
+      username: Joi.string()
         .min(5)
         .max(10)
         .alphanum()
         .regex(/^[a-zA-Z0-9]+$/)
         .allow(null)
         .messages({
-          "string.alphanum": "The avatar name must only contain alphanumeric characters.", // prettier-ignore
-          "string.pattern.base": "The avatar name must only contain alphanumeric characters.", // prettier-ignore
-          "string.min": `Avatar name should have a minimum length of {#limit}`,
-          "string.max": `Avatar name should have a maximum length of {#limit}`,
+          "string.alphanum": "The username must only contain alphanumeric characters.", // prettier-ignore
+          "string.pattern.base": "The username must only contain alphanumeric characters.", // prettier-ignore
+          "string.min": `username should have a minimum length of {#limit}`,
+          "string.max": `username should have a maximum length of {#limit}`,
         }),
       // The notifications property must be a boolean. It's optional.
       notifications: Joi.boolean().optional(),
@@ -115,7 +115,7 @@ function userUpdateProfile(req, res, next) {
       interfaceLanguage: Joi.string().optional(),
     })
       // At least one of these profile properties should be provided.
-      .or("about", "avatarName", "notifications", "interfaceLanguage")
+      .or("about", "username", "notifications", "interfaceLanguage")
       .messages({
         "object.or": "At least one of {#peerNames} should be provided",
       }),
