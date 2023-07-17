@@ -56,8 +56,6 @@ const authSlice = createSlice({
         state.profile = action.payload.profile;
         state.token = action.payload.token;
 
-        console.log(action.payload);
-
         state.isLoggedIn = true;
         state.error.signup = initialState.error.signup;
 
@@ -170,7 +168,6 @@ const authSlice = createSlice({
       })
 
       .addCase(sendRecoverMail.fulfilled, (state, action) => {
-        console.log(action.payload);
         // state.user = initialState.user;
         // state.token = initialState.token;
         state.isLoggedIn = initialState.isLoggedIn;
@@ -228,7 +225,7 @@ const authSlice = createSlice({
       .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = initialState.isLoading;
         state.error.password = [];
-        
+
         if (!state.error.password.includes(action.payload)) {
           state.error.password.push(action.payload);
         }
