@@ -23,8 +23,8 @@ const InviteFriendsItem = () => {
 
   // Here, we are encoding the URL to make sure it can be safely included in a query string.
   const siteAddress = "localhost:3001.com"; //* on prod status change it to real site address
-  const shareUrl = encodeURIComponent(`${siteAddress}/invite?ref=${username}`); // prettier-ignore
-  const text = encodeURIComponent('Join me on this amazing app! Here is your invite link: '); // prettier-ignore
+  const shareUrl = encodeURIComponent(`${siteAddress}/signup?ref=${username}`); // prettier-ignore
+  const text = encodeURIComponent('Join me on JooTips app! Here is your invite link:'); // prettier-ignore
 
   // URLs for different platforms
   const telegramUrl = `https://telegram.me/share/url?url=${shareUrl}&text=${text}`;
