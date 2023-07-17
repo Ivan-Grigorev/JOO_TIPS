@@ -2,9 +2,9 @@ const User = require("../../models/user/user");
 
 async function increaseReferralCount(req, res, next) {
   try {
-    const { ref, email } = req.body;
+    const ID = req.user.id;
 
-    console.log(req.user);
+    await User.findByIdAndUpdate(ID, { $inc: { "referral.count": 1 } });
 
     res.json({ message: "pong" });
   } catch (error) {
