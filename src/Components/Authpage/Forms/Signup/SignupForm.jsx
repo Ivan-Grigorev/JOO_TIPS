@@ -3,9 +3,13 @@ import { register } from "../../../../redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
+import { useLocation } from "react-router-dom";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const ref = query.get("ref"); // refferal link
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,6 +38,9 @@ const SignupForm = () => {
     e.preventDefault();
     dispatch(register({ name, email, password, confirmedPassword }));
     // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
+
+    if (ref !== null) {
+    }
   };
 
   return (
