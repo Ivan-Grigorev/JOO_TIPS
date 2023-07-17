@@ -46,6 +46,7 @@ const user = new mongoose.Schema(
       referredBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
+        default: null,
       },
       count: {
         type: Number,
