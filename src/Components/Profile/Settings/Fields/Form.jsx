@@ -13,9 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Importing selectors and operations from the auth section of Redux.
 import {
-  selectUserAvatarName,
   selectUserEmail,
   selectUserErrors,
+  selectUserName,
   selectUserPhone,
   selectUserProfileInfo,
 } from "../../../../redux/auth/auth-selectors";
@@ -33,7 +33,7 @@ const Form = () => {
   const userProfile = useSelector(selectUserProfileInfo);
   const userPhone = useSelector(selectUserPhone);
   const userEmail = useSelector(selectUserEmail);
-  const userAvatarname = useSelector(selectUserAvatarName);
+  const userName = useSelector(selectUserName);
   const errors = useSelector(selectUserErrors).profile;
 
   // Declaring states for form fields with initial values.
@@ -125,7 +125,7 @@ const Form = () => {
     const noChanges =
       phone.trim() === userPhone ||
       email.trim() === userEmail ||
-      username.trim() === userAvatarname ||
+      username.trim() === userName ||
       about.trim() === userProfile.about;
 
     if (noChanges)

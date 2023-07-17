@@ -15,11 +15,11 @@ import {
 
 import "./styles.scss";
 import { useSelector } from "react-redux";
-import { selectUserName } from "../../../../../redux/auth/auth-selectors";
+import { selectUserUsername } from "../../../../../redux/auth/auth-selectors";
 
 const InviteFriendsItem = () => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
-  const username = useSelector(selectUserName);
+  const username = useSelector(selectUserUsername);
 
   // Here, we are encoding the URL to make sure it can be safely included in a query string.
   const siteAddress = "http://localhost:3001"; //! on prod status change it to real site address
