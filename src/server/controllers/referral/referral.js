@@ -5,8 +5,6 @@ async function increaseReferralCount(req, res, next) {
     const ID = req.user.id;
 
     await User.findByIdAndUpdate(ID, { $inc: { "referral.count": 1 } });
-
-    res.json({ message: "pong" });
   } catch (error) {
     console.log(`Error while increase referral count: ${error.message}`.red);
     res
