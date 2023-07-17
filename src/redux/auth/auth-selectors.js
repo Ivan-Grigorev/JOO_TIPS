@@ -15,7 +15,7 @@ export const selectUserErrors = (state) => state.auth.error;
 //
 export const selectUserProfileInfo = (state) => state.auth.profile;
 
-export const selectUserAvatarName = (state) => state.auth.profile.username;
+export const selectUserUsername = (state) => state.auth.profile.username;
 
 //
 export const selectRestorePasswordToken = (state) =>
