@@ -22,7 +22,7 @@ const initialState = {
   },
   profile: {
     about: null,
-    avatarName: null,
+    username: null,
     interfaceLanguage: null,
     notifications: null,
   },
