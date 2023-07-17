@@ -39,7 +39,7 @@ const Form = () => {
   // Declaring states for form fields with initial values.
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [avatarName, setAvatarName] = useState("");
+  const [username, setUsername] = useState("");
   const [about, setAbout] = useState("");
   const [language, setLanguage] = useState("");
   const [notifications, setNotifications] = useState(false);
@@ -70,8 +70,8 @@ const Form = () => {
       case "email":
         setEmail(value);
         break;
-      case "avatarName":
-        setAvatarName(value);
+      case "username":
+        setUsername(value);
         break;
       case "about":
         setAbout(value);
@@ -102,8 +102,8 @@ const Form = () => {
       phone: phone.trim().length === 0 ? userPhone : phone,
       email: email.trim().length === 0 ? userEmail : email,
       profile: {
-        avatarName:
-          avatarName.trim().length === 0 ? userProfile.avatarName : avatarName,
+        username:
+          username.trim().length === 0 ? userProfile.username : username,
         about: about.trim().length === 0 ? userProfile.about : about,
         interfaceLanguage:
           language.trim().length === 0
@@ -117,7 +117,7 @@ const Form = () => {
     const emptyForm =
       phone.trim().length === 0 &&
       email.trim().length === 0 &&
-      avatarName.trim().length === 0 &&
+      username.trim().length === 0 &&
       about.trim().length === 0 &&
       language === userProfile.interfaceLanguage &&
       notifications === userProfile.notifications;
@@ -125,7 +125,7 @@ const Form = () => {
     const noChanges =
       phone.trim() === userPhone ||
       email.trim() === userEmail ||
-      avatarName.trim() === userAvatarname ||
+      username.trim() === userAvatarname ||
       about.trim() === userProfile.about;
 
     if (noChanges)
@@ -142,7 +142,7 @@ const Form = () => {
     // Resetting the states to the initial data.
     setPhone("");
     setEmail("");
-    setAvatarName("");
+    setUsername("");
     setAbout("");
     setLanguage(userProfile.interfaceLanguage || "");
     setNotifications(userProfile.notifications || false);
@@ -201,14 +201,14 @@ const Form = () => {
       />
 
       <Text fontWeight="400">
-        @{userProfile.avatarName || "There'd be your avatar name"}
+        @{userProfile.username || "There'd be your username"}
       </Text>
       <Input
-        value={avatarName}
-        name="avatarName"
+        value={username}
+        name="username"
         autoComplete="off"
         onChange={handleChange}
-        placeholder="Tap to change avatar name"
+        placeholder="Tap to change username"
         size="sm"
         borderTop="none"
         borderLeft="none"

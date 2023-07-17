@@ -4,6 +4,8 @@ async function increaseReferralCount(req, res, next) {
   try {
     const { ref, email } = req.body;
 
+    console.log(req.user);
+
     res.json({ message: "pong" });
   } catch (error) {
     console.log(`Error while increase referral count: ${error.message}`.red);
