@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
 import { useLocation } from "react-router-dom";
+import { increaseReferralCount } from "../../../../redux/referral/referral-operations";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -36,11 +38,16 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(register({ name, email, password, confirmedPassword }));
-    // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
 
-    if (ref !== null) {
-    }
+    // Attempt to change the password and handle the result
+    try {
+      const action = await dispatch(register({ name, email, password, confirmedPassword })); // prettier-ignore
+      const originalPromiseResult = unwrapResult(action); // If the promise is resolved, this line will return the fulfilled value. If rejected, it will throw the error.
+
+      if (ref !== null) return dispatch(increaseReferralCount({ email, ref }));
+    } catch (rejectedValueOrSerializedError) {}
+
+    // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
   };
 
   return (

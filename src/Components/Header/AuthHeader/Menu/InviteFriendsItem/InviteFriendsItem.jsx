@@ -22,7 +22,7 @@ const InviteFriendsItem = () => {
   const username = useSelector(selectUserName);
 
   // Here, we are encoding the URL to make sure it can be safely included in a query string.
-  const siteAddress = "localhost:3001.com"; //* on prod status change it to real site address
+  const siteAddress = "http://localhost:3001"; //! on prod status change it to real site address
   const shareUrl = encodeURIComponent(`${siteAddress}/signup?ref=${username}`); // prettier-ignore
   const text = encodeURIComponent('Join me on JooTips app! Here is your invite link:'); // prettier-ignore
 
