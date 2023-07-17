@@ -17,13 +17,15 @@ async function signup(req, res, next) {
       bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return next(err);
 
+        if (err) return next(err);
+
         const newUser = await User.create({
           name,
           email,
           password: hash,
           profile: {
             about: null,
-            avatarName: null,
+            username: null,
             interfaceLanguage: "English",
             notifications: true,
           },
@@ -51,13 +53,15 @@ async function signup(req, res, next) {
           expiresIn: "12h",
         });
 
-        newUser.token = token;
-        await newUser.save();
+        bcrypt.hash(`User#${newUser._id}}`, salt, async (err, usernameHash) => {
+          newUser.token = token;
+          newUser.profile.username = `User-${usernameHash}`;
+          await newUser.save();
 
-        req.user.token = token;
+          req.user.token = token;
 
-        const subject = "Ласкаво просимо до JooTips!";
-        const HTML = `<p>Привіт <strong>${newUser.name}</strong>,</p>
+          const subject = "Ласкаво просимо до JooTips!";
+          const HTML = `<p>Привіт <strong>${newUser.name}</strong>,</p>
         <p>Дякуємо вам за реєстрацію на <strong>JooTips</strong>!</p>
         <p>Ми раді повідомити, що ваш обліковий запис був успішно створений. Тепер ви можете насолоджуватися всіма перевагами нашого сервісу, включаючи:</p>
         <p>
@@ -71,22 +75,23 @@ async function signup(req, res, next) {
         <p>З повагою, <strong>Команда JooTips</strong></p>
         `;
 
-        // await sendMail(newUser.email, newUser.name, subject, HTML);
+          // await sendMail(newUser.email, newUser.name, subject, HTML);
 
-        return res.status(201).json({
-          user: {
-            name: newUser.name,
-            email: newUser.email,
-            subscription: newUser.subscription,
-            registrationDate: newUser.registrationDate,
-          },
-          profile: {
-            avatarName: newUser.profile.avatarName,
-            about: newUser.profile.about,
-            interfaceLanguage: newUser.profile.interfaceLanguage,
-            notifications: newUser.profile.notifications,
-          },
-          token: newUser.token,
+          return res.status(201).json({
+            user: {
+              name: newUser.name,
+              email: newUser.email,
+              subscription: newUser.subscription,
+              registrationDate: newUser.registrationDate,
+            },
+            profile: {
+              username: newUser.profile.username,
+              about: newUser.profile.about,
+              interfaceLanguage: newUser.profile.interfaceLanguage,
+              notifications: newUser.profile.notifications,
+            },
+            token: newUser.token,
+          });
         });
       });
     });
