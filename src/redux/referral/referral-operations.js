@@ -6,7 +6,8 @@ const increaseReferralCount = createAsyncThunk(
   "referral/increase",
   async (credentials, thunkAPI) => {
     try {
-      const increase = await axios.post("/referral", credentials);
+      const { data } = await axios.post("/referral", credentials);
+      return data;
     } catch (error) {
       console.error (`Error while increase referral count: ${error.response.data.message}`); // prettier-ignore
       toast.error("Error occured while increase referral count");

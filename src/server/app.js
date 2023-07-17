@@ -11,7 +11,7 @@ app.use(express.json()); // body parser
 
 app.use("/users", authRoutes);
 
-app.use("/referrals", refRoutes);
+app.use("/referral", refRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
