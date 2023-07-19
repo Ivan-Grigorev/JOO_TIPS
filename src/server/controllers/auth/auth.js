@@ -75,7 +75,7 @@ async function signup(req, res, next) {
         <p>З повагою, <strong>Команда JooTips</strong></p>
         `;
 
-          // await sendMail(newUser.email, newUser.name, subject, HTML);
+          //! await sendMail(newUser.email, newUser.name, subject, HTML);
 
           return res.status(201).json({
             user: {
@@ -132,7 +132,7 @@ async function login(req, res, next) {
           phone: user.phone,
         },
         profile: {
-          avatarName: user.profile.avatarName,
+          username: user.profile.username,
           about: user.profile.about,
           interfaceLanguage: user.profile.interfaceLanguage,
           notifications: user.profile.notifications,
