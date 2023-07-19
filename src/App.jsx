@@ -12,8 +12,8 @@ import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CookieBanner from "./Components/Cookie/Cookie";
 
-const InDev = lazy(() => import("./Pages/InDev/InDev"));
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
 const NotFound = lazy(() => import("./Components/Errors/404"));
@@ -78,9 +78,7 @@ const App = () => {
 
         <Route path="*" element={<NotFound />} />
       </Routes>
-
       {isLoading && <ChakraSpinner />}
-
       <ToastContainer
         position="top-right"
         transition={Flip}
@@ -95,6 +93,8 @@ const App = () => {
         theme="dark"
         limit={3}
       />
+
+      <CookieBanner />
     </>
   );
 };
