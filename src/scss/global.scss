@@ -31,6 +31,10 @@ body {
   line-height: normal;
 
   background-color: #ffffff;
+
+  &.chakra-ui-light {
+    font-family: Mulish, sans-serif;
+  }
 }
 :lang(uk) {
   font-family: Mulish;
