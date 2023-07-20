@@ -1,13 +1,12 @@
 async function set(req, res, next) {
   try {
     const cookies = req.body; // Предполагаем, что тело запроса содержит cookies
-    console.table(cookies);
 
     for (let cookieName in cookies) {
       // Устанавливаем каждый cookie из тела запроса
       res.cookie(cookieName, cookies[cookieName], {
-        httpOnly: true,
-        secure: true,
+        httpOnly: false,
+        secure: false,
         sameSite: "strict",
       });
     }

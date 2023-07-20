@@ -13,6 +13,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { cookieReducer } from "./cookies/cookies-slice";
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -33,6 +34,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     subscription: subscriptionReducer,
+    cookie: cookieReducer,
   },
   middleware,
   //   devTools: process.env.NODE_ENV === "development",

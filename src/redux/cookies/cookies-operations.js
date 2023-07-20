@@ -7,7 +7,7 @@ const setCookies = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post("/cookies", credentials);
-      useDispatch(setCookies(data));
+      return data;
     } catch (error) {
       console.error(`Error cookies acting: ${error.response.data.message}`);
       return thunkAPI.rejectWithValue(error.response.data.message);

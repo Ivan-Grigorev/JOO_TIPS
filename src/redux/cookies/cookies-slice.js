@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setCookies } from "./cookies-operations";
 
 const initialState = {
   strictlyNecessary: true, // всегда true
@@ -11,15 +12,18 @@ const cookieSlice = createSlice({
   name: "cookies",
   initialState,
   reducers: {
-    setCookies: (state, action) => {
+    set: (state, action) => {
+      console.log("state", state);
+      console.log("action.payload", action.payload);
       return { ...state, ...action.payload };
     },
-    resetCookies: (state) => {
+    reset: (state) => {
       return initialState;
     },
   },
 });
 
-export const { setCookies, resetCookies } = cookieSlice.actions;
+export const { set, reset } = cookieSlice.actions;
 
 export default cookieSlice.reducer;
+export const cookieReducer = cookieSlice.reducer;

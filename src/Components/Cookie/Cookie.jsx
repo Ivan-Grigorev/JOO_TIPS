@@ -5,53 +5,57 @@ import { useDispatch } from "react-redux";
 import { setCookies } from "../../redux/cookies/cookies-operations";
 
 const CookieBanner = () => {
+  // Define the default state for the user's cookie preferences
   const [selectedCookies, setSelectedCookies] = useState({
     strictlyNecessary: true,
     performance: true,
     targeting: true,
     functionality: true,
   });
-  const [buttonText, setButtonText] = useState("Accept all"); // новый state для текста кнопки
+
+  // State to handle the text change on the "Accept All" button
+  const [buttonText, setButtonText] = useState("Accept all");
+
   const dispatch = useDispatch();
 
+  // Update the cookie preference state when a checkbox is toggled
   const setCookieValue = (type, value) => {
     setSelectedCookies((prevState) => ({
       ...prevState,
       [type]: value,
     }));
 
-    // изменяем текст кнопки
+    // Update the button text once any checkbox is changed
     setButtonText("Save & Close");
-
-    // сохраняем выбор пользователя
-    // dispatch(setCookies({ [type]: value }));
   };
 
+  // Handle the "Accept All" button click
   const handleAcceptAll = () => {
-    setButtonText("Save & Close"); // изменяем текст кнопки
+    // Update the button text
+    setButtonText("Save & Close");
+    // Dispatch an action to set all cookies to true
     dispatch(setCookies(selectedCookies));
 
-    // todo ЗАКРЫТЬ БАННЕР
+    // TODO: Implement logic to close the cookie banner
   };
 
+  // Handle the "Decline All" button click
   const handleDeclineAll = () => {
-    setSelectedCookies({
+    // Set only the strictlyNecessary cookie to true and others to false
+    const newCookieState = {
       strictlyNecessary: true,
       performance: false,
       targeting: false,
       functionality: false,
-    });
-    setButtonText("Save & Close"); // изменяем текст кнопки
-    dispatch(
-      setCookies({
-        strictlyNecessary: true,
-        performance: false,
-        targeting: false,
-        functionality: false,
-      })
-    );
+    };
+    setSelectedCookies(newCookieState);
 
-    // todo ЗАКРЫТЬ БАННЕР
+    // Update the button text
+    setButtonText("Save & Close");
+    // Dispatch an action to update the cookie preferences
+    dispatch(setCookies(newCookieState));
+
+    // TODO: Implement logic to close the cookie banner
   };
 
   return (
@@ -63,7 +67,6 @@ const CookieBanner = () => {
           allow us to use. You can read more about our Cookie Policy in our
           Privacy policy.
         </p>
-
         <ul className="cookie-list">
           <li>
             <Checkbox isDisabled defaultChecked size="sm">
@@ -100,9 +103,11 @@ const CookieBanner = () => {
             </Checkbox>
           </li>
         </ul>
+
+        {/* Button group with updated button text logic */}
         <ButtonGroup>
           <Button size="xs" colorScheme="green" onClick={handleAcceptAll}>
-            {buttonText} {/* используем переменную для управления текстом */}
+            {buttonText}
           </Button>
           <Button size="xs" colorScheme="red" onClick={handleDeclineAll}>
             Decline all
