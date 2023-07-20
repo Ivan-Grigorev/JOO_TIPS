@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const refRoutes = require("./routes/referral");
+const cookiesRoutes = require("./routes/cookies");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(express.json()); // body parser
 app.use("/users", authRoutes);
 
 app.use("/referral", refRoutes);
+
+app.use("/cookies", cookieParser(), cookiesRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
