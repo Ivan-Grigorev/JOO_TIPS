@@ -10,7 +10,7 @@
 
   padding: 10px 10px 0 10px;
 
-  border-radius: 15px;
+  border-top: 2px solid #fcbc7d;
 
   z-index: 999;
 
@@ -32,12 +32,25 @@
   margin-bottom: 20px;
 }
 
-.cookie-container .cookie-list {
-  display: flex;
-  gap: 15px;
+.cookie-container ul {
+  // display: flex;
+  // gap: 15px;
+  // flex-wrap: wrap;
+
+  display: inline-flex;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 5px;
+
+  margin-bottom: 10px;
 }
 
 .chakra-checkbox span {
   text-transform: uppercase;
+}
+
+.cookie-container div[role="group"].chakra-button__group {
+  width: 100%;
+  padding-bottom: 5px;
+  justify-content: space-between;
 }

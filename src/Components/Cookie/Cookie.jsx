@@ -1,5 +1,6 @@
 import { Checkbox } from "@chakra-ui/react";
 import "./Cookie.scss";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 const CookieBanner = () => {
   // const handleDeclineAll = () => {
   //   console.log("decline all");
@@ -37,6 +38,15 @@ const CookieBanner = () => {
             <Checkbox size="sm">Functionality</Checkbox>
           </li>
         </ul>
+
+        <ButtonGroup>
+          <Button size="xs" colorScheme="green">
+            Accept all
+          </Button>
+          <Button size="xs" colorScheme="red">
+            Decline all
+          </Button>
+        </ButtonGroup>
       </div>
     </>
   );
