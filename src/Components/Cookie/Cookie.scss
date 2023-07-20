@@ -8,45 +8,36 @@
   justify-content: space-between;
   align-items: baseline;
 
-  width: 100%;
+  padding: 10px 10px 0 10px;
 
-  padding: 10px;
+  border-radius: 15px;
 
   z-index: 999;
 
   background: rgb(26, 69, 121);
   color: white;
-}
 
-.custom-buttons-container {
-  display: flex;
-  gap: 25px;
-}
-
-.cookie-button {
-  width: 80px;
-  height: 30px;
-  font-size: 13px;
-
-  color: #fcbc7d;
-  border: 1px solid;
-  border-color: #fcbc7d;
-  background-color: transparent;
-
-  transition-property: border-color, background-color, color;
-  transition-duration: 350ms;
-  transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
-
-  &:is(:hover, :focus) {
-    cursor: pointer;
-
-    background-color: #fcbc7d;
-    color: #123054;
+  @media screen and (min-width: 768px) {
+    width: 350px;
   }
 }
 
-.cookie-content {
+.cookie-container .chakra-checkbox__label {
+  font-size: 10px;
+}
+
+.cookie-container p {
+  font-size: 10px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.cookie-container .cookie-list {
   display: flex;
-  align-items: center;
-  gap: 665px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.chakra-checkbox span {
+  text-transform: uppercase;
 }

@@ -1,39 +1,44 @@
-import CookieConsent from "react-cookie-consent";
+import { Checkbox } from "@chakra-ui/react";
 import "./Cookie.scss";
 const CookieBanner = () => {
-  const handleDeclineAll = () => {
-    console.log("decline all");
-  };
-  const handleUseNeccessary = () => {
-    console.log("user only neccessary");
-  };
+  // const handleDeclineAll = () => {
+  //   console.log("decline all");
+  // };
+  // const handleAcceptNeccessary = () => {
+  //   console.log("user only neccessary");
+  // };
+  // const handleAcceptAll = () => {
+  //   console.log("Accept all");
+  // };
 
   return (
-    <CookieConsent
-      location="bottom"
-      buttonText="Accept all"
-      cookieName="GDPRCookieConsent"
-      style={{ background: "#1a4579" }}
-      className="cookie-wrapper"
-      buttonClasses="cookie-button"
-      containerClasses="cookie-container"
-      buttonWrapperClasses="button-origin-container"
-      contentClasses="cookie-content"
-      expires={150}
-      disableButtonStyles
-      disableStyles
-    >
-      This website uses cookies to enhance the user experience.
-      <div className="custom-buttons-container">
-        <button className="cookie-button" onClick={handleUseNeccessary}>
-          Necessary
-        </button>
+    <>
+      <div className="cookie-container">
+        <h1>This website uses cookies</h1>
+        <p>
+          We use cookies to improve user experience. Choose what cookies you
+          allow us to use. You can read more about our Cookie Policy in our
+          Privacy policy.
+        </p>
 
-        <button className="cookie-button" onClick={handleDeclineAll}>
-          Decline
-        </button>
+        <ul classname="cookie-list">
+          <li>
+            <Checkbox isDisabled defaultChecked size="sm">
+              Strictly neccessary
+            </Checkbox>
+          </li>
+          <li>
+            <Checkbox size="sm">Perfomance</Checkbox>
+          </li>
+          <li>
+            <Checkbox size="sm">Targeting</Checkbox>
+          </li>
+          <li>
+            <Checkbox size="sm">Functionality</Checkbox>
+          </li>
+        </ul>
       </div>
-    </CookieConsent>
+    </>
   );
 };
 
