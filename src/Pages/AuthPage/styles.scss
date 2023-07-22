@@ -78,7 +78,7 @@
 .auth h1 {
   display: flex;
   gap: 70px;
-  
+
   font-size: 30px;
   color: #ffffff;
 }
@@ -98,6 +98,7 @@
   display: none;
 }
 
+
 .auth .checkbox:checked + label,
 .auth .checkbox:not(:checked) + label {
   margin: 20px auto -60px auto;
@@ -109,6 +110,7 @@
   border: 2px solid #fcbc7d;
   border-radius: 30px;
   cursor: pointer;
+  z-index: 150;
   background-color: transparent;
 }
 
