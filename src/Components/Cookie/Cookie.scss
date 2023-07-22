@@ -30,6 +30,10 @@
   font-size: 10px;
   font-weight: 300;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 767px) {
+    max-width: 250px;
+  }
 }
 
 .cookie-container ul {
@@ -53,4 +57,13 @@
   width: 100%;
   padding-bottom: 5px;
   justify-content: space-between;
+}
+
+.cookie-buttons {
+  width: 130px;
+  height: 30px !important;
+  border-radius: 25px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  font-size: 10px !important;
 }
