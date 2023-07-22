@@ -1,8 +1,9 @@
 import { Checkbox, Button, ButtonGroup } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Cookie.scss";
 import { useDispatch } from "react-redux";
 import { setCookies } from "../../redux/cookies/cookies-operations";
+import getCookie from "../../helpers/getCookie";
 
 const CookieBanner = () => {
   // Define the default state for the user's cookie preferences
@@ -11,6 +12,32 @@ const CookieBanner = () => {
     targeting: true,
     functionality: true,
   });
+
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    const functionalCookie = getCookie("functionality");
+    const targetingCookie = getCookie("targeting");
+    const performanceCookie = getCookie("performance");
+
+    console.log(
+      "functionalCookie, targetingCookie, performanceCookie",
+      functionalCookie,
+      targetingCookie,
+      performanceCookie
+    );
+
+    if (
+      !functionalCookie ||
+      !targetingCookie ||
+      !performanceCookie ||
+      functionalCookie === "false" ||
+      targetingCookie === "false" ||
+      performanceCookie === "false"
+    ) {
+      setShowBanner(true);
+    }
+  }, [setShowBanner]);
 
   // State to handle the text change on the "Accept All" button
   const [buttonText, setButtonText] = useState("Accept all");
@@ -56,6 +83,8 @@ const CookieBanner = () => {
 
     // TODO: Implement logic to close the cookie banner
   };
+
+  if (!showBanner) return null;
 
   return (
     <>
