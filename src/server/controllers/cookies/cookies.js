@@ -7,21 +7,40 @@ async function set(req, res, next) {
     const setCookies = {};
 
     for (let cookieName in cookies) {
-      const rawCookieValue = cookies[cookieName];
-
-      // Шифруем и обфусцируем значение cookie
-      const encryptedValue = await encrypt(String(rawCookieValue));
-      const obfuscatedName = obfuscate(cookieName);
-      const obfuscatedValue = obfuscate(encryptedValue);
-
-      // Устанавливаем cookie с обфусцированным именем и значением
-      res.cookie(obfuscatedName, obfuscatedValue, {
+      // Устанавливаем каждый cookie из тела запроса
+      const cookieValue = cookies[cookieName];
+      res.cookie(cookieName, cookieValue, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
       });
+      setCookies[cookieName] = cookieValue; // Добавляем установленные куки в объект
+    }
 
-      setCookies[obfuscatedName] = obfuscatedValue;
+    for (let cookieName in cookies) {
+      const cookieValue = cookies[cookieName];
+
+      res.cookie(cookieName, cookieValue, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+      });
+      setCookies[cookieName] = cookieValue; // Добавляем установленные куки в объект
+
+      // ! encrypted & obfuscated var below
+      // // Шифруем и обфусцируем значение cookie
+      // const encryptedValue = await encrypt(String(cookieValue));
+      // const obfuscatedName = obfuscate(cookieName);
+      // const obfuscatedValue = obfuscate(encryptedValue);
+
+      // // Устанавливаем cookie с обфусцированным именем и значением
+      // res.cookie(obfuscatedName, obfuscatedValue, {
+      //   httpOnly: true,
+      //   secure: true,
+      //   sameSite: "strict",
+      // });
+
+      // setCookies[obfuscatedName] = obfuscatedValue;
     }
 
     res.status(200).send({ message: "Cookies set successfully" });
