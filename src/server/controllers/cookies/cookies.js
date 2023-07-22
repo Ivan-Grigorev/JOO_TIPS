@@ -14,10 +14,7 @@ async function set(req, res, next) {
       setCookies[cookieName] = cookieValue; // Добавляем установленные куки в объект
     }
 
-    res.status(200).send({
-      message: "Cookies set successfully",
-      cookies: setCookies, // Возвращаем установленные куки
-    });
+    res.status(200).send({ message: "Cookies set successfully" });
   } catch (error) {
     console.error("Error setting cookies".red);
     res.status(500).json({ message: "Internal server error" });
