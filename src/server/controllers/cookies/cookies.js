@@ -7,8 +7,8 @@ async function set(req, res, next) {
       // Устанавливаем каждый cookie из тела запроса
       const cookieValue = cookies[cookieName];
       res.cookie(cookieName, cookieValue, {
-        httpOnly: false,
-        secure: false,
+        httpOnly: true,
+        secure: true,
         sameSite: "strict",
       });
       setCookies[cookieName] = cookieValue; // Добавляем установленные куки в объект
