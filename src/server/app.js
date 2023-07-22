@@ -9,8 +9,8 @@ const app = express();
 
 app.use(
   cors({
-    credentials: true,
-    origin: "http://localhost:3001",
+    credentials: true, // used for cookie set
+    origin: "http://localhost:3001", // the same as well is above
   })
 );
 
