@@ -20,23 +20,15 @@ const CookieBanner = () => {
     const targetingCookie = getCookie("targeting");
     const performanceCookie = getCookie("performance");
 
-    console.log(
-      "functionalCookie, targetingCookie, performanceCookie",
-      functionalCookie,
-      targetingCookie,
-      performanceCookie
-    );
-
-    if (
+    const noCookies =
       !functionalCookie ||
       !targetingCookie ||
       !performanceCookie ||
       functionalCookie === "false" ||
       targetingCookie === "false" ||
-      performanceCookie === "false"
-    ) {
-      setShowBanner(true);
-    }
+      performanceCookie === "false";
+
+    if (noCookies) setShowBanner(true);
   }, [setShowBanner]);
 
   // State to handle the text change on the "Accept All" button
