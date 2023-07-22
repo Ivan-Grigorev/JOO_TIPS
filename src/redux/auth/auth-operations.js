@@ -1,9 +1,6 @@
-import axios from "axios";
+import axios from "../../config/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-
-// Set the base URL for axios requests
-axios.defaults.baseURL = "http://localhost:3000";
 
 // This object is used to set or unset the authorization token in the axios headers
 const token = {
