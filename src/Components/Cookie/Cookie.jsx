@@ -165,10 +165,11 @@ const CookieBanner = () => {
           colorScheme="transparent"
           variant={"ghost"}
           className="cookie-buttons details-button"
+          onClick={onOpen}
         >
           <IoIosSettings />
           Show details
-          {/* <Modal isOpen={isOpen} onClose={onClose()} size={"xl"}>
+          <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>
@@ -210,7 +211,7 @@ const CookieBanner = () => {
                 </ButtonGroup>
               </ModalFooter>
             </ModalContent>
-          </Modal> */}
+          </Modal>
         </Button>
       </div>
     </>
