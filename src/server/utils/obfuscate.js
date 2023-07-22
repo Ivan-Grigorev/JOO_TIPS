@@ -1,6 +1,10 @@
 function obfuscate(text) {
-  const buffer = Buffer.from(text);
-  return buffer.toString("base64");
+  try {
+    const buffer = Buffer.from(text);
+    return buffer.toString("base64");
+  } catch (error) {
+    console.error(`Error while obfuscate: ${error}`);
+  }
 }
 
-export { obfuscate };
+module.exports = { obfuscate };
