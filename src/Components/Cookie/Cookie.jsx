@@ -7,7 +7,6 @@ import { setCookies } from "../../redux/cookies/cookies-operations";
 const CookieBanner = () => {
   // Define the default state for the user's cookie preferences
   const [selectedCookies, setSelectedCookies] = useState({
-    strictlyNecessary: true,
     performance: true,
     targeting: true,
     functionality: true,
