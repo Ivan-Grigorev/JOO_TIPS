@@ -1,22 +1,10 @@
-import {
-  Checkbox,
-  Button,
-  ButtonGroup,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-} from "@chakra-ui/react";
+import { Checkbox, Button, ButtonGroup } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import "./Cookie.scss";
 import { useDispatch } from "react-redux";
 import { setCookies } from "../../redux/cookies/cookies-operations";
 import getCookie from "../../helpers/getCookie";
-import { IoIosSettings } from "react-icons/io";
+import ModalCookieDetails from "./ModalCookieDetails/ModalCookieDetails";
 
 const CookieBanner = () => {
   // Define the default state for the user's cookie preferences
@@ -25,8 +13,6 @@ const CookieBanner = () => {
     targeting: true,
     functionality: true,
   });
-
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
 
   const [showBanner, setShowBanner] = useState(false);
 
@@ -146,7 +132,7 @@ const CookieBanner = () => {
             size="xs"
             colorScheme="green"
             onClick={handleAcceptAll}
-            className="cookie-buttons"
+            className="cookie__buttons"
           >
             {buttonText}
           </Button>
@@ -154,65 +140,16 @@ const CookieBanner = () => {
             size="xs"
             colorScheme="red"
             onClick={handleDeclineAll}
-            className="cookie-buttons"
+            className="cookie__buttons"
           >
             Decline all
           </Button>
         </ButtonGroup>
 
-        <Button
-          size="xs"
-          colorScheme="transparent"
-          variant={"ghost"}
-          className="cookie-buttons details-button"
-          onClick={onOpen}
-        >
-          <IoIosSettings />
-          Show details
-          <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>
-                Підтвердження видалення облікового запису
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>Some content</ModalBody>
-
-              <ModalFooter>
-                <ButtonGroup>
-                  <Button
-                    size="xs"
-                    colorScheme="green"
-                    variant={"ghost"}
-                    onClick={handleAcceptAll}
-                    className="cookie-buttons"
-                  >
-                    Accept all
-                  </Button>
-
-                  <Button
-                    size="xs"
-                    colorScheme="red"
-                    variant={"ghost"}
-                    onClick={handleDeclineAll}
-                    className="cookie-buttons"
-                  >
-                    Decline all
-                  </Button>
-
-                  <Button
-                    size="xs"
-                    colorScheme="green"
-                    onClick={handleAcceptAll}
-                    className="cookie-buttons"
-                  >
-                    {buttonText}
-                  </Button>
-                </ButtonGroup>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-        </Button>
+        <ModalCookieDetails
+          handleAcceptAll={handleAcceptAll}
+          handleDeclineAll={handleDeclineAll}
+        />
       </div>
     </>
   );

@@ -66,16 +66,18 @@
   justify-content: space-between;
 }
 
-.cookie-buttons {
+.cookie__buttons {
   width: 130px;
   height: 30px !important;
+
   border-radius: 25px !important;
+
+  font-size: 10px !important;
   font-weight: 400 !important;
   text-transform: uppercase;
-  font-size: 10px !important;
 }
 
-.details-button {
+.cookie__details-button {
   margin: 0 auto 5px auto;
   gap: 5px;
 
@@ -87,4 +89,27 @@
   &:is(:hover, :focus) {
     border-color: #fcbc7d;
   }
+}
+
+.cookie__details-buttons-group {
+  flex-wrap: wrap;
+  justify-content: space-around !important;
+}
+
+.cookie__details-buttons-group .cookie__buttons {
+  height: 40px !important;
+
+  font-size: 12px !important;
+
+  color: black;
+  border: 1px solid black;
+}
+
+.cookie__details-buttons-group .cookie__save-button {
+  width: 100%;
+
+  margin: 10px auto 5px auto;
+
+  border-color: transparent;
+  color: white;
 }
