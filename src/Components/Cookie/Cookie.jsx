@@ -126,10 +126,10 @@ const CookieBanner = () => {
 
         {/* Button group with updated button text logic */}
         <ButtonGroup>
-          <Button size="xs" colorScheme="green" onClick={handleAcceptAll}>
+          <Button size="xs" colorScheme="green" onClick={handleAcceptAll} className="cookie-buttons">
             {buttonText}
           </Button>
-          <Button size="xs" colorScheme="red" onClick={handleDeclineAll}>
+          <Button size="xs" colorScheme="red" onClick={handleDeclineAll} className="cookie-buttons">
             Decline all
           </Button>
         </ButtonGroup>
