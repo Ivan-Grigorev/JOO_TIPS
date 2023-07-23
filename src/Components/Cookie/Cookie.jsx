@@ -62,7 +62,6 @@ const CookieBanner = () => {
   const handleDeclineAll = () => {
     // Set only the strictlyNecessary cookie to true and others to false
     const newCookieState = {
-      strictlyNecessary: true,
       performance: false,
       targeting: false,
       functionality: false,
