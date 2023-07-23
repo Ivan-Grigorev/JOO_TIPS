@@ -13,7 +13,7 @@ import {
   ModalFooter,
   Link,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CookieDeclaration from "./CookieDeclaration/CookieDeclaration";
 import CookieAbout from "./CookieAbout/CookieAbout";
 
@@ -50,6 +50,11 @@ const ModalCookieDetails = ({
       e.target.classList.add("switch-content__active");
     }
   };
+
+  // set default value when first rendered
+  useEffect(() => {
+    setView("CookieDeclaration");
+  }, []);
 
   return (
     <>
@@ -110,13 +115,14 @@ const ModalCookieDetails = ({
 
                 {/* Render the content based on the view state */}
                 <div className="content">
-                  {view === "CookieDeclaration" && (
+                  {view === "CookieDeclaration" ? (
                     <CookieDeclaration
                       selectedCookies={selectedCookies}
                       setCookieValue={setCookieValue}
                     />
+                  ) : (
+                    <CookieAbout />
                   )}
-                  {view === "AboutCookies" && <CookieAbout />}
                 </div>
               </div>
             </ModalBody>
