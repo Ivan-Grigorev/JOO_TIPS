@@ -13,6 +13,8 @@ import {
   ModalFooter,
   Link,
 } from "@chakra-ui/react";
+import { Divider } from "@chakra-ui/react";
+
 import { useEffect, useState } from "react";
 import CookieDeclaration from "./CookieDeclaration/CookieDeclaration";
 import CookieAbout from "./CookieAbout/CookieAbout";
@@ -73,12 +75,13 @@ const ModalCookieDetails = ({
             <ModalHeader style={{ paddingBottom: "0" }}>
               <p className="title">This website uses cookies</p>
             </ModalHeader>
+            <Divider />
 
             <ModalCloseButton onClick={() => setView("CookieDeclaration")} />
 
             <ModalBody
               className="cookie__details-body"
-              style={{ padding: "8px 0 0 0" }}
+              style={{ padding: "15px 0 0 0" }}
             >
               <p className="cookie__description">
                 We use cookies to improve user experience. Choose what cookies
