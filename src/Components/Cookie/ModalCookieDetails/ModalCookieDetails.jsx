@@ -17,7 +17,12 @@ import { useState } from "react";
 import CookieDeclaration from "./CookieDeclaration/CookieDeclaration";
 import CookieAbout from "./CookieAbout/CookieAbout";
 
-const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
+const ModalCookieDetails = ({
+  handleAcceptAll,
+  handleDeclineAll,
+  selectedCookies,
+  setCookieValue,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
 
@@ -55,7 +60,7 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
 
             <ModalBody
               className="cookie__details-body"
-              style={{ padding: "8px 0" }}
+              style={{ padding: "8px 0 0 0" }}
             >
               <p className="cookie__description">
                 We use cookies to improve user experience. Choose what cookies
@@ -92,13 +97,18 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
 
                 {/* Render the content based on the view state */}
                 <div className="content">
-                  {view === "CookieDeclaration" && <CookieDeclaration />}
+                  {view === "CookieDeclaration" && (
+                    <CookieDeclaration
+                      selectedCookies={selectedCookies}
+                      setCookieValue={setCookieValue}
+                    />
+                  )}
                   {view === "AboutCookies" && <CookieAbout />}
                 </div>
               </div>
             </ModalBody>
 
-            <ModalFooter>
+            <ModalFooter style={{ backgroundColor: "#f3f3f3;" }}>
               <ButtonGroup className="cookie__details-buttons-group">
                 <Button
                   size="xs"

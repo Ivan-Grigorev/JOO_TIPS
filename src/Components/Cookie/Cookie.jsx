@@ -149,6 +149,8 @@ const CookieBanner = () => {
         <ModalCookieDetails
           handleAcceptAll={handleAcceptAll}
           handleDeclineAll={handleDeclineAll}
+          selectedCookies={selectedCookies}
+          setCookieValue={setCookieValue}
         />
       </div>
     </>

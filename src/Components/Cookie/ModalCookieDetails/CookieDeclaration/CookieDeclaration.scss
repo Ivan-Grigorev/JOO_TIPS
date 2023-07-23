@@ -1,0 +1,25 @@
+.cookie-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.content .cookie-list label {
+  flex-direction: row-reverse;
+}
+
+.content .chakra-form-control {
+  display: flex;
+}
+
+.content .chakra-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  text-transform: inherit;
+  font-size: 12px;
+}
+
+.cookie-description {
+  max-width: 230px;
+}
