@@ -97,7 +97,7 @@ const ModalCookieDetails = ({
                     size={"xs"}
                     onClick={switchContent}
                     name="declaration"
-                    className="cookie__details-buttons"
+                    className="cookie__details-buttons switch-content__active"
                   >
                     Cookie declaration
                   </Button>
