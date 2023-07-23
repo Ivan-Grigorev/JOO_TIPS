@@ -7,11 +7,6 @@
   flex-direction: row-reverse;
 }
 
-.content .chakra-form-control {
-  display: flex;
-  align-items: center;
-}
-
 .content .chakra-form__label {
   display: flex;
   flex-direction: column;
@@ -25,9 +20,12 @@
   max-width: 230px;
 }
 
-.cookie-list {
+.content .cookie-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  gap: 15px;
 }
 
 .cookie-list .cookie-list__item {

@@ -74,7 +74,7 @@ const ModalCookieDetails = ({
               <p className="title">This website uses cookies</p>
             </ModalHeader>
 
-            <ModalCloseButton onClick={() => setView("content1")} />
+            <ModalCloseButton onClick={() => setView("CookieDeclaration")} />
 
             <ModalBody
               className="cookie__details-body"
