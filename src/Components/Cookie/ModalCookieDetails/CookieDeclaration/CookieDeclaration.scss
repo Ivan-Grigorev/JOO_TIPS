@@ -24,3 +24,18 @@
 .cookie-description {
   max-width: 230px;
 }
+
+.cookie-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.cookie-list .cookie-list__item {
+  display: flex;
+  align-items: center;
+
+  & label {
+    display: flex;
+    flex-direction: column;
+  }
+}
