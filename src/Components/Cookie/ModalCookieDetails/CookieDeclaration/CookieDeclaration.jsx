@@ -28,7 +28,7 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
         <div className="cookie-list__item">
           <FormLabel htmlFor="perfomance">
             <span className="cookie-name">
-              Performance Cookies:
+              Performance:
               <br />
             </span>
             <p className="cookie-description">
@@ -45,7 +45,7 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
         <div className="cookie-list__item">
           <FormLabel htmlFor="targeting">
             <span className="cookie-name">
-              Targeting Cookies:
+              Targeting:
               <br />
             </span>
             <p className="cookie-description">
@@ -54,6 +54,35 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
               relevant and engaging to individual users. These cookies collect
               data about users' browsing habits and interests, enabling
               advertisers to deliver personalized content.
+            </p>
+          </FormLabel>
+          <Switch id="targeting" />
+        </div>
+
+        <div className="cookie-list__item">
+          <FormLabel htmlFor="functionality">
+            <span className="cookie-name">
+              Functionality :
+              <br />
+            </span>
+            <p className="cookie-description">
+              Functionality cookies enhance the user experience by remembering
+              choices you make on the website, such as language preferences,
+              font sizes, or region selection. They make the site more
+              personalized and user-friendly, providing a seamless experience.
+            </p>
+          </FormLabel>
+          <Switch id="functionality" />
+        </div>
+        
+        <div className="cookie-list__item">
+          <FormLabel htmlFor="targeting">
+            <span className="cookie-name">
+            Unclassified Cookies:
+              <br />
+            </span>
+            <p className="cookie-description">
+            Unclassified cookies are those that are being categorized, and their purpose is not yet defined. It might happen when new cookies are introduced, or the website is still under development. Website owners may update the cookie policy once these cookies are properly identified and classified.
             </p>
           </FormLabel>
           <Switch id="targeting" />
