@@ -27,7 +27,9 @@ const ModalCookieDetails = ({
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
 
   // Function: switchContent
-  // Description: This function is responsible for toggling between different views when a specific event (e) occurs. It updates the 'view' state based on the target view selected (either "CookieDeclaration" or "AboutCookies").
+  // Description: This function toggles between different views when a specific event (e) occurs.
+  // It updates the 'view' state based on the target view selected (either "CookieDeclaration" or "AboutCookies")
+  // and adds/removes the 'switch-content__active' class based on the button clicked.
   // Parameter: e (Event) - The event object containing information about the event triggered.
   const switchContent = (e) => {
     // Determine the target view based on the 'name' property of the event target.
@@ -35,7 +37,18 @@ const ModalCookieDetails = ({
       e.target.name === "declaration" ? "CookieDeclaration" : "AboutCookies";
 
     // Check if the current 'view' is different from the target view to avoid unnecessary state updates.
-    if (view !== targetView) setView(targetView); // Update the 'view' state with the selected target view.
+    if (view !== targetView) {
+      setView(targetView); // Update the 'view' state with the selected target view.
+
+      // Remove the 'switch-content__active' class from all buttons in the group.
+      const buttons = document.querySelectorAll(".cookie__details-buttons");
+      buttons.forEach((button) =>
+        button.classList.remove("switch-content__active")
+      );
+
+      // Add the 'switch-content__active' class to the clicked button.
+      e.target.classList.add("switch-content__active");
+    }
   };
 
   return (
