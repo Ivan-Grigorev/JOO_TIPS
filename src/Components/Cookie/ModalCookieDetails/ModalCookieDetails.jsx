@@ -14,10 +14,12 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import CookieDeclaration from "./CookieDeclaration/CookieDeclaration";
+import CookieAbout from "./CookieAbout/CookieAbout";
 
 const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
-  const [view, setView] = useState("content1"); // Состояние для отслеживания текущего представления
+  const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
 
   const switchContent = () => {
     if (view === "CookieDeclaration") {
@@ -81,6 +83,11 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
                     About cookies
                   </Button>
                 </ButtonGroup>
+
+                <div className="content">
+                  {view === "CookieDeclaration" && <CookieDeclaration />}
+                  {view === "AboutCookies" && <CookieAbout />}
+                </div>
               </div>
             </ModalBody>
 

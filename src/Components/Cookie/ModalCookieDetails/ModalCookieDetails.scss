@@ -14,9 +14,22 @@
   border-color: transparent;
   text-transform: uppercase;
 
-  transition: border-color 350ms ease;
+  transition-property: border-color, color;
+  transition-timing-function: ease;
+  transition-duration: 350ms;
 
   &:is(:hover, :focus) {
     border-color: #3182ce;
+    color: #3182ce;
   }
+}
+
+.cookie__details-body .content-section .content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 24px;
+
+  background-color: #f3f3f3;
 }

@@ -1,9 +1,5 @@
 const CookieDeclaration = () => {
-  return (
-    <>
-      <></>
-    </>
-  );
+  return <>Cookie declaration</>;
 };
 
 export default CookieDeclaration;
