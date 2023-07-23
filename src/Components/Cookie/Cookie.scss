@@ -77,6 +77,11 @@
   text-transform: uppercase;
 }
 
+// set z-index for the close button
+button[aria-label="Close"] {
+  z-index: 15;
+}
+
 .cookie__details-button {
   margin: 0 auto 5px auto;
   gap: 5px;
@@ -112,4 +117,15 @@
 
   border-color: transparent;
   color: white;
+}
+
+.chakra-modal__header {
+}
+
+.chakra-modal__header .title {
+  font-size: 16px;
+}
+
+.cookie__description {
+  font-size: 13px;
 }

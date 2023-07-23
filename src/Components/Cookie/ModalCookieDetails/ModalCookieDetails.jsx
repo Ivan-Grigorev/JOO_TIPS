@@ -11,10 +11,22 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  Link,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
+  const [view, setView] = useState("content1"); // Состояние для отслеживания текущего представления
+
+  const switchContent = () => {
+    if (view === "CookieDeclaration") {
+      setView("AboutCookies");
+    } else {
+      setView("CookieDeclaration");
+    }
+  };
+
   return (
     <>
       <Button
@@ -29,9 +41,48 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>This website uses cookies</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>Some content</ModalBody>
+            <ModalHeader style={{ paddingBottom: "0" }}>
+              <p className="title">This website uses cookies</p>
+            </ModalHeader>
+
+            <ModalCloseButton onClick={() => setView("content1")} />
+
+            <ModalBody
+              className="cookie__details-body"
+              style={{ padding: "8px 0" }}
+            >
+              <p className="cookie__description">
+                We use cookies to improve user experience. Choose what cookies
+                you allow us to use. You can read more about our Cookie Policy
+                in our{" "}
+                <Link color="blue.500" href="#">
+                  Privacy Policy
+                </Link>
+              </p>
+
+              <div className="content-section">
+                <ButtonGroup>
+                  <Button
+                    colorScheme="gray"
+                    variant={"ghost"}
+                    size={"xs"}
+                    onClick={switchContent}
+                    className="cookie__details-buttons"
+                  >
+                    Cookie declaration
+                  </Button>
+                  <Button
+                    colorScheme="gray"
+                    variant={"ghost"}
+                    size={"xs"}
+                    onClick={switchContent}
+                    className="cookie__details-buttons"
+                  >
+                    About cookies
+                  </Button>
+                </ButtonGroup>
+              </div>
+            </ModalBody>
 
             <ModalFooter>
               <ButtonGroup className="cookie__details-buttons-group">

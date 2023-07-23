@@ -1,0 +1,21 @@
+.cookie__details-body .cookie__description {
+  margin-bottom: 35px;
+
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.cookie__details-body .cookie__details-buttons {
+  min-width: 160px;
+
+  margin: 0;
+
+  border-top: 1px solid;
+  border-color: transparent;
+  text-transform: uppercase;
+
+  transition: border-color 350ms ease;
+
+  &:is(:hover, :focus) {
+    border-color: #3182ce;
+  }
+}
