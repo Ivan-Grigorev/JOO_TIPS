@@ -62,7 +62,7 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
         <div className="cookie-list__item">
           <FormLabel htmlFor="functionality">
             <span className="cookie-name">
-              Functionality :
+              Functionality:
               <br />
             </span>
             <p className="cookie-description">
