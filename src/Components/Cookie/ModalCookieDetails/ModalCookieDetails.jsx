@@ -21,12 +21,16 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
 
-  const switchContent = () => {
-    if (view === "CookieDeclaration") {
-      setView("AboutCookies");
-    } else {
-      setView("CookieDeclaration");
-    }
+  // Function: switchContent
+  // Description: This function is responsible for toggling between different views when a specific event (e) occurs. It updates the 'view' state based on the target view selected (either "CookieDeclaration" or "AboutCookies").
+  // Parameter: e (Event) - The event object containing information about the event triggered.
+  const switchContent = (e) => {
+    // Determine the target view based on the 'name' property of the event target.
+    const targetView =
+      e.target.name === "declaration" ? "CookieDeclaration" : "AboutCookies";
+
+    // Check if the current 'view' is different from the target view to avoid unnecessary state updates.
+    if (view !== targetView) setView(targetView); // Update the 'view' state with the selected target view.
   };
 
   return (
@@ -69,6 +73,7 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
                     variant={"ghost"}
                     size={"xs"}
                     onClick={switchContent}
+                    name="declaration"
                     className="cookie__details-buttons"
                   >
                     Cookie declaration
@@ -78,12 +83,14 @@ const ModalCookieDetails = ({ handleAcceptAll, handleDeclineAll }) => {
                     variant={"ghost"}
                     size={"xs"}
                     onClick={switchContent}
+                    name="about"
                     className="cookie__details-buttons"
                   >
                     About cookies
                   </Button>
                 </ButtonGroup>
 
+                {/* Render the content based on the view state */}
                 <div className="content">
                   {view === "CookieDeclaration" && <CookieDeclaration />}
                   {view === "AboutCookies" && <CookieAbout />}
