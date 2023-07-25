@@ -26,12 +26,11 @@ const ModalCookieDetails = ({
   setCookieValue, // Обработчик для обновления выбранных cookies
   handleSetAllCookies,
   handleDeclineAll,
+  handleSetSelectedCookies,
   onBannerClose,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
-
-  const dispatch = useDispatch();
 
   // Function: switchContent
   // Description: This function toggles between different views when a specific event (e) occurs.
@@ -65,12 +64,23 @@ const ModalCookieDetails = ({
     setCookieValue(id, checked);
   };
 
+  const onDecline = () => {
+    handleDeclineAll();
+    onBannerClose();
+  };
+
+  const onAcceptAll = () => {
+    handleSetAllCookies();
+    onBannerClose();
+  };
+
+  const onSave = () => {
+    onBannerClose();
+    handleSetSelectedCookies();
+  };
+
   // set default value when first rendered
   useEffect(() => setView("CookieDeclaration"), []);
-
-  const setSelectedCookies = () => {
-    dispatch(setCookies(selectedCookies));
-  };
 
   return (
     <>
@@ -150,7 +160,7 @@ const ModalCookieDetails = ({
                   size="xs"
                   colorScheme="green"
                   variant={"ghost"}
-                  onClick={handleSetAllCookies}
+                  onClick={onAcceptAll}
                   className="cookie__buttons"
                 >
                   Accept all
@@ -160,7 +170,7 @@ const ModalCookieDetails = ({
                   size="xs"
                   colorScheme="red"
                   variant={"ghost"}
-                  onClick={handleDeclineAll}
+                  onClick={onDecline}
                   className="cookie__buttons"
                 >
                   Decline all
@@ -169,10 +179,7 @@ const ModalCookieDetails = ({
                 <Button
                   size="xs"
                   style={{ backgroundColor: "#6BBE6B" }}
-                  onClick={() => {
-                    onBannerClose();
-                    setSelectedCookies();
-                  }}
+                  onClick={onSave}
                   className="cookie__buttons cookie__save-button"
                 >
                   Save & close

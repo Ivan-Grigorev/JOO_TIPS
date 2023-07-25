@@ -63,7 +63,7 @@ const CookieBanner = () => {
     }
 
     dispatch(setCookies(selectedCookies));
-    // TODO: Implement logic to close the cookie banner
+    setShowBanner(false);
   };
 
   // Handle the "Decline All" button click
@@ -77,12 +77,10 @@ const CookieBanner = () => {
     };
     setSelectedCookies(newCookieState);
 
-    // Update the button text
-    setButtonText("Save & Close");
     // Dispatch an action to update the cookie preferences
     dispatch(setCookies(newCookieState));
 
-    // TODO: Implement logic to close the cookie banner
+    setShowBanner(false);
   };
 
   const handleSetAllCookies = () => {
@@ -94,6 +92,12 @@ const CookieBanner = () => {
     };
 
     dispatch(setCookies(newCookieState));
+    setShowBanner(false);
+  };
+
+  const handleSetSelectedCookies = () => {
+    dispatch(setCookies(selectedCookies));
+    setShowBanner(false);
   };
 
   if (!showBanner) return null;
@@ -179,6 +183,7 @@ const CookieBanner = () => {
           setCookieValue={setCookieValue}
           handleSetAllCookies={handleSetAllCookies}
           handleDeclineAll={handleDeclineAll}
+          handleSetSelectedCookies={handleSetSelectedCookies}
           onBannerClose={() => setShowBanner(false)}
         />
       </div>
