@@ -9,7 +9,7 @@
   align-items: baseline;
 
   padding: 10px 10px 0 10px;
-  margin-left: 10px;
+  // margin-left: 10px;
 
   border-radius: 10px;
   border-top: 2px solid #fcbc7d;
@@ -19,9 +19,9 @@
   background-color: rgb(26, 69, 121);
   color: white;
 
-  @media screen and (max-width: 767px) {
-    max-width: 250px;
-  }
+  // @media screen and (max-width: 767px) {
+  //   max-width: 250px;
+  // }
 
   @media screen and (min-width: 768px) {
     width: 350px;
@@ -99,6 +99,10 @@ button[aria-label="Close"] {
 .cookie__details-buttons-group {
   flex-wrap: wrap;
   justify-content: space-around !important;
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+  }
 }
 
 .cookie__details-buttons-group .cookie__buttons {
@@ -108,6 +112,14 @@ button[aria-label="Close"] {
 
   color: black;
   border: 1px solid black;
+
+  @media screen and (min-width: 768px) {
+    width: 130px !important;
+
+    &:nth-child(2) {
+      margin-right: 280px;
+    }
+  }
 }
 
 .cookie__details-buttons-group .cookie__save-button {
@@ -117,13 +129,21 @@ button[aria-label="Close"] {
 
   border-color: transparent;
   color: white;
+
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 }
 
 .chakra-modal__header {
 }
 
-.chakra-modal__footer {
+.cookie__details-modal .chakra-modal__footer {
   background-color: #f3f3f3;
+
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+  }
 }
 
 .chakra-modal__header .title {

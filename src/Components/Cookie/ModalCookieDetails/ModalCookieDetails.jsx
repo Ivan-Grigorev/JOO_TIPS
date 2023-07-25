@@ -95,7 +95,7 @@ const ModalCookieDetails = ({
         Show details
         <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent className="cookie__details-modal">
             <ModalHeader style={{ paddingBottom: "0" }}>
               <p className="title">This website uses cookies</p>
             </ModalHeader>
