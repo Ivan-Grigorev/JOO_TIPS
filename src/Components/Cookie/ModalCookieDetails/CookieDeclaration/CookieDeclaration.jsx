@@ -1,35 +1,7 @@
 import { FormControl, FormLabel, SimpleGrid, Switch } from "@chakra-ui/react";
 import "./CookieDeclaration.scss";
-import { useState } from "react";
-import { setCookies } from "../../../../redux/cookies/cookies-operations";
-import { useDispatch } from "react-redux";
 
-const CookieDeclaration = () => {
-  const [performance, setPerformance] = useState(false);
-  const [targeting, setTargeting] = useState(false);
-  const [functionality, setFunctionality] = useState(false);
-  const [unclassified, setUnclassified] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const handleSubmit = () => {
-    const activeCookies = {
-      performance,
-      targeting,
-      functionality,
-      unclassified,
-    };
-
-    // Отфильтровать только активные cookies
-    const activeCookieNames = Object.keys(activeCookies).filter(
-      (key) => activeCookies[key]
-    );
-
-    console.log(activeCookieNames);
-    // Dispatch
-    dispatch(setCookies(activeCookieNames));
-  };
-
+const CookieDeclaration = ({ selectedCookies, handleSwitchChange }) => {
   return (
     <>
       <FormControl
@@ -50,11 +22,16 @@ const CookieDeclaration = () => {
               function correctly without them.
             </p>
           </FormLabel>
-          <Switch id="neccessary" isChecked isDisabled />
+          <Switch
+            onChange={handleSwitchChange}
+            id="neccessary"
+            isChecked
+            isDisabled
+          />
         </div>
 
         <div className="cookie-list__item">
-          <FormLabel htmlFor="perfomance">
+          <FormLabel htmlFor="performance">
             <span className="cookie-name">
               Performance:
               <br />
@@ -68,8 +45,9 @@ const CookieDeclaration = () => {
             </p>
           </FormLabel>
           <Switch
-            id="perfomance"
-            onChange={() => setPerformance(!performance)}
+            onChange={handleSwitchChange}
+            id="performance"
+            isChecked={selectedCookies.performance}
           />
         </div>
 
@@ -87,7 +65,11 @@ const CookieDeclaration = () => {
               advertisers to deliver personalized content.
             </p>
           </FormLabel>
-          <Switch id="targeting" onChange={() => setTargeting(!targeting)} />
+          <Switch
+            onChange={handleSwitchChange}
+            id="targeting"
+            isChecked={selectedCookies.targeting}
+          />
         </div>
 
         <div className="cookie-list__item">
@@ -104,8 +86,9 @@ const CookieDeclaration = () => {
             </p>
           </FormLabel>
           <Switch
+            onChange={handleSwitchChange}
             id="functionality"
-            onChange={() => setFunctionality(!functionality)}
+            isChecked={selectedCookies.functionality}
           />
         </div>
 
@@ -124,14 +107,11 @@ const CookieDeclaration = () => {
             </p>
           </FormLabel>
           <Switch
+            onChange={handleSwitchChange}
             id="unclassified"
-            onChange={() => setUnclassified(!unclassified)}
+            isChecked={selectedCookies.unclassified}
           />
         </div>
-
-        <button type="button" onClick={handleSubmit}>
-          Submit handle
-        </button>
       </FormControl>
     </>
   );

@@ -12,6 +12,7 @@ const CookieBanner = () => {
     performance: true,
     targeting: true,
     functionality: true,
+    unclassified: true,
   });
 
   const [showBanner, setShowBanner] = useState(false);
@@ -146,10 +147,11 @@ const CookieBanner = () => {
         </ButtonGroup>
 
         <ModalCookieDetails
-          handleAcceptAll={handleAcceptAll}
-          handleDeclineAll={handleDeclineAll}
           selectedCookies={selectedCookies}
           setCookieValue={setCookieValue}
+          handleAcceptAll={handleAcceptAll}
+          handleDeclineAll={handleDeclineAll}
+          onBannerClose={() => setShowBanner(false)}
         />
       </div>
     </>

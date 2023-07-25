@@ -18,15 +18,25 @@ import { Divider } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import CookieDeclaration from "./CookieDeclaration/CookieDeclaration";
 import CookieAbout from "./CookieAbout/CookieAbout";
+import { useDispatch } from "react-redux";
+import { setCookies } from "../../../redux/cookies/cookies-operations";
 
 const ModalCookieDetails = ({
+  selectedCookies, // Передаем текущие выбранные cookies как проп
+  setCookieValue, // Обработчик для обновления выбранных cookies
   handleAcceptAll,
   handleDeclineAll,
-  selectedCookies,
-  setCookieValue,
+  onBannerClose,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
+
+  const [performance, setPerformance] = useState(false);
+  const [targeting, setTargeting] = useState(false);
+  const [functionality, setFunctionality] = useState(false);
+  const [unclassified, setUnclassified] = useState(false);
+
+  const dispatch = useDispatch();
 
   // Function: switchContent
   // Description: This function toggles between different views when a specific event (e) occurs.
@@ -53,8 +63,27 @@ const ModalCookieDetails = ({
     }
   };
 
+  const handleSwitchChange = (event) => {
+    const { id, checked } = event.target;
+
+    // Обновляем cookies с помощью переданного обработчика
+    setCookieValue(id, checked);
+  };
+
   // set default value when first rendered
   useEffect(() => setView("CookieDeclaration"), []);
+
+  const handleSetCookies = (cookies) => {
+    try {
+      dispatch(setCookies(cookies));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const setSelectedCookies = () => {
+    dispatch(setCookies(selectedCookies));
+  };
 
   return (
     <>
@@ -67,7 +96,7 @@ const ModalCookieDetails = ({
       >
         <IoIosSettings />
         Show details
-        <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
+        <Modal isOpen={isOpen} onClose={onBannerClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader style={{ paddingBottom: "0" }}>
@@ -117,7 +146,10 @@ const ModalCookieDetails = ({
                 {/* Render the content based on the view state */}
                 <div className="content">
                   {view === "CookieDeclaration" ? (
-                    <CookieDeclaration />
+                    <CookieDeclaration
+                      selectedCookies={selectedCookies} // Передаем текущие выбранные cookies как проп
+                      handleSwitchChange={handleSwitchChange}
+                    />
                   ) : (
                     <CookieAbout />
                   )}
@@ -150,7 +182,10 @@ const ModalCookieDetails = ({
                 <Button
                   size="xs"
                   style={{ backgroundColor: "#6BBE6B" }}
-                  onClick={handleAcceptAll}
+                  onClick={() => {
+                    onBannerClose();
+                    setSelectedCookies();
+                  }}
                   className="cookie__buttons cookie__save-button"
                 >
                   Save & close
