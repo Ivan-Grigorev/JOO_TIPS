@@ -23,14 +23,12 @@ const CookieBanner = () => {
     const performanceCookie = getCookie("performance");
 
     const noCookies =
-      !functionalCookie ||
-      !targetingCookie ||
-      !performanceCookie ||
-      functionalCookie === "false" ||
-      targetingCookie === "false" ||
-      performanceCookie === "false";
+      !functionalCookie || !targetingCookie || !performanceCookie;
 
     if (noCookies) setShowBanner(true);
+
+    // TODO Подумать как реализовать появление баннера
+    // TODO (при каких условиях)
   }, [setShowBanner]);
 
   // State to handle the text change on the "Accept All" button
@@ -51,11 +49,21 @@ const CookieBanner = () => {
 
   // Handle the "Accept All" button click
   const handleAcceptAll = () => {
+    if (buttonText === "Accept all".toLowerCase()) {
+      // Dispatch an action to set all cookies to true
+      return dispatch(setCookies(selectedCookies));
+    }
     // Update the button text
     setButtonText("Save & Close");
-    // Dispatch an action to set all cookies to true
-    dispatch(setCookies(selectedCookies));
+    // Фильтрация объекта selectedCookies, чтобы включить только свойства со значением true
+    const activeCookies = Object.keys(selectedCookies).reduce((acc, key) => {
+      if (selectedCookies[key] === true) {
+        acc[key] = true;
+      }
+      return acc;
+    }, {});
 
+    dispatch(setCookies(activeCookies));
     // TODO: Implement logic to close the cookie banner
   };
 
@@ -111,6 +119,15 @@ const CookieBanner = () => {
               onChange={(e) => setCookieValue("targeting", e.target.checked)}
             >
               Targeting
+            </Checkbox>
+          </li>
+          <li>
+            <Checkbox
+              size="sm"
+              isChecked={selectedCookies.unclassified}
+              onChange={(e) => setCookieValue("unclassified", e.target.checked)}
+            >
+              unclassified
             </Checkbox>
           </li>
           <li>

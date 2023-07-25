@@ -28,13 +28,8 @@ const ModalCookieDetails = ({
   handleDeclineAll,
   onBannerClose,
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
+  const { isOpen, onOpen } = useDisclosure(); // Chakra UI hook for managing the modal
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
-
-  const [performance, setPerformance] = useState(false);
-  const [targeting, setTargeting] = useState(false);
-  const [functionality, setFunctionality] = useState(false);
-  const [unclassified, setUnclassified] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -73,16 +68,16 @@ const ModalCookieDetails = ({
   // set default value when first rendered
   useEffect(() => setView("CookieDeclaration"), []);
 
-  const handleSetCookies = (cookies) => {
-    try {
-      dispatch(setCookies(cookies));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const setSelectedCookies = () => {
-    dispatch(setCookies(selectedCookies));
+    // Фильтрация объекта selectedCookies, чтобы включить только свойства со значением true
+    const activeCookies = Object.keys(selectedCookies).reduce((acc, key) => {
+      if (selectedCookies[key] === true) {
+        acc[key] = true;
+      }
+      return acc;
+    }, {});
+
+    dispatch(setCookies(activeCookies));
   };
 
   return (
