@@ -24,7 +24,7 @@ import { setCookies } from "../../../redux/cookies/cookies-operations";
 const ModalCookieDetails = ({
   selectedCookies, // Передаем текущие выбранные cookies как проп
   setCookieValue, // Обработчик для обновления выбранных cookies
-  handleAcceptAll,
+  handleSetAllCookies,
   handleDeclineAll,
   onBannerClose,
 }) => {
@@ -150,7 +150,7 @@ const ModalCookieDetails = ({
                   size="xs"
                   colorScheme="green"
                   variant={"ghost"}
-                  onClick={handleAcceptAll}
+                  onClick={handleSetAllCookies}
                   className="cookie__buttons"
                 >
                   Accept all

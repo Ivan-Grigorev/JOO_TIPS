@@ -49,21 +49,20 @@ const CookieBanner = () => {
 
   // Handle the "Accept All" button click
   const handleAcceptAll = () => {
-    if (buttonText === "Accept all".toLowerCase()) {
-      // Dispatch an action to set all cookies to true
-      return dispatch(setCookies(selectedCookies));
-    }
-    // Update the button text
-    setButtonText("Save & Close");
-    // Фильтрация объекта selectedCookies, чтобы включить только свойства со значением true
-    const activeCookies = Object.keys(selectedCookies).reduce((acc, key) => {
-      if (selectedCookies[key] === true) {
-        acc[key] = true;
-      }
-      return acc;
-    }, {});
+    const newCookieState = {
+      performance: true,
+      targeting: true,
+      functionality: true,
+      unclassified: true,
+    };
 
-    dispatch(setCookies(activeCookies));
+    // Dispatch an action to set all cookies to true
+    if (buttonText === "Accept all".toLowerCase()) {
+      setSelectedCookies(newCookieState);
+      return dispatch(setCookies(newCookieState));
+    }
+
+    dispatch(setCookies(selectedCookies));
     // TODO: Implement logic to close the cookie banner
   };
 
@@ -74,6 +73,7 @@ const CookieBanner = () => {
       performance: false,
       targeting: false,
       functionality: false,
+      unclassified: false,
     };
     setSelectedCookies(newCookieState);
 
@@ -83,6 +83,17 @@ const CookieBanner = () => {
     dispatch(setCookies(newCookieState));
 
     // TODO: Implement logic to close the cookie banner
+  };
+
+  const handleSetAllCookies = () => {
+    const newCookieState = {
+      performance: true,
+      targeting: true,
+      functionality: true,
+      unclassified: true,
+    };
+
+    dispatch(setCookies(newCookieState));
   };
 
   if (!showBanner) return null;
@@ -166,7 +177,7 @@ const CookieBanner = () => {
         <ModalCookieDetails
           selectedCookies={selectedCookies}
           setCookieValue={setCookieValue}
-          handleAcceptAll={handleAcceptAll}
+          handleSetAllCookies={handleSetAllCookies}
           handleDeclineAll={handleDeclineAll}
           onBannerClose={() => setShowBanner(false)}
         />
