@@ -1,7 +1,35 @@
 import { FormControl, FormLabel, SimpleGrid, Switch } from "@chakra-ui/react";
 import "./CookieDeclaration.scss";
+import { useState } from "react";
+import { setCookies } from "../../../../redux/cookies/cookies-operations";
+import { useDispatch } from "react-redux";
 
-const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
+const CookieDeclaration = () => {
+  const [performance, setPerformance] = useState(false);
+  const [targeting, setTargeting] = useState(false);
+  const [functionality, setFunctionality] = useState(false);
+  const [unclassified, setUnclassified] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    const activeCookies = {
+      performance,
+      targeting,
+      functionality,
+      unclassified,
+    };
+
+    // Отфильтровать только активные cookies
+    const activeCookieNames = Object.keys(activeCookies).filter(
+      (key) => activeCookies[key]
+    );
+
+    console.log(activeCookieNames);
+    // Dispatch
+    dispatch(setCookies(activeCookieNames));
+  };
+
   return (
     <>
       <FormControl
@@ -39,7 +67,10 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
               website's performance and user experience.
             </p>
           </FormLabel>
-          <Switch id="perfomance" />
+          <Switch
+            id="perfomance"
+            onChange={() => setPerformance(!performance)}
+          />
         </div>
 
         <div className="cookie-list__item">
@@ -56,7 +87,7 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
               advertisers to deliver personalized content.
             </p>
           </FormLabel>
-          <Switch id="targeting" />
+          <Switch id="targeting" onChange={() => setTargeting(!targeting)} />
         </div>
 
         <div className="cookie-list__item">
@@ -72,21 +103,35 @@ const CookieDeclaration = ({ selectedCookies, setCookieValue }) => {
               personalized and user-friendly, providing a seamless experience.
             </p>
           </FormLabel>
-          <Switch id="functionality" />
+          <Switch
+            id="functionality"
+            onChange={() => setFunctionality(!functionality)}
+          />
         </div>
-        
+
         <div className="cookie-list__item">
-          <FormLabel htmlFor="targeting">
+          <FormLabel htmlFor="unclassified">
             <span className="cookie-name">
-            Unclassified Cookies:
+              Unclassified Cookies:
               <br />
             </span>
             <p className="cookie-description">
-            Unclassified cookies are those that are being categorized, and their purpose is not yet defined. It might happen when new cookies are introduced, or the website is still under development. Website owners may update the cookie policy once these cookies are properly identified and classified.
+              Unclassified cookies are those that are being categorized, and
+              their purpose is not yet defined. It might happen when new cookies
+              are introduced, or the website is still under development. Website
+              owners may update the cookie policy once these cookies are
+              properly identified and classified.
             </p>
           </FormLabel>
-          <Switch id="targeting" />
+          <Switch
+            id="unclassified"
+            onChange={() => setUnclassified(!unclassified)}
+          />
         </div>
+
+        <button type="button" onClick={handleSubmit}>
+          Submit handle
+        </button>
       </FormControl>
     </>
   );

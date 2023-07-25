@@ -54,9 +54,7 @@ const ModalCookieDetails = ({
   };
 
   // set default value when first rendered
-  useEffect(() => {
-    setView("CookieDeclaration");
-  }, []);
+  useEffect(() => setView("CookieDeclaration"), []);
 
   return (
     <>
@@ -119,10 +117,7 @@ const ModalCookieDetails = ({
                 {/* Render the content based on the view state */}
                 <div className="content">
                   {view === "CookieDeclaration" ? (
-                    <CookieDeclaration
-                      selectedCookies={selectedCookies}
-                      setCookieValue={setCookieValue}
-                    />
+                    <CookieDeclaration />
                   ) : (
                     <CookieAbout />
                   )}
@@ -130,7 +125,7 @@ const ModalCookieDetails = ({
               </div>
             </ModalBody>
 
-            <ModalFooter style={{ backgroundColor: "#f3f3f3;" }}>
+            <ModalFooter>
               <ButtonGroup className="cookie__details-buttons-group">
                 <Button
                   size="xs"
