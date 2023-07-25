@@ -28,7 +28,7 @@ const ModalCookieDetails = ({
   handleDeclineAll,
   onBannerClose,
 }) => {
-  const { isOpen, onOpen } = useDisclosure(); // Chakra UI hook for managing the modal
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for managing the modal
   const [view, setView] = useState("CookieDeclaration"); // Состояние для отслеживания текущего представления
 
   const dispatch = useDispatch();
@@ -69,15 +69,7 @@ const ModalCookieDetails = ({
   useEffect(() => setView("CookieDeclaration"), []);
 
   const setSelectedCookies = () => {
-    // Фильтрация объекта selectedCookies, чтобы включить только свойства со значением true
-    const activeCookies = Object.keys(selectedCookies).reduce((acc, key) => {
-      if (selectedCookies[key] === true) {
-        acc[key] = true;
-      }
-      return acc;
-    }, {});
-
-    dispatch(setCookies(activeCookies));
+    dispatch(setCookies(selectedCookies));
   };
 
   return (
@@ -91,7 +83,7 @@ const ModalCookieDetails = ({
       >
         <IoIosSettings />
         Show details
-        <Modal isOpen={isOpen} onClose={onBannerClose} size={"xl"}>
+        <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader style={{ paddingBottom: "0" }}>
