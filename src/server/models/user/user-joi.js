@@ -101,7 +101,7 @@ function userUpdateProfile(req, res, next) {
         .min(5)
         .max(10)
         .alphanum()
-        .regex(/^[a-zA-Z0-9]+$/)
+        .regex(/^[a-zA-Z0-9а-яА-Я]+$/)
         .allow(null)
         .messages({
           "string.alphanum": "The username must only contain alphanumeric characters.", // prettier-ignore
