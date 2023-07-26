@@ -1,4 +1,5 @@
 const rateLimit = require("express-rate-limit");
+const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
 
@@ -17,6 +18,15 @@ const setupSecurity = (app) => {
     );
     return next();
   });
+
+  app.use(
+    session({
+      secret: "your-secret-key",
+      cookie: { httpOnly: true },
+      resave: false,
+      saveUninitialized: true,
+    })
+  );
 
   app.use(limiter);
 
