@@ -92,42 +92,58 @@ const Form = () => {
     }
   };
 
+  // This function is executed when the form is submitted.
   const handleSubmit = (event) => {
+    // Prevents the default behavior of the event, in this case, the form submission.
     event.preventDefault();
 
+    // Check if a field value has changed. If unchanged, the isChanged function returns undefined.
     const dataFields = {
       phone: isChanged(phone, userPhone),
       email: isChanged(email, userEmail),
       profile: {
         username: isChanged(username, userName),
         about: isChanged(about, userProfile.about),
-        interfaceLanguage: language,
+        interfaceLanguage: language, // Direct assignment since there's no comparison provided.
         notifications: notifications,
       },
     };
 
+    // Check if the form is empty. Trims are used to remove any spaces before and after the text.
     const emptyForm =
-      phone.trim().length === 0 &&
-      email.trim().length === 0 &&
-      username.trim().length === 0 &&
-      about.trim().length === 0 &&
+      !phone.trim() &&
+      !email.trim() &&
+      !username.trim() &&
+      !about.trim() &&
       language === userProfile.interfaceLanguage &&
       notifications === userProfile.notifications;
 
+    // Check if any field value matches the original. This would indicate no changes were made.
     const noChanges =
-      phone.trim() === userPhone ||
-      email.trim() === userEmail ||
-      username.trim() === userName ||
+      phone.trim() === userPhone &&
+      email.trim() === userEmail &&
+      username.trim() === userName &&
       about.trim() === userProfile.about;
 
-    if (noChanges) return toast.warning("You've entered identical data with those already on the server." ); // prettier-ignore
+    // If there's no change in any field, we notify the user.
+    if (noChanges) {
+      return toast.warning("You've entered identical data with those already on the server." ); // prettier-ignore
+    }
 
-    if (emptyForm) return toast.warning("Please fill at least one field before submitting!"); // prettier-ignore
+    // If all fields are empty or contain only spaces, we notify the user.
+    if (emptyForm) {
+      return toast.warning("Please fill at least one field before submitting!");
+    }
 
-    // Отфильтровываем неверные или неизмененные поля
+    // We remove any fields from dataFields that are undefined (i.e., unchanged).
+    // Object.entries(dataFields) converts the object into an array of key-value pairs.
+    // .filter() removes pairs where the value is undefined.
+    // Object.fromEntries() converts the filtered array back into an object.
     const sentData = Object.fromEntries(
-      Object.entries(dataFields).filter(([_, value]) => value)
+      Object.entries(dataFields).filter(([_, value]) => value !== undefined)
     );
+
+    // Use a debounced submit function to avoid rapid, repeated submissions.
     debouncedSubmit(sentData);
   };
 
