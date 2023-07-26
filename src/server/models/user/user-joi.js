@@ -79,7 +79,7 @@ function userDeleteJoi(req, res, next) {
 // This middleware validates the data for user profile update. It checks if data in request body is valid.
 function userUpdateProfile(req, res, next) {
   // Define schema for validation.
-  const userDeleteSchema = Joi.object({
+  const userUpdateProfile = Joi.object({
     // The phone number must contain only digits and be between 5 to 10 characters long. It's allowed to be null.
     phone: Joi.string().regex(/^\d+$/).min(5).max(10).allow(null).messages({
       "string.pattern.base": "The phoneNumber must only contain digits.",
@@ -127,7 +127,7 @@ function userUpdateProfile(req, res, next) {
     });
 
   // Validate request body against the schema.
-  const { error } = userDeleteSchema.validate(req.body);
+  const { error } = userUpdateProfile.validate(req.body);
 
   // If there is validation error, print it to the console in red color and return a 400 response.
   if (error) {
