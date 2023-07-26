@@ -4,6 +4,7 @@ const authRoutes = require("./routes/auth");
 const refRoutes = require("./routes/referral");
 const cookiesRoutes = require("./routes/cookies");
 const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use((_, res, next) => {
   );
   return next();
 });
+
+app.use(helmet());
 
 app.use(
   cors({
