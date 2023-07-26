@@ -329,7 +329,7 @@ async function updateUserProfile(req, res) {
     user.profile.username = req.body.profile.username || user.profile.username;
     user.profile.about = req.body.profile.about || user.profile.about;
     user.profile.interfaceLanguage = req.body.profile.interfaceLanguage || user.profile.interfaceLanguage; // prettier-ignore
-    user.profile.notifications = req.body.profile.notifications || user.profile.notifications; // prettier-ignore
+    user.profile.notifications = req.body.profile.notifications ; // prettier-ignore
 
     await user.save();
     res.status(200).send({

@@ -102,8 +102,7 @@ const Form = () => {
         username: isChanged(username, userName),
         about: isChanged(about, userProfile.about),
         interfaceLanguage: language,
-        notifications:
-          notifications !== userProfile.notifications && notifications,
+        notifications: notifications,
       },
     };
 
