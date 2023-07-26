@@ -17,8 +17,6 @@ async function signup(req, res, next) {
       bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return next(err);
 
-        if (err) return next(err);
-
         const newUser = await User.create({
           name,
           email,
@@ -54,6 +52,8 @@ async function signup(req, res, next) {
         });
 
         bcrypt.hash(`User#${newUser._id}}`, salt, async (err, usernameHash) => {
+          if (err) return next(err);
+
           newUser.token = token;
           newUser.profile.username = `User-${usernameHash}`;
           await newUser.save();
