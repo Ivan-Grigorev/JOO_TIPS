@@ -106,15 +106,28 @@ const Form = () => {
       },
     };
 
+    const emptyForm =
+      phone.trim().length === 0 &&
+      email.trim().length === 0 &&
+      username.trim().length === 0 &&
+      about.trim().length === 0 &&
+      language === userProfile.interfaceLanguage &&
+      notifications === userProfile.notifications;
+
+    const noChanges =
+      phone.trim() === userPhone ||
+      email.trim() === userEmail ||
+      username.trim() === userName ||
+      about.trim() === userProfile.about;
+
+    if (noChanges) return toast.warning("You've entered identical data with those already on the server." ); // prettier-ignore
+
+    if (emptyForm) return toast.warning("Please fill at least one field before submitting!"); // prettier-ignore
+
     // Отфильтровываем неверные или неизмененные поля
     const sentData = Object.fromEntries(
       Object.entries(dataFields).filter(([_, value]) => value)
     );
-
-    if (Object.keys(sentData).length === 0) {
-      return toast.warning("No changes detected or form is empty!");
-    }
-
     debouncedSubmit(sentData);
   };
 
