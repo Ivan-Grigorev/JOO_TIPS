@@ -7,6 +7,14 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
+app.use((_, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "script-src 'self'; object-src 'self'"
+  );
+  return next();
+});
+
 app.use(
   cors({
     credentials: true, // used for cookie set
