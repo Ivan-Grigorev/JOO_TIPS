@@ -15,8 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectUserEmail,
   selectUserErrors,
-  selectUserName,
-  selectUserNotificationsStatus,
   selectUserPhone,
   selectUserProfileInfo,
   selectUserUsername,
@@ -37,7 +35,6 @@ const Form = () => {
   const userEmail = useSelector(selectUserEmail);
   const userName = useSelector(selectUserUsername);
   const errors = useSelector(selectUserErrors).profile;
-  const notifyStatus = useSelector(selectUserNotificationsStatus);
 
   // Declaring states for form fields with initial values.
   const [phone, setPhone] = useState("");
@@ -55,7 +52,7 @@ const Form = () => {
     if (userProfile.notifications !== undefined) {
       setNotifications(userProfile.notifications);
     }
-  }, [userProfile, notifyStatus]);
+  }, [userProfile]);
 
   // Showing or hiding error messages based on the length of errors.
   useEffect(() => {
