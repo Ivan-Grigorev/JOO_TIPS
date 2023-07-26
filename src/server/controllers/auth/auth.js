@@ -319,19 +319,31 @@ async function changePassword(req, res, next) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
-
+// The updateUserProfile function updates the user's profile details based on provided input.
 async function updateUserProfile(req, res) {
   try {
+    // Destructure relevant properties from req.body for easier reference.
+    const {
+      phone,
+      email,
+      profile: { username, about, interfaceLanguage, notifications } = {}, // Provide a default empty object for profile to prevent potential errors from null/undefined values.
+    } = req.body;
+
+    // Retrieve the current user's data from the database using the user's ID from the request object.
     const user = await User.findById(req.user.id);
 
-    user.phone = req.body.phone || user.phone;
-    user.email = req.body.email || user.email;
-    user.profile.username = req.body.profile.username || user.profile.username;
-    user.profile.about = req.body.profile.about || user.profile.about;
-    user.profile.interfaceLanguage = req.body.profile.interfaceLanguage || user.profile.interfaceLanguage; // prettier-ignore
-    user.profile.notifications = req.body.profile.notifications ; // prettier-ignore
+    // Update properties if they have a value.
+    if (phone) user.phone = phone;
+    if (email) user.email = email;
+    if (username) user.profile.username = username;
+    if (about) user.profile.about = about;
+    if (interfaceLanguage) user.profile.interfaceLanguage = interfaceLanguage;
+    if (notifications !== undefined) user.profile.notifications = notifications;
 
+    // Save the updated user details back to the database.
     await user.save();
+
+    // Respond to the client with the updated profile details.
     res.status(200).send({
       profile: { ...user.profile },
       user: {
@@ -342,7 +354,9 @@ async function updateUserProfile(req, res) {
       },
     });
   } catch (e) {
+    // Log any errors encountered during the update process.
     console.error(`Error while updating user profile (auth): ${e}`);
+    // Respond to the client with a 500 Internal Server Error status and error message.
     res.status(500).json({ message: "Internal server error." });
   }
 }
