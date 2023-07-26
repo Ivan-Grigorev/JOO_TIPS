@@ -21,7 +21,7 @@ const setupSecurity = (app) => {
 
   app.use(
     session({
-      secret: "your-secret-key",
+      secret: process.env.SECRET_SESSION_KEY,
       cookie: { httpOnly: true },
       resave: false,
       saveUninitialized: true,
