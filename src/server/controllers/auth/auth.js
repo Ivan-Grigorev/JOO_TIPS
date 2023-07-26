@@ -322,22 +322,16 @@ async function changePassword(req, res, next) {
 
 async function updateUserProfile(req, res) {
   try {
-    // Фильтрация полей с пустыми строками
-    const updatedFields = Object.fromEntries(
-      Object.entries(req.body).filter(([_, value]) => value !== "")
-    );
+    const user = await User.findById(req.user.id);
 
-    // Если после фильтрации объект становится пустым, отправляем ошибку
-    if (Object.keys(updatedFields).length === 0) {
-      return res.status(400).json({ message: "No valid fields to update." });
-    }
+    user.phone = req.body.phone || user.phone;
+    user.email = req.body.email || user.email;
+    user.profile.username = req.body.profile.username || user.profile.username;
+    user.profile.about = req.body.profile.about || user.profile.about;
+    user.profile.interfaceLanguage = req.body.profile.interfaceLanguage || user.profile.interfaceLanguage; // prettier-ignore
+    user.profile.notifications = req.body.profile.notifications || user.profile.notifications; // prettier-ignore
 
-    const user = await User.findByIdAndUpdate(
-      req.user.id,
-      { $set: updatedFields },
-      { new: true, runValidators: true, useFindAndModify: false }
-    );
-
+    await user.save();
     res.status(200).send({
       profile: { ...user.profile },
       user: {
