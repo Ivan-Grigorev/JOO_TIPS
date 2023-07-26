@@ -322,7 +322,6 @@ async function changePassword(req, res, next) {
 
 async function updateUserProfile(req, res, next) {
   try {
-    // Обновляем пользовательские данные по идентификатору пользователя
     const user = await User.findByIdAndUpdate(
       req.user.id,
       { $set: req.body },

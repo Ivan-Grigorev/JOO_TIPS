@@ -60,81 +60,58 @@ const Form = () => {
     errors.length > 0 ? show() : hide();
   });
 
-  // Handling changes to the form fields and updating the corresponding states.
-  const handleChange = (event) => {
-    const { name, value, checked } = event.target;
-    switch (name) {
-      case "phone":
-        setPhone(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "username":
-        setUsername(value);
-        break;
-      case "about":
-        setAbout(value);
-        break;
-      case "language":
-        setLanguage(value);
-        break;
-      case "notifications":
-        setNotifications(checked);
-        break;
-      default:
-        break;
-    }
-  };
-
   // Declaring a debounced function to dispatch the updateUserProfile action.
   const debouncedSubmit = debounce((sentData) => {
     dispatch(updateUserProfile(sentData));
     handleReset();
   }, 500);
 
-  // Handling the form submission event.
+  const handleChange = (event) => {
+    const handlers = {
+      phone: setPhone,
+      email: setEmail,
+      username: setUsername,
+      about: setAbout,
+      language: setLanguage,
+      notifications: setNotifications,
+    };
+
+    const { name, value, checked } = event.target;
+    const handler = handlers[name];
+
+    if (handler) {
+      handler(name === "notifications" ? checked : value);
+    }
+  };
+
+  // Функция для проверки изменилось ли значение
+  const isChanged = (newValue, originalValue) => {
+    return newValue && newValue !== originalValue && newValue.trim();
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Preparing the data to be sent.
-    const sentData = {
-      phone: phone.trim().length === 0 ? userPhone : phone,
-      email: email.trim().length === 0 ? userEmail : email,
-      profile: {
-        username:
-          username.trim().length === 0 ? userProfile.username : username,
-        about: about.trim().length === 0 ? userProfile.about : about,
-        interfaceLanguage:
-          language.trim().length === 0
-            ? userProfile.interfaceLanguage
-            : language,
-        notifications: notifications ?? userProfile.notifications,
-      },
+    const dataFields = {
+      phone: isChanged(phone, userPhone),
+      email: isChanged(email, userEmail),
+      username: isChanged(username, userName),
+      about: isChanged(about, userProfile.about),
+      interfaceLanguage: isChanged(language, userProfile.interfaceLanguage),
+      notifications:
+        notifications !== userProfile.notifications && notifications,
     };
 
-    // Checking if the form is empty or no changes are made.
-    const emptyForm =
-      phone.trim().length === 0 &&
-      email.trim().length === 0 &&
-      username.trim().length === 0 &&
-      about.trim().length === 0 &&
-      language === userProfile.interfaceLanguage &&
-      notifications === userProfile.notifications;
+    // Отфильтровываем неверные или неизмененные поля
+    const sentData = Object.fromEntries(
+      Object.entries(dataFields).filter(([_, value]) => value)
+    );
 
-    const noChanges =
-      phone.trim() === userPhone ||
-      email.trim() === userEmail ||
-      username.trim() === userName ||
-      about.trim() === userProfile.about;
+    if (Object.keys(sentData).length === 0) {
+      return toast.warning("No changes detected or form is empty!");
+    }
 
-    if (noChanges)
-      return toast.warning("You've entered identical data with those already on the server." ); // prettier-ignore
-
-    if (emptyForm)
-      return toast.warning("Please fill at least one field before submitting!");
-
-    debouncedSubmit(sentData); // Calling the debounced function.
+    debouncedSubmit(sentData);
   };
 
   // Handling the form reset event.
