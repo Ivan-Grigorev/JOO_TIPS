@@ -16,6 +16,7 @@ import {
   selectUserEmail,
   selectUserErrors,
   selectUserName,
+  selectUserNotificationsStatus,
   selectUserPhone,
   selectUserProfileInfo,
   selectUserUsername,
@@ -36,6 +37,7 @@ const Form = () => {
   const userEmail = useSelector(selectUserEmail);
   const userName = useSelector(selectUserUsername);
   const errors = useSelector(selectUserErrors).profile;
+  const notifyStatus = useSelector(selectUserNotificationsStatus);
 
   // Declaring states for form fields with initial values.
   const [phone, setPhone] = useState("");
@@ -47,11 +49,13 @@ const Form = () => {
 
   // Updating the notifications and language states when the userProfile is updated.
   useEffect(() => {
-    if (userProfile.notifications && userProfile.interfaceLanguage) {
-      setNotifications(userProfile.notifications);
+    if (userProfile.interfaceLanguage) {
       setLanguage(userProfile.interfaceLanguage);
     }
-  }, [userProfile]);
+    if (userProfile.notifications !== undefined) {
+      setNotifications(userProfile.notifications);
+    }
+  }, [userProfile, notifyStatus]);
 
   // Showing or hiding error messages based on the length of errors.
   useEffect(() => {
