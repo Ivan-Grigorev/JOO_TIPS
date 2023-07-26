@@ -320,11 +320,21 @@ async function changePassword(req, res, next) {
   }
 }
 
-async function updateUserProfile(req, res, next) {
+async function updateUserProfile(req, res) {
   try {
+    // Фильтрация полей с пустыми строками
+    const updatedFields = Object.fromEntries(
+      Object.entries(req.body).filter(([_, value]) => value !== "")
+    );
+
+    // Если после фильтрации объект становится пустым, отправляем ошибку
+    if (Object.keys(updatedFields).length === 0) {
+      return res.status(400).json({ message: "No valid fields to update." });
+    }
+
     const user = await User.findByIdAndUpdate(
       req.user.id,
-      { $set: req.body },
+      { $set: updatedFields },
       { new: true, runValidators: true, useFindAndModify: false }
     );
 

@@ -18,6 +18,7 @@ import {
   selectUserName,
   selectUserPhone,
   selectUserProfileInfo,
+  selectUserUsername,
 } from "../../../../redux/auth/auth-selectors";
 import { updateUserProfile } from "../../../../redux/auth/auth-operations";
 
@@ -33,7 +34,7 @@ const Form = () => {
   const userProfile = useSelector(selectUserProfileInfo);
   const userPhone = useSelector(selectUserPhone);
   const userEmail = useSelector(selectUserEmail);
-  const userName = useSelector(selectUserName);
+  const userName = useSelector(selectUserUsername);
   const errors = useSelector(selectUserErrors).profile;
 
   // Declaring states for form fields with initial values.
@@ -86,7 +87,9 @@ const Form = () => {
 
   // Функция для проверки изменилось ли значение
   const isChanged = (newValue, originalValue) => {
-    return newValue && newValue !== originalValue && newValue.trim();
+    if (newValue && newValue !== originalValue && newValue.toString().trim()) {
+      return newValue;
+    }
   };
 
   const handleSubmit = (event) => {
@@ -95,11 +98,13 @@ const Form = () => {
     const dataFields = {
       phone: isChanged(phone, userPhone),
       email: isChanged(email, userEmail),
-      username: isChanged(username, userName),
-      about: isChanged(about, userProfile.about),
-      interfaceLanguage: isChanged(language, userProfile.interfaceLanguage),
-      notifications:
-        notifications !== userProfile.notifications && notifications,
+      profile: {
+        username: isChanged(username, userName),
+        about: isChanged(about, userProfile.about),
+        interfaceLanguage: language,
+        notifications:
+          notifications !== userProfile.notifications && notifications,
+      },
     };
 
     // Отфильтровываем неверные или неизмененные поля
