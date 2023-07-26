@@ -20,12 +20,19 @@ const setupSecurity = (app) => {
 
   app.use(limiter);
 
-  app.use(
-    cors({
-      credentials: true, 
-      origin: "http://localhost:3001",
-    })
-  );
-}
+  const whitelist = ["http://localhost:3001"];
+  const corsOptions = {
+    credentials: true,
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  };
+
+  app.use(cors(corsOptions));
+};
 
 module.exports = setupSecurity;
