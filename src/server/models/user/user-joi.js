@@ -114,11 +114,7 @@ function userUpdateProfile(req, res, next) {
           "string.max": `Username should have a maximum length of {#limit}`,
         }),
       notifications: Joi.boolean().optional(),
-      interfaceLanguage: Joi.string()
-        .valid("English", "Ukrainian", "Polish", "German", "France")
-        .optional()
-        .allow("")
-        .message("Invalid interface language."),
+      interfaceLanguage: Joi.string().optional().allow(""),
     })
       .optional()
       .or("about", "username", "notifications", "interfaceLanguage")
