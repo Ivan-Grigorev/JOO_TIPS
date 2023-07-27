@@ -25,6 +25,7 @@ import { updateUserProfile } from "../../../../redux/auth/auth-operations";
 import "./Form.scss";
 import { toast } from "react-toastify";
 import { debounce } from "lodash";
+import ErrorMessages from "../../../Errors/ErrorMessages";
 
 // Declaring the Form component.
 const Form = () => {
@@ -53,14 +54,6 @@ const Form = () => {
       setNotifications(userProfile.notifications);
     }
   }, [userProfile]);
-
-  // Showing or hiding error messages based on the length of errors.
-  useEffect(() => {
-    const messages = document.querySelector(".profile-hero .message");
-    const show = () => (messages.style.opacity = 1);
-    const hide = () => (messages.style.opacity = 0);
-    errors.length > 0 ? show() : hide();
-  });
 
   // Declaring a debounced function to dispatch the updateUserProfile action.
   const debouncedSubmit = debounce((sentData) => {
@@ -296,11 +289,7 @@ const Form = () => {
         />
       </FormControl>
 
-      <div className="message">
-        {errors.map((error) => (
-          <p key={error}>{error}</p>
-        ))}
-      </div>
+      <ErrorMessages parentClass={".profile-hero"} errors={errors} />
 
       <div className="settings-buttons">
         <ChakraButton colorScheme="green" type="submit">

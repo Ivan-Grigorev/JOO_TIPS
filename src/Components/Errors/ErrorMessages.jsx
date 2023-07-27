@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { useEffect } from "react";
 
 const ErrorMessages = ({ parentClass, errors }) => {
@@ -12,7 +13,8 @@ const ErrorMessages = ({ parentClass, errors }) => {
 
   return (
     <div className="message">
-      {errors && errors.map((error) => <p key={error}>{error}</p>)}
+      {errors &&
+        errors.map((error) => <p key={error}>{DOMPurify.sanitize(error)}</p>)}
     </div>
   );
 };
