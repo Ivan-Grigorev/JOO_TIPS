@@ -30,7 +30,7 @@ const setupSecurity = (app) => {
 
   app.use(session(sessionOptions));
 
-  app.use(csurf())
+  // app.use(csurf())
 
   app.use(limiter);
 

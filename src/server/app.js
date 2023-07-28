@@ -1,5 +1,5 @@
 const express = require("express");
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/auth/auth");
 const refRoutes = require("./routes/referral");
 const cookiesRoutes = require("./routes/cookies");
 const cookieParser = require("cookie-parser");
@@ -20,14 +20,16 @@ app.use("/users", authRoutes);
 app.use("/referral", refRoutes);
 app.use("/cookies", cookieParser(), cookiesRoutes);
 
-app.get("/csrf-token", (req, res) => res.json({ csrfToken: req.csrfToken() }));
+// app.get("/csrf-token", (req, res) => res.json({ csrfToken: req.csrfToken() }));
 
-app.use((err, req, res, next) => {
-  if (err.code !== "EBADCSRFTOKEN") return next(err);
+// app.use((err, req, res, next) => {
+//   if (err.code !== "EBADCSRFTOKEN") return next(err);
 
-  // Если код ошибки - это "EBADCSRFTOKEN", значит CSRF токен неверный или пропущен.
-  res.status(403).send("CSRF token mismatch");
-});
+//   // Если код ошибки - это "EBADCSRFTOKEN", значит CSRF токен неверный или пропущен.
+//   console.log("CSRF token mismatch");
+//   console.log(err);
+//   res.status(403).send("CSRF token mismatch");
+// });
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
