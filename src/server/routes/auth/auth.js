@@ -9,9 +9,9 @@ const recoverRoutes = require("./recover.js");
 
 const router = express.Router();
 
-router.use(profileRoutes);
-router.use(subscriptionRoutes);
-router.use(recoverRoutes);
+router.use(profileRoutes); // ADDRESS/users + /profile ...
+router.use(subscriptionRoutes); // ADDRESS/users + /subscription ...
+router.use(recoverRoutes); // ADDRESS/users + /recover ...
 
 router.post(
   "/signup",
