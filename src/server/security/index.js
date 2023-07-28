@@ -2,6 +2,7 @@ const rateLimit = require("express-rate-limit");
 const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
+const compression = require("compression");
 
 const setupSecurity = (app) => {
   const limiter = rateLimit({
@@ -29,6 +30,8 @@ const setupSecurity = (app) => {
   );
 
   app.use(limiter);
+
+  app.use(compression());
 
   const whitelist = ["http://localhost:3001"];
   const corsOptions = {
