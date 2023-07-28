@@ -3,12 +3,20 @@ const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
 const compression = require("compression");
+const csurf = require("csurf");
 
 const setupSecurity = (app) => {
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 минут
     max: 100, // лимит каждого IP до 100 запросов за окно
   });
+
+  const sessionOptions = {
+    secret: process.env.SECRET_SESSION_KEY,
+    cookie: { httpOnly: true },
+    resave: false,
+    saveUninitialized: true,
+  };
 
   app.use(helmet());
 
@@ -20,14 +28,9 @@ const setupSecurity = (app) => {
     return next();
   });
 
-  app.use(
-    session({
-      secret: process.env.SECRET_SESSION_KEY,
-      cookie: { httpOnly: true },
-      resave: false,
-      saveUninitialized: true,
-    })
-  );
+  app.use(session(sessionOptions));
+
+  app.use(csurf())
 
   app.use(limiter);
 
