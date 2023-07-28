@@ -5,6 +5,7 @@ const profileMiddlewares = require("../middlewares/profile.js");
 
 const joiUser = require("../models/user/user-joi.js");
 const joiSubscription = require("../models/user/subscription-joi.js");
+const CSRF = require("../middlewares/csrf.js");
 
 const router = express.Router();
 
@@ -44,6 +45,7 @@ router.post(
 router.post(
   "/current/change-password",
   middlewares.auth,
+  CSRF.checkCSRF,
   middlewares.isCurrentPasswordRight,
   auth.changePassword
 );
@@ -61,18 +63,31 @@ router.put(
   joiUser.userDeleteJoi,
   middlewares.isUserExist,
   middlewares.auth,
+  CSRF.checkCSRF,
   middlewares.confirmPassword,
   auth.deleteCurrentUser
 );
 
-router.get("/current", joiUser.userJoi, middlewares.auth, auth.getCurrentUser); // for persisting token
+router.get(
+  "/current",
+  joiUser.userJoi,
+  middlewares.auth,
+  CSRF.checkCSRF,
+  auth.getCurrentUser
+); // for persisting token
 
-router.get("/subscription", middlewares.auth, auth.getSubscriptionDetails);
+router.get(
+  "/subscription",
+  middlewares.auth,
+  CSRF.checkCSRF,
+  auth.getSubscriptionDetails
+);
 
 router.patch(
   "/current/profile",
   joiUser.userUpdateProfile,
   middlewares.auth,
+  CSRF.checkCSRF,
   profileMiddlewares.checkUniqueFields,
   auth.updateUserProfile
 );
@@ -81,6 +96,7 @@ router.patch(
   "/subscription/reset",
   joiSubscription.resetSubscriptionJoi,
   middlewares.auth,
+  CSRF.checkCSRF,
   auth.resetUserSubscription
 );
 
@@ -89,6 +105,7 @@ router.patch(
   joiSubscription.subscriptionJoi,
   middlewares.isUserExist,
   middlewares.auth,
+  CSRF.checkCSRF,
   auth.updateUserSubscription
 );
 
