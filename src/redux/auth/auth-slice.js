@@ -28,6 +28,7 @@ const initialState = {
   },
   token: null,
   restorePasswordToken: null,
+  CSRF: null,
   isLoggedIn: false,
   isRefreshing: false,
   isLoading: false,

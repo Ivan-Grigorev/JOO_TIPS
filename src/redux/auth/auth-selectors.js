@@ -20,3 +20,5 @@ export const selectUserUsername = (state) => state.auth.profile.username;
 //
 export const selectRestorePasswordToken = (state) =>
   state.auth.restorePasswordToken;
+
+export const selectCSRFToken = (state) => state.auth.CSRF;
