@@ -20,6 +20,8 @@ app.use("/users", authRoutes);
 app.use("/referral", refRoutes);
 app.use("/cookies", cookieParser(), cookiesRoutes);
 
+app.get("/csrf-token", (req, res) => res.json({ csrfToken: req.csrfToken() }));
+
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
