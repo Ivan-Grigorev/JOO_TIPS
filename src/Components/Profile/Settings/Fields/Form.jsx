@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Importing selectors and operations from the auth section of Redux.
 import {
+  selectCSRFToken,
   selectUserEmail,
   selectUserErrors,
   selectUserPhone,
@@ -36,6 +37,7 @@ const Form = () => {
   const userEmail = useSelector(selectUserEmail);
   const userName = useSelector(selectUserUsername);
   const errors = useSelector(selectUserErrors).profile;
+  const csrfToken = useSelector(selectCSRFToken);
 
   // Declaring states for form fields with initial values.
   const [phone, setPhone] = useState("");
