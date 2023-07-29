@@ -35,6 +35,8 @@ const setupSecurity = (app) => {
     },
   };
 
+  // todo добавить комментарии
+
   app.use(helmet());
   app.use(mongoSanitize());
   app.use(setSecurityHeaders);
