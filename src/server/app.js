@@ -8,14 +8,13 @@ const morganLogs = require("./security/morgan.js");
 require("./security/morgan.js");
 const app = express();
 
+app.use(express.json());
+app.use(cookieParser());
 // Примените настройки безопасности
 setupSecurity(app);
 
 // Применяем Морган для логгирования
 morganLogs(app);
-
-app.use(express.json());
-app.use(cookieParser());
 
 app.use("/users", authRoutes);
 app.use("/referral", refRoutes);
