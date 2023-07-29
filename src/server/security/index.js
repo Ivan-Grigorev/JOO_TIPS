@@ -4,7 +4,8 @@ const helmet = require("helmet");
 const cors = require("cors");
 const compression = require("compression");
 const mongoSanitize = require("express-mongo-sanitize");
-const hpp = require('hpp');
+const hpp = require("hpp");
+const contentFilter = require('content-filter');
 
 const setupSecurity = (app) => {
   const limiter = rateLimit({
@@ -42,6 +43,7 @@ const setupSecurity = (app) => {
   app.use(helmet());
   app.use(mongoSanitize());
   app.use(hpp());
+  app.use(contentFilter());
   app.use(session(sessionOptions));
   app.use(limiter);
   app.use(compression());
