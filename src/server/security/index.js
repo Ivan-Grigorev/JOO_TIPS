@@ -3,36 +3,26 @@ const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
 const compression = require("compression");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const setupSecurity = (app) => {
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 минут
     max: 100, // лимит каждого IP до 100 запросов за окно
   });
-
   const sessionOptions = {
     secret: process.env.SECRET_SESSION_KEY,
     cookie: { httpOnly: true },
     resave: false,
     saveUninitialized: true,
   };
-
-  app.use(helmet());
-
-  app.use((_, res, next) => {
+  const setSecurityHeaders = (_, res, next) => {
     res.setHeader(
       "Content-Security-Policy",
       "script-src 'self'; object-src 'self'"
     );
     return next();
-  });
-
-  app.use(session(sessionOptions));
-
-  app.use(limiter);
-
-  app.use(compression());
-
+  };
   const whitelist = ["http://localhost:3001"];
   const corsOptions = {
     credentials: true,
@@ -45,6 +35,12 @@ const setupSecurity = (app) => {
     },
   };
 
+  app.use(helmet());
+  app.use(mongoSanitize());
+  app.use(setSecurityHeaders);
+  app.use(session(sessionOptions));
+  app.use(limiter);
+  app.use(compression());
   app.use(cors(corsOptions));
 };
 
