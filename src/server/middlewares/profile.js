@@ -9,6 +9,7 @@ async function checkUniqueFields(req, res, next) {
     const conditions = [];
 
     if (req.body.email) {
+      console.log("Push email to conditions");
       conditions.push({
         email: req.body.email,
         _id: { $ne: id },
@@ -16,6 +17,7 @@ async function checkUniqueFields(req, res, next) {
     }
 
     if (req.body.profile && req.body.profile.username) {
+      console.log("Push username to conditions");
       conditions.push({
         "profile.username": req.body.profile.username,
         _id: { $ne: id },
@@ -24,9 +26,11 @@ async function checkUniqueFields(req, res, next) {
 
     if (req.body.phone) {
       conditions.push({
-        phone: req.body.phone,
+        phone: {
+          $ne: null,
+          $eq: req.body.phone,
+        },
         _id: { $ne: id },
-        phone: { $ne: null },
       });
     }
 
