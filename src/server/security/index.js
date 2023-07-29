@@ -3,7 +3,6 @@ const session = require("express-session");
 const helmet = require("helmet");
 const cors = require("cors");
 const compression = require("compression");
-const csurf = require("csurf");
 
 const setupSecurity = (app) => {
   const limiter = rateLimit({
@@ -29,8 +28,6 @@ const setupSecurity = (app) => {
   });
 
   app.use(session(sessionOptions));
-
-  app.use(csurf())
 
   app.use(limiter);
 
