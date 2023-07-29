@@ -21,15 +21,6 @@ app.use("/users", authRoutes);
 app.use("/referral", refRoutes);
 app.use("/cookies", cookiesRoutes);
 
-// app.use((err, req, res, next) => {
-//   if (err.code !== "EBADCSRFTOKEN") return next(err);
-
-//   // Если код ошибки - это "EBADCSRFTOKEN", значит CSRF токен неверный или пропущен.
-//   console.log("CSRF token mismatch");
-//   console.log(err);
-//   res.status(403).send("CSRF token mismatch");
-// });
-
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
