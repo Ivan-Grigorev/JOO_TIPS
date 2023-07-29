@@ -101,8 +101,7 @@ function userUpdateProfile(req, res, next) {
       username: Joi.string()
         .min(5)
         .max(10)
-        .alphanum()
-        .regex(/^[a-zA-Z0-9а-яА-Я]+$/)
+        .regex(/^[a-zA-Z0-9а-яА-Я-]+$/)
         .allow("")
         .optional()
         .messages({
