@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const setupSecurity = require("./security");
 const morganLogs = require("./security/morgan.js");
 require("./security/morgan.js");
+const CSRF = require("csrf");
 const app = express();
 
 // Примените настройки безопасности
@@ -15,12 +16,31 @@ setupSecurity(app);
 morganLogs(app);
 
 app.use(express.json());
+app.use(cookieParser());
+
+const csrfProtection = new CSRF();
+
+app.use((req, res, next) => {
+  if (["POST", "PUT", "DELETE"].includes(req.method)) {
+    // Для определенных методов проверяем CSRF токен
+    const token =
+      req.body._csrf || req.query._csrf || req.headers["x-csrf-token"];
+    if (!csrfProtection.verify(req.cookies._csrf, token)) {
+      return res.status(403).send("CSRF token mismatch");
+    }
+  }
+  next();
+});
 
 app.use("/users", authRoutes);
 app.use("/referral", refRoutes);
-app.use("/cookies", cookieParser(), cookiesRoutes);
+app.use("/cookies", cookiesRoutes);
 
-// app.get("/csrf-token", (req, res) => res.json({ csrfToken: req.csrfToken() }));
+app.get("/csrf-token", (req, res) => {
+  const token = csrfProtection.create(req.cookies._csrf);
+  res.cookie("_csrf", token);
+  res.json({ token });
+});
 
 // app.use((err, req, res, next) => {
 //   if (err.code !== "EBADCSRFTOKEN") return next(err);
