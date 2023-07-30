@@ -5,9 +5,18 @@ const cors = require("cors");
 const compression = require("compression");
 const mongoSanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
-const contentFilter = require('content-filter');
+const contentFilter = require("content-filter");
 
 const setupSecurity = (app) => {
+  const useStrictHTTPS = (req, res, next) => {
+    if (req.secure) {
+      console.log("https in use");
+      next();
+    } else {
+      console.log("https not in use");
+      res.redirect("https://" + req.headers.host + req.url);
+    }
+  };
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 минут
     max: 100, // лимит каждого IP до 100 запросов за окно
@@ -38,6 +47,7 @@ const setupSecurity = (app) => {
   };
 
   // todo добавить комментарии
+  app.use(useStrictHTTPS);
 
   app.use(setSecurityHeaders);
   app.use(helmet());

@@ -15,6 +15,6 @@ const options = {
   cert: sslCertificate,
 };
 
-const server = https.createServer(options, app);
+const httpsServer = https.createServer(options, app);
 
-module.exports = server;
+module.exports = httpsServer;
