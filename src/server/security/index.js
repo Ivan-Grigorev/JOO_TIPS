@@ -16,7 +16,7 @@ const setupSecurity = (app) => {
       console.log("https not in use");
       res.redirect("https://" + req.headers.host + req.url);
     }
-  };
+  }; // ! cloudeFlare SSL sertificate has his own HTTPS relocate
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 минут
     max: 100, // лимит каждого IP до 100 запросов за окно
@@ -47,7 +47,7 @@ const setupSecurity = (app) => {
   };
 
   // todo добавить комментарии
-  app.use(useStrictHTTPS);
+  // app.use(useStrictHTTPS); // ! cloudeFlare SSL sertificate has his own HTTPS relocate
 
   app.use(setSecurityHeaders);
   app.use(helmet());
