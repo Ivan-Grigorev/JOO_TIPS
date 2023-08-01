@@ -1,12 +1,12 @@
 const app = require("./app.js");
 const mongoDB = require("./db.js");
-const httpsServer = require("./security/ssl");
+// const httpsServer = require("./security/ssl");
 const { autoCheckSubscriptionTime } = require("./utils/utils.js");
 require("./cronJobs.js");
 require("colors");
 
 const PORT = process.env.PORT || 3000;
-httpsServer.listen(PORT, async () => {
+app.listen(PORT, async () => {
   console.log(`The server is listening on port ${PORT}`.yellow);
 
   await mongoDB();

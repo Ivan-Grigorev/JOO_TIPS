@@ -1,20 +1,22 @@
-const https = require("https");
-const fs = require("fs");
-const app = require("../../app");
-const path = require("path");
+// ! not in use because of CloudFlare service
 
-// Задаем пути относительно текущего файла
-const sslCertificatePath = path.join(__dirname, "ssl_certificate.crt");
-const sslPrivateKeyPath = path.join(__dirname, "ssl_private.key");
+// const https = require("https");
+// const fs = require("fs");
+// const app = require("../../app");
+// const path = require("path");
 
-const sslCertificate = fs.readFileSync(sslCertificatePath, "utf8");
-const sslPrivateKey = fs.readFileSync(sslPrivateKeyPath, "utf8");
+// // Задаем пути относительно текущего файла
+// const sslCertificatePath = path.join(__dirname, "ssl_certificate.crt");
+// const sslPrivateKeyPath = path.join(__dirname, "ssl_private.key");
 
-const options = {
-  key: sslPrivateKey,
-  cert: sslCertificate,
-};
+// const sslCertificate = fs.readFileSync(sslCertificatePath, "utf8");
+// const sslPrivateKey = fs.readFileSync(sslPrivateKeyPath, "utf8");
 
-const httpsServer = https.createServer(options, app);
+// const options = {
+//   key: sslPrivateKey,
+//   cert: sslCertificate,
+// };
 
-module.exports = httpsServer;
+// const httpsServer = https.createServer(options, app);
+
+// module.exports = httpsServer;
