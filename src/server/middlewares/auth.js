@@ -35,10 +35,11 @@ async function auth(req, res, next) {
 
 async function updateLastIP(req, res, next) {
   try {
-    const lastUserIP =
-      req.headers["x-forwarded-for"] || req.socket.remoteAddress; // saving an user IP address
-    req.user.IP.lastUserIP = lastUserIP; //? update lastUserIP property for saving when user log in. (next action)
+    const lastUserIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress; // prettier-ignore
+    const cloudFlareProxiUserIP = req.headers["cf-connecting-ip"] || req.connection.remoteAddress; // prettier-ignore
+    req.user.IP.lastUserIP = lastUserIP || cloudFlareProxiUserIP; //? update lastUserIP property for saving when user log in. (next action)
 
+    console.log(`req.user.IP.lastUserIP = = = > ${req.user.IP.lastUserIP}`);
     next();
   } catch (error) {
     console.error(`Error while middleware updateLastIP: ${error}`.red);
@@ -123,7 +124,6 @@ async function isCurrentPasswordRight(req, res, next) {
 
     const { id } = req.user;
     const user = await User.findById(id); // TODO may not work
-
 
     bcrypt.compare(currentPassword, user.password, async (err, result) => {
       if (err) return next(err);
