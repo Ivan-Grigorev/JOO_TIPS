@@ -23,6 +23,10 @@ const user = new mongoose.Schema(
       type: String,
       default: null,
     },
+    country: {
+      type: String,
+      required: true,
+    },
     profile: {
       about: {
         type: String,
