@@ -4,46 +4,107 @@ const sendMail = require("../utils/mailer.js");
 async function calculateMetricsAndSendEmail() {
   const analysisEmail = process.env.ANALYSIS_EMAIL;
   try {
-    // Припустимо, що звітна когорта триває місяць
     const lastMonth = new Date();
-    lastMonth.setMonth(lastMonth.getMonth() - 1); // Визначення дати початку попереднього місяця
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
 
-    // Отримання кількості користувачів на кінець поточної звітної когорти
+    // Загальне число користувачів
     const totalUsers = await User.countDocuments();
-
-    // Отримання кількості користувачів на кінець попередньої звітної когорти
     const totalUsersLastMonth = await User.countDocuments({
       registrationDate: { $lt: lastMonth },
     });
+    const growthTotalUsers =
+      totalUsersLastMonth > 0
+        ? (totalUsers / totalUsersLastMonth - 1) * 100
+        : 0;
 
-    // Розрахунок приросту користувачів
-    const growthTotalUsers = (totalUsers / totalUsersLastMonth - 1) * 100;
+    // Шкільні користувачі
+    const schoolUsers = await User.countDocuments({
+      "subscription.type": "School",
+    });
+    const schoolUsersLastMonth = await User.countDocuments({
+      "subscription.type": "School",
+      registrationDate: { $lt: lastMonth },
+    });
+    const growthSchoolUsers =
+      schoolUsersLastMonth > 0
+        ? (schoolUsers / schoolUsersLastMonth - 1) * 100
+        : 0;
 
-    // Оформлення листа
+    // Звичайні користувачі
+    const commonUsers = await User.countDocuments({
+      "subscription.type": "Common",
+    });
+    const commonUsersLastMonth = await User.countDocuments({
+      "subscription.type": "Common",
+      registrationDate: { $lt: lastMonth },
+    });
+    const growthCommonUsers =
+      commonUsersLastMonth > 0
+        ? (commonUsers / commonUsersLastMonth - 1) * 100
+        : 0;
+
+    // Шкільні платні користувачі
+    const schoolPremiumUsers = await User.countDocuments({
+      "subscription.type": "School",
+      "subscription.isPremium": true,
+    });
+    const schoolPremiumUsersLastMonth = await User.countDocuments({
+      "subscription.type": "School",
+      "subscription.isPremium": true,
+      registrationDate: { $lt: lastMonth },
+    });
+    const growthSchoolPremiumUsers =
+      schoolPremiumUsersLastMonth > 0
+        ? (schoolPremiumUsers / schoolPremiumUsersLastMonth - 1) * 100
+        : 0;
+
+    // Звичайні платні користувачі
+    const commonPremiumUsers = await User.countDocuments({
+      "subscription.type": "Common",
+      "subscription.isPremium": true,
+    });
+    const commonPremiumUsersLastMonth = await User.countDocuments({
+      "subscription.type": "Common",
+      "subscription.isPremium": true,
+      registrationDate: { $lt: lastMonth },
+    });
+    const growthCommonPremiumUsers =
+      commonPremiumUsersLastMonth > 0
+        ? (commonPremiumUsers / commonPremiumUsersLastMonth - 1) * 100
+        : 0;
+
+    // Формування листа
     const subject = "Analytic mail";
-    const HTML = `<h1>Місячний аналітичний звіт академії програмування</h1>
+    const HTML = `
+    <h1>Місячний аналітичний звіт академії програмування</h1>
 
     <h2>Загальна інформація</h2>
     <p>Кількість користувачів на кінець поточної когорти: ${totalUsers}</p>
-    <p>Кількість користувачів на кінець попередньої когорти: ${totalUsersLastMonth}</p>
     <p>Приріст користувачів: ${growthTotalUsers.toFixed(2)}%</p>
+    
+    <h2>Шкільні користувачі</h2>
+    <p>Кількість: ${schoolUsers}</p>
+    <p>Приріст: ${growthSchoolUsers.toFixed(2)}%</p>
 
-    // Тут можна додати аналогічні розрахунки та відображення даних для:
-    // - шкільних користувачів;
-    // - звичайних користувачів;
-    // - шкільних платних користувачів;
-    // - звичайних платних користувачів;
-    // - співвідношення платних до безплатних користувачів і т. д.
-`;
+    <h2>Звичайні користувачі</h2>
+    <p>Кількість: ${commonUsers}</p>
+    <p>Приріст: ${growthCommonUsers.toFixed(2)}%</p>
 
-    // Відправлення листа
-    await sendMail(analysisEmail, "Analytic mail", subject, HTML);
+    <h2>Шкільні платні користувачі</h2>
+    <p>Кількість: ${schoolPremiumUsers}</p>
+    <p>Приріст: ${growthSchoolPremiumUsers.toFixed(2)}%</p>
+
+    <h2>Звичайні платні користувачі</h2>
+    <p>Кількість: ${commonPremiumUsers}</p>
+    <p>Приріст: ${growthCommonPremiumUsers.toFixed(2)}%</p>
+    `;
+
+    await sendMail(analysisEmail, "Analytic", subject, HTML);
   } catch (error) {
-    // Виведення помилок при їх наявності
     console.error("Error while calculating metrics:", error);
   }
 }
 
-module.exports = calculateMetricsAndSendEmail
+module.exports = calculateMetricsAndSendEmail;
 // Запуск функції кожні 15 хвилин
 // setInterval(calculateMetricsAndSendEmail, 15 * 60 * 1000);
