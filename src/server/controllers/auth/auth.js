@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
 const sendMail = require("../../utils/mailer.js");
+const getCountryFromIP = require("../../utils/getCountryFromIP.js");
 require("colors");
 moment.tz.setDefault("Europe/Prague");
 
@@ -10,6 +11,7 @@ async function signup(req, res, next) {
   try {
     const { name, email, password } = req.body;
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const userCountry = await getCountryFromIP(userIP);
 
     bcrypt.genSalt(10, async (err, salt) => {
       if (err) return next(err);
@@ -21,6 +23,7 @@ async function signup(req, res, next) {
           name,
           email,
           password: hash,
+          country: userCountry || "not identified",
           profile: {
             about: null,
             username: null,
