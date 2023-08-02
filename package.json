@@ -26,6 +26,7 @@
     "express-session": "^1.17.3",
     "framer-motion": "^10.12.18",
     "getmacaddress": "^1.2.2",
+    "googleapis": "^59.0.0",
     "helmet": "^7.0.0",
     "hpp": "^0.2.3",
     "joi": "^17.9.2",
