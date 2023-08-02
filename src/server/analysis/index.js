@@ -1,5 +1,6 @@
 const User = require("../models/user/user.js");
 const sendMail = require("../utils/mailer.js");
+const writeToSheet = require("./googleSheet.js");
 
 const EMAIL_INTERVAL = 15 * 60 * 1000; // 15 minutes in milliseconds
 const DEFAULT_COUNTRY = "Unknown";
@@ -128,6 +129,29 @@ async function calculateMetricsAndSendEmail() {
     `;
 
     await sendMail(analysisEmail, "Analytic", "Analytic mail", HTML);
+
+    const writableData = [
+      // ["Metric", "Value", "Growth"], // заголовки
+      ["Total Users", totalUsers, growthData.totalUsers.toFixed(2) + "%"],
+      ["School Users", schoolUsers, growthData.schoolUsers.toFixed(2) + "%"],
+      ["Common Users", commonUsers, growthData.commonUsers.toFixed(2) + "%"],
+      [
+        "School Premium Users",
+        schoolPremiumUsers,
+        growthData.schoolPremiumUsers.toFixed(2) + "%",
+      ],
+      [
+        "Common Premium Users",
+        commonPremiumUsers,
+        growthData.commonPremiumUsers.toFixed(2) + "%",
+      ],
+      ["Top Country", topCountry, ""], // Нет данных роста для страны
+      ["Countries Registered Last Week", countriesList, ""], // Нет данных роста для списка стран
+    ];
+
+    // Запись данных в Google Sheet
+    await writeToSheet(writableData);
+    console.log("Данные записаны в таблицу");
   } catch (error) {
     console.error("Error while calculating metrics:", error);
   }
