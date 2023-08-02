@@ -1,20 +1,35 @@
 const User = require("../models/user/user.js");
 const sendMail = require("../utils/mailer.js");
 
+const EMAIL_INTERVAL = 15 * 60 * 1000; // 15 minutes in milliseconds
+const DEFAULT_COUNTRY = "Unknown";
+
+const getDateOneMonthAgo = () => {
+  const date = new Date();
+  date.setMonth(date.getMonth() - 1);
+  return date;
+};
+
+const getDateOneWeekAgo = () => {
+  const date = new Date();
+  date.setDate(date.getDate() - 7);
+  return date;
+};
+
+const calculateGrowth = (current, previous) => {
+  return previous > 0 ? (current / previous - 1) * 100 : 0;
+};
+
 async function calculateMetricsAndSendEmail() {
   const analysisEmail = process.env.ANALYSIS_EMAIL;
 
   try {
-    // Define the date boundaries
-    const lastMonth = new Date();
-    lastMonth.setMonth(lastMonth.getMonth() - 1);
-    const lastWeek = new Date();
-    lastWeek.setDate(lastWeek.getDate() - 7);
+    const lastMonth = getDateOneMonthAgo();
+    const lastWeek = getDateOneWeekAgo();
 
     const uniqueCountriesLastWeek = await User.distinct("country", {
       registrationDate: { $gte: lastWeek },
     });
-
     const countriesList = uniqueCountriesLastWeek.join(", ");
 
     const topCountryData = await User.aggregate([
@@ -22,13 +37,8 @@ async function calculateMetricsAndSendEmail() {
       { $sort: { count: -1 } },
       { $limit: 1 },
     ]);
-    const topCountry = topCountryData[0]?._id || "Unknown";
+    const topCountry = topCountryData[0]?._id || DEFAULT_COUNTRY;
 
-    // Define a function to calculate growth
-    const calculateGrowth = (current, previous) =>
-      previous > 0 ? (current / previous - 1) * 100 : 0;
-
-    // Fetch user statistics
     const [
       totalUsers,
       totalUsersLastMonth,
@@ -51,7 +61,7 @@ async function calculateMetricsAndSendEmail() {
       User.countDocuments({ "subscription.type": "Common" }),
       User.countDocuments({
         "subscription.type": "Common",
-        registrationDate: { $gte: lastMonth },
+        registrationDate: { $lt: lastMonth },
       }),
       User.countDocuments({
         "subscription.type": "School",
@@ -73,50 +83,56 @@ async function calculateMetricsAndSendEmail() {
       }),
     ]);
 
-    // Calculate growth for each metric
-    const growthTotalUsers = calculateGrowth(totalUsers, totalUsersLastMonth); // prettier-ignore
-    const growthSchoolUsers = calculateGrowth(schoolUsers, schoolUsersLastMonth); // prettier-ignore
-    const growthCommonUsers = calculateGrowth(commonUsers, commonUsersLastMonth); // prettier-ignore
-    const growthSchoolPremiumUsers = calculateGrowth(schoolPremiumUsers, schoolPremiumUsersLastMonth); // prettier-ignore
-    const growthCommonPremiumUsers = calculateGrowth(commonPremiumUsers, commonPremiumUsersLastMonth); // prettier-ignore
+    const growthData = {
+      totalUsers: calculateGrowth(totalUsers, totalUsersLastMonth),
+      schoolUsers: calculateGrowth(schoolUsers, schoolUsersLastMonth),
+      commonUsers: calculateGrowth(commonUsers, commonUsersLastMonth),
+      schoolPremiumUsers: calculateGrowth(
+        schoolPremiumUsers,
+        schoolPremiumUsersLastMonth
+      ),
+      commonPremiumUsers: calculateGrowth(
+        commonPremiumUsers,
+        commonPremiumUsersLastMonth
+      ),
+    };
 
-    // Формування листа
-    const subject = "Analytic mail";
     const HTML = `
-    <h1>Місячний аналітичний звіт академії програмування</h1>
+      <h1>Місячний аналітичний звіт академії програмування</h1>
+      <h2>Загальна інформація</h2>
 
-    <h2>Загальна інформація</h2>
-    <p>Кількість користувачів на кінець поточної когорти: ${totalUsers}</p>
-    <p>Приріст користувачів: ${growthTotalUsers.toFixed(2)}%</p>
+      <p>Кількість користувачів на кінець поточної когорти: ${totalUsers}</p>
+      <p>Приріст користувачів за мiсяць: ${growthData.totalUsers.toFixed(
+        2
+      )}%</p>
+     
+      <h2>Шкільні користувачі</h2>
+      <p>Кількість: ${schoolUsers}</p>
+      <p>Приріст за мiсяць: ${growthData.schoolUsers.toFixed(2)}%</p>
     
-    <h2>Шкільні користувачі</h2>
-    <p>Кількість: ${schoolUsers}</p>
-    <p>Приріст: ${growthSchoolUsers.toFixed(2)}%</p>
-
-    <h2>Звичайні користувачі</h2>
-    <p>Кількість: ${commonUsers}</p>
-    <p>Приріст: ${growthCommonUsers.toFixed(2)}%</p>
-
-    <h2>Шкільні платні користувачі</h2>
-    <p>Кількість: ${schoolPremiumUsers}</p>
-    <p>Приріст: ${growthSchoolPremiumUsers.toFixed(2)}%</p>
-
-    <h2>Звичайні платні користувачі</h2>
-    <p>Кількість: ${commonPremiumUsers}</p>
-    <p>Приріст: ${growthCommonPremiumUsers.toFixed(2)}%</p>
-
-    <h2>Статистика по странам</h2>
-    <p>Більше всього користувачів з країни: ${topCountry}</p>
-    <p>На протязі останнього тижня зареєстровано користувачів з наступних краiн: ${countriesList}</p>
-
+      <h2>Звичайні користувачі</h2>
+      <p>Кількість: ${commonUsers}</p>
+      <p>Приріст за мiсяць: ${growthData.commonUsers.toFixed(2)}%</p>
+  
+      <h2>Шкільні платні користувачі</h2>
+      <p>Кількість: ${schoolPremiumUsers}</p>
+      <p>Приріст за мiсяць: ${growthData.schoolPremiumUsers.toFixed(2)}%</p>
+  
+      <h2>Звичайні платні користувачі</h2>
+      <p>Кількість: ${commonPremiumUsers}</p>
+      <p>Приріст за мiсяць: ${growthData.commonPremiumUsers.toFixed(2)}%</p>
+  
+      <h2>Статистика по странам</h2>
+      <p>Більше всього користувачів з країни: ${topCountry}</p>
+      <p>На протязі останнього тижня зареєстровано користувачів з наступних краiн: ${countriesList}</p>
     `;
 
-    await sendMail(analysisEmail, "Analytic", subject, HTML);
+    await sendMail(analysisEmail, "Analytic", "Analytic mail", HTML);
   } catch (error) {
     console.error("Error while calculating metrics:", error);
   }
 }
 
 module.exports = calculateMetricsAndSendEmail;
-// Запуск функції кожні 15 хвилин
-// setInterval(calculateMetricsAndSendEmail, 15 * 60 * 1000);
+
+// setInterval(calculateMetricsAndSendEmail, EMAIL_INTERVAL);
