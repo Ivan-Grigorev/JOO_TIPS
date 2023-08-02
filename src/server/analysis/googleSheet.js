@@ -2,6 +2,7 @@ const { google } = require("googleapis");
 const sheets = google.sheets("v4");
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config()
 
 const serviceAccPath = path.join(__dirname, "jootips-923e9874e02e.json");
 const PRIVATE_KEY = require(serviceAccPath); // Укажите путь к вашему JSON файлу
@@ -19,7 +20,7 @@ async function writeToSheet(data) {
     await client.authorize();
 
     const sheetsApi = google.sheets({ version: "v4", auth: client });
-    const sheetID = "1dqmPmCi1W01I3W99A76mrWM9klvS7D4u2Lg4Qkb4GDc";
+    const sheetID = process.env.GOOGLE_SHEET_ID;
 
     // Замените `spreadsheetId` и `range` на ваши значения.
     await sheetsApi.spreadsheets.values.append({
@@ -35,9 +36,11 @@ async function writeToSheet(data) {
     console.error(`Error while writing to google sheet: ${error}`);
   }
 }
+
 const writableData = [
   ["Usertype", "Premium", "Country-code"],
   ["School", "true", "UA"],
 ];
 writeToSheet(writableData);
+
 module.exports = writeToSheet;
