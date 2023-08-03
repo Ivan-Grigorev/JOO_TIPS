@@ -1,5 +1,6 @@
 const Lesson = require("../../models/lessons/lessons");
 require("colors");
+const mongoose = require("mongoose"); // Убедитесь, что вы импортировали mongoose
 
 async function getLessonsPointsSum(req, res) {
   try {
@@ -8,12 +9,13 @@ async function getLessonsPointsSum(req, res) {
       return res.status(401).json({ message: "Authentication required." });
     }
 
+    const userId = new mongoose.Types.ObjectId(req.user.id); // Преобразование в ObjectId
+
     // Вычисляем общее количество баллов для этого пользователя
     const totalPoints = await Lesson.aggregate([
-      { $match: { userId: req.user._id } },
+      { $match: { userId: userId } }, // Использование преобразованного идентификатора
       { $group: { _id: null, total: { $sum: "$points" } } },
     ]);
-
 
     res.json({ totalPoints: totalPoints[0] ? totalPoints[0].total : 0 });
   } catch (error) {
