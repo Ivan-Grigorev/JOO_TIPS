@@ -26,4 +26,4 @@ const lessonsSlice = createSlice({
 });
 
 export default lessonsSlice.reducer;
-export const cookieReducer = lessonsSlice.reducer;
+export const lessonsReducer = lessonsSlice.reducer;
