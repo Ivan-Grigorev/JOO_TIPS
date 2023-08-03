@@ -1,0 +1,37 @@
+.education-header {
+  padding: 10px;
+  background-color: #1a4579;
+  border-bottom: 1px solid #718096;
+}
+
+.education-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+}
+
+.education-header a.logo-header {
+  margin-bottom: 20px;
+}
+
+.education-header__points {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 35%);
+
+  padding: 0 20px;
+
+  text-align: center;
+
+  border: 1px solid;
+  border-color: #718096;
+  border-radius: 22px;
+
+  background-color: #163a65;
+  color: white;
+
+  z-index: 100;
+}
