@@ -77,6 +77,12 @@ const App = () => {
         <Route path="profile/change-password" element={<ChangePassword />} />
 
         <Route path="*" element={<NotFound />} />
+
+        <Route path="/education" element={<ProfileLayout />}>
+          <Route path="topics" />
+          <Route path="lessons" />
+          <Route path="results" />
+        </Route>
       </Routes>
       {isLoading && <ChakraSpinner />}
       <ToastContainer
