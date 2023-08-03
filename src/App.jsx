@@ -79,9 +79,9 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
 
         <Route path="/education" element={<ProfileLayout />}>
-          <Route path="topics" />
-          <Route path="lessons" />
-          <Route path="results" />
+          <Route path="topics" element={null} />
+          <Route path="lessons" element={null} />
+          <Route path="results" element={null} />
         </Route>
       </Routes>
       {isLoading && <ChakraSpinner />}
