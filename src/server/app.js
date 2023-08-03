@@ -1,7 +1,10 @@
 const express = require("express");
+
 const authRoutes = require("./routes/auth/auth");
 const refRoutes = require("./routes/referral");
 const cookiesRoutes = require("./routes/cookies");
+const lessonsRoutes = require("./routes/lessons/lessons");
+
 const cookieParser = require("cookie-parser");
 const setupSecurity = require("./security");
 const morganLogs = require("./security/morgan.js");
@@ -17,6 +20,7 @@ setupSecurity(app);
 morganLogs(app);
 
 app.use("/users", authRoutes);
+app.use("/lessons", lessonsRoutes);
 app.use("/referral", refRoutes);
 app.use("/cookies", cookiesRoutes);
 
