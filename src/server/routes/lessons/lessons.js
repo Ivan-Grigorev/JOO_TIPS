@@ -1,8 +1,8 @@
-const experss = require("express");
+const express = require("express");
 const middlewares = require("../../middlewares/auth.js");
 const { getLessonsPointsSum } = require("../../controllers/lessons/lessons.js");
 
-const router = experss.Router();
+const router = express.Router();
 
 router.get("/points", middlewares.auth, getLessonsPointsSum);
 
