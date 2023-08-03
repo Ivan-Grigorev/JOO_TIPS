@@ -7,13 +7,13 @@ const MenuLessons = () => {
       <MenuGroup title="Навчання">
 
         <MenuItem>
-          <Link to={"/themes"}>Теми</Link>
+          <Link to={"/education/topics"}>Теми</Link>
         </MenuItem>
         <MenuItem>
-          <Link to={"/lessons"}>Уроки</Link>
+          <Link to={"/education/lessons"}>Уроки</Link>
         </MenuItem>
         <MenuItem>
-          <Link to={"/results"}>Результати</Link>
+          <Link to={"/education/results"}>Результати</Link>
         </MenuItem>
       </MenuGroup>
 
