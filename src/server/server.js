@@ -12,7 +12,7 @@ app.listen(PORT, async () => {
 
   await mongoDB();
 
-  await calculateMetricsAndSendEmail();
+  // await calculateMetricsAndSendEmail();
 
   // todo Добавить интервал для когортного отчёта
   setInterval(autoCheckSubscriptionTime, 3600000); // 3600000 миллисекунд - 1 час
