@@ -1,4 +1,4 @@
-import { MenuGroup, MenuItem } from "@chakra-ui/react";
+import { MenuDivider, MenuGroup, MenuItem } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const MenuHelpItem = () => {
@@ -9,6 +9,8 @@ const MenuHelpItem = () => {
           <Link to={"/FAQ"}>FAQ</Link>
         </MenuItem>
       </MenuGroup>
+
+      <MenuDivider />
     </>
   );
 };

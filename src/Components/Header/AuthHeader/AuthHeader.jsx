@@ -34,6 +34,7 @@ import UserAvatar from "./Menu/UserAvatar/UserAvatar";
 import MenuDeleteAccountItem from "./Menu/MenuDeleteAccountItem/MenuDeleteAccountItem";
 import InviteFriendsItem from "./Menu/InviteFriendsItem/InviteFriendsItem";
 import MenuHelpItem from "./Menu/MenuHelpItem/MenuHelpItem";
+import MenuLessons from "./Menu/MenuLessons/MenuLessons";
 
 // Styled component using styled-components
 const Div = styled.div`
@@ -126,6 +127,8 @@ const AuthHeader = () => {
           </MenuButton>
           <MenuList>
             <MenuGroup title="Профiль">
+              <MenuDivider />
+
               <MenuItem>
                 <Link to={"/profile"}>Мiй профiль</Link>
               </MenuItem>
@@ -139,6 +142,9 @@ const AuthHeader = () => {
               <MenuItem>
                 <Link to={"/profile/change-password"}>Змiнити пароль</Link>
               </MenuItem>
+              <MenuDivider />
+
+              <MenuLessons />
 
               <InviteFriendsItem />
             </MenuGroup>
