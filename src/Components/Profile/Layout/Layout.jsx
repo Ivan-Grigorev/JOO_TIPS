@@ -1,14 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
-import './Layout.scss'
+import "./Layout.scss";
+import EducationHeader from "./EducationHeader/EducationHeader";
 
 const Layout = () => {
+  const location = useLocation();
+
+  const isLearningPage = location.pathname.includes("/education");
+
   return (
     <>
-      <Header />
+      {isLearningPage ? <EducationHeader /> : <Header />}
 
       <main className="profile-hero">
         <Suspense fallback={<ChakraSpinner />}>
