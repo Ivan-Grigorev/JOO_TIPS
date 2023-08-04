@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchLessonsPointsTotalSum } from "./lessons-operations";
 
 const initialState = {
-  totalPoints: null,
+  totalPoints: 0,
   isLoading: false,
 };
 
@@ -13,6 +13,7 @@ const lessonsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLessonsPointsTotalSum.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.totalPoints = action.payload;
         state.isLoading = initialState.isLoading;
       })
