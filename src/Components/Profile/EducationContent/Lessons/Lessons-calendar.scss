@@ -1,0 +1,10 @@
+.react-calendar {
+  background: transparent;
+  border: transparent;
+  font-family: Mulish;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: transparent;
+}
