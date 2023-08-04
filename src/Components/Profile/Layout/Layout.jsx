@@ -5,6 +5,7 @@ import Footer from "./Footer/Footer";
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import "./Layout.scss";
 import EducationHeader from "./EducationHeader/EducationHeader";
+import EducationFooter from "./EducationFooter/EducationFooter";
 
 const Layout = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const Layout = () => {
         </Suspense>
       </main>
 
-      <Footer />
+      {isLearningPage ? <EducationFooter /> : <Footer />}
     </>
   );
 };
