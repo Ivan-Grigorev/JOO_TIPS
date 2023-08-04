@@ -13,7 +13,7 @@ const lessonsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLessonsPointsTotalSum.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         state.totalPoints = action.payload;
         state.isLoading = initialState.isLoading;
       })
