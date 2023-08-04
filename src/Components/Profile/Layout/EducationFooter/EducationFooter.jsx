@@ -6,27 +6,27 @@ import resultsIcon from "./icons/results-icon.svg";
 const EducationFooter = ({ handleButtonClick }) => {
   return (
     <footer className="education-footer">
-      <buttons
+      <button
         className="education-footer__buttons"
         onClick={() => handleButtonClick("Topics")}
       >
         <img src={topicsIcon} alt="Topics" />
         Topics
-      </buttons>
-      <buttons
+      </button>
+      <button
         className="education-footer__buttons"
         onClick={() => handleButtonClick("Lessons")}
       >
         <img src={lessonsIcon} alt="Lessons" />
         Lessons
-      </buttons>
-      <buttons
+      </button>
+      <button
         className="education-footer__buttons"
         onClick={() => handleButtonClick("Results")}
       >
         <img src={resultsIcon} alt="Results" />
         Results
-      </buttons>
+      </button>
     </footer>
   );
 };
