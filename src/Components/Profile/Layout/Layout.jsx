@@ -6,6 +6,9 @@ import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import "./Layout.scss";
 import EducationHeader from "./EducationHeader/EducationHeader";
 import EducationFooter from "./EducationFooter/EducationFooter";
+import Topics from "../EducationContent/Topics/Topics";
+import Lessons from "../EducationContent/Lessons/Lessons";
+import Results from "../EducationContent/Results/Results";
 
 const Layout = () => {
   const location = useLocation();
@@ -27,9 +30,9 @@ const Layout = () => {
 
           <main className="profile-hero education-hero">
             <Suspense fallback={<ChakraSpinner />}>
-              {activeEducationContent === "Topics" && <p>This is Content 1</p>}
-              {activeEducationContent === "Lessons" && <p>This is Content 2</p>}
-              {activeEducationContent === "Results" && <p>This is Content 3</p>}
+              {activeEducationContent === "Topics" && <Topics />}
+              {activeEducationContent === "Lessons" && <Lessons />}
+              {activeEducationContent === "Results" && <Results />}
             </Suspense>
           </main>
 
