@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import EmailSVG from "../../icons/EmailSVG";
 import UserSVG from "../../icons/UserSVG";
@@ -84,6 +85,15 @@ const SignupFormFields = ({
       </div>
     </>
   );
+};
+
+SignupFormFields.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  nameValue: PropTypes.string.isRequired,
+  emailValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string,
+  confirmPasswordValue: PropTypes.string.isRequired,
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default SignupFormFields;

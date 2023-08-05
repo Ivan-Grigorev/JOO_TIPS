@@ -1,5 +1,6 @@
 import DOMPurify from "dompurify";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
 const ErrorMessages = ({ parentClass, errors }) => {
   useEffect(() => {
@@ -17,6 +18,11 @@ const ErrorMessages = ({ parentClass, errors }) => {
         errors.map((error) => <p key={error}>{DOMPurify.sanitize(error)}</p>)}
     </div>
   );
+};
+
+ErrorMessages.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  parentClass: PropTypes.string,
 };
 
 export default ErrorMessages;

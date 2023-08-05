@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./TryButton.scss";
 import { memo } from "react";
 
@@ -10,5 +11,9 @@ const TryButton = memo(({ text }) => {
     </>
   );
 });
+
+TryButton.propTypes = {
+  text: PropTypes.string,
+};
 
 export default TryButton;

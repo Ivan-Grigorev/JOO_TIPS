@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./EducationFooter.scss";
 import topicsIcon from "./icons/topics-icon.svg";
 import lessonsIcon from "./icons/lessons-icon.svg";
@@ -29,6 +30,10 @@ const EducationFooter = ({ handleButtonClick }) => {
       </button>
     </footer>
   );
+};
+
+EducationFooter.propTypes = {
+  handleButtonClick: PropTypes.func.isRequired,
 };
 
 export default EducationFooter;

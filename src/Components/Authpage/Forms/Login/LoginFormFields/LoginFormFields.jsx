@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import loginLockOpen from "../.././icons/login_lock_open.svg";
 import EmailSVG from "../../icons/EmailSVG";
@@ -56,3 +57,10 @@ export default function LoginFormFields({
     </>
   );
 }
+
+LoginFormFields.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  emailValue: PropTypes.string.isRequired,
+  passwordValue: PropTypes.string,
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

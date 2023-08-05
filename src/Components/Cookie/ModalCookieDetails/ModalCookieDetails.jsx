@@ -20,6 +20,7 @@ import CookieDeclaration from "./CookieDeclaration/CookieDeclaration";
 import CookieAbout from "./CookieAbout/CookieAbout";
 import { useDispatch } from "react-redux";
 import { setCookies } from "../../../redux/cookies/cookies-operations";
+import PropTypes from "prop-types";
 
 const ModalCookieDetails = ({
   selectedCookies, // Передаем текущие выбранные cookies как проп
@@ -193,4 +194,16 @@ const ModalCookieDetails = ({
   );
 };
 
+ModalCookieDetails.propTypes = {
+  setCookieValue: PropTypes.func.isRequired,
+  handleSetAllCookies: PropTypes.func.isRequired,
+  handleDeclineAll: PropTypes.func.isRequired,
+  handleSetSelectedCookies: PropTypes.func.isRequired,
+  onBannerClose: PropTypes.func.isRequired,
+  // selectedCookies: PropTypes.shape({
+  //   perfomance: PropTypes.string,
+  //   password: PropTypes.string
+  // }).isRequired,
+};
+// selectedCookies
 export default ModalCookieDetails;

@@ -1,5 +1,6 @@
 import EmailSVG from "../../../Authpage/Forms/icons/EmailSVG";
 import ErrorMessages from "../../../Errors/ErrorMessages";
+import PropTypes from "prop-types";
 
 const Hero = ({ email, errors, handleChange, handleRecoverPassword }) => {
   return (
@@ -36,6 +37,13 @@ const Hero = ({ email, errors, handleChange, handleRecoverPassword }) => {
       </div>
     </>
   );
+};
+
+Hero.propTypes = {
+  email: PropTypes.string.isRequired,
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleRecoverPassword: PropTypes.func.isRequired,
 };
 
 export default Hero;

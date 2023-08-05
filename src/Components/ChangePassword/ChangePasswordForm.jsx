@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import PasswordSVG from "../Authpage/Forms/icons/PasswordSVG";
 import ErrorMessages from "../Errors/ErrorMessages";
 
@@ -62,6 +63,15 @@ const ChangePasswordForm = ({
       </form>
     </>
   );
+};
+
+ChangePasswordForm.propTypes = {
+  newPassword: PropTypes.string.isRequired,
+  confirmedNewPassword: PropTypes.string.isRequired,
+  parentClass: PropTypes.string,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ChangePasswordForm;

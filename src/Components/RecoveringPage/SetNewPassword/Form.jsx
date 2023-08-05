@@ -1,5 +1,6 @@
 import EmailSVG from "../../Authpage/Forms/icons/EmailSVG";
 import ErrorMessages from "../../Errors/ErrorMessages";
+import PropTypes from "prop-types";
 
 // This component renders a form where the user can enter and confirm their new password
 const Form = ({
@@ -45,6 +46,15 @@ const Form = ({
       </form>
     </>
   );
+};
+
+Form.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  password: PropTypes.string,
+  confirmedPassword: PropTypes.string,
+  parentClass: PropTypes.string,
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Form;
