@@ -1,0 +1,20 @@
+.layout-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.sidebar {
+  flex: 0 0 25px; /* Задаем фиксированную ширину сайдбара, например, 200px */
+  height: 100vh; /* Задаем высоту сайдбара равной высоте окна просмотра */
+  background-color: #f7f7f7; /* Цвет фона для сайдбара */
+  border-right: 1px solid #e0e0e0; /* Граница справа */
+}
+
+.profile-hero {
+  flex: 1; /* Позволяет основному содержимому занимать все доступное пространство */
+  padding: 20px; /* Внутренние отступы для основного содержимого */
+}
+
+.sidebar .icon-sidebar {
+  stroke: black;
+}
