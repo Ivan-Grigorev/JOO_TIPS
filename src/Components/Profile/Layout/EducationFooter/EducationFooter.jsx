@@ -1,27 +1,28 @@
 import PropTypes from "prop-types";
 import "./EducationFooter.scss";
-import topicsIcon from "./icons/topics-icon.svg";
-import lessonsIcon from "./icons/lessons-icon.svg";
-import resultsIcon from "./icons/results-icon.svg";
+
+import LessonsIcon from "./icons/LessonsIcon";
+import TopicsIcon from "./icons/TopicsIcon";
+import ResultsIcon from "./icons/ResultsIcon";
 
 const EducationFooter = ({ handleButtonClick, activeContent }) => {
-  const renderButton = (contentKey, icon, label) => (
+  const renderButton = (contentKey, IconComponent, label) => (
     <button
       className={`education-footer__buttons ${
         activeContent === contentKey ? "active" : ""
       }`}
       onClick={() => handleButtonClick(contentKey)}
     >
-      <img src={icon} alt={label} />
+      <IconComponent />
       {label}
     </button>
   );
 
   return (
     <footer className="education-footer">
-      {renderButton("Topics", topicsIcon, "Topics")}
-      {renderButton("Lessons", lessonsIcon, "Lessons")}
-      {renderButton("Results", resultsIcon, "Results")}
+      {renderButton("Topics", TopicsIcon, "Topics")}
+      {renderButton("Lessons", LessonsIcon, "Lessons")}
+      {renderButton("Results", ResultsIcon, "Results")}
     </footer>
   );
 };
