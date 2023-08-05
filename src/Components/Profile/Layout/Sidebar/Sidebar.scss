@@ -4,17 +4,39 @@
 }
 
 .sidebar {
-  flex: 0 0 25px; /* Задаем фиксированную ширину сайдбара, например, 200px */
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+
+  // flex: 0 0 25px; /* Задаем фиксированную ширину сайдбара, например, 200px */
   height: 100vh; /* Задаем высоту сайдбара равной высоте окна просмотра */
-  background-color: #f7f7f7; /* Цвет фона для сайдбара */
-  border-right: 1px solid #e0e0e0; /* Граница справа */
+  background-color: #163a65; /* Цвет фона для сайдбара */
+}
+
+.sidebar button {
+  width: 21px;
+  height: 100px;
+
+  border: 1px solid #71809640;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+
+  @media screen and (min-width: 360px) {
+    height: 160px;
+  }
+}
+
+.sidebar button svg {
+  width: 18px;
+  margin-right: 5px;
 }
 
 .profile-hero {
+  min-height: 655px;
   flex: 1; /* Позволяет основному содержимому занимать все доступное пространство */
   padding: 20px; /* Внутренние отступы для основного содержимого */
 }
 
 .sidebar .icon-sidebar {
-  stroke: black;
+  stroke: rgb(131, 128, 128);
 }
