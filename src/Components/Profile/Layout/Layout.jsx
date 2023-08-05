@@ -1,10 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import "./Layout.scss";
-import EducationLayout from "./EducationLayout";
+
+const EducationLayout = lazy(() => import("./EducationLayout"));
 
 const Layout = () => {
   const location = useLocation();
