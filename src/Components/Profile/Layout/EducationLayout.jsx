@@ -31,6 +31,11 @@ const EducationLayout = () => {
             {activeEducationContent === "Topics" && <Topics />}
             {activeEducationContent === "Lessons" && <Lessons />}
             {activeEducationContent === "Results" && <Results />}
+
+            {activeEducationContent === "Competition" && <Topics />}
+            {activeEducationContent === "Examinations" && <Results />}
+            {activeEducationContent === "Ratings" && <Lessons />}
+            {activeEducationContent === "Matches" && <Results />}
           </Suspense>
         </main>
       </div>

@@ -11,14 +11,14 @@ const Sidebar = ({ activeContent, handleButtonClick }) => {
         <Competition />
       </button>
       <button
-        className={activeContent === "Ratings" ? "active" : ""}
-        onClick={() => handleButtonClick("Ratings")}
+        className={activeContent === "Examinations" ? "active" : ""}
+        onClick={() => handleButtonClick("Examinations")}
       >
         <Examinations />
       </button>
       <button
-        className={activeContent === "Matches" ? "active" : ""}
-        onClick={() => handleButtonClick("Matches")}
+        className={activeContent === "Ratings" ? "active" : ""}
+        onClick={() => handleButtonClick("Ratings")}
       >
         <Ratings />
       </button>
