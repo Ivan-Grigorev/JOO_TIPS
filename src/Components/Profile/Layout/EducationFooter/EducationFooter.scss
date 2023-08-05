@@ -31,3 +31,11 @@
   color: white;
   cursor: pointer;
 }
+
+.education-footer .icon-stroke {
+  stroke: gray; /* Обычное состояние - серый цвет */
+}
+
+.education-footer .active .icon-stroke {
+  stroke: white; /* Цвет при классе .active - белый */
+}
