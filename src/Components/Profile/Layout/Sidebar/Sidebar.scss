@@ -21,6 +21,10 @@
   border-top-right-radius: 14px;
   border-bottom-right-radius: 14px;
 
+  transition-property: stroke, background-color;
+  transition-duration: 350ms;
+  transition-timing-function: ease;
+
   @media screen and (min-width: 360px) {
     height: 160px;
   }
@@ -29,6 +33,13 @@
 .sidebar button svg {
   width: 18px;
   margin-right: 5px;
+}
+
+.sidebar button.active {
+  background-color: #163559;
+}
+.sidebar button.active .icon-sidebar {
+  stroke: white;
 }
 
 .profile-hero {

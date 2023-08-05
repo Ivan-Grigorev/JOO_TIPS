@@ -6,6 +6,10 @@ import Topics from "../EducationContent/Topics/Topics";
 import Lessons from "../EducationContent/Lessons/Lessons";
 import Results from "../EducationContent/Results/Results";
 import Sidebar from "./Sidebar/Sidebar";
+import Competition from "../EducationContent/Competition/Competition";
+import Examinations from "../EducationContent/Examinations/Examinations";
+import Matches from "../EducationContent/Matches/Matches";
+import Ratings from "../EducationContent/Ratings/Ratings";
 
 const EducationLayout = () => {
   const [activeEducationContent, setActiveEducationContent] =
@@ -32,10 +36,10 @@ const EducationLayout = () => {
             {activeEducationContent === "Lessons" && <Lessons />}
             {activeEducationContent === "Results" && <Results />}
 
-            {activeEducationContent === "Competition" && <Topics />}
-            {activeEducationContent === "Examinations" && <Results />}
-            {activeEducationContent === "Ratings" && <Lessons />}
-            {activeEducationContent === "Matches" && <Results />}
+            {activeEducationContent === "Competition" && <Competition />}
+            {activeEducationContent === "Examinations" && <Examinations />}
+            {activeEducationContent === "Ratings" && <Ratings />}
+            {activeEducationContent === "Matches" && <Matches />}
           </Suspense>
         </main>
       </div>
