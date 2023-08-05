@@ -8,3 +8,36 @@
 .react-calendar__navigation button:enabled:focus {
   background-color: transparent;
 }
+
+// date
+
+.react-calendar__tile--now {
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid yellow !important;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid orangered;
+}
+
+// disabled years listing
+.react-calendar__navigation button:disabled {
+  background-color: transparent;
+  color: transparent;
+}
+
+// month name
+.react-calendar__navigation__label__labelText {
+  color: white;
+}
+
+// weekends
+.react-calendar__month-view__days__day--weekend:not(
+    .react-calendar__month-view__days__day--neighboringMonth
+  ) {
+  // выделяем все выходные дни КРОМЕ тех которые в пред./след. месяцах
+  color: white;
+}
