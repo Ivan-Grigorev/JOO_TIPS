@@ -23,6 +23,12 @@ const Lessons = () => {
         maxDetail="month" // The largest view is a month
         minDate={minDate} // Apply the minimum date here
         maxDate={maxDate} // Apply the maximum date here
+        formatShortWeekday={(locale, date) => {
+          // Возвращаем первую букву названия дня недели
+          return new Intl.DateTimeFormat(locale, { weekday: "narrow" }).format(
+            date
+          );
+        }}
       />
     </>
   );
