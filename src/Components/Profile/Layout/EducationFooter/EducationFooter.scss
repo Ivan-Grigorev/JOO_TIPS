@@ -24,9 +24,10 @@
 
   color: #c8c8c8;
   background-color: #1f4573;
+}
 
-  &:is(:hover, :focus) {
-    color: white;
-    cursor: pointer;
-  }
+.education-footer .active,
+.education-footer__buttons:is(:hover, :focus) {
+  color: white;
+  cursor: pointer;
 }
