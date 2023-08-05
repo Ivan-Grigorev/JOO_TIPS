@@ -7,7 +7,7 @@ export const Competition = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_1621_4857)">
+      <g clipPath="url(#clip0_1621_4857)">
         <path
           d="M5 4H9C9.26522 4 9.51957 4.10536 9.70711 4.29289C9.89464 4.48043 10 4.73478 10 5V9C10 9.26522 9.89464 9.51957 9.70711 9.70711C9.51957 9.89464 9.26522 10 9 10H5"
           // stroke="white"
@@ -67,7 +67,7 @@ export const Examinations = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_1621_4858)">
+      <g clipPath="url(#clip0_1621_4858)">
         <path
           d="M18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4Z"
           stroke="white"
@@ -105,7 +105,7 @@ export const Ratings = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_1621_4859)">
+      <g clipPath="url(#clip0_1621_4859)">
         <path
           d="M8 21H16"
           // stroke="white"
