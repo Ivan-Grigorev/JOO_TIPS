@@ -5,6 +5,7 @@ import EducationHeader from "./EducationHeader/EducationHeader";
 import Topics from "../EducationContent/Topics/Topics";
 import Lessons from "../EducationContent/Lessons/Lessons";
 import Results from "../EducationContent/Results/Results";
+import Sidebar from "./Sidebar/Sidebar";
 
 const EducationLayout = () => {
   const [activeEducationContent, setActiveEducationContent] =
@@ -18,13 +19,22 @@ const EducationLayout = () => {
   return (
     <>
       <EducationHeader />
-      <main className="profile-hero education-hero">
-        <Suspense fallback={<ChakraSpinner />}>
-          {activeEducationContent === "Topics" && <Topics />}
-          {activeEducationContent === "Lessons" && <Lessons />}
-          {activeEducationContent === "Results" && <Results />}
-        </Suspense>
-      </main>
+
+      <div className="layout-container">
+        <Sidebar
+          activeContent={activeEducationContent}
+          handleButtonClick={handleButtonClick}
+        />
+
+        <main className="profile-hero education-hero">
+          <Suspense fallback={<ChakraSpinner />}>
+            {activeEducationContent === "Topics" && <Topics />}
+            {activeEducationContent === "Lessons" && <Lessons />}
+            {activeEducationContent === "Results" && <Results />}
+          </Suspense>
+        </main>
+      </div>
+
       <EducationFooter
         activeContent={activeEducationContent}
         handleButtonClick={handleButtonClick}
