@@ -4,36 +4,31 @@ import topicsIcon from "./icons/topics-icon.svg";
 import lessonsIcon from "./icons/lessons-icon.svg";
 import resultsIcon from "./icons/results-icon.svg";
 
-const EducationFooter = ({ handleButtonClick }) => {
+const EducationFooter = ({ handleButtonClick, activeContent }) => {
+  const renderButton = (contentKey, icon, label) => (
+    <button
+      className={`education-footer__buttons ${
+        activeContent === contentKey ? "active" : ""
+      }`}
+      onClick={() => handleButtonClick(contentKey)}
+    >
+      <img src={icon} alt={label} />
+      {label}
+    </button>
+  );
+
   return (
     <footer className="education-footer">
-      <button
-        className="education-footer__buttons"
-        onClick={() => handleButtonClick("Topics")}
-      >
-        <img src={topicsIcon} alt="Topics" />
-        Topics
-      </button>
-      <button
-        className="education-footer__buttons"
-        onClick={() => handleButtonClick("Lessons")}
-      >
-        <img src={lessonsIcon} alt="Lessons" />
-        Lessons
-      </button>
-      <button
-        className="education-footer__buttons"
-        onClick={() => handleButtonClick("Results")}
-      >
-        <img src={resultsIcon} alt="Results" />
-        Results
-      </button>
+      {renderButton("Topics", topicsIcon, "Topics")}
+      {renderButton("Lessons", lessonsIcon, "Lessons")}
+      {renderButton("Results", resultsIcon, "Results")}
     </footer>
   );
 };
 
 EducationFooter.propTypes = {
   handleButtonClick: PropTypes.func.isRequired,
+  activeContent: PropTypes.string.isRequired,
 };
 
 export default EducationFooter;

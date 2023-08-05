@@ -22,35 +22,34 @@ const Layout = () => {
     window.scrollTo(0, 0);
   };
 
+  if (isLearningPage) {
+    return (
+      <>
+        <EducationHeader />
+        <main className="profile-hero education-hero">
+          <Suspense fallback={<ChakraSpinner />}>
+            {activeEducationContent === "Topics" && <Topics />}
+            {activeEducationContent === "Lessons" && <Lessons />}
+            {activeEducationContent === "Results" && <Results />}
+          </Suspense>
+        </main>
+        <EducationFooter
+          activeContent={activeEducationContent}
+          handleButtonClick={handleButtonClick}
+        />
+      </>
+    );
+  }
+
   return (
     <>
-      {isLearningPage ? (
-        <>
-          <EducationHeader />
-
-          <main className="profile-hero education-hero">
-            <Suspense fallback={<ChakraSpinner />}>
-              {activeEducationContent === "Topics" && <Topics />}
-              {activeEducationContent === "Lessons" && <Lessons />}
-              {activeEducationContent === "Results" && <Results />}
-            </Suspense>
-          </main>
-
-          <EducationFooter handleButtonClick={handleButtonClick} />
-        </>
-      ) : (
-        <>
-          <Header />
-
-          <main className="profile-hero">
-            <Suspense fallback={<ChakraSpinner />}>
-              <Outlet />
-            </Suspense>
-          </main>
-
-          <Footer />
-        </>
-      )}
+      <Header />
+      <main className="profile-hero">
+        <Suspense fallback={<ChakraSpinner />}>
+          <Outlet />
+        </Suspense>
+      </main>
+      <Footer />
     </>
   );
 };
