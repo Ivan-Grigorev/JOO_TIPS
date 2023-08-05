@@ -1,5 +1,3 @@
-import ResultsIcon from "../../EducationFooter/icons/ResultsIcon";
-
 export const Competition = () => {
   return (
     <svg
@@ -13,7 +11,7 @@ export const Competition = () => {
         <path
           d="M5 4H9C9.26522 4 9.51957 4.10536 9.70711 4.29289C9.89464 4.48043 10 4.73478 10 5V9C10 9.26522 9.89464 9.51957 9.70711 9.70711C9.51957 9.89464 9.26522 10 9 10H5"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -22,7 +20,7 @@ export const Competition = () => {
         <path
           d="M5 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929C9.89464 14.4804 10 14.7348 10 15V19C10 19.2652 9.89464 19.5196 9.70711 19.7071C9.51957 19.8946 9.26522 20 9 20H5"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -31,7 +29,7 @@ export const Competition = () => {
         <path
           d="M10 7H14C14.2652 7 14.5196 7.10536 14.7071 7.29289C14.8946 7.48043 15 7.73478 15 8V16C15 16.2652 14.8946 16.5196 14.7071 16.7071C14.5196 16.8946 14.2652 17 14 17H10"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -40,7 +38,7 @@ export const Competition = () => {
         <path
           d="M15 12H20"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -61,7 +59,41 @@ export const Competition = () => {
 };
 
 export const Examinations = () => {
-  return <ResultsIcon />;
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g clip-path="url(#clip0_1621_4858)">
+        <path
+          d="M18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4Z"
+          stroke="white"
+          // stroke-opacity="0.25"
+          className="icon-sidebar"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9 12L11 14L15 10"
+          stroke="white"
+          // stroke-opacity="0.25"
+          className="icon-sidebar"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_1621_4858">
+          <rect width="24" height="24" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
 };
 
 export const Ratings = () => {
@@ -77,7 +109,7 @@ export const Ratings = () => {
         <path
           d="M8 21H16"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -86,7 +118,7 @@ export const Ratings = () => {
         <path
           d="M12 17V21"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -95,7 +127,7 @@ export const Ratings = () => {
         <path
           d="M7 4H17"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -104,7 +136,7 @@ export const Ratings = () => {
         <path
           d="M17 4V12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12V4"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -113,7 +145,7 @@ export const Ratings = () => {
         <path
           d="M5 11C6.10457 11 7 10.1046 7 9C7 7.89543 6.10457 7 5 7C3.89543 7 3 7.89543 3 9C3 10.1046 3.89543 11 5 11Z"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -122,7 +154,7 @@ export const Ratings = () => {
         <path
           d="M19 11C20.1046 11 21 10.1046 21 9C21 7.89543 20.1046 7 19 7C17.8954 7 17 7.89543 17 9C17 10.1046 17.8954 11 19 11Z"
           // stroke="white"
-          stroke-opacity="0.25"
+          // stroke-opacity="0.25"
           className="icon-sidebar"
           fill="none"
           strokeLinecap="round"
@@ -150,7 +182,7 @@ export const Matches = () => {
       <path
         d="M4 15L20 15"
         // stroke="white"
-        stroke-opacity="0.25"
+        // stroke-opacity="0.25"
         className="icon-sidebar"
         fill="none"
         strokeLinecap="round"
@@ -159,7 +191,7 @@ export const Matches = () => {
       <path
         d="M4 9L20 9"
         // stroke="white"
-        stroke-opacity="0.25"
+        // stroke-opacity="0.25"
         className="icon-sidebar"
         fill="none"
         strokeLinecap="round"
@@ -170,7 +202,7 @@ export const Matches = () => {
         cy="12"
         r="9"
         // stroke="white"
-        stroke-opacity="0.25"
+        // stroke-opacity="0.25"
         className="icon-sidebar"
         fill="none"
         strokeLinecap="round"
