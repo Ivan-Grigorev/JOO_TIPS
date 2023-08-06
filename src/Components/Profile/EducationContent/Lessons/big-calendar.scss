@@ -21,6 +21,10 @@ $active-bg-color: lighten($primary-color, 40%);
   width: 700px;
   height: 500px;
 
+  @media screen and (min-width: 768px) {
+    height: 370px;
+  }
+
   padding: 15px;
 
   background-color: #1a4579;
@@ -31,10 +35,21 @@ $active-bg-color: lighten($primary-color, 40%);
   color: $text-color;
 }
 
+.rbc-now button {
+  color: orange;
+}
+
 // Стилизация активного/выбранного дня
 .rbc-day-slot .rbc-selected,
 .rbc-today {
-  background-color: $active-bg-color;
+  //   background-color: $active-bg-color;
+  background-color: transparent;
+  border: 1px solid orange;
+}
+
+// Стилизация месяца
+.rbc-toolbar .rbc-toolbar-label {
+  text-align: start;
 }
 
 // Стилизация событий в календаре

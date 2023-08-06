@@ -32,7 +32,6 @@ const Lessons = () => {
         events={schedule}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 500 }}
       />
     </>
   );
