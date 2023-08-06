@@ -1,0 +1,76 @@
+// MyBigCalendar.scss
+
+// Основной цвет
+$primary-color: #163a65;
+// Цвет текста
+$text-color: white;
+// Цвет для акцентов
+$accent-color: lighten($primary-color, 20%);
+// Цвет фона для активных/выбранных дней
+$active-bg-color: lighten($primary-color, 40%);
+
+// Стилизация шапки календаря
+.rbc-header {
+  background-color: $primary-color;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.rbc-calendar {
+  width: 700px;
+  height: 500px;
+
+  padding: 15px;
+
+  background-color: #1a4579;
+  border-radius: 10px;
+}
+
+.rbc-calendar button {
+  color: $text-color;
+}
+
+// Стилизация активного/выбранного дня
+.rbc-day-slot .rbc-selected,
+.rbc-today {
+  background-color: $active-bg-color;
+}
+
+// Стилизация событий в календаре
+.rbc-event {
+  background-color: $accent-color;
+  border-color: $primary-color;
+  color: $primary-color;
+
+  &:hover {
+    background-color: $primary-color;
+    color: white;
+  }
+}
+
+// Стилизация кнопок навигации и переключения между месяцами/неделями/днями
+.rbc-btn-group button {
+  background-color: $primary-color;
+  color: white;
+  margin: 0 5px;
+
+  &:hover,
+  &:focus {
+    background-color: $accent-color;
+    color: $primary-color;
+  }
+}
+
+// Стилизация дней вне текущего месяца
+.rbc-off-range-bg {
+  background-color: #14365f;
+}
+
+// Стилизация событий вне текущего месяца (если они есть)
+.rbc-off-range .rbc-event {
+  //   background-color: darken($accent-color, 10%);
+  //   color: lighten($primary-color, 40%);
+}
+
+// ... Вы можете продолжить стилизацию в соответствии со своими предпочтениями
