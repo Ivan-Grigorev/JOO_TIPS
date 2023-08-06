@@ -24,25 +24,26 @@ const EducationLayout = () => {
     <>
       <EducationHeader />
 
-      <div className="layout-container">
+      {/* <div className="layout-container">
         <Sidebar
           activeContent={activeEducationContent}
           handleButtonClick={handleButtonClick}
-        />
+        /> */}
 
-        <main className="profile-hero education-hero">
-          <Suspense fallback={<ChakraSpinner />}>
-            {activeEducationContent === "Topics" && <Topics />}
-            {activeEducationContent === "Lessons" && <Lessons />}
-            {activeEducationContent === "Results" && <Results />}
+      <main className="profile-hero education-hero">
+        <Suspense fallback={<ChakraSpinner />}>
+          {activeEducationContent === "Topics" && <Topics />}
+          {activeEducationContent === "Lessons" && <Lessons />}
+          {activeEducationContent === "Competitions" && <Competition />}
+          {activeEducationContent === "Results" && <Results />}
 
-            {activeEducationContent === "Competition" && <Competition />}
+          {/* {activeEducationContent === "Competition" && <Competition />}
             {activeEducationContent === "Examinations" && <Examinations />}
             {activeEducationContent === "Ratings" && <Ratings />}
-            {activeEducationContent === "Matches" && <Matches />}
-          </Suspense>
-        </main>
-      </div>
+            {activeEducationContent === "Matches" && <Matches />} */}
+        </Suspense>
+      </main>
+      {/* </div> */}
 
       <EducationFooter
         activeContent={activeEducationContent}

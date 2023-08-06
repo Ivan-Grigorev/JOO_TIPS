@@ -4,6 +4,7 @@ import "./EducationFooter.scss";
 import LessonsIcon from "./icons/LessonsIcon";
 import TopicsIcon from "./icons/TopicsIcon";
 import ResultsIcon from "./icons/ResultsIcon";
+import CompetitionIcon from "./icons/CompetitionIcon";
 // EducationFooter Component - Represents the footer section of the education page.
 const EducationFooter = ({ handleButtonClick, activeContent }) => {
   // Function to render individual buttons with corresponding icons and labels.
@@ -27,6 +28,7 @@ const EducationFooter = ({ handleButtonClick, activeContent }) => {
       {/* Render the Topics, Lessons, and Results buttons */}
       {renderButton("Topics", TopicsIcon, "Topics")}
       {renderButton("Lessons", LessonsIcon, "Lessons")}
+      {renderButton("Competitions", CompetitionIcon, "Competitions")}
       {renderButton("Results", ResultsIcon, "Results")}
     </footer>
   );
