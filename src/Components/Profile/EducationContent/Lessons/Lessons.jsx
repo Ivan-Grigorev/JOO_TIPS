@@ -1,34 +1,38 @@
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import "./Lessons-calendar.scss";
+// import "./Lessons-calendar.scss";
+
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./big-calendar.scss";
+
+// Установка локализации календаря на базе moment.js
+const localizer = momentLocalizer(moment);
 
 const Lessons = () => {
-  // Current year
-  const currentYear = new Date().getFullYear();
-
-  // Set the minimum date to the first day of the current year
-  const minDate = new Date(currentYear, 0, 1); // January 1st of the current year
-
-  // Set the maximum date to the last school month (June) of the next year
-  const nextYear = currentYear + 1;
-  const maxDate = new Date(nextYear, 5, 30); // June 30th of the next year
+  // Тестовые данные для графика
+  const schedule = [
+    {
+      title: "Тест по JavaScript",
+      start: new Date(2023, 7, 7, 10, 0), // 7 августа 2023 года, 10:00
+      end: new Date(2023, 7, 7, 11, 0), // 7 августа 2023 года, 11:00
+    },
+    {
+      title: "Вебинар по React",
+      start: new Date(2023, 7, 8, 14, 0), // 8 августа 2023 года, 14:00
+      end: new Date(2023, 7, 8, 16, 0), // 8 августа 2023 года, 16:00
+    },
+    // ... Добавьте больше событий по аналогии
+  ];
 
   return (
     <>
       <Calendar
-        calendarType="gregory" // Use "gregory" for the Gregorian calendar
-        locale="en-US" // Use "en-US" to display days of the week in English
-        view="month" // Display a month at a time
-        minDetail="month" // The smallest view is a month
-        maxDetail="month" // The largest view is a month
-        minDate={minDate} // Apply the minimum date here
-        maxDate={maxDate} // Apply the maximum date here
-        formatShortWeekday={(locale, date) => {
-          // Возвращаем первую букву названия дня недели
-          return new Intl.DateTimeFormat(locale, { weekday: "narrow" }).format(
-            date
-          );
-        }}
+        localizer={localizer}
+        views={["month"]}
+        events={schedule}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
       />
     </>
   );
