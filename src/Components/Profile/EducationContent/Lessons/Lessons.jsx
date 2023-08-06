@@ -5,6 +5,8 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./big-calendar.scss";
 import CustomToolbar from "./CalendarCustomToolbar";
+import { useState } from "react";
+import { useEffect } from "react";
 
 // Установка локализации календаря на базе moment.js
 const localizer = momentLocalizer(moment);
@@ -14,13 +16,13 @@ const Lessons = () => {
   const schedule = [
     {
       title: "Основы REACT",
-      start: new Date(2023, 7, 7, 10, 0), // 7 августа 2023 года, 10:00
-      end: new Date(2023, 7, 7, 11, 0), // 7 августа 2023 года, 11:00
+      start: new Date(2023, 7, 7, 10, 0),
+      end: new Date(2023, 7, 7, 11, 0),
     },
     {
-      title: "Redux",
-      start: new Date(2023, 7, 8, 14, 0), // 8 августа 2023 года, 14:00
-      end: new Date(2023, 7, 8, 16, 0), // 8 августа 2023 года, 16:00
+      title: "Основы Express",
+      start: new Date(2023, 7, 8, 14, 0),
+      end: new Date(2023, 7, 8, 16, 0),
     },
     // ... Добавьте больше событий по аналогии
   ];
