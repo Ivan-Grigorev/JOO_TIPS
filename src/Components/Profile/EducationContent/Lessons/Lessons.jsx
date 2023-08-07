@@ -6,50 +6,61 @@ import "./big-calendar.scss";
 import CustomToolbar from "./CalendarCustomToolbar";
 import { useState } from "react";
 import EventModal from "./EventModal";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLessons } from "../../../../redux/lessons/lessons-operations";
+import { useEffect } from "react";
+import { selectUserLessons } from "../../../../redux/lessons/lessons-selectors";
 
 // Установка локализации календаря на базе moment.js
 const localizer = momentLocalizer(moment);
 
 const Lessons = () => {
+  const dispatch = useDispatch();
   // Тестовые данные для графика
-  const schedule = [
-    {
-      topic: "Fundamentals of Express",
-      subtopic: "Introduction to Express",
-      flashcardsCount: 3,
-      lessonDate: new Date(2023, 7, 9, 10, 0), // required
-      endTime: new Date(2023, 7, 9, 10, 45), // required
-      lessonNumber: 3,
-      lessonDuration: 45,
-    },
-    {
-      topic: "Fundamentals of Express",
-      subtopic: "Routing in Express",
-      flashcardsCount: 6,
-      lessonDate: new Date(2023, 7, 10, 14, 0),
-      endTime: new Date(2023, 7, 10, 16, 0),
-      lessonNumber: 4,
-      lessonDuration: 45,
-    },
-    {
-      topic: "React Hooks",
-      subtopic: "useState and useEffect",
-      flashcardsCount: 4,
-      lessonDate: new Date(2023, 7, 11, 9, 0),
-      endTime: new Date(2023, 7, 11, 10, 30),
-      lessonNumber: 1,
-      lessonDuration: 45,
-    },
-    {
-      topic: "React Hooks",
-      subtopic: "useContext and useReducer",
-      flashcardsCount: 5,
-      lessonDate: new Date(2023, 7, 12, 13, 0),
-      endTime: new Date(2023, 7, 12, 15, 0),
-      lessonNumber: 2,
-      lessonDuration: 45,
-    },
-  ];
+  // const schedule = [
+  //   {
+  //     topic: "Fundamentals of Express",
+  //     subtopic: "Introduction to Express",
+  //     flashcardsCount: 3,
+  //     lessonDate: new Date(2023, 7, 9, 10, 0), // required
+  //     endTime: new Date(2023, 7, 9, 10, 45), // required
+  //     lessonNumber: 3,
+  //     lessonDuration: 45,
+  //   },
+  //   {
+  //     topic: "Fundamentals of Express",
+  //     subtopic: "Routing in Express",
+  //     flashcardsCount: 6,
+  //     lessonDate: new Date(2023, 7, 10, 14, 0),
+  //     endTime: new Date(2023, 7, 10, 16, 0),
+  //     lessonNumber: 4,
+  //     lessonDuration: 45,
+  //   },
+  //   {
+  //     topic: "React Hooks",
+  //     subtopic: "useState and useEffect",
+  //     flashcardsCount: 4,
+  //     lessonDate: new Date(2023, 7, 11, 9, 0),
+  //     endTime: new Date(2023, 7, 11, 10, 30),
+  //     lessonNumber: 1,
+  //     lessonDuration: 45,
+  //   },
+  //   {
+  //     topic: "React Hooks",
+  //     subtopic: "useContext and useReducer",
+  //     flashcardsCount: 5,
+  //     lessonDate: new Date(2023, 7, 12, 13, 0),
+  //     endTime: new Date(2023, 7, 12, 15, 0),
+  //     lessonNumber: 2,
+  //     lessonDuration: 45,
+  //   },
+  // ];
+
+  const schedule = useSelector(selectUserLessons);
+
+  useEffect(() => {
+    dispatch(fetchLessons());
+  }, [dispatch]);
 
   const [eventModalOpen, setEventModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);

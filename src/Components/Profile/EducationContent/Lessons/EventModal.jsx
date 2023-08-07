@@ -11,8 +11,6 @@ import {
 import "./eventModal.scss";
 
 const EventModal = ({ event, isOpen, onClose }) => {
-  console.log(event);
-
   const { lessonDuration, topic, subtopic, lessonNumber, flashcardsCount } =
     event;
   return (
