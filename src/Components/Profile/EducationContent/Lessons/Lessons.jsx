@@ -18,16 +18,37 @@ const Lessons = () => {
   // Тестовые данные для графика
   const schedule = [
     {
-      title: "Основы REACT",
-      start: new Date(2023, 7, 7, 10, 0),
-      end: new Date(2023, 7, 7, 11, 0),
+      topic: "Fundamentals of Express",
+      subtopic: "Introduction to Express",
+      flashcardsCount: 3,
+      startTime: new Date(2023, 7, 9, 10, 0),
+      endTime: new Date(2023, 7, 9, 11, 0),
+      lessonNumber: 3,
     },
     {
-      title: "Основы Express",
-      start: new Date(2023, 7, 8, 14, 0),
-      end: new Date(2023, 7, 8, 16, 0),
+      topic: "Fundamentals of Express",
+      subtopic: "Routing in Express",
+      flashcardsCount: 6,
+      startTime: new Date(2023, 7, 10, 14, 0),
+      endTime: new Date(2023, 7, 10, 16, 0),
+      lessonNumber: 4,
     },
-    // ... Добавьте больше событий по аналогии
+    {
+      topic: "React Hooks",
+      subtopic: "useState and useEffect",
+      flashcardsCount: 4,
+      startTime: new Date(2023, 7, 11, 9, 0),
+      endTime: new Date(2023, 7, 11, 10, 30),
+      lessonNumber: 1,
+    },
+    {
+      topic: "React Hooks",
+      subtopic: "useContext and useReducer",
+      flashcardsCount: 5,
+      startTime: new Date(2023, 7, 12, 13, 0),
+      endTime: new Date(2023, 7, 12, 15, 0),
+      lessonNumber: 2,
+    },
   ];
 
   const [eventModalOpen, setEventModalOpen] = useState(false);
@@ -51,8 +72,9 @@ const Lessons = () => {
         }}
         views={["month"]}
         events={schedule}
-        startAccessor="start"
-        endAccessor="end"
+        startAccessor="startTime"
+        endAccessor="endTime"
+        titleAccessor={"topic"}
         onSelectEvent={handleEventClick} // Обработчик для клика на событие
       />
 
