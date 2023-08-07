@@ -20,41 +20,56 @@ app.listen(PORT, async () => {
   setInterval(autoCheckSubscriptionTime, 3600000); // 3600000 миллисекунд - 1 час
 });
 
-// const createTestLessons = async () => {
-//   try {
-//     const userId = "64b5285e6384f51d63b4dbcd";
-//     const sampleLessonsForUser1 = [
-//       {
-//         userId,
-//         title: "Урок 1: Введение в JavaScript",
-//         points: 10,
-//       },
-//       {
-//         userId,
-//         title: "Урок 2: Основы React",
-//         points: 20,
-//       },
-//       // ... добавьте другие уроки по аналогии
-//     ];
+const createTestLessons = async () => {
+  try {
+    const userId = "64b5285e6384f51d63b4dbcd";
 
-//     const sampleLessonsForUser2 = [
-//       {
-//         userId,
-//         title: "Урок 1: Введение в JavaScript",
-//         points: 15,
-//       },
-//       {
-//         userId,
-//         title: "Урок 2: Основы React",
-//         points: 25,
-//       },
-//       // ... добавьте другие уроки по аналогии
-//     ];
+    const sampleLessons = [
+      {
+        userId,
+        topic: "Fundamentals of Express",
+        subtopic: "Introduction to Express",
+        flashcardsCount: 3,
+        lessonDate: new Date(2023, 7, 9, 10, 0),
+        endTime: new Date(2023, 7, 9, 10, 45),
+        lessonNumber: 3,
+        lessonDuration: 45,
+      },
+      {
+        userId,
+        topic: "Fundamentals of Express",
+        subtopic: "Routing in Express",
+        flashcardsCount: 6,
+        lessonDate: new Date(2023, 7, 10, 14, 0),
+        endTime: new Date(2023, 7, 10, 16, 0),
+        lessonNumber: 4,
+        lessonDuration: 45,
+      },
+      {
+        userId,
+        topic: "React Hooks",
+        subtopic: "useState and useEffect",
+        flashcardsCount: 4,
+        lessonDate: new Date(2023, 7, 11, 9, 0),
+        endTime: new Date(2023, 7, 11, 10, 30),
+        lessonNumber: 1,
+        lessonDuration: 45,
+      },
+      {
+        userId,
+        topic: "React Hooks",
+        subtopic: "useContext and useReducer",
+        flashcardsCount: 5,
+        lessonDate: new Date(2023, 7, 12, 13, 0),
+        endTime: new Date(2023, 7, 12, 15, 0),
+        lessonNumber: 2,
+        lessonDuration: 45,
+      },
+    ];
 
-//     // Сохраняем уроки для каждого пользователя
-//     await Lesson.insertMany(sampleLessonsForUser1);
-//     await Lesson.insertMany(sampleLessonsForUser2);
-//   } catch (error) {
-//     console.error(`error: ${error}`);
-//   }
-// };
+    // Save the lessons for the user
+    await Lesson.insertMany(sampleLessons);
+  } catch (error) {
+    console.error(`Error: ${error}`);
+  }
+};

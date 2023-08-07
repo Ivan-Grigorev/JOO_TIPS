@@ -12,14 +12,10 @@ const lessonSchema = new mongoose.Schema(
       required: [true, "Lesson points is required."],
       default: 0,
     },
-    title: {
-      type: String,
-      required: [true, "Lesson title is required."],
-      trim: true,
-    },
     topic: {
       type: String,
       required: [true, "Lesson topic is required."],
+      trim: true,
     },
     subtopic: {
       type: String,
