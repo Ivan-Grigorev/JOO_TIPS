@@ -48,6 +48,12 @@ $event-font-size: 11px;
     color: orange;
   }
 
+  .rbc-button-link {
+    width: 100%;
+    height: 100%;
+    text-align: end;
+  }
+
   .rbc-header {
     text-overflow: initial;
     background-color: $primary-color;
