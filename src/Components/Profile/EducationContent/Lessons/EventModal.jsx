@@ -5,6 +5,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  Divider,
 } from "@chakra-ui/react";
 
 import "./eventModal.scss";
@@ -12,7 +13,7 @@ import "./eventModal.scss";
 const EventModal = ({ event, isOpen, onClose }) => {
   console.log(event);
 
-  const { startTime, endTime, topic, subtopic, lessonNumber, flashcardsCount } =
+  const { lessonDuration, topic, subtopic, lessonNumber, flashcardsCount } =
     event;
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -20,12 +21,17 @@ const EventModal = ({ event, isOpen, onClose }) => {
       <ModalContent>
         <ModalHeader>
           <h1 className="calendar-modal__topic">{topic}</h1>
+          <Divider />
           <span className="calendar-modal__subtopic">{subtopic}</span>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <p>{`Start: ${startTime.toLocaleString()}`}</p>
-          <p>{`End: ${endTime.toLocaleString()}`}</p>
+          <p>{`Duration: ${lessonDuration} minutes`}</p>
+          <p>{`Cards amount: ${flashcardsCount}`}</p>
+          <Divider />
+          <button type="button" className="calendar-modal__start-lesson">
+            Start Lesson
+          </button>
           {/* Добавьте другие поля для отображения дополнительной информации о событии */}
         </ModalBody>
       </ModalContent>
