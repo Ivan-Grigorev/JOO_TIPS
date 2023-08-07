@@ -7,78 +7,48 @@ const lessonSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "UserID is required"],
     },
-    sessionId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Session",
-      required: [true, "SessionID is required"],
+    points: {
+      type: Number,
+      required: [true, "Lesson points is required."],
+      default: 0,
     },
-    lessonTypeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "LessonType",
-      required: [true, "LessonTypeID is required"],
+    title: {
+      type: String,
+      required: [true, "Lesson title is required."],
+      trim: true,
+    },
+    topic: {
+      type: String,
+      required: [true, "Lesson topic is required."],
+    },
+    subtopic: {
+      type: String,
+      required: [true, "Lesson subtopic is required."],
+    },
+    flashcardsCount: {
+      type: Number,
+      required: [true, "Number of flashcards is required."],
     },
     startTime: {
       type: Date,
-      required: [true, "Start time is required."],
+      // required: [true, "Start time is required."],
+      default: null,
     },
     endTime: {
       type: Date,
-      required: [true, "End time is required."],
-    },
-    flashcardsResult: {
-      type: [
-        {
-          flashcardId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Flashcard",
-          },
-          points: {
-            type: Number,
-            default: 0,
-          },
-          duration: {
-            type: Number,
-            default: 0,
-          },
-          viewsCount: {
-            type: Number,
-            default: 0,
-          },
-        },
-      ],
-      default: [],
-    },
-    testsResult: {
-      type: [
-        {
-          testId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Test",
-          },
-          points: {
-            type: Number,
-            default: 0,
-          },
-          duration: {
-            type: Number,
-            default: 0,
-          },
-        },
-      ],
-      default: [],
-    },
-    totalPoints: {
-      type: Number,
-      default: 0,
+      // required: [true, "End time is required."],
+      default: null,
     },
     lessonNumber: {
       type: Number,
       required: [true, "Lesson number is required."],
     },
-    isCompleted: {
-      type: Boolean,
-      default: false,
+    lessonDuration: {
+      type: Number,
+      // required: [true, "Lesson duration is required."],
+      default: 45,
     },
+    // ... other fields you may want to add
   },
   { versionKey: false }
 );
