@@ -5,7 +5,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./big-calendar.scss";
 import CustomToolbar from "./CalendarCustomToolbar";
 import { useState } from "react";
-import { useEffect } from "react";
 import EventModal from "./EventModal";
 
 // Установка локализации календаря на базе moment.js
