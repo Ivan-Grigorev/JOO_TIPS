@@ -132,4 +132,9 @@ $event-font-size: 11px;
   }
 }
 
+.calendar-modal__start-lesson {
+  @extend %button-styles;
+  margin: 25px 0 5px 0;
+}
+
 // Для стилей вне текущего контекста .rbc-calendar, убедитесь, что они не конфликтуют с другими компонентами
