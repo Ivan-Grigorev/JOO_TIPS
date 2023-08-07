@@ -26,8 +26,12 @@ const EventModal = ({ event, isOpen, onClose }) => {
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <p>{`Duration: ${lessonDuration} minutes`}</p>
-          <p>{`Cards amount: ${flashcardsCount}`}</p>
+          <p>
+            <span className="bold">Duration:</span> {lessonDuration} minutes
+          </p>
+          <p>
+            <span className="bold">Cards amount:</span> {flashcardsCount} cards
+          </p>
           <Divider />
           <button type="button" className="calendar-modal__start-lesson">
             Start Lesson
