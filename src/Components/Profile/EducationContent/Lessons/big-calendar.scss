@@ -126,6 +126,10 @@ $event-font-size: 11px;
     background-color: transparent !important;
     border: 1px solid orange !important;
   }
+
+  .past-day-bg {
+    border: 1px solid red;
+  }
 }
 
 // Для стилей вне текущего контекста .rbc-calendar, убедитесь, что они не конфликтуют с другими компонентами
