@@ -26,7 +26,6 @@ const lessonsSlice = createSlice({
       })
 
       .addCase(fetchLessons.fulfilled, (state, action) => {
-        // console.log(action.payload);
         state.lessons = action.payload;
         state.isLoading = initialState.isLoading;
       })

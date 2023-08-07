@@ -19,7 +19,6 @@ const fetchLessons = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.get("/lessons");
-      console.log(`data in fetchLessons - ${data}`);
       return data;
     } catch (error) {
       console.error("Error fetching lessons");
