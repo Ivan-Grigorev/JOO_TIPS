@@ -24,4 +24,19 @@ async function getLessonsPointsSum(req, res) {
   }
 }
 
-module.exports = { getLessonsPointsSum };
+async function getLessons(req, res) {
+  const userId = req.user.id;
+
+  try {
+    // Находим уроки, привязанные к заданному userId
+    const lessons = await Lesson.find({ userId });
+
+    // Отправляем уроки в ответе
+    res.json(lessons);
+  } catch (error) {
+    // В случае ошибки отправляем ошибку в ответе
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
+module.exports = { getLessonsPointsSum, getLessons };
