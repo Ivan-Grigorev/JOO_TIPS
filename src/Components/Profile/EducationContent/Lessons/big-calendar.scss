@@ -49,6 +49,7 @@ $event-font-size: 11px;
   }
 
   .rbc-header {
+    text-overflow: initial;
     background-color: $primary-color;
     color: $text-color;
     padding: 5px 10px;
@@ -82,6 +83,10 @@ $event-font-size: 11px;
         position: absolute;
         right: 10px;
         top: 15px;
+
+        @media screen and (max-width: 767px) {
+          font-size: 9px;
+        }
 
         font-size: 12px;
       }
