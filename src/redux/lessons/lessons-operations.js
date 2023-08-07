@@ -14,4 +14,18 @@ const fetchLessonsPointsTotalSum = createAsyncThunk(
   }
 );
 
-export { fetchLessonsPointsTotalSum };
+const fetchLessons = createAsyncThunk(
+  "lessons/fetchLessons",
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.get("/lessons");
+      console.log(`data in fetchLessons - ${data}`);
+      return data;
+    } catch (error) {
+      console.error("Error fetching lessons");
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export { fetchLessonsPointsTotalSum, fetchLessons };
