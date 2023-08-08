@@ -1,7 +1,8 @@
 @import "/src/scss/variables.scss";
 
 header .btn-login {
-  display: none;
+  display: block;
+  // display: none;
   z-index: 10;
 
   width: 99px;
@@ -30,7 +31,4 @@ header .btn-login {
     background-color: $button-hover-bg-color;
   }
 
-  @media screen and (min-width: 1320px) {
-    display: block;
-  }
 }
