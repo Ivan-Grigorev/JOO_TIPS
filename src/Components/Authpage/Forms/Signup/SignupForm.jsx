@@ -3,13 +3,14 @@ import { register } from "../../../../redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { selectUserErrors } from "../../../../redux/auth/auth-selectors";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { increaseReferralCount } from "../../../../redux/referral/referral-operations";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const query = new URLSearchParams(location.search);
   const ref = query.get("ref"); // refferal link
 
@@ -46,6 +47,8 @@ const SignupForm = () => {
 
       // console.log("ref", ref);
       if (ref !== null) return dispatch(increaseReferralCount({ email, ref }));
+
+      navigate("/languages/choose");
     } catch (rejectedValueOrSerializedError) {}
 
     // dont need a navigate to homepage, because authpage is a restricted route (see App.jsx)
