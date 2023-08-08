@@ -1,0 +1,37 @@
+.languages {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: #163a65;
+}
+
+.languages-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Две колонки равной ширины */
+  grid-gap: 10px; /* Промежуток между элементами */
+
+  padding-top: 10px;
+}
+
+.languages-list li {
+  width: 120px;
+  height: 100px;
+
+  padding: 5px;
+
+  text-align: center;
+
+  border-radius: 10px;
+  border: 1px solid white;
+
+  background-color: #1a4579;
+
+  & p:first-child {
+    text-transform: uppercase;
+    margin-bottom: 25px;
+  }
+}
