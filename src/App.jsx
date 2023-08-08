@@ -13,6 +13,7 @@ import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CookieBanner from "./Components/Cookie/Cookie";
+import Languages from "./Components/Languages/Languages";
 
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
@@ -82,6 +83,10 @@ const App = () => {
           <Route path="topics" element={null} />
           <Route path="lessons" element={null} />
           <Route path="results" element={null} />
+        </Route>
+
+        <Route path="/languages">
+          <Route path="choose" element={<Languages />} />
         </Route>
       </Routes>
       {isLoading && <ChakraSpinner />}
