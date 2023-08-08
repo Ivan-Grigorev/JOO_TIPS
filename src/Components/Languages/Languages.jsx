@@ -1,4 +1,5 @@
 import "./Languages.scss";
+import { JavascriptIcon } from "./icons/icons";
 const Languages = () => {
   return (
     <>

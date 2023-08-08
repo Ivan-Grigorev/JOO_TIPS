@@ -34,4 +34,8 @@
     text-transform: uppercase;
     margin-bottom: 25px;
   }
+
+  & p:nth-child(2) {
+    font-size: 12px;
+  }
 }
