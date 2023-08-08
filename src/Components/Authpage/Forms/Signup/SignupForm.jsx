@@ -44,7 +44,7 @@ const SignupForm = () => {
       const action = await dispatch(register({ name, email, password, confirmedPassword })); // prettier-ignore
       const originalPromiseResult = unwrapResult(action); // If the promise is resolved, this line will return the fulfilled value. If rejected, it will throw the error.
 
-      console.log("ref", ref);
+      // console.log("ref", ref);
       if (ref !== null) return dispatch(increaseReferralCount({ email, ref }));
     } catch (rejectedValueOrSerializedError) {}
 
