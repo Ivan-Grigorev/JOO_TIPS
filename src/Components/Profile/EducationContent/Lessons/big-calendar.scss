@@ -24,18 +24,30 @@ $event-font-size: 11px;
   }
 }
 
+// base styles
 .rbc-calendar {
   width: 300px;
   // height: 500px;
   min-height: 70vh;
 
+  margin-bottom: 200px;
+
   font-weight: normal;
-  @media screen and (min-width: 375px) {
+
+  @media screen and (min-width: 375px) and (max-width: 479px) {
     width: 350px;
   }
-
-  @media screen and (min-width: 767px) {
+  @media screen and (min-width: 480px) {
+    width: 450px;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    height: 700px;
     width: 700px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 950px;
+    height: 800px;
   }
 
   position: relative;
@@ -43,11 +55,9 @@ $event-font-size: 11px;
   padding: 15px;
   background-color: #1a4579;
   border-radius: 10px;
+}
 
-  @media screen and (min-width: 768px) {
-    height: 370px;
-  }
-
+.rbc-calendar {
   button:not(.rbc-button-link) {
     @extend %button-styles;
   }
@@ -59,7 +69,14 @@ $event-font-size: 11px;
   .rbc-button-link {
     width: 100%;
     height: 100%;
-    text-align: end;
+
+    text-align: center;
+
+    margin-left: 3%;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 18px;
+    }
   }
 
   .rbc-header {
@@ -71,6 +88,7 @@ $event-font-size: 11px;
 
     text-overflow: initial;
 
+    font-weight: 500;
     border-radius: 3px;
     background-color: $primary-color;
     color: $text-color;
@@ -88,7 +106,7 @@ $event-font-size: 11px;
 
       .current-month-label {
         margin: 0 10px;
-        font-weight: bold;
+        // font-weight: bold;
       }
 
       button {
@@ -125,6 +143,16 @@ $event-font-size: 11px;
       background-color: $primary-color;
       color: $text-color;
     }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 16px;
+    }
+  }
+
+  .rbc-event-content {
+    @media screen and (min-width: 1024px) {
+      white-space: normal;
+    }
   }
 
   .rbc-btn-group button {
@@ -145,7 +173,7 @@ $event-font-size: 11px;
   //   .rbc-selected,
   .rbc-today {
     background-color: transparent !important;
-    border: 1px solid orange !important;
+    border: 1px solid #ffa5009e !important;
   }
 
   .past-day-bg {
@@ -158,6 +186,16 @@ $event-font-size: 11px;
   .rbc-day-bg + .rbc-day-bg,
   .rbc-month-row + .rbc-month-row {
     border-color: $border-color;
+  }
+
+  .rbc-month-row {
+    flex-basis: initial;
+    justify-content: space-around;
+    height: 55px;
+
+    @media screen and (min-width: 768px) {
+      height: 95px;
+    }
   }
 }
 
