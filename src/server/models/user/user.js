@@ -82,6 +82,15 @@ const user = new mongoose.Schema(
         },
       },
     },
+    languages: {
+      type: [
+        {
+          type: String,
+          enum: ["JS", "Python", "Java", "Swift", "Ruby", "C", "C#", "C++"],
+        },
+      ],
+      default: [],
+    },
 
     avatar: {
       type: String,
