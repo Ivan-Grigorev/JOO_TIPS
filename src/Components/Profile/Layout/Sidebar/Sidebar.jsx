@@ -1,4 +1,4 @@
-import "./Sidebar.scss";
+// import "./Sidebar.scss";
 import { Competition, Examinations, Matches, Ratings } from "./icons/Icons";
 
 const Sidebar = ({ activeContent, handleButtonClick }) => {

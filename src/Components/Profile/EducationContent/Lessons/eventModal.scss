@@ -3,4 +3,11 @@
   font-weight: 600;
 }
 
+.chakra-modal__content {
+  @media screen and (max-width: 479px) {
+    height: 100%;
+    margin: 0;
+  }
+}
+
 // styles for buttons in big-calendar.scss
