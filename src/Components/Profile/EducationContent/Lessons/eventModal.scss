@@ -4,10 +4,11 @@
 }
 
 .chakra-modal__content {
-  @media screen and (max-width: 479px) {
+  @media screen and (max-width: 379px) {
     height: 100%;
     margin: 0;
   }
+  margin: auto;
 }
 
 // styles for buttons in big-calendar.scss
