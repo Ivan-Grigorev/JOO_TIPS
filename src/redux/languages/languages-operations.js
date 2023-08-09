@@ -18,10 +18,10 @@ const addLanguage = createAsyncThunk(
   "languages/addlanguages",
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post("/languages/add");
+      const { data } = await axios.post("/languages/add", credentials);
       return data;
     } catch (error) {
-      console.error("Error fetching languages");
+      console.error("Error adding languages");
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
