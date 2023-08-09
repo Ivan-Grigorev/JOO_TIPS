@@ -9,8 +9,13 @@ import Golang from "./icons/golang_logo.svg";
 import PHP from "./icons/php_logo.svg";
 
 import LanguageCard from "./LanguageCard";
-import { useDispatch } from "react-redux";
-import { addLanguage } from "../../redux/languages/languages-operations";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addLanguage,
+  fetchlanguages,
+} from "../../redux/languages/languages-operations";
+import { selectUserLanguages } from "../../redux/languages/languages-selectors";
+import { useEffect } from "react";
 
 const languagesData = [
   { iconSrc: Python, altText: "python", languageName: "Python" },
@@ -25,7 +30,13 @@ const languagesData = [
 
 const Languages = () => {
   const dispatch = useDispatch();
+  const userLanguages = useSelector(selectUserLanguages);
 
+  useEffect(() => {
+    dispatch(fetchlanguages());
+  }, [dispatch]);
+
+  console.log(`userLanguages = = = ${userLanguages}`);
   const chooseLanguage = (language) => {
     // console.log(language);
     dispatch(addLanguage({ language }));
@@ -40,6 +51,7 @@ const Languages = () => {
             key={index}
             {...language}
             chooseLanguage={chooseLanguage}
+            userLanguages={userLanguages}
           />
         ))}
       </div>

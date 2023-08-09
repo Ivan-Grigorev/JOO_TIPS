@@ -93,6 +93,8 @@
 .card-wrapper {
   perspective: 300px;
   perspective-origin: 50%;
+
+  transition: filter 550ms ease;
 }
 
 .card .card__text {
@@ -135,4 +137,12 @@
   font-size: 17px;
   font-weight: 500;
   // color: #14355c;
+}
+
+.disable__card {
+  filter: grayscale(1);
+  backdrop-filter: grayscale(1);
+
+  pointer-events: none;
+  cursor: no-drop;
 }
