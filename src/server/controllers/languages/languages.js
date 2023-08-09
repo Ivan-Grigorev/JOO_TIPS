@@ -18,6 +18,7 @@ async function add(req, res) {
     if (!newLanguage) return res.status(400).json({ message: "Language is required." }); // prettier-ignore
 
     user.languages.push(newLanguage); // Добавление языка в массив
+    user.languagesPoints.set(newLanguage, 0); // Добавление информации о языке и очках в languagesPoints
     await user.save(); // Сохранение изменений
 
     // console.log(`Language ${newLanguage} added to user ${user.name}`);
