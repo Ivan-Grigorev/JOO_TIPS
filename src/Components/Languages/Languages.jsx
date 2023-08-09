@@ -9,6 +9,8 @@ import Golang from "./icons/golang_logo.svg";
 import PHP from "./icons/php_logo.svg";
 
 import LanguageCard from "./LanguageCard";
+import { useDispatch } from "react-redux";
+import { addLanguage } from "../../redux/languages/languages-operations";
 
 const languagesData = [
   { iconSrc: Python, altText: "python", languageName: "Python" },
@@ -22,12 +24,23 @@ const languagesData = [
 ];
 
 const Languages = () => {
+  const dispatch = useDispatch();
+
+  const chooseLanguage = (language) => {
+    console.log(language);
+    dispatch(addLanguage({ language }));
+  };
+
   return (
     <section className="languages-section section">
       <p className="languages-title">Programming languages</p>
       <div className="language-cards-list">
         {languagesData.map((language, index) => (
-          <LanguageCard key={index} {...language} />
+          <LanguageCard
+            key={index}
+            {...language}
+            chooseLanguage={chooseLanguage}
+          />
         ))}
       </div>
     </section>
