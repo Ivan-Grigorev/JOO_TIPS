@@ -162,10 +162,37 @@ function userResetPassword(req, res, next) {
   next();
 }
 
+function userLanguage(req, res, next) {
+  // Define schema for validation.
+  const userLanguageSchema = Joi.object({
+    language: Joi.string()
+      .valid("JS", "Python", "Java", "Swift", "Ruby", "C", "C#", "C++")
+      .required()
+      .messages({
+        "string.base": "Language must be a string",
+        "any.only": "Invalid language",
+        "any.required": "Language is a required field",
+      }),
+  });
+
+  // Validate request body against the schema.
+  const { error } = userLanguageSchema.validate(req.body);
+
+  // If there is a validation error, return a 400 response.
+  if (error) {
+    console.error(`Joi Error: ${error}`.red);
+    return res.status(400).json({ message: error.message }).end();
+  }
+
+  // If validation passes, proceed to the next middleware.
+  next();
+}
+
 // Export all the validation middlewares.
 module.exports = {
   userJoi,
   userDeleteJoi,
   userUpdateProfile,
   userResetPassword,
+  userLanguage,
 };
