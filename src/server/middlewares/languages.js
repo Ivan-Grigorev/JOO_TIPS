@@ -6,9 +6,9 @@ async function isUniqueLanguage(req, res, next) {
     const newLanguage = req.body.language; // Язык из тела запроса
 
     if (user.languages.includes(newLanguage)) {
-      console.log(`Language ${newLanguage} already exists for the user`);
+      console.log(`${newLanguage} already exists for the user`);
       return res.status(409).json({
-        message: `Language ${newLanguage} already exists for the user`,
+        message: `${newLanguage} already exists for the user`,
       });
     }
     next();
