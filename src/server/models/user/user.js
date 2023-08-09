@@ -82,6 +82,7 @@ const user = new mongoose.Schema(
         },
       },
     },
+    
     languages: {
       type: [
         {
@@ -99,6 +100,11 @@ const user = new mongoose.Schema(
         },
       ],
       default: [],
+    },
+    languagesPoints: {
+      type: Map,
+      of: Number,
+      default: {},
     },
 
     avatar: {
