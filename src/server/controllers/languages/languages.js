@@ -20,7 +20,7 @@ async function add(req, res) {
     user.languages.push(newLanguage); // Добавление языка в массив
     await user.save(); // Сохранение изменений
 
-    console.log(`Language ${newLanguage} added to user ${user.name}`);
+    // console.log(`Language ${newLanguage} added to user ${user.name}`);
     res.status(200).json(user.languages);
   } catch (e) {
     console.log(`Error while adding language to user object: ${e}`);
