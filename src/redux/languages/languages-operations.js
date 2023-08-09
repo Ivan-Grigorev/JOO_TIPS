@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../config/axios";
+import { toast } from "react-toastify";
 
 const fetchlanguages = createAsyncThunk(
   "languages/fetchlanguages",
@@ -21,6 +22,7 @@ const addLanguage = createAsyncThunk(
       const { data } = await axios.post("/languages/add", credentials);
       return data;
     } catch (error) {
+      toast.error(error.response.data.message);
       console.error("Error adding languages");
       return thunkAPI.rejectWithValue(error.response.data.message);
     }

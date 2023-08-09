@@ -15,6 +15,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { cookieReducer } from "./cookies/cookies-slice";
 import { lessonsReducer } from "./lessons/lessons-slice";
+import { languagesReducer } from "./languages/languages-slice";
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -37,6 +38,7 @@ export const store = configureStore({
     subscription: subscriptionReducer,
     cookie: cookieReducer,
     lessons: lessonsReducer,
+    languages: languagesReducer,
   },
   middleware,
   //   devTools: process.env.NODE_ENV === "development",

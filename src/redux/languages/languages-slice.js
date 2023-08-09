@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchLessons, fetchLessonsPointsTotalSum } from "./lessons-operations";
 import { addLanguage, fetchlanguages } from "./languages-operations";
 
 const initialState = {
@@ -7,7 +6,7 @@ const initialState = {
   isLoading: false,
 };
 
-const lessonsSlice = createSlice({
+const languagesSlice = createSlice({
   name: "languages",
   initialState,
   reducers: {},
@@ -26,7 +25,7 @@ const lessonsSlice = createSlice({
       })
 
       .addCase(addLanguage.fulfilled, (state, action) => {
-        state.languages = action.payload;
+        // state.languages = action.payload;
         state.isLoading = initialState.isLoading;
       })
       .addCase(addLanguage.pending, (state) => {
@@ -38,5 +37,5 @@ const lessonsSlice = createSlice({
   },
 });
 
-export default lessonsSlice.reducer;
-export const lessonsReducer = lessonsSlice.reducer;
+export default languagesSlice.reducer;
+export const languagesReducer = languagesSlice.reducer;
