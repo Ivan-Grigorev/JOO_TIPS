@@ -27,7 +27,7 @@ const Languages = () => {
   const dispatch = useDispatch();
 
   const chooseLanguage = (language) => {
-    console.log(language);
+    // console.log(language);
     dispatch(addLanguage({ language }));
   };
 
