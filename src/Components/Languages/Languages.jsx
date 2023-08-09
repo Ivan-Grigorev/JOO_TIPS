@@ -16,6 +16,7 @@ import {
 } from "../../redux/languages/languages-operations";
 import { selectUserLanguages } from "../../redux/languages/languages-selectors";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const languagesData = [
   { iconSrc: Python, altText: "python", languageName: "Python" },
@@ -30,6 +31,7 @@ const languagesData = [
 
 const Languages = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userLanguages = useSelector(selectUserLanguages);
 
   useEffect(() => {
@@ -40,6 +42,7 @@ const Languages = () => {
   const chooseLanguage = (language) => {
     // console.log(language);
     dispatch(addLanguage({ language }));
+    navigate("/education");
   };
 
   return (
