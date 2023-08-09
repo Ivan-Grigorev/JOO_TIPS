@@ -166,7 +166,16 @@ function userLanguage(req, res, next) {
   // Define schema for validation.
   const userLanguageSchema = Joi.object({
     language: Joi.string()
-      .valid("Javascript", "Python", "Java", "Swift", "Ruby", "C", "C#", "C++")
+      .valid(
+        "Python",
+        "Javascript",
+        "Java",
+        "Swift",
+        "C#",
+        "C++",
+        "Golang",
+        "PHP"
+      )
       .required()
       .messages({
         "string.base": "Language must be a string",
