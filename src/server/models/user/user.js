@@ -86,7 +86,17 @@ const user = new mongoose.Schema(
       type: [
         {
           type: String,
-          enum: ["JS", "Python", "Java", "Swift", "Ruby", "C", "C#", "C++"],
+          enum: [
+            "Javascript",
+            "Python",
+            "Java",
+            "Swift",
+            "Ruby",
+            "C",
+            "C#",
+            "C++",
+            "PHP",
+          ],
         },
       ],
       default: [],
