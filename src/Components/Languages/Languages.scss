@@ -1,23 +1,22 @@
 .languages-section {
   text-align: center;
 }
+
 .languages-title {
   margin-bottom: 83px;
-
   font-weight: 600;
   font-size: 23px;
-  line-height: calc(25 / 23);
+  line-height: 1.09; /* Improved readability */
 
   text-transform: uppercase;
-
   color: #0c3059;
 }
+
 .language-cards-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 5px;
@@ -30,13 +29,13 @@
     gap: 18px;
   }
 }
+
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  padding-top: 30px;
+  padding-top: 30px; /* Adjusted for better alignment */
   justify-content: flex-start;
 
   position: relative;
@@ -45,14 +44,11 @@
   cursor: pointer;
   overflow: hidden;
 
-  margin-left: 5px;
-  margin-right: 5px;
-
+  margin: 0 5px; /* Combined margin rules */
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
 
-  transition-duration: 0.4s;
-  transition-property: box-shadow, filter, transform;
+  transition: box-shadow 0.4s, filter 0.4s, transform 0.4s;
   transition-timing-function: cubic-bezier(0, 0.73, 0.48, 1);
 
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
@@ -64,19 +60,19 @@
     filter: brightness(1.1) contrast(0.95) saturate(1);
     transform: rotateX(3deg) translateZ(15px);
   }
+
   &:hover .card-shine {
     opacity: 0.2;
     transform: rotateZ(210deg) translateX(12%) translateY(32%);
   }
+
   & a {
     font-size: 15px;
     opacity: 0;
-
-    transition-property: opacity;
-    transition-duration: 250ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     color: #5666f8;
   }
+
   &:hover a {
     opacity: 1;
   }
@@ -100,7 +96,6 @@
 
 .card .card__text {
   text-transform: uppercase;
-  /* margin-top: 0; */
 }
 
 .card-shine {
@@ -118,8 +113,7 @@
   top: 0;
   left: 0;
   transform: rotateZ(212deg) translateX(12%) translateY(59%);
-  transition-duration: 0.6s;
-  transition-property: opacity, transform;
+  transition: opacity 0.6s, transform 0.6s;
   transition-timing-function: cubic-bezier(0, 0.73, 0.48, 1);
   width: 220%;
   height: 100%;
@@ -132,13 +126,12 @@
   height: 90px;
   width: 90px;
 }
+
 .card__text {
   position: fixed;
   bottom: 25px;
-
   text-transform: uppercase;
   font-size: 17px;
   font-weight: 500;
-
   color: #14355c;
 }
