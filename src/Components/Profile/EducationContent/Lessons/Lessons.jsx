@@ -19,8 +19,8 @@ const Lessons = () => {
   // Тестовые данные для графика
   const exampleSchedule = [
     {
-      topic: "Fundamentals of Express",
-      subtopic: "Introduction to Express",
+      topic: "Fundamentals of React",
+      subtopic: "Introduction to React",
       flashcardsCount: 3,
       lessonDate: new Date(2023, 7, 9, 10, 0), // required
       endTime: new Date(2023, 7, 9, 10, 45), // required
