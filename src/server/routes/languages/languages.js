@@ -18,4 +18,6 @@ router.post(
   language.add
 );
 
+router.post("/add/active", joiValidation, middlewares.auth, language.setActive);
+
 module.exports = router;
