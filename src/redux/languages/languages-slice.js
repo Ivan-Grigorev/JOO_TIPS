@@ -19,7 +19,8 @@ const languagesSlice = createSlice({
     builder
       .addCase(fetchlanguages.fulfilled, (state, action) => {
         // console.log(action.payload);
-        state.languages = action.payload;
+        state.languages = action.payload.languages;
+        state.activeLanguage = action.payload.activeLanguage;
         state.isLoading = initialState.isLoading;
       })
       .addCase(fetchlanguages.pending, (state) => {
