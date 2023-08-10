@@ -8,7 +8,7 @@ async function get(req, res) {
       .json({ languages: user.languages, activeLanguage: user.activeLanguage });
   } catch (e) {
     console.error(`Error getting user languages: ${e.message}`);
-    res.status(500).json({ message: "Error getting user languages." });
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
