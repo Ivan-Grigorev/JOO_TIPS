@@ -29,4 +29,22 @@ async function add(req, res) {
   }
 }
 
-module.exports = { get, add };
+async function setActive(req, res) {
+  try {
+    const user = await User.findById(req.user.id);
+
+    const activeLanguage = req.body.language; // Язык из тела запроса
+    if (!activeLanguage) return res.status(400).json({ message: "Language is required." }); // prettier-ignore
+
+    user.activeLanguage = activeLanguage; // Сохраняем активный язык в объекте пользователя
+    await user.save(); // Сохранение изменений
+
+    // console.log(`Successfully set active language ${activeLanguage}`);
+    res.status(200).json(user.activeLanguage);
+  } catch (e) {
+    console.log(`Error while adding language to user object: ${e}`);
+    res.status(500).json({ message: e.message });
+  }
+}
+
+module.exports = { get, add, setActive };
