@@ -29,4 +29,17 @@ const addLanguage = createAsyncThunk(
   }
 );
 
-export { fetchlanguages, addLanguage };
+const setActiveLanguage = createAsyncThunk(
+  "languages/setActiveLanguage",
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post("/languages/add/active", credentials);
+      return data;
+    } catch (error) {
+      console.error("Error adding languages");
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export { fetchlanguages, addLanguage, setActiveLanguage };

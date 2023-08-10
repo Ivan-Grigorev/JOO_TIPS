@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addLanguage, fetchlanguages } from "./languages-operations";
+import {
+  addLanguage,
+  fetchlanguages,
+  setActiveLanguage,
+} from "./languages-operations";
 
 const initialState = {
   languages: [],
+  activeLanguage: null,
   isLoading: false,
 };
 
@@ -32,6 +37,17 @@ const languagesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(addLanguage.rejected, (state, action) => {
+        state.isLoading = initialState.isLoading;
+      })
+
+      .addCase(setActiveLanguage.fulfilled, (state, action) => {
+        state.activeLanguage = action.payload;
+        state.isLoading = initialState.isLoading;
+      })
+      .addCase(setActiveLanguage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(setActiveLanguage.rejected, (state, action) => {
         state.isLoading = initialState.isLoading;
       });
   },
