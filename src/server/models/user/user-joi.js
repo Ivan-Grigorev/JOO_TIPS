@@ -163,19 +163,20 @@ function userResetPassword(req, res, next) {
 }
 
 function userLanguage(req, res, next) {
+  const languageEnum = [
+    "Python",
+    "Javascript",
+    "Java",
+    "Swift",
+    "C#",
+    "C++",
+    "Golang",
+    "PHP",
+  ];
   // Define schema for validation.
   const userLanguageSchema = Joi.object({
     language: Joi.string()
-      .valid(
-        "Python",
-        "Javascript",
-        "Java",
-        "Swift",
-        "C#",
-        "C++",
-        "Golang",
-        "PHP"
-      )
+      .valid(...languageEnum)
       .required()
       .messages({
         "string.base": "Language must be a string",

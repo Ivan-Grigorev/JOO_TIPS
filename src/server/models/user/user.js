@@ -82,7 +82,7 @@ const user = new mongoose.Schema(
         },
       },
     },
-    
+
     languages: {
       type: [
         {
@@ -105,6 +105,21 @@ const user = new mongoose.Schema(
       type: Map,
       of: Number,
       default: {},
+    },
+    activeLanguage: {
+      type: String,
+      enum: [
+        "Javascript",
+        "Python",
+        "Java",
+        "Swift",
+        "C#",
+        "C++",
+        "PHP",
+        "Golang",
+        null,
+      ],
+      default: null,
     },
 
     avatar: {
