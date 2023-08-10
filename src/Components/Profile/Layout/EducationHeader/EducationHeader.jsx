@@ -3,11 +3,12 @@ import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink";
 import Avatar from "../Header/Avatar/Avatar";
 
 import "./EducationHeader.scss";
-import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations";
 import { selectLessonsTotalPoints } from "../../../../redux/lessons/lessons-selectors";
-import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors";
 import { selectUserActiveLanguage } from "../../../../redux/languages/languages-selectors";
+import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors";
+import { fetchlanguages } from "../../../../redux/languages/languages-operations";
 
 const EducationHeader = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const EducationHeader = () => {
 
   useEffect(() => {
     isLoggedIn && dispatch(fetchLessonsPointsTotalSum());
+    isLoggedIn && dispatch(fetchlanguages());
   }, [dispatch, isLoggedIn]);
 
   return (
