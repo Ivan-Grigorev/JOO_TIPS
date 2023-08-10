@@ -32,6 +32,12 @@ $event-font-size: 11px;
 
   font-weight: normal;
 
+  position: relative;
+
+  padding: 15px;
+  background-color: #1a4579;
+  border-radius: 10px;
+
   @media screen and (min-width: 375px) and (max-width: 479px) {
     width: 350px;
   }
@@ -48,12 +54,6 @@ $event-font-size: 11px;
     height: 800px;
   }
 
-  position: relative;
-
-  padding: 15px;
-  background-color: #1a4579;
-  border-radius: 10px;
-
   button:not(.rbc-button-link) {
     @extend %button-styles;
   }
@@ -67,8 +67,6 @@ $event-font-size: 11px;
     height: 100%;
 
     text-align: center;
-
-    padding: 100% 0;
 
     margin-left: 3%;
 
@@ -129,6 +127,9 @@ $event-font-size: 11px;
     }
   }
 
+  .rbc-row {
+    position: relative;
+  }
   .rbc-event {
     background-color: $accent-color;
     border-color: $primary-color;
@@ -136,7 +137,10 @@ $event-font-size: 11px;
     font-size: $event-font-size;
     color: $text-color;
 
-    display: none;
+    position: absolute;
+    top: -37px;
+    padding-bottom: 10%;
+    opacity: 0;
     &:hover {
       background-color: $primary-color;
       color: $text-color;
@@ -205,9 +209,9 @@ $event-font-size: 11px;
       height: 95px;
     }
   }
+}
+.calendar-modal__start-lesson {
+  @extend %button-styles;
 
-  .calendar-modal__start-lesson {
-    @extend %button-styles;
-    margin: 25px 0 5px 0;
-  }
+  margin: 25px 0 5px 0;
 }
