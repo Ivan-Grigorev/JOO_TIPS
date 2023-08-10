@@ -12,15 +12,17 @@ import { fetchlanguages } from "../../../../redux/languages/languages-operations
 
 const EducationHeader = () => {
   const dispatch = useDispatch();
-
-  const points = useSelector(selectLessonsTotalPoints);
-  const activeLanguage = useSelector(selectUserActiveLanguage);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    isLoggedIn && dispatch(fetchLessonsPointsTotalSum());
-    isLoggedIn && dispatch(fetchlanguages());
+    if (isLoggedIn) {
+      dispatch(fetchLessonsPointsTotalSum());
+      dispatch(fetchlanguages());
+    }
   }, [dispatch, isLoggedIn]);
+
+  const points = useSelector(selectLessonsTotalPoints);
+  const activeLanguage = useSelector(selectUserActiveLanguage);
 
   return (
     <>
