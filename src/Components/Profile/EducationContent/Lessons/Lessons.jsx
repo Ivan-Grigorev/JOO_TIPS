@@ -1,8 +1,8 @@
 // import "./Lessons-calendar.scss";
+import "./big-calendar.scss";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "./big-calendar.scss";
 import CustomToolbar from "./CalendarCustomToolbar";
 import { useState } from "react";
 import EventModal from "./EventModal";
