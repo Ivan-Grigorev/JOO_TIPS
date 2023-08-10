@@ -35,21 +35,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-top: 30px; /* Adjusted for better alignment */
   justify-content: flex-start;
 
+  padding-top: 30px; /* Adjusted for better alignment */
+  margin: 0 5px; /* Combined margin rules */
+
   position: relative;
+
   width: 130px;
   height: 215px;
+
   cursor: pointer;
   overflow: hidden;
 
-  margin: 0 5px; /* Combined margin rules */
+  filter: grayscale(1);
+  backdrop-filter: grayscale(1);
+
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
 
-  transition: box-shadow 0.4s, filter 0.4s, transform 0.4s;
+  transition: box-shadow 0.4s, filter 0.4s, transform 0.4s, backdrop-filter 1s;
   transition-timing-function: cubic-bezier(0, 0.73, 0.48, 1);
 
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
@@ -60,6 +65,8 @@
     box-shadow: 0px 14px 12px 0px rgba(0, 0, 0, 0.3);
     filter: brightness(1.1) contrast(0.95) saturate(1);
     transform: rotateX(3deg) translateZ(15px);
+
+    backdrop-filter: grayscale(0);
   }
 
   &:hover .card-shine {
@@ -86,6 +93,15 @@
     width: 200px;
     height: 240px;
   }
+}
+
+.disable__card {
+  // filter: grayscale(1);
+  // backdrop-filter: grayscale(1);
+
+  // pointer-events: none;
+  // user-select: none;
+  cursor: no-drop;
 }
 
 /* ! - - - - - card animation - - - - - */
@@ -137,13 +153,4 @@
   font-size: 17px;
   font-weight: 500;
   // color: #14355c;
-}
-
-.disable__card {
-  filter: grayscale(1);
-  backdrop-filter: grayscale(1);
-
-  pointer-events: none;
-  user-select: none;
-  cursor: no-drop;
 }
