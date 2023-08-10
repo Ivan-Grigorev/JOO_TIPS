@@ -7,10 +7,13 @@ import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-op
 import { useDispatch, useSelector } from "react-redux";
 import { selectLessonsTotalPoints } from "../../../../redux/lessons/lessons-selectors";
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors";
+import { selectUserActiveLanguage } from "../../../../redux/languages/languages-selectors";
 
 const EducationHeader = () => {
   const dispatch = useDispatch();
+
   const points = useSelector(selectLessonsTotalPoints);
+  const activeLanguage = useSelector(selectUserActiveLanguage);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
@@ -29,7 +32,10 @@ const EducationHeader = () => {
             <Avatar w="50px" h="50px" />
           </div>
 
-          <div className="education-header__points">{points}</div>
+          <div className="education-header__points">
+            <p>{activeLanguage}</p>
+            <p>{points}</p>
+          </div>
         </header>
       </>
     </>

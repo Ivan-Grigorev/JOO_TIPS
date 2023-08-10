@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addLanguage,
   fetchlanguages,
+  setActiveLanguage,
 } from "../../redux/languages/languages-operations";
 import { selectUserLanguages } from "../../redux/languages/languages-selectors";
 import { useEffect } from "react";
@@ -42,6 +43,7 @@ const Languages = () => {
   const chooseLanguage = (language) => {
     // console.log(language);
     dispatch(addLanguage({ language }));
+    dispatch(setActiveLanguage({ language }));
     navigate("/education");
   };
 
