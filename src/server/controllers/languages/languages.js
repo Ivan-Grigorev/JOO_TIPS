@@ -3,7 +3,9 @@ const User = require("../../models/user/user");
 async function get(req, res) {
   try {
     const user = await User.findById(req.user.id);
-    res.status(200).json(user.languages);
+    res
+      .status(200)
+      .json({ languages: user.languages, activeLanguage: user.activeLanguage });
   } catch (e) {
     console.error(`Error getting user languages: ${e.message}`);
     res.status(500).json({ message: "Error getting user languages." });
