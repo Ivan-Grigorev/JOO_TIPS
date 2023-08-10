@@ -39,7 +39,6 @@ const Languages = () => {
     dispatch(fetchlanguages());
   }, [dispatch]);
 
-  console.log(`userLanguages = = = ${userLanguages}`);
   const chooseLanguage = (language) => {
     // console.log(language);
     dispatch(addLanguage({ language }));
