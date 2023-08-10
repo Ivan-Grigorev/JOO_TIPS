@@ -82,7 +82,7 @@ const Lessons = () => {
           toolbar: CustomToolbar,
         }}
         views={["month"]}
-        events={exampleSchedule}
+        events={schedule}
         startAccessor="lessonDate"
         endAccessor="endTime"
         titleAccessor={"topic"}
