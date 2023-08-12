@@ -10,46 +10,57 @@ import Competition from "../EducationContent/Competition/Competition";
 import Examinations from "../EducationContent/Examinations/Examinations";
 import Matches from "../EducationContent/Matches/Matches";
 import Ratings from "../EducationContent/Ratings/Ratings";
+import { useSwipeable } from "react-swipeable";
+
+// const handleButtonClick = (contentKey) => {
+//   setActiveEducationContent(contentKey);
+//   window.scrollTo(0, 0);
+// };
 
 const EducationLayout = () => {
-  const [activeEducationContent, setActiveEducationContent] =
-    useState("Topics");
+  const contentOrder = ["Topics", "Lessons", "Competitions", "Results"];
+  const [activeEducationContentIndex, setActiveEducationContentIndex] =
+    useState(0);
 
-  const handleButtonClick = (contentKey) => {
-    setActiveEducationContent(contentKey);
+  const handleSwipe = (direction) => {
+    let nextIndex;
+
+    if (direction === "LEFT") {
+      nextIndex = (activeEducationContentIndex + 1) % contentOrder.length;
+    } else if (direction === "RIGHT") {
+      nextIndex =
+        (activeEducationContentIndex - 1 + contentOrder.length) %
+        contentOrder.length;
+    }
+
+    setActiveEducationContentIndex(nextIndex);
     window.scrollTo(0, 0);
   };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => handleSwipe("LEFT"),
+    onSwipedRight: () => handleSwipe("RIGHT"),
+  });
+
+  const activeEducationContent = contentOrder[activeEducationContentIndex];
 
   return (
     <>
       <EducationHeader />
 
-      {/* <div className="layout-container">
-        <Sidebar
-          activeContent={activeEducationContent}
-          handleButtonClick={handleButtonClick}
-        /> */}
-
-      <main className="profile-hero education-hero">
-        <Suspense fallback={<ChakraSpinner />}>
-          {activeEducationContent === "Topics" && <Topics />}
-          {activeEducationContent === "Lessons" && <Lessons />}
-          {activeEducationContent === "Competitions" && <Competition />}
-          {activeEducationContent === "Results" && <Results />}
-
-          {/* {activeEducationContent === "Competition" && <Competition />}
-            {activeEducationContent === "Examinations" && <Examinations />}
-            {activeEducationContent === "Ratings" && <Ratings />}
-            {activeEducationContent === "Matches" && <Matches />} */}
-        </Suspense>
+      <main className="profile-hero education-hero" {...handlers}>
+        {activeEducationContent === "Topics" && <Topics />}
+        {activeEducationContent === "Lessons" && <Lessons />}
+        {activeEducationContent === "Competitions" && <Competition />}
+        {activeEducationContent === "Results" && <Results />}
       </main>
-      {/* </div> */}
 
       <EducationFooter
         activeContent={activeEducationContent}
-        handleButtonClick={handleButtonClick}
+        // handleButtonClick={handleButtonClick}
       />
     </>
   );
 };
+
 export default EducationLayout;
