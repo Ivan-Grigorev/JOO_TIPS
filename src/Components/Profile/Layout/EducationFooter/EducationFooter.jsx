@@ -23,8 +23,10 @@ const EducationFooter = ({ handleButtonClick, activeContent }) => {
     );
   };
 
+  const shallHide = activeContent === "Achievements" ? "hide" : "";
+
   return (
-    <footer className="education-footer">
+    <footer className={`education-footer ${shallHide}`}>
       {/* Render the Topics, Lessons, and Results buttons */}
       {renderButton("Topics", TopicsIcon, "Topics")}
       {renderButton("Lessons", LessonsIcon, "Lessons")}
