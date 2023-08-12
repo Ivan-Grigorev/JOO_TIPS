@@ -1,5 +1,6 @@
-import { Suspense, useState } from "react";
+import { Fragment, Suspense, useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import { CSSTransition, TransitionGroup } from "react-transition-group"; // Импортируйте необходимые компоненты
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import EducationFooter from "./EducationFooter/EducationFooter";
 import EducationHeader from "./EducationHeader/EducationHeader";
@@ -12,6 +13,7 @@ import Examinations from "../EducationContent/Examinations/Examinations";
 import Matches from "../EducationContent/Matches/Matches";
 import Ratings from "../EducationContent/Ratings/Ratings";
 import Achievements from "../../Achievements/Achivements";
+import { useRef } from "react";
 
 const EducationLayout = () => {
   const contentOrder = [
@@ -21,8 +23,10 @@ const EducationLayout = () => {
     "Competitions",
     "Results",
   ];
+  const nodeRef = useRef(null); // Создайте реф
+
   const [activeEducationContentIndex, setActiveEducationContentIndex] =
-    useState(0);
+    useState(1); // set Topics as default content
 
   const handleSwipe = (direction) => {
     let nextIndex;
@@ -64,17 +68,34 @@ const EducationLayout = () => {
   });
 
   const activeEducationContent = contentOrder[activeEducationContentIndex];
+  const achievementsHero =
+    activeEducationContentIndex === 0 ? "achievements-hero" : "";
 
   return (
     <>
       <EducationHeader activeContent={activeEducationContent} />
 
-      <main className="profile-hero education-hero" {...handlers}>
+      <main
+        className={`profile-hero education-hero ${achievementsHero}`}
+        {...handlers}
+      >
+        {/* <TransitionGroup>
+          <CSSTransition
+            key={activeEducationContent}
+            timeout={700}
+            classNames="fade"
+            nodeRef={nodeRef} // Создайте реф
+          > */}
+        {/* Все ваши компоненты должны быть внутри этого одного дочернего элемента */}
+        {/* <div ref={nodeRef} className="fade"> */}
         {activeEducationContent === "Achievements" && <Achievements />}
         {activeEducationContent === "Topics" && <Topics />}
         {activeEducationContent === "Lessons" && <Lessons />}
         {activeEducationContent === "Competitions" && <Competition />}
         {activeEducationContent === "Results" && <Results />}
+        {/* </div> */}
+        {/* </CSSTransition>
+        </TransitionGroup> */}
       </main>
 
       <EducationFooter
