@@ -1,3 +1,8 @@
+.user-achievements__avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .user-achievements__avatar .user-avatar {
   width: 150px;
   height: 150px;
@@ -32,9 +37,6 @@
   padding: 2px;
   // border: 2px solid orange;
   box-shadow: 0 0 0 2px green; /* Цвет индикатора и его толщина */
-}
-
-.user-achievements__list li img {
 }
 
 .user-achievements__list li p {

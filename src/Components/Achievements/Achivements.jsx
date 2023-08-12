@@ -36,7 +36,19 @@ const Achievements = () => {
       image: "https://i.imgur.com/Vq6zHPa.jpg",
     },
     {
-      title: "FullSStack",
+      title: "FullStack",
+      image: "https://i.imgur.com/Vq6zHPa.jpg",
+    },
+    {
+      title: "Новичок ",
+      image: "https://i.imgur.com/Vq6zHPa.jpg",
+    },
+    {
+      title: "Капибара ",
+      image: "https://i.imgur.com/Vq6zHPa.jpg",
+    },
+    {
+      title: "Отличник",
       image: "https://i.imgur.com/Vq6zHPa.jpg",
     },
   ];
