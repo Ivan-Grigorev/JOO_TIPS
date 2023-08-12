@@ -19,10 +19,13 @@ const EducationLayout = () => {
 
   const handleSwipe = (direction) => {
     let nextIndex;
+    const leftSwipe = direction === "LEFT";
+    const rightSwipe = direction === "RIGHT";
 
-    if (direction === "LEFT") {
+    if (leftSwipe) {
       nextIndex = (activeEducationContentIndex + 1) % contentOrder.length;
-    } else if (direction === "RIGHT") {
+    }
+    if (rightSwipe) {
       nextIndex =
         (activeEducationContentIndex - 1 + contentOrder.length) %
         contentOrder.length;
@@ -30,13 +33,13 @@ const EducationLayout = () => {
 
     // Проверка на крайние элементы
     if (nextIndex >= 0 && nextIndex < contentOrder.length) {
-      if (
-        (activeEducationContentIndex === 0 && direction === "RIGHT") || // Если текущий контент - первый, и происходит свайп вправо
-        (activeEducationContentIndex === contentOrder.length - 1 &&
-          direction === "LEFT") // Если текущий контент - последний, и происходит свайп влево
-      ) {
-        return; // Не меняем контент, если пытаемся выйти за пределы крайних элементов
-      }
+      // Если текущий контент - первый, и происходит свайп вправо
+      const swipeRightWhenFirst = activeEducationContentIndex === 0 && rightSwipe; // prettier-ignore
+      // Если текущий контент - последний, и происходит свайп влево
+      const swipeLeftWhenLast = activeEducationContentIndex === contentOrder.length - 1 && leftSwipe; // prettier-ignore
+
+      // Не меняем контент, если пытаемся выйти за пределы крайних элементов
+      if (swipeRightWhenFirst || swipeLeftWhenLast) return;
 
       setActiveEducationContentIndex(nextIndex);
       window.scrollTo(0, 0);
