@@ -12,11 +12,6 @@ import Matches from "../EducationContent/Matches/Matches";
 import Ratings from "../EducationContent/Ratings/Ratings";
 import { useSwipeable } from "react-swipeable";
 
-// const handleButtonClick = (contentKey) => {
-//   setActiveEducationContent(contentKey);
-//   window.scrollTo(0, 0);
-// };
-
 const EducationLayout = () => {
   const contentOrder = ["Topics", "Lessons", "Competitions", "Results"];
   const [activeEducationContentIndex, setActiveEducationContentIndex] =
@@ -33,8 +28,19 @@ const EducationLayout = () => {
         contentOrder.length;
     }
 
-    setActiveEducationContentIndex(nextIndex);
-    window.scrollTo(0, 0);
+    // Проверка на крайние элементы
+    if (nextIndex >= 0 && nextIndex < contentOrder.length) {
+      if (
+        (activeEducationContentIndex === 0 && direction === "RIGHT") || // Если текущий контент - первый, и происходит свайп вправо
+        (activeEducationContentIndex === contentOrder.length - 1 &&
+          direction === "LEFT") // Если текущий контент - последний, и происходит свайп влево
+      ) {
+        return; // Не меняем контент, если пытаемся выйти за пределы крайних элементов
+      }
+
+      setActiveEducationContentIndex(nextIndex);
+      window.scrollTo(0, 0);
+    }
   };
 
   const handlers = useSwipeable({
