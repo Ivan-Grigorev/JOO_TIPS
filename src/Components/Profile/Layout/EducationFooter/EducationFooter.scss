@@ -12,6 +12,8 @@
   border-top: 1px solid #718096;
   background-color: #163a65;
 
+  transition: bottom 550ms;
+  transition-timing-function: ease-in-out;
   @media screen and (min-width: 768px) {
     justify-content: center;
   }
@@ -46,4 +48,8 @@
 
 .education-footer .active .icon-stroke {
   stroke: white; /* Цвет при классе .active - белый */
+}
+
+.hide {
+  bottom: -1000px;
 }
