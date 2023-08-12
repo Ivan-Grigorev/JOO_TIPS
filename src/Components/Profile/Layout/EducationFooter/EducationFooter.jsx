@@ -23,6 +23,7 @@ const EducationFooter = ({ handleButtonClick, activeContent }) => {
     );
   };
 
+
   const shallHide = activeContent === "Achievements" ? "hide" : "";
 
   return (
@@ -37,8 +38,8 @@ const EducationFooter = ({ handleButtonClick, activeContent }) => {
 };
 
 EducationFooter.propTypes = {
-  // handleButtonClick: PropTypes.func.isRequired,
-  // activeContent: PropTypes.string.isRequired,
+  handleButtonClick: PropTypes.func.isRequired,
+  activeContent: PropTypes.string.isRequired,
 };
 
 export default EducationFooter;
