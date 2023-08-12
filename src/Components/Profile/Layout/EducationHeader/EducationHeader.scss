@@ -1,11 +1,21 @@
 .education-header {
-  position: relative;
+  position: absolute;
+  top: 0;
+  width: 100%;
 
   padding: 10px;
 
   border-bottom: 1px solid #718096;
 
   background-color: #1a4579;
+
+  transition: top 550ms;
+  transition-timing-function: ease-in-out;
+}
+
+header.hide {
+  position: absolute;
+  top: -100%;
 }
 
 .education-header__top {
