@@ -36,7 +36,7 @@ const EducationFooter = ({ handleButtonClick, activeContent }) => {
 
 EducationFooter.propTypes = {
   // handleButtonClick: PropTypes.func.isRequired,
-  activeContent: PropTypes.string.isRequired,
+  // activeContent: PropTypes.string.isRequired,
 };
 
 export default EducationFooter;

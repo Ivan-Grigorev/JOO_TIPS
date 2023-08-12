@@ -46,6 +46,11 @@ const EducationLayout = () => {
     }
   };
 
+  const handleButtonClick = (contentKey) => {
+    const newIndex = contentOrder.indexOf(contentKey);
+    setActiveEducationContentIndex(newIndex);
+  };
+
   const handlers = useSwipeable({
     onSwipedLeft: () => handleSwipe("LEFT"),
     onSwipedRight: () => handleSwipe("RIGHT"),
@@ -66,7 +71,7 @@ const EducationLayout = () => {
 
       <EducationFooter
         activeContent={activeEducationContent}
-        // handleButtonClick={handleButtonClick}
+        handleButtonClick={handleButtonClick}
       />
     </>
   );
