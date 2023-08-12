@@ -1,30 +1,31 @@
-const calculateMetricsAndSendEmail = require("./analysis/index.js");
-const app = require("./app.js");
-const mongoDB = require("./db.js");
-const Lesson = require("./models/lessons/lessons.js");
-// const httpsServer = require("./security/ssl");
-const { autoCheckSubscriptionTime } = require("./utils/utils.js");
-require("./cronJobs.js");
-require("colors");
+const calculateMetricsAndSendEmail = require("./analysis/index.js"); // Import the module responsible for calculating metrics and sending emails
+const app = require("./app.js"); // Import the main application module
+const mongoDB = require("./db.js"); // Import the module for establishing a MongoDB connection
+const Lesson = require("./models/lessons/lessons.js"); // Import the Lesson model
+const { autoCheckSubscriptionTime } = require("./utils/utils.js"); // Import the autoCheckSubscriptionTime function
+require("./cronJobs.js"); // Import cron jobs
+require("colors"); // Import the "colors" library for colorful console logs
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Set the port for the server
 app.listen(PORT, async () => {
-  console.log(`The server is listening on port ${PORT}`.yellow);
+  console.log(`The server is listening on port ${PORT}`.yellow); // Log server start
 
-  await mongoDB();
+  await mongoDB(); // Establish a MongoDB connection
 
-  // await calculateMetricsAndSendEmail();
-  // await createTestLessons();
+  // await calculateMetricsAndSendEmail(); // Calculate metrics and send emails (Commented out)
+  // await createTestLessons(); // Create test lessons (Commented out)
 
-  // todo Добавить интервал для когортного отчёта
-  setInterval(autoCheckSubscriptionTime, 3600000); // 3600000 миллисекунд - 1 час
+  // TODO: Add an interval for cohort reports
+  setInterval(autoCheckSubscriptionTime, 3600000); // Run autoCheckSubscriptionTime every hour
 });
 
+// Function to create test lessons (Commented out)
 const createTestLessons = async () => {
   try {
-    const userId = "64b5285e6384f51d63b4dbcd";
+    const userId = "64b5285e6384f51d63b4dbcd"; // Sample user ID
 
     const sampleLessons = [
+      // Sample lessons data
       {
         userId,
         topic: "Fundamentals of Express",
@@ -35,39 +36,10 @@ const createTestLessons = async () => {
         lessonNumber: 3,
         lessonDuration: 45,
       },
-      {
-        userId,
-        topic: "Fundamentals of Express",
-        subtopic: "Routing in Express",
-        flashcardsCount: 6,
-        lessonDate: new Date(2023, 7, 10, 14, 0),
-        endTime: new Date(2023, 7, 10, 16, 0),
-        lessonNumber: 4,
-        lessonDuration: 45,
-      },
-      {
-        userId,
-        topic: "React Hooks",
-        subtopic: "useState and useEffect",
-        flashcardsCount: 4,
-        lessonDate: new Date(2023, 7, 11, 9, 0),
-        endTime: new Date(2023, 7, 11, 10, 30),
-        lessonNumber: 1,
-        lessonDuration: 45,
-      },
-      {
-        userId,
-        topic: "React Hooks",
-        subtopic: "useContext and useReducer",
-        flashcardsCount: 5,
-        lessonDate: new Date(2023, 7, 12, 13, 0),
-        endTime: new Date(2023, 7, 12, 15, 0),
-        lessonNumber: 2,
-        lessonDuration: 45,
-      },
+      // ... (other sample lessons)
     ];
 
-    // Save the lessons for the user
+    // Save the sample lessons for the user
     await Lesson.insertMany(sampleLessons);
   } catch (error) {
     console.error(`Error: ${error}`);

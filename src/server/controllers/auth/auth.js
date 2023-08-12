@@ -7,23 +7,31 @@ const getCountryFromIP = require("../../utils/getCountryFromIP.js");
 require("colors");
 moment.tz.setDefault("Europe/Prague");
 
+// This function handles user registration and account creation.
 async function signup(req, res, next) {
   try {
+    // Extract user details from the request body.
     const { name, email, password } = req.body;
+    // Get the user's IP address.
     const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    // Get user's country based on the IP address.
     const userCountry = await getCountryFromIP(userIP);
 
+    // Generate a salt for password hashing using bcrypt.
     bcrypt.genSalt(10, async (err, salt) => {
       if (err) return next(err);
 
+      // Hash the user's password with the generated salt.
       bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return next(err);
 
+        // Create a new user using the provided details and hashed password.
         const newUser = await User.create({
           name,
           email,
           password: hash,
           country: userCountry || "not identified",
+          // Initialize user profile and subscription details.
           profile: {
             about: null,
             username: null,
@@ -38,6 +46,7 @@ async function signup(req, res, next) {
               endDate: null,
             },
           },
+          // Store IP and device information.
           IP: {
             firstUserIP: userIP,
             lastUserIP: userIP,
@@ -50,19 +59,24 @@ async function signup(req, res, next) {
           registrationDate: new Date(),
         });
 
+        // Generate a JWT token for the newly registered user.
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
           expiresIn: "12h",
         });
 
+        // Hash the user's ID and set it as part of the username for privacy.
         bcrypt.hash(`User#${newUser._id}}`, salt, async (err, usernameHash) => {
           if (err) return next(err);
 
+          // Update the user's token and username in the database.
           newUser.token = token;
           newUser.profile.username = `User-${usernameHash}`;
           await newUser.save();
 
+          // Update the token in the request user object.
           req.user.token = token;
 
+          // Compose the welcome email subject and HTML content.
           const subject = "Ласкаво просимо до JooTips!";
           const HTML = `<p>Привіт <strong>${newUser.name}</strong>,</p>
         <p>Дякуємо вам за реєстрацію на <strong>JooTips</strong>!</p>
@@ -78,8 +92,10 @@ async function signup(req, res, next) {
         <p>З повагою, <strong>Команда JooTips</strong></p>
         `;
 
-          //! await sendMail(newUser.email, newUser.name, subject, HTML);
+          // Uncomment the line below to send the welcome email.
+          // await sendMail(newUser.email, newUser.name, subject, HTML);
 
+          // Respond with the registered user's details and the generated token.
           return res.status(201).json({
             user: {
               name: newUser.name,
@@ -99,34 +115,46 @@ async function signup(req, res, next) {
       });
     });
   } catch (error) {
+    // Handle errors by sending a 500 Internal Server Error response.
     return res.status(500).json({ message: "Internal server error" });
   }
 }
 
+// This function handles user login authentication.
 async function login(req, res, next) {
   try {
-    const password = req.body.password; //* take a password from the request body
-    const userPassword = req.user.password; //* take a password from the user, stored on the past middleware
-    const userVerify = req.user.verify; //* take an verify status from the user
+    // Extract the password from the request body.
+    const password = req.body.password;
+    // Extract user's password and verify status from the user object (stored in previous middleware).
+    const userPassword = req.user.password;
+    const userVerify = req.user.verify;
 
+    // Check if the user is not verified.
     if (userVerify === false)
-      res.status(403).json({ message: "Not verified." });
+      return res.status(403).json({ message: "Not verified." });
 
+    // Compare the provided password with the stored user's password.
     bcrypt.compare(password, userPassword, async (err, result) => {
       if (err) return next(err);
 
-      if (result === false) return res.status(401).json({ message: "Email or password is wrong." }); // prettier-ignore
+      // If the passwords don't match, respond with an unauthorized status.
+      if (result === false)
+        return res.status(401).json({ message: "Email or password is wrong." });
 
+      // Generate a JWT token for the authenticated user.
       const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
         expiresIn: "12h",
       });
 
+      // Set the token in the request user object.
       req.user.token = token;
 
+      // Update the user's token in the database.
       const user = await User.findByIdAndUpdate(req.user.id, req.user, {
         new: true,
-      }); // set the token
+      });
 
+      // Respond with the user's details and the generated token.
       res.status(200).json({
         user: {
           name: user.name,
@@ -144,27 +172,38 @@ async function login(req, res, next) {
       });
     });
   } catch (error) {
+    // Log the error and respond with an unauthorized status.
     console.error(`Error while logging in: ${error}`.red);
     return res.status(401).json({ message: error });
   }
 }
 
+// This function logs out the currently logged-in user by clearing their authentication token.
 async function logout(req, res, next) {
   try {
-    await User.findOneAndUpdate({ email: req.user.email }, { token: null }); // set the token
+    // Find the user by their email and update their token to null.
+    await User.findOneAndUpdate({ email: req.user.email }, { token: null });
 
+    // Respond with a success status and no content (204 No Content).
     return res.status(204).end();
   } catch (error) {
+    // Log the error and send a 500 Internal Server Error response.
     console.error(`${error}`.red);
     return res.status(500).json({ message: "Logout error" });
   }
 }
 
+// This function retrieves the details of the currently logged-in user.
 async function getCurrentUser(req, res, next) {
   try {
+    // Extract the user ID from the request object.
     const { id } = req.user;
+
+    // Find the user's information using their ID.
     const user = await User.findById(id);
 
+    // Respond with a success status and the user's name, avatar, email, and phone.
+    // Also include the user's profile details.
     res.status(200).json({
       user: {
         name: user.name,
@@ -172,9 +211,10 @@ async function getCurrentUser(req, res, next) {
         email: user.email,
         phone: user.phone,
       },
-      profile: { ...user.profile },
+      profile: { ...user.profile }, // Copy the profile object.
     });
   } catch (error) {
+    // Log the error and send a 500 Internal Server Error response.
     console.log(`${error}`.red);
     res.status(500).json({ message: "Internal server error" });
   }
@@ -223,16 +263,20 @@ async function sendRecoverMail(req, res, next) {
   }
 }
 
+// This function checks if a given reset token is valid for password recovery.
 async function isTokenValid(req, res, next) {
   try {
-    // Find user with matching reset token
+    // Find a user with the provided reset token.
     const user = await User.findOne({ recoverPasswordToken: req.params.token });
 
-    if (!user) return res.status(400).send({ message: "Invalid or expired token" }); // prettier-ignore
+    // If no user is found with the token, respond with an error message.
+    if (!user)
+      return res.status(400).send({ message: "Invalid or expired token" });
 
-    // Redirect user to reset password page if valid: true
+    // If a user is found with the token, respond with a success status and valid: true.
     res.status(200).json({ valid: true });
   } catch (error) {
+    // Handle errors by sending a 500 Internal Server Error response.
     res.status(500).send({ message: "Internal server error" });
   }
 }
@@ -298,30 +342,37 @@ async function setNewPassword(req, res, next) {
   }
 }
 
-// This function is used to change user password
+// This function is used to change the user's password.
 async function changePassword(req, res, next) {
   try {
+    // Extract the new password from the request body.
     const password = req.body.password;
+    // Get the user's ID from the request object.
     const { id } = req.user;
 
+    // Generate a salt for password hashing using bcrypt.
     bcrypt.genSalt(10, async (err, salt) => {
       if (err) return next(err);
 
-      // Hash the new password with the salt
+      // Hash the new password with the generated salt.
       bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return next(err);
 
+        // Update the user's password with the new hashed password in the database.
         await User.findByIdAndUpdate(id, { password: hash });
 
+        // Log a success message and respond with a status indicating password change.
         console.log("Changing password - Success!".green);
         res.status(201).json({ passwordChanged: true });
       });
     });
   } catch (error) {
+    // Handle errors by logging the error and sending a 500 Internal Server Error response.
     console.error(`error while changing user password: ${error.message}`.red);
     res.status(500).json({ message: "Internal server error" });
   }
 }
+
 // The updateUserProfile function updates the user's profile details based on provided input.
 async function updateUserProfile(req, res) {
   try {
@@ -364,57 +415,75 @@ async function updateUserProfile(req, res) {
   }
 }
 
+// This function deletes the currently logged-in user.
 async function deleteCurrentUser(req, res, next) {
   try {
+    // Delete the user from the database based on their ID.
     const user = await User.deleteOne({ _id: req.user.id });
 
+    // Respond with a success status and no content (204 No Content).
     res.status(204).json(user);
   } catch (error) {
+    // Handle errors by sending a 500 Internal Server Error response.
     res.status(500).json({ message: `Internal server error.` });
-    // .json({ message: "Internal server error in deleteCurrentUser" });
   }
 }
 
+// This function retrieves subscription details for the logged-in user.
 async function getSubscriptionDetails(req, res, next) {
   try {
+    // Get the current time using the Moment.js library.
     const currentTime = moment();
+    // Extract the user ID from the request object.
     const { id } = req.user;
+
+    // Retrieve the user's information from the database.
     const user = await User.findById(id);
+    // Get the expiration date of the user's subscription.
     const expirationDate = moment(user.subscription.expired.endDate);
 
+    // Calculate the remaining time until the subscription expires.
     const remainingTime = expirationDate.diff(currentTime);
 
+    // Respond with a success status and include subscription details along with remaining time.
     res.status(200).json({ ...user.subscription, remainingTime });
   } catch (error) {
+    // Handle errors by sending a 500 Internal Server Error response.
     res.status(500).json({ message: "Internal server error" });
     console.error(`Error while getting subscription time: ${error}`.red);
   }
 }
 
+// This function updates a user's subscription and sends a confirmation email.
 async function updateUserSubscription(req, res, next) {
   try {
     const { id } = req.user;
-    const expiration = req.body.subscription.expirationDate; // from redux dispatch
+    const expiration = req.body.subscription.expirationDate; // Get expiration days from redux dispatch
 
+    // Calculate the subscription's end date based on the current date and expiration days.
     const endDate = moment(moment().valueOf())
       .add(expiration, "days")
       .valueOf();
 
+    // Define the updated subscription details.
     const subscription = {
       type: req.body.subscription.type,
       isPremium: true,
       expired: { startDate: moment().valueOf(), endDate },
     };
 
+    // Update the user's subscription information in the database.
     const user = await User.findByIdAndUpdate(
       id,
       { subscription },
       { new: true }
     );
 
+    // Calculate the remaining days of the subscription.
     const ms = moment(endDate).diff(moment()); // prettier-ignore
-    const expirationDate = `${Math.ceil(moment.duration(ms).asDays())} днiв.`;
+    const expirationDate = `${Math.ceil(moment.duration(ms).asDays())} days`;
 
+    // Compose the email subject and HTML content for the confirmation email.
     const subject = "Підтвердження платної підписки на сервісі JooTips";
     const HTML = `<p>Шановний користувачу,</p>
     <p>Ми хотіли б висловити щиру вдячність за ваше рішення укласти <strong>платну підписку</strong> на ${expirationDate} на нашому сервісі <strong>JooTips</strong>. Ваш вибір означає для нас набагато більше, ніж просто фінансову підтримку. Він підтверджує, що ви довіряєте нам і нашій роботі, а також визнаєте цінність, яку ми надаємо.</p>
@@ -425,20 +494,27 @@ async function updateUserSubscription(req, res, next) {
     <p>З найкращими побажаннями,</p>
     <p>Команда <strong>JooTips</strong>.</p>`;
 
+    // Respond with a success status and the updated subscription details.
     res.status(200).json(user.subscription);
 
+    // Send the confirmation email to the user.
     await sendMail(user.email, user.name, subject, HTML);
   } catch (error) {
+    // Handle errors by sending a 500 Internal Server Error response.
     res.status(500).json({ message: "Internal Server Error" });
     console.error(`Error while updating user subscription: ${error}`.red);
   }
 }
 
+// This function resets a user's subscription to an initial state.
 async function resetUserSubscription(req, res, next) {
   try {
+    // Extract the user ID from the request object.
     const { id } = req.user;
+    // Get the user's old subscription type from the request body.
     const userOldSubscriptionType = req.body.subscriptionType;
 
+    // Define the initial subscription state.
     const initialSubscription = {
       type: userOldSubscriptionType,
       isPremium: false,
@@ -448,15 +524,19 @@ async function resetUserSubscription(req, res, next) {
       },
     };
 
+    // Update the user's subscription information in the database.
     const user = await User.findByIdAndUpdate(
       id,
       { subscription: initialSubscription },
-      { new: true }
+      { new: true } // Return the updated user object after the update.
     );
+
+    // Respond with a success status and the updated subscription details.
     return res.status(200).json(user.subscription);
   } catch (error) {
+    // Handle errors by sending a 500 Internal Server Error response.
     res.status(500).json({
-      message: "Internal Server Error while reseting user subscription",
+      message: "Internal Server Error while resetting user subscription",
     });
   }
 }

@@ -5,34 +5,41 @@ const writeToSheet = require("./googleSheet.js");
 const EMAIL_INTERVAL = 15 * 60 * 1000; // 15 minutes in milliseconds
 const DEFAULT_COUNTRY = "Unknown";
 
+// Returns the date one month ago from the current date.
 const getDateOneMonthAgo = () => {
   const date = new Date();
   date.setMonth(date.getMonth() - 1);
   return date;
 };
 
+// Returns the date one week ago from the current date.
 const getDateOneWeekAgo = () => {
   const date = new Date();
   date.setDate(date.getDate() - 7);
   return date;
 };
 
+// Calculates growth percentage between current and previous values.
 const calculateGrowth = (current, previous) => {
-  return previous > 0 ? (current / previous - 1) * 100 : 0;
+  return previous > 0 ? ((current / previous - 1) * 100).toFixed(2) : 0;
 };
 
+// Calculates metrics and sends email report.
 async function calculateMetricsAndSendEmail() {
   const analysisEmail = process.env.ANALYSIS_EMAIL;
 
   try {
+    // Get dates for the last month and last week.
     const lastMonth = getDateOneMonthAgo();
     const lastWeek = getDateOneWeekAgo();
 
+    // Retrieve unique countries of registered users from the last week.
     const uniqueCountriesLastWeek = await User.distinct("country", {
       registrationDate: { $gte: lastWeek },
     });
     const countriesList = uniqueCountriesLastWeek.join(", ");
 
+    // Retrieve the top country by user count.
     const topCountryData = await User.aggregate([
       { $group: { _id: "$country", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
@@ -40,6 +47,7 @@ async function calculateMetricsAndSendEmail() {
     ]);
     const topCountry = topCountryData[0]?._id || DEFAULT_COUNTRY;
 
+    // Retrieve various user counts based on subscription type and timeframe.
     const [
       totalUsers,
       totalUsersLastMonth,
@@ -84,6 +92,7 @@ async function calculateMetricsAndSendEmail() {
       }),
     ]);
 
+    // Calculate growth percentages for different user metrics.
     const growthData = {
       totalUsers: calculateGrowth(totalUsers, totalUsersLastMonth),
       schoolUsers: calculateGrowth(schoolUsers, schoolUsersLastMonth),
@@ -98,60 +107,61 @@ async function calculateMetricsAndSendEmail() {
       ),
     };
 
+    // Prepare HTML content for the email.
     const HTML = `
-      <h1>Місячний аналітичний звіт академії програмування</h1>
-      <h2>Загальна інформація</h2>
+      <h1>Monthly Analytic Report for Programming Academy</h1>
+      <h2>General Information</h2>
 
-      <p>Кількість користувачів на кінець поточної когорти: ${totalUsers}</p>
-      <p>Приріст користувачів за мiсяць: ${growthData.totalUsers.toFixed(
-        2
-      )}%</p>
+      <p>Total users at the end of current cohort: ${totalUsers}</p>
+      <p>Monthly growth in users: ${growthData.totalUsers}%</p>
      
-      <h2>Шкільні користувачі</h2>
-      <p>Кількість: ${schoolUsers}</p>
-      <p>Приріст за мiсяць: ${growthData.schoolUsers.toFixed(2)}%</p>
+      <h2>School Users</h2>
+      <p>Count: ${schoolUsers}</p>
+      <p>Monthly growth: ${growthData.schoolUsers}%</p>
     
-      <h2>Звичайні користувачі</h2>
-      <p>Кількість: ${commonUsers}</p>
-      <p>Приріст за мiсяць: ${growthData.commonUsers.toFixed(2)}%</p>
+      <h2>Common Users</h2>
+      <p>Count: ${commonUsers}</p>
+      <p>Monthly growth: ${growthData.commonUsers}%</p>
   
-      <h2>Шкільні платні користувачі</h2>
-      <p>Кількість: ${schoolPremiumUsers}</p>
-      <p>Приріст за мiсяць: ${growthData.schoolPremiumUsers.toFixed(2)}%</p>
+      <h2>School Premium Users</h2>
+      <p>Count: ${schoolPremiumUsers}</p>
+      <p>Monthly growth: ${growthData.schoolPremiumUsers}%</p>
   
-      <h2>Звичайні платні користувачі</h2>
-      <p>Кількість: ${commonPremiumUsers}</p>
-      <p>Приріст за мiсяць: ${growthData.commonPremiumUsers.toFixed(2)}%</p>
+      <h2>Common Premium Users</h2>
+      <p>Count: ${commonPremiumUsers}</p>
+      <p>Monthly growth: ${growthData.commonPremiumUsers}%</p>
   
-      <h2>Статистика по странам</h2>
-      <p>Більше всього користувачів з країни: ${topCountry}</p>
-      <p>На протязі останнього тижня зареєстровано користувачів з наступних краiн: ${countriesList}</p>
+      <h2>Country Statistics</h2>
+      <p>Most users from country: ${topCountry}</p>
+      <p>Users registered in the last week from: ${countriesList}</p>
     `;
 
+    // Send the analytic email.
     await sendMail(analysisEmail, "Analytic", "Analytic mail", HTML);
 
+    // Prepare data for writing to Google Sheet.
     const writableData = [
-      // ["Metric", "Value", "Growth"], // заголовки
-      ["Total Users", totalUsers, growthData.totalUsers.toFixed(2) + "%"],
-      ["School Users", schoolUsers, growthData.schoolUsers.toFixed(2) + "%"],
-      ["Common Users", commonUsers, growthData.commonUsers.toFixed(2) + "%"],
+      ["Metric", "Value", "Growth"], // headers
+      ["Total Users", totalUsers, growthData.totalUsers + "%"],
+      ["School Users", schoolUsers, growthData.schoolUsers + "%"],
+      ["Common Users", commonUsers, growthData.commonUsers + "%"],
       [
         "School Premium Users",
         schoolPremiumUsers,
-        growthData.schoolPremiumUsers.toFixed(2) + "%",
+        growthData.schoolPremiumUsers + "%",
       ],
       [
         "Common Premium Users",
         commonPremiumUsers,
-        growthData.commonPremiumUsers.toFixed(2) + "%",
+        growthData.commonPremiumUsers + "%",
       ],
-      ["Top Country", topCountry, ""], // Нет данных роста для страны
-      ["Countries Registered Last Week", countriesList, ""], // Нет данных роста для списка стран
+      ["Top Country", topCountry, ""], // No growth data for country
+      ["Countries Registered Last Week", countriesList, ""], // No growth data for list of countries
     ];
 
-    // Запись данных в Google Sheet
+    // Write data to Google Sheet.
     await writeToSheet(writableData);
-    console.log("Данные записаны в таблицу");
+    console.log("Data written to the spreadsheet");
   } catch (error) {
     console.error("Error while calculating metrics:", error);
   }
