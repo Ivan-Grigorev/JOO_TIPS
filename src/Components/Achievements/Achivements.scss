@@ -1,0 +1,47 @@
+.user-achievements__avatar .user-avatar {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 40px;
+}
+
+.user-achievements__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.user-achievements__list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 95px;
+  height: 90px;
+
+  text-align: center;
+}
+
+.user-achievements__list li img {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+  padding: 2px;
+  // border: 2px solid orange;
+  box-shadow: 0 0 0 2px green; /* Цвет индикатора и его толщина */
+}
+
+.user-achievements__list li img {
+}
+
+.user-achievements__list li p {
+  font-size: 11px;
+  height: 15px;
+  width: 85px;
+
+  @media screen and (min-width: 480px) {
+  }
+}
