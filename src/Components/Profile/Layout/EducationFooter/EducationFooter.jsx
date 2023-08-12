@@ -9,19 +9,19 @@ import CompetitionIcon from "./icons/CompetitionIcon";
 const EducationFooter = ({ handleButtonClick, activeContent }) => {
   // Function to render individual buttons with corresponding icons and labels.
   // Takes in a content key (to determine the active state), the icon component, and the label.
-  const renderButton = (contentKey, IconComponent, label) => (
-    <button
-      // Add the 'active' class if the current content matches the contentKey, otherwise, no class is added.
-      className={`education-footer__buttons ${
-        activeContent === contentKey ? "active" : ""
-      }`}
-      // When the button is clicked, invoke the handleButtonClick function with the content key.
-      onClick={() => handleButtonClick(contentKey)}
-    >
-      <IconComponent /> {/* Render the provided SVG icon component */}
-      {label} {/* Display the button's label */}
-    </button>
-  );
+  const renderButton = (contentKey, IconComponent, label) => {
+    // Add the 'active' class if the current content matches the contentKey, otherwise, no class is added.
+    const isActive = activeContent === contentKey ? "active" : "";
+    return (
+      <button
+        className={`education-footer__buttons ${isActive}`}
+        onClick={() => handleButtonClick(contentKey)} // When the button is clicked, invoke the handleButtonClick function with the content key.
+      >
+        <IconComponent /> {/* Render the provided SVG icon component */}
+        {label} {/* Display the button's label */}
+      </button>
+    );
+  };
 
   return (
     <footer className="education-footer">

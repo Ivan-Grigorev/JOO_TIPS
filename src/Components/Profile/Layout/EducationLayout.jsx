@@ -1,4 +1,5 @@
 import { Suspense, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import EducationFooter from "./EducationFooter/EducationFooter";
 import EducationHeader from "./EducationHeader/EducationHeader";
@@ -10,7 +11,6 @@ import Competition from "../EducationContent/Competition/Competition";
 import Examinations from "../EducationContent/Examinations/Examinations";
 import Matches from "../EducationContent/Matches/Matches";
 import Ratings from "../EducationContent/Ratings/Ratings";
-import { useSwipeable } from "react-swipeable";
 
 const EducationLayout = () => {
   const contentOrder = ["Topics", "Lessons", "Competitions", "Results"];
