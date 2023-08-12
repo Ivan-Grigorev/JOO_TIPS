@@ -11,9 +11,16 @@ import Competition from "../EducationContent/Competition/Competition";
 import Examinations from "../EducationContent/Examinations/Examinations";
 import Matches from "../EducationContent/Matches/Matches";
 import Ratings from "../EducationContent/Ratings/Ratings";
+import Achievements from "../../Achievements/Achivements";
 
 const EducationLayout = () => {
-  const contentOrder = ["Topics", "Lessons", "Competitions", "Results"];
+  const contentOrder = [
+    "Achievements",
+    "Topics",
+    "Lessons",
+    "Competitions",
+    "Results",
+  ];
   const [activeEducationContentIndex, setActiveEducationContentIndex] =
     useState(0);
 
@@ -63,6 +70,7 @@ const EducationLayout = () => {
       <EducationHeader />
 
       <main className="profile-hero education-hero" {...handlers}>
+        {activeEducationContent === "Achievements" && <Achievements />}
         {activeEducationContent === "Topics" && <Topics />}
         {activeEducationContent === "Lessons" && <Lessons />}
         {activeEducationContent === "Competitions" && <Competition />}

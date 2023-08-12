@@ -1,6 +1,6 @@
 import "./Achivements.scss";
 
-const Achivements = () => {
+const Achievements = () => {
   return (
     <>
       <h1>It's achievements section</h1>
@@ -8,4 +8,4 @@ const Achivements = () => {
   );
 };
 
-export default Achivements;
+export default Achievements;
