@@ -118,3 +118,22 @@ ul {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.5);
   font-family: Mulish, sanf-serif !important;
 }
+
+/* Создайте классы анимаций для смены контента */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
