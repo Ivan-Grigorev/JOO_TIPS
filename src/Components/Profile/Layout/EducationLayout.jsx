@@ -67,7 +67,7 @@ const EducationLayout = () => {
 
   return (
     <>
-      <EducationHeader />
+      <EducationHeader activeContent={activeEducationContent} />
 
       <main className="profile-hero education-hero" {...handlers}>
         {activeEducationContent === "Achievements" && <Achievements />}
