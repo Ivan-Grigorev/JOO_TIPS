@@ -30,15 +30,18 @@ const Swipe = ({ hideLayout, showLayout }) => {
       topicsRef.current.classList.add("hided");
       achievementsRef.current.classList.remove("hided");
       showLayout();
+
+      // Scroll to the top of the page after swipe
+      window.scrollTo(0, 0);
     } else if (diffX < -50 && activeContent === "achievements") {
       setActiveContent("topics");
       achievementsRef.current.classList.add("hided");
       topicsRef.current.classList.remove("hided");
       hideLayout();
-    }
 
-    // Scroll to the top of the page after swipe
-    window.scrollTo(0, 0);
+      // Scroll to the top of the page after swipe
+      window.scrollTo(0, 0);
+    }
   };
 
   // Define classes based on active content for smooth transition
