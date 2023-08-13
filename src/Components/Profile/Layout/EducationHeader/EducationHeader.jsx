@@ -1,46 +1,46 @@
-import { useEffect } from "react";
-import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink";
-import Avatar from "../Header/Avatar/Avatar";
+import { useEffect } from "react"; // Import the useEffect hook from React
+import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
+import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
 
-import "./EducationHeader.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations";
-import { selectLessonsTotalPoints } from "../../../../redux/lessons/lessons-selectors";
-import { selectUserActiveLanguage } from "../../../../redux/languages/languages-selectors";
-import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors";
-import { fetchlanguages } from "../../../../redux/languages/languages-operations";
+import "./EducationHeader.scss"; // Import the styles for EducationHeader
+import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
+import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
+import { selectLessonsTotalPoints } from "../../../../redux/lessons/lessons-selectors"; // Import a selector to get total lesson points
+import { selectUserActiveLanguage } from "../../../../redux/languages/languages-selectors"; // Import a selector to get the user's active language
+import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors"; // Import a selector to check if the user is logged in
+import { fetchlanguages } from "../../../../redux/languages/languages-operations"; // Import a function to fetch languages
 
-const EducationHeader = ({ activeContent, isAchievementsPageOpen }) => {
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+const EducationHeader = ({ isAchievementsPageOpen }) => {
+  const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
+  const isLoggedIn = useSelector(selectIsLoggedIn); // Get the user's login status using a selector
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(fetchLessonsPointsTotalSum());
-      dispatch(fetchlanguages());
+      // If the user is logged in, perform these actions
+      dispatch(fetchLessonsPointsTotalSum()); // Fetch the total sum of lesson points
+      dispatch(fetchlanguages()); // Fetch languages
     }
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, isLoggedIn]); // Run the effect when dispatch or isLoggedIn change
 
-  const points = useSelector(selectLessonsTotalPoints);
-  const activeLanguage = useSelector(selectUserActiveLanguage);
+  const points = useSelector(selectLessonsTotalPoints); // Get the total lesson points using a selector
+  const activeLanguage = useSelector(selectUserActiveLanguage); // Get the user's active language using a selector
 
-  const shallHide = isAchievementsPageOpen === true ? "hide" : "";
+  const shallHide = isAchievementsPageOpen === true ? "hide" : ""; // Determine if the header should be hidden on the achievements page
 
   return (
     <>
       <>
         <header className={`education-header ${shallHide}`}>
           <div className="education-header__top">
-            <div>Menu</div>
-
-            <LogoLink width="80px" height="30px" />
-
-            <Avatar w="50px" h="50px" />
+            <div>Menu</div> {/* Display the Menu text */}
+            <LogoLink width="80px" height="30px" />{" "}
+            {/* Display the logo link */}
+            <Avatar w="50px" h="50px" /> {/* Display the avatar */}
           </div>
 
           <div className="education-header__points">
-            <p>{activeLanguage}</p>
-            <p>{points}</p>
+            <p>{activeLanguage}</p> {/* Display the active language */}
+            <p>{points}</p> {/* Display the total lesson points */}
           </div>
         </header>
       </>
@@ -48,4 +48,4 @@ const EducationHeader = ({ activeContent, isAchievementsPageOpen }) => {
   );
 };
 
-export default EducationHeader;
+export default EducationHeader; // Export the EducationHeader component
