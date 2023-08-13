@@ -27,3 +27,8 @@
 .swipe-indicator.hided {
   bottom: 0;
 }
+
+.swipe-indicator.achievements {
+  bottom: 5px;
+  z-index: 100;
+}

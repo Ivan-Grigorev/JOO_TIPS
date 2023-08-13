@@ -12,10 +12,13 @@ const SwipeIndicator = ({ activeEducationContent, isAchievementsPageOpen }) => {
 
   const achievementsContent = isAchievementsPageOpen === true ? "active" : "";
 
+  const achievementsHasVisited =
+    isAchievementsPageOpen === true ? "achievements" : "";
+
   return (
     <>
       {/* Container for swipe indicators */}
-      <div className={`swipe-indicator ${shallHide}`}>
+      <div className={`swipe-indicator ${shallHide} ${achievementsHasVisited}`}>
         {/* Indicator for achievements content */}
         <div className={achievementsContent}></div>
         {/* Indicator for topics content */}
