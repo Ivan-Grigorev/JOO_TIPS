@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Topics from "../../EducationContent/Topics/Topics";
 import Achievements from "../../../Achievements/Achivements";
 import "./Swipe.scss";
+import PropTypes from "prop-types";
 
 const Swipe = ({ hideLayout, showLayout }) => {
   // State to track the active content (Topics or Achievements)
@@ -67,6 +68,11 @@ const Swipe = ({ hideLayout, showLayout }) => {
       </div>
     </div>
   );
+};
+
+Swipe.propTypes = {
+  hideLayout: PropTypes.func.isRequired,
+  showLayout: PropTypes.func.isRequired,
 };
 
 export default Swipe;
