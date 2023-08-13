@@ -1,13 +1,10 @@
-import { Fragment, Suspense, useState } from "react";
+import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { CSSTransition, TransitionGroup } from "react-transition-group"; // Импортируйте необходимые компоненты
-import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import EducationFooter from "./EducationFooter/EducationFooter";
 import EducationHeader from "./EducationHeader/EducationHeader";
 import Topics from "../EducationContent/Topics/Topics";
 import Lessons from "../EducationContent/Lessons/Lessons";
 import Results from "../EducationContent/Results/Results";
-import Sidebar from "./Sidebar/Sidebar";
 import Competition from "../EducationContent/Competition/Competition";
 import Examinations from "../EducationContent/Examinations/Examinations";
 import Matches from "../EducationContent/Matches/Matches";
@@ -23,7 +20,6 @@ const EducationLayout = () => {
     "Competitions",
     "Results",
   ];
-  const nodeRef = useRef(null); // Создайте реф
 
   const [activeEducationContentIndex, setActiveEducationContentIndex] =
     useState(1); // set Topics as default content
@@ -79,23 +75,11 @@ const EducationLayout = () => {
         className={`profile-hero education-hero ${achievementsHero}`}
         {...handlers}
       >
-        {/* <TransitionGroup>
-          <CSSTransition
-            key={activeEducationContent}
-            timeout={700}
-            classNames="fade"
-            nodeRef={nodeRef} // Создайте реф
-          > */}
-        {/* Все ваши компоненты должны быть внутри этого одного дочернего элемента */}
-        {/* <div ref={nodeRef} className="fade"> */}
         {activeEducationContent === "Achievements" && <Achievements />}
         {activeEducationContent === "Topics" && <Topics />}
         {activeEducationContent === "Lessons" && <Lessons />}
         {activeEducationContent === "Competitions" && <Competition />}
         {activeEducationContent === "Results" && <Results />}
-        {/* </div> */}
-        {/* </CSSTransition>
-        </TransitionGroup> */}
       </main>
 
       <EducationFooter
