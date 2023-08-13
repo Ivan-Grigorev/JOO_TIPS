@@ -1,43 +1,46 @@
-import { Suspense, useState } from "react";
-import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
-import EducationFooter from "./EducationFooter/EducationFooter";
-import EducationHeader from "./EducationHeader/EducationHeader";
-import Lessons from "../EducationContent/Lessons/Lessons";
-import Results from "../EducationContent/Results/Results";
-import Competition from "../EducationContent/Competition/Competition";
-import Swipe from "./Swipe/Swipe";
+import { Suspense, useState } from "react"; // Import necessary modules from React
+import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
+import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
+import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
+import Lessons from "../EducationContent/Lessons/Lessons"; // Import the lessons component
+import Results from "../EducationContent/Results/Results"; // Import the results component
+import Competition from "../EducationContent/Competition/Competition"; // Import the competition component
+import Swipe from "./Swipe/Swipe"; // Import the swipe component
 
 const EducationLayout = () => {
-  const [activeEducationContent, setActiveEducationContent] =
-    useState("Topics");
-  const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false);
+  // Create a state variable to track active content
+  const [activeEducationContent, setActiveEducationContent] = useState("Topics"); // prettier-ignore
+  const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false); // Create a state variable to track if achievements page is open
 
   const handleButtonClick = (contentKey) => {
-    setActiveEducationContent(contentKey);
-    window.scrollTo(0, 0);
+    setActiveEducationContent(contentKey); // Function to change active content when button is clicked
+    window.scrollTo(0, 0); // Scroll to the top of the page
   };
 
-  const hideLayout = () => setIsAchievementsPageOpen(false);
-  const showLayout = () => setIsAchievementsPageOpen(true);
+  const hideLayout = () => setIsAchievementsPageOpen(false); // Function to hide layout when achievements page is opened
+  const showLayout = () => setIsAchievementsPageOpen(true); // Function to show layout when achievements page is closed
 
+  // CSS class based on whether achievements page is open
   const achievementsHeroClass = isAchievementsPageOpen === true ? "achievements-hero" : ""; // prettier-ignore
 
   return (
     <>
       <EducationHeader isAchievementsPageOpen={isAchievementsPageOpen} />
-
+      {/* Render the header component with a prop */}
       <main className={`profile-hero education-hero ${achievementsHeroClass}`}>
         <Suspense fallback={<ChakraSpinner />}>
+          {/* // Suspense for lazy loading components */}
           {activeEducationContent === "Topics" && (
-            <Swipe hideLayout={hideLayout} showLayout={showLayout} />
+            <Swipe hideLayout={hideLayout} showLayout={showLayout} /> // Render Swipe component if active content is "Topics"
           )}
           {activeEducationContent === "Lessons" && <Lessons />}
+          {/* Lessons component if active content is "Lessons" */}
           {activeEducationContent === "Competitions" && <Competition />}
+          {/* Render Competition component if active content is "Competitions" */}
           {activeEducationContent === "Results" && <Results />}
+          {/* Results component if active content is "Results" */}
         </Suspense>
       </main>
-      {/* </div> */}
-
       <EducationFooter
         activeContent={activeEducationContent}
         handleButtonClick={handleButtonClick}
@@ -46,4 +49,4 @@ const EducationLayout = () => {
     </>
   );
 };
-export default EducationLayout;
+export default EducationLayout; // Export the EducationLayout component
