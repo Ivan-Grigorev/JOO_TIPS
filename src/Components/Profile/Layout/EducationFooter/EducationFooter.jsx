@@ -44,6 +44,7 @@ const EducationFooter = ({
 EducationFooter.propTypes = {
   handleButtonClick: PropTypes.func.isRequired,
   activeContent: PropTypes.string.isRequired,
+  isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
 export default EducationFooter;
