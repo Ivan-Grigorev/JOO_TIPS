@@ -1,86 +1,35 @@
-import { useState } from "react";
-import { useSwipeable } from "react-swipeable";
+import { Suspense, useState } from "react";
+import ChakraSpinner from "../../ChakraUI/Spinner/Spinner";
 import EducationFooter from "./EducationFooter/EducationFooter";
 import EducationHeader from "./EducationHeader/EducationHeader";
 import Topics from "../EducationContent/Topics/Topics";
 import Lessons from "../EducationContent/Lessons/Lessons";
 import Results from "../EducationContent/Results/Results";
 import Competition from "../EducationContent/Competition/Competition";
-import Examinations from "../EducationContent/Examinations/Examinations";
-import Matches from "../EducationContent/Matches/Matches";
-import Ratings from "../EducationContent/Ratings/Ratings";
-import Achievements from "../../Achievements/Achivements";
-import { useRef } from "react";
+import Swipe from "./Swipe/Swipe";
 
 const EducationLayout = () => {
-  const contentOrder = [
-    "Achievements",
-    "Topics",
-    "Lessons",
-    "Competitions",
-    "Results",
-  ];
-
-  const [activeEducationContentIndex, setActiveEducationContentIndex] =
-    useState(1); // set Topics as default content
-
-  const handleSwipe = (direction) => {
-    let nextIndex;
-    const leftSwipe = direction === "LEFT";
-    const rightSwipe = direction === "RIGHT";
-
-    if (leftSwipe) {
-      nextIndex = (activeEducationContentIndex + 1) % contentOrder.length;
-    }
-    if (rightSwipe) {
-      nextIndex =
-        (activeEducationContentIndex - 1 + contentOrder.length) %
-        contentOrder.length;
-    }
-
-    // Проверка на крайние элементы
-    if (nextIndex >= 0 && nextIndex < contentOrder.length) {
-      // Если текущий контент - первый, и происходит свайп вправо
-      const swipeRightWhenFirst = activeEducationContentIndex === 0 && rightSwipe; // prettier-ignore
-      // Если текущий контент - последний, и происходит свайп влево
-      const swipeLeftWhenLast = activeEducationContentIndex === contentOrder.length - 1 && leftSwipe; // prettier-ignore
-
-      // Не меняем контент, если пытаемся выйти за пределы крайних элементов
-      if (swipeRightWhenFirst || swipeLeftWhenLast) return;
-
-      setActiveEducationContentIndex(nextIndex);
-      window.scrollTo(0, 0);
-    }
-  };
+  const [activeEducationContent, setActiveEducationContent] =
+    useState("Topics");
 
   const handleButtonClick = (contentKey) => {
-    const newIndex = contentOrder.indexOf(contentKey);
-    setActiveEducationContentIndex(newIndex);
+    setActiveEducationContent(contentKey);
+    window.scrollTo(0, 0);
   };
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handleSwipe("LEFT"),
-    onSwipedRight: () => handleSwipe("RIGHT"),
-  });
-
-  const activeEducationContent = contentOrder[activeEducationContentIndex];
-  const achievementsHero =
-    activeEducationContentIndex === 0 ? "achievements-hero" : "";
 
   return (
     <>
-      <EducationHeader activeContent={activeEducationContent} />
+      <EducationHeader />
 
-      <main
-        className={`profile-hero education-hero ${achievementsHero}`}
-        {...handlers}
-      >
-        {activeEducationContent === "Achievements" && <Achievements />}
-        {activeEducationContent === "Topics" && <Topics />}
-        {activeEducationContent === "Lessons" && <Lessons />}
-        {activeEducationContent === "Competitions" && <Competition />}
-        {activeEducationContent === "Results" && <Results />}
+      <main className="profile-hero education-hero">
+        <Suspense fallback={<ChakraSpinner />}>
+          {activeEducationContent === "Topics" && <Swipe />}
+          {activeEducationContent === "Lessons" && <Lessons />}
+          {activeEducationContent === "Competitions" && <Competition />}
+          {activeEducationContent === "Results" && <Results />}
+        </Suspense>
       </main>
+      {/* </div> */}
 
       <EducationFooter
         activeContent={activeEducationContent}
@@ -89,5 +38,4 @@ const EducationLayout = () => {
     </>
   );
 };
-
 export default EducationLayout;

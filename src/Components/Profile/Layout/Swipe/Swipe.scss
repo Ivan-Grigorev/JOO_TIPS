@@ -1,0 +1,36 @@
+.swipe-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  //   overflow: hidden;
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease;
+  }
+
+  .topics {
+    opacity: 1;
+  }
+
+  .achievements {
+  }
+
+  .inactive .topics {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .inactive .achievements {
+    opacity: 1;
+  }
+
+  .hided {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
