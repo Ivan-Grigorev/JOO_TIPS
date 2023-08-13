@@ -11,12 +11,12 @@ import { fetchLessons } from "../../../../redux/lessons/lessons-operations";
 import { useEffect } from "react";
 import { selectUserLessons } from "../../../../redux/lessons/lessons-selectors";
 
-// Установка локализации календаря на базе moment.js
+// Set up calendar localization based on moment.js
 const localizer = momentLocalizer(moment);
 
 const Lessons = () => {
-  const dispatch = useDispatch();
-  // Тестовые данные для графика
+  const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
+  // Example schedule data for demonstration
   const exampleSchedule = [
     {
       topic: "Fundamentals of React",
@@ -56,44 +56,43 @@ const Lessons = () => {
     },
   ];
 
-  const schedule = useSelector(selectUserLessons);
+  const schedule = useSelector(selectUserLessons); // Get user's lessons using a selector
 
   useEffect(() => {
-    dispatch(fetchLessons());
+    dispatch(fetchLessons()); // Fetch user's lessons when the component mounts
   }, [dispatch]);
 
-  const [eventModalOpen, setEventModalOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [eventModalOpen, setEventModalOpen] = useState(false); // State to manage event modal visibility
+  const [selectedEvent, setSelectedEvent] = useState(null); // State to store selected event data
 
   const handleEventClick = (event) => {
-    setSelectedEvent(event);
-    setEventModalOpen(true);
+    setSelectedEvent(event); // Set the clicked event
+    setEventModalOpen(true); // Open the event modal
   };
 
   const handleCloseModal = () => {
-    setEventModalOpen(false);
+    setEventModalOpen(false); // Close the event modal
   };
 
   return (
     <>
       <Calendar
-        localizer={localizer}
+        localizer={localizer} // Set up the calendar localization
         components={{
-          toolbar: CustomToolbar,
+          toolbar: CustomToolbar, // Use the custom toolbar component
         }}
-        views={["month"]}
-        events={schedule}
-        startAccessor="lessonDate"
-        endAccessor="endTime"
-        titleAccessor={"topic"}
-        onSelectEvent={handleEventClick} // Обработчик для клика на событие
+        views={["month"]} // Display the calendar in month view
+        events={schedule} // Use the user's lessons as calendar events
+        startAccessor="lessonDate" // Start date property for events
+        endAccessor="endTime" // End date property for events
+        titleAccessor={"topic"} // Title property for events
+        onSelectEvent={handleEventClick} // Click event handler for events
         formats={{
-          // Настройка форматирования чисел месяца
-          dateFormat: "D", // Используйте 'D' для отображения чисел без ведущего нуля
+          dateFormat: "D", // Customize how day numbers are displayed
         }}
       />
 
-      {/* Модальное окно с информацией о событии */}
+      {/* Event modal with event details */}
       {selectedEvent && (
         <EventModal
           event={selectedEvent}
