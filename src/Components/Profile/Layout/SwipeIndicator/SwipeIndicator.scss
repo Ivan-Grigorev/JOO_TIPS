@@ -8,6 +8,9 @@
   gap: 3px;
 
   width: 100%;
+
+  transition: bottom 700ms, background-color 700ms;
+  transition-timing-function: ease;
 }
 
 .swipe-indicator div {
@@ -15,4 +18,12 @@
   width: 10px;
   border-radius: 50%;
   background: gray;
+}
+
+.swipe-indicator div.active {
+  background-color: orange;
+}
+
+.swipe-indicator.hided {
+  bottom: 0;
 }
