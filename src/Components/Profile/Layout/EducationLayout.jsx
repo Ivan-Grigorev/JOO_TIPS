@@ -43,7 +43,10 @@ const EducationLayout = () => {
         </Suspense>
       </main>
 
-      <SwipeIndicator />
+      <SwipeIndicator
+        activeEducationContent={activeEducationContent}
+        isAchievementsPageOpen={isAchievementsPageOpen}
+      />
 
       <EducationFooter
         activeContent={activeEducationContent}
