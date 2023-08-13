@@ -12,8 +12,8 @@
   border-top: 1px solid #718096;
   background-color: #163a65;
 
-  transition: bottom 550ms;
-  transition-timing-function: ease-in-out;
+  transition: bottom 700ms;
+  transition-timing-function: ease;
   @media screen and (min-width: 768px) {
     justify-content: center;
   }
@@ -51,5 +51,5 @@
 }
 
 footer.hide {
-  bottom: -100%;
+  bottom: -25%;
 }
