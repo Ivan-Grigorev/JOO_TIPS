@@ -6,12 +6,17 @@ import TopicsIcon from "./icons/TopicsIcon";
 import ResultsIcon from "./icons/ResultsIcon";
 import CompetitionIcon from "./icons/CompetitionIcon";
 // EducationFooter Component - Represents the footer section of the education page.
-const EducationFooter = ({ handleButtonClick, activeContent }) => {
+const EducationFooter = ({
+  handleButtonClick,
+  activeContent,
+  isAchievementsPageOpen,
+}) => {
   // Function to render individual buttons with corresponding icons and labels.
   // Takes in a content key (to determine the active state), the icon component, and the label.
   const renderButton = (contentKey, IconComponent, label) => {
     // Add the 'active' class if the current content matches the contentKey, otherwise, no class is added.
     const isActive = activeContent === contentKey ? "active" : "";
+
     return (
       <button
         className={`education-footer__buttons ${isActive}`}
@@ -23,8 +28,7 @@ const EducationFooter = ({ handleButtonClick, activeContent }) => {
     );
   };
 
-
-  const shallHide = activeContent === "Achievements" ? "hide" : "";
+  const shallHide = isAchievementsPageOpen === true ? "hide" : "";
 
   return (
     <footer className={`education-footer ${shallHide}`}>

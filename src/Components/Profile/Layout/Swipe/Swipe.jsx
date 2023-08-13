@@ -3,40 +3,45 @@ import Topics from "../../EducationContent/Topics/Topics";
 import Achievements from "../../../Achievements/Achivements";
 import "./Swipe.scss";
 
-const Swipe = () => {
+const Swipe = ({ hideLayout, showLayout }) => {
+  // State to track the active content (Topics or Achievements)
   const [activeContent, setActiveContent] = useState("topics");
+
+  // Store the starting touch position
   const touchStartX = useRef(null);
 
+  // Refs to access the DOM elements
   const topicsRef = useRef(null);
   const achievementsRef = useRef(null);
 
-  //   useEffect(() => {
-  //     if (topicsRef.current.classList.contains("inactive")) {
-  //       setTimeout(() => topicsRef.current.classList.add("hided"), 1000);
-  //     }
-  //   }, [activeContent]);
-
+  // Handle the touch start event
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
   };
 
+  // Handle the touch end event
   const handleTouchEnd = (e) => {
     const touchEndX = e.changedTouches[0].clientX;
     const diffX = touchEndX - touchStartX.current;
 
+    // Switch content based on swipe direction and current active content
     if (diffX > 50 && activeContent === "topics") {
       setActiveContent("achievements");
       topicsRef.current.classList.add("hided");
       achievementsRef.current.classList.remove("hided");
+      showLayout();
     } else if (diffX < -50 && activeContent === "achievements") {
       setActiveContent("topics");
-      if (activeContent === "topics") {
-        achievementsRef.current.classList.add("hided");
-        topicsRef.current.classList.remove("hided");
-      }
+      achievementsRef.current.classList.add("hided");
+      topicsRef.current.classList.remove("hided");
+      hideLayout();
     }
+
+    // Scroll to the top of the page after swipe
+    window.scrollTo(0, 0);
   };
 
+  // Define classes based on active content for smooth transition
   const topicsClass = activeContent === "topics" ? "" : "hided";
   const achievementsClass = activeContent === "achievements" ? "" : "hided";
 
@@ -46,11 +51,13 @@ const Swipe = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      {/* Display Topics content */}
       <div className={`content topics ${topicsClass}`} ref={topicsRef}>
         <Topics />
       </div>
+      {/* Display Achievements content */}
       <div
-        className={`content achievements ${achievementsClass} `}
+        className={`content achievements ${achievementsClass}`}
         ref={achievementsRef}
       >
         <Achievements />

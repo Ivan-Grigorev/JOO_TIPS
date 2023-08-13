@@ -10,7 +10,7 @@ import { selectUserActiveLanguage } from "../../../../redux/languages/languages-
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors";
 import { fetchlanguages } from "../../../../redux/languages/languages-operations";
 
-const EducationHeader = ({ activeContent }) => {
+const EducationHeader = ({ activeContent, isAchievementsPageOpen }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -24,7 +24,7 @@ const EducationHeader = ({ activeContent }) => {
   const points = useSelector(selectLessonsTotalPoints);
   const activeLanguage = useSelector(selectUserActiveLanguage);
 
-  const shallHide = activeContent === "Achievements" ? "hide" : "";
+  const shallHide = isAchievementsPageOpen === true ? "hide" : "";
 
   return (
     <>
