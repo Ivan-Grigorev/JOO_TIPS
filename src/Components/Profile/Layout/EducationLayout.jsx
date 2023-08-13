@@ -6,6 +6,7 @@ import Lessons from "../EducationContent/Lessons/Lessons"; // Import the lessons
 import Results from "../EducationContent/Results/Results"; // Import the results component
 import Competition from "../EducationContent/Competition/Competition"; // Import the competition component
 import Swipe from "./Swipe/Swipe"; // Import the swipe component
+import SwipeIndicator from "./SwipeIndicator/SwipeIndicator";
 
 const EducationLayout = () => {
   // Create a state variable to track active content
@@ -41,6 +42,9 @@ const EducationLayout = () => {
           {/* Results component if active content is "Results" */}
         </Suspense>
       </main>
+
+      <SwipeIndicator />
+
       <EducationFooter
         activeContent={activeEducationContent}
         handleButtonClick={handleButtonClick}
