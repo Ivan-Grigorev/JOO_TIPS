@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./SwipeIndicator.scss"; // Import the styles for the SwipeIndicator component
 
 // SwipeIndicator component to show indicators based on active education content and achievements page status
@@ -26,6 +27,11 @@ const SwipeIndicator = ({ activeEducationContent, isAchievementsPageOpen }) => {
       </div>
     </>
   );
+};
+
+SwipeIndicator.propTypes = {
+  activeEducationContent: PropTypes.string.isRequired,
+  isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
 export default SwipeIndicator; // Export the SwipeIndicator component
