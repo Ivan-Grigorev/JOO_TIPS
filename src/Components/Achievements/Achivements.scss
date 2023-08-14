@@ -1,5 +1,5 @@
 .user-achievements {
-  max-width: 320px;
+  max-width: 480px;
   margin: 0 auto;
 }
 
@@ -19,7 +19,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 30px;
 
   padding-bottom: 40px;
 }
@@ -30,8 +30,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 95px;
-  height: 90px;
+  // width: 95px;
+  // height: 90px;
 
   text-align: center;
 }
@@ -47,10 +47,14 @@
 }
 
 .user-achievements__list li p {
-  font-size: 11px;
-  height: 15px;
   width: 85px;
+  height: 15px;
+  margin-top: 10px;
 
-  @media screen and (min-width: 480px) {
+  font-size: 14px;
+  font-weight: 400;
+
+  @media screen and (min-width: 375px) {
+    font-size: 14px;
   }
 }

@@ -10,7 +10,7 @@
   width: 100%;
 
   transition: bottom 700ms, background-color 700ms;
-  transition-timing-function: ease;
+  transition-timing-function: ease-in-out;
 }
 
 .swipe-indicator div {
