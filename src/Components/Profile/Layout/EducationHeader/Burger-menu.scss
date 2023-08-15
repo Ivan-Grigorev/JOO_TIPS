@@ -68,11 +68,13 @@
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  height: initial;
 }
 
 /* Individual item */
