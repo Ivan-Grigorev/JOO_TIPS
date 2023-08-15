@@ -45,10 +45,17 @@
   */
 .bm-menu-wrap {
   position: fixed;
+
+  width: 150px !important;
   height: 100%;
 
   top: 0;
   left: 0;
+
+  & svg {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 /* General sidebar styles */
@@ -71,17 +78,18 @@
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 10px;
+  // padding: 10px;
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  // gap: 10px;
+  gap: 0;
 
   height: initial;
 
   @media screen and (min-width: 768px) {
-    gap: 9px;
-    border-right: 2px solid #718096;
+    // gap: 9px;
+    // border-right: 2px solid #718096;
   }
 }
 
@@ -95,8 +103,24 @@
   display: inline-block;
   padding: 5px;
 
-  &:not(:first-child, :nth-child(2)) {
-    border-top: 1px solid gray;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // &:not(:first-child) {
+  //   border-top: 1px solid gray;
+  // }
+}
+
+.bm-item:is(:hover) {
+  color: #123257;
+  background-color: #fcbc7d;
+
+  transition: background-color 350ms ease, color 350ms ease, stroke 350ms ease;
+
+  .icon-stroke {
+    stroke: #123257;
   }
 }
 

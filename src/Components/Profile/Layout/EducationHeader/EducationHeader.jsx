@@ -13,6 +13,10 @@ import { fetchlanguages } from "../../../../redux/languages/languages-operations
 import { slide as Menu } from "react-burger-menu";
 import "./Burger-menu.scss";
 import { Link } from "react-router-dom";
+import TopicsIcon from "../EducationFooter/icons/TopicsIcon";
+import LessonsIcon from "../EducationFooter/icons/LessonsIcon";
+import CompetitionIcon from "../EducationFooter/icons/CompetitionIcon";
+import ResultsIcon from "../EducationFooter/icons/ResultsIcon";
 
 const EducationHeader = ({ isAchievementsPageOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -80,16 +84,29 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
     <>
       <header className={`education-header ${shallHide}`}>
         <div className="education-header__top">
-          <Menu isOpen={isMenuOpen} onStateChange={handleStateChange}>
-            <LogoLink width={100} />
+          <Menu
+            isOpen={isMenuOpen}
+            onStateChange={handleStateChange}
+            customCrossIcon={false}
+          >
             {/* Content of the burger menu */}
             {/* {renderItems()} */}
-            <Link href="#">Home</Link>
-            <Link href="#">Menu</Link>
-            <Link href="#">Cabinet</Link>
-            <Link href="#">About</Link>
-            <Link href="#">Articles</Link>
-            <Link href="#">Contact</Link>
+            <Link>
+              <TopicsIcon />
+              Topics
+            </Link>
+            <Link>
+              <LessonsIcon />
+              Lessons
+            </Link>
+            <Link>
+              <CompetitionIcon />
+              Competitions
+            </Link>
+            <Link>
+              <ResultsIcon />
+              Results
+            </Link>
           </Menu>
           <LogoLink width="80px" height="30px" /> {/* Display the logo link */}
           <Avatar w="50px" h="50px" /> {/* Display the avatar */}
