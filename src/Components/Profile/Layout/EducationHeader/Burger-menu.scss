@@ -9,17 +9,16 @@
 
 #react-burger-menu-btn {
   // border: 1px solid red !important;
-
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #ffffffa8;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #a90000;
+  // background: rgb(211, 143, 18);
 }
 
 /* Position and sizing of clickable cross button */
@@ -40,13 +39,25 @@
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
+
+  top: 0;
+  left: 0;
+
+  @media screen and (max-width: 767px) {
+    width: 100% !important;
+  }
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+  background: #122f52;
+  // padding: 2.5em 1.5em 0;
+  // font-size: 1.15em;
+  font-size: 21px;
+
+  @media screen and (max-width: 767px) {
+    padding: 15px;
+  }
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -58,6 +69,10 @@
 .bm-item-list {
   color: #b8b7ad;
   padding: 0.8em;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Individual item */
@@ -68,4 +83,6 @@
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+  top: 0px;
+  left: 0px;
 }
