@@ -26,6 +26,23 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
     }
   }, [dispatch, isLoggedIn]); // Run the effect when dispatch or isLoggedIn change
 
+  useEffect(() => {
+    // Select the burger menu button element
+    const burgerMenu = document.querySelector(".bm-burger-button");
+
+    // Define a function to add "hide" class
+    const setClass = () => burgerMenu.classList.add("hide");
+
+    // Define a function to remove "hide" class
+    const resetClass = () => burgerMenu.classList.remove("hide");
+
+    // Check if the achievements page is open
+    // If true, add "hide" class; otherwise, remove it
+    isAchievementsPageOpen ? setClass() : resetClass();
+
+    // The effect will re-run whenever isAchievementsPageOpen changes
+  }, [isAchievementsPageOpen]);
+
   const points = useSelector(selectLessonsTotalPoints); // Get the total lesson points using a selector
   const activeLanguage = useSelector(selectUserActiveLanguage); // Get the user's active language using a selector
 
