@@ -84,12 +84,12 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
             <LogoLink width={100} />
             {/* Content of the burger menu */}
             {/* {renderItems()} */}
-            <a href="#">Home</a>
-            <a href="#">Menu</a>
-            <a href="#">Cabinet</a>
-            <a href="#">About</a>
-            <a href="#">Articles</a>
-            <a href="#">Contact</a>
+            <Link href="#">Home</Link>
+            <Link href="#">Menu</Link>
+            <Link href="#">Cabinet</Link>
+            <Link href="#">About</Link>
+            <Link href="#">Articles</Link>
+            <Link href="#">Contact</Link>
           </Menu>
           <LogoLink width="80px" height="30px" /> {/* Display the logo link */}
           <Avatar w="50px" h="50px" /> {/* Display the avatar */}
