@@ -12,6 +12,7 @@ import { fetchlanguages } from "../../../../redux/languages/languages-operations
 
 import { slide as Menu } from "react-burger-menu";
 import "./Burger-menu.scss";
+import { Link } from "react-router-dom";
 
 const EducationHeader = ({ isAchievementsPageOpen }) => {
   const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
@@ -30,16 +31,25 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
 
   const shallHide = isAchievementsPageOpen === true ? "hide" : ""; // Determine if the header should be hidden on the achievements page
 
+  const options = [];
+  const renderItems = () => {
+    for (let index = 0; index < 10; index++) {
+      options.push(
+        <Link to={"#"} key={index}>
+          Option {index + 1}
+        </Link>
+      );
+    }
+    return options;
+  };
+
   return (
     <>
       <header className={`education-header ${shallHide}`}>
         <div className="education-header__top">
-          <Menu left isOpen>
+          <Menu>
             {/* Content of the burger menu */}
-            <p>Далеко-далеко за словесными горами в стране.</p>
-            <p>Далеко-далеко за словесными горами в стране.</p>
-            <p>Далеко-далеко за словесными горами в стране.</p>
-            {/* Add more menu items as needed */}
+            {renderItems()}
           </Menu>
           <LogoLink width="80px" height="30px" /> {/* Display the logo link */}
           <Avatar w="50px" h="50px" /> {/* Display the avatar */}
