@@ -12,7 +12,7 @@
   border-top: 1px solid #718096;
   background-color: #163a65;
 
-  transition: bottom 700ms;
+  transition: bottom 0.7s, opacity 0.7s;
   transition-timing-function: ease;
   @media screen and (min-width: 768px) {
     justify-content: center;
@@ -50,6 +50,6 @@
   stroke: white; /* Цвет при классе .active - белый */
 }
 
-footer.hide {
+footer.education-footer.hide {
   bottom: -25%;
 }

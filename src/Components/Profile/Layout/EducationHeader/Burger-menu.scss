@@ -1,10 +1,17 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
   left: 25px;
   top: 24px;
+
+  width: 36px;
+  height: 30px;
+
+  transition: opacity 0.7s ease, top .8s ease;
+
+  &.hide {
+    top: -25%;
+  }
 }
 
 #react-burger-menu-btn {

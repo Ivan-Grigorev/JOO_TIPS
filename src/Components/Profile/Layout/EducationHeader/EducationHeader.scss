@@ -9,15 +9,15 @@
 
   background-color: #1a4579;
 
-  transition: top 550ms;
-  transition-timing-function: ease-in-out;
+  transition: top 0.7s, opacity 0.7s;
+  transition-timing-function: ease;
 
   z-index: 100;
 }
 
-header.hide {
+header.education-header.hide {
   position: absolute;
-  top: -100%;
+  top: -25%;
 }
 
 .education-header__top {
