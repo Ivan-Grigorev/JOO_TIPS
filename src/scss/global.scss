@@ -124,3 +124,8 @@ ul {
   user-select: none;
   pointer-events: none;
 }
+
+.height-limit {
+  height: 100vh;
+  overflow: hidden;
+}
