@@ -119,21 +119,8 @@ ul {
   font-family: Mulish, sanf-serif !important;
 }
 
-/* Создайте классы анимаций для смены контента */
-.fade-enter {
+.hide {
   opacity: 0;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 200ms ease;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-  opacity: 0;
-  transition: opacity 500ms ease;
+  user-select: none;
+  pointer-events: none;
 }
