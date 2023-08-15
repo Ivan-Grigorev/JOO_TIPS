@@ -49,10 +49,6 @@
 
   top: 0;
   left: 0;
-
-  @media screen and (max-width: 767px) {
-    width: 100% !important;
-  }
 }
 
 /* General sidebar styles */
@@ -89,9 +85,19 @@
   }
 }
 
+.bm-item-list a.logo-header {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+
 /* Individual item */
 .bm-item {
   display: inline-block;
+  padding: 5px;
+
+  &:not(:first-child, :nth-child(2)) {
+    border-top: 1px solid gray;
+  }
 }
 
 /* Styling of overlay */

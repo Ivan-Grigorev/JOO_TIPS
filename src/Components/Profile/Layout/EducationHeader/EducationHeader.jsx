@@ -81,8 +81,15 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
       <header className={`education-header ${shallHide}`}>
         <div className="education-header__top">
           <Menu isOpen={isMenuOpen} onStateChange={handleStateChange}>
+            <LogoLink width={100} />
             {/* Content of the burger menu */}
-            {renderItems()}
+            {/* {renderItems()} */}
+            <a href="#">Home</a>
+            <a href="#">Menu</a>
+            <a href="#">Cabinet</a>
+            <a href="#">About</a>
+            <a href="#">Articles</a>
+            <a href="#">Contact</a>
           </Menu>
           <LogoLink width="80px" height="30px" /> {/* Display the logo link */}
           <Avatar w="50px" h="50px" /> {/* Display the avatar */}
