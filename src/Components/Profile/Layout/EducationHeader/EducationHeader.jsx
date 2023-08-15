@@ -33,7 +33,7 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
 
   const options = [];
   const renderItems = () => {
-    for (let index = 0; index < 10; index++) {
+    for (let index = 0; index < 15; index++) {
       options.push(
         <Link to={"#"} key={index}>
           Option {index + 1}
