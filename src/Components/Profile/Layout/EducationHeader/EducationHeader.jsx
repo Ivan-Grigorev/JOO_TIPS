@@ -10,6 +10,9 @@ import { selectUserActiveLanguage } from "../../../../redux/languages/languages-
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors"; // Import a selector to check if the user is logged in
 import { fetchlanguages } from "../../../../redux/languages/languages-operations"; // Import a function to fetch languages
 
+import { slide as Menu } from "react-burger-menu";
+import "./Burger-menu.scss";
+
 const EducationHeader = ({ isAchievementsPageOpen }) => {
   const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
   const isLoggedIn = useSelector(selectIsLoggedIn); // Get the user's login status using a selector
@@ -29,21 +32,24 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
 
   return (
     <>
-      <>
-        <header className={`education-header ${shallHide}`}>
-          <div className="education-header__top">
-            <div>Menu</div> {/* Display the Menu text */}
-            <LogoLink width="80px" height="30px" />{" "}
-            {/* Display the logo link */}
-            <Avatar w="50px" h="50px" /> {/* Display the avatar */}
-          </div>
+      <header className={`education-header ${shallHide}`}>
+        <div className="education-header__top">
+          <Menu left isOpen>
+            {/* Content of the burger menu */}
+            <p>Далеко-далеко за словесными горами в стране.</p>
+            <p>Далеко-далеко за словесными горами в стране.</p>
+            <p>Далеко-далеко за словесными горами в стране.</p>
+            {/* Add more menu items as needed */}
+          </Menu>
+          <LogoLink width="80px" height="30px" /> {/* Display the logo link */}
+          <Avatar w="50px" h="50px" /> {/* Display the avatar */}
+        </div>
 
-          <div className="education-header__points">
-            <p>{activeLanguage}</p> {/* Display the active language */}
-            <p>{points}</p> {/* Display the total lesson points */}
-          </div>
-        </header>
-      </>
+        <div className="education-header__points">
+          <p>{activeLanguage}</p> {/* Display the active language */}
+          <p>{points}</p> {/* Display the total lesson points */}
+        </div>
+      </header>
     </>
   );
 };
