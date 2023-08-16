@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react"; // Import the useEffect hook from React
-import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
-import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
-
 import "./EducationHeader.scss"; // Import the styles for EducationHeader
+import { useEffect, useState } from "react"; // Import the useEffect hook from React
+import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
 import { selectLessonsTotalPoints } from "../../../../redux/lessons/lessons-selectors"; // Import a selector to get total lesson points
@@ -10,8 +8,11 @@ import { selectUserActiveLanguage } from "../../../../redux/languages/languages-
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors"; // Import a selector to check if the user is logged in
 import { fetchlanguages } from "../../../../redux/languages/languages-operations"; // Import a function to fetch languages
 
-import { slide as Menu } from "react-burger-menu";
 import "./Burger-menu.scss";
+
+import { slide as Menu } from "react-burger-menu";
+import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
+import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
 import { Link } from "react-router-dom";
 import TopicsIcon from "../EducationFooter/icons/TopicsIcon";
 import LessonsIcon from "../EducationFooter/icons/LessonsIcon";
@@ -27,6 +28,8 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn); // Get the user's login status using a selector
   const points = useSelector(selectLessonsTotalPoints); // Get the total lesson points using a selector
   const activeLanguage = useSelector(selectUserActiveLanguage); // Get the user's active language using a selector
+
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -116,7 +119,16 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
               Results
             </Link>
           </Menu>
-          <LogoLink width="80px" height="30px" /> {/* Display the logo link */}
+          {isLargeScreen && (
+            <nav>
+              <Link>Topics</Link>
+              <Link>Lessons</Link>
+              <Link>Competitions</Link>
+              <Link>Results</Link>
+              <LogoLink width="80px" height="30px" />
+            </nav>
+          )}
+          {!isLargeScreen && <LogoLink width="80px" height="30px" />}
           <Avatar w="50px" h="50px" /> {/* Display the avatar */}
         </div>
 
