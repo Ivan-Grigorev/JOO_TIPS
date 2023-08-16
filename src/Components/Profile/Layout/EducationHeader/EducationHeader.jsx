@@ -17,6 +17,7 @@ import TopicsIcon from "../EducationFooter/icons/TopicsIcon";
 import LessonsIcon from "../EducationFooter/icons/LessonsIcon";
 import CompetitionIcon from "../EducationFooter/icons/CompetitionIcon";
 import ResultsIcon from "../EducationFooter/icons/ResultsIcon";
+import { ImCross } from "react-icons/im";
 
 const EducationHeader = ({ isAchievementsPageOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,6 +66,10 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
     setIsMenuOpen(isMenuOpen);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const shallHide = isAchievementsPageOpen === true ? "hide" : ""; // Determine if the header should be hidden on the achievements page
 
   const renderItems = () => {
@@ -91,7 +96,9 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
           >
             {/* Content of the burger menu */}
             {/* {renderItems()} */}
-            <div className="close-button">CLOSE</div>
+            <div className="close-button" onClick={toggleMenu}>
+              <ImCross />
+            </div>
             <Link>
               <TopicsIcon />
               Topics
