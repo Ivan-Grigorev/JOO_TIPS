@@ -1,4 +1,5 @@
 import { Suspense, useState } from "react"; // Import necessary modules from React
+import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
@@ -12,6 +13,7 @@ const EducationLayout = () => {
   // Create a state variable to track active content
   const [activeEducationContent, setActiveEducationContent] = useState("Topics"); // prettier-ignore
   const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false); // Create a state variable to track if achievements page is open
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
   const handleButtonClick = (contentKey) => {
     setActiveEducationContent(contentKey); // Function to change active content when button is clicked
@@ -43,10 +45,12 @@ const EducationLayout = () => {
         </Suspense>
       </main>
 
-      <SwipeIndicator
-        activeEducationContent={activeEducationContent}
-        isAchievementsPageOpen={isAchievementsPageOpen}
-      />
+      {!isLargeScreen && (
+        <SwipeIndicator
+          activeEducationContent={activeEducationContent}
+          isAchievementsPageOpen={isAchievementsPageOpen}
+        />
+      )}
 
       <EducationFooter
         activeContent={activeEducationContent}
