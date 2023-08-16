@@ -7,7 +7,8 @@ const SwipeIndicator = ({ activeEducationContent, isAchievementsPageOpen }) => {
 
   // Determine classes to highlight active content based on the current state
   const topicsContent =
-    activeEducationContent === "Topics" && isAchievementsPageOpen === false
+    activeEducationContent !== "Achievements" &&
+    isAchievementsPageOpen === false
       ? "active"
       : "";
 
