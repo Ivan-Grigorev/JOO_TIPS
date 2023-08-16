@@ -91,6 +91,7 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
           >
             {/* Content of the burger menu */}
             {/* {renderItems()} */}
+            <div className="close-button">CLOSE</div>
             <Link>
               <TopicsIcon />
               Topics
