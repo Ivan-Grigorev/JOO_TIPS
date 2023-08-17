@@ -18,6 +18,10 @@
   // max-height: 700px;
 
   transition: padding-top 350ms ease, background-color 350ms ease;
+
+  @media screen and (min-width: 1024px) {
+    padding-bottom: 0;
+  }
 }
 
 .achievements-hero {
@@ -26,3 +30,4 @@
 
   background-color: #122f52;
 }
+

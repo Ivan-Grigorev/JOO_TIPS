@@ -34,18 +34,20 @@ const EducationLayout = () => {
       />
       {/* Render the header component with a prop */}
       <main className={`profile-hero education-hero ${achievementsHeroClass}`}>
-        <Suspense fallback={<ChakraSpinner />}>
-          {/* // Suspense for lazy loading components */}
-          {activeEducationContent === "Topics" && (
-            <Swipe hideLayout={hideLayout} showLayout={showLayout} /> // Render Swipe component if active content is "Topics"
-          )}
-          {activeEducationContent === "Lessons" && <Lessons />}
-          {/* Lessons component if active content is "Lessons" */}
-          {activeEducationContent === "Competitions" && <Competition />}
-          {/* Render Competition component if active content is "Competitions" */}
-          {activeEducationContent === "Results" && <Results />}
-          {/* Results component if active content is "Results" */}
-        </Suspense>
+        <div className="container">
+          <Suspense fallback={<ChakraSpinner />}>
+            {/* // Suspense for lazy loading components */}
+            {activeEducationContent === "Topics" && (
+              <Swipe hideLayout={hideLayout} showLayout={showLayout} /> // Render Swipe component if active content is "Topics"
+            )}
+            {activeEducationContent === "Lessons" && <Lessons />}
+            {/* Lessons component if active content is "Lessons" */}
+            {activeEducationContent === "Competitions" && <Competition />}
+            {/* Render Competition component if active content is "Competitions" */}
+            {activeEducationContent === "Results" && <Results />}
+            {/* Results component if active content is "Results" */}
+          </Suspense>
+        </div>
       </main>
 
       {!isLargeScreen && (

@@ -52,7 +52,25 @@ ul {
 }
 
 .container {
+  position: relative;
   width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    max-width: 768px;
+  }
+  @media screen and (min-width: 1024px) and (max-width: 1279px) {
+    max-width: 1000px;
+  }
+
+  @media screen and (min-width: 1280px) and (max-width: 1319px) {
+    max-width: 1200px;
+  }
+
+  @media screen and (min-width: 1320px) {
+    max-width: 1300px;
+  }
 }
 
 .section {

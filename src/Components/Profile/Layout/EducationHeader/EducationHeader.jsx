@@ -86,51 +86,55 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
   return (
     <>
       <header className={`education-header ${shallHide}`}>
-        <div className="education-header__top">
-          <Menu
-            isOpen={isMenuOpen}
-            onStateChange={handleStateChange}
-            customCrossIcon={false}
-          >
-            {/* Content of the burger menu */}
-            {/* {renderItems()} */}
-            <div className="close-button" onClick={toggleMenu}>
-              <ImCross />
-            </div>
-            <Link>
-              <TopicsIcon />
-              Topics
-            </Link>
-            <Link>
-              <LessonsIcon />
-              Lessons
-            </Link>
-            <Link>
-              <CompetitionIcon />
-              Competitions
-            </Link>
-            <Link>
-              <ResultsIcon />
-              Results
-            </Link>
-          </Menu>
-          {isLargeScreen && (
-            <nav className="education-navigation">
-              {contentItems.map((item) => (
-                <p key={item.key} onClick={() => handleNavClick(item.key)}>
-                  {item.label}
-                </p>
-              ))}
-              <LogoLink width="80px" height="30px" />
-            </nav>
-          )}
-          {!isLargeScreen && <LogoLink width="80px" height="30px" />}
-          <Avatar w="50px" h="50px" /> {/* Display the avatar */}
-        </div>
+        <div className="container">
+          <div className="education-header__top">
+            <Menu
+              isOpen={isMenuOpen}
+              onStateChange={handleStateChange}
+              customCrossIcon={false}
+            >
+              {/* Content of the burger menu */}
+              {/* {renderItems()} */}
+              <div className="close-button" onClick={toggleMenu}>
+                <ImCross />
+              </div>
+              <Link>
+                <TopicsIcon />
+                Topics
+              </Link>
+              <Link>
+                <LessonsIcon />
+                Lessons
+              </Link>
+              <Link>
+                <CompetitionIcon />
+                Competitions
+              </Link>
+              <Link>
+                <ResultsIcon />
+                Results
+              </Link>
+            </Menu>
+            {isLargeScreen && (
+              <>
+                <nav className="education-navigation">
+                  {contentItems.map((item) => (
+                    <p key={item.key} onClick={() => handleNavClick(item.key)}>
+                      {item.label}
+                    </p>
+                  ))}
+                </nav>
+                <LogoLink width="80px" height="30px" />
+              </>
+            )}
+            {!isLargeScreen && <LogoLink width="80px" height="30px" />}
+            <Avatar w="50px" h="50px" /> {/* Display the avatar */}
+          </div>
 
-        <div className="education-header__points">
-          <p>{activeLanguage}</p> {/* Display the active language */}
-          <p>{points}</p> {/* Display the total lesson points */}
+          <div className="education-header__points">
+            <p>{activeLanguage}</p> {/* Display the active language */}
+            <p>{points}</p> {/* Display the total lesson points */}
+          </div>
         </div>
       </header>
     </>
