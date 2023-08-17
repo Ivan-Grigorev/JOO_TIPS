@@ -28,7 +28,10 @@ const EducationLayout = () => {
 
   return (
     <>
-      <EducationHeader isAchievementsPageOpen={isAchievementsPageOpen} />
+      <EducationHeader
+        handleNavClick={handleButtonClick}
+        isAchievementsPageOpen={isAchievementsPageOpen}
+      />
       {/* Render the header component with a prop */}
       <main className={`profile-hero education-hero ${achievementsHeroClass}`}>
         <Suspense fallback={<ChakraSpinner />}>

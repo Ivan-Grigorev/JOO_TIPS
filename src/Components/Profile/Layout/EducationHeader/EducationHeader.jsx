@@ -20,7 +20,15 @@ import CompetitionIcon from "../EducationFooter/icons/CompetitionIcon";
 import ResultsIcon from "../EducationFooter/icons/ResultsIcon";
 import { ImCross } from "react-icons/im";
 
-const EducationHeader = ({ isAchievementsPageOpen }) => {
+const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
+  // Define an array of content keys and their corresponding labels
+  const contentItems = [
+    { key: "Topics", label: "Topics" },
+    { key: "Lessons", label: "Lessons" },
+    { key: "Competitions", label: "Competitions" },
+    { key: "Results", label: "Results" },
+  ];
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
@@ -75,19 +83,6 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
 
   const shallHide = isAchievementsPageOpen === true ? "hide" : ""; // Determine if the header should be hidden on the achievements page
 
-  const renderItems = () => {
-    const output = [];
-
-    for (let index = 0; index < 15; index++) {
-      output.push(
-        <Link to={"#"} key={index}>
-          Option {index + 1}
-        </Link>
-      );
-    }
-    return output;
-  };
-
   return (
     <>
       <header className={`education-header ${shallHide}`}>
@@ -121,10 +116,11 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
           </Menu>
           {isLargeScreen && (
             <nav className="education-navigation">
-              <p>Topics</p>
-              <p>Lessons</p>
-              <p>Competitions</p>
-              <p>Results</p>
+              {contentItems.map((item) => (
+                <p key={item.key} onClick={() => handleNavClick(item.key)}>
+                  {item.label}
+                </p>
+              ))}
               <LogoLink width="80px" height="30px" />
             </nav>
           )}
