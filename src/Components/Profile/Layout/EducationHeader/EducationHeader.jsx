@@ -120,11 +120,11 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
             </Link>
           </Menu>
           {isLargeScreen && (
-            <nav>
-              <Link>Topics</Link>
-              <Link>Lessons</Link>
-              <Link>Competitions</Link>
-              <Link>Results</Link>
+            <nav className="education-navigation">
+              <p>Topics</p>
+              <p>Lessons</p>
+              <p>Competitions</p>
+              <p>Results</p>
               <LogoLink width="80px" height="30px" />
             </nav>
           )}
