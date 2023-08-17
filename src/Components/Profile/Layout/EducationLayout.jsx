@@ -55,11 +55,13 @@ const EducationLayout = () => {
         />
       )}
 
-      <EducationFooter
-        activeContent={activeEducationContent}
-        handleButtonClick={handleButtonClick}
-        isAchievementsPageOpen={isAchievementsPageOpen}
-      />
+      {!isLargeScreen && (
+        <EducationFooter
+          activeContent={activeEducationContent}
+          handleButtonClick={handleButtonClick}
+          isAchievementsPageOpen={isAchievementsPageOpen}
+        />
+      )}
     </>
   );
 };
