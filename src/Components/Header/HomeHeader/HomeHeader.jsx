@@ -11,11 +11,13 @@ const HomeHeader = memo(() => {
 
   return (
     <>
-      <header className="header container">
-        <Navigation />
+      <header className="header ">
+        <div className="container">
+          <Navigation />
 
-        {isLoggedIn ? <AuthHeader /> : <LoginBTN />}
-        {/* <HomeMobileHeader /> */}
+          {isLoggedIn ? <AuthHeader /> : <LoginBTN />}
+          {/* <HomeMobileHeader /> */}
+        </div>
       </header>
     </>
   );
