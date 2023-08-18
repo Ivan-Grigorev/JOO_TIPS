@@ -1,5 +1,4 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from "react"; // Import necessary modules from React
-import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
@@ -71,7 +70,6 @@ const EducationLayout = () => {
 
       {!isLargeScreen && (
         <EducationFooter
-          activeContent={activeEducationContent}
           handleButtonClick={handleButtonClick}
           isAchievementsPageOpen={isAchievementsPageOpen}
         />

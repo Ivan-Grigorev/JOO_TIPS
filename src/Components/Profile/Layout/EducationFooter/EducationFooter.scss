@@ -39,14 +39,14 @@
 .education-footer__buttons:is(:hover, :focus) {
   color: white;
   cursor: pointer;
+
+  & .icon-stroke {
+    stroke: white;
+  }
 }
 
 .education-footer .icon-stroke {
   stroke: gray; /* Обычное состояние - серый цвет */
-}
-
-.education-footer .active .icon-stroke {
-  stroke: white; /* Цвет при классе .active - белый */
 }
 
 footer.education-footer.hide {

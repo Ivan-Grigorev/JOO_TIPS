@@ -12,8 +12,6 @@ import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CookieBanner from "./Components/Cookie/Cookie";
-import Languages from "./Components/Languages/Languages";
 
 const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
@@ -30,6 +28,8 @@ const SetNewPassword = lazy(() =>
 const ChangePassword = lazy(() =>
   import("./Pages/ChangePassword/ChangePassword")
 );
+const CookieBanner = lazy(() => import("./Components/Cookie/Cookie"));
+const Languages = lazy(() => import("./Components/Languages/Languages"));
 
 const App = () => {
   const dispatch = useDispatch();
