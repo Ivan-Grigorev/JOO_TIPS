@@ -94,19 +94,19 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
             <div className="close-button" onClick={toggleMenu}>
               <ImCross />
             </div>
-            <Link>
+            <Link to={"#"}>
               <TopicsIcon />
               Topics
             </Link>
-            <Link>
+            <Link to={"#"}>
               <LessonsIcon />
               Lessons
             </Link>
-            <Link>
+            <Link to={"#"}>
               <CompetitionIcon />
               Competitions
             </Link>
-            <Link>
+            <Link to={"#"}>
               <ResultsIcon />
               Results
             </Link>

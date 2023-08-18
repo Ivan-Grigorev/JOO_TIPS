@@ -8,12 +8,9 @@ const Swipe = ({ hideLayout, showLayout }) => {
   // State to track the active content (Topics or Achievements)
   const [activeContent, setActiveContent] = useState("topics");
 
-  // Store the starting touch position
-  const touchStartX = useRef(null);
-
-  // Refs to access the DOM elements
-  const topicsRef = useRef(null);
-  const achievementsRef = useRef(null);
+  const touchStartX = useRef(null); // Store the starting touch position
+  const topicsRef = useRef(null); // Refs to access the DOM elements
+  const achievementsRef = useRef(null); // Refs to access the DOM elements
 
   // Handle the touch start event
   const handleTouchStart = useCallback((e) => {
