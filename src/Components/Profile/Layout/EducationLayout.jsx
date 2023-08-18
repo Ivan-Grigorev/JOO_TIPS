@@ -9,9 +9,10 @@ const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
 
 const EducationLayout = () => {
   // Create a state variable to track active content
-  const [activeEducationContent, setActiveEducationContent] = useState("Topics"); // prettier-ignore
+  const [activeEducationContent, setActiveEducationContent] =
+    useState("Topics");
   const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false); // Create a state variable to track if achievements page is open
-  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   // const handleButtonClick = (contentKey) => {
   //   setActiveEducationContent(contentKey); // Function to change active content when button is clicked
@@ -25,6 +26,7 @@ const EducationLayout = () => {
     [] // empty dependency array
   );
 
+  // CSS class based on whether achievements page is open
   useEffect(() => {
     const hero = document.querySelector(".profile-hero");
     isAchievementsPageOpen
@@ -32,11 +34,13 @@ const EducationLayout = () => {
       : hero.classList.remove("achievements-hero");
   }, [isAchievementsPageOpen]);
 
-  const hideLayout = () => setIsAchievementsPageOpen(false); // Function to hide layout when achievements page is opened
-  const showLayout = () => setIsAchievementsPageOpen(true); // Function to show layout when achievements page is closed
+  useEffect(() => {
+    const isLarge = window.matchMedia("(min-width: 1024px)").matches;
+    setIsLargeScreen(isLarge);
+  }, []);
 
-  // CSS class based on whether achievements page is open
-  // const achievementsHeroClass = isAchievementsPageOpen === true ? "achievements-hero" : ""; // prettier-ignore
+  const hideLayout = useCallback(() => setIsAchievementsPageOpen(false), []); // Function to hide layout when achievements page is opened
+  const showLayout = useCallback(() => setIsAchievementsPageOpen(true), []); // Function to show layout when achievements page is closed
 
   return (
     <>

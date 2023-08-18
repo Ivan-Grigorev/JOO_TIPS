@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./SwipeIndicator.scss"; // Import the styles for the SwipeIndicator component
+import { useMemo } from "react";
 
 // SwipeIndicator component to show indicators based on active education content and achievements page status
 const SwipeIndicator = ({ activeEducationContent, isAchievementsPageOpen }) => {
@@ -12,7 +13,9 @@ const SwipeIndicator = ({ activeEducationContent, isAchievementsPageOpen }) => {
       ? "active"
       : "";
 
-  const achievementsContent = isAchievementsPageOpen === true ? "active" : "";
+  const achievementsContent = useMemo(() => {
+    return isAchievementsPageOpen === true ? "active" : "";
+  }, [isAchievementsPageOpen]);
 
   const achievementsHasVisited =
     isAchievementsPageOpen === true ? "achievements" : "";

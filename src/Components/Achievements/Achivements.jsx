@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Avatar from "../Profile/Layout/Header/Avatar/Avatar";
 import "./Achivements.scss";
 
@@ -110,4 +111,4 @@ const Achievements = () => {
   );
 };
 
-export default Achievements;
+export default memo(Achievements);
