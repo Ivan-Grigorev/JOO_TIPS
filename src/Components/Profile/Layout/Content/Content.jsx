@@ -27,7 +27,7 @@ const Content = ({ hideLayout, showLayout, activeEducationContent }) => {
 Content.propTypes = {
   hideLayout: PropTypes.func.isRequired,
   showLayout: PropTypes.func.isRequired,
-  activeEducationContent: PropTypes.bool.isRequired,
+  activeEducationContent: PropTypes.string.isRequired,
 };
 
 export default Content;

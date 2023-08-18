@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from "react"; // Import necessary modules from React
+import { Suspense, lazy, useCallback, useEffect, useState } from "react"; // Import necessary modules from React
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
@@ -13,16 +13,30 @@ const EducationLayout = () => {
   const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false); // Create a state variable to track if achievements page is open
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
-  const handleButtonClick = (contentKey) => {
-    setActiveEducationContent(contentKey); // Function to change active content when button is clicked
-    window.scrollTo(0, 0); // Scroll to the top of the page
-  };
+  // const handleButtonClick = (contentKey) => {
+  //   setActiveEducationContent(contentKey); // Function to change active content when button is clicked
+  //   window.scrollTo(0, 0); // Scroll to the top of the page
+  // };
+  const handleButtonClick = useCallback(
+    (contentKey) => {
+      setActiveEducationContent(contentKey);
+      window.scrollTo(0, 0);
+    },
+    [] // empty dependency array
+  );
+
+  useEffect(() => {
+    const hero = document.querySelector(".profile-hero");
+    isAchievementsPageOpen
+      ? hero.classList.add("achievements-hero")
+      : hero.classList.remove("achievements-hero");
+  }, [isAchievementsPageOpen]);
 
   const hideLayout = () => setIsAchievementsPageOpen(false); // Function to hide layout when achievements page is opened
   const showLayout = () => setIsAchievementsPageOpen(true); // Function to show layout when achievements page is closed
 
   // CSS class based on whether achievements page is open
-  const achievementsHeroClass = isAchievementsPageOpen === true ? "achievements-hero" : ""; // prettier-ignore
+  // const achievementsHeroClass = isAchievementsPageOpen === true ? "achievements-hero" : ""; // prettier-ignore
 
   return (
     <>
@@ -31,7 +45,7 @@ const EducationLayout = () => {
         isAchievementsPageOpen={isAchievementsPageOpen}
       />
       {/* Render the header component with a prop */}
-      <main className={`profile-hero education-hero ${achievementsHeroClass}`}>
+      <main className={`profile-hero education-hero `}>
         <div className="container">
           <Suspense fallback={<ChakraSpinner />}>
             {/*  Suspense for lazy loading components */}

@@ -1,6 +1,6 @@
 import "./EducationHeader.scss"; // Import the styles for EducationHeader
 import PropTypes from "prop-types";
-import { memo, useEffect, useState } from "react"; // Import the useEffect hook from React
+import { memo, useCallback, useEffect, useMemo, useState } from "react"; // Import the useEffect hook from React
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
@@ -23,12 +23,14 @@ import { ImCross } from "react-icons/im";
 
 const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
   // Define an array of content keys and their corresponding labels
-  const contentItems = [
-    { key: "Topics", label: "Topics" },
-    { key: "Lessons", label: "Lessons" },
-    { key: "Competitions", label: "Competitions" },
-    { key: "Results", label: "Results" },
-  ];
+  const contentItems = useMemo(() => {
+    return [
+      { key: "Topics", label: "Topics" },
+      { key: "Lessons", label: "Lessons" },
+      { key: "Competitions", label: "Competitions" },
+      { key: "Results", label: "Results" },
+    ];
+  }, []);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -52,19 +54,15 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
     // Select the burger menu button element
     const burgerMenu = document.querySelector(".bm-burger-button");
 
-    // Define a function to add "hide" class
-    const setClass = () => burgerMenu.classList.add("hide");
-
-    // Define a function to remove "hide" class
-    const resetClass = () => burgerMenu.classList.remove("hide");
-
     // Check if the achievements page is open
     // If true, add "hide" class; otherwise, remove it
-    isAchievementsPageOpen ? setClass() : resetClass();
+    isAchievementsPageOpen
+      ? burgerMenu.classList.add("hide")
+      : burgerMenu.classList.remove("hide");
   }, [isAchievementsPageOpen]); // The effect will re-run whenever isAchievementsPageOpen changes
 
   // Define a function to handle the state change of the menu
-  const handleStateChange = (state) => {
+  const handleStateChange = useCallback((state) => {
     // Find the <body> element in the document
     const body = document.body;
 
@@ -76,11 +74,9 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
 
     // Update the state variable to reflect the menu's open/closed state
     setIsMenuOpen(isMenuOpen);
-  };
+  }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const shallHide = isAchievementsPageOpen === true ? "hide" : ""; // Determine if the header should be hidden on the achievements page
 
