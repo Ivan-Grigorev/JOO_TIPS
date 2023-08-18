@@ -1,4 +1,5 @@
 import "./EducationHeader.scss"; // Import the styles for EducationHeader
+import PropTypes from "prop-types";
 import { memo, useEffect, useState } from "react"; // Import the useEffect hook from React
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
@@ -137,6 +138,11 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
       </div>
     </header>
   );
+};
+
+EducationHeader.propTypes = {
+  handleNavClick: PropTypes.func.isRequired,
+  isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
 export default memo(EducationHeader); // Export the EducationHeader component
