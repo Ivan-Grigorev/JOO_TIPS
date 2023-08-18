@@ -5,13 +5,7 @@ import EducationFooter from "./EducationFooter/EducationFooter"; // Import the f
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
 import Content from "./Content/Content";
 
-const Lessons = lazy(() => import("../EducationContent/Results/Results")); // Lazy import the lessons component
-const Results = lazy(() => import("../EducationContent/Results/Results")); // Lazy import the results component
-const Competition = lazy(() =>
-  import("../EducationContent/Competition/Competition")
-); // Lazy import the competition component
 const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
-const Swipe = lazy(() => import("./Swipe/Swipe")); // Import the swipe component
 
 const EducationLayout = () => {
   // Create a state variable to track active content

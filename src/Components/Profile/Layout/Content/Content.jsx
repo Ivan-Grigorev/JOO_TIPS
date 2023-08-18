@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
+import { lazy } from "react";
 
-import Competition from "../../EducationContent/Competition/Competition";
-import Lessons from "../../EducationContent/Lessons/Lessons";
-import Results from "../../EducationContent/Results/Results";
-import Swipe from "../Swipe/Swipe";
+const Lessons = lazy(() => import("../../EducationContent/Lessons/Lessons")); // Lazy import the lessons component
+const Competition = lazy(() =>
+  import("../../EducationContent/Competition/Competition")
+); // Lazy import the competition component
+const Results = lazy(() => import("../../EducationContent/Results/Results")); // Lazy import the results component
+const Swipe = lazy(() => import("../Swipe/Swipe")); // Import the swipe component
 
 const Content = ({ hideLayout, showLayout, activeEducationContent }) => {
   return (
