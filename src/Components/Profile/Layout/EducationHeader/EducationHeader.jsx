@@ -1,5 +1,5 @@
 import "./EducationHeader.scss"; // Import the styles for EducationHeader
-import { useEffect, useState } from "react"; // Import the useEffect hook from React
+import { memo, useEffect, useState } from "react"; // Import the useEffect hook from React
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
@@ -84,61 +84,59 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
   const shallHide = isAchievementsPageOpen === true ? "hide" : ""; // Determine if the header should be hidden on the achievements page
 
   return (
-    <>
-      <header className={`education-header ${shallHide}`}>
-        <div className="container">
-          <div className="education-header__top">
-            <Menu
-              isOpen={isMenuOpen}
-              onStateChange={handleStateChange}
-              customCrossIcon={false}
-            >
-              {/* Content of the burger menu */}
-              {/* {renderItems()} */}
-              <div className="close-button" onClick={toggleMenu}>
-                <ImCross />
-              </div>
-              <Link>
-                <TopicsIcon />
-                Topics
-              </Link>
-              <Link>
-                <LessonsIcon />
-                Lessons
-              </Link>
-              <Link>
-                <CompetitionIcon />
-                Competitions
-              </Link>
-              <Link>
-                <ResultsIcon />
-                Results
-              </Link>
-            </Menu>
-            {isLargeScreen && (
-              <>
-                <nav className="education-navigation">
-                  {contentItems.map((item) => (
-                    <p key={item.key} onClick={() => handleNavClick(item.key)}>
-                      {item.label}
-                    </p>
-                  ))}
-                </nav>
-                <LogoLink width="80px" height="30px" />
-              </>
-            )}
-            {!isLargeScreen && <LogoLink width="80px" height="30px" />}
-            <Avatar w="50px" h="50px" /> {/* Display the avatar */}
-          </div>
-
-          <div className="education-header__points">
-            <p>{activeLanguage}</p> {/* Display the active language */}
-            <p>{points}</p> {/* Display the total lesson points */}
-          </div>
+    <header className={`education-header ${shallHide}`}>
+      <div className="container">
+        <div className="education-header__top">
+          <Menu
+            isOpen={isMenuOpen}
+            onStateChange={handleStateChange}
+            customCrossIcon={false}
+          >
+            {/* Content of the burger menu */}
+            {/* {renderItems()} */}
+            <div className="close-button" onClick={toggleMenu}>
+              <ImCross />
+            </div>
+            <Link>
+              <TopicsIcon />
+              Topics
+            </Link>
+            <Link>
+              <LessonsIcon />
+              Lessons
+            </Link>
+            <Link>
+              <CompetitionIcon />
+              Competitions
+            </Link>
+            <Link>
+              <ResultsIcon />
+              Results
+            </Link>
+          </Menu>
+          {isLargeScreen && (
+            <>
+              <nav className="education-navigation">
+                {contentItems.map((item) => (
+                  <p key={item.key} onClick={() => handleNavClick(item.key)}>
+                    {item.label}
+                  </p>
+                ))}
+              </nav>
+              <LogoLink width="80px" height="30px" />
+            </>
+          )}
+          {!isLargeScreen && <LogoLink width="80px" height="30px" />}
+          <Avatar w="50px" h="50px" /> {/* Display the avatar */}
         </div>
-      </header>
-    </>
+
+        <div className="education-header__points">
+          <p>{activeLanguage}</p> {/* Display the active language */}
+          <p>{points}</p> {/* Display the total lesson points */}
+        </div>
+      </div>
+    </header>
   );
 };
 
-export default EducationHeader; // Export the EducationHeader component
+export default memo(EducationHeader); // Export the EducationHeader component

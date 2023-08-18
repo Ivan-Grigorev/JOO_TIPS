@@ -5,12 +5,20 @@ import LessonsIcon from "./icons/LessonsIcon";
 import TopicsIcon from "./icons/TopicsIcon";
 import ResultsIcon from "./icons/ResultsIcon";
 import CompetitionIcon from "./icons/CompetitionIcon";
+import { memo, useEffect, useState } from "react";
 // EducationFooter Component - Represents the footer section of the education page.
 const EducationFooter = ({
   handleButtonClick,
   activeContent,
   isAchievementsPageOpen,
 }) => {
+  const [shallHide, setShallHide] = useState("");
+
+  // Обновляем класс shallHide при изменении isAchievementsPageOpen
+  useEffect(() => {
+    setShallHide(isAchievementsPageOpen ? "hide" : "");
+  }, [isAchievementsPageOpen]);
+
   // Function to render individual buttons with corresponding icons and labels.
   // Takes in a content key (to determine the active state), the icon component, and the label.
   const renderButton = (contentKey, IconComponent, label) => {
@@ -28,7 +36,7 @@ const EducationFooter = ({
     );
   };
 
-  const shallHide = isAchievementsPageOpen === true ? "hide" : "";
+  // const shallHide = isAchievementsPageOpen === true ? "hide" : "";
 
   return (
     <footer className={`education-footer ${shallHide}`}>
@@ -47,4 +55,4 @@ EducationFooter.propTypes = {
   isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
-export default EducationFooter;
+export default memo(EducationFooter);
