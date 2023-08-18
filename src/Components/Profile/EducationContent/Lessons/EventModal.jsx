@@ -9,10 +9,12 @@ import {
 } from "@chakra-ui/react";
 
 import "./eventModal.scss";
+import { memo } from "react";
 
-const EventModal = ({ event, isOpen, onClose }) => {
+const EventModal = memo(({ event, isOpen, onClose }) => {
   const { lessonDuration, topic, subtopic, lessonNumber, flashcardsCount } =
     event;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -39,6 +41,6 @@ const EventModal = ({ event, isOpen, onClose }) => {
       </ModalContent>
     </Modal>
   );
-};
+});
 
 export default EventModal;

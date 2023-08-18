@@ -6,34 +6,29 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import CustomToolbar from "./CalendarCustomToolbar";
 import { memo, useCallback, useMemo, useState } from "react";
 import EventModal from "./EventModal";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLessons } from "../../../../redux/lessons/lessons-operations";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { selectUserLessons } from "../../../../redux/lessons/lessons-selectors";
+import ChakraSpinner from "../../../ChakraUI/Spinner/Spinner";
+import useModal from "../../../../hooks/useModal";
+import useLessons from "../../../../hooks/useLessons";
 
 const Lessons = () => {
-  const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
-
-  // Set up calendar localization based on moment.js
-  const localizer = useMemo(() => momentLocalizer(moment), []);
-
-  const schedule = useSelector(selectUserLessons); // Get user's lessons using a selector
-
-  useEffect(() => {
-    dispatch(fetchLessons()); // Fetch user's lessons when the component mounts
-  }, [dispatch]);
-
-  const [eventModalOpen, setEventModalOpen] = useState(false); // State to manage event modal visibility
   const [selectedEvent, setSelectedEvent] = useState(null); // State to store selected event data
+  const events = useSelector(selectUserLessons); // Get user's lessons using a selector
 
-  const handleEventClick = useCallback((event) => {
-    setSelectedEvent(event); // Set the clicked event
-    setEventModalOpen(true); // Open the event modal
-  }, []);
+  const { isOpen, open, close } = useModal();
+  const lessons = useLessons();
 
-  const handleCloseModal = useCallback(() => {
-    setEventModalOpen(false); // Close the event modal
-  }, []);
+  const localizer = useMemo(() => momentLocalizer(moment), []); // Set up calendar localization based on moment.js
+
+  const handleEventClick = useCallback(
+    (event) => {
+      setSelectedEvent(event); // Set the clicked event
+      // setEventModalOpen(true); // Open the event modal
+      open(event);
+    },
+    [open]
+  );
 
   const dateFormat = useMemo(
     () => ({
@@ -50,21 +45,18 @@ const Lessons = () => {
           toolbar: CustomToolbar, // Use the custom toolbar component
         }}
         views={["month"]} // Display the calendar in month view
-        events={schedule} // Use the user's lessons as calendar events
+        events={lessons} // Use the user's lessons as calendar events
         startAccessor="lessonDate" // Start date property for events
         endAccessor="endTime" // End date property for events
         titleAccessor={"topic"} // Title property for events
         onSelectEvent={handleEventClick} // Click event handler for events
         formats={dateFormat}
       />
+      {events.length === 0 && <ChakraSpinner />}
 
       {/* Event modal with event details */}
       {selectedEvent && (
-        <EventModal
-          event={selectedEvent}
-          isOpen={eventModalOpen}
-          onClose={handleCloseModal}
-        />
+        <EventModal event={selectedEvent} isOpen={isOpen} onClose={close} />
       )}
     </>
   );
