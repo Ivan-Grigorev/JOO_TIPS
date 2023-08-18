@@ -1,13 +1,17 @@
-import { Suspense, useState } from "react"; // Import necessary modules from React
+import { Suspense, lazy, useState } from "react"; // Import necessary modules from React
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
-import Lessons from "../EducationContent/Lessons/Lessons"; // Import the lessons component
-import Results from "../EducationContent/Results/Results"; // Import the results component
-import Competition from "../EducationContent/Competition/Competition"; // Import the competition component
-import Swipe from "./Swipe/Swipe"; // Import the swipe component
-import SwipeIndicator from "./SwipeIndicator/SwipeIndicator";
+import Content from "./Content/Content";
+
+const Lessons = lazy(() => import("../EducationContent/Results/Results")); // Lazy import the lessons component
+const Results = lazy(() => import("../EducationContent/Results/Results")); // Lazy import the results component
+const Competition = lazy(() =>
+  import("../EducationContent/Competition/Competition")
+); // Lazy import the competition component
+const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
+const Swipe = lazy(() => import("./Swipe/Swipe")); // Import the swipe component
 
 const EducationLayout = () => {
   // Create a state variable to track active content
@@ -36,16 +40,12 @@ const EducationLayout = () => {
       <main className={`profile-hero education-hero ${achievementsHeroClass}`}>
         <div className="container">
           <Suspense fallback={<ChakraSpinner />}>
-            {/* // Suspense for lazy loading components */}
-            {activeEducationContent === "Topics" && (
-              <Swipe hideLayout={hideLayout} showLayout={showLayout} /> // Render Swipe component if active content is "Topics"
-            )}
-            {activeEducationContent === "Lessons" && <Lessons />}
-            {/* Lessons component if active content is "Lessons" */}
-            {activeEducationContent === "Competitions" && <Competition />}
-            {/* Render Competition component if active content is "Competitions" */}
-            {activeEducationContent === "Results" && <Results />}
-            {/* Results component if active content is "Results" */}
+            {/*  Suspense for lazy loading components */}
+            <Content
+              hideLayout={hideLayout}
+              showLayout={showLayout}
+              activeEducationContent={activeEducationContent}
+            />
           </Suspense>
         </div>
       </main>
