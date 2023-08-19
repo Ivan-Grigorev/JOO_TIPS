@@ -6,25 +6,24 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import CustomToolbar from "./CalendarCustomToolbar";
 import { memo, useCallback, useMemo, useState } from "react";
 import EventModal from "./EventModal";
-import { useSelector } from "react-redux";
-import { selectUserLessons } from "../../../../redux/lessons/lessons-selectors";
 import ChakraSpinner from "../../../ChakraUI/Spinner/Spinner";
 import useModal from "../../../../hooks/useModal";
 import useLessons from "../../../../hooks/useLessons";
+import { useSelector } from "react-redux";
+import { selectLessonsLoadingStatus } from "../../../../redux/lessons/lessons-selectors";
 
 const Lessons = () => {
   const [selectedEvent, setSelectedEvent] = useState(null); // State to store selected event data
-  const events = useSelector(selectUserLessons); // Get user's lessons using a selector
 
   const { isOpen, open, close } = useModal();
   const lessons = useLessons();
+  const isLoading = useSelector(selectLessonsLoadingStatus);
 
   const localizer = useMemo(() => momentLocalizer(moment), []); // Set up calendar localization based on moment.js
 
   const handleEventClick = useCallback(
     (event) => {
       setSelectedEvent(event); // Set the clicked event
-      // setEventModalOpen(true); // Open the event modal
       open(event);
     },
     [open]
@@ -52,7 +51,8 @@ const Lessons = () => {
         onSelectEvent={handleEventClick} // Click event handler for events
         formats={dateFormat}
       />
-      {events.length === 0 && <ChakraSpinner />}
+
+      {isLoading && <ChakraSpinner />}
 
       {/* Event modal with event details */}
       {selectedEvent && (

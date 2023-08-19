@@ -16,7 +16,9 @@ export default function useLessons() {
 
   // Check if stored lessons are not available, and if so, fetch lessons
   useEffect(() => {
-    if (!storedLessons) dispatch(fetchLessons());
+    if (!storedLessons) {
+      dispatch(fetchLessons());
+    }
   }, [dispatch, storedLessons]);
 
   // Update session storage with lessons if available and not empty
