@@ -1,7 +1,6 @@
 import "./EducationHeader.scss"; // Import the styles for EducationHeader
-import PropTypes from "prop-types";
-import { memo, useCallback, useEffect, useMemo, useState } from "react"; // Import the useEffect hook from React
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { memo, useEffect, useMemo, useState } from "react"; // Import the useEffect hook from React
+import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
@@ -12,16 +11,12 @@ import { fetchlanguages } from "../../../../redux/languages/languages-operations
 
 import "./Burger-menu.scss";
 
-import { slide as Menu } from "react-burger-menu";
 import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
 import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
-import TopicsIcon from "../EducationFooter/icons/TopicsIcon";
-import LessonsIcon from "../EducationFooter/icons/LessonsIcon";
-import CompetitionIcon from "../EducationFooter/icons/CompetitionIcon";
-import ResultsIcon from "../EducationFooter/icons/ResultsIcon";
-import { ImCross } from "react-icons/im";
+import Navigation from "./Navigation/Navigation";
+import BurgerMenu from "./Menu/Menu";
 
-const EducationHeader = ({ isAchievementsPageOpen }) => {
+const EducationHeader = () => {
   const [hideClass, setHideClass] = useState(""); // Define an array of content keys and their corresponding labels
   const contentItems = useMemo(() => {
     return [
@@ -35,8 +30,6 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
       { key: "Results", label: "Results", to: "/education/results" },
     ];
   }, []);
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
   const location = useLocation();
@@ -63,68 +56,14 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
     achievementsRoute ? setHideClass("hide") : setHideClass("");
   }, [location]);
 
-  // Define a function to handle the state change of the menu
-  const handleStateChange = useCallback((state) => {
-    // Find the <body> element in the document
-    const body = document.body;
-
-    // Determine whether the menu is open
-    const isMenuOpen = state.isOpen;
-
-    // Add or remove the "height-limit" class based on the menu's state
-    body.classList.toggle("height-limit", isMenuOpen);
-
-    // Update the state variable to reflect the menu's open/closed state
-    setIsMenuOpen(isMenuOpen);
-  }, []);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
   return (
     <header className={`education-header ${hideClass}`}>
       <div className="container">
         <div className="education-header__top">
-          <Menu
-            isOpen={isMenuOpen}
-            onStateChange={handleStateChange}
-            customCrossIcon={false}
-          >
-            {/* Content of the burger menu */}
-            {/* {renderItems()} */}
-            <div className="close-button" onClick={toggleMenu}>
-              <ImCross />
-            </div>
-            <Link to={"#"}>
-              <TopicsIcon />
-              Topics
-            </Link>
-            <Link to={"#"}>
-              <LessonsIcon />
-              Lessons
-            </Link>
-            <Link to={"#"}>
-              <CompetitionIcon />
-              Competitions
-            </Link>
-            <Link to={"#"}>
-              <ResultsIcon />
-              Results
-            </Link>
-          </Menu>
-          {isLargeScreen && (
-            <>
-              <nav className="education-navigation">
-                {contentItems.map((item) => (
-                  <NavLink key={item.key} to={item.to}>
-                    {item.label}
-                  </NavLink>
-                ))}
-              </nav>
-              <LogoLink width="80px" height="30px" />
-            </>
-          )}
+          <BurgerMenu />
+          {isLargeScreen && <Navigation contentItems={contentItems} />}
           {!isLargeScreen && <LogoLink width="80px" height="30px" />}
-          <Avatar w="50px" h="50px" /> {/* Display the avatar */}
+          <Avatar w="50px" h="50px" />
         </div>
 
         <div className="education-header__points">
@@ -134,10 +73,6 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
       </div>
     </header>
   );
-};
-
-EducationHeader.propTypes = {
-  isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
 export default memo(EducationHeader); // Export the EducationHeader component

@@ -1,37 +1,35 @@
-import { Suspense, lazy, useCallback, useEffect, useState } from "react"; // Import necessary modules from React
+import { Suspense, lazy, useEffect, useState } from "react"; // Import necessary modules from React
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
 
 const EducationLayout = () => {
   // Create a state variable to track active content
-  const [activeEducationContent, setActiveEducationContent] =
-    useState("Topics");
-  const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false); // Create a state variable to track if achievements page is open
   const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  const location = useLocation();
 
   // CSS class based on whether achievements page is open
   useEffect(() => {
+    const achievementsRoute = location.pathname === "/education/achievements";
     const hero = document.querySelector(".profile-hero");
-    isAchievementsPageOpen
+
+    achievementsRoute
       ? hero.classList.add("achievements-hero")
       : hero.classList.remove("achievements-hero");
-  }, [isAchievementsPageOpen]);
+  }, [location.pathname]);
 
   useEffect(() => {
     const isLarge = window.matchMedia("(min-width: 1024px)").matches;
     setIsLargeScreen(isLarge);
   }, []);
 
-  const hideLayout = useCallback(() => setIsAchievementsPageOpen(false), []); // Function to hide layout when achievements page is opened
-  const showLayout = useCallback(() => setIsAchievementsPageOpen(true), []); // Function to show layout when achievements page is closed
-
   return (
     <>
-      <EducationHeader isAchievementsPageOpen={isAchievementsPageOpen} />
+      <EducationHeader />
       <main className="profile-hero education-hero">
         <div className="container">
           <Suspense fallback={<ChakraSpinner />}>
@@ -41,16 +39,9 @@ const EducationLayout = () => {
         </div>
       </main>
 
-      {!isLargeScreen && (
-        <SwipeIndicator
-          activeEducationContent={activeEducationContent}
-          isAchievementsPageOpen={isAchievementsPageOpen}
-        />
-      )}
+      {!isLargeScreen && <SwipeIndicator />}
 
-      {!isLargeScreen && (
-        <EducationFooter isAchievementsPageOpen={isAchievementsPageOpen} />
-      )}
+      {!isLargeScreen && <EducationFooter />}
     </>
   );
 };
