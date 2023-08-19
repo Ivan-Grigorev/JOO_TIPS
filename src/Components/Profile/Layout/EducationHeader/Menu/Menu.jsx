@@ -8,6 +8,8 @@ import ResultsIcon from "../../EducationFooter/icons/ResultsIcon";
 import { ImCross } from "react-icons/im";
 import { Link } from "react-router-dom";
 
+import "./Burger-menu.scss";
+
 const BurgerMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

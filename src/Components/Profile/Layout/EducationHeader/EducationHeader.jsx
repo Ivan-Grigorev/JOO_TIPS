@@ -7,8 +7,6 @@ import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-op
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors"; // Import a selector to check if the user is logged in
 import { fetchlanguages } from "../../../../redux/languages/languages-operations"; // Import a function to fetch languages
 
-import "./Burger-menu.scss";
-
 import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
 import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
 import Navigation from "./Navigation/Navigation";
