@@ -95,29 +95,3 @@ header.education-header a.logo-header {
   margin-bottom: 20px;
   margin-left: 45px;
 }
-
-.education-header__points {
-  position: absolute !important;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-
-  font-size: 12px;
-
-  padding: 0 20px;
-
-  text-align: center;
-
-  border: 1px solid;
-  border-color: #718096;
-  border-radius: 22px;
-
-  background-color: #163a65;
-  color: white;
-
-  z-index: 100;
-
-  & p:first-child {
-    border-bottom: 1px solid;
-  }
-}

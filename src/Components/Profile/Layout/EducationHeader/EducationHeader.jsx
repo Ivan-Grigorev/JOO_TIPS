@@ -4,8 +4,6 @@ import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
-import { selectLessonsTotalPoints } from "../../../../redux/lessons/lessons-selectors"; // Import a selector to get total lesson points
-import { selectUserActiveLanguage } from "../../../../redux/languages/languages-selectors"; // Import a selector to get the user's active language
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors"; // Import a selector to check if the user is logged in
 import { fetchlanguages } from "../../../../redux/languages/languages-operations"; // Import a function to fetch languages
 
@@ -15,6 +13,7 @@ import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // 
 import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
 import Navigation from "./Navigation/Navigation";
 import BurgerMenu from "./Menu/Menu";
+import LanguagePoints from "./Points/LanguagePoints";
 
 const EducationHeader = () => {
   const [hideClass, setHideClass] = useState(""); // Define an array of content keys and their corresponding labels
@@ -35,8 +34,6 @@ const EducationHeader = () => {
   const location = useLocation();
 
   const isLoggedIn = useSelector(selectIsLoggedIn); // Get the user's login status using a selector
-  const points = useSelector(selectLessonsTotalPoints); // Get the total lesson points using a selector
-  const activeLanguage = useSelector(selectUserActiveLanguage); // Get the user's active language using a selector
 
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
@@ -65,11 +62,7 @@ const EducationHeader = () => {
           {!isLargeScreen && <LogoLink width="80px" height="30px" />}
           <Avatar w="50px" h="50px" />
         </div>
-
-        <div className="education-header__points">
-          <p>{activeLanguage}</p> {/* Display the active language */}
-          <p>{points}</p> {/* Display the total lesson points */}
-        </div>
+        <LanguagePoints />
       </div>
     </header>
   );

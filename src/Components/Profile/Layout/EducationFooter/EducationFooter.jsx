@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { memo, useCallback, useEffect, useState } from "react";
 import "./EducationFooter.scss";
 
@@ -6,20 +5,26 @@ import LessonsIcon from "./icons/LessonsIcon";
 import TopicsIcon from "./icons/TopicsIcon";
 import ResultsIcon from "./icons/ResultsIcon";
 import CompetitionIcon from "./icons/CompetitionIcon";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 // EducationFooter Component - Represents the footer section of the education page.
-const EducationFooter = ({ isAchievementsPageOpen }) => {
+const EducationFooter = () => {
   // Обновляем класс shallHide при изменении isAchievementsPageOpen
-  const [shallHideFooter, setShallHideFooter] = useState("");
+  const [hideClass, setHideClass] = useState("");
+
+  const location = useLocation();
 
   useEffect(() => {
-    setShallHideFooter(isAchievementsPageOpen ? "hide" : "");
-  }, [isAchievementsPageOpen]);
+    // if user on this route - hide header
+    const achievementsRoute = location.pathname === "/education/achievements";
+
+    // otherwise do nothing
+    achievementsRoute ? setHideClass("hide") : setHideClass("");
+  }, [location]);
 
   // Function to render individual buttons with corresponding icons and labels.
   // Takes in a content key (to determine the active state), the icon component, and the label.
-  const renderButton = useCallback((IconComponent, label, to) => {
+  const renderButton = useCallback((IconComponent, label) => {
     return (
       <NavLink className="education-footer__buttons" to={label.toLowerCase()}>
         <IconComponent /> {/* Render the provided SVG icon component */}
@@ -29,7 +34,7 @@ const EducationFooter = ({ isAchievementsPageOpen }) => {
   }, []);
 
   return (
-    <footer className={`education-footer ${shallHideFooter}`}>
+    <footer className={`education-footer ${hideClass}`}>
       {/* Render the Topics, Lessons, and Results buttons */}
       {renderButton(TopicsIcon, "Topics")}
       {renderButton(LessonsIcon, "Lessons")}
@@ -37,10 +42,6 @@ const EducationFooter = ({ isAchievementsPageOpen }) => {
       {renderButton(ResultsIcon, "Results")}
     </footer>
   );
-};
-
-EducationFooter.propTypes = {
-  isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
 export default memo(EducationFooter);
