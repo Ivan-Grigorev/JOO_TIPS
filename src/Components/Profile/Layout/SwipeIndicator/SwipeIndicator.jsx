@@ -6,6 +6,7 @@ import "./SwipeIndicator.scss"; // Import the styles for the SwipeIndicator comp
 const SwipeIndicator = () => {
   const [shouldHide, setShouldHide] = useState("");
   const [demontageClass, setDemontageClass] = useState("");
+  const [onAchievementsClass, setOnAchievementsClass] = useState("");
 
   const topicsRef = useRef(null); // ref to topics link (used in useEffect)
 
@@ -21,6 +22,14 @@ const SwipeIndicator = () => {
   }, [shouldHide, location]);
 
   useEffect(() => {
+    const achievementsRoute = location.pathname === "/education/achievements";
+
+    achievementsRoute
+      ? setOnAchievementsClass("achievements")
+      : setOnAchievementsClass("");
+  }, [shouldHide, location]);
+
+  useEffect(() => {
     shouldHide === "hided"
       ? setDemontageClass("active") // leave active class on topics link, when indicator is about to hide
       : setDemontageClass(""); // default mode
@@ -29,7 +38,7 @@ const SwipeIndicator = () => {
   return (
     <>
       {/* Container for swipe indicators */}
-      <div className={`swipe-indicator ${shouldHide}`}>
+      <div className={`swipe-indicator ${shouldHide} ${onAchievementsClass}`}>
         {/* Indicator for achievements content */}
         <NavLink to="achievements"></NavLink>
         {/* Indicator for topics content */}
