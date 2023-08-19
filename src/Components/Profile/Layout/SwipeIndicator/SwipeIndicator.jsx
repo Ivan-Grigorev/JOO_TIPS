@@ -1,41 +1,47 @@
-import PropTypes from "prop-types";
+import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import "./SwipeIndicator.scss"; // Import the styles for the SwipeIndicator component
-import { useMemo } from "react";
 
 // SwipeIndicator component to show indicators based on active education content and achievements page status
-const SwipeIndicator = ({ activeEducationContent, isAchievementsPageOpen }) => {
-  const shallHide = activeEducationContent === "Topics" ? "" : "hided"; // Conditionally determine if the indicator should be hidden
+const SwipeIndicator = () => {
+  const [shouldHide, setShouldHide] = useState("");
+  const [demontageClass, setDemontageClass] = useState("");
 
-  // Determine classes to highlight active content based on the current state
-  const topicsContent =
-    activeEducationContent !== "Achievements" &&
-    isAchievementsPageOpen === false
-      ? "active"
-      : "";
+  const topicsRef = useRef(null);
 
-  const achievementsContent = useMemo(() => {
-    return isAchievementsPageOpen === true ? "active" : "";
-  }, [isAchievementsPageOpen]);
+  const location = useLocation();
 
-  const achievementsHasVisited =
-    isAchievementsPageOpen === true ? "achievements" : "";
+  useEffect(() => {
+    const swipeRoutes =
+      location.pathname === "/education/achievements" ||
+      location.pathname === "/education/topics";
+
+    !swipeRoutes ? setShouldHide("hided") : setShouldHide("");
+  }, [shouldHide, location]);
+
+  useEffect(() => {
+    shouldHide === "hided"
+      ? setDemontageClass("active")
+      : setDemontageClass("");
+  }, [shouldHide]);
+
+  // Conditionally determine if the indicator should be hidden
 
   return (
     <>
       {/* Container for swipe indicators */}
-      <div className={`swipe-indicator ${shallHide} ${achievementsHasVisited}`}>
+      <div className={`swipe-indicator ${shouldHide}`}>
         {/* Indicator for achievements content */}
-        <div className={achievementsContent}></div>
+        <NavLink to="achievements"></NavLink>
         {/* Indicator for topics content */}
-        <div className={topicsContent}></div>
+        <NavLink
+          to="topics"
+          ref={topicsRef}
+          className={demontageClass}
+        ></NavLink>
       </div>
     </>
   );
-};
-
-SwipeIndicator.propTypes = {
-  activeEducationContent: PropTypes.string.isRequired,
-  isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 
 export default SwipeIndicator; // Export the SwipeIndicator component

@@ -2,7 +2,6 @@ import { Suspense, lazy, useCallback, useEffect, useState } from "react"; // Imp
 import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading spinner component
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
-import Content from "./Content/Content";
 import { Outlet } from "react-router-dom";
 
 const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
@@ -13,18 +12,6 @@ const EducationLayout = () => {
     useState("Topics");
   const [isAchievementsPageOpen, setIsAchievementsPageOpen] = useState(false); // Create a state variable to track if achievements page is open
   const [isLargeScreen, setIsLargeScreen] = useState(false);
-
-  // const handleButtonClick = (contentKey) => {
-  //   setActiveEducationContent(contentKey); // Function to change active content when button is clicked
-  //   window.scrollTo(0, 0); // Scroll to the top of the page
-  // };
-  const handleButtonClick = useCallback(
-    (contentKey) => {
-      setActiveEducationContent(contentKey);
-      window.scrollTo(0, 0);
-    },
-    [] // empty dependency array
-  );
 
   // CSS class based on whether achievements page is open
   useEffect(() => {
@@ -44,21 +31,12 @@ const EducationLayout = () => {
 
   return (
     <>
-      <EducationHeader
-        handleNavClick={handleButtonClick}
-        isAchievementsPageOpen={isAchievementsPageOpen}
-      />
-      {/* Render the header component with a prop */}
-      <main className={`profile-hero education-hero `}>
+      <EducationHeader isAchievementsPageOpen={isAchievementsPageOpen} />
+      <main className="profile-hero education-hero">
         <div className="container">
           <Suspense fallback={<ChakraSpinner />}>
             {/*  Suspense for lazy loading components */}
-            <Outlet />
-            {/* <Content
-              hideLayout={hideLayout}
-              showLayout={showLayout}
-              activeEducationContent={activeEducationContent}
-            /> */}
+            <Outlet hideLayout={() => console.log("works")} />
           </Suspense>
         </div>
       </main>
@@ -71,10 +49,7 @@ const EducationLayout = () => {
       )}
 
       {!isLargeScreen && (
-        <EducationFooter
-          handleButtonClick={handleButtonClick}
-          isAchievementsPageOpen={isAchievementsPageOpen}
-        />
+        <EducationFooter isAchievementsPageOpen={isAchievementsPageOpen} />
       )}
     </>
   );

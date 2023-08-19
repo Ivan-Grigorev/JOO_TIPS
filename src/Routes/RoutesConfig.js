@@ -63,6 +63,7 @@ const RoutesConfig = () => {
         <Route path="*" element={<NotFound />} />
 
         <Route path="/education" element={<ProfileLayout />}>
+          <Route path="achievements" element={<Swipe />} />
           <Route path="topics" element={<Swipe />} />
           <Route path="lessons" element={<Lessons />} />
           <Route path="competitions" element={<Competition />} />

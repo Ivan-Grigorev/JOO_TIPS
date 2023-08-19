@@ -21,7 +21,7 @@ import CompetitionIcon from "../EducationFooter/icons/CompetitionIcon";
 import ResultsIcon from "../EducationFooter/icons/ResultsIcon";
 import { ImCross } from "react-icons/im";
 
-const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
+const EducationHeader = ({ isAchievementsPageOpen }) => {
   // Define an array of content keys and their corresponding labels
   const contentItems = useMemo(() => {
     return [
@@ -141,7 +141,6 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
 };
 
 EducationHeader.propTypes = {
-  handleNavClick: PropTypes.func.isRequired,
   isAchievementsPageOpen: PropTypes.bool.isRequired,
 };
 

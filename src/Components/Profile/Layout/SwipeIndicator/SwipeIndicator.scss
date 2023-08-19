@@ -13,14 +13,14 @@
   transition-timing-function: ease-in-out;
 }
 
-.swipe-indicator div {
+.swipe-indicator a {
   height: 10px;
   width: 10px;
   border-radius: 50%;
-  background: gray;
+  background-color: gray;
 }
 
-.swipe-indicator div.active {
+.swipe-indicator a.active {
   background-color: orange;
 }
 
