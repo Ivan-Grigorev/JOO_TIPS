@@ -56,9 +56,10 @@ const EducationHeader = ({ isAchievementsPageOpen }) => {
   }, [dispatch, isLoggedIn]); // Run the effect when dispatch or isLoggedIn change
 
   useEffect(() => {
-    // if user is not on this routes - hide indicator
+    // if user on this route - hide header
     const achievementsRoute = location.pathname === "/education/achievements";
 
+    // otherwise do nothing
     achievementsRoute ? setHideClass("hide") : setHideClass("");
   }, [location]);
 
