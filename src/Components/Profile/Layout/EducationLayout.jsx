@@ -34,7 +34,7 @@ const EducationLayout = () => {
         <div className="container">
           <Suspense fallback={<ChakraSpinner />}>
             {/*  Suspense for lazy loading components */}
-            <Outlet hideLayout={() => console.log("works")} />
+            <Outlet />
           </Suspense>
         </div>
       </main>
