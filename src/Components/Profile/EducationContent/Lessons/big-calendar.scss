@@ -120,11 +120,15 @@ $event-font-size: 11px;
         right: 10px;
         top: 15px;
 
-        @media screen and (max-width: 767px) {
+        font-size: 12px;
+
+        @media screen and (max-width: 767px) and (max-width: 1023px) {
           font-size: 9px;
         }
 
-        font-size: 12px;
+        @media screen and (min-width: 1024px) {
+          font-size: 16px;
+        }
       }
     }
   }
@@ -163,7 +167,7 @@ $event-font-size: 11px;
   }
 
   .rbc-date-cell {
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
       font-size: 18px;
     }
   }
