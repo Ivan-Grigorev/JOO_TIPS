@@ -15,7 +15,7 @@ const CookieBanner = lazy(() => import("./Components/Cookie/Cookie"));
 const App = memo(() => {
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(selectLoadingStatus);
+  const { isLoading } = useSelector(selectLoadingStatus);
   const { isRefreshing } = useSelector(selectIsRefreshing);
 
   useEffect(() => {
