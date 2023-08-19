@@ -7,11 +7,12 @@ const SwipeIndicator = () => {
   const [shouldHide, setShouldHide] = useState("");
   const [demontageClass, setDemontageClass] = useState("");
 
-  const topicsRef = useRef(null);
+  const topicsRef = useRef(null); // ref to topics link (used in useEffect)
 
   const location = useLocation();
 
   useEffect(() => {
+    // if user is not on this routes - hide indicator
     const swipeRoutes =
       location.pathname === "/education/achievements" ||
       location.pathname === "/education/topics";
@@ -21,11 +22,9 @@ const SwipeIndicator = () => {
 
   useEffect(() => {
     shouldHide === "hided"
-      ? setDemontageClass("active")
-      : setDemontageClass("");
+      ? setDemontageClass("active") // leave active class on topics link, when indicator is about to hide
+      : setDemontageClass(""); // default mode
   }, [shouldHide]);
-
-  // Conditionally determine if the indicator should be hidden
 
   return (
     <>
