@@ -1,37 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import { lazy, useEffect } from "react";
+import { Suspense, lazy, memo, useEffect } from "react";
+import { Flip, ToastContainer } from "react-toastify";
 
-import Layout from "./Pages/Layout/Layout";
 import "./scss/global.scss"; // do not delete
-import RestrictedRoute from "./Routes/RestrictedRoute";
-import PrivateRoute from "./Routes/PrivateRoute";
 import { refreshUser } from "./redux/auth/auth-operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing, selectLoadingStatus } from "./redux/selectors";
-import ChakraSpinner from "./Components/ChakraUI/Spinner/Spinner";
 
-import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RoutesConfig from "./Routes/RoutesConfig";
 
-const Homepage = lazy(() => import("./Pages/Homepage/Homepage"));
-const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"));
-const NotFound = lazy(() => import("./Components/Errors/404"));
-const ProfileLayout = lazy(() => import("./Components/Profile/Layout/Layout"));
-const Profile = lazy(() => import("./Components/Profile/Profile"));
-const Settings = lazy(() => import("./Components/Profile/Settings/Settings"));
-const RecoveringPassword = lazy(() =>
-  import("./Pages/RecoveringPassword/RecoveringPassword")
-);
-const SetNewPassword = lazy(() =>
-  import("./Pages/RecoveringPassword/SetNewPassword/SetNewPassword")
-);
-const ChangePassword = lazy(() =>
-  import("./Pages/ChangePassword/ChangePassword")
-);
+const ChakraSpinner = lazy(() => import("./Components/ChakraUI/Spinner/Spinner")); // prettier-ignore
 const CookieBanner = lazy(() => import("./Components/Cookie/Cookie"));
-const Languages = lazy(() => import("./Components/Languages/Languages"));
 
-const App = () => {
+const App = memo(() => {
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectLoadingStatus);
@@ -45,69 +26,29 @@ const App = () => {
     <ChakraSpinner />
   ) : (
     <>
-      <Routes>
-        <Route path="" element={<Layout />}>
-          <Route index element={<Homepage />} />
-        </Route>
+      <Suspense fallback={<ChakraSpinner />}>
+        <RoutesConfig />
 
-        <Route path="/profile" element={<ProfileLayout />}>
-          <Route
-            index
-            element={<PrivateRoute redirectTo="/" component={<Profile />} />}
-          />
-          <Route
-            path="/profile/settings"
-            element={<PrivateRoute redirectTo="/" component={<Settings />} />}
-          />
-        </Route>
-
-        <Route
-          path="signup"
-          element={<RestrictedRoute redirectTo="/" component={<AuthPage />} />}
+        {isLoading && <ChakraSpinner />}
+        <ToastContainer
+          position="top-right"
+          transition={Flip}
+          autoClose={1000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          limit={3}
         />
 
-        <Route
-          path="signup/recover-password"
-          element={<RecoveringPassword />}
-        />
-        <Route
-          path="signup/recover-password/:token"
-          element={<SetNewPassword />}
-        />
-
-        <Route path="profile/change-password" element={<ChangePassword />} />
-
-        <Route path="*" element={<NotFound />} />
-
-        <Route path="/education" element={<ProfileLayout />}>
-          <Route path="topics" element={null} />
-          <Route path="lessons" element={null} />
-          <Route path="results" element={null} />
-        </Route>
-
-        <Route path="/languages">
-          <Route path="choose" element={<Languages />} />
-        </Route>
-      </Routes>
-      {isLoading && <ChakraSpinner />}
-      <ToastContainer
-        position="top-right"
-        transition={Flip}
-        autoClose={1000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        limit={3}
-      />
-
-      <CookieBanner />
+        <CookieBanner />
+      </Suspense>
     </>
   );
-};
+});
 
 export default App;

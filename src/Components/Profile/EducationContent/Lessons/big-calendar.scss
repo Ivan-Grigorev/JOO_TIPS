@@ -38,6 +38,8 @@ $event-font-size: 11px;
   background-color: #1a4579;
   border-radius: 10px;
 
+  margin: 0 auto;
+
   @media screen and (min-width: 375px) and (max-width: 479px) {
     width: 350px;
   }
