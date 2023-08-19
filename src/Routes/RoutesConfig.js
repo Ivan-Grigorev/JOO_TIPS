@@ -1,5 +1,9 @@
 import { lazy, memo } from "react";
 import { Route, Routes } from "react-router-dom";
+import Swipe from "../Components/Profile/Layout/Swipe/Swipe";
+import Lessons from "../Components/Profile/EducationContent/Lessons/Lessons";
+import Competition from "../Components/Profile/EducationContent/Competition/Competition";
+import Results from "../Components/Profile/EducationContent/Results/Results";
 const PrivateRoute = lazy(() => import("./PrivateRoute"));
 const RestrictedRoute = lazy(() => import("./RestrictedRoute"));
 
@@ -58,7 +62,12 @@ const RoutesConfig = () => {
 
         <Route path="*" element={<NotFound />} />
 
-        <Route path="/education" element={<ProfileLayout />} />
+        <Route path="/education" element={<ProfileLayout />}>
+          <Route path="topics" element={<Swipe />} />
+          <Route path="lessons" element={<Lessons />} />
+          <Route path="competitions" element={<Competition />} />
+          <Route path="results" element={<Results />} />
+        </Route>
 
         <Route path="/languages">
           <Route path="choose" element={<Languages />} />

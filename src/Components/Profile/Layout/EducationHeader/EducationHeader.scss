@@ -48,11 +48,12 @@ header.education-header.hide {
   align-items: center;
   margin-right: 20px;
 
-  & p {
+  & a {
     cursor: pointer;
     transition: color 350ms cubic-bezier(0.39, 0.575, 0.565, 1);
 
-    &:hover {
+    &:is(:hover, :focus),
+    &.active {
       color: #fcbc7d;
     }
 

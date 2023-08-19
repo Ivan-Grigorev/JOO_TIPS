@@ -3,6 +3,7 @@ import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading 
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
 import Content from "./Content/Content";
+import { Outlet } from "react-router-dom";
 
 const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
 
@@ -52,11 +53,12 @@ const EducationLayout = () => {
         <div className="container">
           <Suspense fallback={<ChakraSpinner />}>
             {/*  Suspense for lazy loading components */}
-            <Content
+            <Outlet />
+            {/* <Content
               hideLayout={hideLayout}
               showLayout={showLayout}
               activeEducationContent={activeEducationContent}
-            />
+            /> */}
           </Suspense>
         </div>
       </main>

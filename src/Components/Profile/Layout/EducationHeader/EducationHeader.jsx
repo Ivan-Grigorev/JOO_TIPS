@@ -1,6 +1,7 @@
 import "./EducationHeader.scss"; // Import the styles for EducationHeader
 import PropTypes from "prop-types";
 import { memo, useCallback, useEffect, useMemo, useState } from "react"; // Import the useEffect hook from React
+import { Link, NavLink } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
 import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
@@ -14,7 +15,6 @@ import "./Burger-menu.scss";
 import { slide as Menu } from "react-burger-menu";
 import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
 import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
-import { Link } from "react-router-dom";
 import TopicsIcon from "../EducationFooter/icons/TopicsIcon";
 import LessonsIcon from "../EducationFooter/icons/LessonsIcon";
 import CompetitionIcon from "../EducationFooter/icons/CompetitionIcon";
@@ -25,10 +25,14 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
   // Define an array of content keys and their corresponding labels
   const contentItems = useMemo(() => {
     return [
-      { key: "Topics", label: "Topics" },
-      { key: "Lessons", label: "Lessons" },
-      { key: "Competitions", label: "Competitions" },
-      { key: "Results", label: "Results" },
+      { key: "Topics", label: "Topics", to: "/education/topics" },
+      { key: "Lessons", label: "Lessons", to: "/education/lessons" },
+      {
+        key: "Competitions",
+        label: "Competitions",
+        to: "/education/competitions",
+      },
+      { key: "Results", label: "Results", to: "/education/results" },
     ];
   }, []);
 
@@ -115,9 +119,9 @@ const EducationHeader = ({ handleNavClick, isAchievementsPageOpen }) => {
             <>
               <nav className="education-navigation">
                 {contentItems.map((item) => (
-                  <p key={item.key} onClick={() => handleNavClick(item.key)}>
+                  <NavLink key={item.key} to={item.to}>
                     {item.label}
-                  </p>
+                  </NavLink>
                 ))}
               </nav>
               <LogoLink width="80px" height="30px" />
