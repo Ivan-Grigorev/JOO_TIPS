@@ -1,96 +1,104 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import Avatar from "../../Layout/Header/Avatar/Avatar";
 import BackButton from "../../Settings/BackButton/BackButton";
 
 import "./Achivements.scss";
 
+const achievements = [
+  {
+    title: "Новичок",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Капибара",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Отличник",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "HTML и CSS",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Новичок",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Капибара",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Отличник",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "HTML и CSS",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "HTML и CSS",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Новичок ",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Капибара ",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Отличник",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "HTML и CSS",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Гуру Python",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Java Чемпион",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Разбойник",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Профессионал",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "FullStack",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Новичок ",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Капибара ",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+  {
+    title: "Отличник",
+    image: "https://i.imgur.com/Vq6zHPa.jpg",
+  },
+];
+
 const Achievements = ({ achievementsClass, achievementsRef }) => {
-  const achievements = [
-    {
-      title: "Новичок ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Капибара ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Отличник",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "HTML и CSS",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Новичок ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Капибара ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Отличник",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "HTML и CSS",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "HTML и CSS",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Новичок ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Капибара ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Отличник",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "HTML и CSS",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Гуру Python",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Java Чемпион",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Разбойник",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Профессионал",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "FullStack",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Новичок ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Капибара ",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-    {
-      title: "Отличник",
-      image: "https://i.imgur.com/Vq6zHPa.jpg",
-    },
-  ];
+  // Create a state variable to track active content
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const isLarge = window.matchMedia("(min-width: 1024px)").matches;
+    setIsLargeScreen(isLarge);
+  }, []);
 
   // todo обязательно сделать показатель выполненности условия достижения
   return (
@@ -113,10 +121,12 @@ const Achievements = ({ achievementsClass, achievementsRef }) => {
         </ul>
       </div>
 
-      <BackButton
-        backLink={"/education/topics"}
-        currentSectionName={"Achievements"}
-      />
+      {isLargeScreen && (
+        <BackButton
+          backLink={"/education/topics"}
+          currentSectionName={"Achievements"}
+        />
+      )}
     </div>
   );
 };
