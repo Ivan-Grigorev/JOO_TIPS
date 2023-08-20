@@ -1,10 +1,9 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import Topics from "../../EducationContent/Topics/Topics";
-import Achievements from "../../../Achievements/Achivements";
+import Achievements from "../../EducationContent/Achievements/Achivements";
 import "./Swipe.scss";
 import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
-import {} from "react-router-dom";
 
 const Swipe = () => {
   const location = useLocation();
@@ -73,17 +72,12 @@ const Swipe = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Display Topics content */}
-      <div className={`content topics ${topicsClass}`} ref={topicsRef}>
-        <Topics />
-      </div>
-      {/* Display Achievements content */}
-      <div
-        className={`content achievements ${achievementsClass}`}
-        ref={achievementsRef}
-      >
-        <Achievements />
-      </div>
+      <Topics topicsClass={topicsClass} topicsRef={topicsRef} />
+
+      <Achievements
+        achievementsClass={achievementsClass}
+        achievementsRef={achievementsRef}
+      />
     </div>
   );
 };

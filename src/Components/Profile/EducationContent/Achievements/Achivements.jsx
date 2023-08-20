@@ -1,8 +1,8 @@
 import { memo } from "react";
-import Avatar from "../Profile/Layout/Header/Avatar/Avatar";
 import "./Achivements.scss";
+import Avatar from "../../Layout/Header/Avatar/Avatar";
 
-const Achievements = () => {
+const Achievements = ({ achievementsClass, achievementsRef }) => {
   const achievements = [
     {
       title: "Новичок ",
@@ -92,7 +92,10 @@ const Achievements = () => {
 
   // todo обязательно сделать показатель выполненности условия достижения
   return (
-    <>
+    <div
+      className={`content achievements ${achievementsClass}`}
+      ref={achievementsRef}
+    >
       <div className="user-achievements__avatar">
         <Avatar />
       </div>
@@ -107,7 +110,7 @@ const Achievements = () => {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 
