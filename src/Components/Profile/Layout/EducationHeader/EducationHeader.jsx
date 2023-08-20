@@ -63,7 +63,7 @@ const EducationHeader = () => {
         </div>
         <LanguagePoints />
 
-        <AchievementsButton />
+        {isLargeScreen && <AchievementsButton />}
       </div>
     </header>
   );
