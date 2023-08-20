@@ -1,6 +1,8 @@
 import { memo } from "react";
-import "./Achivements.scss";
 import Avatar from "../../Layout/Header/Avatar/Avatar";
+import BackButton from "../../Settings/BackButton/BackButton";
+
+import "./Achivements.scss";
 
 const Achievements = ({ achievementsClass, achievementsRef }) => {
   const achievements = [
@@ -110,6 +112,11 @@ const Achievements = ({ achievementsClass, achievementsRef }) => {
           ))}
         </ul>
       </div>
+
+      <BackButton
+        backLink={"/education/topics"}
+        currentSectionName={"Achievements"}
+      />
     </div>
   );
 };
