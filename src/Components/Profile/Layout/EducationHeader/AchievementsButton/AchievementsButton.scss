@@ -1,14 +1,14 @@
 .achievements-link {
   position: absolute;
-  bottom: -56px;
+  bottom: -90px;
   color: #fcbc7d;
 
   animation: bounceAnimation 2s ease-in-out infinite 1.5s; /* 2 секунды продолжительности, cubic-bezier для медленной анимации, задержка 1.5 секунды */
 }
 
 .achievements-link svg {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
 }
 
 @keyframes bounceAnimation {

@@ -62,9 +62,9 @@ const EducationHeader = () => {
           <Avatar w="50px" h="50px" />
         </div>
         <LanguagePoints />
-      </div>
 
-      <AchievementsButton />
+        <AchievementsButton />
+      </div>
     </header>
   );
 };
