@@ -28,4 +28,10 @@
     opacity: 0;
     pointer-events: none;
   }
+
+  .back-button {
+    position: absolute;
+    top: 25px;
+    right: 0;
+  }
 }
