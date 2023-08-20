@@ -12,6 +12,7 @@ import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
 import Navigation from "./Navigation/Navigation";
 import BurgerMenu from "./Menu/Menu";
 import LanguagePoints from "./Points/LanguagePoints";
+import AchievementsButton from "./AchievementsButton/AchievementsButton";
 
 const EducationHeader = () => {
   const [hideClass, setHideClass] = useState(""); // Define an array of content keys and their corresponding labels
@@ -62,6 +63,8 @@ const EducationHeader = () => {
         </div>
         <LanguagePoints />
       </div>
+
+      <AchievementsButton />
     </header>
   );
 };

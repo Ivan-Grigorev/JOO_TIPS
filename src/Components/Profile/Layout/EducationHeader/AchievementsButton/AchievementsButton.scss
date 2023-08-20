@@ -1,0 +1,23 @@
+.achievements-link {
+  position: absolute;
+  bottom: -56px;
+  color: #fcbc7d;
+
+  animation: bounceAnimation 2s ease-in-out infinite 1.5s; /* 2 секунды продолжительности, cubic-bezier для медленной анимации, задержка 1.5 секунды */
+}
+
+.achievements-link svg {
+  width: 50px;
+  height: 50px;
+}
+
+@keyframes bounceAnimation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px); /* На сколько пикселей подпрыгивать */
+  }
+}
