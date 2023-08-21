@@ -2,6 +2,7 @@ import { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Avatar from "../../Layout/Header/Avatar/Avatar";
 import BackButton from "../../Settings/BackButton/BackButton";
+import AchievementsList from "./AchievementsList/AchivementsList";
 
 import "./Achivements.scss";
 
@@ -92,50 +93,38 @@ const achievements = [
   },
 ];
 
+// Define the Achievements functional component that displays user achievements.
 const Achievements = ({ achievementsClass, achievementsRef }) => {
-  // Create a state variable to track active content
+  // Create a state variable to track whether the screen size is large.
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
+  // Use the useEffect hook to determine if the screen size is large.
   useEffect(() => {
     const isLarge = window.matchMedia("(min-width: 1024px)").matches;
     setIsLargeScreen(isLarge);
   }, []);
 
-  // todo обязательно сделать показатель выполненности условия достижения
   return (
     <div
-      className={`content achievements ${achievementsClass}`}
-      ref={achievementsRef}
+      className={`content achievements ${achievementsClass}`} // Apply CSS classes dynamically.
+      ref={achievementsRef} // Attach a ref to this component.
     >
       <div className="user-achievements__avatar">
         <Avatar />
       </div>
+      <AchievementsList achievements={achievements} />
 
-      <div className="user-achievements">
-        <ul className="user-achievements__list">
-          {achievements.map((achievement, index) => (
-            <li key={index}>
-              <img src={achievement.image} alt={achievement.title} />
-              <p>{achievement.title}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {isLargeScreen && (
-        <BackButton
-          backLink={"/education/topics"}
-          currentSectionName={"Achievements"}
-        />
-      )}
+      {/* Show the BackButton component if the screen is large */}
+      {isLargeScreen && <BackButton currentSectionName="Achievements" />}
     </div>
   );
 };
 
+// Define PropTypes to specify the data types for the props.
 Achievements.propTypes = {
-  achievementsClass: PropTypes.string.isRequired,
+  achievementsClass: PropTypes.string.isRequired, // Class name for styling.
   achievementsRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
-    .isRequired,
+    .isRequired, // Ref for attaching to this component.
 };
 
-export default memo(Achievements);
+export default memo(Achievements); // Export the Achievements component with memoization.
