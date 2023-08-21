@@ -8,36 +8,20 @@
   background-color: $header-bg-color;
 
   // on figma margin-bottom is 135px
-  padding: 0 30px 115px 30px;
+
+  padding: 25px 15px 150px 15px;
   z-index: 10;
 
   align-items: center;
-
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    padding: 0 0 150px 45px;
-  }
-
-  @media screen and (min-width: 1024px) and (max-width: 1319px) {
-    padding: 25px 0 150px 45px;
-  }
-
-  @media screen and (min-width: 1320px) and (max-width: 1439px) {
-    padding: 24px 35px 150px 45px;
-  }
-
-  @media screen and (min-width: 1440px) {
-    padding: 24px 80px 150px 105px;
-  }
 }
 .header .logo-header {
-  margin-top: 35px;
+  margin-right: auto;
   z-index: 10;
 
   @media screen and (min-width: 768px) and (max-width: 1200px) {
     margin-left: 30px;
   }
   @media screen and (min-width: 1024px) {
-    margin-right: 95px;
     margin-top: 0;
   }
 }

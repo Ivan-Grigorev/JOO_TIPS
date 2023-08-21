@@ -3,12 +3,17 @@
 .navbar {
   display: none;
   z-index: 10;
-  margin-right: 125px;
+  margin-right: auto;
 
   color: $header-titles;
 
-  @media screen and (min-width: 1320px) {
+  @media screen and (min-width: 1024px) {
     display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 14px;
+  }
+  @media screen and (min-width: 1320px) {
     gap: 80px;
     font-size: 16px;
   }
