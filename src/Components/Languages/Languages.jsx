@@ -40,7 +40,6 @@ const Languages = () => {
   }, [dispatch]);
 
   const chooseLanguage = (language) => {
-    // console.log(language);
     dispatch(addLanguage({ language }));
     dispatch(setActiveLanguage({ language }));
     navigate("/education");
