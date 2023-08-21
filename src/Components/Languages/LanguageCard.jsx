@@ -4,7 +4,6 @@ import { memo } from "react";
 
 const LanguageCard = ({
   iconSrc,
-  altText,
   languageName,
   userLanguages,
   chooseLanguage,
@@ -13,12 +12,9 @@ const LanguageCard = ({
     (userLanguages && userLanguages.includes(languageName)) || false;
 
   const handleChooseLanguage = () => {
-    if (languageName === "Javascript" || languageName === "Python") {
-      return isLanguageSelected
-        ? toast.error("You already learning this language")
-        : chooseLanguage(languageName);
-    }
-    toast.warning("This language is still in development process.");
+    return isLanguageSelected
+      ? toast.error("You already learning this language")
+      : chooseLanguage(languageName);
   };
 
   const cardClassName = isLanguageSelected ? "disable__card" : "";
@@ -28,7 +24,7 @@ const LanguageCard = ({
       <div className={`card ${cardClassName}`} onClick={handleChooseLanguage}>
         <img
           src={iconSrc}
-          alt={altText}
+          alt={languageName.toLowerCase()}
           className="programming-language-icon"
         />
         <p className="card__text">{languageName}</p>
@@ -40,7 +36,6 @@ const LanguageCard = ({
 
 LanguageCard.propTypes = {
   iconSrc: PropTypes.string.isRequired,
-  altText: PropTypes.string.isRequired,
   languageName: PropTypes.string.isRequired,
   userLanguages: PropTypes.arrayOf(
     PropTypes.oneOf([

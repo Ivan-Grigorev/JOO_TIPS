@@ -7,6 +7,18 @@ import CSharp from "./icons/csharp_logo.svg";
 import CPlusPlus from "./icons/cplusplus_logo.svg";
 import Golang from "./icons/golang_logo.svg";
 import PHP from "./icons/php_logo.svg";
+import HTML from "./icons/html_logo.png";
+import CSS from "./icons/css_logo.png";
+import SCSS from "./icons/scss_logo.svg";
+import Solidity from "./icons/solidity_logo.png";
+import React from "./icons/react_logo.jpg";
+import Node from "./icons/node.js_logo.png";
+import Django from "./icons/django_logo.svg";
+import Kotlin from "./icons/kotlin_logo.svg";
+import MySQL from "./icons/mysql_logo.svg";
+import Docker from "./icons/docker_logo.svg";
+import Nginx from "./icons/nginx_logo.svg";
+import TCP from "./icons/TCP_logo.svg";
 
 import LanguageCard from "./LanguageCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,22 +32,32 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const languagesData = [
-  { iconSrc: Python, altText: "python", languageName: "Python" },
-  { iconSrc: Javascript, altText: "javascript", languageName: "Javascript" },
-  { iconSrc: JAVA, altText: "java", languageName: "Java" },
-  { iconSrc: SWIFT, altText: "swift", languageName: "Swift" },
-  { iconSrc: CSharp, altText: "C#", languageName: "C#" },
-  { iconSrc: CPlusPlus, altText: "C++", languageName: "C++" },
-  { iconSrc: Golang, altText: "golang", languageName: "Golang" },
-  { iconSrc: PHP, altText: "PHP", languageName: "PHP" },
+  { iconSrc: Javascript, languageName: "Javascript" },
+  { iconSrc: React, languageName: "React" },
+  { iconSrc: Node, languageName: "Node/Express" },
+  { iconSrc: JAVA, languageName: "Java" },
+  { iconSrc: SWIFT, languageName: "Swift" },
+  { iconSrc: CSharp, languageName: "C#" },
+  { iconSrc: CPlusPlus, languageName: "C++" },
+  { iconSrc: Golang, languageName: "Golang" },
+  { iconSrc: PHP, languageName: "PHP" },
+  { iconSrc: HTML, languageName: "HTML" },
+  { iconSrc: CSS, languageName: "CSS" },
+  { iconSrc: SCSS, languageName: "SCSS" },
+  { iconSrc: Solidity, languageName: "Solidity" },
+  { iconSrc: Python, languageName: "Python" },
+  { iconSrc: Django, languageName: "Django" },
+  { iconSrc: Kotlin, languageName: "Kotlin" },
+  { iconSrc: MySQL, languageName: "MySQL" },
+  { iconSrc: Docker, languageName: "Docker" },
+  { iconSrc: Nginx, languageName: "Nginx" },
+  { iconSrc: TCP, languageName: "TCP/IP" },
 ];
 
 const Languages = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLanguages = useSelector(selectUserLanguages);
-
-  console.log(userLanguages);
 
   useEffect(() => {
     dispatch(fetchlanguages());
