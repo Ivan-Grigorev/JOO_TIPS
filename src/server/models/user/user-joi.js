@@ -164,14 +164,27 @@ function userResetPassword(req, res, next) {
 
 function userLanguage(req, res, next) {
   const languageEnum = [
-    "Python",
     "Javascript",
-    "Java",
-    "Swift",
-    "C#",
+    "Python",
+    "HTML",
+    "CSS",
+    "SCSS",
+    "SWIFT",
+    "Solidity",
     "C++",
-    "Golang",
+    "C#",
+    "React",
+    "Node/Express",
     "PHP",
+    "Django",
+    "Java",
+    "Golang",
+    "Kotlin",
+    "MongoDB",
+    "MySQL",
+    "Docker",
+    "Nginx",
+    "TCP/IP",
   ];
   // Define schema for validation.
   const userLanguageSchema = Joi.object({
