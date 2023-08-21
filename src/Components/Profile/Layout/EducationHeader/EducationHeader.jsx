@@ -11,8 +11,8 @@ import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // 
 import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
 import Navigation from "./Navigation/Navigation";
 import BurgerMenu from "./Menu/Menu";
-import LanguagePoints from "./Points/LanguagePoints";
 import AchievementsButton from "./AchievementsButton/AchievementsButton";
+import LanguagePoints from "./LanguagePoints/LanguagePoints";
 
 const EducationHeader = () => {
   const [hideClass, setHideClass] = useState(""); // Define an array of content keys and their corresponding labels
