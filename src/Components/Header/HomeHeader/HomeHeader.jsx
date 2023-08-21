@@ -11,8 +11,8 @@ const HomeHeader = memo(() => {
 
   return (
     <>
-      <header className="header ">
-        <div className="container">
+      <header className="header">
+        <div className="container flex">
           <Navigation />
 
           {isLoggedIn ? <AuthHeader /> : <LoginBTN />}
