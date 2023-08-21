@@ -35,6 +35,8 @@ const Languages = () => {
   const navigate = useNavigate();
   const userLanguages = useSelector(selectUserLanguages);
 
+  console.log(userLanguages);
+
   useEffect(() => {
     dispatch(fetchlanguages());
   }, [dispatch]);

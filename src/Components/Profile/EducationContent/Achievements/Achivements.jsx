@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import Avatar from "../../Layout/Header/Avatar/Avatar";
 import BackButton from "../../Settings/BackButton/BackButton";
 
@@ -129,6 +130,12 @@ const Achievements = ({ achievementsClass, achievementsRef }) => {
       )}
     </div>
   );
+};
+
+Achievements.propTypes = {
+  achievementsClass: PropTypes.string.isRequired,
+  achievementsRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+    .isRequired,
 };
 
 export default memo(Achievements);

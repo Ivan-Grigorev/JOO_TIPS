@@ -1,4 +1,6 @@
 import { toast } from "react-toastify";
+import PropTypes from "prop-types";
+import { memo } from "react";
 
 const LanguageCard = ({
   iconSrc,
@@ -36,4 +38,37 @@ const LanguageCard = ({
   );
 };
 
-export default LanguageCard;
+LanguageCard.propTypes = {
+  iconSrc: PropTypes.string.isRequired,
+  altText: PropTypes.string.isRequired,
+  languageName: PropTypes.string.isRequired,
+  userLanguages: PropTypes.arrayOf(
+    PropTypes.oneOf([
+      "Javascript",
+      "Python",
+      "HTML",
+      "CSS",
+      "SCSS",
+      "SWIFT",
+      "Solidity",
+      "C++",
+      "C#",
+      "React",
+      "Node/Express",
+      "PHP",
+      "Django",
+      "Java",
+      "Golang",
+      "Kotlin",
+      "MongoDB",
+      "MySQL",
+      "Docker",
+      "Nginx",
+      "TCP/IP",
+    ])
+  ).isRequired,
+
+  chooseLanguage: PropTypes.func.isRequired,
+};
+
+export default memo(LanguageCard);
