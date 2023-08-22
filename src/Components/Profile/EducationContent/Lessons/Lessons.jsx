@@ -63,9 +63,8 @@ const Lessons = () => {
     []
   );
 
-
   return (
-    <>
+    <div className="flex">
       <Calendar
         localizer={localizer} // Set up the calendar localization
         components={{
@@ -89,7 +88,7 @@ const Lessons = () => {
       {selectedEvent && (
         <EventModal event={selectedEvent} isOpen={isOpen} onClose={close} />
       )}
-    </>
+    </div>
   );
 };
 
