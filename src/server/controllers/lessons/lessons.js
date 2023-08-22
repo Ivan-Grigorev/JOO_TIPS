@@ -46,24 +46,23 @@ async function getLessons(req, res) {
 
 async function finishLesson(req, res) {
   const { lessonId } = req.body;
-  console.log(req.body);
-  // todo добавить userID для проверки в виде миддлвары
+  // console.log(req.body); // Logging the request body for debugging
+
+  // todo: Add userID for verification using middleware
 
   try {
-    // Найдите урок в базе данных по его ID
+    // Find the lesson by its ID in the database
     const lesson = await Lesson.findById(lessonId);
 
-    if (!lesson) {
-      return res.status(404).json({ message: "Lesson isn't finded" });
-    }
-
-    // Установите флаг завершения урока
+    // Set the completion flag of the lesson to true
     lesson.completed = true;
     await lesson.save();
 
+    // Respond with a success message if the lesson was completed successfully
     res.status(200).json({ message: "Lesson finished successfully." });
   } catch (error) {
-    console.error("Ошибка при завершении урока:", error);
+    // Handle errors if any occurred during the process
+    console.error("Error finishing lesson:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
