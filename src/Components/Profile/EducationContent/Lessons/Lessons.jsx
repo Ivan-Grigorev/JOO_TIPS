@@ -1,16 +1,18 @@
-// import "./Lessons-calendar.scss";
-import "./big-calendar.scss";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import CustomToolbar from "./CalendarCustomToolbar";
-import { memo, useCallback, useMemo, useState } from "react";
 import EventModal from "./EventModal";
 import ChakraSpinner from "../../../ChakraUI/Spinner/Spinner";
+
+import { memo, useCallback, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useModal from "../../../../hooks/useModal";
 import useLessons from "../../../../hooks/useLessons";
-import { useSelector } from "react-redux";
 import { selectLessonsLoadingStatus } from "../../../../redux/lessons/lessons-selectors";
+
+import "./big-calendar.scss"; // do not swap places!
+import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap places!
+import { finishLesson } from "../../../../redux/lessons/lessons-operations";
 
 const Lessons = () => {
   // State to store selected event data
@@ -21,6 +23,8 @@ const Lessons = () => {
 
   // Fetch lesson data using the hook
   const lessons = useLessons();
+
+  const dispatch = useDispatch();
 
   // Loading status of lessons
   const isLoading = useSelector(selectLessonsLoadingStatus);
@@ -37,14 +41,20 @@ const Lessons = () => {
     [open]
   );
 
+  const handleFinishLesson = (lessonId) => {
+    dispatch(finishLesson({ lessonId }));
+  };
+
   // Function to add 'missed' class to missed lessons
   const addMissedClass = (events) => {
     const currentDate = new Date(); // Current date and time in the local time zone
     return events.map((event) => {
+      const lessonCompleted = event.completed === true;
+
       const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
       let className = "";
 
-      if (eventDate < currentDate) {
+      if (eventDate < currentDate && !lessonCompleted) {
         className = "missed";
       }
 
@@ -107,7 +117,12 @@ const Lessons = () => {
 
       {/* Event modal with event details */}
       {selectedEvent && (
-        <EventModal event={selectedEvent} isOpen={isOpen} onClose={close} />
+        <EventModal
+          event={selectedEvent}
+          isOpen={isOpen}
+          onClose={close}
+          handleFinishLesson={handleFinishLesson}
+        />
       )}
     </div>
   );
