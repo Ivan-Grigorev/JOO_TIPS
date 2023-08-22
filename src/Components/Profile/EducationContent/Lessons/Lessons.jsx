@@ -13,14 +13,22 @@ import { useSelector } from "react-redux";
 import { selectLessonsLoadingStatus } from "../../../../redux/lessons/lessons-selectors";
 
 const Lessons = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null); // State to store selected event data
+  // State to store selected event data
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
+  // Hook for managing modal state
   const { isOpen, open, close } = useModal();
+
+  // Fetch lesson data using the hook
   const lessons = useLessons();
+
+  // Loading status of lessons
   const isLoading = useSelector(selectLessonsLoadingStatus);
 
-  const localizer = useMemo(() => momentLocalizer(moment), []); // Set up calendar localization based on moment.js
+  // Set up calendar localization based on moment.js
+  const localizer = useMemo(() => momentLocalizer(moment), []);
 
+  // Event click handler
   const handleEventClick = useCallback(
     (event) => {
       setSelectedEvent(event); // Set the clicked event
@@ -29,12 +37,31 @@ const Lessons = () => {
     [open]
   );
 
+  // Function to add 'missed' class to missed lessons
+  const addMissedClass = (events) => {
+    const currentDate = new Date(); // Current date and time in the local time zone
+    return events.map((event) => {
+      const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
+      if (eventDate < currentDate) {
+        return { ...event, className: "missed" };
+      }
+      return event;
+    });
+  };
+
+  // Apply the function to the lessons array before using it in the Calendar
+  const eventsWithMissedClass = useMemo(
+    () => addMissedClass(lessons),
+    [lessons]
+  );
+
+  // Customize how day numbers are displayed
   const dateFormat = useMemo(
     () => ({
       dateFormat: "D",
     }),
     []
-  ); // Customize how day numbers are displayed
+  );
 
   return (
     <>
@@ -44,7 +71,10 @@ const Lessons = () => {
           toolbar: CustomToolbar, // Use the custom toolbar component
         }}
         views={["month"]} // Display the calendar in month view
-        events={lessons} // Use the user's lessons as calendar events
+        events={eventsWithMissedClass} // Use the user's lessons as calendar events
+        eventPropGetter={(event) => ({
+          className: event.className || "", // Применяем класс 'missed', если есть
+        })}
         startAccessor="lessonDate" // Start date property for events
         endAccessor="endTime" // End date property for events
         titleAccessor={"topic"} // Title property for events
