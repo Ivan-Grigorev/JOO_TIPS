@@ -44,4 +44,28 @@ async function getLessons(req, res) {
   }
 }
 
-module.exports = { getLessonsPointsSum, getLessons };
+async function finishLesson(req, res) {
+  const { lessonId } = req.body;
+  console.log(req.body);
+  // todo добавить userID для проверки в виде миддлвары
+
+  try {
+    // Найдите урок в базе данных по его ID
+    const lesson = await Lesson.findById(lessonId);
+
+    if (!lesson) {
+      return res.status(404).json({ message: "Lesson isn't finded" });
+    }
+
+    // Установите флаг завершения урока
+    lesson.completed = true;
+    await lesson.save();
+
+    res.status(200).json({ message: "Lesson finished successfully." });
+  } catch (error) {
+    console.error("Ошибка при завершении урока:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+module.exports = { getLessonsPointsSum, getLessons, finishLesson };
