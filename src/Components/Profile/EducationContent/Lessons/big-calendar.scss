@@ -143,14 +143,20 @@ $event-font-size: 11px;
     font-size: $event-font-size;
     color: $text-color;
 
+    color: transparent;
+    background: transparent;
+
     position: absolute;
     bottom: -33px;
-    padding-bottom: 10%;
-    opacity: 0;
-    &:hover {
-      background-color: $primary-color;
-      color: $text-color;
-    }
+    // opacity: 0;
+
+    width: 45px;
+    height: 71px;
+
+    // &:hover {
+    //   background-color: $primary-color;
+    //   color: $text-color;
+    // }
 
     @media screen and (min-width: 768px) and (max-width: 1023px) {
       font-size: 14px;
@@ -158,8 +164,19 @@ $event-font-size: 11px;
 
     @media screen and (min-width: 1024px) {
       font-size: 16px;
+      width: 130px;
+      height: 95px;
     }
   }
+  .rbc-event.missed {
+    filter: grayscale(1);
+    background-color: gray;
+    opacity: 0.2;
+  }
+  .rbc-event-content {
+    text-align: center;
+  }
+
   .rbc-event:focus,
   .rbc-day-slot .rbc-background-event:focus {
     outline: none;
@@ -194,7 +211,9 @@ $event-font-size: 11px;
     background-color: #14365f;
   }
 
-  //   .rbc-selected,
+  .rbc-event.rbc-selected {
+    background-color: inherit;
+  }
   .rbc-today {
     background-color: transparent !important;
     border: 1px solid #ffa5009e !important;
@@ -220,6 +239,10 @@ $event-font-size: 11px;
     @media screen and (min-width: 768px) {
       height: 95px;
     }
+  }
+
+  .rbc-row-segment {
+    padding: initial;
   }
 }
 .calendar-modal__start-lesson {
