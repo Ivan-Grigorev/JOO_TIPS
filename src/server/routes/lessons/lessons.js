@@ -1,5 +1,6 @@
 const express = require("express");
-const middlewares = require("../../middlewares/auth.js");
+const { auth } = require("../../middlewares/auth.js");
+const middlewares = require("../../middlewares/lessons.js");
 const {
   getLessonsPointsSum,
   getLessons,
@@ -8,10 +9,10 @@ const {
 
 const router = express.Router();
 
-router.get("", middlewares.auth, getLessons);
+router.get("", auth, getLessons);
 
-router.get("/points", middlewares.auth, getLessonsPointsSum);
+router.get("/points", auth, getLessonsPointsSum);
 
-router.post("/finish", middlewares.auth, finishLesson);
+router.post("/finish", auth, middlewares.isLessonExistById, finishLesson);
 
 module.exports = router;
