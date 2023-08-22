@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchLessons, fetchLessonsPointsTotalSum } from "./lessons-operations";
+import {
+  fetchLessons,
+  fetchLessonsPointsTotalSum,
+  finishLesson,
+} from "./lessons-operations";
 
 const initialState = {
   lessons: [],
@@ -21,7 +25,7 @@ const lessonsSlice = createSlice({
       .addCase(fetchLessonsPointsTotalSum.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchLessonsPointsTotalSum.rejected, (state, action) => {
+      .addCase(fetchLessonsPointsTotalSum.rejected, (state) => {
         state.isLoading = initialState.isLoading;
       })
 
@@ -32,7 +36,18 @@ const lessonsSlice = createSlice({
       .addCase(fetchLessons.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchLessons.rejected, (state, action) => {
+      .addCase(fetchLessons.rejected, (state) => {
+        state.isLoading = initialState.isLoading;
+      })
+
+      .addCase(finishLesson.fulfilled, (state, action) => {
+        state.lessons = action.payload;
+        state.isLoading = initialState.isLoading;
+      })
+      .addCase(finishLesson.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(finishLesson.rejected, (state) => {
         state.isLoading = initialState.isLoading;
       });
   },
