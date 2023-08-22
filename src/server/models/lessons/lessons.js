@@ -35,6 +35,10 @@ const lessonSchema = new mongoose.Schema(
       // required: [true, "End time is required."],
       default: null,
     },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
     lessonDate: {
       type: Date,
       required: [true, "Lesson date is required."],
