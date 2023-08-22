@@ -43,6 +43,7 @@ const Lessons = () => {
 
   const handleFinishLesson = (lessonId) => {
     dispatch(finishLesson({ lessonId }));
+    // console.log(lessonId);
   };
 
   // Function to add 'missed' class to missed lessons

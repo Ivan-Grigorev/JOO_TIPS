@@ -17,6 +17,7 @@ import { useCallback } from "react";
 const EventModal = memo(({ event, isOpen, onClose, handleFinishLesson }) => {
   const {
     _id,
+    userId,
     lessonDuration,
     topic,
     subtopic,
