@@ -42,11 +42,32 @@ const Lessons = () => {
     const currentDate = new Date(); // Current date and time in the local time zone
     return events.map((event) => {
       const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
+      let className = "";
+
       if (eventDate < currentDate) {
-        return { ...event, className: "missed" };
+        className = "missed";
       }
-      return event;
+
+      if (isSunday(eventDate)) {
+        className += " module-test";
+      }
+
+      if (isLastDayOfMonth(eventDate)) {
+        className += " module-test";
+      }
+
+      return { ...event, className };
     });
+  };
+
+  const isSunday = (date) => {
+    return date.getDay() === 0; // 0 corresponds to Sunday
+  };
+
+  const isLastDayOfMonth = (date) => {
+    const nextDay = new Date(date);
+    nextDay.setDate(date.getDate() + 1);
+    return nextDay.getMonth() !== date.getMonth();
   };
 
   // Apply the function to the lessons array before using it in the Calendar
@@ -64,7 +85,7 @@ const Lessons = () => {
   );
 
   return (
-    <div className="flex">
+    <div className="flex" style={{ justifyContent: "center" }}>
       <Calendar
         localizer={localizer} // Set up the calendar localization
         components={{
@@ -73,7 +94,7 @@ const Lessons = () => {
         views={["month"]} // Display the calendar in month view
         events={eventsWithMissedClass} // Use the user's lessons as calendar events
         eventPropGetter={(event) => ({
-          className: event.className || "", // Применяем класс 'missed', если есть
+          className: event.className || "",
         })}
         startAccessor="lessonDate" // Start date property for events
         endAccessor="endTime" // End date property for events
