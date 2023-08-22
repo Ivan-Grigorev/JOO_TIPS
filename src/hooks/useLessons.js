@@ -12,7 +12,7 @@ export default function useLessons() {
   const lessons = useSelector(selectUserLessons);
 
   // Retrieve stored lessons from session storage
-  const storedLessons = JSON.parse(sessionStorage.getItem("lessons"));
+  const storedLessons = JSON.parse(localStorage.getItem("lessons"));
 
   // Check if stored lessons are not available, and if so, fetch lessons
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function useLessons() {
   // Update session storage with lessons if available and not empty
   useEffect(() => {
     if (lessons && lessons.length > 0) {
-      sessionStorage.setItem("lessons", JSON.stringify(lessons));
+      localStorage.setItem("lessons", JSON.stringify(lessons));
     }
   }, [lessons]);
 
