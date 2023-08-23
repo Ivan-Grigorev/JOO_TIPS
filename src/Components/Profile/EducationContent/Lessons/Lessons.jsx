@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import useModal from "../../../../hooks/useModal";
 import useLessons from "../../../../hooks/useLessons";
 import { selectLessonsLoadingStatus } from "../../../../redux/lessons/lessons-selectors";
+import { finishLesson } from "../../../../redux/lessons/lessons-operations";
 
 import "./big-calendar.scss"; // do not swap places!
 import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap places!
-import { finishLesson } from "../../../../redux/lessons/lessons-operations";
 
 const Lessons = () => {
   // State to store selected event data
