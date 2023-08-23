@@ -1,6 +1,6 @@
 const Lesson = require("../../models/lessons/lessons");
+const User = require("../../models/user/user");
 require("colors");
-const mongoose = require("mongoose"); // Убедитесь, что вы импортировали mongoose
 
 // This function calculates the sum of points for lessons associated with the user.
 async function getLessonsPointsSum(req, res) {
@@ -10,17 +10,17 @@ async function getLessonsPointsSum(req, res) {
       return res.status(401).json({ message: "Authentication required." });
     }
 
-    // Convert the user ID to a MongoDB ObjectId.
-    const userId = new mongoose.Types.ObjectId(req.user.id);
+    // Find the user by ID
+    const user = await User.findById(req.user.id);
 
-    // Calculate the total points for lessons associated with this user.
-    const totalPoints = await Lesson.aggregate([
-      { $match: { userId: userId } },
-      { $group: { _id: null, total: { $sum: "$points" } } },
-    ]);
+    // Get the active language from the user's data
+    const activeLanguage = user.activeLanguage;
+
+    // Access the points for the active language from languagesPoints object
+    const points = user.languagesPoints.get(activeLanguage);
 
     // Respond with the total points, defaulting to 0 if not found.
-    res.json({ totalPoints: totalPoints[0] ? totalPoints[0].total : 0 });
+    res.json(points);
   } catch (error) {
     // Log the error and send a 500 Internal Server Error response.
     console.error("Error fetching user points:", error);
@@ -44,7 +44,21 @@ async function getLessons(req, res) {
   }
 }
 
-async function finishLesson(req, res) {
+async function addPoints(req, res) {
+  const { language, points } = req.lesson;
+  try {
+    const user = await User.findByIdAndUpdate(req.user.id, {
+      [`languagesPoints.${language}`]: points,
+    });
+
+    res.status(204).json(user.languagesPoints.React);
+  } catch (e) {
+    console.error(`Error adding points: ${e}`);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+async function finishLesson(req, res, next) {
   const { lessonId } = req.body;
   // console.log(req.body); // Logging the request body for debugging
 
@@ -56,8 +70,12 @@ async function finishLesson(req, res) {
     lesson.completed = true;
     await lesson.save();
 
+    req.lesson.points = lesson.points;
+    req.lesson.language = lesson.language;
+
+    next();
     // Respond with a success message if the lesson was completed successfully
-    res.status(200).json({ message: "Lesson finished successfully." });
+    // res.status(200).json({ message: "Lesson finished successfully." });
   } catch (error) {
     // Handle errors if any occurred during the process
     console.error("Error finishing lesson:", error);
@@ -65,4 +83,4 @@ async function finishLesson(req, res) {
   }
 }
 
-module.exports = { getLessonsPointsSum, getLessons, finishLesson };
+module.exports = { getLessonsPointsSum, getLessons, finishLesson, addPoints };
