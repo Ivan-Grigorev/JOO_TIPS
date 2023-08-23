@@ -59,6 +59,10 @@ const Lessons = () => {
         className = "missed";
       }
 
+      if (lessonCompleted) {
+        className = "completed";
+      }
+
       if (isSunday(eventDate)) {
         className += " module-test";
       }
