@@ -155,7 +155,7 @@ $event-font-size: 11px;
     bottom: -33px;
     // opacity: 0;
 
-    width: 45px;
+    width: 38px;
     height: 71px;
 
     // &:hover {
@@ -163,12 +163,20 @@ $event-font-size: 11px;
     //   color: $text-color;
     // }
 
+    @media screen and (min-width: 375px) and (max-width: 489px) {
+      width: 44px;
+    }
+
+    @media screen and (min-width: 490px) {
+      width: 60px;
+    }
+
     @media screen and (min-width: 768px) and (max-width: 1023px) {
-      font-size: 14px;
+      width: 95px;
+      height: 92px;
     }
 
     @media screen and (min-width: 1024px) {
-      font-size: 16px;
       width: 130px;
       height: 93px;
     }
