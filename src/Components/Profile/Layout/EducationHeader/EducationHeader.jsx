@@ -38,19 +38,13 @@ const EducationHeader = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      // If the user is logged in, perform these actions
-      dispatch(fetchLessonsPointsTotalSum()); // Fetch the total sum of lesson points
-      dispatch(fetchlanguages()); // Fetch languages
+      dispatch(fetchLessonsPointsTotalSum());
+      dispatch(fetchlanguages());
     }
-  }, [dispatch, isLoggedIn]); // Run the effect when dispatch or isLoggedIn change
 
-  useEffect(() => {
-    // if user on this route - hide header
     const achievementsRoute = location.pathname === "/education/achievements";
-
-    // otherwise do nothing
-    achievementsRoute ? setHideClass("hide") : setHideClass("");
-  }, [location]);
+    setHideClass(achievementsRoute ? "hide" : "");
+  }, [dispatch, isLoggedIn, location]);
 
   return (
     <header className={`education-header ${hideClass}`}>
