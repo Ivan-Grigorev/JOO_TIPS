@@ -31,8 +31,10 @@ const finishLesson = createAsyncThunk(
   "lessons/finishLesson",
   async (credentials, thunkAPI) => {
     try {
-      const { data } = await axios.post("/lessons/finish", credentials);
-      return data;
+      const req = await axios.post("/lessons/finish", credentials);
+      // console.log(req)
+      localStorage.removeItem("lessons");
+      return req.data;
     } catch (error) {
       console.error("Error fetching lessons");
       return thunkAPI.rejectWithValue(error.response.data.message);
