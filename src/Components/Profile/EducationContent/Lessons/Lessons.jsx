@@ -49,30 +49,33 @@ const Lessons = () => {
   // Function to add 'missed' class to missed lessons
   const addMissedClass = (events) => {
     const currentDate = new Date(); // Current date and time in the local time zone
-    return events.map((event) => {
-      const lessonCompleted = event.completed === true;
 
-      const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
-      let className = "";
+    if (events) {
+      return events.map((event) => {
+        const lessonCompleted = event.completed === true;
 
-      if (eventDate < currentDate && !lessonCompleted) {
-        className = "missed";
-      }
+        const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
+        let className = "";
 
-      if (lessonCompleted) {
-        className = "completed";
-      }
+        if (eventDate < currentDate && !lessonCompleted) {
+          className = "missed";
+        }
 
-      if (isSunday(eventDate)) {
-        className += " module-test";
-      }
+        if (lessonCompleted) {
+          className = "completed";
+        }
 
-      if (isLastDayOfMonth(eventDate)) {
-        className += " module-test";
-      }
+        if (isSunday(eventDate)) {
+          className += " module-test";
+        }
 
-      return { ...event, className };
-    });
+        if (isLastDayOfMonth(eventDate)) {
+          className += " module-test";
+        }
+
+        return { ...event, className };
+      });
+    }
   };
 
   const isSunday = (date) => {
