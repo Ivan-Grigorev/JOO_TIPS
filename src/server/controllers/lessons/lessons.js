@@ -48,7 +48,7 @@ async function addPoints(req, res) {
   const { language, points } = req.lesson;
   try {
     const user = await User.findByIdAndUpdate(req.user.id, {
-      [`languagesPoints.${language}`]: points,
+      $inc: { [`languagesPoints.${language}`]: points },
     });
 
     res.status(204).json(user.languagesPoints.React);
