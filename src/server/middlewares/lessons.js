@@ -14,7 +14,8 @@ const isLessonExistById = async (req, res, next) => {
       return res.status(404).json({ message: "Lesson is not found" });
     }
 
-    // If lesson exists, continue to the next middleware or route handler
+    // If lesson exists, save lesson object to req.lesson and continue to the next middleware or route handler
+    req.lesson = lesson;
     next();
   } catch (e) {
     // Handle errors if any
@@ -23,6 +24,20 @@ const isLessonExistById = async (req, res, next) => {
   }
 };
 
+const isLessonAlreadyCompleted = async (req, res, next) => {
+  try {
+    if (req.lesson.completed === true) {
+      return res.status(409).json({ message: "Lessons is already completed" });
+    }
+
+    next();
+  } catch (e) {
+    console.error(`Error: ${e}`);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   isLessonExistById,
+  isLessonAlreadyCompleted,
 };

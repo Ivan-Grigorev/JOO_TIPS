@@ -13,6 +13,12 @@ router.get("", auth, getLessons);
 
 router.get("/points", auth, getLessonsPointsSum);
 
-router.post("/finish", auth, middlewares.isLessonExistById, finishLesson);
+router.post(
+  "/finish",
+  auth,
+  middlewares.isLessonExistById,
+  middlewares.isLessonAlreadyCompleted,
+  finishLesson
+);
 
 module.exports = router;
