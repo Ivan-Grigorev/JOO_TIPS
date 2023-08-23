@@ -6,7 +6,7 @@ const fetchLessonsPointsTotalSum = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.get("/lessons/points");
-      return data.totalPoints;
+      return data;
     } catch (error) {
       console.error("Error fetching lessons points total sum");
       return thunkAPI.rejectWithValue(error.response.data.message);
