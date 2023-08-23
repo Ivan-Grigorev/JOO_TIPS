@@ -178,6 +178,12 @@ $event-font-size: 11px;
     background-color: gray;
     opacity: 0.2;
   }
+  .rbc-event.completed {
+    border-color: green;
+    border: 2px solid green;
+    background-color: green;
+    opacity: 0.3;
+  }
   .rbc-event-content {
     text-align: center;
   }
