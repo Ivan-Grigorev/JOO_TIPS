@@ -48,8 +48,6 @@ async function finishLesson(req, res) {
   const { lessonId } = req.body;
   // console.log(req.body); // Logging the request body for debugging
 
-  // todo: Add userID for verification using middleware
-
   try {
     // Find the lesson by its ID in the database
     const lesson = await Lesson.findById(lessonId);
