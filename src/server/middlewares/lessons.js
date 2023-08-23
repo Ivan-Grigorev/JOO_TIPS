@@ -24,14 +24,19 @@ const isLessonExistById = async (req, res, next) => {
   }
 };
 
+// Middleware to check if a lesson has already been completed
 const isLessonAlreadyCompleted = async (req, res, next) => {
   try {
+    // Check if the lesson's 'completed' property is true
     if (req.lesson.completed === true) {
-      return res.status(409).json({ message: "Lessons is already completed" });
+      // If the lesson is already completed, respond with a 409 Conflict status
+      return res.status(409).json({ message: "Lesson is already completed" });
     }
 
+    // If the lesson is not completed, proceed to the next middleware or route handler
     next();
   } catch (e) {
+    // Handle errors if any occur during the process
     console.error(`Error: ${e}`);
     res.status(500).json({ message: "Internal server error" });
   }
