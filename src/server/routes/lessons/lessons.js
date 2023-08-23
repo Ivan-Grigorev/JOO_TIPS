@@ -5,6 +5,7 @@ const {
   getLessonsPointsSum,
   getLessons,
   finishLesson,
+  addPoints,
 } = require("../../controllers/lessons/lessons.js");
 
 const router = express.Router();
@@ -18,7 +19,8 @@ router.post(
   auth,
   middlewares.isLessonExistById,
   middlewares.isLessonAlreadyCompleted,
-  finishLesson
+  finishLesson,
+  addPoints
 );
 
 module.exports = router;
