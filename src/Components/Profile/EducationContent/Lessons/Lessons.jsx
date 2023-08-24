@@ -47,7 +47,7 @@ const Lessons = () => {
   };
 
   // Function to add 'missed', 'completed' and 'module-test' classes to lessons
-  const addMissedClass = (events) => {
+  const addClass = (events) => {
     const currentDate = new Date(); // Current date and time in the local time zone
 
     if (events) {
@@ -90,10 +90,7 @@ const Lessons = () => {
   };
 
   // Apply the function to the lessons array before using it in the Calendar
-  const eventsWithMissedClass = useMemo(
-    () => addMissedClass(lessons),
-    [lessons]
-  );
+  const eventsWithMissedClass = useMemo(() => addClass(lessons), [lessons]);
 
   // Customize how day numbers are displayed
   const dateFormat = useMemo(
