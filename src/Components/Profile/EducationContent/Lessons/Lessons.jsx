@@ -46,15 +46,16 @@ const Lessons = () => {
     // console.log(lessonId);
   };
 
-  // Function to add 'missed' class to missed lessons
+  // Function to add 'missed', 'completed' and 'module-test' classes to lessons
   const addMissedClass = (events) => {
     const currentDate = new Date(); // Current date and time in the local time zone
 
     if (events) {
       return events.map((event) => {
         const lessonCompleted = event.completed === true;
-
         const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
+        const dayOfMonth = eventDate.getDate();
+
         let className = "";
 
         if (eventDate < currentDate && !lessonCompleted) {
@@ -73,7 +74,7 @@ const Lessons = () => {
           className += " module-test";
         }
 
-        return { ...event, className };
+        return { ...event, className, dayOfMonth };
       });
     }
   };
@@ -116,7 +117,7 @@ const Lessons = () => {
         })}
         startAccessor="lessonDate" // Start date property for events
         endAccessor="endTime" // End date property for events
-        titleAccessor={"topic"} // Title property for events
+        titleAccessor={"dayOfMonth"} // Title property for events
         onSelectEvent={handleEventClick} // Click event handler for events
         formats={dateFormat}
       />

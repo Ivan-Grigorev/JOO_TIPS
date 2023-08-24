@@ -7,6 +7,11 @@ $accent-color: lighten($primary-color, 20%);
 $active-bg-color: lighten($primary-color, 40%);
 $border-color: #dddddd2e;
 
+// events
+$completed-color: #25b525;
+$missed-color: gray;
+$module-test-color: red;
+
 $event-font-size: 11px;
 
 // Общие стили кнопок
@@ -142,26 +147,23 @@ $event-font-size: 11px;
     position: relative;
   }
   .rbc-event {
-    background-color: $accent-color;
-    border-color: $primary-color;
-
-    font-size: $event-font-size;
-    color: $text-color;
-
-    color: transparent;
-    background: transparent;
-
     position: absolute;
     bottom: -33px;
-    // opacity: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     width: 38px;
     height: 71px;
 
-    // &:hover {
-    //   background-color: $primary-color;
-    //   color: $text-color;
-    // }
+    // font-size: $event-font-size;
+    font-size: 20px;
+
+    color: $text-color;
+    background-color: transparent;
+    border-color: $primary-color;
 
     @media screen and (min-width: 375px) and (max-width: 489px) {
       width: 44px;
@@ -181,17 +183,19 @@ $event-font-size: 11px;
       height: 93px;
     }
   }
+
   .rbc-event.missed {
-    filter: grayscale(1);
-    background-color: gray;
-    opacity: 0.2;
+    color: $missed-color;
+    color: #af3131;
   }
   .rbc-event.completed {
-    border-color: green;
-    border: 2px solid green;
-    background-color: green;
-    opacity: 0.3;
+    color: $completed-color;
   }
+  .rbc-event.module-test {
+    //  color: #ff00003d;
+    color: $module-test-color;
+  }
+
   .rbc-event-content {
     text-align: center;
   }
@@ -203,13 +207,17 @@ $event-font-size: 11px;
   }
 
   .rbc-date-cell {
+    opacity: 0;
     @media screen and (min-width: 768px) and (max-width: 1023px) {
       font-size: 18px;
+    }
+
+    &.rbc-off-range {
+      opacity: 1;
     }
   }
 
   .rbc-event-content {
-    padding-bottom: 25%;
     @media screen and (min-width: 1024px) {
       white-space: normal;
     }
@@ -236,12 +244,6 @@ $event-font-size: 11px;
     background-color: initial;
 
     border: 2px solid #fcbc7d !important;
-  }
-
-  .rbc-event.module-test {
-    background-color: #ff00003d;
-    opacity: initial;
-    filter: initial;
   }
 
   .past-day-bg {
