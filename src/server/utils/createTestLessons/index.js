@@ -153,7 +153,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -167,7 +166,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -181,7 +179,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -195,7 +192,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -209,7 +205,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -223,7 +218,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -237,7 +231,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -251,7 +244,6 @@ const createTestLessons = async () => {
         language: "React",
         points: 1,
       },
-
       {
         userId,
         topic: "Redux/RTK",
@@ -337,6 +329,32 @@ const createTestLessons = async () => {
         flashcardsCount: 45,
         lessonDate: new Date(2023, 7, 25, 10, 0),
         endTime: new Date(2023, 7, 26, 0, 0),
+        lessonNumber: 3,
+        lessonDuration: 45,
+        completed: false,
+        language: "React",
+        points: 1,
+      },
+      {
+        userId,
+        topic: "Redux/RTK",
+        subtopic: "Redux selectors",
+        flashcardsCount: 45,
+        lessonDate: new Date(2023, 7, 26, 10, 0),
+        endTime: new Date(2023, 7, 27, 0, 0),
+        lessonNumber: 3,
+        lessonDuration: 45,
+        completed: false,
+        language: "React",
+        points: 1,
+      },
+      {
+        userId,
+        topic: "RTK",
+        subtopic: "Redux actions",
+        flashcardsCount: 45,
+        lessonDate: new Date(2023, 7, 27, 0, 0),
+        endTime: new Date(2023, 7, 28, 0, 0),
         lessonNumber: 3,
         lessonDuration: 45,
         completed: false,
