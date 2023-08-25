@@ -122,8 +122,8 @@ $event-font-size: 11px;
       }
 
       button {
-        // @extend %button-styles;
-        display: none;
+        @extend %button-styles;
+        // display: none;
       }
 
       .today-btn {
