@@ -15,6 +15,7 @@ import "./big-calendar.scss"; // do not swap places!
 import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap places!
 import { increasePoints } from "../../../../redux/lessons/lessons-slice";
 import { useEffect } from "react";
+import { isLastDayOfMonth, isSunday, getMissedType } from "./utils";
 
 const Lessons = () => {
   // State to store selected event data
@@ -26,50 +27,22 @@ const Lessons = () => {
   const [missedLessons, setMissedLessons] = useState(null);
 
   useEffect(() => {
-    // Convert lessonDate strings to Date objects
-    lessons.forEach((lesson) => {
-      const date = new Date(lesson.lessonDate);
-      lesson.date = date;
-    });
-
     const today = new Date();
 
-    const missed = [];
+    const missed = lessons
+      .filter((lesson) => {
+        const lessonDate = new Date(lesson.lessonDate);
+        return lessonDate < today && !lesson.completed;
+      })
+      .map((lesson) => lesson.lessonDate);
 
-    lessons.forEach((lesson) => {
-      if (lesson.date < today && !lesson.completed) {
-        missed.push(lesson);
-      }
-    });
+    const type = missed.length ? getMissedType(missed) : null;
 
-    if (missed.length > 0) {
-      const weekly = missed.find((lesson) => lesson.date.getDay() === 0);
+    setMissedLessons(type);
+    // console.log(missed);
+    console.log(type);
+  }, [lessons]);
 
-      const monthly = missed.find((lesson) => {
-        const nextDay = new Date(lesson.date);
-        nextDay.setDate(lesson.date.getDate() + 1);
-        return nextDay.getMonth() !== lesson.date.getMonth();
-      });
-
-      if (weekly) {
-        // console.group(`weekly`);
-        // console.log(weekly);
-        // console.groupEnd();
-        setMissedLessons("Weekly");
-      } else if (monthly) {
-        // setMissedLessons("Monthly");
-        // console.group(`Monthly`);
-        // console.log(monthly);
-        console.groupEnd();
-      } else {
-        setMissedLessons("Daily");
-      }
-    } else {
-      setMissedLessons(null);
-    }
-
-    console.log(missedLessons);
-  }, [lessons, missedLessons]);
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
 
@@ -131,14 +104,6 @@ const Lessons = () => {
         return { ...event, className, dayOfMonth };
       });
     }
-  };
-
-  const isSunday = (date) => date.getDay() === 0; // 0 corresponds to Sunday
-
-  const isLastDayOfMonth = (date) => {
-    const nextDay = new Date(date);
-    nextDay.setDate(date.getDate() + 1);
-    return nextDay.getMonth() !== date.getMonth();
   };
 
   // Apply the function to the lessons array before using it in the Calendar
