@@ -29,6 +29,7 @@ const Lessons = () => {
   useEffect(() => {
     const today = new Date();
 
+    // Filter lessons to find missed ones
     const missed = lessons
       .filter((lesson) => {
         const lessonDate = new Date(lesson.lessonDate);
@@ -36,13 +37,15 @@ const Lessons = () => {
       })
       .map((lesson) => lesson.lessonDate);
 
-    if (missed.length === 0) return setMissedLessons(null);
+    // If there are no missed lessons, set missedLessons to null
+    if (missed.length === 0) return setMissedLessons(null); // Exit early since there's nothing more to do
 
-    const type = missed.length ? getMissedType(missed) : null;
+    // Determine the type of missed lessons (Daily, Weekly, Monthly)
+    const type = getMissedType(missed);
 
+    // Set the missedLessons state with the determined type
     setMissedLessons(type);
-    console.log(missedLessons);
-  }, [lessons, missedLessons]);
+  }, [lessons]);
 
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
