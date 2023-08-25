@@ -113,12 +113,17 @@ $event-font-size: 11px;
       justify-content: center;
 
       .current-month-label {
-        margin: 0 10px;
-        // font-weight: bold;
+        background-color: #163a65;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
       }
 
       button {
-        @extend %button-styles;
+        // @extend %button-styles;
+        display: none;
       }
 
       .today-btn {
@@ -193,6 +198,9 @@ $event-font-size: 11px;
   .rbc-event.module-test {
     //  color: #ff00003d;
     color: $module-test-color;
+  }
+  .rbc-event.module-test.completed {
+    color: $completed-color;
   }
 
   .rbc-event-content {
