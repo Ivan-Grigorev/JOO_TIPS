@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../config/axios";
+import updateStoredLessons from "../../helpers/updateStoredLessons";
 
 const fetchLessonsPointsTotalSum = createAsyncThunk(
   "lessons/fetchTotalPointsSum",
@@ -32,8 +33,9 @@ const finishLesson = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const req = await axios.post("/lessons/finish", credentials);
-      // console.log(req)
-      localStorage.removeItem("lessons");
+
+      if (req.status === 204) updateStoredLessons(credentials.lessonId); // update local storage with lessons object
+
       return req.data;
     } catch (error) {
       console.error("Error fetching lessons");
