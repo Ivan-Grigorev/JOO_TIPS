@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   lessons: [],
-  totalPoints: 0,
+  points: 0,
   isLoading: false,
 };
 
@@ -19,7 +19,7 @@ const lessonsSlice = createSlice({
     builder
       .addCase(fetchLessonsPointsTotalSum.fulfilled, (state, action) => {
         // console.log(action.payload);
-        state.totalPoints = action.payload;
+        state.points = action.payload;
         state.isLoading = initialState.isLoading;
       })
       .addCase(fetchLessonsPointsTotalSum.pending, (state) => {

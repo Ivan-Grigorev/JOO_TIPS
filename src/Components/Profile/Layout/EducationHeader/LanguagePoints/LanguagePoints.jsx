@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { selectLessonsTotalPoints } from "../../../../../redux/lessons/lessons-selectors";
+import { selectLessonPoints } from "../../../../../redux/lessons/lessons-selectors";
 import { selectUserActiveLanguage } from "../../../../../redux/languages/languages-selectors";
 
 import "./LanguagePoints.scss";
 
 const LanguagePoints = () => {
-  const points = useSelector(selectLessonsTotalPoints); // Get the total lesson points using a selector
+  const points = useSelector(selectLessonPoints); // Get the total lesson points using a selector
   const activeLanguage = useSelector(selectUserActiveLanguage); // Get the user's active language using a selector
 
   return (
