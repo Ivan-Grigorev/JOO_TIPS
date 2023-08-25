@@ -14,7 +14,12 @@ const initialState = {
 const lessonsSlice = createSlice({
   name: "lessons",
   initialState,
-  reducers: {},
+  reducers: {
+    increasePoints: (state, action) => {
+      state.points += action.payload; // Increase points by the payload amount
+      console.log(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLessonsPointsTotalSum.fulfilled, (state, action) => {
@@ -52,6 +57,7 @@ const lessonsSlice = createSlice({
       });
   },
 });
+export const { increasePoints } = lessonsSlice.actions;
 
 export default lessonsSlice.reducer;
 export const lessonsReducer = lessonsSlice.reducer;
