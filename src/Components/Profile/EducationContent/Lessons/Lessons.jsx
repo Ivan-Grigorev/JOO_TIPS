@@ -14,16 +14,64 @@ import { finishLesson } from "../../../../redux/lessons/lessons-operations";
 import "./big-calendar.scss"; // do not swap places!
 import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap places!
 import { increasePoints } from "../../../../redux/lessons/lessons-slice";
+import { useEffect } from "react";
 
 const Lessons = () => {
   // State to store selected event data
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  // Hook for managing modal state
-  const { isOpen, open, close } = useModal();
-
   // Fetch lesson data using the hook
   const lessons = useLessons();
+
+  const [missedLessons, setMissedLessons] = useState(null);
+
+  useEffect(() => {
+    // Convert lessonDate strings to Date objects
+    lessons.forEach((lesson) => {
+      const date = new Date(lesson.lessonDate);
+      lesson.date = date;
+    });
+
+    const today = new Date();
+
+    const missed = [];
+
+    lessons.forEach((lesson) => {
+      if (lesson.date < today && !lesson.completed) {
+        missed.push(lesson);
+      }
+    });
+
+    if (missed.length > 0) {
+      const weekly = missed.find((lesson) => lesson.date.getDay() === 0);
+
+      const monthly = missed.find((lesson) => {
+        const nextDay = new Date(lesson.date);
+        nextDay.setDate(lesson.date.getDate() + 1);
+        return nextDay.getMonth() !== lesson.date.getMonth();
+      });
+
+      if (weekly) {
+        // console.group(`weekly`);
+        // console.log(weekly);
+        // console.groupEnd();
+        setMissedLessons("Weekly");
+      } else if (monthly) {
+        // setMissedLessons("Monthly");
+        // console.group(`Monthly`);
+        // console.log(monthly);
+        console.groupEnd();
+      } else {
+        setMissedLessons("Daily");
+      }
+    } else {
+      setMissedLessons(null);
+    }
+
+    console.log(missedLessons);
+  }, [lessons, missedLessons]);
+  // Hook for managing modal state
+  const { isOpen, open, close } = useModal();
 
   const dispatch = useDispatch();
 
@@ -85,9 +133,7 @@ const Lessons = () => {
     }
   };
 
-  const isSunday = (date) => {
-    return date.getDay() === 0; // 0 corresponds to Sunday
-  };
+  const isSunday = (date) => date.getDay() === 0; // 0 corresponds to Sunday
 
   const isLastDayOfMonth = (date) => {
     const nextDay = new Date(date);
