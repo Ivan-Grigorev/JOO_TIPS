@@ -39,7 +39,7 @@ const Lessons = () => {
     const type = missed.length ? getMissedType(missed) : null;
 
     setMissedLessons(type);
-    // console.log(missed);
+    console.log(missed);
     console.log(type);
   }, [lessons]);
 
