@@ -22,4 +22,9 @@
   & p:first-child {
     border-bottom: 1px solid;
   }
+
+  @media screen and (min-width: 1024px) {
+    top: 34%;
+    font-size: 14px;
+  }
 }

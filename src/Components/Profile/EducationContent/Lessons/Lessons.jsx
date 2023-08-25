@@ -107,7 +107,10 @@ const Lessons = () => {
   );
 
   return (
-    <div className="flex" style={{ justifyContent: "center" }}>
+    <div
+      className="flex"
+      style={{ justifyContent: "center", paddingBottom: "75px" }}
+    >
       <Calendar
         localizer={localizer} // Set up the calendar localization
         components={{
