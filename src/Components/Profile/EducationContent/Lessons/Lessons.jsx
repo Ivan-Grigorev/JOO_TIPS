@@ -36,12 +36,13 @@ const Lessons = () => {
       })
       .map((lesson) => lesson.lessonDate);
 
+    if (missed.length === 0) return setMissedLessons(null);
+
     const type = missed.length ? getMissedType(missed) : null;
 
     setMissedLessons(type);
-    console.log(missed);
-    console.log(type);
-  }, [lessons]);
+    console.log(missedLessons);
+  }, [lessons, missedLessons]);
 
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
