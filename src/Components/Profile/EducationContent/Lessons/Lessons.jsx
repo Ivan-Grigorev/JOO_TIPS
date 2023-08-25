@@ -13,6 +13,7 @@ import { finishLesson } from "../../../../redux/lessons/lessons-operations";
 
 import "./big-calendar.scss"; // do not swap places!
 import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap places!
+import { increasePoints } from "../../../../redux/lessons/lessons-slice";
 
 const Lessons = () => {
   // State to store selected event data
@@ -41,8 +42,14 @@ const Lessons = () => {
     [open]
   );
 
-  const handleFinishLesson = (lessonId) => {
-    dispatch(finishLesson({ lessonId }));
+  const handleFinishLesson = (lessonId, pointsToAdd) => {
+    dispatch(finishLesson({ lessonId }))
+      .then((data) => {
+        if (data.meta.requestStatus === "fulfilled") {
+          dispatch(increasePoints(pointsToAdd));
+        }
+      })
+      .catch((e) => console.error(e));
     // console.log(lessonId);
   };
 
