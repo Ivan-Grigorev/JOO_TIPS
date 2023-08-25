@@ -227,6 +227,7 @@ $event-font-size: 11px;
 
     &.rbc-off-range {
       opacity: 1;
+      pointer-events: none;
     }
   }
 
