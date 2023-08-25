@@ -45,9 +45,8 @@ const Lessons = () => {
   const handleFinishLesson = (lessonId, pointsToAdd) => {
     dispatch(finishLesson({ lessonId }))
       .then((data) => {
-        if (data.meta.requestStatus === "fulfilled") {
-          dispatch(increasePoints(pointsToAdd));
-        }
+        const success = data.meta.requestStatus === "fulfilled";
+        if (success) dispatch(increasePoints(pointsToAdd));
       })
       .catch((e) => console.error(e));
     // console.log(lessonId);

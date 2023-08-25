@@ -17,7 +17,6 @@ const lessonsSlice = createSlice({
   reducers: {
     increasePoints: (state, action) => {
       state.points += action.payload; // Increase points by the payload amount
-      console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
