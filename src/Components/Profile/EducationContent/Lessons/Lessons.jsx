@@ -36,27 +36,20 @@ const Lessons = () => {
         .filter((lesson) => {
           const lessonDate = new Date(lesson.lessonDate);
           const missedLesson = lessonDate < today && !lesson.completed;
-          console.log(lesson.completed);
-
           return missedLesson;
         })
         .map((lesson) => lesson.lessonDate);
-      console.log(missed);
 
-      if (missed.length === 0) {
-        dispatch(setMissedType({ daily: null, weekly: null, monthly: null }));
-      } else {
-        // Determine the type of missed lessons (Daily, Weekly, Monthly)
-        const type = getMissedType(missed);
+      // Determine the type of missed lessons (Daily, Weekly, Monthly)
+      const type = getMissedType(missed);
 
-        // Update the missedType state only if it has changed
-        if (
-          type.daily !== missedLessons.daily ||
-          type.weekly !== missedLessons.weekly ||
-          type.monthly !== missedLessons.monthly
-        ) {
-          dispatch(setMissedType(type));
-        }
+      // Update the missedType state only if it has changed
+      if (
+        type.daily !== missedLessons.daily ||
+        type.weekly !== missedLessons.weekly ||
+        type.monthly !== missedLessons.monthly
+      ) {
+        dispatch(setMissedType(type));
       }
     }
     return;
