@@ -9,6 +9,7 @@ const initialState = {
   lessons: [],
   points: 0,
   isLoading: false,
+  missed: null,
 };
 
 const lessonsSlice = createSlice({
@@ -18,11 +19,13 @@ const lessonsSlice = createSlice({
     increasePoints: (state, action) => {
       state.points += action.payload; // Increase points by the payload amount
     },
+    setMissedType: (state, action) => {
+      state.missed = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchActiveLessonPoints.fulfilled, (state, action) => {
-        // console.log(action.payload);
         state.points = action.payload;
         state.isLoading = initialState.isLoading;
       })
@@ -56,7 +59,7 @@ const lessonsSlice = createSlice({
       });
   },
 });
-export const { increasePoints } = lessonsSlice.actions;
+export const { increasePoints, setMissedType } = lessonsSlice.actions;
 
 export default lessonsSlice.reducer;
 export const lessonsReducer = lessonsSlice.reducer;
