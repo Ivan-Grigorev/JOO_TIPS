@@ -76,6 +76,7 @@ header.education-header.hide {
   }
 }
 
+// missed lessons indicator
 .education-navigation a[href="/education/lessons"]::after {
   content: "";
   display: block;
