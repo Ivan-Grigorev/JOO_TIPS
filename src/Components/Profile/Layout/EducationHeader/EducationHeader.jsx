@@ -2,10 +2,8 @@ import "./EducationHeader.scss"; // Import the styles for EducationHeader
 import { memo, useEffect, useMemo, useState } from "react"; // Import the useEffect hook from React
 import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "@react-hook/media-query"; // Import a media query
-import { useDispatch, useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
-import { fetchLessonsPointsTotalSum } from "../../../../redux/lessons/lessons-operations"; // Import a function to fetch total lesson points
+import { useSelector } from "react-redux"; // Import the useDispatch and useSelector functions from react-redux
 import { selectIsLoggedIn } from "../../../../redux/auth/auth-selectors"; // Import a selector to check if the user is logged in
-import { fetchlanguages } from "../../../../redux/languages/languages-operations"; // Import a function to fetch languages
 
 import LogoLink from "../../../Header/HomeHeader/Navigation/Links/LogoLink"; // Import the logo link component
 import Avatar from "../Header/Avatar/Avatar"; // Import the avatar component
