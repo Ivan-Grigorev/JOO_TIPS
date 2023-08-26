@@ -1,7 +1,6 @@
 import EventModal from "./EventModal/EventModal";
 import ChakraSpinner from "../../../ChakraUI/Spinner/Spinner";
 import Calendar from "./Calendar/Calendar";
-import MissingLessonsIndicator from "./MissingLessonsIndicator/MissingLessonsIndicator";
 
 import { memo, useCallback, useMemo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -119,8 +118,6 @@ const Lessons = () => {
       className="flex"
       style={{ justifyContent: "center", paddingBottom: "75px" }}
     >
-      <MissingLessonsIndicator />
-
       <Calendar
         handleEventClick={handleEventClick}
         lessons={eventsWithMissedClass}
