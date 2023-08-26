@@ -2,16 +2,23 @@ import moment from "moment";
 
 // Function to determine the type of missed lessons
 export function getMissedType(missed) {
+  const output = {
+    daily: false,
+    weekly: false,
+    monthly: false,
+  };
+
   // Check for monthly missed lesson
   const monthly = missed.find(isLastDayOfMonth);
-  if (monthly) return "Monthly";
+  if (monthly) output.monthly = true;
 
   // Check for weekly missed lesson
   const weekly = missed.find(isSunday);
-  if (weekly) return "Weekly";
+  if (weekly) output.weekly = true;
 
   // Default to daily missed lesson
-  return "Daily";
+  if (!output.daily && !output.weekly) output.daily = true;
+  return output;
 }
 
 // Function to check if a date is a Sunday
