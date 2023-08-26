@@ -54,9 +54,9 @@ const Lessons = () => {
           dispatch(setMissedType(type));
         }
       }
-      console.log(missedLessons);
     }
-  }, [lessons, missedLessons, dispatch]);
+    return;
+  }, [lessons, dispatch]); //* do not include missedLessons !!!
 
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
