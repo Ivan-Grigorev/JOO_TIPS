@@ -4,7 +4,10 @@ import Calendar from "./Calendar/Calendar";
 
 import { memo, useCallback, useMemo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLessonsLoadingStatus } from "../../../../redux/lessons/lessons-selectors";
+import {
+  selectLessonsLoadingStatus,
+  selectMissedLessonsType,
+} from "../../../../redux/lessons/lessons-selectors";
 import { finishLesson } from "../../../../redux/lessons/lessons-operations";
 import {
   increasePoints,
@@ -17,17 +20,13 @@ import { isLastDayOfMonth, isSunday, getMissedType } from "./utils";
 const Lessons = () => {
   // State to store selected event data
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [missedType, setMissedType] = useState({
-    daily: null,
-    weekly: null,
-    monthly: null,
-  });
 
   // Fetch lesson data using the hook
   const lessons = useLessons();
   const dispatch = useDispatch();
 
-  // todo пофиксить ререндер
+  const missedLessons = useSelector(selectMissedLessonsType);
+
   useEffect(() => {
     if (lessons) {
       const today = new Date();
@@ -40,21 +39,26 @@ const Lessons = () => {
         })
         .map((lesson) => lesson.lessonDate);
 
+      if (missed.length === 0) {
+        return dispatch(
+          setMissedType({ daily: null, weekly: null, monthly: null })
+        );
+      }
+
       // Determine the type of missed lessons (Daily, Weekly, Monthly)
       const type = getMissedType(missed);
 
       // Update the missedType state only if it has changed
       if (
-        type.daily !== missedType.daily ||
-        type.weekly !== missedType.weekly ||
-        type.monthly !== missedType.monthly
+        type.daily !== missedLessons.daily ||
+        type.weekly !== missedLessons.weekly ||
+        type.monthly !== missedLessons.monthly
       ) {
-        setMissedType(type);
+        dispatch(setMissedType(type));
       }
     }
-  }, [lessons, missedType]);
-
-  useEffect(() => console.log(missedType), [missedType]);
+    console.log(missedLessons);
+  }, [lessons, missedLessons, dispatch]);
 
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
