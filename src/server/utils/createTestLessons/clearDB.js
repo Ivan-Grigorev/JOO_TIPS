@@ -1,0 +1,17 @@
+const mongoDB = require("../../db");
+const Lesson = require("../../models/lessons/lessons");
+
+const createTestLessons = async () => {
+  try {
+    await mongoDB(); // Establish a MongoDB connection
+
+    const result = await Lesson.deleteMany({});
+    console.log(
+      `Удалено ${result.deletedCount} документов из коллекции 'Lessons'`
+    );
+  } catch (err) {
+    console.error("Ошибка при удалении документов:", err);
+  }
+};
+
+createTestLessons();
