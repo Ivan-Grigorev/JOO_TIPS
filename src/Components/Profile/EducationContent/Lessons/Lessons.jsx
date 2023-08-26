@@ -1,22 +1,16 @@
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-import CustomToolbar from "./CalendarCustomToolbar";
-import EventModal from "./EventModal";
+import EventModal from "./EventModal/EventModal";
 import ChakraSpinner from "../../../ChakraUI/Spinner/Spinner";
+import Calendar from "./Calendar/Calendar";
+import MissingLessonsIndicator from "./MissingLessonsIndicator/MissingLessonsIndicator";
 
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useModal from "../../../../hooks/useModal";
-import useLessons from "../../../../hooks/useLessons";
 import { selectLessonsLoadingStatus } from "../../../../redux/lessons/lessons-selectors";
 import { finishLesson } from "../../../../redux/lessons/lessons-operations";
-
-import "./big-calendar.scss"; // do not swap places!
-import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap places!
 import { increasePoints } from "../../../../redux/lessons/lessons-slice";
-import { useEffect } from "react";
+import useModal from "../../../../hooks/useModal";
+import useLessons from "../../../../hooks/useLessons";
 import { isLastDayOfMonth, isSunday, getMissedType } from "./utils";
-import MissingLessonsIndicator from "./MissingLessonsIndicator/MissingLessonsIndicator";
 
 const Lessons = () => {
   // State to store selected event data
@@ -60,7 +54,6 @@ const Lessons = () => {
   const isLoading = useSelector(selectLessonsLoadingStatus);
 
   // Set up calendar localization based on moment.js
-  const localizer = useMemo(() => momentLocalizer(moment), []);
 
   // Event click handler
   const handleEventClick = useCallback(
@@ -120,36 +113,16 @@ const Lessons = () => {
   // Apply the function to the lessons array before using it in the Calendar
   const eventsWithMissedClass = useMemo(() => addClass(lessons), [lessons]);
 
-  // Customize how day numbers are displayed
-  const dateFormat = useMemo(
-    () => ({
-      dateFormat: "D",
-    }),
-    []
-  );
-
   return (
     <div
       className="flex"
       style={{ justifyContent: "center", paddingBottom: "75px" }}
     >
       <MissingLessonsIndicator />
-      
+
       <Calendar
-        localizer={localizer} // Set up the calendar localization
-        components={{
-          toolbar: CustomToolbar, // Use the custom toolbar component
-        }}
-        views={["month"]} // Display the calendar in month view
-        events={eventsWithMissedClass} // Use the user's lessons as calendar events
-        eventPropGetter={(event) => ({
-          className: event.className || "",
-        })}
-        startAccessor="lessonDate" // Start date property for events
-        endAccessor="endTime" // End date property for events
-        titleAccessor={"dayOfMonth"} // Title property for events
-        onSelectEvent={handleEventClick} // Click event handler for events
-        formats={dateFormat}
+        handleEventClick={handleEventClick}
+        lessons={eventsWithMissedClass}
       />
 
       {isLoading && <ChakraSpinner />}
