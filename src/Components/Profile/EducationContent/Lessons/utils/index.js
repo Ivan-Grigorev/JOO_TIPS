@@ -17,7 +17,9 @@ export function getMissedType(missed) {
   if (weekly) output.weekly = true;
 
   // Default to daily missed lesson
-  if (!output.daily && !output.weekly) output.daily = true;
+  const daily = missed.find(missedToday);
+  if (daily) output.daily = true;
+
   return output;
 }
 
@@ -31,4 +33,10 @@ export const isSunday = (date) => {
 export const isLastDayOfMonth = (inputDate) => {
   const nextDay = moment(inputDate).add(1, "day");
   return !nextDay.isSame(inputDate, "month");
+};
+
+const missedToday = (day) => {
+  const today = moment();
+  const dayMoment = moment(day);
+  return dayMoment.isSame(today, "day");
 };
