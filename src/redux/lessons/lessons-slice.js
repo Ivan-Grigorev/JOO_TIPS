@@ -9,7 +9,7 @@ const initialState = {
   lessons: [],
   points: 0,
   isLoading: false,
-  missed: null,
+  missed: { daily: null, monthly: null, weekly: null },
 };
 
 const lessonsSlice = createSlice({
@@ -20,7 +20,8 @@ const lessonsSlice = createSlice({
       state.points += action.payload; // Increase points by the payload amount
     },
     setMissedType: (state, action) => {
-      state.missed = action.payload;
+      const { daily, weekly, monthly } = action.payload;
+      state.missed = { daily, weekly, monthly };
     },
   },
   extraReducers: (builder) => {
