@@ -35,9 +35,13 @@ const Lessons = () => {
       const missed = lessons
         .filter((lesson) => {
           const lessonDate = new Date(lesson.lessonDate);
-          return lessonDate < today && !lesson.completed;
+          const missedLesson = lessonDate < today && !lesson.completed;
+          console.log(lesson.completed);
+
+          return missedLesson;
         })
         .map((lesson) => lesson.lessonDate);
+      console.log(missed);
 
       if (missed.length === 0) {
         dispatch(setMissedType({ daily: null, weekly: null, monthly: null }));
@@ -57,6 +61,8 @@ const Lessons = () => {
     }
     return;
   }, [lessons, dispatch]); //* do not include missedLessons !!!
+
+  useEffect(() => console.log(missedLessons), [missedLessons]);
 
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
@@ -91,6 +97,8 @@ const Lessons = () => {
     const currentDate = new Date(); // Current date and time in the local time zone
 
     if (events) {
+      console.log("events in addClas function");
+      console.log(events);
       return events.map((event) => {
         const lessonCompleted = event.completed === true;
         const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
