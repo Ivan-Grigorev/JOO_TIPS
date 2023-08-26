@@ -31,6 +31,8 @@ import { selectUserLanguages } from "../../redux/languages/languages-selectors";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
+// doesn't do rerender, because languagesData isn't inside of
+// Languages component
 const languagesData = [
   { iconSrc: Javascript, languageName: "Javascript" },
   { iconSrc: React, languageName: "React" },
