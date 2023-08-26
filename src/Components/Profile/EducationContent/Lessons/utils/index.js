@@ -16,8 +16,11 @@ export function getMissedType(missed) {
   if (weekly.length > 0) output.weekly = true;
 
   // Default to daily missed lesson
-  const daily = missed.find(missedToday);
-  if (daily) output.daily = true;
+  const dailyMissed = findMissedInLast2Days(missed);
+
+  if (dailyMissed.length > 0) {
+    output.daily = true;
+  }
 
   return output;
 }
@@ -50,4 +53,18 @@ const findMissedWeekLesson = (day) => {
   const diff = dayMoment.diff(currentSunday, "days");
 
   return diff >= 0 && diff <= 7 && dayMoment.day() === 0;
+};
+
+// Проверка диапазона дат
+const isMissedInLast2Days = (day) => {
+  const today = moment();
+  const dayMoment = moment(day);
+
+  const diff = today.diff(dayMoment, "days");
+
+  return diff >= 0 && diff <= 2;
+};
+
+const findMissedInLast2Days = (lessons) => {
+  return lessons.filter(isMissedInLast2Days);
 };
