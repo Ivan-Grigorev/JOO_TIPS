@@ -21,6 +21,7 @@ const Lessons = () => {
 
   const [missedLessons, setMissedLessons] = useState(null);
 
+  // todo пофиксить ререндер
   useEffect(() => {
     const today = new Date();
 
