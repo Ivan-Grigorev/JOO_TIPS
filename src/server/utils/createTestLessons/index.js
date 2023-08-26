@@ -425,3 +425,5 @@ const createTestLessons = async () => {
 };
 
 createTestLessons(); // Create test lessons (Commented out)
+
+module.exports = createTestLessons;
