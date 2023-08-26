@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchLessons,
-  fetchLessonsPointsTotalSum,
+  fetchActiveLessonPoints,
   finishLesson,
 } from "./lessons-operations";
 
@@ -21,15 +21,15 @@ const lessonsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLessonsPointsTotalSum.fulfilled, (state, action) => {
+      .addCase(fetchActiveLessonPoints.fulfilled, (state, action) => {
         // console.log(action.payload);
         state.points = action.payload;
         state.isLoading = initialState.isLoading;
       })
-      .addCase(fetchLessonsPointsTotalSum.pending, (state) => {
+      .addCase(fetchActiveLessonPoints.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchLessonsPointsTotalSum.rejected, (state) => {
+      .addCase(fetchActiveLessonPoints.rejected, (state) => {
         state.isLoading = initialState.isLoading;
       })
 

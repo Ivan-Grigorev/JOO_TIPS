@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../config/axios";
 import updateStoredLessons from "../../helpers/updateStoredLessons";
 
-const fetchLessonsPointsTotalSum = createAsyncThunk(
+const fetchActiveLessonPoints = createAsyncThunk(
   "lessons/fetchTotalPointsSum",
   async (credentials, thunkAPI) => {
     try {
@@ -44,4 +44,4 @@ const finishLesson = createAsyncThunk(
   }
 );
 
-export { fetchLessonsPointsTotalSum, fetchLessons, finishLesson };
+export { fetchActiveLessonPoints, fetchLessons, finishLesson };
