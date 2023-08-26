@@ -49,6 +49,8 @@ header.education-header.hide {
   margin-right: 20px;
 
   & a {
+    height: 24px;
+
     cursor: pointer;
     transition: color 350ms cubic-bezier(0.39, 0.575, 0.565, 1);
 
@@ -60,6 +62,15 @@ header.education-header.hide {
     @media screen and (min-width: 1024px) {
       font-size: 16px;
     }
+  }
+
+  & a[href="/education/lessons"]::after {
+    content: "";
+    display: block;
+    width: 7px;
+    height: 7px;
+    background: red;
+    border-radius: 50%;
   }
 
   @media screen and (min-width: 1024px) {
