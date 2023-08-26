@@ -17,6 +17,11 @@ import { isLastDayOfMonth, isSunday, getMissedType } from "./utils";
 const Lessons = () => {
   // State to store selected event data
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [missedType, setMissedType] = useState({
+    daily: null,
+    weekly: null,
+    monthly: null,
+  });
 
   // Fetch lesson data using the hook
   const lessons = useLessons();
@@ -35,16 +40,21 @@ const Lessons = () => {
         })
         .map((lesson) => lesson.lessonDate);
 
-      // If there are no missed lessons, set missedLessons to null
-      if (missed.length === 0) return dispatch(setMissedType(null)); // Exit early since there's nothing more to do
-
       // Determine the type of missed lessons (Daily, Weekly, Monthly)
       const type = getMissedType(missed);
 
-      // Set the missedLessons state with the determined type
-      dispatch(setMissedType(type));
+      // Update the missedType state only if it has changed
+      if (
+        type.daily !== missedType.daily ||
+        type.weekly !== missedType.weekly ||
+        type.monthly !== missedType.monthly
+      ) {
+        setMissedType(type);
+      }
     }
-  }, [lessons, dispatch]);
+  }, [lessons, missedType]);
+
+  useEffect(() => console.log(missedType), [missedType]);
 
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();

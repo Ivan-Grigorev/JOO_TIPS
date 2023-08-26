@@ -63,7 +63,7 @@ const EducationHeader = () => {
       default:
         return;
     }
-  });
+  }, [missedLessonsType]);
 
   return (
     <header className={`education-header ${hideClass}`}>
