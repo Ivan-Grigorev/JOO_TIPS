@@ -97,8 +97,9 @@ const Lessons = () => {
     const currentDate = new Date(); // Current date and time in the local time zone
 
     if (events) {
-      console.log("events in addClas function");
-      console.log(events);
+      // console.log("events in addClas function");
+      // console.log(events);
+
       return events.map((event) => {
         const lessonCompleted = event.completed === true;
         const eventDate = new Date(event.lessonDate); // Convert event date to a Date object
