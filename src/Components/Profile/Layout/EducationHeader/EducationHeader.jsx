@@ -29,7 +29,6 @@ const EducationHeader = () => {
     ];
   }, []);
 
-  const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
   const location = useLocation();
 
   const isLoggedIn = useSelector(selectIsLoggedIn); // Get the user's login status using a selector
@@ -37,14 +36,9 @@ const EducationHeader = () => {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(fetchLessonsPointsTotalSum());
-      dispatch(fetchlanguages());
-    }
-
     const achievementsRoute = location.pathname === "/education/achievements";
     setHideClass(achievementsRoute ? "hide" : "");
-  }, [dispatch, isLoggedIn, location]);
+  }, [isLoggedIn, location]);
 
   return (
     <header className={`education-header ${hideClass}`}>

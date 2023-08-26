@@ -3,6 +3,10 @@ import ChakraSpinner from "../../ChakraUI/Spinner/Spinner"; // Import a loading 
 import EducationFooter from "./EducationFooter/EducationFooter"; // Import the footer component
 import EducationHeader from "./EducationHeader/EducationHeader"; // Import the header component
 import { Outlet, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../../redux/auth/auth-selectors";
+import { fetchActiveLessonPoints } from "../../../redux/lessons/lessons-operations";
+import { fetchlanguages } from "../../../redux/languages/languages-operations";
 
 const SwipeIndicator = lazy(() => import("./SwipeIndicator/SwipeIndicator"));
 
@@ -11,6 +15,8 @@ const EducationLayout = () => {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   const location = useLocation();
+  const dispatch = useDispatch(); // Initialize the dispatch function from react-redux
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   // CSS class based on whether achievements page is open
   useEffect(() => {
@@ -26,6 +32,13 @@ const EducationLayout = () => {
     const isLarge = window.matchMedia("(min-width: 1024px)").matches;
     setIsLargeScreen(isLarge);
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchActiveLessonPoints());
+      dispatch(fetchlanguages());
+    }
+  }, [dispatch, isLoggedIn]);
 
   return (
     <>
