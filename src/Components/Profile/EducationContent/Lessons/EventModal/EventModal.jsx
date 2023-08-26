@@ -18,11 +18,10 @@ const EventModal = memo(({ event, isOpen, onClose, handleFinishLesson }) => {
   const { _id, points, lessonDuration, topic, subtopic, flashcardsCount } =
     event;
 
-  // console.log(event);
-
   const finishLesson = useCallback(() => {
     handleFinishLesson(_id, points);
-  }, [handleFinishLesson, _id, points]);
+    onClose();
+  }, [handleFinishLesson, _id, points, onClose]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
