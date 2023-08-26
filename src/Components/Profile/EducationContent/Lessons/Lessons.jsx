@@ -16,6 +16,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css"; // do not swap place
 import { increasePoints } from "../../../../redux/lessons/lessons-slice";
 import { useEffect } from "react";
 import { isLastDayOfMonth, isSunday, getMissedType } from "./utils";
+import MissingLessonsIndicator from "./MissingLessonsIndicator/MissingLessonsIndicator";
 
 const Lessons = () => {
   // State to store selected event data
@@ -47,6 +48,9 @@ const Lessons = () => {
     setMissedLessons(type);
   }, [lessons]);
 
+  //? this useEffect is needed just for missedLessons state
+  useEffect(() => console.log(missedLessons), [missedLessons]);
+
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
 
@@ -67,15 +71,18 @@ const Lessons = () => {
     [open]
   );
 
-  const handleFinishLesson = (lessonId, pointsToAdd) => {
-    dispatch(finishLesson({ lessonId }))
-      .then((data) => {
-        const success = data.meta.requestStatus === "fulfilled";
-        if (success) dispatch(increasePoints(pointsToAdd));
-      })
-      .catch((e) => console.error(e));
-    // console.log(lessonId);
-  };
+  const handleFinishLesson = useCallback(
+    (lessonId, pointsToAdd) => {
+      dispatch(finishLesson({ lessonId }))
+        .then((data) => {
+          const success = data.meta.requestStatus === "fulfilled";
+          if (success) dispatch(increasePoints(pointsToAdd));
+        })
+        .catch((e) => console.error(e));
+      // console.log(lessonId);
+    },
+    [dispatch]
+  );
 
   // Function to add 'missed', 'completed' and 'module-test' classes to lessons
   const addClass = (events) => {
@@ -126,6 +133,8 @@ const Lessons = () => {
       className="flex"
       style={{ justifyContent: "center", paddingBottom: "75px" }}
     >
+      <MissingLessonsIndicator />
+      
       <Calendar
         localizer={localizer} // Set up the calendar localization
         components={{
