@@ -1,7 +1,7 @@
 const mongoDB = require("../../db");
 const Lesson = require("../../models/lessons/lessons");
 
-const createTestLessons = async () => {
+const clearLessons = async () => {
   try {
     await mongoDB(); // Establish a MongoDB connection
 
@@ -14,4 +14,4 @@ const createTestLessons = async () => {
   }
 };
 
-createTestLessons();
+clearLessons();
