@@ -40,24 +40,22 @@ const Lessons = () => {
         .map((lesson) => lesson.lessonDate);
 
       if (missed.length === 0) {
-        return dispatch(
-          setMissedType({ daily: null, weekly: null, monthly: null })
-        );
-      }
+        dispatch(setMissedType({ daily: null, weekly: null, monthly: null }));
+      } else {
+        // Determine the type of missed lessons (Daily, Weekly, Monthly)
+        const type = getMissedType(missed);
 
-      // Determine the type of missed lessons (Daily, Weekly, Monthly)
-      const type = getMissedType(missed);
-
-      // Update the missedType state only if it has changed
-      if (
-        type.daily !== missedLessons.daily ||
-        type.weekly !== missedLessons.weekly ||
-        type.monthly !== missedLessons.monthly
-      ) {
-        dispatch(setMissedType(type));
+        // Update the missedType state only if it has changed
+        if (
+          type.daily !== missedLessons.daily ||
+          type.weekly !== missedLessons.weekly ||
+          type.monthly !== missedLessons.monthly
+        ) {
+          dispatch(setMissedType(type));
+        }
       }
+      console.log(missedLessons);
     }
-    console.log(missedLessons);
   }, [lessons, missedLessons, dispatch]);
 
   // Hook for managing modal state
