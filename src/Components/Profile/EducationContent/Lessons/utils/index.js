@@ -13,8 +13,20 @@ export function getMissedType(missed) {
   if (monthly) output.monthly = true;
 
   // Check for weekly missed lesson
-  const weekly = missed.find(isSunday);
-  if (weekly) output.weekly = true;
+  const currentSunday = moment().startOf("week"); // Находим воскресение текущей недели
+
+  const weekly = missed.filter((day) => {
+    const dayMoment = moment(day);
+
+    // Сравниваем с воскресеньем текущей недели
+    const diff = dayMoment.diff(currentSunday, "days");
+
+    return diff >= 0 && diff <= 7 && dayMoment.day() === 0;
+  });
+
+  if (weekly.length > 0) {
+    output.weekly = true;
+  }
 
   // Default to daily missed lesson
   const daily = missed.find(missedToday);
