@@ -76,35 +76,6 @@ header.education-header.hide {
   }
 }
 
-// missed lessons indicator
-.education-navigation a[href="/education/lessons"]::after {
-  content: "";
-  display: block;
-
-  border-radius: 50%;
-
-  transition: background-color 350ms, width 350ms, height 350ms;
-  transition-timing-function: ease-in-out;
-}
-
-.education-navigation a[href="/education/lessons"].daily-missed::after {
-  width: 7px;
-  height: 7px;
-  background-color: tomato;
-}
-
-.education-navigation a[href="/education/lessons"].weekly-missed::after {
-  width: 8px;
-  height: 8px;
-  background-color: rgb(165, 16, 16);
-}
-
-.education-navigation a[href="/education/lessons"].monthly-missed::after {
-  width: 9px;
-  height: 9px;
-  background-color: red;
-}
-
 header.education-header a.logo-header {
   position: absolute;
   left: 50%;
