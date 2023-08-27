@@ -56,54 +56,80 @@ async function parseAndSaveData() {
     const questionText = row[4];
 
     const answer = row[5].split(" ");
-    const answerDifficult = answer[0];
-    const isCorrect = answer[1];
+    const answerDifficult = answer[0].match(/\[(.*?)\]/)[1].toLowerCase();
+    const isCorrect = answer[1] === "[CORRECT]";
     const optionText = answer[2];
 
     const noContent = !language; //если нет языка - значит нет и остального кроме ответов
 
+    // if (language) console.log(`language - ${language}`);
+    // if (topic) console.log(`topic - ${topic}`);
+    // if (text) console.log(`text - ${text}`);
+    // if (language) console.log(`example - ${example}`);
+    // console.log(`questionText - ${questionText}`);
+    // console.log(`answer - ${answer}`);
+    // console.log(`answerDifficult - ${answerDifficult}`);
+    // console.log(`isCorrect - ${isCorrect}`);
+    // console.log(`optionText - ${optionText}`);
+
     // //* Создание новой карты
-    // const card = new Card({
-    //   language,
-    //   topic,
-    //   text,
-    //   example,
-    // });
+    if (language) {
+      var card = new Card({
+        language,
+        topic,
+        text,
+        example,
+      });
 
-    // if (noContent && answer) {
-    //   var question = new Question({
-    //     questionText,
-    //     cardId: card._id, // Привязываем вопрос к карте по ID
-    //     difficultyLevels: {
-    //       easy: [],
-    //       medium: [],
-    //       hard: [],
-    //     },
-    //   }); //* Создание нового вопроса
-    //   card.qas.push(question._id); // привязываю вопрос к карточке
+      //* Создание нового вопроса
+      var question = new Question({
+        questionText,
+        cardId: card._id, // Привязываем вопрос к карте по ID
+        difficultyLevels: {
+          easy: [],
+          medium: [],
+          hard: [],
+        },
+      });
 
-    //   for (let i = 1; i <= 10; i++) {
-    //     //* Создание нового варианта ответа и добавление в соответствующий уровень сложности
-    //     var option = new QuestionOption({
-    //       text: optionText,
-    //       isCorrect,
-    //     });
-    //     console.log(`option - ${option}`);
-    //     question.difficultyLevels[answerDifficult].push(option); // prettier-ignore
-    //     await option.save(); // ? сохранение опции
-    //   }
+      card.qas.push(question._id); // привязываю вопрос к карточке
+      await card.save(); // ? Сохранение карты
+      await question.save(); // ? Сохранение вопроса
+    }
 
-    //   // добавляем опцию в сложности урока
+    //* Создание опции
+    var option = new QuestionOption({
+      text: optionText,
+      isCorrect,
+    });
 
-    //   await question.save(); // ? Сохранение вопроса
-    //   await card.save(); // ? Сохранение карты
-    // }
-
-    // if (noContent && !answer) continue;
-
-    // console.log(`question - - -${question}`);
+    console.log(`answerDifficult - ${answerDifficult}`);
+    if (answerDifficult === "easy") {
+      await Question.findByIdAndUpdate(
+        question._id,
+        { $push: { "question.difficultyLevels.easy": option } },
+        { new: true }
+      );
+      // await Question.save(); // ? сохранение опции
+    } else if (answerDifficult === "medium") {
+      await Question.findByIdAndUpdate(question._id, {
+        $push: { "question.difficultyLevels.medium": option },
+      });
+      // await Question.save(); // ? сохранение опции
+    } else {
+      await Question.findByIdAndUpdate(
+        question._id,
+        { $push: { "question.difficultyLevels.difficult": option } },
+        { new: true }
+      );
+      // await Question.save(); // ? сохранение опции
+    }
   }
 
+  console.log(`question - - -${question}`.blue);
+  console.log(
+    `question.difficultyLevels - - -${question.difficultyLevels}`.blue
+  );
   console.log("Data parsed and saved.".green);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
