@@ -28,7 +28,7 @@ const QuestionSchema = new mongoose.Schema(
     difficultyLevels: {
       easy: [OptionSchema], // масив з трьох варіантів відповідей
       medium: [OptionSchema],
-      difficult: [OptionSchema],
+      hard: [OptionSchema],
     },
   },
   { versionKey: false }
