@@ -60,21 +60,9 @@ async function parseAndSaveData() {
     const isCorrect = answer[1] === "[CORRECT]";
     const optionText = answer[2];
 
-    const noContent = !language; //если нет языка - значит нет и остального кроме ответов
-
-    // if (language) console.log(`language - ${language}`);
-    // if (topic) console.log(`topic - ${topic}`);
-    // if (text) console.log(`text - ${text}`);
-    // if (language) console.log(`example - ${example}`);
-    // console.log(`questionText - ${questionText}`);
-    // console.log(`answer - ${answer}`);
-    // console.log(`answerDifficult - ${answerDifficult}`);
-    // console.log(`isCorrect - ${isCorrect}`);
-    // console.log(`optionText - ${optionText}`);
-
     // //* Создание новой карты
     if (language) {
-      var card = new Card({
+      const card = new Card({
         language,
         topic,
         text,
@@ -104,41 +92,33 @@ async function parseAndSaveData() {
     });
 
     if (answerDifficult === "easy") {
-      console.log("answerDifficult = easy");
+      // console.log("answerDifficult = easy");
       const update = await Question.findByIdAndUpdate(
         question._id,
         { $push: { "difficultyLevels.easy": option } },
         { new: true }
       );
-      console.log(`update - > ${update}`);
 
       // await Question.save(); // ? сохранение опции
     } else if (answerDifficult === "medium") {
-      console.log("answerDifficult = medium");
+      // console.log("answerDifficult = medium");
       const update = await Question.findByIdAndUpdate(question._id, {
         $push: { "difficultyLevels.medium": option },
       });
-      console.log(`update - > ${update}`);
 
       // await Question.save(); // ? сохранение опции
     } else {
-      console.log("answerDifficult = difficult");
+      // console.log("answerDifficult = difficult");
       const update = await Question.findByIdAndUpdate(
         question._id,
-        { $push: { "difficultyLevels.difficult": option } },
+        { $push: { "difficultyLevels.hard": option } },
         { new: true }
       );
-      console.log(`update - > ${update}`);
+
       // await Question.save(); // ? сохранение опции
     }
   }
 
-  console.log(
-    `question.difficultyLevels - - -${question.difficultyLevels}`.blue
-  );
-  console.log(
-    `question.difficultyLevels - - -${question.difficultyLevels}`.blue
-  );
   console.log("Data parsed and saved.".green);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
