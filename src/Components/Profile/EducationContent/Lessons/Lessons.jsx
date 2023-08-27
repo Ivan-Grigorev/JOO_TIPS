@@ -55,8 +55,6 @@ const Lessons = () => {
     return;
   }, [lessons, dispatch]); //* do not include missedLessons !!!
 
-  useEffect(() => console.log(missedLessons), [missedLessons]);
-
   // Hook for managing modal state
   const { isOpen, open, close } = useModal();
 
