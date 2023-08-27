@@ -43,9 +43,13 @@ async function parseAndSaveData() {
 
   await mongoDB(); // подключились к базе данных
 
+  console.log(`rows.length - - - > ${rows.length}`.red);
+
   // Пропускаем первую строку, так как это заголовки
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
+
+    console.log(`Ячейка № ${i}`.green);
 
     // Извлечение данных
     const language = row[0];
@@ -55,7 +59,7 @@ async function parseAndSaveData() {
     const questionText = row[4];
 
     const answer = row[5].split(" ");
-    const answerDifficult = answer[0].match(/\[(.*?)\]/)[1].toLowerCase();
+    const answerDifficult = (answer[0].match(/\[(.*?)\]/) || [])[1].toLowerCase() || answer[0].toLowerCase(); // prettier-ignore
     const isCorrect = answer[1] === "[CORRECT]";
     const optionText = answer.splice(2).join(" ");
 
@@ -89,7 +93,7 @@ async function parseAndSaveData() {
 
     if (answerDifficult === "easy") {
       // console.log("answerDifficult = easy");
-      const update = await Question.findByIdAndUpdate(
+      await Question.findByIdAndUpdate(
         question._id,
         { $push: { "difficultyLevels.easy": option } },
         { new: true }
@@ -98,20 +102,26 @@ async function parseAndSaveData() {
       // await Question.save(); // ? сохранение опции
     } else if (answerDifficult === "medium") {
       // console.log("answerDifficult = medium");
-      const update = await Question.findByIdAndUpdate(question._id, {
+      await Question.findByIdAndUpdate(question._id, {
         $push: { "difficultyLevels.medium": option },
       });
 
       // await Question.save(); // ? сохранение опции
-    } else {
+    } else if (answerDifficult === "difficult") {
       // console.log("answerDifficult = difficult");
-      const update = await Question.findByIdAndUpdate(
+      await Question.findByIdAndUpdate(
         question._id,
         { $push: { "difficultyLevels.hard": option } },
         { new: true }
       );
 
       // await Question.save(); // ? сохранение опции
+    } else {
+      console.log(
+        "answerDifficult doesn't equal easy, medium or difficult".red
+      );
+      console.log(`answerDifficult - - - > ${answerDifficult}`.red);
+      throw new Error("answerDifficult doesn't equal easy or medium");
     }
   }
 
