@@ -6,15 +6,16 @@ const WEEKLY_RADIUS = 7;
 // Function to determine the type of missed lessons
 export function getMissedType(missed) {
   const output = {
-    daily: false,
-    weekly: false,
-    monthly: false,
+    daily: false, // Initialize daily missed lesson flag
+    weekly: false, // Initialize weekly missed lesson flag
+    monthly: false, // Initialize monthly missed lesson flag
   };
 
   // Check for monthly missed lesson
   const monthly = missed.find(isLastDayOfMonth);
   if (monthly) output.monthly = true;
 
+  // Find weekly missed lessons
   const weekly = findMissedWeekLessons(missed);
   if (weekly.length > 0) output.weekly = true;
 
@@ -28,6 +29,7 @@ export function getMissedType(missed) {
   return output;
 }
 
+// Find lessons missed in the current week
 export const findMissedWeekLessons = (lessons) => {
   const currentSunday = moment().startOf("week");
 
@@ -35,10 +37,12 @@ export const findMissedWeekLessons = (lessons) => {
     const dayMoment = moment(day);
     const diff = dayMoment.diff(currentSunday, "days");
 
-    return diff >= 0 && diff <= 7 && dayMoment.day() === 0;
+    // Check if the day is within the current week's radius and is a Sunday
+    return diff >= 0 && diff <= WEEKLY_RADIUS && dayMoment.day() === 0;
   });
 };
 
+// Find lessons missed in the specified number of days
 export const findMissedInLastDays = (lessons, days) => {
   const today = moment();
 
@@ -62,5 +66,7 @@ export const isSunday = (date) => {
 // Function to check if a date is the last day of the month
 export const isLastDayOfMonth = (inputDate) => {
   const nextDay = moment(inputDate).add(1, "day");
+
+  // Check if the next day is in a different month
   return !nextDay.isSame(inputDate, "month");
 };
