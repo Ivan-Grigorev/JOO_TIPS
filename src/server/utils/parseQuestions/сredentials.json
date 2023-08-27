@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "jootips",
+  "private_key_id": "68e81c37c92f342164a67651b471ef3512638d19",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCrJ4iaG+5wQWG9\nI+KfrAcrbiMHfYLeDeEbhJtD2qFpy77XlRP+R9EukAWF16y55PVuiLP9P9EIpV/P\n+LltAYPshTkIV1CU5cCDjv1rjIkgr3p0EIOCrzBWgXvh3qiisree7EQKQqhJaEir\nlGo63ux/rQWIdYiSqSt+S8dzedRnT2DGJBkZpgoDRGGUJcaISio+RhKgn+AWE4qf\nkB63MU5f0UcTK11WjwDYB0P9dujyXOTaEPv4PZNoikNe/jQ5lh/3Po1XBWVMi6sH\nDFGQCKuIvX7s+Azv5wpkwp6rbDhoPvr+5DxQfteNs9JN23oL55KSIreFr+umiVXf\nnJLDQvJpAgMBAAECgf8+XKk+mieqae9dl6d7TXoy2OA/6KYp7ToKE+ObVap6mtCK\n9WMo4AIQ5vdVFE7M+zw5NM8K2wskfuRcDW8Q5TVXBvrPHXMwzaJl21BetORehHVE\nYzHAs01pjP1PXYqioQnxXgiJCd0OqVRC921LsLVCerpetx82wsJdUHgUxeus1LOH\nSgZ+GyPLFzhJ8MY+E6e2pRBq9aIBkvcBMJQI4H+Qf6Urd8DgoGYlUlO5oWzGGDmj\nkSkJ5Uzu10z0M+OdEoMhwWkfSSq4tSvVR4/1PT0W4z+zesFgiID9UfK8jwjYLcXX\nTGwy8F4lgNNwleJWoFYZQDBzkm+oohep3bIUnUcCgYEA8SG6Bqwqh4SnMYz526WR\npMrxq0vZoyMf4ujFfwEVxrTSNoZPnAas4ZVfdPeJi0Oo5KP5h23ze+1xyjpgcM5H\ni7z0mRGUAnV6/FeTy0UhkGvaEzZLY25rKFmJytImi4BQLwaU8MlFyfuvesoRP6N/\nf3/afVoIkgevrkjBQ09yIo8CgYEAtbU2Y4gcAQR2Hl3x9Q5uZWWy78YmAPgthX8s\nIXVuFEFXiGNhh/M0deET/FTfFE0RUP18Lhz3SJbqFzWIFfQHB4u8fw0ZYP2G/Wa5\ndaGYCx3C7kpnGh5Y/R8RqSdRliYDXRGTpB8B09qkg0cyZGTe+vkwuAPAW+JbeysF\nUlf6N4cCgYEAi6fx+w1Z8HVG9G7nA2zoZp5Xy9M5cL/WJvCT+hPhzd1KZuPxVbeU\nB28hAzifA/ai6hGCYwquW5dRMUQQOSVv0KIWtFS2+ZmbKm16nt8iKmgcvMXUcfkw\nvQTmxn5ibqdZSXMxbifUcMCBiMdhqA8EuA6Pt8webJ1hBbsDm/12aEcCgYAdbPQa\n2C7Yx1Utg78sFSMxjm+UvrzmyUnt5XNLE844v4AiWR2xO2RSdpma8k+R5Q0Z1YLn\noM821SGhkoywKW19/lYPKRrkBwp2PM1pzDpoCnDH0Aq0QxfcHczpXLGspAlFaBRF\nrrPIEA82JzB065TkhbgrBIiBGL4Byyy4cgDWPwKBgC5/bXStwICnhNyhGdENMmJA\nTKwTkvaSM4ZYldWlgIn24CyD15bFmtER9mNWysL1cwO4ckIjAGdRvuxmuVIdy8Lv\ns+CUd4gBF829fj+vR0i1SKPoID5EtuP7mBicSlgjdgosBDOLdWzUSZ8pgZpYCe3J\nrzLY97cfKR1tUhE1+D8F\n-----END PRIVATE KEY-----\n",
+  "client_email": "jootips-service@jootips.iam.gserviceaccount.com",
+  "client_id": "108968609555043998975",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jootips-service%40jootips.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
