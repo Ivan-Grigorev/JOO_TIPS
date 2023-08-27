@@ -5,7 +5,7 @@ const OptionSchema = new mongoose.Schema({
   isCorrect: Boolean, // позначка, чи є ця відповідь правильною
 });
 
-const questionSchema = new mongoose.Schema({
+const QuestionSchema = new mongoose.Schema({
   questionText: String, // текст питання
   cardId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -18,6 +18,6 @@ const questionSchema = new mongoose.Schema({
   },
 });
 
-const Question = mongoose.model("Question", questionSchema);
+const Question = mongoose.model("Question", QuestionSchema);
 
 module.exports = Question;
