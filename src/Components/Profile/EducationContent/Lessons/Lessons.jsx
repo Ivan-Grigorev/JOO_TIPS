@@ -72,23 +72,31 @@ const Lessons = () => {
 
   const handleFinishLesson = useCallback(
     (lessonId, pointsToAdd) => {
+      // Dispatch the action to finish the lesson
       dispatch(finishLesson({ lessonId }))
         .then((data) => {
+          // Check if the action was fulfilled successfully
           const success = data.meta.requestStatus === "fulfilled";
-          if (success) dispatch(increasePoints(pointsToAdd));
+
+          // If the action was successful, increase points
+          if (success) {
+            dispatch(increasePoints(pointsToAdd));
+          }
         })
-        .catch((e) => console.error(e));
-      // console.log(lessonId);
+        .catch((e) => {
+          console.error(e); // Log any errors that occur
+        });
+      // console.log(lessonId); // Uncomment this line for debugging
     },
-    [dispatch]
+    [dispatch] // Depend on the 'dispatch' function
   );
 
-  // Function to add 'missed', 'completed' and 'module-test' classes to lessons
+  // Function to add 'missed', 'completed', and 'module-test' classes to lessons
   const addClass = (events) => {
     const currentDate = new Date(); // Current date and time in the local time zone
 
     if (events) {
-      // console.log("events in addClas function");
+      // console.log("events in addClass function");
       // console.log(events);
 
       return events.map((event) => {
@@ -98,19 +106,18 @@ const Lessons = () => {
 
         let className = "";
 
+        // Check if the event date is in the past and the lesson is not completed
         if (eventDate < currentDate && !lessonCompleted) {
           className = "missed";
         }
 
+        // Check if the lesson is completed
         if (lessonCompleted) {
           className = "completed";
         }
 
-        if (isSunday(eventDate)) {
-          className += " module-test";
-        }
-
-        if (isLastDayOfMonth(eventDate)) {
+        // Check if the event date is a Sunday or the last day of the month
+        if (isSunday(eventDate) || isLastDayOfMonth(eventDate)) {
           className += " module-test";
         }
 
