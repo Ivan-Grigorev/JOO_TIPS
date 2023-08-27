@@ -415,6 +415,11 @@ const createTestLessons = async () => {
       },
     ];
 
+    const deleteLessons = await Lesson.deleteMany({});
+    console.log(
+      `Удалено ${deleteLessons.deletedCount} документов из коллекции 'Lessons'`
+    );
+
     // Save the sample lessons for the user
     await Lesson.insertMany(sampleLessons);
   } catch (error) {
