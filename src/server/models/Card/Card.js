@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+const mongoose = require("mongoose");
 const cardSchema = new mongoose.Schema({
   language: { type: String, required: true },
   topic: { type: String, required: true },
@@ -10,4 +9,4 @@ const cardSchema = new mongoose.Schema({
 
 const Card = mongoose.model("Card", cardSchema);
 
-export default Card;
+module.exports = Card;
