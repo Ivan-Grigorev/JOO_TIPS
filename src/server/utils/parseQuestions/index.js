@@ -71,12 +71,9 @@ async function parseAndSaveData() {
     const text = row[headers.text];
     const example = row[headers.example];
 
-    const noContent =
-      !language && !topic && !text && !example && row[headers.answers];
+    const noContentButAnswers = !language && !topic && !text && !example && row[headers.answers]; // prettier-ignore
 
-    if (noContent) {
-      continue;
-    }
+    if (noContentButAnswers) continue;
 
     //* Создание новой карты
     const card = new Card({
