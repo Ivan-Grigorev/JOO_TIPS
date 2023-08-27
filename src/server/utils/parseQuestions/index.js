@@ -43,38 +43,24 @@ async function parseAndSaveData() {
 
   await mongoDB(); // подключились к базе данных
 
-  // Создание объекта для хранения заголовков и соответствующих индексов столбцов
-  const headers = {
-    language: 0,
-    topic: 1,
-    text: 2,
-    example: 3,
-    qas: 4,
-    answers: 5,
-  };
-
   // Пропускаем первую строку, так как это заголовки
   const indexRange = 10; // в будущем rows.length
   for (let i = 1; i < indexRange; i++) {
     const row = rows[i];
 
     // Извлечение данных
-    const language = row[headers.language];
-    const topic = row[headers.topic];
-    const text = row[headers.text];
-    const example = row[headers.example];
-    const questionText = row[headers.qas];
-    const answer = row[row.length - 1].split(" ");
+    const language = row[0];
+    const topic = row[1];
+    const text = row[2];
+    const example = row[3];
+    const questionText = row[4];
+
+    const answer = row[5].split(" ");
     const answerDifficult = answer[0];
     const isCorrect = answer[1];
     const optionText = answer[2];
 
     const noContent = !language; //если нет языка - значит нет и остального кроме ответов
-
-    console.log(`answer - ${answer}`);
-    console.log(`answerDifficult - ${answerDifficult}`);
-    console.log(`isCorrect - ${isCorrect}`);
-    console.log(`optionText - ${optionText}`);
 
     // //* Создание новой карты
     // const card = new Card({
@@ -118,9 +104,6 @@ async function parseAndSaveData() {
     // console.log(`question - - -${question}`);
   }
 
-  // console.log(`option - ${option}`);
-  // console.log(`question - ${question}`);
-  // console.log(`question.difficultyLevels - ${question.difficultyLevels}`);
   console.log("Data parsed and saved.".green);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
