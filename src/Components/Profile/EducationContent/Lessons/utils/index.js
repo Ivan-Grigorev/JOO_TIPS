@@ -6,26 +6,24 @@ const WEEKLY_RADIUS = 7;
 // Function to determine the type of missed lessons
 export function getMissedType(missed) {
   const output = {
-    // daily: false,
+    daily: false,
     weekly: false,
-    // monthly: false,
+    monthly: false,
   };
 
-  console.log(missed);
-
   // Check for monthly missed lesson
-  // const monthly = missed.find(isLastDayOfMonth);
-  // if (monthly) output.monthly = true;
+  const monthly = missed.find(isLastDayOfMonth);
+  if (monthly) output.monthly = true;
 
   const weekly = findMissedWeekLessons(missed);
   if (weekly.length > 0) output.weekly = true;
 
   // Default to daily missed lesson
-  // const dailyMissed = findMissedInLastDays(missed, DAILY_RADIUS);
+  const dailyMissed = findMissedInLastDays(missed, DAILY_RADIUS);
 
-  // if (dailyMissed.length > 0) {
-  //   output.daily = true;
-  // }
+  if (dailyMissed.length > 0) {
+    output.daily = true;
+  }
 
   return output;
 }
