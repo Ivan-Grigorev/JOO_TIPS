@@ -6,7 +6,7 @@
 .chakra-modal__content {
   @media screen and (max-width: 379px) {
     height: 100%;
-    margin: 0;
+    margin: 0 !important;
   }
   margin: auto;
 }
