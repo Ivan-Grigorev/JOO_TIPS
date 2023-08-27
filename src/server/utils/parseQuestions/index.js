@@ -1,11 +1,9 @@
-const fs = require("fs");
 const { google } = require("googleapis");
-const excel = require("exceljs");
-
-// Загрузка учетных данных Google API из файла credentials.json
-const creds = require("./сredentials.json");
+const creds = require("./сredentials.json"); // Загрузка учетных данных Google API из файла credentials.json
 const Card = require("../../models/Card/Card");
-const Question = require("../../models/question/question");
+const { Question, QuestionOption } = require("../../models/Question/question");
+const mongoDB = require("../../db");
+require("colors");
 
 const client = new google.auth.JWT(
   creds.client_email,
@@ -41,7 +39,9 @@ async function getDataFromGoogleDocs() {
 
 // Асинхронная функция для разбора данных и сохранения в Excel и MongoDB
 async function parseAndSaveData() {
-  const rows = await getDataFromGoogleDocs();
+  const rows = await getDataFromGoogleDocs(); // получили данные
+
+  await mongoDB(); // подключились к базе данных
 
   // Создание объекта для хранения заголовков и соответствующих индексов столбцов
   const headers = {
@@ -55,79 +55,83 @@ async function parseAndSaveData() {
     optionText: 7,
     isCorrect: 8,
   };
-  // Создание объекта для хранения временных данных по картам
-  const cardData = {};
 
   // Пропускаем первую строку, так как это заголовки
   for (
     let i = 1;
-    i < 9;
+    i < 10;
     // rows.length;
     i++
   ) {
     const row = rows[i];
 
-    // Извлечение данных из соответствующих столбцов на основе индексов из headers
+    // Извлечение данных для карты
     const language = row[headers.language];
     const topic = row[headers.topic];
     const text = row[headers.text];
     const example = row[headers.example];
-    const answersParts = row[headers.answers].split(" ");
-    const difficultyLevels = answersParts[0].substring(1, answersParts[0].length - 1); // prettier-ignore
-    const isCorrect = answersParts[1].substring(1, answersParts[1].length - 1);
-    const optionText = answersParts.slice(2).join(" ");
-    // Теперь у вас есть difficultyLevels, isCorrect и optionText для каждой строки
 
-    console.log(`difficultyLevels - ${difficultyLevels}`);
-    console.log(`isCorrect - ${isCorrect}`);
-    console.log(`optionText - ${optionText}`);
+    if (!language && !topic && !text && !example && row[headers.answers]) {
+      continue;
+    }
 
+    //* Создание новой карты
+    const card = new Card({
+      language,
+      topic,
+      text,
+      example,
+    });
 
-    // const cardKey = `${language}-${topic}-${text}`;
-    // if (!cardData[cardKey]) {
-    //   cardData[cardKey] = {
-    //     language,
-    //     topic,
-    //     text,
-    //     example,
-    //     qas: [],
-    //   };
-    // }
+    for (let j = 0; j < 9; j++) {
+      const questionRow = rows[i + j];
 
-    // // Создание варианта ответа
-    // const option = {
-    //   text: optionText,
-    //   isCorrect,
-    // };
+      if (!questionRow) {
+        continue;
+      } // Если строка пустая, пропускаем
 
-    // // Добавление варианта ответа в соответствующий уровень сложности
-    // const question = cardData[cardKey].qas.find(
-    //   (qa) => qa.questionText === questionText
-    // );
-    // if (question) {
-    //   question.difficultyLevels.medium.push(option); // Выберите сложность по вашему усмотрению
-    // } else {
-    //   cardData[cardKey].qas.push({
-    //     questionText,
-    //     difficultyLevels: {
-    //       easy: [],
-    //       medium: [option], // Выберите сложность по вашему усмотрению
-    //       hard: [],
-    //     },
-    //   });
-    // }
+      // Извлечение данных для вопроса
+      const questionText = row[headers.qas];
+      const answersParts = row[headers.answers].split(" ");
+      const answerDifficult = answersParts[0].substring(1, answersParts[0].length - 1).toLowerCase(); // prettier-ignore
+      const optionText = answersParts.slice(2).join(" ");
+      const isCorrect = row[headers.isCorrect] === "CORRECT";
+
+      //* Создание нового вопроса
+      const question = new Question({
+        questionText,
+        cardId: card._id, // Привязываем вопрос к карте по ID
+        difficultyLevels: {
+          easy: [],
+          medium: [],
+          hard: [],
+        },
+      });
+
+      // Создание нового варианта ответа и добавление в соответствующий уровень сложности
+      const option = new QuestionOption({
+        text: optionText,
+        isCorrect,
+      });
+
+      await option.save();
+
+      question.difficultyLevels[answerDifficult].push(option);
+
+      // ? Сохранение вопроса
+      await question.save();
+
+      // Добавление вопроса в карту
+      card.qas.push(question._id);
+    }
+
+    // ? Сохранение карты
+    await card.save();
   }
 
-  // // Сохранение данных в базе данных
-  // for (const cardKey in cardData) {
-  //   const cardInfo = cardData[cardKey];
-
-  //   // Создание новой карты и сохранение в MongoDB
-  //   const card = new Card(cardInfo);
-  //   await card.save();
-  // }
-
-  console.log("Data parsed and saved.");
+  console.log("Data parsed and saved.".green);
+  console.log("Disconnected from the DB".yellow);
+  process.exit(1); // Exit the application with a non-zero status code
 }
 
 // Вызов функции для разбора данных
