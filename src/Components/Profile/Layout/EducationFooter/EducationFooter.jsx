@@ -6,6 +6,7 @@ import TopicsIcon from "./icons/TopicsIcon";
 import ResultsIcon from "./icons/ResultsIcon";
 import CompetitionIcon from "./icons/CompetitionIcon";
 import { NavLink, useLocation } from "react-router-dom";
+import MissedLessonsIndicator from "../EducationHeader/MissedLessonsIndicator/MissedLessonsIndicator";
 
 // EducationFooter Component - Represents the footer section of the education page.
 const EducationFooter = () => {
@@ -27,6 +28,11 @@ const EducationFooter = () => {
   const renderButton = useCallback((IconComponent, label) => {
     return (
       <NavLink className="education-footer__buttons" to={label.toLowerCase()}>
+        {label.toLowerCase() === "lessons" && (
+          <div className="education-footer__indicator-container">
+            <MissedLessonsIndicator />
+          </div>
+        )}
         <IconComponent /> {/* Render the provided SVG icon component */}
         {label} {/* Display the button's label */}
       </NavLink>
