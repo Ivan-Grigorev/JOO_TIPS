@@ -103,30 +103,39 @@ async function parseAndSaveData() {
       isCorrect,
     });
 
-    console.log(`answerDifficult - ${answerDifficult}`);
     if (answerDifficult === "easy") {
-      await Question.findByIdAndUpdate(
+      console.log("answerDifficult = easy");
+      const update = await Question.findByIdAndUpdate(
         question._id,
-        { $push: { "question.difficultyLevels.easy": option } },
+        { $push: { "difficultyLevels.easy": option } },
         { new: true }
       );
+      console.log(`update - > ${update}`);
+
       // await Question.save(); // ? сохранение опции
     } else if (answerDifficult === "medium") {
-      await Question.findByIdAndUpdate(question._id, {
-        $push: { "question.difficultyLevels.medium": option },
+      console.log("answerDifficult = medium");
+      const update = await Question.findByIdAndUpdate(question._id, {
+        $push: { "difficultyLevels.medium": option },
       });
+      console.log(`update - > ${update}`);
+
       // await Question.save(); // ? сохранение опции
     } else {
-      await Question.findByIdAndUpdate(
+      console.log("answerDifficult = difficult");
+      const update = await Question.findByIdAndUpdate(
         question._id,
-        { $push: { "question.difficultyLevels.difficult": option } },
+        { $push: { "difficultyLevels.difficult": option } },
         { new: true }
       );
+      console.log(`update - > ${update}`);
       // await Question.save(); // ? сохранение опции
     }
   }
 
-  console.log(`question - - -${question}`.blue);
+  console.log(
+    `question.difficultyLevels - - -${question.difficultyLevels}`.blue
+  );
   console.log(
     `question.difficultyLevels - - -${question.difficultyLevels}`.blue
   );
