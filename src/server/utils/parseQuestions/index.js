@@ -1,7 +1,7 @@
 const { google } = require("googleapis");
 const creds = require("./сredentials.json"); // Загрузка учетных данных Google API из файла credentials.json
 const Card = require("../../models/Card/Card");
-const { Question, QuestionOption } = require("../../models/Question/question");
+const { Question } = require("../../models/Question/question");
 const mongoDB = require("../../db");
 require("colors");
 
@@ -44,8 +44,7 @@ async function parseAndSaveData() {
   await mongoDB(); // подключились к базе данных
 
   // Пропускаем первую строку, так как это заголовки
-  const indexRange = 10; // в будущем rows.length
-  for (let i = 1; i < indexRange; i++) {
+  for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
 
     // Извлечение данных
@@ -58,7 +57,7 @@ async function parseAndSaveData() {
     const answer = row[5].split(" ");
     const answerDifficult = answer[0].match(/\[(.*?)\]/)[1].toLowerCase();
     const isCorrect = answer[1] === "[CORRECT]";
-    const optionText = answer[2];
+    const optionText = answer.splice(2).join(" ");
 
     // //* Создание новой карты
     if (language) {
@@ -86,10 +85,7 @@ async function parseAndSaveData() {
     }
 
     //* Создание опции
-    var option = new QuestionOption({
-      text: optionText,
-      isCorrect,
-    });
+    var option = { text: optionText, isCorrect };
 
     if (answerDifficult === "easy") {
       // console.log("answerDifficult = easy");
