@@ -29,3 +29,25 @@
   height: 11px;
   background-color: red;
 }
+
+.education-footer .missed-indicator {
+  width: 7px;
+  height: 7px;
+}
+
+.education-footer__indicator-container {
+  position: absolute;
+  top: 6px;
+  left: 1px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.education-footer .missed-indicator__container {
+  left: initial;
+  bottom: initial;
+}

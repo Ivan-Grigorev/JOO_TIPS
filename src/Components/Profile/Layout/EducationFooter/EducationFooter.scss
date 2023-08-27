@@ -35,6 +35,10 @@
   background-color: #1f4573;
 }
 
+.education-footer__buttons[href="/education/lessons"] {
+  position: relative;
+}
+
 .education-footer .active,
 .education-footer__buttons:is(:hover, :focus) {
   color: white;
