@@ -64,28 +64,27 @@ async function parseAndSaveData() {
     const text = row[headers.text];
     const example = row[headers.example];
     const questionText = row[headers.qas];
-    const answersParts = row[headers.answers].split(" ");
-    const answerDifficult = answersParts[0].substring(1, answersParts[0].length - 1).toLowerCase(); // prettier-ignore
-    const optionText = answersParts.slice(2).join(" ");
-    const isCorrect = answersParts[1].substring(1, answersParts[1].length - 1).toLowerCase() === "correct"; // prettier-ignore
-
-    console.log(`isCorrect - ${isCorrect}`);
+    const answer = row[row.length - 1].split(" ");
+    const answerDifficult = answer[0];
+    const isCorrect = answer[1];
+    const optionText = answer[2];
 
     const noContent = !language; //если нет языка - значит нет и остального кроме ответов
 
-    // if (language) {
-    //   //* Создание новой карты
-    //   var card = new Card({
-    //     language,
-    //     topic,
-    //     text,
-    //     example,
-    //   });
-    // }
-    // if (noContent && !row[headers.answers]) continue;
+    console.log(`answer - ${answer}`);
+    console.log(`answerDifficult - ${answerDifficult}`);
+    console.log(`isCorrect - ${isCorrect}`);
+    console.log(`optionText - ${optionText}`);
 
-    // if (noContent && row[headers.answers]) {
-    //   //* Создание нового вопроса
+    // //* Создание новой карты
+    // const card = new Card({
+    //   language,
+    //   topic,
+    //   text,
+    //   example,
+    // });
+
+    // if (noContent && answer) {
     //   var question = new Question({
     //     questionText,
     //     cardId: card._id, // Привязываем вопрос к карте по ID
@@ -94,27 +93,34 @@ async function parseAndSaveData() {
     //       medium: [],
     //       hard: [],
     //     },
-    //   });
-
-    //   //* Создание нового варианта ответа и добавление в соответствующий уровень сложности
-    //   var option = new QuestionOption({
-    //     text: optionText,
-    //     isCorrect,
-    //   });
-
-    //   console.log(`question.difficultyLevels[answerDifficult] - ${question.difficultyLevels[answerDifficult]}`.blue); // prettier-ignore
-    //   console.log(`answerDifficult - ${answerDifficult}`.green);
-
-    //   // добавляем опцию в сложности урока
-    //   if (question.difficultyLevels[answerDifficult]) question.difficultyLevels[answerDifficult].push(option); // prettier-ignore
+    //   }); //* Создание нового вопроса
     //   card.qas.push(question._id); // привязываю вопрос к карточке
 
-    //   await option.save();
+    //   for (let i = 1; i <= 10; i++) {
+    //     //* Создание нового варианта ответа и добавление в соответствующий уровень сложности
+    //     var option = new QuestionOption({
+    //       text: optionText,
+    //       isCorrect,
+    //     });
+    //     console.log(`option - ${option}`);
+    //     question.difficultyLevels[answerDifficult].push(option); // prettier-ignore
+    //     await option.save(); // ? сохранение опции
+    //   }
+
+    //   // добавляем опцию в сложности урока
+
     //   await question.save(); // ? Сохранение вопроса
     //   await card.save(); // ? Сохранение карты
     // }
+
+    // if (noContent && !answer) continue;
+
+    // console.log(`question - - -${question}`);
   }
 
+  // console.log(`option - ${option}`);
+  // console.log(`question - ${question}`);
+  // console.log(`question.difficultyLevels - ${question.difficultyLevels}`);
   console.log("Data parsed and saved.".green);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
