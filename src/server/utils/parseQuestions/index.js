@@ -71,7 +71,10 @@ async function parseAndSaveData() {
     const text = row[headers.text];
     const example = row[headers.example];
 
-    if (!language && !topic && !text && !example && row[headers.answers]) {
+    const noContent =
+      !language && !topic && !text && !example && row[headers.answers];
+
+    if (noContent) {
       continue;
     }
 
@@ -83,47 +86,39 @@ async function parseAndSaveData() {
       example,
     });
 
-    for (let j = 0; j < 9; j++) {
-      const questionRow = rows[i + j];
+    // Извлечение данных для вопроса
+    const questionText = row[headers.qas];
+    const answersParts = row[headers.answers].split(" ");
+    const answerDifficult = answersParts[0].substring(1, answersParts[0].length - 1).toLowerCase(); // prettier-ignore
+    const optionText = answersParts.slice(2).join(" ");
+    const isCorrect = row[headers.isCorrect] === "CORRECT";
 
-      if (!questionRow) {
-        continue;
-      } // Если строка пустая, пропускаем
+    //* Создание нового вопроса
+    const question = new Question({
+      questionText,
+      cardId: card._id, // Привязываем вопрос к карте по ID
+      difficultyLevels: {
+        easy: [],
+        medium: [],
+        hard: [],
+      },
+    });
 
-      // Извлечение данных для вопроса
-      const questionText = row[headers.qas];
-      const answersParts = row[headers.answers].split(" ");
-      const answerDifficult = answersParts[0].substring(1, answersParts[0].length - 1).toLowerCase(); // prettier-ignore
-      const optionText = answersParts.slice(2).join(" ");
-      const isCorrect = row[headers.isCorrect] === "CORRECT";
+    // Создание нового варианта ответа и добавление в соответствующий уровень сложности
+    const option = new QuestionOption({
+      text: optionText,
+      isCorrect,
+    });
 
-      //* Создание нового вопроса
-      const question = new Question({
-        questionText,
-        cardId: card._id, // Привязываем вопрос к карте по ID
-        difficultyLevels: {
-          easy: [],
-          medium: [],
-          hard: [],
-        },
-      });
+    await option.save();
 
-      // Создание нового варианта ответа и добавление в соответствующий уровень сложности
-      const option = new QuestionOption({
-        text: optionText,
-        isCorrect,
-      });
+    question.difficultyLevels[answerDifficult].push(option);
 
-      await option.save();
+    // ? Сохранение вопроса
+    await question.save();
 
-      question.difficultyLevels[answerDifficult].push(option);
-
-      // ? Сохранение вопроса
-      await question.save();
-
-      // Добавление вопроса в карту
-      card.qas.push(question._id);
-    }
+    // Добавление вопроса в карту
+    card.qas.push(question._id);
 
     // ? Сохранение карты
     await card.save();
