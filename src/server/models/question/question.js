@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const OptionSchema = new mongoose.Schema(
   {
     text: { type: String, required: [true, "Option text is required"] }, // текст відповіді
-    isCorrect: { type: Boolean, required: [true, "IsCorrect is required property"] }, // позначка, чи є ця відповідь правильною
+    isCorrect: {
+      type: Boolean,
+      required: [true, "IsCorrect is required property"],
+    }, // позначка, чи є ця відповідь правильною
   },
   { versionKey: false }
 );
