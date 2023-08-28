@@ -117,7 +117,7 @@ async function parseAndSaveData() {
       console.log(`data.rows.length - ${data.rows.length}`.red);
 
       // Пропускаем первую строку, так как это заголовки
-      for (let i = 1; i < 10; i++) {
+      for (let i = 1; i < data.rows.length; i++) {
         try {
           const row = data.rows[i];
           const parsedData = parseRow(row);
@@ -140,6 +140,9 @@ async function parseAndSaveData() {
               await card.save(); // ? Сохранение карты
             }
           }
+
+          // TODO Пофиксить умножение вопросов в карте на 3
+          //* можно реализовать проверку на уникальность вопроса ВНУТРИ карточки
 
           const questionDuplicate = await Question.findOne({
             questionText: parsedData.questionText,
@@ -189,7 +192,9 @@ async function parseAndSaveData() {
             // throw new Error("answerDifficult doesn't equal easy or medium");
           }
 
-          card.questions.push(question._id); //* привязываю вопрос к карточке
+          if (!card.questions.includes(question._id)) {
+            card.questions.push(question._id); //* привязываю вопрос к карточке
+          }
 
           await card.save(); // ? сохранение карты
           await question.save(); // ? сохранение вопроса
