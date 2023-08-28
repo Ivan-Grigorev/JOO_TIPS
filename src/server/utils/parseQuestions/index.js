@@ -176,7 +176,7 @@ async function parseAndSaveData() {
             console.log("parsedData.answerDifficult doesn't equal easy, medium or difficult".red); // prettier-ignore
             console.log(`parsedData.answerDifficult - - - > ${parsedData.answerDifficult}`.red ); // prettier-ignore
 
-            const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
+            const errorText = `parsedData.answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
             const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
 
             logErrorToFile(errorLog);
