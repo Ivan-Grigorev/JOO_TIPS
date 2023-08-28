@@ -172,16 +172,9 @@ async function parseAndSaveData() {
               { $push: { "difficultyLevels.hard": option } },
               { new: true }
             );
-
-            // await Question.save(); // ? сохранение опции
           } else {
-            console.log(
-              "answerDifficult doesn't equal easy, medium or difficult".red
-            );
-            console.log(
-              `parsedData.answerDifficult - - - > ${parsedData.answerDifficult}`
-                .red
-            );
+            console.log("parsedData.answerDifficult doesn't equal easy, medium or difficult".red); // prettier-ignore
+            console.log(`parsedData.answerDifficult - - - > ${parsedData.answerDifficult}`.red ); // prettier-ignore
 
             const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
             const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
