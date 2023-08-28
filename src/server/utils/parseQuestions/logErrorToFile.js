@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const errorFilePath = path.join(__dirname, "error.txt");
+const errorFilePath = path.join(__dirname, "error.log");
 
 // Функция для записи ошибки в файл
 function logErrorToFile(error) {
