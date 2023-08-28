@@ -185,7 +185,7 @@ async function parseAndSaveData() {
             );
 
             const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
-            const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
+            const errorLog = `${language}\n Range: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
 
             logErrorToFile(errorLog);
 
@@ -195,7 +195,7 @@ async function parseAndSaveData() {
         } catch (e) {
           console.error(`Error on ${i} cell`.red);
 
-          const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\n Error: ${e} `;
+          const errorLog = `${language}\n Range: ${data.title}\n Cell: ${i}\n Error: ${e} `;
           logErrorToFile(errorLog); //* Запись ошибки в файл
           continue;
         }
