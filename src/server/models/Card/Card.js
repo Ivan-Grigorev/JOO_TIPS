@@ -5,7 +5,7 @@ const cardSchema = new mongoose.Schema(
     topic: { type: String, required: [true, "Card topic is reqeuired"] },
     text: { type: String, required: [true, "Card text is required"] },
     example: { type: String, required: [true, "Card example is required"] },
-    question: [
+    questions: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Question",

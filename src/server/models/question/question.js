@@ -17,6 +17,7 @@ const QuestionSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Answer",
           required: [true, "Ref to Answer is required"],
+          unique: [true, "Answer refs must be unique"],
         },
       ], // масив з трьох варіантів відповідей
       medium: [
@@ -24,6 +25,7 @@ const QuestionSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Answer",
           required: [true, "Ref to Answer is required"],
+          unique: [true, "Answer refs must be unique"],
         },
       ],
       hard: [
@@ -31,6 +33,7 @@ const QuestionSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Answer",
           required: [true, "Ref to Answer is required"],
+          unique: [true, "Answer refs must be unique"],
         },
       ],
     },
