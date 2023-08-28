@@ -86,13 +86,13 @@ async function getDataFromGoogleDocs() {
     auth: client,
     spreadsheetId: null, // setID
   });
-  const sheetId = response.data.sheets[0].properties.sheetId;
+  const range = response.data.sheets[0].properties.title;
 
   // Получение данных из листа
   const res = await sheets.spreadsheets.values.get({
     auth: client,
     spreadsheetId: null,
-    range: `51-100`, // Имя листа
+    range, // Имя листа
   });
 
   const rows = res.data.values;
@@ -186,7 +186,8 @@ async function parseAndSaveData() {
         "answerDifficult doesn't equal easy, medium or difficult".red
       );
       console.log(`answerDifficult - - - > ${answerDifficult}`.red);
-      throw new Error("answerDifficult doesn't equal easy or medium");
+      continue;
+      // throw new Error("answerDifficult doesn't equal easy or medium");
     }
   }
 
@@ -196,4 +197,4 @@ async function parseAndSaveData() {
 }
 
 // Вызов функции для разбора данных
-parseAndSaveData();
+parseAndSaveData().catch((e) => console.error(`Parsing error: ${e}`.red));
