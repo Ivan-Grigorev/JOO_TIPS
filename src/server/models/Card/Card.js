@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const cardSchema = new mongoose.Schema(
   {
-    language: { type: String, required: true },
-    topic: { type: String, required: true },
-    text: { type: String, required: true },
-    example: { type: String, default: null },
-    qas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
+    language: { type: String, required: [true, "Card language is required"] },
+    topic: { type: String, required: [true, "Card topic is rqeuired"] },
+    text: { type: String, required: [true, "Card text is required"] },
+    example: { type: String, required: [true, "Card example is required"] },
+    question: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
   },
   { versionKey: false }
 );
