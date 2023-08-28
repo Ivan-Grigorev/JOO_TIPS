@@ -74,6 +74,7 @@
     "dev": "nodemon src/server/server.js",
     "lessons": "node src/server/utils/createTestLessons/",
     "clearLessons": "node src/server/utils/createTestLessons/clearDB.js",
+    "parseQuestions": "node src/server/utils/parseQuestions/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
