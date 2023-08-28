@@ -16,7 +16,7 @@ const client = new google.auth.JWT(
 // ID Google Docs файлов
 const questionDocs = {
   javascript: {
-    1: "1LhUzn8PornnA2KrbuYgUxD4WvVkNowfxOQ-21NGlMIQ",
+    1: "14zmPc3goZTuklbMA8eeVolgwC3NTlvYG8R8IhZ8hDKo",
     2: "15pnb5RLqMwUhKQpble49v3-nSNn19c7YjcEM5NZPU6o",
     3: "145aSRuoH_hCIL91E-P7hh1UcvtBgCzq9UqN23O3LqSY",
     4: "1uY6gb_ybkldu8zU_TD8x5dAWsj4JPvCit-dZx1tPGDc",
@@ -112,6 +112,7 @@ async function parseAndSaveData() {
     for (const docNumber in questionDocs[language]) {
       const data = await getDataFromGoogleDocs(language, docNumber);
 
+      console.log(`Question of the ${language}`.red);
       console.log(`Question amount - - - > ${data.title}`.red);
       console.log(`data.rows.length - - - > ${data.rows.length}`.red);
 
@@ -172,11 +173,18 @@ async function parseAndSaveData() {
               { $push: { "difficultyLevels.hard": option } },
               { new: true }
             );
-          } else {
-            console.log("parsedData.answerDifficult doesn't equal easy, medium or difficult".red); // prettier-ignore
-            console.log(`parsedData.answerDifficult - - - > ${parsedData.answerDifficult}`.red ); // prettier-ignore
 
-            const errorText = `parsedData.answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
+            // await Question.save(); // ? сохранение опции
+          } else {
+            console.log(
+              "answerDifficult doesn't equal easy, medium or difficult".red
+            );
+            console.log(
+              `parsedData.answerDifficult - - - > ${parsedData.answerDifficult}`
+                .red
+            );
+
+            const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
             const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
 
             logErrorToFile(errorLog);
