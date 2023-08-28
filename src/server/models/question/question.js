@@ -1,19 +1,5 @@
 const mongoose = require("mongoose");
 
-const OptionSchema = new mongoose.Schema(
-  {
-    text: {
-      type: String,
-      required: [true, "Option text is required"],
-    }, // текст відповіді
-    isCorrect: {
-      type: Boolean,
-      required: [true, "IsCorrect is required property"],
-    }, // позначка, чи є ця відповідь правильною
-  },
-  { versionKey: false }
-);
-
 const QuestionSchema = new mongoose.Schema(
   {
     questionText: {
@@ -22,19 +8,36 @@ const QuestionSchema = new mongoose.Schema(
     }, // текст питання
     cardId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: [true, "Card id is required"],
+      required: [true, "Ref to CardId is required"],
       ref: "Card",
     },
     difficultyLevels: {
-      easy: [OptionSchema], // масив з трьох варіантів відповідей
-      medium: [OptionSchema],
-      hard: [OptionSchema],
+      easy: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Answer",
+          required: [true, "Ref to Answer is required"],
+        },
+      ], // масив з трьох варіантів відповідей
+      medium: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Answer",
+          required: [true, "Ref to Answer is required"],
+        },
+      ],
+      hard: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Answer",
+          required: [true, "Ref to Answer is required"],
+        },
+      ],
     },
   },
   { versionKey: false }
 );
 
 const Question = mongoose.model("Question", QuestionSchema);
-const QuestionOption = mongoose.model("QuestionOption", OptionSchema);
 
-module.exports = { Question };
+module.exports = Question;
