@@ -3,6 +3,7 @@ const creds = require("./сredentials.json"); // Загрузка учетных
 const Card = require("../../models/Card/Card");
 const { Question } = require("../../models/Question/question");
 const mongoDB = require("../../db");
+const logErrorToFile = require("./logErrorToFile");
 require("colors");
 
 const client = new google.auth.JWT(
@@ -78,123 +79,163 @@ const questionDocs = {
 };
 
 // Асинхронная функция для получения данных из Google Docs
-async function getDataFromGoogleDocs() {
+async function getDataFromGoogleDocs(language, docNumber) {
   const sheets = google.sheets("v4");
+  const spreadsheetId = questionDocs[language][docNumber];
 
   // Получение информации о листе
   const response = await sheets.spreadsheets.get({
     auth: client,
-    spreadsheetId: null, // setID
+    spreadsheetId, // setID
   });
   const range = response.data.sheets[0].properties.title;
 
   // Получение данных из листа
   const res = await sheets.spreadsheets.values.get({
     auth: client,
-    spreadsheetId: null,
+    spreadsheetId,
     range, // Имя листа
   });
 
   const rows = res.data.values;
-  return rows;
+  return { rows, title: range };
 }
 
 // Асинхронная функция для разбора данных и сохранения в Excel и MongoDB
 async function parseAndSaveData() {
-  const rows = await getDataFromGoogleDocs(); // получили данные
-
   await mongoDB(); // подключились к базе данных
 
-  console.log(`rows.length - - - > ${rows.length}`.red);
+  const languages = ["javascript", "python"];
+  const promises = [];
 
-  // Пропускаем первую строку, так как это заголовки
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
+  for (const language of languages) {
+    for (const docNumber in questionDocs[language]) {
+      const data = await getDataFromGoogleDocs(language, docNumber);
 
-    // Извлечение данных
-    const language = row[0];
-    const topic = row[1];
-    const text = row[2];
-    const example = row[3];
-    const questionText = row[4];
+      console.log(`Question amount - - - > ${data.title}`.red);
+      console.log(`data.rows.length - - - > ${data.rows.length}`.red);
 
-    const answer = row[5].split(" ");
-    const answerDifficult = (answer[0].match(/\[(.*?)\]/) || [])[1].toLowerCase() || answer[0].toLowerCase(); // prettier-ignore
-    const isCorrect = answer[1] === "[CORRECT]";
-    const optionText = answer.splice(2).join(" ");
+      // Пропускаем первую строку, так как это заголовки
+      for (let i = 1; i < data.rows.length; i++) {
+        try {
+          const row = data.rows[i];
+          const parsedData = parseRow(row);
 
-    let countCards = 0;
+          console.log(`Ячейка № ${i}`.green); // вывод обрабатываемой ячейки в excel документе
 
-    // //* Создание новой карты
-    if (language) {
-      countCards = countCards + 1;
-      const card = new Card({
-        language,
-        topic,
-        text,
-        example,
-      });
+          // //* Создание новой карты
+          if (parsedData.language) {
+            const card = new Card(parsedData);
 
-      console.log(`Ячейка № ${i} \brКарта № ${countCards}`.green);
+            //* Создание нового вопроса
+            var question = new Question({
+              questionText: parsedData.questionText,
+              cardId: card._id, // Привязываем вопрос к карте по ID
+              difficultyLevels: {
+                easy: [],
+                medium: [],
+                hard: [],
+              },
+            });
 
-      //* Создание нового вопроса
-      var question = new Question({
-        questionText,
-        cardId: card._id, // Привязываем вопрос к карте по ID
-        difficultyLevels: {
-          easy: [],
-          medium: [],
-          hard: [],
-        },
-      });
+            card.qas.push(question._id); // привязываю вопрос к карточке
+            promises.push(card.save()); // ? Сохранение карты
+            promises.push(question.save()); // ? Сохранение вопроса
+          }
 
-      card.qas.push(question._id); // привязываю вопрос к карточке
-      await card.save(); // ? Сохранение карты
-      await question.save(); // ? Сохранение вопроса
-    }
+          //* Создание опции
+          var option = {
+            text: parsedData.optionText,
+            isCorrect: parsedData.isCorrect,
+          };
 
-    //* Создание опции
-    var option = { text: optionText, isCorrect };
+          if (parsedData.answerDifficult === "easy") {
+            // console.log("answerDifficult = easy");
+            await Question.findByIdAndUpdate(
+              question._id,
+              { $push: { "difficultyLevels.easy": option } },
+              { new: true }
+            );
 
-    if (answerDifficult === "easy") {
-      // console.log("answerDifficult = easy");
-      await Question.findByIdAndUpdate(
-        question._id,
-        { $push: { "difficultyLevels.easy": option } },
-        { new: true }
-      );
+            // await Question.save(); // ? сохранение опции
+          } else if (parsedData.answerDifficult === "medium") {
+            // console.log("answerDifficult = medium");
+            await Question.findByIdAndUpdate(question._id, {
+              $push: { "difficultyLevels.medium": option },
+            });
 
-      // await Question.save(); // ? сохранение опции
-    } else if (answerDifficult === "medium") {
-      // console.log("answerDifficult = medium");
-      await Question.findByIdAndUpdate(question._id, {
-        $push: { "difficultyLevels.medium": option },
-      });
+            // await Question.save(); // ? сохранение опции
+          } else if (parsedData.answerDifficult === "difficult") {
+            // console.log("answerDifficult = difficult");
+            await Question.findByIdAndUpdate(
+              question._id,
+              { $push: { "difficultyLevels.hard": option } },
+              { new: true }
+            );
 
-      // await Question.save(); // ? сохранение опции
-    } else if (answerDifficult === "difficult") {
-      // console.log("answerDifficult = difficult");
-      await Question.findByIdAndUpdate(
-        question._id,
-        { $push: { "difficultyLevels.hard": option } },
-        { new: true }
-      );
+            // await Question.save(); // ? сохранение опции
+          } else {
+            console.log(
+              "answerDifficult doesn't equal easy, medium or difficult".red
+            );
+            console.log(
+              `parsedData.answerDifficult - - - > ${parsedData.answerDifficult}`
+                .red
+            );
 
-      // await Question.save(); // ? сохранение опции
-    } else {
-      console.log(
-        "answerDifficult doesn't equal easy, medium or difficult".red
-      );
-      console.log(`answerDifficult - - - > ${answerDifficult}`.red);
-      continue;
-      // throw new Error("answerDifficult doesn't equal easy or medium");
+            const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
+            const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
+
+            logErrorToFile(errorLog);
+
+            continue;
+            // throw new Error("answerDifficult doesn't equal easy or medium");
+          }
+        } catch (e) {
+          console.error(`Error on ${i} cell`.red);
+
+          const errorLog = `${language}\n Title: ${data.title}\n Cell: ${i}\n Error: ${e} `;
+          logErrorToFile(errorLog); //* Запись ошибки в файл
+          continue;
+        }
+      }
     }
   }
+  await Promise.all(promises);
 
   console.log("Data parsed and saved.".green);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
 }
 
+function parseRow(row) {
+  try {
+    const [language, topic, text, example, questionText, answerText] = row;
+
+    // Парсинг answerText
+    const answerMatch = answerText.match(/\[(.*?)\]/);
+    const answerDifficult = (answerMatch || [])[1]?.toLowerCase();
+    const isCorrect = answerText.includes("[CORRECT]");
+    const optionText = answerText
+      .substring(answerMatch?.index + answerMatch?.[0].length)
+      .trim();
+
+    return {
+      language,
+      topic,
+      text,
+      example,
+      questionText,
+      answerDifficult,
+      isCorrect,
+      optionText,
+    };
+  } catch (error) {
+    console.error(`Error parsing row: ${error}`.red);
+  }
+}
+
 // Вызов функции для разбора данных
-parseAndSaveData().catch((e) => console.error(`Parsing error: ${e}`.red));
+parseAndSaveData().catch((e) => {
+  console.error(`Parsing error: ${e}`.red);
+});
