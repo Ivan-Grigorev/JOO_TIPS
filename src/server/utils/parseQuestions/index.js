@@ -18,35 +18,35 @@ const client = new google.auth.JWT(
 const questionDocs = {
   javascript: {
     1: "14zmPc3goZTuklbMA8eeVolgwC3NTlvYG8R8IhZ8hDKo",
-    2: "15pnb5RLqMwUhKQpble49v3-nSNn19c7YjcEM5NZPU6o",
-    3: "145aSRuoH_hCIL91E-P7hh1UcvtBgCzq9UqN23O3LqSY",
-    4: "1uY6gb_ybkldu8zU_TD8x5dAWsj4JPvCit-dZx1tPGDc",
-    5: "1Lt7V2tJIheDMeeby-pjNGqFYdUN5BEY06K_mYCSsR78",
-    6: "1szEDJa3J5h3F6-Wr7hbnnGJbsifNrKsFKch6Ho-Ib_g",
-    7: "1OY8HE2E1xtTgmY7NXIUSIv1QezH6RX0jIjhJOvjDCgY",
-    8: "1DGhxzJIa1cF6d77MdrWg-oxfdI3VQ70uzhBHQQEwa1Y",
-    9: "1YLELlIEfuPSOZIqcDLAOFrGZO08k8z31EjCMZd4Cr3k",
-    10: "1ltdwLkpp4Rk2TXytJNDMtrgmCEvC422DKpD2leTezJU",
-    11: "1ZmUR00UkfMpD0jBx4Vlu5XluUYpyUqB4RfZq_qtkEWs",
-    12: "1XOtByF3DZXTi59ESkozptU75D5MaaNQoi0u1FPIPpxA",
-    13: "1HAkuM5xfof2k8CRq7h1XHUijMtV1NrlA60SattSOv6A",
-    14: "1_JdQK_bdXTpoRQdd6goPl74rAcMkb5Zb_dnAVGuKcZM",
-    15: "1JrYVkhtInSj__ntYy1bcKX9FBCxoJMiaXgNMDXz-n5k",
-    16: "107V8lyHFGCEjrzlHkXkeHoAm2Tg4CTlFkr5KpC-ECYM",
-    17: "1K4RzXU16bzdXVIPbwz-pgAJLYU7j9qx2AjciBeIufWo",
-    18: "19QtjZyvOmcfDx4xjk-8Qa5P_Y4DWZ-4dGWGLb33qqAs",
-    19: "1TcgBohsdpAx-hzy2NjPwcVP9hqK8yWWJEbl53Bnuu2M",
-    20: "1wvGSGvqiUCHbYca8p2d2H1FROm4_YLnn0ygZOYMp8k0",
-    21: "1ALNMySvdalI5LdtmLSS_l90K0Y7TnNvl3jj-1rzNxDI",
-    22: "1MVLwpzLxijvdTLxhc21ZIgrUm0HjXhKtMLaKKlFJy-0",
-    23: "1OSB-45qHkGEktfDOilxqAMirvn5vB5fCyFL8Qup13pU",
-    24: "1cQEz92-t7YM0H4KmtpSr3jhHyL0dXo1kftDY_keyPoM",
-    25: "1ufMwpdXdXVMXpkxc02oA6x0OEgGVQo8A8IGQmweAj2c",
-    26: "1mBvBa6yIAOEO2OHN6hrQwZE4TwMhCHq3UpLzwsNzi0A",
-    27: "1-_lmC7388St-6yZq0GrzxvgKc3BnzCyAWAdvt27yUVM",
-    28: "1vhw7A91Bf-nwTwmlolLuSBF5ZAqusn5LXgjs2D7YNnU",
-    29: "1JGagg0NTolFlflYkypRHmETxWKTg_DAwRTHVCWVGBWY",
-    30: "10WVivNVmETNOSCWracgIsvqFjzQPjyLxLYXpkuyd3cE",
+    // 2: "15pnb5RLqMwUhKQpble49v3-nSNn19c7YjcEM5NZPU6o",
+    // 3: "145aSRuoH_hCIL91E-P7hh1UcvtBgCzq9UqN23O3LqSY",
+    // 4: "1uY6gb_ybkldu8zU_TD8x5dAWsj4JPvCit-dZx1tPGDc",
+    // 5: "1Lt7V2tJIheDMeeby-pjNGqFYdUN5BEY06K_mYCSsR78",
+    // 6: "1szEDJa3J5h3F6-Wr7hbnnGJbsifNrKsFKch6Ho-Ib_g",
+    // 7: "1OY8HE2E1xtTgmY7NXIUSIv1QezH6RX0jIjhJOvjDCgY",
+    // 8: "1DGhxzJIa1cF6d77MdrWg-oxfdI3VQ70uzhBHQQEwa1Y",
+    // 9: "1YLELlIEfuPSOZIqcDLAOFrGZO08k8z31EjCMZd4Cr3k",
+    // 10: "1ltdwLkpp4Rk2TXytJNDMtrgmCEvC422DKpD2leTezJU",
+    // 11: "1ZmUR00UkfMpD0jBx4Vlu5XluUYpyUqB4RfZq_qtkEWs",
+    // 12: "1XOtByF3DZXTi59ESkozptU75D5MaaNQoi0u1FPIPpxA",
+    // 13: "1HAkuM5xfof2k8CRq7h1XHUijMtV1NrlA60SattSOv6A",
+    // 14: "1_JdQK_bdXTpoRQdd6goPl74rAcMkb5Zb_dnAVGuKcZM",
+    // 15: "1JrYVkhtInSj__ntYy1bcKX9FBCxoJMiaXgNMDXz-n5k",
+    // 16: "107V8lyHFGCEjrzlHkXkeHoAm2Tg4CTlFkr5KpC-ECYM",
+    // 17: "1K4RzXU16bzdXVIPbwz-pgAJLYU7j9qx2AjciBeIufWo",
+    // 18: "19QtjZyvOmcfDx4xjk-8Qa5P_Y4DWZ-4dGWGLb33qqAs",
+    // 19: "1TcgBohsdpAx-hzy2NjPwcVP9hqK8yWWJEbl53Bnuu2M",
+    // 20: "1wvGSGvqiUCHbYca8p2d2H1FROm4_YLnn0ygZOYMp8k0",
+    // 21: "1ALNMySvdalI5LdtmLSS_l90K0Y7TnNvl3jj-1rzNxDI",
+    // 22: "1MVLwpzLxijvdTLxhc21ZIgrUm0HjXhKtMLaKKlFJy-0",
+    // 23: "1OSB-45qHkGEktfDOilxqAMirvn5vB5fCyFL8Qup13pU",
+    // 24: "1cQEz92-t7YM0H4KmtpSr3jhHyL0dXo1kftDY_keyPoM",
+    // 25: "1ufMwpdXdXVMXpkxc02oA6x0OEgGVQo8A8IGQmweAj2c",
+    // 26: "1mBvBa6yIAOEO2OHN6hrQwZE4TwMhCHq3UpLzwsNzi0A",
+    // 27: "1-_lmC7388St-6yZq0GrzxvgKc3BnzCyAWAdvt27yUVM",
+    // 28: "1vhw7A91Bf-nwTwmlolLuSBF5ZAqusn5LXgjs2D7YNnU",
+    // 29: "1JGagg0NTolFlflYkypRHmETxWKTg_DAwRTHVCWVGBWY",
+    // 30: "10WVivNVmETNOSCWracgIsvqFjzQPjyLxLYXpkuyd3cE",
   },
   python: {
     1: "1IoH5TKEPxft5ooSDigyi0cj13LNcJyqyxyQQdxWxU0c",
@@ -106,29 +106,35 @@ async function getDataFromGoogleDocs(language, docNumber) {
 async function parseAndSaveData() {
   await mongoDB(); // подключились к базе данных
 
-  const languages = ["javascript", "python"];
+  const languages = [
+    "javascript",
+    //  "python"
+  ];
 
   for (const language of languages) {
     for (const docNumber in questionDocs[language]) {
       const data = await getDataFromGoogleDocs(language, docNumber);
+      const excelDocumentLength = data.rows.length;
 
-      console.log(`Programming language - ${language}`.red);
-      console.log(`Question amount - ${data.title}`.red);
-      console.log(`data.rows.length - ${data.rows.length}`.red);
+      console.log(`Programming language - ${language}`.yellow);
+      console.log(`Question amount - ${data.title}`.yellow);
+      console.log(`Excel document length - ${excelDocumentLength}`.yellow);
 
       // Пропускаем первую строку, так как это заголовки
-      for (let i = 1; i < data.rows.length; i++) {
+      for (let i = 1; i < 50; i++) {
         try {
           const row = data.rows[i];
           const parsedData = parseRow(row);
 
           console.log(`Cell № ${i}`.green); // вывод обрабатываемой ячейки в excel документе
 
+          const cardDatas = parsedData.text && parsedData.topic;
           //* Создание новой карты если есть данные
-          if (parsedData.language) {
+          if (cardDatas) {
             var cardDuplicate = await Card.findOne({ text: parsedData.text });
 
             if (!cardDuplicate) {
+              console.log("Карточка уникальна");
               var card = new Card({
                 language: parsedData.language,
                 topic: parsedData.topic,
@@ -138,11 +144,11 @@ async function parseAndSaveData() {
               }); // если карта ещё не создана, то создаём
 
               await card.save(); // ? Сохранение карты
+            } else {
+              console.log("У карточки есть дубликат");
+              var card = cardDuplicate;
             }
           }
-
-          // TODO Пофиксить умножение вопросов в карте на 3
-          //* можно реализовать проверку на уникальность вопроса ВНУТРИ карточки
 
           const questionDuplicate = await Question.findOne({
             questionText: parsedData.questionText,
@@ -150,6 +156,7 @@ async function parseAndSaveData() {
 
           //* Создание вопроса если нет дубликата
           if (!questionDuplicate && parsedData.questionText) {
+            console.log("Вопрос уникален");
             var question = new Question({
               questionText: parsedData.questionText,
               cardId: card._id, // Привязываем вопрос к карте по ID
@@ -159,6 +166,9 @@ async function parseAndSaveData() {
                 hard: [],
               },
             });
+          } else if (questionDuplicate) {
+            console.log("Есть дубликат вопроса (стр. № 167)");
+            var question = questionDuplicate;
           }
 
           //* Создание ответа
@@ -170,31 +180,27 @@ async function parseAndSaveData() {
           const answerDifficult = parsedData.answerDifficult;
           const unknownDifficult = answerDifficult !== "easy" && answerDifficult !== "medium" && answerDifficult !== "difficult"; // prettier-ignore
 
+          console.log(`answerDifficult - ${answerDifficult}`.red);
           if (answerDifficult === "easy") {
-            question.difficultyLevels.easy.push(answer._id);
-          }
-          if (answerDifficult === "medium") {
-            question.difficultyLevels.medium.push(answer._id);
-          }
-          if (answerDifficult === "difficult") {
-            question.difficultyLevels.hard.push(answer._id);
-          } // неизвестная сложность
-          if (unknownDifficult) {
-            console.log("answerDifficult doesn't equal easy, medium or difficult".red); // prettier-ignore
+            console.log("Добавляю лёгкий ответ");
+            question.difficultyLevels.easy.addToSet(answer._id);
+          } else if (answerDifficult === "medium") {
+            question.difficultyLevels.medium.addToSet(answer._id);
+          } else if (answerDifficult === "difficult") {
+            question.difficultyLevels.hard.addToSet(answer._id);
+          } else if (unknownDifficult) {
+            const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
+            console.log(`${errorText}`.red); // prettier-ignore
             console.log(`parsedData.answerDifficult - ${parsedData.answerDifficult}`.red); // prettier-ignore
 
-            const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
             const errorLog = `${language}\n Range: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
 
             logErrorToFile(errorLog);
 
             continue;
-            // throw new Error("answerDifficult doesn't equal easy or medium");
-          }
+          } // неизвестная сложность
 
-          if (!card.questions.includes(question._id)) {
-            card.questions.push(question._id); //* привязываю вопрос к карточке
-          }
+          card.questions.addToSet(question._id); //* привязываю вопрос к карточке
 
           await card.save(); // ? сохранение карты
           await question.save(); // ? сохранение вопроса
@@ -208,6 +214,10 @@ async function parseAndSaveData() {
           continue;
         }
       }
+
+      const testQuestion = await Question.findOne();
+
+      console.log(testQuestion);
     }
   }
 
@@ -245,3 +255,14 @@ function parseRow(row) {
 parseAndSaveData().catch((e) => {
   console.error(`Parsing error: ${e}`.red);
 });
+
+function checkUniqueness(array) {
+  const stringArray = array.map((objId) => objId.toString()); // Преобразование в массив строк
+  const uniqueSet = new Set(stringArray);
+
+  const isUnique = uniqueSet.size === array.length;
+
+  // Если размер массива после преобразования в Set отличается от исходного массива,
+  // это означает, что в исходном массиве были дубликаты.
+  return isUnique;
+}
