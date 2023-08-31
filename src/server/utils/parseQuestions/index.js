@@ -123,14 +123,11 @@ async function parseAndSaveData() {
       // Пропускаем первую строку, так как это заголовки
       for (let i = 1; i < 40; i++) {
         try {
+          console.log(`Cell № ${i}`.green); // вывод обрабатываемой ячейки в excel документе
           const row = data.rows[i];
           const parsedData = parseRow(row);
 
-          console.log(`Cell № ${i}`.green); // вывод обрабатываемой ячейки в excel документе
-
           const cardDatas = parsedData.text && parsedData.topic;
-
-          //* Создание новой карты если есть данные
 
           var card;
           if (cardDatas) {
@@ -144,7 +141,7 @@ async function parseAndSaveData() {
             );
 
             if (!cardDuplicate) {
-              console.log("Карточка уникальна");
+              console.log("Создана новая карточка");
               card = new Card({
                 language: parsedData.language,
                 topic: parsedData.topic,
@@ -154,8 +151,8 @@ async function parseAndSaveData() {
               }); // если карта ещё не создана, то создаём
 
               await card.save(); // ? Сохранение карты
-            } else {
-              console.log(`Карта имеет дубликат`);
+            } else if (cardDuplicate) {
+              console.log(`Такая карточка уже существует`);
               card = cardDuplicate; // Обновление ссылки на карточку
             }
           }
@@ -196,10 +193,8 @@ async function parseAndSaveData() {
           const answerDifficult = parsedData.answerDifficult;
           const unknownDifficult = answerDifficult !== "easy" && answerDifficult !== "medium" && answerDifficult !== "difficult"; // prettier-ignore
 
-          console.log(`answerDifficult - ${answerDifficult}`);
           if (answerDifficult === "easy") {
             console.log("Добавляю easy ответ");
-            console.log(question.difficultyLevels.easy);
             question.difficultyLevels.easy.addToSet(answer._id);
           } else if (answerDifficult === "medium") {
             console.log("Добавляю medium ответ");
@@ -220,6 +215,7 @@ async function parseAndSaveData() {
             continue;
           } // неизвестная сложность
 
+          console.log("Добавляю вопрос в карту");
           card.questions.addToSet(question._id); //* привязываю вопрос к карточке
 
           await card.save(); // ? сохранение карты
