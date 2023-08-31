@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const AnswerSchema = new mongoose.Schema(
   {
-    text: {
+    answerText: {
       type: String,
       required: [true, "Answer text is required"],
     }, // текст відповіді

@@ -5,6 +5,7 @@ const QuestionSchema = new mongoose.Schema(
     questionText: {
       type: String,
       required: [true, "Question text is required"],
+      unique: true,
     }, // текст питання
     cardId: {
       type: mongoose.Schema.Types.ObjectId,
