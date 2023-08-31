@@ -4,9 +4,10 @@ const path = require("path");
 const errorLogsDir = path.join(__dirname, "errorLogs");
 
 // Создаем директорию для логов ошибок, если еще не создана
-if (!fs.existsSync(errorLogsDir)) {
-  fs.mkdirSync(errorLogsDir);
-}
+const directoryIsNotExist = !fs.existsSync(errorLogsDir);
+const createDirectory = fs.mkdirSync(errorLogsDir);
+
+if (directoryIsNotExist) createDirectory();
 
 // Функция для записи ошибки в файл
 function logErrorToFile(range, error) {
