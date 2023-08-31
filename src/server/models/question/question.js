@@ -5,7 +5,7 @@ const QuestionSchema = new mongoose.Schema(
     questionText: {
       type: String,
       required: [true, "Question text is required"],
-      unique: true,
+      // unique: true,
     }, // текст питання
     cardId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -18,7 +18,7 @@ const QuestionSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Answer",
           required: [true, "Ref to Answer is required"],
-          unique: true,
+          // unique: true,
         },
       ], // масив з трьох варіантів відповідей
       medium: [
@@ -26,7 +26,7 @@ const QuestionSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Answer",
           required: [true, "Ref to Answer is required"],
-          unique: true,
+          // unique: true,
         },
       ],
       hard: [
@@ -34,7 +34,7 @@ const QuestionSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Answer",
           required: [true, "Ref to Answer is required"],
-          unique: true,
+          // unique: true,
         },
       ],
     },
