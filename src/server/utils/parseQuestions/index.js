@@ -121,7 +121,7 @@ async function parseAndSaveData() {
       console.log(`Excel document length - ${excelDocumentLength}`.yellow);
 
       // Пропускаем первую строку, так как это заголовки
-      for (let i = 1; i < 40; i++) {
+      for (let i = 1; i < excelDocumentLength; i++) {
         try {
           console.log(`Cell № ${i}`.green); // вывод обрабатываемой ячейки в excel документе
           const row = data.rows[i];
@@ -141,7 +141,7 @@ async function parseAndSaveData() {
             );
 
             if (!cardDuplicate) {
-              console.log("Создана новая карточка");
+              // console.log("Создана новая карточка");
               card = new Card({
                 language: parsedData.language,
                 topic: parsedData.topic,
@@ -152,7 +152,7 @@ async function parseAndSaveData() {
 
               await card.save(); // ? Сохранение карты
             } else if (cardDuplicate) {
-              console.log(`Такая карточка уже существует`);
+              // console.log(`Такая карточка уже существует`);
               card = cardDuplicate; // Обновление ссылки на карточку
             }
           }
@@ -164,7 +164,7 @@ async function parseAndSaveData() {
           var question;
           //* Создание вопроса если нет дубликата
           if (!questionDuplicate && parsedData.questionText) {
-            console.log("Вопрос уникален");
+            console.log("Создаю вопрос");
             question = new Question({
               questionText: parsedData.questionText,
               cardId: card._id, // Привязываем вопрос к карте по ID
@@ -175,7 +175,8 @@ async function parseAndSaveData() {
               },
             });
           } else if (questionDuplicate) {
-            console.log(`Есть дубликат вопроса - \n\nText: ${questionDuplicate.questionText}\n\nCardRef: ${questionDuplicate.cardId}`.yellow); // prettier-ignore
+            // console.log(`Есть дубликат вопроса - \n\nText: ${questionDuplicate.questionText}\n\nCardRef: ${questionDuplicate.cardId}`.yellow); // prettier-ignore
+            console.log("Обновляю вопрос");
 
             questionDuplicate.difficultyLevels.easy = [];
             questionDuplicate.difficultyLevels.medium = [];
@@ -194,13 +195,13 @@ async function parseAndSaveData() {
           const unknownDifficult = answerDifficult !== "easy" && answerDifficult !== "medium" && answerDifficult !== "difficult"; // prettier-ignore
 
           if (answerDifficult === "easy") {
-            console.log("Добавляю easy ответ");
+            // console.log("Добавляю easy ответ");
             question.difficultyLevels.easy.addToSet(answer._id);
           } else if (answerDifficult === "medium") {
-            console.log("Добавляю medium ответ");
+            // console.log("Добавляю medium ответ");
             question.difficultyLevels.medium.addToSet(answer._id);
           } else if (answerDifficult === "difficult") {
-            console.log("Добавляю difficult ответ");
+            // console.log("Добавляю difficult ответ");
             question.difficultyLevels.hard.addToSet(answer._id);
           } else if (unknownDifficult) {
             const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
@@ -215,7 +216,7 @@ async function parseAndSaveData() {
             continue;
           } // неизвестная сложность
 
-          console.log("Добавляю вопрос в карту");
+          // console.log("Добавляю вопрос в карту");
           card.questions.addToSet(question._id); //* привязываю вопрос к карточке
 
           await card.save(); // ? сохранение карты
