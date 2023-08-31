@@ -25,7 +25,7 @@ const questionDocs = {
     // 6: "1szEDJa3J5h3F6-Wr7hbnnGJbsifNrKsFKch6Ho-Ib_g",
     // 7: "1OY8HE2E1xtTgmY7NXIUSIv1QezH6RX0jIjhJOvjDCgY",
     // 8: "1DGhxzJIa1cF6d77MdrWg-oxfdI3VQ70uzhBHQQEwa1Y",
-    9: "1YLELlIEfuPSOZIqcDLAOFrGZO08k8z31EjCMZd4Cr3k",
+    // 9: "1YLELlIEfuPSOZIqcDLAOFrGZO08k8z31EjCMZd4Cr3k",
     // 10: "1ltdwLkpp4Rk2TXytJNDMtrgmCEvC422DKpD2leTezJU",
     // 11: "1ZmUR00UkfMpD0jBx4Vlu5XluUYpyUqB4RfZq_qtkEWs",
     // 12: "1XOtByF3DZXTi59ESkozptU75D5MaaNQoi0u1FPIPpxA",
@@ -38,10 +38,10 @@ const questionDocs = {
     // 19: "1TcgBohsdpAx-hzy2NjPwcVP9hqK8yWWJEbl53Bnuu2M",
     // 20: "1wvGSGvqiUCHbYca8p2d2H1FROm4_YLnn0ygZOYMp8k0",
     // 21: "1ALNMySvdalI5LdtmLSS_l90K0Y7TnNvl3jj-1rzNxDI",
-    // 22: "1MVLwpzLxijvdTLxhc21ZIgrUm0HjXhKtMLaKKlFJy-0",
-    // 23: "1OSB-45qHkGEktfDOilxqAMirvn5vB5fCyFL8Qup13pU",
-    // 24: "1cQEz92-t7YM0H4KmtpSr3jhHyL0dXo1kftDY_keyPoM",
-    // 25: "1ufMwpdXdXVMXpkxc02oA6x0OEgGVQo8A8IGQmweAj2c",
+    22: "1MVLwpzLxijvdTLxhc21ZIgrUm0HjXhKtMLaKKlFJy-0",
+    23: "1OSB-45qHkGEktfDOilxqAMirvn5vB5fCyFL8Qup13pU",
+    24: "1cQEz92-t7YM0H4KmtpSr3jhHyL0dXo1kftDY_keyPoM",
+    25: "1ufMwpdXdXVMXpkxc02oA6x0OEgGVQo8A8IGQmweAj2c",
     // 26: "1mBvBa6yIAOEO2OHN6hrQwZE4TwMhCHq3UpLzwsNzi0A",
     // 27: "1-_lmC7388St-6yZq0GrzxvgKc3BnzCyAWAdvt27yUVM",
     // 28: "1vhw7A91Bf-nwTwmlolLuSBF5ZAqusn5LXgjs2D7YNnU",
@@ -116,14 +116,16 @@ async function parseAndSaveData() {
       const data = await getDataFromGoogleDocs(language, docNumber);
       const excelDocumentLength = data.rows.length;
 
-      console.log(`Programming language - ${language}`.yellow);
-      console.log(`Question amount - ${data.title}`.yellow);
-      console.log(`Excel document length - ${excelDocumentLength}`.yellow);
+      console.log(
+        `Programming language - ${language}\nRange: ${data.title}\nLength: ${excelDocumentLength}`
+          .yellow
+      );
 
       // Пропускаем первую строку, так как это заголовки
       for (let i = 1; i < excelDocumentLength; i++) {
         try {
           console.log(`Cell № ${i}`.green); // вывод обрабатываемой ячейки в excel документе
+
           const row = data.rows[i];
           const parsedData = parseRow(row);
 
@@ -135,9 +137,9 @@ async function parseAndSaveData() {
               cardText: parsedData.text,
             });
 
-            console.log(`Programming language - ${language}`.yellow);
             console.log(
-              `Excel document length - ${excelDocumentLength}`.yellow
+              `Programming language - ${language}\nRange: ${data.title}\nLength: ${excelDocumentLength}`
+                .yellow
             );
 
             if (!cardDuplicate) {
@@ -157,15 +159,14 @@ async function parseAndSaveData() {
             }
           }
 
-          const questionDuplicate = await Question.findOne({
-            questionText: parsedData.questionText,
-          });
+          // const questionDuplicate = await Question.findOne({
+          //   questionText: parsedData.questionText,
+          // });
 
-          var question;
           //* Создание вопроса если нет дубликата
-          if (!questionDuplicate && parsedData.questionText) {
-            console.log("Создаю вопрос");
-            question = new Question({
+          if (parsedData.questionText) {
+            // console.log("Создаю вопрос");
+            var question = new Question({
               questionText: parsedData.questionText,
               cardId: card._id, // Привязываем вопрос к карте по ID
               difficultyLevels: {
@@ -174,16 +175,17 @@ async function parseAndSaveData() {
                 hard: [],
               },
             });
-          } else if (questionDuplicate) {
-            // console.log(`Есть дубликат вопроса - \n\nText: ${questionDuplicate.questionText}\n\nCardRef: ${questionDuplicate.cardId}`.yellow); // prettier-ignore
-            console.log("Обновляю вопрос");
-
-            questionDuplicate.difficultyLevels.easy = [];
-            questionDuplicate.difficultyLevels.medium = [];
-            questionDuplicate.difficultyLevels.hard = [];
-
-            question = questionDuplicate;
           }
+          //  else if (questionDuplicate) {
+          //   // console.log(`Есть дубликат вопроса - \n\nText: ${questionDuplicate.questionText}\n\nCardRef: ${questionDuplicate.cardId}`.yellow); // prettier-ignore
+          //   console.log("Обновляю вопрос");
+
+          //   questionDuplicate.difficultyLevels.easy = [];
+          //   questionDuplicate.difficultyLevels.medium = [];
+          //   questionDuplicate.difficultyLevels.hard = [];
+
+          //   question = questionDuplicate;
+          // }
 
           //* Создание ответа
           var answer = new Answer({
@@ -211,7 +213,7 @@ async function parseAndSaveData() {
 
             const errorLog = `${language}\n Range: ${data.title}\n Cell: ${i}\nError: ${errorText}  `;
 
-            logErrorToFile(errorLog);
+            logErrorToFile(data.title, errorLog);
 
             continue;
           } // неизвестная сложность
@@ -227,13 +229,10 @@ async function parseAndSaveData() {
           console.error(`${e}`.red);
 
           const errorLog = `${language}\n Range: ${data.title}\n Cell: ${i}\n Error: ${e} `;
-          logErrorToFile(errorLog); //* Запись ошибки в файл
+          logErrorToFile(data.title, errorLog); //* Запись ошибки в файл
           continue;
         }
       }
-
-      // const testQuestion = await Question.findOne();
-      // console.log(testQuestion);
     }
   }
 
