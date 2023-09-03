@@ -1,5 +1,5 @@
 import { Suspense, lazy, memo, useEffect } from "react";
-import { Flip, ToastContainer } from "react-toastify";
+import ToastContainer from "./Components/Toast/ToastContainer";
 
 import "./scss/global.scss"; // do not delete
 import { refreshUser } from "./redux/auth/auth-operations";
@@ -30,20 +30,8 @@ const App = memo(() => {
         <RoutesConfig />
 
         {isLoading && <ChakraSpinner />}
-        <ToastContainer
-          position="top-right"
-          transition={Flip}
-          autoClose={1000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-          limit={3}
-        />
+
+        <ToastContainer />
 
         <CookieBanner />
       </Suspense>
