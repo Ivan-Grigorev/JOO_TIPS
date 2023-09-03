@@ -1,8 +1,9 @@
 import { useEffect } from "react";
+import { Divider } from "@chakra-ui/layout";
 import BackButton from "../Profile/Settings/BackButton/BackButton";
 
 import "./Lesson.scss";
-import { Divider } from "@chakra-ui/layout";
+import LessonExample from "./LessonExample/LessonExample";
 
 const Lesson = () => {
   // fetch lesson data
@@ -13,7 +14,7 @@ const Lesson = () => {
       <BackButton ID="lesson__back-button" />
 
       <div className="lesson__info">
-        <div className="header">
+        <div className="topics">
           <div>
             Theme:
             <p>Lorem, ipsum.</p>
@@ -39,6 +40,8 @@ const Lesson = () => {
           Tuple packing and unpacking is a concise and efficient way to work
           with multiple values in Python.
         </p>
+
+        <LessonExample text={null} />
       </div>
     </>
   );
