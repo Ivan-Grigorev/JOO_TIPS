@@ -1,7 +1,47 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import BackButton from "../Profile/Settings/BackButton/BackButton";
+
+import "./Lesson.scss";
+import { Divider } from "@chakra-ui/layout";
 
 const Lesson = () => {
-  return <>Here w'd be lesson cards</>;
+  // fetch lesson data
+  useEffect(() => {}, []);
+
+  return (
+    <>
+      <BackButton ID="lesson__back-button" />
+
+      <div className="lesson__info">
+        <div className="header">
+          <div>
+            Theme:
+            <p>Lorem, ipsum.</p>
+          </div>
+          <div>
+            Topic:
+            <p>Lorem, ipsum.</p>
+          </div>
+          <div>
+            Thread:
+            <p>Lorem, ipsum.</p>
+          </div>
+        </div>
+
+        <Divider />
+
+        <p className="text">
+          Tuple packing and unpacking is a useful feature in Python that allows
+          for easy assignment of values. It involves assigning multiple values
+          to a single variable, which is known as packing, and then unpacking
+          those values into separate variables. This can be done using a
+          comma-separated list of values, which are enclosed in parentheses.
+          Tuple packing and unpacking is a concise and efficient way to work
+          with multiple values in Python.
+        </p>
+      </div>
+    </>
+  );
 };
 
 export default Lesson;
