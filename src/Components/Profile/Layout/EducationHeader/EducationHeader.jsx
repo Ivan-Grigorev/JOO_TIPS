@@ -16,6 +16,7 @@ import { selectMissedLessonsType } from "../../../../redux/lessons/lessons-selec
 const EducationHeader = () => {
   const linkRef = useRef(null);
   const [hideClass, setHideClass] = useState(""); // Define an array of content keys and their corresponding labels
+  const [lessonIsActive, setLessonIsActive] = useState(false);
   const contentItems = useMemo(() => {
     return [
       { key: "Topics", label: "Topics", to: "/education/topics" },
@@ -44,6 +45,10 @@ const EducationHeader = () => {
   useEffect(() => {
     const achievementsRoute = location.pathname === "/education/achievements";
     setHideClass(achievementsRoute ? "hide" : "");
+
+    const lessonRoute = location.pathname.startsWith("/education/lessons/");
+
+    lessonRoute ? setLessonIsActive(true) : setLessonIsActive(false);
   }, [isLoggedIn, location]);
 
   useEffect(() => {
