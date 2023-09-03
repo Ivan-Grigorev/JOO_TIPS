@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { Divider } from "@chakra-ui/layout";
 import BackButton from "../Profile/Settings/BackButton/BackButton";
 
@@ -8,6 +8,9 @@ import LessonExample from "./LessonExample/LessonExample";
 const Lesson = () => {
   // fetch lesson data
   useEffect(() => {}, []);
+
+  const codeExample =
+    "<script type='text/javascript'> var images = new Array() function preloadImages(){ for (i=0; i < preloadImages.arguments.length; i++){ images[i] = new Image();images[i].src = preloadImages.arguments[i]}}preloadImage('logo.jpg', 'main_bg.jpg', 'body_bg.jpg', 'header_bg.jpg')</script>";
 
   return (
     <>
@@ -41,10 +44,10 @@ const Lesson = () => {
           with multiple values in Python.
         </p>
 
-        <LessonExample text={null} />
+        <LessonExample codeExample={codeExample} />
       </div>
     </>
   );
 };
 
-export default Lesson;
+export default memo(Lesson);
