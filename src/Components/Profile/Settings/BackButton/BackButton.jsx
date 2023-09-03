@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./BackButton.scss";
 
 // Define the BackButton functional component, which represents a navigational button.
-const BackButton = ({ currentSectionName }) => {
+const BackButton = ({ currentSectionName, ID }) => {
   const navigate = useNavigate(); // Get the navigate function using the useNavigate hook from React Router.
 
   // Define the click event handler for the button.
@@ -12,9 +12,8 @@ const BackButton = ({ currentSectionName }) => {
 
   // Render the BackButton component.
   return (
-    <div className="back-button">
+    <div className="back-button" id={ID}>
       <button onClick={onClick}>
-        {" "}
         <GoArrowLeft />
         {currentSectionName && (
           <p className="profile-title">{currentSectionName}</p>
