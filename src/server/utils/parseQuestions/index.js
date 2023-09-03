@@ -5,6 +5,8 @@ const Question = require("../../models/Question/Question");
 const Answer = require("../../models/Answer/Answer");
 const mongoDB = require("../../db");
 const logErrorToFile = require("./logErrorToFile");
+const winston = require("winston");
+
 require("colors");
 
 const client = new google.auth.JWT(
@@ -50,32 +52,32 @@ const questionDocs = {
   },
   python: {
     1: "1IoH5TKEPxft5ooSDigyi0cj13LNcJyqyxyQQdxWxU0c",
-    // 2: "1rvtoTTMWW791U6eIdDRNNpC6c51mdsBby5CZoKXq8B8",
-    // 3: "11iY0m7TvBxcJu6-R6g7y4Ah2npawoXrkrRd5w_22h3s",
-    // 4: "1VLQoBZNYby55Effu-O4od8X1cduo8bxjAvmCWDUhcKA",
-    // 5: "1qWzcYPpVkhQjonzGyc8QNDNP3Rq1yAk_VH6jgnmV4P8",
-    // 6: "1UatHB1IyPG-BYgbUBkfGflWlNZ2ZEO-_pc9fCXKEYhU",
-    // 7: "10A5EDm0owox4vBIOGXKm4e6uY-KrX1CnHYlY5G23rY0",
-    // 8: "1i03AmJMkMKGBd9-OhkYlRIb4wCKPCPqj9hbkufWDRRM",
-    // 9: "1gin7zeFbp0EVJ6UE12Fnwq2xglfnGRT56yNayEq0eb4",
-    // 10: "14YBiwxYTniS2q5q7bJGGX-1RSfCiVlMvrU_eeBvnL94",
-    // 11: "1iII1iYTkDk5LDz-Jy9sx7oaZs2118gFvP-FeL9Q0B1A",
-    // 12: "1NO7EDkW0X5gnfikwQvK3iQJlYSPA1wl4tSt4MlMI-Xo",
-    // 13: "1gGDHeqdyXhSLxvT7HX_jNnQ-9XDPmikRWf8ZcXJIJj4",
-    // 14: "1eDjyZZ947s3kRkGn_9wmRi-N3N8y7ZkJ8oOCXx2p54g",
-    // 15: "1V5ZeqAAzu5rm2XH92P74xKJN4Ph1-YfDscHkDAE3nVQ",
-    // 16: "14t9WUaQQ6DT99Z_LToLV2iY5Kgq--OIVdYv4G1nQRjY",
-    // 17: "11gqss-r9o_dxYoDxgfaQ09EMJTZRyU5exY1VsR_rVFw",
-    // 18: "1F7F8RL_EyTehU5LNvlOTngxo2cF4N4MbC6nhZ60RsQQ",
-    // 19: "18AemM5ZB06Iyh3xwih9mODlVXGo5K-HOeaP-bmSiUAY",
-    // 20: "1Yon0D53xaAzf8D-4G_0u-bXNCpj0KE4mVyp2iVQeZWI",
-    // 21: "1g7J1FhF_XgpvgGd1Q_1d5YZ-66hwCA5RKCM0_khI2U8",
-    // 22: "1b-ksBLoiJ3ZobyyOuSOZE6vR1mQPlOChj-mNHH54RWk",
-    // 23: "1fwbNRiX8j08yxvtBGbPU6wysY3X5nhT1ZOYCF_L02A4",
-    // 24: "1uUaOFw4wIPvAyWFm4Hg3RMmCDOx8DGMLJMIOK5IIyqY",
-    // 25: "1CbPEnb9dcAqpsr6vBXFuiGEUbwSllbcGwW138GuXdJw",
-    // 26: "1jrM4BGbExU7EccACsp4jE_QoX1YXUNQpRNlvxR8gj3o",
-    // 27: "1Qgf-k7RVto2KQ4LfI-ROMziYoaAATteAFT1Tmbc2QoI",
+    2: "1rvtoTTMWW791U6eIdDRNNpC6c51mdsBby5CZoKXq8B8",
+    3: "11iY0m7TvBxcJu6-R6g7y4Ah2npawoXrkrRd5w_22h3s",
+    4: "1VLQoBZNYby55Effu-O4od8X1cduo8bxjAvmCWDUhcKA",
+    5: "1qWzcYPpVkhQjonzGyc8QNDNP3Rq1yAk_VH6jgnmV4P8",
+    6: "1UatHB1IyPG-BYgbUBkfGflWlNZ2ZEO-_pc9fCXKEYhU",
+    7: "10A5EDm0owox4vBIOGXKm4e6uY-KrX1CnHYlY5G23rY0",
+    8: "1i03AmJMkMKGBd9-OhkYlRIb4wCKPCPqj9hbkufWDRRM",
+    9: "1gin7zeFbp0EVJ6UE12Fnwq2xglfnGRT56yNayEq0eb4",
+    10: "14YBiwxYTniS2q5q7bJGGX-1RSfCiVlMvrU_eeBvnL94",
+    11: "1iII1iYTkDk5LDz-Jy9sx7oaZs2118gFvP-FeL9Q0B1A",
+    12: "1NO7EDkW0X5gnfikwQvK3iQJlYSPA1wl4tSt4MlMI-Xo",
+    13: "1gGDHeqdyXhSLxvT7HX_jNnQ-9XDPmikRWf8ZcXJIJj4",
+    14: "1eDjyZZ947s3kRkGn_9wmRi-N3N8y7ZkJ8oOCXx2p54g",
+    15: "1V5ZeqAAzu5rm2XH92P74xKJN4Ph1-YfDscHkDAE3nVQ",
+    16: "14t9WUaQQ6DT99Z_LToLV2iY5Kgq--OIVdYv4G1nQRjY",
+    17: "11gqss-r9o_dxYoDxgfaQ09EMJTZRyU5exY1VsR_rVFw",
+    18: "1F7F8RL_EyTehU5LNvlOTngxo2cF4N4MbC6nhZ60RsQQ",
+    19: "18AemM5ZB06Iyh3xwih9mODlVXGo5K-HOeaP-bmSiUAY",
+    20: "1Yon0D53xaAzf8D-4G_0u-bXNCpj0KE4mVyp2iVQeZWI",
+    21: "1g7J1FhF_XgpvgGd1Q_1d5YZ-66hwCA5RKCM0_khI2U8",
+    22: "1b-ksBLoiJ3ZobyyOuSOZE6vR1mQPlOChj-mNHH54RWk",
+    23: "1fwbNRiX8j08yxvtBGbPU6wysY3X5nhT1ZOYCF_L02A4",
+    24: "1uUaOFw4wIPvAyWFm4Hg3RMmCDOx8DGMLJMIOK5IIyqY",
+    25: "1CbPEnb9dcAqpsr6vBXFuiGEUbwSllbcGwW138GuXdJw",
+    26: "1jrM4BGbExU7EccACsp4jE_QoX1YXUNQpRNlvxR8gj3o",
+    27: "1Qgf-k7RVto2KQ4LfI-ROMziYoaAATteAFT1Tmbc2QoI",
   },
 };
 
@@ -115,7 +117,7 @@ async function parseAndSaveData() {
   await mongoDB(); // подключились к базе данных
 
   const languages = [
-    // "javascript",
+    "javascript",
     "python",
   ];
 
@@ -125,10 +127,9 @@ async function parseAndSaveData() {
 
       for (const sheet of data) {
         const excelDocumentLength = sheet.rows.length;
+        const sheetTitle = sheet.title;
 
-        console.log(
-          `Programming language - ${language}\nRange: ${sheet.title}\nLength: ${excelDocumentLength}`
-        );
+        console.log(`Programming language - ${language}\nRange: ${sheetTitle}\nLength: ${excelDocumentLength}`); // prettier-ignore
 
         // Пропускаем первую строку, так как это заголовки
         for (let i = 1; i < excelDocumentLength; i++) {
@@ -148,7 +149,7 @@ async function parseAndSaveData() {
               });
 
               console.log(
-                `Programming language - ${language}\nRange: ${sheet.title}\nLength: ${excelDocumentLength}`
+                `Programming language - ${language}\nRange: ${sheetTitle}\nLength: ${excelDocumentLength}`
                   .yellow
               );
 
@@ -198,6 +199,7 @@ async function parseAndSaveData() {
             // }
 
             //* Создание ответа
+
             var answer = new Answer({
               answerText: parsedData.optionText,
               isCorrect: parsedData.isCorrect,
@@ -221,9 +223,9 @@ async function parseAndSaveData() {
               console.log(`${errorText}`.red); // prettier-ignore
               console.log(`parsedData.answerDifficult - ${parsedData.answerDifficult}`.red); // prettier-ignore
 
-              const errorLog = `${language}\n Range: ${sheet.title}\n Cell: ${i}\nError: ${errorText}  `;
+              const errorLog = `${language}\n Range: ${sheetTitle}\n Cell: ${i}\nError: ${errorText}  `;
 
-              logErrorToFile(language, sheet.title, errorLog); //* Запись ошибки в файл
+              logErrorToFile(language, sheetTitle, errorLog); //* Запись ошибки в файл
 
               continue;
             } // неизвестная сложность
@@ -238,8 +240,8 @@ async function parseAndSaveData() {
             console.error(`Error on ${i} cell. ${e}`.red);
             console.error(`${e}`.red);
 
-            const errorLog = `${language}\n Range: ${sheet.title}\n Cell: ${i}\n Error: ${e} `;
-            logErrorToFile(language, sheet.title, errorLog); //* Запись ошибки в файл
+            const errorLog = `${language}\n Range: ${sheetTitle}\n Cell: ${i}\n Error: ${e} `;
+            logErrorToFile(language, sheetTitle, errorLog); //* Запись ошибки в файл
             continue;
           }
         }
