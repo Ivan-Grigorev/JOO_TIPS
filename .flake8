@@ -1,5 +1,0 @@
-[flake8]
-# Set a new size restriction.
-exclude = */migrations/, */settings.py
-ignore = DJ01,F401,F403,F405
-max-line-length = 120
