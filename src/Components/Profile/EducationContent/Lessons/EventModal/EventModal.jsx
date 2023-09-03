@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import "./eventModal.scss";
 import { memo } from "react";
 import { useCallback } from "react";
+import { Link } from "react-router-dom";
 
 const EventModal = memo(({ event, isOpen, onClose, handleFinishLesson }) => {
   const { _id, points, lessonDuration, topic, subtopic, flashcardsCount } =
@@ -22,6 +23,8 @@ const EventModal = memo(({ event, isOpen, onClose, handleFinishLesson }) => {
     handleFinishLesson(_id, points);
     onClose();
   }, [handleFinishLesson, _id, points, onClose]);
+
+  const onStartLesson = useCallback(() => {}, []);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -41,13 +44,15 @@ const EventModal = memo(({ event, isOpen, onClose, handleFinishLesson }) => {
             <span className="bold">Cards amount:</span> {flashcardsCount} cards
           </p>
           <Divider />
-          <button
-            type="button"
-            className="calendar-modal__start-lesson"
-            onClick={finishLesson}
-          >
-            Start Lesson
-          </button>
+          <Link to={_id}>
+            <button
+              type="button"
+              className="calendar-modal__start-lesson"
+              // onClick={finishLesson}
+            >
+              Start Lesson
+            </button>
+          </Link>
           {/* Добавьте другие поля для отображения дополнительной информации о событии */}
         </ModalBody>
       </ModalContent>
