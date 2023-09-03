@@ -26,6 +26,7 @@ const BackButton = ({ currentSectionName, ID }) => {
 // Define PropTypes to specify the data type for the prop.
 BackButton.propTypes = {
   currentSectionName: PropTypes.string, // Prop representing the current section name.
+  ID: PropTypes.string,
 };
 
 export default BackButton; // Export the BackButton component for use in other modules.
