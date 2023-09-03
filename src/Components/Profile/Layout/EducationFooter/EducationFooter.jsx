@@ -12,15 +12,22 @@ import MissedLessonsIndicator from "../EducationHeader/MissedLessonsIndicator/Mi
 const EducationFooter = () => {
   // Обновляем класс shallHide при изменении isAchievementsPageOpen
   const [hideClass, setHideClass] = useState("");
+  const [className, setClassName] = useState("");
 
   const location = useLocation();
 
+  const showLessonFooter = location.pathname.startsWith("/education/lessons/");
+
   useEffect(() => {
     // if user on this route - hide header
-    const achievementsRoute = location.pathname === "/education/achievements";
+    const shouldHide = location.pathname === "/education/achievements";
+    const onLessonRoute = location.pathname.startsWith("/education/lessons/");
 
     // otherwise do nothing
-    achievementsRoute ? setHideClass("hide") : setHideClass("");
+    shouldHide ? setHideClass("hide") : setHideClass("");
+    onLessonRoute
+      ? setClassName("lesson__footer")
+      : setClassName("education-footer");
   }, [location]);
 
   // Function to render individual buttons with corresponding icons and labels.
@@ -40,12 +47,18 @@ const EducationFooter = () => {
   }, []);
 
   return (
-    <footer className={`education-footer ${hideClass}`}>
-      {/* Render the Topics, Lessons, and Results buttons */}
-      {renderButton(TopicsIcon, "Topics")}
-      {renderButton(LessonsIcon, "Lessons")}
-      {renderButton(CompetitionIcon, "Competitions")}
-      {renderButton(ResultsIcon, "Results")}
+    <footer className={`${className} ${hideClass} `}>
+      {showLessonFooter ? (
+        <></>
+      ) : (
+        <>
+          {/* Render the Topics, Lessons, and Results buttons */}
+          {renderButton(TopicsIcon, "Topics")}
+          {renderButton(LessonsIcon, "Lessons")}
+          {renderButton(CompetitionIcon, "Competitions")}
+          {renderButton(ResultsIcon, "Results")}
+        </>
+      )}
     </footer>
   );
 };

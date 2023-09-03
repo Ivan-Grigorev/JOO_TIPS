@@ -35,6 +35,8 @@ const SwipeIndicator = () => {
       : setDemontageClass(""); // default mode
   }, [shouldHide]);
 
+  if (location.pathname.startsWith("/education/lessons/")) return null;
+
   return (
     <>
       {/* Container for swipe indicators */}
