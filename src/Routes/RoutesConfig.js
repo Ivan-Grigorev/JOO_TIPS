@@ -71,34 +71,31 @@ const RoutesConfig = () => {
           <Route
             path="topics"
             element={
-              <RestrictedRoute redirectTo="/signup" component={<Swipe />} />
+              <PrivateRoute redirectTo="/signup" component={<Swipe />} />
             }
           />
           <Route
             path="lessons"
             element={
-              <RestrictedRoute redirectTo="/signup" component={<Lessons />} />
+              <PrivateRoute redirectTo="/signup" component={<Lessons />} />
             }
           />
           <Route
             path="lessons/:id"
             element={
-              <RestrictedRoute redirectTo="/signup" component={<Lesson />} />
+              <PrivateRoute redirectTo="/signup" component={<Lesson />} />
             }
           />
           <Route
             path="competitions"
             element={
-              <RestrictedRoute
-                redirectTo="/signup"
-                component={<Competition />}
-              />
+              <PrivateRoute redirectTo="/signup" component={<Competition />} />
             }
           />
           <Route
             path="results"
             element={
-              <RestrictedRoute redirectTo="/signup" component={<Results />} />
+              <PrivateRoute redirectTo="/signup" component={<Results />} />
             }
           />
         </Route>
@@ -107,7 +104,7 @@ const RoutesConfig = () => {
           <Route
             path="choose"
             element={
-              <RestrictedRoute redirectTo="/signup" component={<Languages />} />
+              <PrivateRoute redirectTo="/signup" component={<Languages />} />
             }
           />
         </Route>
