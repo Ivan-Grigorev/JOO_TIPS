@@ -62,16 +62,54 @@ const RoutesConfig = () => {
         <Route path="profile/change-password" element={<ChangePassword />} />
 
         <Route path="/education" element={<ProfileLayout />}>
-          <Route path="achievements" element={<Swipe />} />
-          <Route path="topics" element={<Swipe />} />
-          <Route path="lessons" element={<Lessons />} />
-          <Route path="lessons/:id" element={<Lesson />} />
-          <Route path="competitions" element={<Competition />} />
-          <Route path="results" element={<Results />} />
+          <Route
+            path="achievements"
+            element={
+              <RestrictedRoute redirectTo="/signup" component={<Swipe />} />
+            }
+          />
+          <Route
+            path="topics"
+            element={
+              <RestrictedRoute redirectTo="/signup" component={<Swipe />} />
+            }
+          />
+          <Route
+            path="lessons"
+            element={
+              <RestrictedRoute redirectTo="/signup" component={<Lessons />} />
+            }
+          />
+          <Route
+            path="lessons/:id"
+            element={
+              <RestrictedRoute redirectTo="/signup" component={<Lesson />} />
+            }
+          />
+          <Route
+            path="competitions"
+            element={
+              <RestrictedRoute
+                redirectTo="/signup"
+                component={<Competition />}
+              />
+            }
+          />
+          <Route
+            path="results"
+            element={
+              <RestrictedRoute redirectTo="/signup" component={<Results />} />
+            }
+          />
         </Route>
 
         <Route path="/languages">
-          <Route path="choose" element={<Languages />} />
+          <Route
+            path="choose"
+            element={
+              <RestrictedRoute redirectTo="/signup" component={<Languages />} />
+            }
+          />
         </Route>
 
         <Route path="*" element={<NotFound />} />
