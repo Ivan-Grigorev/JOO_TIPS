@@ -4,6 +4,7 @@ import Swipe from "../Components/Profile/Layout/Swipe/Swipe";
 import Lessons from "../Components/Profile/EducationContent/Lessons/Lessons";
 import Competition from "../Components/Profile/EducationContent/Competition/Competition";
 import Results from "../Components/Profile/EducationContent/Results/Results";
+import Lesson from "../Components/Lesson/Lesson";
 const PrivateRoute = lazy(() => import("./PrivateRoute"));
 const RestrictedRoute = lazy(() => import("./RestrictedRoute"));
 
@@ -60,12 +61,11 @@ const RoutesConfig = () => {
 
         <Route path="profile/change-password" element={<ChangePassword />} />
 
-        <Route path="*" element={<NotFound />} />
-
         <Route path="/education" element={<ProfileLayout />}>
           <Route path="achievements" element={<Swipe />} />
           <Route path="topics" element={<Swipe />} />
           <Route path="lessons" element={<Lessons />} />
+          <Route path="lessons/:id" element={<Lesson />} />
           <Route path="competitions" element={<Competition />} />
           <Route path="results" element={<Results />} />
         </Route>
@@ -73,6 +73,8 @@ const RoutesConfig = () => {
         <Route path="/languages">
           <Route path="choose" element={<Languages />} />
         </Route>
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
