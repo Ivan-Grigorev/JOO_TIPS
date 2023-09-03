@@ -65,7 +65,7 @@ const RoutesConfig = () => {
           <Route
             path="achievements"
             element={
-              <RestrictedRoute redirectTo="/signup" component={<Swipe />} />
+              <PrivateRoute redirectTo="/signup" component={<Swipe />} />
             }
           />
           <Route
