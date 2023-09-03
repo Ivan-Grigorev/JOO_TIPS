@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import "./LessonExample.scss";
 
-const LessonExample = ({ text }) => {
+import CodeHighlighter from "./CodeHighlighter/CodeHighlighter";
+
+const LessonExample = ({ codeExample }) => {
   return (
     <div className="lesson-example__container">
       <div className="lesson-example__dots-container">
@@ -10,7 +12,7 @@ const LessonExample = ({ text }) => {
         <div className="lesson-example__dots"></div>
       </div>
 
-      <p className="lesson-example__content">{text}</p>
+      <CodeHighlighter codeExample={codeExample} />
     </div>
   );
 };
@@ -18,5 +20,5 @@ const LessonExample = ({ text }) => {
 export default LessonExample;
 
 LessonExample.propTypes = {
-  text: PropTypes.string.isRequired,
+  codeExample: PropTypes.string.isRequired,
 };
