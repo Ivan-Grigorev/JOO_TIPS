@@ -56,3 +56,26 @@
 footer.education-footer.hide {
   bottom: -25%;
 }
+
+.lesson__footer {
+  height: 50px;
+  background-color: #1a4579;
+}
+
+.lesson__footer div.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 100%;
+  padding: 0 15px;
+
+  color: white;
+
+  font-size: 18px;
+}
+
+.lesson__footer .swipe-buttons {
+  color: white;
+  font-size: 30px;
+}
