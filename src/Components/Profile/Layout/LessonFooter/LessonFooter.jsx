@@ -14,7 +14,9 @@ const LessonFooter = () => {
         onClick={onLeftSwipe}
       />
 
-      <p className="leson__footer-content">Lorem ipsum dolor sit amet.</p>
+      <p className="leson__footer-content">
+        Swipe to the left or right respectively
+      </p>
 
       <HiOutlineChevronDoubleRight
         className="swipe-buttons"
