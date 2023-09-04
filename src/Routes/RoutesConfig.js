@@ -76,15 +76,17 @@ const RoutesConfig = () => {
           />
           <Route
             path="lessons"
-            element={
-              <PrivateRoute redirectTo="/signup" component={<Lessons />} />
-            }
+            element={<Lessons />}
+            // element={
+            //   <PrivateRoute redirectTo="/signup" component={<Lessons />} />
+            // }
           />
           <Route
             path="lessons/:id"
-            element={
-              <PrivateRoute redirectTo="/signup" component={<Lesson />} />
-            }
+            element={<Lesson />}
+            // element={
+            //   <PrivateRoute redirectTo="/signup" component={<Lesson />} />
+            // }
           />
           <Route
             path="competitions"
