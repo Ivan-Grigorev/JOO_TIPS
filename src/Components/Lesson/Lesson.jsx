@@ -9,8 +9,12 @@ const Lesson = () => {
   // fetch lesson data
   useEffect(() => {}, []);
 
-  const codeExample =
-    "<script type='text/javascript'> var images = new Array() function preloadImages(){ for (i=0; i < preloadImages.arguments.length; i++){ images[i] = new Image();images[i].src = preloadImages.arguments[i]}}preloadImage('logo.jpg', 'main_bg.jpg', 'body_bg.jpg', 'header_bg.jpg')</script>";
+  const codeExample = ` // Example of destructuring assignment in JavaScript
+    const [a, b, c] = [1, 2, 3];
+    console.log(a); // Output: 1
+    console.log(b); // Output: 2
+    console.log(c); // Output: 3
+    `;
 
   return (
     <>
