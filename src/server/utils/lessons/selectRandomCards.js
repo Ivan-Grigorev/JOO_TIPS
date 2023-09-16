@@ -12,18 +12,18 @@ const selectRandomCards = async (topics) => {
       .findOne({});
     const chances = await db.collection("topics_chances").findOne({});
 
-    const allCardIDs = [];
-
-    for (const topic of topics) {
-      const cardIDs = await Card.find({ topic }, "_id"); // поиск карточек по заданной теме. Возвращает их _id
-      allCardIDs.push(...cardIDs);
-    }
-
-    console.log("ID's найденных карточек:", allCardIDs);
-
+    console.log("Вероятности из базы данных:", chances);
     const numToSelect = techTopics.topicsToChoose;
 
-    console.log("Вероятности из базы данных:", chances);
+    const cardIDs = [];
+
+    // проходимся по массиву тем, ищем карточки с соответствующими темами
+    // добавляем их в массив allCardIDs
+    for (const topic of topics) {
+      const findCards = await Card.find({ topic }, "_id"); // поиск карточек по заданной теме. Возвращает их _id
+      cardIDs.push(...findCards);
+    }
+    console.log("ID's найденных карточек:", cardIDs);
 
     // const randomCards = await Algorithm(cardIDs, numToSelect, chances);
 
