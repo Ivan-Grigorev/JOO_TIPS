@@ -6,7 +6,7 @@ import "./CodeHighlighter.scss";
 
 const CodeHighlighter = ({ codeExample }) => {
   useEffect(() => {
-    hljs.highlightAll();
+    hljs.highlightBlock(document.querySelector("CODE"));
   }, []);
 
   return (
