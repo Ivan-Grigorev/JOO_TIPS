@@ -7,9 +7,9 @@ const TechTopicsAutoAppearanceIntervalSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-const TechTopicsAppearance = mongoose.model(
+const TechTopicsAppearanceInterval = mongoose.model(
   "TechTopicsAutoAppearanceInterval",
   TechTopicsAutoAppearanceIntervalSchema
 );
 
-module.exports = TechTopicsAppearance;
+module.exports = TechTopicsAppearanceInterval;
