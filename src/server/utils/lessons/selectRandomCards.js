@@ -1,30 +1,23 @@
-function selectRandomCards(cardIDs, numToSelect, weights = {}) {
-  // Normalize the weights by dividing by the sum of the weights, and then multiply by the standard chance
-  const totalWeight = cardIDs.reduce((sum, id) => sum + (weights[id] || 1), 0);
-  const standardChance = 1 / cardIDs.length;
+const mongoDB = require("../../db");
+const Algorithm = require("./Algorithm");
 
-  // Create an array of probabilities
-  const probabilities = cardIDs.map(
-    (id) => ((weights[id] || 1) * standardChance) / totalWeight
-  );
+const selectRandomCards = async () => {
+  const db = await mongoDB();
 
-  // Create a cumulative probabilities array to easily select IDs based on their probability
-  const cumulativeProbabilities = probabilities.reduce((arr, prob) => {
-    arr.push((arr[arr.length - 1] || 0) + prob);
-    return arr;
-  }, []);
+  const techTopics = await db.collection("topics_to_choose_amount").findOne({});
+  const techChances = await db.collection("topics_chances").findOne({});
+  const cardIDs = null;
 
-  // Select numToSelect random IDs based on their probabilities
-  const selectedIDs = [];
-  for (let i = 0; i < numToSelect; i++) {
-    const random = Math.random();
-    const selectedIndex = cumulativeProbabilities.findIndex(
-      (prob) => prob > random
-    );
-    selectedIDs.push(cardIDs[selectedIndex]);
-  }
+  const numToSelect = techTopics.topicsToChoose;
+  const chances = {};
 
-  return selectedIDs;
-}
+  console.log(techChances);
 
-export default selectRandomCards;
+  // const randomCards = await Algorithm(cardIDs, numToSelect, chances);
+
+  // console.log(randomCards);
+};
+
+selectRandomCards();
+
+module.exports = selectRandomCards;
