@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const techSchema = new mongoose.Schema(
+const TechLessonsSchema = new mongoose.Schema(
   {
     lessons: {
       points: {
@@ -15,6 +15,6 @@ const techSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-const Tech = mongoose.model("Lesson", techSchema);
+const TechLessons = mongoose.model("Lesson", TechLessonsSchema);
 
-module.exports = Tech;
+module.exports = TechLessons;
