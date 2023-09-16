@@ -2,15 +2,17 @@ const mongoose = require("mongoose");
 
 const TechLessonsSchema = new mongoose.Schema(
   {
-    lessons: {
-      points: {
-        easy: Number,
-        medium: Number,
-        hard: Number,
-      },
-
-      quantity: Number,
+    lessonPoints: {
+      easy: { type: Number },
+      medium: { type: Number },
+      hard: { type: Number },
     },
+
+    missedLessonsRadius: Number,
+
+    cardsAmount: Number,
+
+    topicUpdateInterval: Number,
   },
   { versionKey: false }
 );
