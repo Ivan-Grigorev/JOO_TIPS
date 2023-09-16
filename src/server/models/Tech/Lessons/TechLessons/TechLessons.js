@@ -11,12 +11,10 @@ const TechLessonsSchema = new mongoose.Schema(
     missedLessonsRadius: Number,
 
     cardsAmount: Number,
-
-    topicUpdateInterval: Number,
   },
   { versionKey: false }
 );
 
-const TechLessons = mongoose.model("Lesson", TechLessonsSchema);
+const TechLessons = mongoose.model("TechLesson", TechLessonsSchema);
 
 module.exports = TechLessons;
