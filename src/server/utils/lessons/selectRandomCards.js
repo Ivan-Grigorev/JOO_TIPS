@@ -42,11 +42,11 @@ const selectRandomCards = async () => {
     // проходимся по массиву тем, ищем карточки с соответствующими темами
     // добавляем их в массив cardObjects
     for (const obj of techProps.topics) {
-      const findCards = await Card.find({ topic: obj.topic }); // поиск карточек по заданной теме.
+      const { topic } = obj;
+      const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
       cardObjects.push(...findCards);
     }
 
-    return;
     console.log("Количество найденных карточек:", cardObjects.length);
 
     // Извлекаем _id из объектов карточек и преобразуем их в строки
@@ -55,7 +55,7 @@ const selectRandomCards = async () => {
     // Вызов функции Algorithm с правильными аргументами
     const randomCards = Algorithm(cardIDs, techProps.numToSelect);
 
-    // console.log("Выбранные карточки:", randomCards);
+    console.log("Выбранные карточки:", randomCards);
     return;
   } catch (e) {
     console.error(e);
