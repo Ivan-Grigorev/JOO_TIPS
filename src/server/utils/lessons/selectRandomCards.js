@@ -6,28 +6,32 @@ const selectRandomCards = async (topics) => {
   const db = await mongoDB();
   try {
     // TODO оптимизировать через Promise.All()
-    // беру нужные параметры из тех.коллекций
+
     const techTopics = await db
       .collection("topics_to_choose_amount")
-      .findOne({});
-    const chances = await db.collection("topics_chances").findOne({});
+      .findOne({}); // беру из тех.коллекции количество тем
+    const chances = await db.collection("topics_chances").findOne({}); // беру из тех.коллекции шансы появления тех или иных карточек
 
     console.log("Вероятности из базы данных:", chances);
-    const numToSelect = techTopics.topicsToChoose;
+    const numToSelect = techTopics.topicsToChoose; // беру значение из объекта
 
-    const cardIDs = [];
+    const cardObjects = [];
 
     // проходимся по массиву тем, ищем карточки с соответствующими темами
-    // добавляем их в массив allCardIDs
+    // добавляем их в массив cardObjects
     for (const topic of topics) {
-      const findCards = await Card.find({ topic }, "_id"); // поиск карточек по заданной теме. Возвращает их _id
-      cardIDs.push(...findCards);
+      const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
+      cardObjects.push(...findCards);
     }
-    console.log("ID's найденных карточек:", cardIDs);
+    console.log("Количество найденных карточек:", cardObjects.length);
 
-    // const randomCards = await Algorithm(cardIDs, numToSelect, chances);
+    // Извлекаем _id из объектов карточек и преобразуем их в строки
+    const cardIDs = cardObjects.map((card) => card._id.toString());
 
-    // console.log("Выбранные карточки:", randomCards);
+    // Вызов функции Algorithm с правильными аргументами
+    const randomCards = Algorithm(cardIDs, numToSelect);
+
+    console.log("Выбранные карточки:", randomCards);
   } catch (e) {
     console.error(e);
   } finally {
@@ -41,3 +45,5 @@ const topics = [
 selectRandomCards(topics);
 
 module.exports = selectRandomCards;
+
+// Ваша функция Algorithm остается неизменной, так как она корректно обрабатывает вероятности.
