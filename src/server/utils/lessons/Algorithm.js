@@ -27,7 +27,7 @@
 //   return selectedIDs; // Возвращаем массив выбранных карт
 // }
 
-function Algorithm(arrayOfIDs, numToSelect) {
+function Algorithm(arrayOfIDs, numToSelect, chances = {}) {
   const selectedIDs = [];
   const shuffledIDs = [...arrayOfIDs]; // Создаем копию массива для перемешивания
 
