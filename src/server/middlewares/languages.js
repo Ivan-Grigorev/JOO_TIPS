@@ -1,6 +1,6 @@
+const Card = require("../models/Card/Card");
 const Lesson = require("../models/lessons/lessons");
 const User = require("../models/user/user");
-const getTechProps = require("../utils/lessons/getTechProps");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
 const moment = require("moment");
 
@@ -32,6 +32,8 @@ async function createScheduleToEndOfWeek(language, userID) {
 
     const user = await User.findById(userID);
 
+    if (Algorithm.cards === null) return "No cards";
+
     // Получаем текущую дату
     const currentDate = moment();
 
@@ -42,38 +44,44 @@ async function createScheduleToEndOfWeek(language, userID) {
       days.push(date);
     }
 
-    // Создаем массив объектов уроков для каждой карточки и дня
     const lessonsToCreate = [];
-    Algorithm.cards.forEach((card, index) => {
-      days.forEach((day, dayIndex) => {
-        // Вычисляем крайнюю дату (не включительно) до 03:00 следующего дня
-        const expiredDate = moment(day)
-          .add(1, "days")
-          .set({ hour: 3, minute: 0, second: 0 });
 
-        lessonsToCreate.push({
-          userID: user._id,
-          language: language,
-          topic: card.topic, // Используем тему из карточки
-          cardText: card.cardText, // Используем текст карточки
-          cardsAmount: card.cardsAmount, // Используем количество карточек из карточки
-          points: 1, //* здесь будет число, в зависимости того, сколько раз пользователь просмотрел тему
-          startTime: null, // Начальное время (по умолчанию)
-          endTime: null, // Конечное время (по умолчанию)
-          status: null, // Статус (по умолчанию)
-          lessonDate: day.toDate(),
-          lessonDuration: Algorithm.techProps.lessonDuration, // Длительность урока (по умолчанию)
-          expired: expiredDate, // срок истечения урока
-        });
+    for (const cardID of Algorithm.cards) {
+      const index = Algorithm.cards.indexOf(cardID); // Получаем индекс карточки
+      const dayIndex = index % days.length; // Определяем индекс дня для каждой карточки
+
+      const day = days[dayIndex];
+
+      // Вычисляем крайнюю дату (не включительно) до 03:00 следующего дня
+      const expiredDate = moment(day)
+        .add(1, "days")
+        .set({ hour: 3, minute: 0, second: 0 });
+
+      const card = await Card.findById(cardID);
+
+      lessonsToCreate.push({
+        userId: user._id,
+        language: language,
+        topic: card.topic, // Используем тему из карточки
+        cardText: card.cardText, // Используем текст карточки
+        cardsAmount: 5, // Algorithm.techProps., // Используем количество карточек из карточки
+        points: 0, // количество зависит от степени просмотренности карточек
+        startTime: null, // Начальное время (по умолчанию)
+        endTime: null, // Конечное время (по умолчанию)
+        status: null, // Статус (по умолчанию)
+        lessonDate: day.toDate(),
+        lessonNumber: index + 1, // Номер урока
+        lessonDuration: Algorithm.techProps.lessonDuration, // Длительность урока (по умолчанию)
+        expired: expiredDate.toDate(), // Крайняя дата урока
       });
-    });
+    }
 
     // Шаг 2: Сохраняем объекты уроков в базе данных
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
 
     return createdLessons;
   } catch (e) {
-    console.error("Error creating user schedule:", e);
+    console.error("Error creating user schedule:".red, e);
     throw new Error("Error creating user schedule");
   }
 }
