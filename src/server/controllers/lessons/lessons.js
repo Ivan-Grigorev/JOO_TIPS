@@ -2,14 +2,6 @@ const Lesson = require("../../models/lessons/lessons");
 const User = require("../../models/user/user");
 require("colors");
 
-async function createScheduleToEndOfWeek(req, res, next) {
-  try {
-  } catch (e) {
-    console.error("Error creating user schedule:", e);
-    res.status(500).json({ message: "Internal server error" });
-  }
-}
-
 // This function calculates the sum of points for lessons associated with the user.
 async function getLessonsPointsSum(req, res) {
   try {
