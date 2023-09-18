@@ -65,6 +65,7 @@ async function setActive(req, res) {
     // Save the changes to the user's information.
     await user.save();
 
+    // create schedule for a week
     await createScheduleToEndOfWeek(activeLanguage, userID);
     // Respond with the updated active language.
     res.status(200).json({ activeLanguage: user.activeLanguage });
