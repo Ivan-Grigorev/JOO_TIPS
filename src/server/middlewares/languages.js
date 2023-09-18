@@ -57,7 +57,7 @@ async function createScheduleToEndOfWeek(language, userId) {
 
     // Если уже есть уроки для этих дней, возвращаем сообщение об этом
     if (existingLessons.length > 0) {
-      console.log("Lessons already exist for these days");
+      console.log("Lessons already exist for these days".red);
       return "Lessons already exist for these days";
     }
 
@@ -72,9 +72,7 @@ async function createScheduleToEndOfWeek(language, userId) {
         const cardID =
           Algorithm.cards[Math.floor(Math.random() * Algorithm.cards.length)];
 
-        if (!uniqueCards.has(cardID)) {
-          uniqueCards.add(cardID);
-        }
+        if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
       }
 
       const expiredDate = moment(day)
