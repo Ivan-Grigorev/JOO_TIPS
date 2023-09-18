@@ -31,9 +31,7 @@ async function createScheduleToEndOfWeek(language, userId) {
     const Algorithm = await selectRandomCards(language);
     const user = await User.findById(userId);
 
-    if (Algorithm.cards === null) {
-      return "No cards";
-    }
+    if (Algorithm.cards === null) return "No cards";
 
     const currentDate = moment();
     const days = [];
@@ -53,8 +51,6 @@ async function createScheduleToEndOfWeek(language, userId) {
       userId,
       lessonDate: { $in: daysWithoutTime },
     });
-
-    console.log(daysWithoutTime);
 
     if (existingLessons.length > 0) {
       console.log("Lessons already exist for these days");
