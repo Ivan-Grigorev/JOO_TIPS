@@ -38,24 +38,22 @@ const lessonSchema = new mongoose.Schema(
       type: String,
       enum: languagesEnum,
     },
-    topic: {
-      type: String,
-      required: [true, "Lesson topic is required."],
-      trim: true,
-    },
+    // topic: {
+    //   type: String,
+    //   required: [true, "Lesson topic is required."],
+    //   trim: true,
+    // },
     // cardText: {
     //   type: String,
     //   required: [true, "Lesson subtopic is required."],
     // },
-    cardsAmount: {
-      type: Number,
-      required: [true, "Number of flashcards is required."],
-    },
-    cardsId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Cards",
-      required: [true, "Card ref is required"],
-    },
+    cards: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Card",
+        required: [true, "Card ref is required"],
+      },
+    ],
     expired: {
       type: Date,
       required: [true, "Expired property is required."],
