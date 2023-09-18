@@ -55,6 +55,7 @@ async function setActive(req, res) {
 
     // Extract the active language from the request body.
     const activeLanguage = req.body.language;
+
     // Check if the active language is provided.
     if (!activeLanguage)
       return res.status(400).json({ message: "Language is required." });
@@ -64,7 +65,7 @@ async function setActive(req, res) {
     // Save the changes to the user's information.
     await user.save();
 
-    createScheduleToEndOfWeek(activeLanguage, userID);
+   await createScheduleToEndOfWeek(activeLanguage, userID);
     // Respond with the updated active language.
     res.status(200).json(user.activeLanguage);
   } catch (e) {
