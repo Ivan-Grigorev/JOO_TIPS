@@ -51,7 +51,7 @@ const lessonSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Number of flashcards is required."],
     },
-    cardsRefs: {
+    cardsId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Cards",
       required: [true, "Card ref is required"],

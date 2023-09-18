@@ -76,6 +76,7 @@ async function createScheduleToEndOfWeek(language, userId) {
 
       const lesson = {
         userId: user._id,
+        cardsId: card._id,
         language: language,
         topic: card.topic,
         cardText: card.cardText,
