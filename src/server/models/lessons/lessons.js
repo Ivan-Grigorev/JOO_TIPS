@@ -1,5 +1,27 @@
 const mongoose = require("mongoose");
-
+const languagesEnum = [
+  "javascript",
+  "python",
+  "html",
+  "css",
+  "scss",
+  "swift",
+  "solidity",
+  "c++",
+  "c#",
+  "react",
+  "node/express",
+  "php",
+  "django",
+  "java",
+  "golang",
+  "kotlin",
+  "mongodb",
+  "mysql",
+  "docker",
+  "nginx",
+  "tcp/ip",
+];
 const lessonSchema = new mongoose.Schema(
   {
     userId: {
@@ -14,29 +36,7 @@ const lessonSchema = new mongoose.Schema(
     },
     language: {
       type: String,
-      enum: [
-        "Javascript",
-        "Python",
-        "HTML",
-        "CSS",
-        "SCSS",
-        "SWIFT",
-        "Solidity",
-        "C++",
-        "C#",
-        "React",
-        "Node/Express",
-        "PHP",
-        "Django",
-        "Java",
-        "Golang",
-        "Kotlin",
-        "MongoDB",
-        "MySQL",
-        "Docker",
-        "Nginx",
-        "TCP/IP",
-      ],
+      enum: languagesEnum,
     },
     topic: {
       type: String,
@@ -74,10 +74,6 @@ const lessonSchema = new mongoose.Schema(
     lessonDate: {
       type: Date,
       required: [true, "Lesson date is required."],
-    },
-    lessonNumber: {
-      type: Number,
-      required: [true, "Lesson number is required."],
     },
     lessonDuration: {
       type: Number,
