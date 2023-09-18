@@ -20,23 +20,21 @@ const selectRandomCards = async (language) => {
 
     console.log("Количество найденных карточек:", cardObjects.length);
 
+    if (cardObjects.length === 0) return { cards: null, techProps };
+
     // Извлекаем _id из объектов карточек и преобразуем их в строки
     const cardIDs = cardObjects.map((card) => card._id.toString());
 
     // Вызов функции Algorithm с правильными аргументами
     const randomCards = Algorithm(cardIDs, techProps.numToSelect);
 
-    console.log("Выбранные карточки:", randomCards);
+    // console.log("Выбранные карточки:", randomCards);
     return { cards: randomCards, techProps };
   } catch (e) {
     console.error(e);
-  } finally {
-    db.close();
   }
 };
 
-selectRandomCards("javascript");
+// selectRandomCards("javascript");
 
 module.exports = selectRandomCards;
-
-// Ваша функция Algorithm остается неизменной, так как она корректно обрабатывает вероятности.
