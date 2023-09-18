@@ -64,7 +64,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
           lessonDate: day.toDate(),
           lessonNumber: index + 1, // Номер урока
           lessonDuration: 45, // Длительность урока (по умолчанию)
-          expired: expiredDate,
+          expired: expiredDate, // срок истечения урока
         });
       });
     });
