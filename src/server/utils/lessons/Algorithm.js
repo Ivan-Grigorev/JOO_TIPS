@@ -43,6 +43,5 @@ function Algorithm(arrayOfIDs, numToSelect, chances = {}) {
   return selectedIDs;
 }
 
-// Пример использования:
 
 module.exports = Algorithm;

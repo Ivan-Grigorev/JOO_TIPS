@@ -3,17 +3,15 @@ const Card = require("../../models/Card/Card");
 const Algorithm = require("./Algorithm");
 const getTechProps = require("./getTechProps");
 
-const selectRandomCards = async () => {
+const selectRandomCards = async (language) => {
   const db = await mongoDB();
   try {
-    const techProps = await getTechProps(db, "javascript");
+    const techProps = await getTechProps(db, language);
 
     const cardObjects = [];
 
-    console.log(techProps.topics);
-
-    // проходимся по массиву тем, ищем карточки с соответствующими темами
-    // добавляем их в массив cardObjects
+    // Проходимся по массиву тем, ищем карточки с соответствующими темами
+    // Добавляем их в массив cardObjects
     for (const obj of techProps.topics) {
       const { topic } = obj;
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
@@ -29,7 +27,7 @@ const selectRandomCards = async () => {
     const randomCards = Algorithm(cardIDs, techProps.numToSelect);
 
     console.log("Выбранные карточки:", randomCards);
-    return;
+    return randomCards;
   } catch (e) {
     console.error(e);
   } finally {
@@ -37,7 +35,7 @@ const selectRandomCards = async () => {
   }
 };
 
-selectRandomCards();
+selectRandomCards("javascript");
 
 module.exports = selectRandomCards;
 
