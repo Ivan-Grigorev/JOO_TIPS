@@ -27,7 +27,27 @@
 //   return selectedIDs; // Возвращаем массив выбранных карт
 // }
 
+const moment = require("moment");
+
 function Algorithm(arrayOfIDs, numToSelect, chances = {}) {
+  // Получаем текущую дату
+  const currentDate = moment();
+
+  // Определяем текущий день недели (0 - Воскресенье, 1 - Понедельник, и т.д.)
+  const currentDayOfWeek = currentDate.day();
+
+  // Рассчитываем количество карт, которое нужно вернуть
+  let numToReturn = 0;
+
+  // Рассчитываем количество дней до субботы (7 дней недели - воскресенье)
+  // TODO протестировать во вторник, возможно неверно работает
+  const daysBeforeSaturday = 7 - currentDayOfWeek;
+
+  if (daysBeforeSaturday > 0) {
+    // Если до субботы ещё есть дни, то рассчитываем количество карт
+    numToReturn = numToSelect * daysBeforeSaturday;
+  }
+
   const selectedIDs = [];
   const shuffledIDs = [...arrayOfIDs]; // Создаем копию массива для перемешивания
 
@@ -37,11 +57,10 @@ function Algorithm(arrayOfIDs, numToSelect, chances = {}) {
     [shuffledIDs[i], shuffledIDs[j]] = [shuffledIDs[j], shuffledIDs[i]];
   }
 
-  // Выбираем первые numToSelect элементов (они теперь случайны)
-  for (let i = 0; i < numToSelect; i++) selectedIDs.push(shuffledIDs[i]);
+  // Выбираем первые numToReturn элементов (они теперь случайны)
+  for (let i = 0; i < numToReturn; i++) selectedIDs.push(shuffledIDs[i]);
 
   return selectedIDs;
 }
-
 
 module.exports = Algorithm;
