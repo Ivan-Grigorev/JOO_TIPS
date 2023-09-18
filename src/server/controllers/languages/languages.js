@@ -66,9 +66,11 @@ async function setActive(req, res) {
     await user.save();
 
     // create schedule for a week
-    await createScheduleToEndOfWeek(activeLanguage, userID);
+    const lessons = await createScheduleToEndOfWeek(activeLanguage, userID);
     // Respond with the updated active language.
-    res.status(200).json({ activeLanguage: user.activeLanguage });
+    res
+      .status(200)
+      .json({ activeLanguage: user.activeLanguage, createdLessons: lessons });
   } catch (e) {
     // Log the error and send a 500 Internal Server Error response.
     console.log(`Error while setting active language for user: ${e}`);

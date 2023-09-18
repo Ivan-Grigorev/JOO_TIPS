@@ -43,10 +43,10 @@ const lessonSchema = new mongoose.Schema(
       required: [true, "Lesson topic is required."],
       trim: true,
     },
-    cardText: {
-      type: String,
-      required: [true, "Lesson subtopic is required."],
-    },
+    // cardText: {
+    //   type: String,
+    //   required: [true, "Lesson subtopic is required."],
+    // },
     cardsAmount: {
       type: Number,
       required: [true, "Number of flashcards is required."],

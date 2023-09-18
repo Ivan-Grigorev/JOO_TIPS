@@ -73,16 +73,14 @@ async function createScheduleToEndOfWeek(language, userId) {
       const lesson = {
         userId: user._id,
         cardsId: card._id,
-        language: language,
         topic: card.topic,
-        cardText: card.cardText,
-        cardsAmount: 5, //Algorithm.techProps.cardsAmount
-        points: 0,
+        language: language,
+        cardsAmount: Algorithm.techProps.cardsAmount,
+        points: 0, // первый просмотр - 1б, второй - 2, третий - 3
         startTime: null,
         endTime: null,
         status: null,
         lessonDate: moment(day).startOf("day").toDate(), // Устанавливаем время на полночь,
-        lessonNumber: index + 1,
         lessonDuration: Algorithm.techProps.lessonDuration,
         expired: expiredDate.toDate(),
       };
