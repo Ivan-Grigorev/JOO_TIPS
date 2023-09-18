@@ -1,3 +1,4 @@
+const { createScheduleToEndOfWeek } = require("../../middlewares/languages");
 const User = require("../../models/user/user");
 
 // This function retrieves the user's language preferences.
@@ -48,8 +49,9 @@ async function add(req, res) {
 // This function sets the active language for the user.
 async function setActive(req, res) {
   try {
+    const userID = req.user.id;
     // Retrieve the user's information based on their ID.
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(userID);
 
     // Extract the active language from the request body.
     const activeLanguage = req.body.language;
@@ -62,6 +64,7 @@ async function setActive(req, res) {
     // Save the changes to the user's information.
     await user.save();
 
+    createScheduleToEndOfWeek(activeLanguage, userID);
     // Respond with the updated active language.
     res.status(200).json(user.activeLanguage);
   } catch (e) {
