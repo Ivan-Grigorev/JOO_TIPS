@@ -9,7 +9,6 @@ const getTechProps = async (db, language) => {
 
     // беру из тех.коллекции шансы появления тех или иных карточек
     const chances = await db.collection("topics_chances").findOne({});
-    // console.log("Вероятности из базы данных:", chances);
 
     // беру значение из объекта
     const numToSelect = techTopics.topicsToChoose;
@@ -21,9 +20,18 @@ const getTechProps = async (db, language) => {
       .toArray();
 
     const lessonTechCollection = await db.collection("lessons_tech").findOne();
-    const lessonDuration = lessonTechCollection.lessonDuration;
+    const { lessonDuration, cardsAmount, missedLessonRadius, lessonPoints } =
+      lessonTechCollection;
 
-    return { topics, numToSelect, chances, lessonDuration };
+    return {
+      topics,
+      numToSelect,
+      chances,
+      lessonDuration,
+      cardsAmount,
+      lessonPoints,
+      missedLessonRadius,
+    };
   } catch (e) {
     console.error(e);
   }
