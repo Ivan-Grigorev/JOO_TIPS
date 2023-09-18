@@ -20,7 +20,10 @@ const getTechProps = async (db, language) => {
       .find({ language })
       .toArray();
 
-    return { topics, numToSelect, chances };
+    const lessonTechCollection = await db.collection("lessons_tech").findOne();
+    const lessonDuration = lessonTechCollection.lessonDuration;
+
+    return { topics, numToSelect, chances, lessonDuration };
   } catch (e) {
     console.error(e);
   }

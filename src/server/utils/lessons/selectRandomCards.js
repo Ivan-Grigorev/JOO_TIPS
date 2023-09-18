@@ -27,7 +27,7 @@ const selectRandomCards = async (language) => {
     const randomCards = Algorithm(cardIDs, techProps.numToSelect);
 
     console.log("Выбранные карточки:", randomCards);
-    return randomCards;
+    return { cards: randomCards, techProps };
   } catch (e) {
     console.error(e);
   } finally {
