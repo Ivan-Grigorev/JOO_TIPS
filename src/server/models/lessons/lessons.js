@@ -43,11 +43,11 @@ const lessonSchema = new mongoose.Schema(
       required: [true, "Lesson topic is required."],
       trim: true,
     },
-    subtopic: {
+    cardText: {
       type: String,
       required: [true, "Lesson subtopic is required."],
     },
-    flashcardsCount: {
+   cardsAmount: {
       type: Number,
       required: [true, "Number of flashcards is required."],
     },
@@ -61,9 +61,10 @@ const lessonSchema = new mongoose.Schema(
       // required: [true, "End time is required."],
       default: null,
     },
-    completed: {
-      type: Boolean,
-      default: false,
+    status: {
+      type: String,
+      enum: ["completed", "user_abandoned", "system_abandoned", null],
+      default: null,
     },
     lessonDate: {
       type: Date,
@@ -78,7 +79,6 @@ const lessonSchema = new mongoose.Schema(
       // required: [true, "Lesson duration is required."],
       default: 45,
     },
-    // ... other fields you may want to add
   },
   { versionKey: false }
 );
