@@ -51,6 +51,11 @@ const lessonSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Number of flashcards is required."],
     },
+    cardsRefs: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cards",
+      required: [true, "Card ref is required"],
+    },
     expired: {
       type: Date,
       required: [true, "Expired property is required."],
