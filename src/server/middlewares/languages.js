@@ -47,6 +47,11 @@ async function createScheduleToEndOfWeek(req, res, next) {
     const lessonsToCreate = [];
     randomCards.forEach((card, index) => {
       days.forEach((day, dayIndex) => {
+        // Вычисляем крайнюю дату (не включительно) до 03:00 следующего дня
+        const expiredDate = moment(day)
+          .add(1, "days")
+          .set({ hour: 3, minute: 0, second: 0 });
+
         lessonsToCreate.push({
           userID: user._id,
           language: language,
@@ -59,6 +64,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
           lessonDate: day.toDate(),
           lessonNumber: index + 1, // Номер урока
           lessonDuration: 45, // Длительность урока (по умолчанию)
+          expired: expiredDate,
         });
       });
     });
