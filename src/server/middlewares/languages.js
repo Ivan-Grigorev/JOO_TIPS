@@ -1,5 +1,6 @@
 const Lesson = require("../models/lessons/lessons");
 const User = require("../models/user/user");
+const getTechProps = require("../utils/lessons/getTechProps");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
 const moment = require("moment");
 
@@ -25,13 +26,11 @@ async function isUniqueLanguage(req, res, next) {
   }
 }
 
-async function createScheduleToEndOfWeek(req, res, next) {
+async function createScheduleToEndOfWeek(language, userID) {
   try {
-    const { language } = req.body;
+    const Algorithm = await selectRandomCards(language);
 
-    const randomCards = await selectRandomCards(language);
-
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(userID);
 
     // Получаем текущую дату
     const currentDate = moment();
@@ -45,7 +44,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     // Создаем массив объектов уроков для каждой карточки и дня
     const lessonsToCreate = [];
-    randomCards.forEach((card, index) => {
+    Algorithm.cards.forEach((card, index) => {
       days.forEach((day, dayIndex) => {
         // Вычисляем крайнюю дату (не включительно) до 03:00 следующего дня
         const expiredDate = moment(day)
@@ -58,12 +57,12 @@ async function createScheduleToEndOfWeek(req, res, next) {
           topic: card.topic, // Используем тему из карточки
           cardText: card.cardText, // Используем текст карточки
           cardsAmount: card.cardsAmount, // Используем количество карточек из карточки
+          points: 1, //* здесь будет число, в зависимости того, сколько раз пользователь просмотрел тему
           startTime: null, // Начальное время (по умолчанию)
           endTime: null, // Конечное время (по умолчанию)
           status: null, // Статус (по умолчанию)
           lessonDate: day.toDate(),
-          lessonNumber: index + 1, // Номер урока
-          lessonDuration: 45, // Длительность урока (по умолчанию)
+          lessonDuration: Algorithm.techProps.lessonDuration, // Длительность урока (по умолчанию)
           expired: expiredDate, // срок истечения урока
         });
       });
@@ -72,14 +71,10 @@ async function createScheduleToEndOfWeek(req, res, next) {
     // Шаг 2: Сохраняем объекты уроков в базе данных
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
 
-    // Отправляем ответ, если необходимо
-    res.status(200).json({
-      message: "Schedule created successfully",
-      lessons: createdLessons,
-    });
+    return createdLessons;
   } catch (e) {
     console.error("Error creating user schedule:", e);
-    res.status(500).json({ message: "Internal server error" });
+    throw new Error("Error creating user schedule");
   }
 }
 
