@@ -26,62 +26,80 @@ async function isUniqueLanguage(req, res, next) {
   }
 }
 
-async function createScheduleToEndOfWeek(language, userID) {
+async function createScheduleToEndOfWeek(language, userId) {
   try {
     const Algorithm = await selectRandomCards(language);
+    const user = await User.findById(userId);
 
-    const user = await User.findById(userID);
+    if (Algorithm.cards === null) {
+      return "No cards";
+    }
 
-    if (Algorithm.cards === null) return "No cards";
-
-    // Получаем текущую дату
     const currentDate = moment();
+    const days = [];
 
     // Создаем массив дней сегодняшнего дня до субботы
-    const days = [];
     for (let i = 0; i <= 5; i++) {
-      const date = moment(currentDate).add(i, "days");
-      days.push(date);
+      days.push(currentDate.clone().add(i, "days").toDate());
+    }
+
+    // Преобразуем даты в формат без времени
+    const daysWithoutTime = days.map((date) =>
+      moment(date).startOf("day").toDate()
+    );
+
+    // Проверяем, есть ли уже уроки для этих дней (сравниваем только даты)
+    const existingLessons = await Lesson.find({
+      userId,
+      lessonDate: { $in: daysWithoutTime },
+    });
+
+    console.log(daysWithoutTime);
+
+    if (existingLessons.length > 0) {
+      console.log("Lessons already exist for these days");
+      return "Lessons already exist for these days";
     }
 
     const lessonsToCreate = [];
 
     for (const cardID of Algorithm.cards) {
-      const index = Algorithm.cards.indexOf(cardID); // Получаем индекс карточки
-      const dayIndex = index % days.length; // Определяем индекс дня для каждой карточки
-
+      const index = Algorithm.cards.indexOf(cardID);
+      const dayIndex = index % days.length;
       const day = days[dayIndex];
 
-      // Вычисляем крайнюю дату (не включительно) до 03:00 следующего дня
       const expiredDate = moment(day)
         .add(1, "days")
         .set({ hour: 3, minute: 0, second: 0 });
 
       const card = await Card.findById(cardID);
 
-      lessonsToCreate.push({
+      const lesson = {
         userId: user._id,
         language: language,
-        topic: card.topic, // Используем тему из карточки
-        cardText: card.cardText, // Используем текст карточки
-        cardsAmount: 5, // Algorithm.techProps., // Используем количество карточек из карточки
-        points: 0, // количество зависит от степени просмотренности карточек
-        startTime: null, // Начальное время (по умолчанию)
-        endTime: null, // Конечное время (по умолчанию)
-        status: null, // Статус (по умолчанию)
-        lessonDate: day.toDate(),
-        lessonNumber: index + 1, // Номер урока
-        lessonDuration: Algorithm.techProps.lessonDuration, // Длительность урока (по умолчанию)
-        expired: expiredDate.toDate(), // Крайняя дата урока
-      });
+        topic: card.topic,
+        cardText: card.cardText,
+        cardsAmount: 5, //Algorithm.techProps.cardsAmount
+        points: 0,
+        startTime: null,
+        endTime: null,
+        status: null,
+        lessonDate: moment(day).startOf("day").toDate(), // Устанавливаем время на полночь,
+        lessonNumber: index + 1,
+        lessonDuration: Algorithm.techProps.lessonDuration,
+        expired: expiredDate.toDate(),
+      };
+
+      lessonsToCreate.push(lesson);
     }
 
-    // Шаг 2: Сохраняем объекты уроков в базе данных
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
+
+    console.log(`${lessonsToCreate.length} Lessons have been created`.green);
 
     return createdLessons;
   } catch (e) {
-    console.error("Error creating user schedule:".red, e);
+    console.error("Error creating user schedule:", e);
     throw new Error("Error creating user schedule");
   }
 }
