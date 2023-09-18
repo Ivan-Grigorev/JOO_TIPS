@@ -47,10 +47,15 @@ const lessonSchema = new mongoose.Schema(
       type: String,
       required: [true, "Lesson subtopic is required."],
     },
-   cardsAmount: {
+    cardsAmount: {
       type: Number,
       required: [true, "Number of flashcards is required."],
     },
+    expired: {
+      type: Date,
+      required: [true, "Expired property is required."],
+    },
+
     startTime: {
       type: Date,
       // required: [true, "Start time is required."],
