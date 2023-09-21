@@ -1,4 +1,3 @@
-const Card = require("../../models/Card/Card");
 const Lesson = require("../../models/lessons/lessons");
 
 async function getAllTakenCards(userId) {
