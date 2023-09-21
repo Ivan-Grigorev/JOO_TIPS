@@ -42,7 +42,7 @@ const languagesSlice = createSlice({
       })
 
       .addCase(setActiveLanguage.fulfilled, (state, action) => {
-        state.activeLanguage = action.payload;
+        state.activeLanguage = action.payload.activeLanguage;
         state.isLoading = initialState.isLoading;
       })
       .addCase(setActiveLanguage.pending, (state) => {
