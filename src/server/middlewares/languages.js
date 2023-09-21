@@ -29,12 +29,9 @@ async function isUniqueLanguage(req, res, next) {
 async function createScheduleToEndOfWeek(language, userId) {
   try {
     // Find the user by their identifier
-    const userPromise = User.findById(userId);
-    const AlgorithmPromise = selectRandomCards(userId, language);
-
     const [user, Algorithm] = await Promise.all([
-      userPromise,
-      AlgorithmPromise,
+      User.findById(userId),
+      selectRandomCards(userId, language),
     ]);
 
     // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
