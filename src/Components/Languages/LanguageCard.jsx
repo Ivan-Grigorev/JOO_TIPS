@@ -14,7 +14,7 @@ const LanguageCard = ({
   const handleChooseLanguage = () => {
     return isLanguageSelected
       ? toast.error("You already learning this language")
-      : chooseLanguage(languageName);
+      : chooseLanguage(languageName.toLowerCase());
   };
 
   const cardClassName = isLanguageSelected ? "disable__card" : "";
