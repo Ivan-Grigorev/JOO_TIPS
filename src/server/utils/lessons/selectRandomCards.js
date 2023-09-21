@@ -40,7 +40,7 @@ const selectRandomCards = async (userId, language) => {
     // todo пофиксить. Присутствует 3 темы, а должна только одна.
     for (const topic of activeTopics) {
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
-      const cardIDsToAdd = findCards
+      const cardIDsToAdd = findCards // проверка на уникальность тем
         .filter((card) => !allTakenCards.includes(card._id.toString()))
         .map((card) => card._id.toString());
 
