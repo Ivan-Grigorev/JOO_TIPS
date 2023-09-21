@@ -28,8 +28,8 @@ async function isUniqueLanguage(req, res, next) {
 
 async function createScheduleToEndOfWeek(language, userId) {
   try {
-    // Получаем случайные карточки с помощью selectRandomCards
-    const Algorithm = await selectRandomCards(language);
+    // Получаем случайные карточки
+    const Algorithm = await selectRandomCards(userId, language);
 
     // Находим пользователя по его идентификатору
     const user = await User.findById(userId);
@@ -100,7 +100,7 @@ async function createScheduleToEndOfWeek(language, userId) {
     // Вставляем созданные уроки в базу данных
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
 
-    console.log(`${lessonsToCreate.length} Lessons have been created`.green);
+    console.log(lessonsToCreate.length + "Lessons have been created".green);
 
     return createdLessons;
   } catch (e) {
