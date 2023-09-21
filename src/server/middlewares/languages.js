@@ -1,4 +1,3 @@
-const Card = require("../models/Card/Card");
 const Lesson = require("../models/lessons/lessons");
 const User = require("../models/user/user");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
@@ -28,70 +27,72 @@ async function isUniqueLanguage(req, res, next) {
 
 async function createScheduleToEndOfWeek(language, userId) {
   try {
-    // Получаем случайные карточки
-    const Algorithm = await selectRandomCards(userId, language);
-
     // Находим пользователя по его идентификатору
-    const user = await User.findById(userId);
+    const userPromise = User.findById(userId);
+    const AlgorithmPromise = selectRandomCards(userId, language);
 
-    // Если алгоритм не вернул карточки, возвращаем сообщение об отсутствии карточек
-    if (Algorithm.cards === null) return "No cards";
+    const [user, Algorithm] = await Promise.all([
+      userPromise,
+      AlgorithmPromise,
+    ]);
 
-    // Получаем текущую дату и создаем массив дней до субботы
+    // Получаем текущую дату и день недели (0 - воскресенье, 6 - суббота)
     const currentDate = moment();
-    const days = [];
-    for (let i = 0; i <= 5; i++) {
-      days.push(currentDate.clone().add(i, "days").toDate());
-    }
+    const currentDayOfWeek = currentDate.day();
 
-    // Преобразуем даты в формат без времени
-    const daysWithoutTime = days.map((date) =>
-      moment(date).startOf("day").toDate()
-    );
+    // Вычисляем, сколько дней осталось до субботы
+    const daysRemaining = 6 - currentDayOfWeek;
 
-    // Проверяем, есть ли уже уроки для этих дней (сравниваем только даты)
+    // Проверяем, если уже есть уроки для текущей недели
     const existingLessons = await Lesson.find({
       userId,
-      lessonDate: { $in: daysWithoutTime },
+      lessonDate: {
+        $gte: currentDate.startOf("week").toDate(),
+        $lte: currentDate.endOf("week").toDate(),
+      },
     });
 
-    // Если уже есть уроки для этих дней, возвращаем сообщение об этом
     if (existingLessons.length > 0) {
-      console.log("Lessons already exist for these days".red);
-      return "Lessons already exist for these days";
+      console.log("Lessons already exist for this week".red);
+      return "Lessons already exist for this week";
     }
 
     const lessonsToCreate = [];
 
-    // Создаем уроки для каждого дня
-    for (const day of days) {
-      const uniqueCards = new Set(); // Для хранения уникальных карточек
+    // Создаем уроки для каждого дня до субботы
+    for (let i = 0; i <= daysRemaining; i++) {
+      const uniqueCards = new Set();
 
-      // Выбираем случайные уникальные карточки (пока не будет 5)
+      // Выбираем случайные уникальные карточки (пока не будет нужное количество)
       while (uniqueCards.size < 5) {
         const cardID =
           Algorithm.cards[Math.floor(Math.random() * Algorithm.cards.length)];
 
-        if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
+        if (!uniqueCards.has(cardID)) {
+          uniqueCards.add(cardID);
+        }
       }
 
-      const expiredDate = moment(day)
+      const day = currentDate.clone().add(i, "days");
+
+      const expiredDate = day
+        .clone()
         .add(1, "days")
         .set({ hour: 3, minute: 0, second: 0 });
 
       const cardsArray = Array.from(uniqueCards);
 
       const lesson = {
-        userId: user._id, // ссылка на пользователя
-        cards: cardsArray, // Массив с ID уникальных карточек
-        language: language,
-        points: 0, // первый просмотр - 1б, второй - 2, третий - 3
-        startTime: null, // время фактического начала урока
-        endTime: null, // время фактического окончания урока
-        status: null, // статус урока
-        lessonDate: moment(day).startOf("day").toDate(), // Устанавливаем время на полночь
-        lessonDuration: Algorithm.techProps.lessonDuration, // длительность урока
-        expired: expiredDate.toDate(), // срок годности урока
+        userId: user._id,
+        cards: cardsArray,
+        language,
+        points: 0,
+        startTime: null,
+        endTime: null,
+        status: null,
+        lessonDate: day.startOf("day").toDate(),
+        lessonDuration: Algorithm.techProps.lessonDuration,
+        expired: expiredDate.toDate(),
       };
 
       lessonsToCreate.push(lesson);
@@ -100,7 +101,7 @@ async function createScheduleToEndOfWeek(language, userId) {
     // Вставляем созданные уроки в базу данных
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
 
-    console.log(lessonsToCreate.length + "Lessons have been created".green);
+    console.log(lessonsToCreate.length + " Lessons have been created".green);
 
     return createdLessons;
   } catch (e) {
