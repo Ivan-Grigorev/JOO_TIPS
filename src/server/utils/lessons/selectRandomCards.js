@@ -13,13 +13,12 @@ const selectRandomCards = async (userId, language) => {
 
     // уже зарезервированные карточки
     // todo
-    // const alreadyTakenTopics = await getAllTakenTopics(userId);
+    const alreadyTakenTopics = await getAllTakenTopics(userId);
 
     // Находим объект с нужным языком в массиве languages пользователя
     const activeLanguage = user.languages.find((lang) => {
       return lang.language === language;
     });
-
 
     // если нет активной темы - устанавливаем первую тему из списка
     if (activeLanguage.activeTopic === null || !activeLanguage.activeTopic) {
@@ -35,22 +34,19 @@ const selectRandomCards = async (userId, language) => {
     // Получаем активные темы для указанного языка (может быть массивом)
     const activeTopics = [activeLanguage.activeTopic];
 
-    const cardIDsArray = [];
+    const cardIDs = [];
 
     // Проходимся по массиву тем, ищем карточки с соответствующими темами
-    // Добавляем их в массив cardIDsArray
+    // Добавляем их в массив cardIDs
     // todo пофиксить. Присутствует 3 темы, а должна только одна.
     for (const topic of activeTopics) {
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
-      cardIDsArray.push(...findCards.map((card) => card._id.toString()));
+      cardIDs.push(...findCards.map((card) => card._id.toString()));
     }
 
-    console.log("Количество найденных карточек:", cardIDsArray.length);
+    console.log("Количество найденных карточек:", cardIDs.length);
 
-    if (cardIDsArray.length === 0) return { cards: null, techProps };
-
-    // Извлекаем _id из объектов карточек и преобразуем их в строки
-    const cardIDs = cardIDsArray.map((card) => card._id.toString());
+    if (cardIDs.length === 0) return { cards: null, techProps };
 
     const randomCards = Algorithm(cardIDs, techProps.numToSelect);
 
