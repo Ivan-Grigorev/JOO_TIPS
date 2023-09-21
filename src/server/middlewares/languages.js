@@ -27,7 +27,7 @@ async function isUniqueLanguage(req, res, next) {
 
 async function createScheduleToEndOfWeek(language, userId) {
   try {
-    // Находим пользователя по его идентификатору
+    // Find the user by their identifier
     const userPromise = User.findById(userId);
     const AlgorithmPromise = selectRandomCards(userId, language);
 
@@ -36,14 +36,14 @@ async function createScheduleToEndOfWeek(language, userId) {
       AlgorithmPromise,
     ]);
 
-    // Получаем текущую дату и день недели (0 - воскресенье, 6 - суббота)
+    // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
     const currentDate = moment();
     const currentDayOfWeek = currentDate.day();
 
-    // Вычисляем, сколько дней осталось до субботы
+    // Calculate how many days are left until Saturday
     const daysRemaining = 6 - currentDayOfWeek;
 
-    // Проверяем, если уже есть уроки для текущей недели
+    // Check if there are already lessons for the current week
     const existingLessons = await Lesson.find({
       userId,
       lessonDate: {
@@ -59,11 +59,11 @@ async function createScheduleToEndOfWeek(language, userId) {
 
     const lessonsToCreate = [];
 
-    // Создаем уроки для каждого дня до субботы
+    // Create lessons for each day until Saturday
     for (let i = 0; i <= daysRemaining; i++) {
       const uniqueCards = new Set();
 
-      // Выбираем случайные уникальные карточки (пока не будет нужное количество)
+      // Select random unique cards (until the desired number is reached)
       while (uniqueCards.size < 5) {
         const cardID =
           Algorithm.cards[Math.floor(Math.random() * Algorithm.cards.length)];
@@ -98,7 +98,7 @@ async function createScheduleToEndOfWeek(language, userId) {
       lessonsToCreate.push(lesson);
     }
 
-    // Вставляем созданные уроки в базу данных
+    // Insert the created lessons into the database
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
 
     console.log(lessonsToCreate.length + " Lessons have been created".green);
