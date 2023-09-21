@@ -8,8 +8,14 @@ const getTechProps = require("./getTechProps");
 const selectRandomCards = async (userId, language) => {
   const db = await mongoDB();
   try {
-    const techProps = await getTechProps(db, language);
-    const user = await User.findById(userId);
+    const techPropsPromise = getTechProps(db, language);
+    const userPromise = User.findById(userId);
+
+    // Ожидаем выполнения обоих запросов
+    const [techProps, user] = await Promise.all([
+      techPropsPromise,
+      userPromise,
+    ]);
 
     // уже зарезервированные карточки
     // todo
