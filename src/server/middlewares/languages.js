@@ -25,6 +25,7 @@ async function isUniqueLanguage(req, res, next) {
   }
 }
 
+// todo написать unit-test
 async function createScheduleToEndOfWeek(language, userId) {
   try {
     // Find the user by their identifier
