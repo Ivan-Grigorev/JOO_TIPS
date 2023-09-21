@@ -8,9 +8,9 @@ async function get(req, res) {
     const user = await User.findById(req.user.id);
 
     // Respond with the user's languages and active language.
-    res
-      .status(200)
-      .json({ languages: user.languages, activeLanguage: user.activeLanguage });
+
+    const languages = user.languages.map((language) => language);
+    res.status(200).json({ languages, activeLanguage: user.activeLanguage });
   } catch (e) {
     // Log the error and send a 500 Internal Server Error response.
     console.error(`Error getting user languages: ${e.message}`);
@@ -31,14 +31,16 @@ async function add(req, res) {
       return res.status(400).json({ message: "Language is required." });
 
     // Add the new language to the user's languages array.
-    user.languages.push(newLanguage);
+    user.languages.push({ language: newLanguage, activeTopic: null });
     // Set the language's points in the languagesPoints object.
     user.languagesPoints.set(newLanguage, 0);
     // Save the changes to the user's information.
     await user.save();
 
+    const languages = user.languages.map((language) => language);
+
     // Respond with the updated user's languages.
-    res.status(200).json(user.languages);
+    res.status(200).json(languages);
   } catch (e) {
     // Log the error and send a 500 Internal Server Error response.
     console.log(`Error while adding language to user object: ${e}`);
