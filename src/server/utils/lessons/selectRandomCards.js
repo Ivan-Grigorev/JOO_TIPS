@@ -2,7 +2,7 @@ const mongoDB = require("../../db");
 const Card = require("../../models/Card/Card");
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm");
-const getAllTakenTopics = require("./getAllTakenTopics");
+const getAllTakenCards = require("./getAllTakenTopics");
 const getTechProps = require("./getTechProps");
 
 const selectRandomCards = async (userId, language) => {
@@ -10,16 +10,17 @@ const selectRandomCards = async (userId, language) => {
   try {
     const techPropsPromise = getTechProps(db, language);
     const userPromise = User.findById(userId);
+    const allTakenCardsPromise = getAllTakenCards(userId);
 
-    // Ожидаем выполнения обоих запросов
-    const [techProps, user] = await Promise.all([
+    // Ожидаем выполнения запросов
+    const [techProps, user, allTakenCards] = await Promise.all([
       techPropsPromise,
       userPromise,
+      allTakenCardsPromise,
     ]);
 
     // уже зарезервированные карточки
     // todo
-    const alreadyTakenTopics = await getAllTakenTopics(userId);
 
     // Находим объект с нужным языком в массиве languages пользователя
     const activeLanguage = user.languages.find((lang) => {
