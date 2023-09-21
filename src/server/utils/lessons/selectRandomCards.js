@@ -8,19 +8,11 @@ const getTechProps = require("./getTechProps");
 const selectRandomCards = async (userId, language) => {
   const db = await mongoDB();
   try {
-    const techPropsPromise = getTechProps(db, language);
-    const userPromise = User.findById(userId);
-    const allTakenCardsPromise = getAllTakenCards(userId);
-
-    // Ожидаем выполнения запросов
     const [techProps, user, allTakenCards] = await Promise.all([
-      techPropsPromise,
-      userPromise,
-      allTakenCardsPromise,
+      getTechProps(db, language),
+      User.findById(userId),
+      getAllTakenCards(userId),
     ]);
-
-    // уже зарезервированные карточки
-    // todo
 
     // Находим объект с нужным языком в массиве languages пользователя
     const activeLanguage = user.languages.find((lang) => {
@@ -48,7 +40,11 @@ const selectRandomCards = async (userId, language) => {
     // todo пофиксить. Присутствует 3 темы, а должна только одна.
     for (const topic of activeTopics) {
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
-      cardIDs.push(...findCards.map((card) => card._id.toString()));
+      const cardIDsToAdd = findCards
+        .filter((card) => !allTakenCards.includes(card._id.toString()))
+        .map((card) => card._id.toString());
+
+      cardIDs.push(...cardIDsToAdd);
     }
 
     console.log("Количество найденных карточек:", cardIDs.length);
