@@ -54,7 +54,7 @@ const selectRandomCards = async (userId, language) => {
 
     if (cardIDs.length === 0) return { cards: null, techProps };
 
-    const randomCards = Algorithm(cardIDs, techProps.numToSelect);
+    const randomCards = Algorithm(cardIDs, techProps.cardsAmount);
 
     return { cards: randomCards, techProps };
   } catch (e) {
