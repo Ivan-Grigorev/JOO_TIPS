@@ -22,6 +22,7 @@ const languagesEnum = [
   "docker",
   "nginx",
   "tcp/ip",
+  null,
 ];
 
 const user = new mongoose.Schema(
@@ -110,8 +111,12 @@ const user = new mongoose.Schema(
     languages: {
       type: [
         {
-          type: String,
-          enum: languagesEnum,
+          language: {
+            type: String,
+            enum: languagesEnum,
+          },
+          activeTopic: String, // Здесь храните активную тему
+          _id: false, // Добавляем опцию _id: false
         },
       ],
       default: [],
