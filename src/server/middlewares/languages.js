@@ -48,21 +48,21 @@ async function createScheduleToEndOfWeek(language, userId) {
       return "Lessons already exist for this week";
     }
 
-    const lessonsToCreate = createLessons(
+    const lessonsToCreate = await createLessons(
       daysRemaining,
       currentDate,
+      user._id,
       language,
       Algorithm.cards,
-      user._id,
+      Algorithm.takenCards,
       Algorithm.techProps
     );
 
     // Insert the created lessons into the database
     const createdLessons = await Lesson.insertMany(lessonsToCreate);
-
     console.log(lessonsToCreate.length + " Lessons have been created".green);
 
-    return createdLessons;
+    return { createdLessons };
   } catch (e) {
     console.error("Error creating user schedule:", e);
     throw new Error("Error creating user schedule");
@@ -88,12 +88,13 @@ const isLessonsAlreadyExists = async (userId, currentDate) => {
   }
 };
 
-const createLessons = (
+const createLessons = async (
   daysRemaining,
   currentDate,
+  userId,
   language,
   cards,
-  userId,
+  takenCards,
   techProps
 ) => {
   try {
@@ -104,7 +105,7 @@ const createLessons = (
       const uniqueCards = new Set();
 
       // Select random unique cards (until the desired number is reached)
-      while (uniqueCards.size < 5) {
+      while (uniqueCards.size < techProps.cardsAmount) {
         const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
 
         if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
@@ -135,6 +136,17 @@ const createLessons = (
       lessonsToCreate.push(lesson);
     }
 
+    // creating week lesson
+    const weekLesson = await createWeekLesson(
+      userId,
+      language,
+      currentDate,
+      cards,
+      techProps
+    );
+
+    lessonsToCreate.push(weekLesson);
+
     return lessonsToCreate;
   } catch (e) {
     console.error("Error while creating lessons", e);
@@ -142,17 +154,89 @@ const createLessons = (
   }
 };
 
-const createWeekLesson = async () => {
+const createWeekLesson = async (
+  userId,
+  language,
+  currentDate,
+  cards,
+  techProps
+) => {
   try {
+    const uniqueCards = new Set();
+
+    // Select random unique cards (until the desired number is reached)
+    while (uniqueCards.size < cards.length) {
+      const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
+
+      if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
+    }
+
+    const expiredDate = currentDate
+      .clone()
+      .add(1, "days")
+      .set({ hour: 3, minute: 0, second: 0 });
+
+    const cardsArray = Array.from(uniqueCards);
+
+    const lesson = {
+      userId,
+      cards: cardsArray,
+      language,
+      points: 0,
+      startTime: null,
+      endTime: null,
+      status: null,
+      lessonDate: currentDate.clone().endOf("week").toDate(),
+      lessonDuration: 30, //* подтянуть значение из тех.коллекции
+      expired: expiredDate.toDate(),
+    };
+
+    // Save the special Sunday lesson to the database
+    const lessonsToCreate = await Lesson.create(lesson);
+    return lessonsToCreate;
   } catch (e) {
-    console.error("Error creating week lesson", e);
+    console.error("Error creating Sunday lesson", e);
+    throw e;
   }
 };
 
-const createMonthLesson = async () => {
+const createMonthLesson = async (userId, language, cards, techProps) => {
   try {
+    const uniqueCards = new Set();
+
+    // Select random unique cards (until the desired number is reached)
+    while (uniqueCards.size < 5) {
+      const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
+
+      if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
+    }
+
+    const currentDate = moment();
+    const expiredDate = currentDate
+      .clone()
+      .add(1, "days")
+      .set({ hour: 3, minute: 0, second: 0 });
+
+    const cardsArray = Array.from(uniqueCards);
+
+    const lesson = {
+      userId,
+      cards: cardsArray,
+      language,
+      points: 0,
+      startTime: null,
+      endTime: null,
+      status: null,
+      lessonDate: currentDate.startOf("day").toDate(),
+      lessonDuration: techProps.lessonDuration,
+      expired: expiredDate.toDate(),
+    };
+
+    // Save the monthly lesson to the database
+    await Lesson.create(lesson);
   } catch (e) {
-    console.error("Error creating month lesson", e);
+    console.error("Error creating monthly lesson", e);
+    throw e;
   }
 };
 
