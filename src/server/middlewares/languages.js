@@ -142,4 +142,18 @@ const createLessons = (
   }
 };
 
+const createWeekLesson = async () => {
+  try {
+  } catch (e) {
+    console.error("Error creating week lesson", e);
+  }
+};
+
+const createMonthLesson = async () => {
+  try {
+  } catch (e) {
+    console.error("Error creating month lesson", e);
+  }
+};
+
 module.exports = { isUniqueLanguage, createScheduleToEndOfWeek };
