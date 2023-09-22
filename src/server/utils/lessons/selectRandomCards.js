@@ -2,13 +2,13 @@ const mongoDB = require("../../db");
 const Card = require("../../models/Card/Card");
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm");
-const getAllTakenCards = require("./getAllTakenTopics");
+const getAllTakenCards = require("./getAllTakenCards");
 const getTechProps = require("./getTechProps");
 
 const selectRandomCards = async (userId, language) => {
   const db = await mongoDB();
   try {
-    const [techProps, user, allTakenCards] = await Promise.all([
+    const [techProps, user, takenCards] = await Promise.all([
       getTechProps(db, language),
       User.findById(userId),
       getAllTakenCards(userId),
@@ -38,11 +38,10 @@ const selectRandomCards = async (userId, language) => {
 
     // Проходимся по массиву тем, ищем карточки с соответствующими темами
     // Добавляем их в массив cardIDs
-    // todo пофиксить. Присутствует 3 темы, а должна только одна.
     for (const topic of activeTopics) {
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
       const cardIDsToAdd = findCards // проверка на уникальность тем
-        .filter((card) => !allTakenCards.includes(card._id.toString()))
+        .filter((card) => !takenCards.all.includes(card._id.toString()))
         .map((card) => card._id.toString());
 
       cardIDs.push(...cardIDsToAdd);
@@ -54,7 +53,7 @@ const selectRandomCards = async (userId, language) => {
 
     const randomCards = Algorithm(cardIDs, techProps.cardsAmount);
 
-    return { cards: randomCards, techProps };
+    return { cards: randomCards, techProps, takenCards };
   } catch (e) {
     console.error(e);
   }
