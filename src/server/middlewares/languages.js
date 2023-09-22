@@ -41,14 +41,7 @@ async function createScheduleToEndOfWeek(language, userId) {
     // Calculate how many days are left until Saturday
     const daysRemaining = 6 - currentDayOfWeek;
 
-    // Check if there are already lessons for the current week
-    const existingLessons = await Lesson.find({
-      userId,
-      lessonDate: {
-        $gte: currentDate.startOf("week").toDate(),
-        $lte: currentDate.endOf("week").toDate(),
-      },
-    });
+    const existingLessons = await isLessonsAlreadyExists(userId, currentDate);
 
     if (existingLessons.length > 0) {
       console.log("Lessons already exist for this week".red);
@@ -107,5 +100,22 @@ async function createScheduleToEndOfWeek(language, userId) {
     throw new Error("Error creating user schedule");
   }
 }
+
+// Check if there are already lessons for the current week
+const isLessonsAlreadyExists = async (userId, currentDate) => {
+  try {
+    const existingLessons = await Lesson.find({
+      userId,
+      lessonDate: {
+        $gte: currentDate.startOf("week").toDate(),
+        $lte: currentDate.endOf("week").toDate(),
+      },
+    });
+
+    return existingLessons;
+  } catch (e) {
+    console.error("Error in createScheduleToEndOfWeek middleware", e);
+  }
+};
 
 module.exports = { isUniqueLanguage, createScheduleToEndOfWeek };
