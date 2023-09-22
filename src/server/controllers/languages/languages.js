@@ -70,9 +70,13 @@ async function setActive(req, res) {
     // create schedule for a week
     const lessons = await createScheduleToEndOfWeek(activeLanguage, userID);
     // Respond with the updated active language.
-    res
-      .status(200)
-      .json({ activeLanguage: user.activeLanguage, createdLessons: lessons });
+    res.status(201).json({
+      lessons,
+      //   activeLanguage: user.activeLanguage,
+      //   dayLessons: lessons.dayLessons || null,
+      //   weekLesson: lessons.weekLesson || null,
+      //   monthLesson: lessons.monthLesson || null,
+    });
   } catch (e) {
     // Log the error and send a 500 Internal Server Error response.
     console.log(`Error while setting active language for user: ${e}`);
