@@ -72,6 +72,7 @@ async function createScheduleToEndOfWeek(language, userId) {
 // Check if there are already lessons for the current week
 const isLessonsAlreadyExists = async (userId, currentDate) => {
   try {
+    // trying to find in DB lessons on planned date
     const existingLessons = await Lesson.find({
       userId,
       lessonDate: {
