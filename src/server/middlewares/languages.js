@@ -41,7 +41,7 @@ async function createScheduleToEndOfWeek(language, userId) {
     // Calculate how many days are left until Saturday
     const daysRemaining = 6 - currentDayOfWeek;
 
-    const existingLessons = await isLessonsAlreadyExists(userId, currentDate);
+    const existingLessons = await isScheduleAlreadyExists(userId, currentDate);
 
     if (existingLessons.length > 0) {
       console.log("Lessons already exist for this week".red);
@@ -70,7 +70,7 @@ async function createScheduleToEndOfWeek(language, userId) {
 }
 
 // Check if there are already lessons for the current week
-const isLessonsAlreadyExists = async (userId, currentDate) => {
+const isScheduleAlreadyExists = async (userId, currentDate) => {
   try {
     // trying to find in DB lessons on planned date
     const existingLessons = await Lesson.find({

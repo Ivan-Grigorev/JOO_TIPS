@@ -1,4 +1,5 @@
 const Lesson = require("../models/lessons/lessons");
+const moment = require("moment");
 
 // Middleware function to check if a lesson exists by its ID
 const isLessonExistById = async (req, res, next) => {
@@ -39,6 +40,28 @@ const isLessonAlreadyCompleted = async (req, res, next) => {
     // Handle errors if any occur during the process
     console.error(`Error: ${e}`);
     res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Check if there are already lessons for the current week
+const isScheduleAlreadyExists = async (req, res, next) => {
+  try {
+    const currentDate = moment();
+    const userId = req.user.id;
+
+    // trying to find in DB lessons on planned date
+    const existingLessons = await Lesson.find({
+      userId,
+      lessonDate: {
+        $gte: currentDate.startOf("week").toDate(),
+        $lte: currentDate.endOf("week").toDate(),
+      },
+    });
+
+    return existingLessons;
+  } catch (e) {
+    console.error("Error in createScheduleToEndOfWeek middleware", e);
+    return e;
   }
 };
 
