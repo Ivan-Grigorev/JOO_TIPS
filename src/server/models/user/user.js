@@ -172,6 +172,7 @@ const user = new mongoose.Schema(
       type: String,
       required: true,
     },
+    lastOnline: Number,
   },
   { versionKey: false }
 );
