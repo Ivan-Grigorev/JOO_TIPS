@@ -29,8 +29,8 @@ async function getTakenCards(userId) {
 
     return {
       all: allTakenCardsIDs,
-      week: weekTakenCardsIDs || null,
-      month: monthTakenCardsIDs || null,
+      week: weekTakenCardsIDs,
+      month: monthTakenCardsIDs,
     };
   } catch (error) {
     console.error("Error fetching lessons:", error);
