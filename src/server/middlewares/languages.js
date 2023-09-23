@@ -136,16 +136,16 @@ const createLessons = async (
       lessonsToCreate.push(lesson);
     }
 
-    // creating week lesson
-    const weekLesson = await createWeekLesson(
-      userId,
-      language,
-      currentDate,
-      cards,
-      techProps
-    );
+    // // creating week lesson
+    // const weekLesson = await createWeekLesson(
+    //   userId,
+    //   language,
+    //   currentDate,
+    //   takenCards.week,
+    //   techProps
+    // );
 
-    lessonsToCreate.push(weekLesson);
+    // lessonsToCreate.push(weekLesson);
 
     return lessonsToCreate;
   } catch (e) {
@@ -158,15 +158,18 @@ const createWeekLesson = async (
   userId,
   language,
   currentDate,
-  cards,
+  takenCardsByWeek,
   techProps
 ) => {
   try {
+    console.log(takenCardsByWeek);
+    console.log("takenCardsByWeek");
+
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < cards.length) {
-      const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
+    while (uniqueCards.size < takenCardsByWeek.length) {
+      const cardID = takenCardsByWeek[Math.floor(Math.random() * takenCardsByWeek.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
     }
@@ -182,7 +185,7 @@ const createWeekLesson = async (
       userId,
       cards: cardsArray,
       language,
-      points: 0,
+      points: 50,
       startTime: null,
       endTime: null,
       status: null,
