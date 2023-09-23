@@ -3,6 +3,7 @@ const User = require("../../models/user/user");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
+// todo переименовать в getActiveLessonPoints
 async function getLessonsPointsSum(req, res) {
   try {
     // Check if there is an authenticated user, return error if not.
@@ -30,9 +31,9 @@ async function getLessonsPointsSum(req, res) {
 
 // This function retrieves lessons associated with the user.
 async function getLessons(req, res) {
-  const userId = req.user.id;
-
   try {
+    const userId = req.user.id;
+
     // Find lessons linked to the specified userId.
     const lessons = await Lesson.find({ userId });
 
@@ -45,8 +46,8 @@ async function getLessons(req, res) {
 }
 
 async function addPoints(req, res) {
-  const { language, points } = req.lesson;
   try {
+    const { language, points } = req.lesson;
     const user = await User.findByIdAndUpdate(req.user.id, {
       $inc: { [`languagesPoints.${language}`]: points },
     });
