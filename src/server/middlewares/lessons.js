@@ -72,12 +72,13 @@ const isScheduleAlreadyExists = async (req, res, next) => {
     next();
   } catch (e) {
     console.error("Error in createScheduleToEndOfWeek middleware".red, e);
-    res.status(409).json({ message: "Schedule is already exists" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
 // todo написать unit-test
 async function createScheduleToEndOfWeek(req, res, next) {
+  if (req.existingLessons) return next(); // set boolean to true in past midddleware
   try {
     const userId = req.user.id;
     const language = req.body.language;
@@ -94,13 +95,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     // Calculate how many days are left until Saturday
     const daysRemaining = 6 - currentDayOfWeek;
-
-    const existingLessons = await isScheduleAlreadyExists(userId, currentDate);
-
-    if (existingLessons.length > 0) {
-      console.log("Lessons already exist for this week".red);
-      next();
-    }
 
     const lessonsToCreate = await createLessons(
       daysRemaining,
