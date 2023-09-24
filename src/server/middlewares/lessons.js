@@ -67,10 +67,12 @@ const isScheduleAlreadyExists = async (req, res, next) => {
       },
     });
 
-    return existingLessons;
+    if (existingLessons) req.existingLessons = true;
+
+    next();
   } catch (e) {
-    console.error("Error in createScheduleToEndOfWeek middleware", e);
-    return e;
+    console.error("Error in createScheduleToEndOfWeek middleware".red, e);
+    res.status(409).json({ message: "Schedule is already exists" });
   }
 };
 
@@ -282,6 +284,7 @@ const createMonthLesson = async (userId, language, cards, techProps) => {
 module.exports = {
   isLessonExistById,
   isLessonAlreadyCompleted,
+  isScheduleAlreadyExists,
   createScheduleToEndOfWeek,
   createWeekLesson,
   createMonthLesson,
