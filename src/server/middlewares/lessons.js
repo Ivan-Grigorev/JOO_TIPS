@@ -93,13 +93,16 @@ async function createScheduleToEndOfWeek(req, res, next) {
       selectRandomCards(userId, language),
     ]);
 
-    if (isTodayEndOfTheMonth(date.currentDate) === true) {
+    const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
+    const todayIsSaturday = isTodaySaturday(date.currentDayOfWeek) === true;
+
+    if (todayIsEndOfMonth) {
       console.log("Today is the end of the month.".blue);
       console.log("Creating month lesson".blue);
 
       await createMonthLesson();
       next();
-    } else if (isTodaySaturday(date.currentDayOfWeek) === true) {
+    } else if (todayIsSaturday) {
       console.log("Today is Saturday.".blue);
       console.log("Creating week lesson".blue);
 
