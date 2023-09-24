@@ -107,7 +107,14 @@ async function createScheduleToEndOfWeek(req, res, next) {
       console.log("Today is the end of the month.".blue);
       console.log("Creating month lesson".blue);
 
-      await createMonthLesson();
+      await createMonthLesson(
+        userId,
+        language,
+        date.formattedCurrentDate,
+        date.expiredDate,
+        Algorithm.takenCards.month,
+        Algorithm.techProps
+      );
       next();
     } else if (todayIsSunday) {
       console.log("Today is Saturday.".blue);
@@ -276,7 +283,7 @@ const createWeekLesson = async (
       endTime: null,
       status: null,
       lessonDate: currentDate,
-      lessonDuration: 30, //* подтянуть значение из тех.коллекции
+      lessonDuration: 30, //! подтянуть значение из тех.коллекции
       expired: expiredDate,
     };
 
@@ -289,22 +296,23 @@ const createWeekLesson = async (
   }
 };
 
-const createMonthLesson = async (userId, language, cards, techProps) => {
+const createMonthLesson = async (
+  userId,
+  language,
+  currentDate,
+  expiredDate,
+  takenCardsByMonth,
+  techProps
+) => {
   try {
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < 5) {
-      const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
+    while (uniqueCards.size < takenCardsByMonth.length) {
+      const cardID = takenCardsByMonth[Math.floor(Math.random() * takenCardsByMonth.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
     }
-
-    const currentDate = moment();
-    const expiredDate = currentDate
-      .clone()
-      .add(1, "days")
-      .set({ hour: 3, minute: 0, second: 0 });
 
     const cardsArray = Array.from(uniqueCards);
 
@@ -312,17 +320,18 @@ const createMonthLesson = async (userId, language, cards, techProps) => {
       userId,
       cards: cardsArray,
       language,
-      points: 0,
+      points: 150,
       startTime: null,
       endTime: null,
       status: null,
-      lessonDate: currentDate.startOf("day").toDate(),
-      lessonDuration: techProps.lessonDuration,
-      expired: expiredDate.toDate(),
+      lessonDate: currentDate,
+      lessonDuration: 45, //! подтянуть значение из тех.коллекции
+      expired: expiredDate,
     };
 
-    // Save the monthly lesson to the database
-    await Lesson.create(lesson);
+    // Save the special Sunday lesson to the database
+    const lessonsToCreate = await Lesson.create(lesson);
+    return lessonsToCreate;
   } catch (e) {
     console.error("Error creating monthly lesson", e);
     throw e;
