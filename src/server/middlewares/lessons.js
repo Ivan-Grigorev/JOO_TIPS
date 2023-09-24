@@ -91,7 +91,12 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
     const currentDate = moment();
+    const formattedCurrentDate = currentDate.format("DD.MM.YYYY");
     const currentDayOfWeek = currentDate.day();
+    const expiredDate = currentDate
+      .clone()
+      .add(1, "days")
+      .set({ hour: 3, minute: 0, second: 0 });
 
     // Find the user by their identifier
     const [user, Algorithm] = await Promise.all([
@@ -109,10 +114,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
       console.log("Today is Saturday.".blue);
       console.log("Creating week lesson".blue);
 
-      const today = moment().startOf("day").toDate();
-
       const existedWeekLesson = await Lesson.findOne({
-        lessonDate: today,
+        lessonDate: currentDate,
       });
 
       if (existedWeekLesson) {
@@ -120,11 +123,18 @@ async function createScheduleToEndOfWeek(req, res, next) {
         return next();
       }
 
+      //* если карточек не хватает - взять за основу общий массив карточек
+      const cardsForWeekLesson =
+        Algorithm.takenCards.week.length > 15
+          ? Algorithm.takenCards
+          : Algorithm.cards;
+
       await createWeekLesson(
         userId,
         language,
-        currentDate,
-        Algorithm.takenCards.week,
+        formattedCurrentDate,
+        expiredDate,
+        cardsForWeekLesson,
         Algorithm.techProps
       );
 
@@ -138,7 +148,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     const lessonsToCreate = await createLessons(
       daysRemaining,
-      currentDate,
+      formattedCurrentDate,
       user._id,
       language,
       Algorithm.cards,
@@ -250,6 +260,7 @@ const createWeekLesson = async (
   userId,
   language,
   currentDate,
+  expiredDate,
   takenCardsByWeek,
   techProps
 ) => {
@@ -263,11 +274,6 @@ const createWeekLesson = async (
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
     }
 
-    const expiredDate = currentDate
-      .clone()
-      .add(1, "days")
-      .set({ hour: 3, minute: 0, second: 0 });
-
     const cardsArray = Array.from(uniqueCards);
 
     const lesson = {
@@ -278,9 +284,9 @@ const createWeekLesson = async (
       startTime: null,
       endTime: null,
       status: null,
-      lessonDate: currentDate.clone().endOf("week").toDate(),
+      lessonDate: currentDate,
       lessonDuration: 30, //* подтянуть значение из тех.коллекции
-      expired: expiredDate.toDate(),
+      expired: expiredDate,
     };
 
     // Save the special Sunday lesson to the database
