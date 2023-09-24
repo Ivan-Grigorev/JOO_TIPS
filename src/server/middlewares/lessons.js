@@ -2,13 +2,19 @@ const Lesson = require("../models/lessons/lessons");
 const User = require("../models/user/user");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
 const moment = require("moment");
-
+moment.tz.setDefault("Europe/Kiev");
 moment.updateLocale("en", {
   week: {
     dow: 1, // Начало недели - понедельник (1)
   },
-  weekEnd: 6, // Конец недели - суббота (6)
+  // weekEnd: 6, // Конец недели - суббота (6)
 });
+
+console.log("Конец недели", moment().endOf("week").toDate());
+console.log(
+  "Конец недели - 1 день",
+  moment().endOf("week").subtract(1, "days").toDate()
+);
 
 // Middleware function to check if a lesson exists by its ID
 const isLessonExistById = async (req, res, next) => {
@@ -67,7 +73,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
       },
     });
 
-    if (existingLessons) req.existingLessons = true;
+    if (existingLessons.length !== 0) req.scheduleIsExists = true;
 
     next();
   } catch (e) {
@@ -78,7 +84,9 @@ const isScheduleAlreadyExists = async (req, res, next) => {
 
 // todo написать unit-test
 async function createScheduleToEndOfWeek(req, res, next) {
-  if (req.existingLessons) return next(); // set boolean to true in past midddleware
+  // set boolean to true in past midddleware
+  if (req.scheduleIsExists) return next();
+
   try {
     const userId = req.user.id;
     const language = req.body.language;
