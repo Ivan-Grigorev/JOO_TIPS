@@ -103,52 +103,52 @@ async function createScheduleToEndOfWeek(req, res, next) {
     const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
     const todayIsSaturday = isTodaySaturday(date.currentDayOfWeek) === true;
 
-    if (todayIsEndOfMonth) {
-      console.log("Today is the end of the month.".blue);
-      console.log("Creating month lesson".blue);
+    // if (todayIsEndOfMonth) {
+    //   console.log("Today is the end of the month.".blue);
+    //   console.log("Creating month lesson".blue);
 
-      await createMonthLesson();
-      next();
-    } else if (todayIsSaturday) {
-      console.log("Today is Saturday.".blue);
-      console.log("Creating week lesson".blue);
+    //   await createMonthLesson();
+    //   next();
+    // } else if (todayIsSaturday) {
+    //   console.log("Today is Saturday.".blue);
+    //   console.log("Creating week lesson".blue);
 
-      const existedWeekLesson = await Lesson.findOne({
-        lessonDate: date.formattedCurrentDate,
-      });
+    //   const existedWeekLesson = await Lesson.findOne({
+    //     lessonDate: date.formattedCurrentDate,
+    //   });
 
-      if (existedWeekLesson) {
-        console.log("Week lesson is already existing".blue);
-        return next();
-      }
+    //   if (existedWeekLesson) {
+    //     console.log("Week lesson is already existing".blue);
+    //     return next();
+    //   }
 
-      //* если карточек не хватает - взять за основу общий массив карточек
-      // todo должен браться имеющийся массив...
-      // todo и в него должны пушиться рандомных N карточек
-      const cardsForWeekLesson =
-        Algorithm.takenCards.week.length > 15
-          ? Algorithm.takenCards.week
-          : Algorithm.cards;
+    //   //* если карточек не хватает - взять за основу общий массив карточек
+    //   // todo должен браться имеющийся массив...
+    //   // todo и в него должны пушиться рандомных N карточек
+    //   const cardsForWeekLesson =
+    //     Algorithm.takenCards.week.length > 15
+    //       ? Algorithm.takenCards.week
+    //       : Algorithm.cards;
 
-      await createWeekLesson(
-        userId,
-        language,
-        date.formattedCurrentDate,
-        date.expiredDate,
-        cardsForWeekLesson,
-        Algorithm.techProps
-      );
+    //   await createWeekLesson(
+    //     userId,
+    //     language,
+    //     date.formattedCurrentDate,
+    //     date.expiredDate,
+    //     cardsForWeekLesson,
+    //     Algorithm.techProps
+    //   );
 
-      return next();
-    }
+    //   return next();
+    // }
 
     if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
     // Calculate how many days are left until Saturday
-    const daysRemaining = 6 - date.currentDayOfWeek;
+    // const daysRemaining = 6 - date.currentDayOfWeek; //! старая версия. Пока что сохранить
 
     const lessonsToCreate = await createLessons(
-      daysRemaining,
+      date.daysUntilSunday,
       date.currentDate,
       user._id,
       language,
@@ -202,9 +202,10 @@ const createLessons = async (
 ) => {
   try {
     const lessonsToCreate = [];
+    if (daysRemaining === 0 || daysRemaining === -1) return [];
 
     // Create lessons for each day until Saturday
-    for (let i = 0; i <= daysRemaining; i++) {
+    for (let i = 0; i < daysRemaining; i++) {
       const uniqueCards = new Set();
 
       // Select random unique cards (until the desired number is reached)
@@ -329,17 +330,29 @@ const createMonthLesson = async (userId, language, cards, techProps) => {
 };
 
 function getCurrentDate() {
-  // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
   const currentDate = moment();
   const formattedCurrentDate = currentDate.format("DD.MM.YYYY");
-  const currentDayOfWeek = currentDate.day();
+  const currentDayOfWeek = moment().isoWeekday(); // Получаем текущий день недели (1 - понедельник, 2 - вторник, и так далее, 7 - воскресенье)
+  const daysUntilSunday = 7 - currentDayOfWeek; // остаток дней до субботы
   const expiredDate = currentDate
     .clone()
     .add(1, "days")
     .set({ hour: 3, minute: 0, second: 0 })
     .format("DD.MM.YYYY");
 
-  return { currentDate, formattedCurrentDate, currentDayOfWeek, expiredDate };
+  console.log(`Current date - ${currentDate}`.yellow);
+  console.log(`Formatted current date  - ${formattedCurrentDate}`.yellow);
+  console.log(`Current day of week date - ${currentDayOfWeek}`.yellow);
+  console.log(`Expired date - ${expiredDate}`.yellow);
+  console.log(`Days until the Sunday - ${daysUntilSunday}`.yellow);
+
+  return {
+    currentDate,
+    formattedCurrentDate,
+    currentDayOfWeek,
+    daysUntilSunday,
+    expiredDate,
+  };
 }
 
 module.exports = {
