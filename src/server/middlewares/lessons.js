@@ -2,6 +2,8 @@ const Lesson = require("../models/lessons/lessons");
 const User = require("../models/user/user");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
 const moment = require("moment");
+
+// moment config
 moment.tz.setDefault("Europe/Kiev");
 moment.updateLocale("en", {
   week: {
@@ -9,13 +11,6 @@ moment.updateLocale("en", {
   },
   // weekEnd: 6, // Конец недели - суббота (6)
 });
-
-console.log("Сегодня", moment().format("DD-MM-YYYY HH:mm"));
-console.log("Конец недели", moment().endOf("week").format("DD-MM-YYYY HH:mm"));
-console.log(
-  "Конец недели - 1 день",
-  moment().endOf("week").subtract(1, "days").format("DD-MM-YYYY HH:mm")
-);
 
 // Middleware function to check if a lesson exists by its ID
 const isLessonExistById = async (req, res, next) => {
@@ -96,7 +91,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
     const expiredDate = currentDate
       .clone()
       .add(1, "days")
-      .set({ hour: 3, minute: 0, second: 0 });
+      .set({ hour: 3, minute: 0, second: 0 })
+      .format("DD.MM.YYYY");
 
     // Find the user by their identifier
     const [user, Algorithm] = await Promise.all([
@@ -126,7 +122,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
       //* если карточек не хватает - взять за основу общий массив карточек
       const cardsForWeekLesson =
         Algorithm.takenCards.week.length > 15
-          ? Algorithm.takenCards
+          ? Algorithm.takenCards.week
           : Algorithm.cards;
 
       await createWeekLesson(
