@@ -60,16 +60,23 @@ const isScheduleAlreadyExists = async (req, res, next) => {
     const currentDate = moment();
     const userId = req.user.id;
 
+    // Получите начало и конец недели в формате "DD.MM.YYYY"
+    const startOfWeek = currentDate.startOf("week").format("DD.MM.YYYY");
+    const endOfWeek = currentDate.endOf("week").format("DD.MM.YYYY");
+
     // trying to find in DB lessons on planned date
     const existingLessons = await Lesson.find({
       userId,
       lessonDate: {
-        $gte: currentDate.startOf("week").toDate(),
-        $lte: currentDate.endOf("week").toDate(),
+        $gte: startOfWeek,
+        $lte: endOfWeek,
       },
     });
 
-    if (existingLessons.length !== 0) req.scheduleIsExists = true;
+    if (existingLessons.length !== 0) {
+      console.log("Lessons schedule is already exists".blue);
+      req.scheduleIsExists = true;
+    }
 
     next();
   } catch (e) {
@@ -142,7 +149,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     const lessonsToCreate = await createLessons(
       daysRemaining,
-      date.formattedCurrentDate,
+      date.currentDate,
       user._id,
       language,
       Algorithm.cards,
@@ -224,24 +231,13 @@ const createLessons = async (
         startTime: null,
         endTime: null,
         status: null,
-        lessonDate: day.startOf("day").toDate(),
+        lessonDate: day.format("DD.MM.YYYY"),
         lessonDuration: techProps.lessonDuration,
-        expired: expiredDate.toDate(),
+        expired: expiredDate.format("DD.MM.YYYY"),
       };
 
       lessonsToCreate.push(lesson);
     }
-
-    // // creating week lesson
-    // const weekLesson = await createWeekLesson(
-    //   userId,
-    //   language,
-    //   currentDate,
-    //   takenCards.week,
-    //   techProps
-    // );
-
-    // lessonsToCreate.push(weekLesson);
 
     return lessonsToCreate;
   } catch (e) {
