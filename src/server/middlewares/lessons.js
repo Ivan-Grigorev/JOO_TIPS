@@ -85,14 +85,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
     const language = req.body.language;
 
     // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
-    const currentDate = moment();
-    const formattedCurrentDate = currentDate.format("DD.MM.YYYY");
-    const currentDayOfWeek = currentDate.day();
-    const expiredDate = currentDate
-      .clone()
-      .add(1, "days")
-      .set({ hour: 3, minute: 0, second: 0 })
-      .format("DD.MM.YYYY");
+    const date = getCurrentDate();
 
     // Find the user by their identifier
     const [user, Algorithm] = await Promise.all([
@@ -100,18 +93,18 @@ async function createScheduleToEndOfWeek(req, res, next) {
       selectRandomCards(userId, language),
     ]);
 
-    if (isTodayEndOfTheMonth(currentDate) === true) {
+    if (isTodayEndOfTheMonth(date.currentDate) === true) {
       console.log("Today is the end of the month.".blue);
       console.log("Creating month lesson".blue);
 
       await createMonthLesson();
       next();
-    } else if (isTodaySaturday(currentDayOfWeek) === true) {
+    } else if (isTodaySaturday(date.currentDayOfWeek) === true) {
       console.log("Today is Saturday.".blue);
       console.log("Creating week lesson".blue);
 
       const existedWeekLesson = await Lesson.findOne({
-        lessonDate: currentDate,
+        lessonDate: date.formattedCurrentDate,
       });
 
       if (existedWeekLesson) {
@@ -120,6 +113,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
       }
 
       //* если карточек не хватает - взять за основу общий массив карточек
+      // todo должен браться имеющийся массив...
+      // todo и в него должны пушиться рандомных N карточек
       const cardsForWeekLesson =
         Algorithm.takenCards.week.length > 15
           ? Algorithm.takenCards.week
@@ -128,8 +123,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
       await createWeekLesson(
         userId,
         language,
-        formattedCurrentDate,
-        expiredDate,
+        date.formattedCurrentDate,
+        date.expiredDate,
         cardsForWeekLesson,
         Algorithm.techProps
       );
@@ -140,11 +135,11 @@ async function createScheduleToEndOfWeek(req, res, next) {
     if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
     // Calculate how many days are left until Saturday
-    const daysRemaining = 6 - currentDayOfWeek;
+    const daysRemaining = 6 - date.currentDayOfWeek;
 
     const lessonsToCreate = await createLessons(
       daysRemaining,
-      formattedCurrentDate,
+      date.formattedCurrentDate,
       user._id,
       language,
       Algorithm.cards,
@@ -333,6 +328,20 @@ const createMonthLesson = async (userId, language, cards, techProps) => {
     throw e;
   }
 };
+
+function getCurrentDate() {
+  // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
+  const currentDate = moment();
+  const formattedCurrentDate = currentDate.format("DD.MM.YYYY");
+  const currentDayOfWeek = currentDate.day();
+  const expiredDate = currentDate
+    .clone()
+    .add(1, "days")
+    .set({ hour: 3, minute: 0, second: 0 })
+    .format("DD.MM.YYYY");
+
+  return { currentDate, formattedCurrentDate, currentDayOfWeek, expiredDate };
+}
 
 module.exports = {
   isLessonExistById,
