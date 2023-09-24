@@ -101,46 +101,46 @@ async function createScheduleToEndOfWeek(req, res, next) {
     ]);
 
     const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
-    const todayIsSaturday = isTodaySaturday(date.currentDayOfWeek) === true;
+    const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
 
-    // if (todayIsEndOfMonth) {
-    //   console.log("Today is the end of the month.".blue);
-    //   console.log("Creating month lesson".blue);
+    if (todayIsEndOfMonth) {
+      console.log("Today is the end of the month.".blue);
+      console.log("Creating month lesson".blue);
 
-    //   await createMonthLesson();
-    //   next();
-    // } else if (todayIsSaturday) {
-    //   console.log("Today is Saturday.".blue);
-    //   console.log("Creating week lesson".blue);
+      await createMonthLesson();
+      next();
+    } else if (todayIsSunday) {
+      console.log("Today is Saturday.".blue);
+      console.log("Creating week lesson".blue);
 
-    //   const existedWeekLesson = await Lesson.findOne({
-    //     lessonDate: date.formattedCurrentDate,
-    //   });
+      const existedWeekLesson = await Lesson.findOne({
+        lessonDate: date.formattedCurrentDate,
+      });
 
-    //   if (existedWeekLesson) {
-    //     console.log("Week lesson is already existing".blue);
-    //     return next();
-    //   }
+      if (existedWeekLesson) {
+        console.log("Week lesson is already existing".blue);
+        return next();
+      }
 
-    //   //* если карточек не хватает - взять за основу общий массив карточек
-    //   // todo должен браться имеющийся массив...
-    //   // todo и в него должны пушиться рандомных N карточек
-    //   const cardsForWeekLesson =
-    //     Algorithm.takenCards.week.length > 15
-    //       ? Algorithm.takenCards.week
-    //       : Algorithm.cards;
+      //* если карточек не хватает - взять за основу общий массив карточек
+      // todo должен браться имеющийся массив...
+      // todo и в него должны пушиться рандомных N карточек
+      const cardsForWeekLesson =
+        Algorithm.takenCards.week.length > 15
+          ? Algorithm.takenCards.week
+          : Algorithm.cards;
 
-    //   await createWeekLesson(
-    //     userId,
-    //     language,
-    //     date.formattedCurrentDate,
-    //     date.expiredDate,
-    //     cardsForWeekLesson,
-    //     Algorithm.techProps
-    //   );
+      await createWeekLesson(
+        userId,
+        language,
+        date.formattedCurrentDate,
+        date.expiredDate,
+        cardsForWeekLesson,
+        Algorithm.techProps
+      );
 
-    //   return next();
-    // }
+      return next();
+    }
 
     if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
@@ -169,8 +169,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
 }
 
 // todo remove to utils file
-function isTodaySaturday(currentDayOfWeek) {
-  if (currentDayOfWeek === 0) {
+function isTodaySunday(currentDayOfWeek) {
+  if (currentDayOfWeek === 7) {
     return true;
   }
   return false;
