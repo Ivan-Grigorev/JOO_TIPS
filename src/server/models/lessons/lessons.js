@@ -55,7 +55,7 @@ const lessonSchema = new mongoose.Schema(
       },
     ],
     expired: {
-      type: Date,
+      type: String,
       required: [true, "Expired property is required."],
     },
 
@@ -75,7 +75,7 @@ const lessonSchema = new mongoose.Schema(
       default: null,
     },
     lessonDate: {
-      type: Date,
+      type: String,
       required: [true, "Lesson date is required."],
     },
     lessonDuration: {
