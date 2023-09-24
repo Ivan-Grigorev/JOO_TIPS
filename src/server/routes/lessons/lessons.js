@@ -10,7 +10,13 @@ const {
 
 const router = express.Router();
 
-router.get("", auth, middlewares.isScheduleAlreadyExists, getLessons);
+router.get(
+  "",
+  auth,
+  middlewares.isScheduleAlreadyExists,
+  middlewares.createScheduleToEndOfWeek,
+  getLessons
+);
 
 router.get("/points", auth, getLessonsPointsSum);
 
