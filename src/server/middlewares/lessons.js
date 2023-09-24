@@ -10,10 +10,11 @@ moment.updateLocale("en", {
   // weekEnd: 6, // Конец недели - суббота (6)
 });
 
-console.log("Конец недели", moment().endOf("week").toDate());
+console.log("Сегодня", moment().format("DD-MM-YYYY HH:mm"));
+console.log("Конец недели", moment().endOf("week").format("DD-MM-YYYY HH:mm"));
 console.log(
   "Конец недели - 1 день",
-  moment().endOf("week").subtract(1, "days").toDate()
+  moment().endOf("week").subtract(1, "days").format("DD-MM-YYYY HH:mm")
 );
 
 // Middleware function to check if a lesson exists by its ID
@@ -84,12 +85,13 @@ const isScheduleAlreadyExists = async (req, res, next) => {
 
 // todo написать unit-test
 async function createScheduleToEndOfWeek(req, res, next) {
-  // set boolean to true in past midddleware
-  if (req.scheduleIsExists) return next();
-
   try {
     const userId = req.user.id;
     const language = req.body.language;
+
+    // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
+    const currentDate = moment();
+    const currentDayOfWeek = currentDate.day();
 
     // Find the user by their identifier
     const [user, Algorithm] = await Promise.all([
@@ -97,9 +99,39 @@ async function createScheduleToEndOfWeek(req, res, next) {
       selectRandomCards(userId, language),
     ]);
 
-    // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
-    const currentDate = moment();
-    const currentDayOfWeek = currentDate.day();
+    if (isTodayEndOfTheMonth(currentDate) === true) {
+      console.log("Today is the end of the month.".blue);
+      console.log("Creating month lesson".blue);
+
+      await createMonthLesson();
+      next();
+    } else if (isTodaySaturday(currentDayOfWeek) === true) {
+      console.log("Today is Saturday.".blue);
+      console.log("Creating week lesson".blue);
+
+      const today = moment().startOf("day").toDate();
+
+      const existedWeekLesson = await Lesson.findOne({
+        lessonDate: today,
+      });
+
+      if (existedWeekLesson) {
+        console.log("Week lesson is already existing".blue);
+        return next();
+      }
+
+      await createWeekLesson(
+        userId,
+        language,
+        currentDate,
+        Algorithm.takenCards.week,
+        Algorithm.techProps
+      );
+
+      return next();
+    }
+
+    if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
     // Calculate how many days are left until Saturday
     const daysRemaining = 6 - currentDayOfWeek;
@@ -123,6 +155,29 @@ async function createScheduleToEndOfWeek(req, res, next) {
     console.error("Error creating user schedule:", e);
     throw new Error("Error creating user schedule");
   }
+}
+
+// todo remove to utils file
+function isTodaySaturday(currentDayOfWeek) {
+  if (currentDayOfWeek === 0) {
+    return true;
+  }
+  return false;
+}
+
+// todo remove to utils file
+function isTodayEndOfTheMonth(currentDate) {
+  // Получите день месяца
+  const currentDayOfMonth = currentDate.date();
+
+  // Получите количество дней в текущем месяце
+  const daysInCurrentMonth = currentDate.daysInMonth();
+
+  // Проверьте, что сегодня последний день месяца
+  if (currentDayOfMonth === daysInCurrentMonth) {
+    return true;
+  }
+  return false;
 }
 
 const createLessons = async (
@@ -192,9 +247,6 @@ const createLessons = async (
 };
 
 const createWeekLesson = async (
-  req,
-  res,
-  next,
   userId,
   language,
   currentDate,
@@ -202,9 +254,6 @@ const createWeekLesson = async (
   techProps
 ) => {
   try {
-    const userId = req.user.id;
-    const language = req.body.language;
-
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
