@@ -1,7 +1,8 @@
+const TopicsToChoose = require("../../../../models/Tech/TopicsToChooseAmount");
+
 async function getTopicsToChooseAmount() {
   try {
-    const TopicsToChooseAmount = null;
-    return await TopicsToChooseAmount.findOne();
+    return await TopicsToChoose.findOne();
   } catch (E) {
     console.error("Error getting topics to choose amount", E);
   }

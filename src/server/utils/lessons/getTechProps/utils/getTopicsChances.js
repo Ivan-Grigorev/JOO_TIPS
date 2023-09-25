@@ -1,7 +1,8 @@
+const Chances = require("../../../../models/Tech/TopicsChances");
+
 async function getTopicsChances() {
   try {
-    const TopicsChances = null;
-    return await TopicsChances.findOne();
+    return await Chances.findOne();
   } catch (e) {
     console.error("Error getting topics chances", e);
   }
