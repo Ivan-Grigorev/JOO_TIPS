@@ -182,19 +182,14 @@ async function createMonthLesson(
 
     let takenCardIDs = [];
 
-    // Проверяем, достаточно ли карт в массиве takenCards.month
     takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.month
     if (takenCards.month.length < cardsAmount) {
-      // Распространяем массив takenCards.month
       takenCardIDs = shuffledTakenCards;
 
-      // Вычисляем, сколько дополнительных карт нужно для cardsAmount
+      // counting how many cards required
       const additionalCardsNeeded = cardsAmount - takenCards.month.length;
-
-      // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
       const additionalCards = await selectRandomCards(additionalCardsNeeded);
-
-      // Разглаживаем массивы и добавляем дополнительные карты
+      // Flat array of cards
       takenCardIDs.push(...additionalCards.flat());
     }
 
