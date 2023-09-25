@@ -1,16 +1,16 @@
-const LessonConfig = require("../../../models/Tech/LessonConfig");
+const getLessonConfig = require("./utils/getLessonConfig");
 const getTopicsByLanguage = require("./utils/getTopicsByLanguage");
 const getTopicsChances = require("./utils/getTopicsChances");
 const getTopicsToChooseAmount = require("./utils/getTopicsToChooseAmount");
 
-const getTechProps = async (db, language) => {
+const getTechProps = async (language) => {
   try {
     const [techTopics, chances, topics, LessonConfiguration] =
       await Promise.all([
         getTopicsToChooseAmount(),
         getTopicsChances(),
         getTopicsByLanguage(language),
-        LessonConfig.findOne(),
+        getLessonConfig(),
       ]);
 
     const { topicsToChoose } = techTopics;
