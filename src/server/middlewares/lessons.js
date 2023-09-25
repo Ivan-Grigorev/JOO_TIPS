@@ -111,7 +111,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
         language,
         techProps.monthLesson.cardsAmount,
         date.formattedCurrentDate,
-        date.expiredDate
+        date.expiredDate,
+        techProps.monthLesson.duration
       );
       next();
     } else if (todayIsSunday) {
@@ -252,16 +253,16 @@ async function createWeekLesson(
 ) {
   try {
     const takenCards = await getAllTakenCards(userId);
-    const algorithm = Algorithm(takenCards.week, cardsAmount);
+    const shuffledTakenCards = Algorithm(takenCards.week, cardsAmount);
 
     let takenCardIDs = [];
 
     // Проверяем, достаточно ли карт в массиве takenCards.week
     if (takenCards.week.length >= cardsAmount) {
-      takenCardIDs = [...takenCards.week]; // Распространяем массив takenCards.week
+      takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.week
     } else {
       // Распространяем массив takenCards.week
-      takenCardIDs = [...takenCards.week];
+      takenCardIDs = shuffledTakenCards;
 
       // Вычисляем, сколько дополнительных карт нужно для cardsAmount
       const additionalCardsNeeded = cardsAmount - takenCards.week.length;
@@ -311,16 +312,36 @@ async function createMonthLesson(
   language,
   cardsAmount,
   currentDate,
-  expiredDate
+  expiredDate,
+  lessonDuration
 ) {
   try {
-    const RandomCards = await selectRandomCards(userId, language, cardsAmount);
-    const { takenCards, techProps } = RandomCards;
+    const takenCards = await getAllTakenCards(userId);
+    const shuffledTakenCards = Algorithm(takenCards.month, cardsAmount);
+
+    let takenCardIDs = [];
+
+    // Проверяем, достаточно ли карт в массиве takenCards.month
+    takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.month
+    if (takenCards.month.length < cardsAmount) {
+      // Распространяем массив takenCards.month
+      takenCardIDs = shuffledTakenCards;
+
+      // Вычисляем, сколько дополнительных карт нужно для cardsAmount
+      const additionalCardsNeeded = cardsAmount - takenCards.month.length;
+
+      // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
+      const additionalCards = selectRandomCards(additionalCardsNeeded);
+
+      // Разглаживаем массивы и добавляем дополнительные карты
+      takenCardIDs.push(...additionalCards.flat());
+    }
+
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < cardsAmount) {
-      const cardID = takenCards.month[Math.floor(Math.random() * takenCards.month.length)]; // prettier-ignore
+    while (uniqueCards.size < takenCardIDs.length) {
+      const cardID = takenCardIDs[Math.floor(Math.random() * takenCardIDs.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
     }
@@ -336,7 +357,7 @@ async function createMonthLesson(
       endTime: null,
       status: null,
       lessonDate: currentDate,
-      lessonDuration: techProps.monthLesson.duration,
+      lessonDuration,
       expired: expiredDate,
     };
 
