@@ -56,49 +56,39 @@ const isLessonAlreadyCompleted = async (req, res, next) => {
   }
 };
 
-// Check if there are already lessons for the current week
+// Middleware to check if there are already lessons for the current week
 const isScheduleAlreadyExists = async (req, res, next) => {
   try {
-    const today = moment(); // Текущая дата
-    const saturday = 6; // День недели субботы (0 - воскресенье, 1 - понедельник, ..., 6 - суббота)
+    const today = moment(); // Get the current date
+    const sunday = 0; // Sunday is represented as 0 in moment.js (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
 
-    // Создайте массив для хранения дат
-    const datesUntilSaturday = [];
+    // If today is Sunday, immediately execute next()
+    if (today.day() === sunday) return next();
 
-    // Пока текущий день недели не равен субботе, добавляйте дни в массив
-    const isNotSaturday = today.day() !== saturday;
+    const datesUntilSunday = []; // Create an array to store dates
 
-    console.log("Старт цикла)");
-
-    // Пока текущий день недели не равен субботе и не является последним днем месяца
-    while (
-      isNotSaturday &&
-      !today.isSame(moment(today).endOf("month"), "day") // не выносить в отдельную переменную
-    ) {
-      datesUntilSaturday.push(today.format("DD.MM.YYYY"));
-      today.add(1, "day"); // Переход к следующему дню
+    // The loop runs until it's Sunday
+    while (today.day() !== sunday) {
+      datesUntilSunday.push(today.format("DD.MM.YYYY")); // Add the date to the array
+      today.add(1, "day"); // Move to the next day
     }
 
-    // Добавим субботу включительно
-    datesUntilSaturday.push(today.format("DD.MM.YYYY"));
+    console.log("Dates until Sunday: ", datesUntilSunday); // Log the array of dates
 
-    // Массив с датами
-    console.log(datesUntilSaturday);
-
-    // Найти документы в промежутке от начала недели до субботы
+    // Find documents with lesson dates within the current week
     const existingLessons = await Lesson.find({
-      lessonDate: { $in: datesUntilSaturday },
+      lessonDate: { $in: datesUntilSunday },
     });
 
     if (existingLessons.length !== 0) {
-      console.log("Lessons schedule is already exists".blue);
-      req.scheduleIsExists = true;
+      console.log("Lessons schedule already exists".blue); // Log a message if lessons exist
+      req.scheduleIsExists = true; // Set a flag in the request object
     }
 
-    next();
-  } catch (e) {
-    console.error("Error in createScheduleToEndOfWeek middleware".red, e);
-    res.status(500).json({ message: "Internal server error" });
+    next(); // Continue to the next middleware
+  } catch (error) {
+    console.error("Error in createScheduleToEndOfWeek middleware".red, error); // Log an error message
+    res.status(500).json({ message: "Internal server error" }); // Respond with a 500 Internal Server Error
   }
 };
 
