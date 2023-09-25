@@ -6,6 +6,7 @@ const isTodaySunday = require("../utils/lessons/isTodaySunday");
 const isTodayEndOfTheMonth = require("../utils/lessons/isTodayEndOfTheMonth");
 
 const moment = require("moment");
+const isLessonExistsForToday = require("../utils/lessons/isLessonExistsForToday");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -110,6 +111,17 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     if (todayIsEndOfMonth) {
       console.log("Today is the end of the month.".blue);
+
+      const existingMonthLesson = await isLessonExistsForToday(
+        userId,
+        language,
+        date.formattedCurrentDate
+      );
+
+      if (existingMonthLesson) {
+        console.log("Month lesson is already exists.".blue);
+        return next();
+      }
       console.log("Creating month lesson".blue);
 
       await createLessons.monthly(
@@ -120,22 +132,24 @@ async function createScheduleToEndOfWeek(req, res, next) {
         date.expiredDate,
         techProps.monthLesson.duration
       );
-      next();
+      return next();
     } else if (todayIsSunday) {
-      console.log("Today is Saturday.".blue);
-      console.log("Creating week lesson".blue);
+      console.log("Today is Sunday.".blue);
 
-      const existedWeekLesson = await Lesson.findOne({ lessonDate: date.formattedCurrentDate }); // prettier-ignore
+      const existedWeekLesson = await isLessonExistsForToday(
+        userId,
+        language,
+        date.formattedCurrentDate
+      );
 
       if (existedWeekLesson) {
-        console.log("Week lesson is already existing".blue);
+        console.log("Week lesson already exists".blue);
         return next();
       }
 
-      //* если карточек не хватает - взять за основу общий массив карточек
-      // todo должен браться имеющийся массив...
-      // todo и в него должны пушиться рандомных N карточек
+      console.log("Creating week lesson".blue);
 
+      // If there are not enough cards, use a shared array and push random cards into it
       await createLessons.weekly(
         userId,
         language,
@@ -148,9 +162,9 @@ async function createScheduleToEndOfWeek(req, res, next) {
       return next();
     }
 
-    if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
+    if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
 
-    console.log("Creating day lessons".blue);
+    console.log("Creating daily lessons".blue);
 
     const lessonsToCreate = await createLessons.daily(
       date.daysUntilSunday,
@@ -162,7 +176,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
     );
 
     await Lesson.insertMany(lessonsToCreate); // Insert the created lessons into the database
-    console.log(lessonsToCreate.length + " Lessons have been created".green);
+    console.log(lessonsToCreate.length + " lessons have been created".green);
 
     next();
   } catch (e) {
