@@ -144,19 +144,18 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
-    // const lessonsToCreate = await createLessons(
-    //   date.daysUntilSunday,
-    //   date.currentDate,
-    //   userId,
-    //   language,
-    //   Algorithm.cards,
-    //   Algorithm.takenCards,
-    //   Algorithm.techProps
-    // );
+    const lessonsToCreate = await createLessons(
+      date.daysUntilSunday,
+      date.currentDate,
+      userId,
+      language,
+      techProps.dayLesson.cardsAmount,
+      techProps.dayLesson.duration
+    );
 
     // Insert the created lessons into the database
-    // await Lesson.insertMany(lessonsToCreate);
-    // console.log(lessonsToCreate.length + " Lessons have been created".green);
+    await Lesson.insertMany(lessonsToCreate);
+    console.log(lessonsToCreate.length + " Lessons have been created".green);
 
     next();
   } catch (e) {
@@ -193,11 +192,11 @@ async function createLessons(
   currentDate,
   userId,
   language,
-  cards,
-  takenCards,
-  techProps
+  cardsAmount,
+  lessonDuration
 ) {
   try {
+    const cards = await selectRandomCards(userId, language, cardsAmount);
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
 
@@ -206,7 +205,7 @@ async function createLessons(
       const uniqueCards = new Set();
 
       // Select random unique cards (until the desired number is reached)
-      while (uniqueCards.size < techProps.cardsAmount) {
+      while (uniqueCards.size < cardsAmount) {
         const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
 
         if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
@@ -230,7 +229,7 @@ async function createLessons(
         endTime: null,
         status: null,
         lessonDate: day.format("DD.MM.YYYY"),
-        lessonDuration: techProps.dayLesson.duration,
+        lessonDuration,
         expired: expiredDate.format("DD.MM.YYYY"),
       };
 
