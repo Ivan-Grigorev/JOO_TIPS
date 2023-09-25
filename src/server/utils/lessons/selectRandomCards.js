@@ -1,17 +1,15 @@
-const mongoDB = require("../../db");
 const Card = require("../../models/Card/Card");
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm");
 const getAllTakenCards = require("./getAllTakenCards");
-const getTechProps = require("./getTechProps");
+const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
 
-const selectRandomCards = async (userId, language) => {
-  const db = await mongoDB();
+const selectRandomCards = async (userId, language, cardsAmount) => {
   try {
-    const [techProps, user, takenCards] = await Promise.all([
-      getTechProps(db, language),
+    const [user, takenCards, topicsList] = await Promise.all([
       User.findById(userId),
       getAllTakenCards(userId),
+      getTopicsByLanguage(language),
     ]);
 
     // Находим объект с нужным языком в массиве languages пользователя
@@ -26,17 +24,17 @@ const selectRandomCards = async (userId, language) => {
         return lang.language === language;
       });
 
-      languageToUpdate.activeTopic = techProps.topics[0].topic;
+      languageToUpdate.activeTopic = topicsList[0].topic;
 
       await user.save();
     }
 
     // Получаем активные темы для указанного языка (может быть массивом)
-    const activeTopics = [activeLanguage.activeTopic];
+    const activeTopics = [activeLanguage.activeTopic]; // в будущем здесь будет максимум 4 темы
 
     const cardIDs = [];
 
-    // Проходимся по массиву тем, ищем карточки с соответствующими темами
+    // Проходимся по массиву тем, ищем уникальные карточки с соответствующими темами
     // Добавляем их в массив cardIDs
     for (const topic of activeTopics) {
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
@@ -49,11 +47,11 @@ const selectRandomCards = async (userId, language) => {
 
     console.log("Количество найденных карточек:", cardIDs.length);
 
-    if (cardIDs.length === 0) return { cards: null, techProps };
+    if (cardIDs.length === 0) return { cards: null };
 
-    const randomCards = Algorithm(cardIDs, techProps.cardsAmount);
+    const randomCards = Algorithm(cardIDs, cardsAmount);
 
-    return { cards: randomCards, techProps, takenCards };
+    return { cards: randomCards, takenCards };
   } catch (e) {
     console.error(e);
   }
