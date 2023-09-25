@@ -134,7 +134,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
         language,
         techProps.weekLesson.cardsAmount,
         date.formattedCurrentDate,
-        date.expiredDate
+        date.expiredDate,
+        techProps.weekLesson.duration
       );
 
       return next();
@@ -246,7 +247,8 @@ async function createWeekLesson(
   language,
   cardsAmount,
   currentDate,
-  expiredDate
+  expiredDate,
+  lessonDuration
 ) {
   try {
     const takenCards = await getAllTakenCards(userId);
@@ -291,7 +293,7 @@ async function createWeekLesson(
       endTime: null,
       status: null,
       lessonDate: currentDate,
-      lessonDuration: techProps.weekLesson.duration,
+      lessonDuration,
       expired: expiredDate,
     };
 
