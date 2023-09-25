@@ -5,7 +5,7 @@ const getTopicsToChooseAmount = require("./utils/getTopicsToChooseAmount");
 
 const getTechProps = async (language) => {
   try {
-    const [techTopics, chances, topics, LessonConfiguration] =
+    const [topicsToChooseAmount, topicsChances, topicsList, lessonConfig] =
       await Promise.all([
         getTopicsToChooseAmount(),
         getTopicsChances(),
@@ -13,7 +13,7 @@ const getTechProps = async (language) => {
         getLessonConfig(),
       ]);
 
-    const { topicsToChoose } = techTopics;
+    const { topicsToChoose } = topicsToChooseAmount;
 
     const {
       missedLessonRadius,
@@ -21,15 +21,15 @@ const getTechProps = async (language) => {
       dayLesson,
       weekLesson,
       monthLesson,
-    } = LessonConfiguration;
+    } = lessonConfig;
 
     return {
       dayLesson,
       weekLesson,
       monthLesson,
-      topics, // topics list
+      topics: topicsList, // topics list
       topicsToChoose,
-      chances, // formula chances
+      chances: topicsChances, // formula chances
       lessonPoints,
       missedLessonRadius,
     };
