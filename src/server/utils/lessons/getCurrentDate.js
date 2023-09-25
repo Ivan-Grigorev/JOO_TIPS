@@ -1,5 +1,16 @@
 const moment = require("moment");
 
+/**
+ * @function getCurrentDate
+ * @description Retrieves and formats the current date along with additional date-related information.
+ *
+ * @returns {Object} An object containing the following properties:
+ *   - currentDate (moment): The current date as a moment.js object.
+ *   - formattedCurrentDate (string): The current date in the "DD.MM.YYYY" format.
+ *   - currentDayOfWeek (number): The current day of the week (1 for Monday, 2 for Tuesday, ..., 7 for Sunday).
+ *   - daysUntilSunday (number): The number of days remaining until Sunday.
+ *   - expiredDate (string): A formatted date representing the next day at 3:00 AM.
+ */
 function getCurrentDate() {
   const currentDate = moment();
   const formattedCurrentDate = currentDate.format("DD.MM.YYYY");

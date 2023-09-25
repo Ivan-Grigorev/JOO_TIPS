@@ -3,6 +3,21 @@ const selectRandomCards = require("./selectRandomCards");
 const getAllTakenCards = require("../../utils/lessons/getAllTakenCards");
 const Algorithm = require("./Algorithm");
 
+/**
+ * @function createLessons
+ * @description Creates lessons for a specified number of days until Saturday.
+ *
+ * @param {number} daysRemaining - The number of days remaining in the current week.
+ * @param {moment} currentDate - The current date as a moment.js object.
+ * @param {string} userId - The user's ID.
+ * @param {string} language - The language for the lessons.
+ * @param {number} cardsAmount - The number of cards for each lesson.
+ * @param {number} lessonDuration - The duration of each lesson.
+ *
+ * @returns {Promise<Array>} A promise that resolves to an array of lesson objects.
+ *
+ * @throws {Error} Throws an error if there is an issue while creating lessons.
+ */
 async function createLessons(
   daysRemaining,
   currentDate,
@@ -60,6 +75,21 @@ async function createLessons(
   }
 }
 
+/**
+ * @function createWeekLesson
+ * @description Creates a weekly lesson for the specified user.
+ *
+ * @param {string} userId - The user's ID.
+ * @param {string} language - The language for the lesson.
+ * @param {number} cardsAmount - The number of cards for the lesson.
+ * @param {string} currentDate - The current date in "DD.MM.YYYY" format.
+ * @param {string} expiredDate - The date when the lesson expires in "DD.MM.YYYY" format.
+ * @param {number} lessonDuration - The duration of the lesson.
+ *
+ * @returns {Promise<object>} A promise that resolves to the created lesson object.
+ *
+ * @throws {Error} Throws an error if there is an issue while creating the weekly lesson.
+ */
 async function createWeekLesson(
   userId,
   language,
@@ -123,6 +153,21 @@ async function createWeekLesson(
   }
 }
 
+/**
+ * @function createMonthLesson
+ * @description Creates a monthly lesson for the specified user.
+ *
+ * @param {string} userId - The user's ID.
+ * @param {string} language - The language for the lesson.
+ * @param {number} cardsAmount - The number of cards for the lesson.
+ * @param {string} currentDate - The current date in "DD.MM.YYYY" format.
+ * @param {string} expiredDate - The date when the lesson expires in "DD.MM.YYYY" format.
+ * @param {number} lessonDuration - The duration of the lesson.
+ *
+ * @returns {Promise<object>} A promise that resolves to the created lesson object.
+ *
+ * @throws {Error} Throws an error if there is an issue while creating the monthly lesson.
+ */
 async function createMonthLesson(
   userId,
   language,
@@ -186,6 +231,14 @@ async function createMonthLesson(
   }
 }
 
+/**
+ * @module lessonCreation
+ * @description Module for creating daily, weekly, and monthly lessons.
+ *
+ * @exports {function} daily - Function to create daily lessons.
+ * @exports {function} weekly - Function to create a weekly lesson.
+ * @exports {function} monthly - Function to create a monthly lesson.
+ */
 module.exports = {
   daily: createLessons,
   weekly: createWeekLesson,
