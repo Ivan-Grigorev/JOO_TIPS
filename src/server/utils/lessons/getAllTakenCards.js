@@ -1,6 +1,7 @@
 const Lesson = require("../../models/lessons/lessons");
 const moment = require("moment");
 
+// todo добавить язык по которому идёт поиск
 async function getTakenCards(userId) {
   try {
     // Находим все уроки и выбираем только поле "cards"
