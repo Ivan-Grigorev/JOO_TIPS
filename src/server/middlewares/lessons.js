@@ -1,5 +1,4 @@
 const Lesson = require("../models/lessons/lessons");
-const User = require("../models/user/user");
 const getTechProps = require("../utils/lessons/getTechProps/getTechProps");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
 const getAllTakenCards = require("../utils/lessons/getAllTakenCards");
@@ -144,6 +143,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
+    console.log("Creating day lessons".blue);
+
     const lessonsToCreate = await createLessons(
       date.daysUntilSunday,
       date.currentDate,
@@ -154,7 +155,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
     );
 
     // Insert the created lessons into the database
-    await Lesson.insertMany(lessonsToCreate);
+    const insertLessons = await Lesson.insertMany(lessonsToCreate);
+    console.log(insertLessons);
     console.log(lessonsToCreate.length + " Lessons have been created".green);
 
     next();
@@ -196,7 +198,9 @@ async function createLessons(
   lessonDuration
 ) {
   try {
-    const cards = await selectRandomCards(userId, language, cardsAmount);
+    const Algorithm = await selectRandomCards(userId, language, cardsAmount);
+    const { cards } = Algorithm;
+
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
 
