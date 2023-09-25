@@ -1,7 +1,10 @@
 const Lesson = require("../models/lessons/lessons");
 const User = require("../models/user/user");
+const getTechProps = require("../utils/lessons/getTechProps/getTechProps");
 const selectRandomCards = require("../utils/lessons/selectRandomCards");
+const getAllTakenCards = require("../utils/lessons/getAllTakenCards");
 const moment = require("moment");
+const Algorithm = require("../utils/lessons/Algorithm");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -91,14 +94,10 @@ async function createScheduleToEndOfWeek(req, res, next) {
     const userId = req.user.id;
     const language = req.body.language;
 
-    // Get the current date and day of the week (0 - Sunday, 6 - Saturday)
+    // Get the current date in different formats
     const date = getCurrentDate();
 
-    // Find the user by their identifier
-    const [user, Algorithm] = await Promise.all([
-      User.findById(userId),
-      selectRandomCards(userId, language),
-    ]);
+    const techProps = await getTechProps(language);
 
     const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
     const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
@@ -110,19 +109,16 @@ async function createScheduleToEndOfWeek(req, res, next) {
       await createMonthLesson(
         userId,
         language,
+        techProps.monthLesson.cardsAmount,
         date.formattedCurrentDate,
-        date.expiredDate,
-        Algorithm.takenCards.month,
-        Algorithm.techProps
+        date.expiredDate
       );
       next();
     } else if (todayIsSunday) {
       console.log("Today is Saturday.".blue);
       console.log("Creating week lesson".blue);
 
-      const existedWeekLesson = await Lesson.findOne({
-        lessonDate: date.formattedCurrentDate,
-      });
+      const existedWeekLesson = await Lesson.findOne({lessonDate: date.formattedCurrentDate}); // prettier-ignore
 
       if (existedWeekLesson) {
         console.log("Week lesson is already existing".blue);
@@ -132,18 +128,13 @@ async function createScheduleToEndOfWeek(req, res, next) {
       //* если карточек не хватает - взять за основу общий массив карточек
       // todo должен браться имеющийся массив...
       // todo и в него должны пушиться рандомных N карточек
-      const cardsForWeekLesson =
-        Algorithm.takenCards.week.length > 15
-          ? Algorithm.takenCards.week
-          : Algorithm.cards;
 
       await createWeekLesson(
         userId,
         language,
+        techProps.weekLesson.cardsAmount,
         date.formattedCurrentDate,
-        date.expiredDate,
-        cardsForWeekLesson,
-        Algorithm.techProps
+        date.expiredDate
       );
 
       return next();
@@ -151,22 +142,19 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     if (req.scheduleIsExists) return next(); // set boolean to true in past midddleware
 
-    // Calculate how many days are left until Saturday
-    // const daysRemaining = 6 - date.currentDayOfWeek; //! старая версия. Пока что сохранить
-
-    const lessonsToCreate = await createLessons(
-      date.daysUntilSunday,
-      date.currentDate,
-      user._id,
-      language,
-      Algorithm.cards,
-      Algorithm.takenCards,
-      Algorithm.techProps
-    );
+    // const lessonsToCreate = await createLessons(
+    //   date.daysUntilSunday,
+    //   date.currentDate,
+    //   userId,
+    //   language,
+    //   Algorithm.cards,
+    //   Algorithm.takenCards,
+    //   Algorithm.techProps
+    // );
 
     // Insert the created lessons into the database
-    await Lesson.insertMany(lessonsToCreate);
-    console.log(lessonsToCreate.length + " Lessons have been created".green);
+    // await Lesson.insertMany(lessonsToCreate);
+    // console.log(lessonsToCreate.length + " Lessons have been created".green);
 
     next();
   } catch (e) {
@@ -198,7 +186,7 @@ function isTodayEndOfTheMonth(currentDate) {
   return false;
 }
 
-const createLessons = async (
+async function createLessons(
   daysRemaining,
   currentDate,
   userId,
@@ -206,7 +194,7 @@ const createLessons = async (
   cards,
   takenCards,
   techProps
-) => {
+) {
   try {
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
@@ -240,7 +228,7 @@ const createLessons = async (
         endTime: null,
         status: null,
         lessonDate: day.format("DD.MM.YYYY"),
-        lessonDuration: techProps.lessonDuration,
+        lessonDuration: techProps.dayLesson.duration,
         expired: expiredDate.format("DD.MM.YYYY"),
       };
 
@@ -250,24 +238,44 @@ const createLessons = async (
     return lessonsToCreate;
   } catch (e) {
     console.error("Error while creating lessons", e);
-    return e;
   }
-};
+}
 
-const createWeekLesson = async (
+async function createWeekLesson(
   userId,
   language,
+  cardsAmount,
   currentDate,
-  expiredDate,
-  takenCardsByWeek,
-  techProps
-) => {
+  expiredDate
+) {
   try {
+    const takenCards = await getAllTakenCards(userId);
+    const algorithm = Algorithm(takenCards.week, cardsAmount);
+
+    let takenCardIDs = [];
+
+    // Проверяем, достаточно ли карт в массиве takenCards.week
+    if (takenCards.week.length >= cardsAmount) {
+      takenCardIDs = [...takenCards.week]; // Распространяем массив takenCards.week
+    } else {
+      // Распространяем массив takenCards.week
+      takenCardIDs = [...takenCards.week];
+
+      // Вычисляем, сколько дополнительных карт нужно для cardsAmount
+      const additionalCardsNeeded = cardsAmount - takenCards.week.length;
+
+      // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
+      const additionalCards = selectRandomCards(additionalCardsNeeded);
+
+      // Разглаживаем массивы и добавляем дополнительные карты
+      takenCardIDs.push(...additionalCards.flat());
+    }
+
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < takenCardsByWeek.length) {
-      const cardID = takenCardsByWeek[Math.floor(Math.random() * takenCardsByWeek.length)]; // prettier-ignore
+    while (uniqueCards.size < takenCardIDs.length) {
+      const cardID = takenCardIDs[Math.floor(Math.random() * takenCardIDs.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
     }
@@ -283,7 +291,7 @@ const createWeekLesson = async (
       endTime: null,
       status: null,
       lessonDate: currentDate,
-      lessonDuration: 30, //! подтянуть значение из тех.коллекции
+      lessonDuration: techProps.weekLesson.duration,
       expired: expiredDate,
     };
 
@@ -294,22 +302,23 @@ const createWeekLesson = async (
     console.error("Error creating Sunday lesson", e);
     throw e;
   }
-};
+}
 
-const createMonthLesson = async (
+async function createMonthLesson(
   userId,
   language,
+  cardsAmount,
   currentDate,
-  expiredDate,
-  takenCardsByMonth,
-  techProps
-) => {
+  expiredDate
+) {
   try {
+    const RandomCards = await selectRandomCards(userId, language, cardsAmount);
+    const { takenCards, techProps } = RandomCards;
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < takenCardsByMonth.length) {
-      const cardID = takenCardsByMonth[Math.floor(Math.random() * takenCardsByMonth.length)]; // prettier-ignore
+    while (uniqueCards.size < cardsAmount) {
+      const cardID = takenCards.month[Math.floor(Math.random() * takenCards.month.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
     }
@@ -325,7 +334,7 @@ const createMonthLesson = async (
       endTime: null,
       status: null,
       lessonDate: currentDate,
-      lessonDuration: 45, //! подтянуть значение из тех.коллекции
+      lessonDuration: techProps.monthLesson.duration,
       expired: expiredDate,
     };
 
@@ -336,7 +345,7 @@ const createMonthLesson = async (
     console.error("Error creating monthly lesson", e);
     throw e;
   }
-};
+}
 
 function getCurrentDate() {
   const currentDate = moment();
