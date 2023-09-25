@@ -258,9 +258,8 @@ async function createWeekLesson(
     let takenCardIDs = [];
 
     // Проверяем, достаточно ли карт в массиве takenCards.week
-    if (takenCards.week.length >= cardsAmount) {
-      takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.week
-    } else {
+    takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.week
+    if (takenCards.week.length < cardsAmount) {
       // Распространяем массив takenCards.week
       takenCardIDs = shuffledTakenCards;
 
@@ -268,7 +267,7 @@ async function createWeekLesson(
       const additionalCardsNeeded = cardsAmount - takenCards.week.length;
 
       // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
-      const additionalCards = selectRandomCards(additionalCardsNeeded);
+      const additionalCards = await selectRandomCards(additionalCardsNeeded);
 
       // Разглаживаем массивы и добавляем дополнительные карты
       takenCardIDs.push(...additionalCards.flat());
@@ -331,7 +330,7 @@ async function createMonthLesson(
       const additionalCardsNeeded = cardsAmount - takenCards.month.length;
 
       // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
-      const additionalCards = selectRandomCards(additionalCardsNeeded);
+      const additionalCards = await selectRandomCards(additionalCardsNeeded);
 
       // Разглаживаем массивы и добавляем дополнительные карты
       takenCardIDs.push(...additionalCards.flat());
