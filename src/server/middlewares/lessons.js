@@ -59,20 +59,35 @@ const isLessonAlreadyCompleted = async (req, res, next) => {
 // Check if there are already lessons for the current week
 const isScheduleAlreadyExists = async (req, res, next) => {
   try {
-    const currentDate = moment();
-    const userId = req.user.id;
+    const today = moment(); // Текущая дата
+    const saturday = 6; // День недели субботы (0 - воскресенье, 1 - понедельник, ..., 6 - суббота)
 
-    // Получите начало и конец недели в формате "DD.MM.YYYY"
-    const startOfWeek = currentDate.startOf("week").format("DD.MM.YYYY");
-    const endOfWeek = currentDate.endOf("week").format("DD.MM.YYYY");
+    // Создайте массив для хранения дат
+    const datesUntilSaturday = [];
 
-    // trying to find in DB lessons on planned date
+    // Пока текущий день недели не равен субботе, добавляйте дни в массив
+    const isNotSaturday = today.day() !== saturday;
+
+    console.log("Старт цикла)");
+
+    // Пока текущий день недели не равен субботе и не является последним днем месяца
+    while (
+      isNotSaturday &&
+      !today.isSame(moment(today).endOf("month"), "day") // не выносить в отдельную переменную
+    ) {
+      datesUntilSaturday.push(today.format("DD.MM.YYYY"));
+      today.add(1, "day"); // Переход к следующему дню
+    }
+
+    // Добавим субботу включительно
+    datesUntilSaturday.push(today.format("DD.MM.YYYY"));
+
+    // Массив с датами
+    console.log(datesUntilSaturday);
+
+    // Найти документы в промежутке от начала недели до субботы
     const existingLessons = await Lesson.find({
-      userId,
-      lessonDate: {
-        $gte: startOfWeek,
-        $lte: endOfWeek,
-      },
+      lessonDate: { $in: datesUntilSaturday },
     });
 
     if (existingLessons.length !== 0) {
@@ -156,7 +171,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     // Insert the created lessons into the database
     const insertLessons = await Lesson.insertMany(lessonsToCreate);
-    console.log(insertLessons);
     console.log(lessonsToCreate.length + " Lessons have been created".green);
 
     next();
