@@ -1,6 +1,5 @@
 const getTechProps = async (db, language) => {
   try {
-    // Оптимизируем запросы через Promise.all()
     const [techTopics, chances, topics, lessonTechCollection] =
       await Promise.all([
         db.collection("topics_to_choose_amount").findOne({}),
@@ -9,22 +8,28 @@ const getTechProps = async (db, language) => {
         db.collection("lessons_tech").findOne(),
       ]);
 
-    const { topicsToChoose: numToSelect } = techTopics;
+    const { topicsToChoose } = techTopics;
 
-    const { lessonDuration, cardsAmount, missedLessonRadius, lessonPoints } =
-      lessonTechCollection;
+    const {
+      missedLessonRadius,
+      lessonPoints,
+      dayLesson,
+      weekLesson,
+      monthLesson,
+    } = lessonTechCollection;
 
     return {
-      topics,
-      numToSelect,
-      chances,
-      lessonDuration,
-      cardsAmount,
+      dayLesson,
+      weekLesson,
+      monthLesson,
+      topics, // topics list
+      topicsToChoose,
+      chances, // formula chances
       lessonPoints,
       missedLessonRadius,
     };
   } catch (e) {
-    console.error(e);
+    console.error("Error getting techProps", e);
   }
 };
 
