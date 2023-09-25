@@ -1,8 +1,11 @@
 const Lesson = require("../models/lessons/lessons");
 const getTechProps = require("../utils/lessons/getTechProps/getTechProps");
-const moment = require("moment");
 const getCurrentDate = require("../utils/lessons/getCurrentDate");
 const createLessons = require("../utils/lessons/createLessons");
+const isTodaySunday = require("../utils/lessons/isTodaySunday");
+const isTodayEndOfTheMonth = require("../utils/lessons/isTodayEndOfTheMonth");
+
+const moment = require("moment");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -166,29 +169,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
     console.error("Error creating user schedule:", e);
     throw new Error("Error creating user schedule");
   }
-}
-
-// todo remove to utils file
-function isTodaySunday(currentDayOfWeek) {
-  if (currentDayOfWeek === 7) {
-    return true;
-  }
-  return false;
-}
-
-// todo remove to utils file
-function isTodayEndOfTheMonth(currentDate) {
-  // Получите день месяца
-  const currentDayOfMonth = currentDate.date();
-
-  // Получите количество дней в текущем месяце
-  const daysInCurrentMonth = currentDate.daysInMonth();
-
-  // Проверьте, что сегодня последний день месяца
-  if (currentDayOfMonth === daysInCurrentMonth) {
-    return true;
-  }
-  return false;
 }
 
 module.exports = {
