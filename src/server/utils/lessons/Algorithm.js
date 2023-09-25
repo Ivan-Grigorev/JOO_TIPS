@@ -29,10 +29,11 @@
 
 const moment = require("moment");
 
-function Algorithm(arrayOfIDs, numToSelect, chances = {}) {
+function Algorithm(arrayOfIDs, cardsAmount, chances = {}) {
   // Получаем текущую дату
   const currentDate = moment();
 
+  // todo переделать. Проверка должна идти до воскресенья
   // Определяем текущий день недели (0 - Воскресенье, 1 - Понедельник, и т.д.)
   const currentDayOfWeek = currentDate.day();
 
@@ -45,7 +46,7 @@ function Algorithm(arrayOfIDs, numToSelect, chances = {}) {
 
   if (daysBeforeSaturday > 0) {
     // Если до субботы ещё есть дни, то рассчитываем количество карт
-    numToReturn = numToSelect * daysBeforeSaturday;
+    numToReturn = cardsAmount * daysBeforeSaturday;
   }
 
   const selectedIDs = [];
