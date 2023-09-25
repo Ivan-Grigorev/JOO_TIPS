@@ -1,11 +1,13 @@
+const LessonConfig = require("../../models/Tech/LessonConfig");
+
 const getTechProps = async (db, language) => {
   try {
-    const [techTopics, chances, topics, lessonTechCollection] =
+    const [techTopics, chances, topics, LessonConfiguration] =
       await Promise.all([
         db.collection("topics_to_choose_amount").findOne({}),
         db.collection("topics_chances").findOne({}),
         db.collection("topics_list").find({ language }).toArray(),
-        db.collection("lessons_tech").findOne(),
+        LessonConfig.findOne(),
       ]);
 
     const { topicsToChoose } = techTopics;
@@ -16,7 +18,7 @@ const getTechProps = async (db, language) => {
       dayLesson,
       weekLesson,
       monthLesson,
-    } = lessonTechCollection;
+    } = LessonConfiguration;
 
     return {
       dayLesson,
