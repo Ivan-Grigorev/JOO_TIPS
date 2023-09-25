@@ -17,7 +17,16 @@ moment.updateLocale("en", {
   // weekEnd: 6, // Конец недели - суббота (6)
 });
 
-// Middleware function to check if a lesson exists by its ID
+/**
+ * @function isLessonExistById
+ * @description Middleware function to check if a lesson exists by its ID.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ *
+ * @returns {undefined}
+ */
 const isLessonExistById = async (req, res, next) => {
   try {
     const { lessonId } = req.body;
@@ -41,7 +50,16 @@ const isLessonExistById = async (req, res, next) => {
   }
 };
 
-// Middleware to check if a lesson has already been completed
+/**
+ * @function isLessonAlreadyCompleted
+ * @description Middleware to check if a lesson has already been completed.
+ *
+ * @param {object} req - Express request object with a 'lesson' property.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ *
+ * @returns {undefined}
+ */
 const isLessonAlreadyCompleted = async (req, res, next) => {
   try {
     // Check if the lesson's 'completed' property is true
@@ -59,7 +77,16 @@ const isLessonAlreadyCompleted = async (req, res, next) => {
   }
 };
 
-// Middleware to check if there are already lessons for the current week
+/**
+ * @function isScheduleAlreadyExists
+ * @description Middleware to check if there are already lessons for the current week.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ *
+ * @returns {undefined}
+ */
 const isScheduleAlreadyExists = async (req, res, next) => {
   try {
     const today = moment(); // Get the current date
@@ -95,7 +122,16 @@ const isScheduleAlreadyExists = async (req, res, next) => {
   }
 };
 
-// todo написать unit-test
+/**
+ * @function createScheduleToEndOfWeek
+ * @description Middleware to create a schedule for the current week.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - Express next middleware function.
+ *
+ * @returns {undefined}
+ */
 async function createScheduleToEndOfWeek(req, res, next) {
   try {
     const userId = req.user.id;
