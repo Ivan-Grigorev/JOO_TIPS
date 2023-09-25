@@ -5,7 +5,7 @@ const Lesson = require("../../models/lessons/lessons");
  *
  * @param {string} userId - The user's ID.
  * @param {string} language - The language for the lesson.
- * @param {Date} lessonDate - The date of the lesson.
+ * @param {string} lessonDate - The date of the lesson in "DD.MM.YYYY" format.
  * @returns {Promise} A promise that resolves to the found lesson or null if not found.
  */
 async function isLessonExistsForToday(userId, language, lessonDate) {
