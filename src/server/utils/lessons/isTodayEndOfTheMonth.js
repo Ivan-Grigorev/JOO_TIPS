@@ -1,5 +1,11 @@
-// Function to check if the current date is the last day of the month
-// used with moment.js
+/**
+ * Title: isTodayEndOfTheMonth
+ * Description: Checks if the current date is the last day of the month.
+ * @param {string} currentDate - The current date represented as a moment.js object.
+ * @returns {boolean}  True if it's the last day of the month, false otherwise.
+ * Dependencies: Requires the 'moment' library for date manipulation.
+ * Notes/Considerations: This function is based on moment.js and assumes a valid moment object as input.
+ */
 function isTodayEndOfTheMonth(currentDate) {
   // Get the day of the month
   const currentDayOfMonth = currentDate.date();
