@@ -184,7 +184,7 @@ async function createMonthLesson(
   lessonDuration
 ) {
   try {
-    const takenCards = await getAllTakenCards(userId);
+    const takenCards = await getAllTakenCards(userId, language);
     const shuffledTakenCards = Algorithm(takenCards.month, cardsAmount);
 
     let takenCardIDs = [];

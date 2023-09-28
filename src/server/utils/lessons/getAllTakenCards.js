@@ -7,7 +7,8 @@ const moment = require("moment");
  *
  * @async
  * @function getTakenCards
- * @param {string} userId - The user's identifier.
+ * @param {string} userId - The user's identifier used for searching lessons.
+ * @param {string} language - The language used for searching lessons.
  * @returns {Promise<{ all: string[], week: string[], month: string[] }>} An object containing unique card identifiers.
  * @throws {Error} An error if there was an issue fetching the data.
  */
