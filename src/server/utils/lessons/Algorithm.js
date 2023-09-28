@@ -30,44 +30,37 @@
 const moment = require("moment");
 
 /**
- * A function that calculates and returns a selection of card IDs based on the current day of the week and other parameters.
+ * A function that calculates and returns a selection of unique card IDs based on the current day of the week and other parameters.
  *
  * @param {Array} arrayOfIDs - An array of card IDs to choose from.
- * @param {number} cardsAmount - The total number of cards available.
- * @param {Object} [chances={}] - Optional configuration object for additional parameters.
- * @returns {Array} - An array of random selected card IDs.
+ * @param {number} cardsAmount - The total number of cards to return.
+ * @returns {Array} - An array of random selected unique card IDs.
  */
-function Algorithm(arrayOfIDs, cardsAmount, chances = {}) {
-  // Получаем текущую дату
+function Algorithm(arrayOfIDs, cardsAmount) {
   const currentDate = moment();
-
-  // todo переделать. Проверка должна идти до воскресенья
-  // Определяем текущий день недели (0 - Воскресенье, 1 - Понедельник, и т.д.)
   const currentDayOfWeek = currentDate.day();
 
-  // Рассчитываем количество карт, которое нужно вернуть
-  let numToReturn = 0;
+  // Calculate the number of days until Sunday (7 days in a week - current day + 1)
+  const daysUntilSunday = 7 - currentDayOfWeek;
 
-  // Рассчитываем количество дней до субботы (7 дней недели - воскресенье)
-  // TODO протестировать во вторник, возможно неверно работает
-  const daysBeforeSaturday = 7 - currentDayOfWeek;
+  // Calculate the maximum number of cards that can be returned
+  const maxNumToReturn = daysUntilSunday * cardsAmount;
 
-  if (daysBeforeSaturday > 0) {
-    // Если до субботы ещё есть дни, то рассчитываем количество карт
-    numToReturn = cardsAmount * daysBeforeSaturday;
+  // Create a Set to ensure unique values
+  const selectedIDsSet = new Set();
+
+  // Shuffle the array and add unique values to the Set
+  const shuffledIDs = [...arrayOfIDs].sort(() => Math.random() - 0.5);
+
+  for (const id of shuffledIDs) {
+    if (selectedIDsSet.size >= maxNumToReturn) break; // Stop if we reach the desired number of unique values
+    selectedIDsSet.add(id);
   }
 
-  const selectedIDs = [];
-  const shuffledIDs = [...arrayOfIDs]; // Создаем копию массива для перемешивания
+  // Convert the Set back to an array
+  const selectedIDs = Array.from(selectedIDsSet);
 
-  // Перемешиваем массив случайным образом
-  for (let i = shuffledIDs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledIDs[i], shuffledIDs[j]] = [shuffledIDs[j], shuffledIDs[i]];
-  }
-
-  // Выбираем первые numToReturn элементов (они теперь случайны)
-  for (let i = 0; i < numToReturn; i++) selectedIDs.push(shuffledIDs[i]);
+  console.log(selectedIDs.length);
 
   return selectedIDs;
 }
