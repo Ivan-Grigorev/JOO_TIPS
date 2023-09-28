@@ -14,6 +14,7 @@ const moment = require("moment");
 function getCurrentDate() {
   const currentDate = moment();
   const formattedCurrentDate = currentDate.format("DD.MM.YYYY HH:mm");
+  const regexpCurrentDate = new RegExp(formattedCurrentDate.replace(/\./g, "\\.")); // prettier-ignore
   const currentDayOfWeek = moment().isoWeekday(); // Получаем текущий день недели (1 - понедельник, 2 - вторник, и так далее, 7 - воскресенье)
   const daysUntilSunday = 7 - currentDayOfWeek; // остаток дней до субботы
   const expiredDate = currentDate
@@ -31,6 +32,7 @@ function getCurrentDate() {
   return {
     currentDate,
     formattedCurrentDate,
+    regexpCurrentDate,
     currentDayOfWeek,
     daysUntilSunday,
     expiredDate,
