@@ -130,7 +130,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
  * @param {object} res - Express response object.
  * @param {function} next - Express next middleware function.
  *
- * @returns {undefined}
+ * @returns {void}
  */
 async function createScheduleToEndOfWeek(req, res, next) {
   try {
