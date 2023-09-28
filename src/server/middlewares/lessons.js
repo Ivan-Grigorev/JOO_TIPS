@@ -223,8 +223,8 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
     next();
   } catch (e) {
-    console.error("Error creating user schedule:", e);
-    throw new Error("Error creating user schedule");
+    console.error("Error creating user schedule:".red, e);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 }
 
