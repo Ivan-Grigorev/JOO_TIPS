@@ -106,7 +106,7 @@ async function createWeekLesson(
   lessonDuration
 ) {
   try {
-    const takenCards = await getAllTakenCards(userId);
+    const takenCards = await getAllTakenCards(userId, language);
     const shuffledTakenCards = Algorithm(takenCards.week, cardsAmount);
 
     let takenCardIDs = [];

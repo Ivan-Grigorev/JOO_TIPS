@@ -2,36 +2,52 @@ const Lesson = require("../../models/lessons/lessons");
 const moment = require("moment");
 
 // todo добавить язык по которому идёт поиск
-async function getTakenCards(userId) {
+/**
+ * Get unique card identifiers associated with a user's lessons.
+ *
+ * @async
+ * @function getTakenCards
+ * @param {string} userId - The user's identifier.
+ * @returns {Promise<{ all: string[], week: string[], month: string[] }>} An object containing unique card identifiers.
+ * @throws {Error} An error if there was an issue fetching the data.
+ */
+async function getTakenCards(userId, language) {
   try {
-    // Находим все уроки и выбираем только поле "cards"
-    const lessons = await Lesson.find({ userId }, "cards");
+    // Find all lessons and select only the "cards" field
+    const lessons = await Lesson.find({ userId, language }, "cards");
 
-    // Создаем массивы для хранения всех ссылок на карточки
-    const allTakenCardsIDs = [];
-    const weekTakenCardsIDs = [];
-    const monthTakenCardsIDs = [];
+    // Create Sets to store unique identifiers
+    const allTakenCardsIDs = new Set();
+    const weekTakenCardsIDs = new Set();
+    const monthTakenCardsIDs = new Set();
 
-    // Получаем текущую дату
+    // Get the current date
     const currentDate = moment();
 
-    // Извлекаем ссылки на карточки из каждого урока и добавляем их в соответствующие массивы
+    // Extract card references from each lesson and add them to Sets
     lessons.forEach((lesson) => {
-      allTakenCardsIDs.push(...lesson.cards);
+      lesson.cards.forEach((cardId) => {
+        allTakenCardsIDs.add(cardId);
 
-      // Проверяем, был ли урок за неделю
-      const lessonInWeek = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(7, "days")); // prettier-ignore
-      if (lessonInWeek) weekTakenCardsIDs.push(...lesson.cards);
+        // Check if the lesson was within the week
+        const lessonInWeek = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(7, "days")); // prettier-ignore
+        if (lessonInWeek) weekTakenCardsIDs.add(cardId);
 
-      // Проверяем, был ли урок за месяц
-      const lessonInMonth = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(1, "months")); // prettier-ignore
-      if (lessonInMonth) monthTakenCardsIDs.push(...lesson.cards);
+        // Check if the lesson was within the month
+        const lessonInMonth = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(1, "months")); // prettier-ignore
+        if (lessonInMonth) monthTakenCardsIDs.add(cardId);
+      });
     });
 
+    // Convert Sets back to arrays
+    const allTakenCardsIDsArray = [...allTakenCardsIDs];
+    const weekTakenCardsIDsArray = [...weekTakenCardsIDs];
+    const monthTakenCardsIDsArray = [...monthTakenCardsIDs];
+
     return {
-      all: allTakenCardsIDs,
-      week: weekTakenCardsIDs,
-      month: monthTakenCardsIDs,
+      all: allTakenCardsIDsArray,
+      week: weekTakenCardsIDsArray,
+      month: monthTakenCardsIDsArray,
     };
   } catch (error) {
     console.error("Error fetching lessons:", error);
