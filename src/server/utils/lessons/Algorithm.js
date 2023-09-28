@@ -29,6 +29,14 @@
 
 const moment = require("moment");
 
+/**
+ * A function that calculates and returns a selection of card IDs based on the current day of the week and other parameters.
+ *
+ * @param {Array} arrayOfIDs - An array of card IDs to choose from.
+ * @param {number} cardsAmount - The total number of cards available.
+ * @param {Object} [chances={}] - Optional configuration object for additional parameters.
+ * @returns {Array} - An array of random selected card IDs.
+ */
 function Algorithm(arrayOfIDs, cardsAmount, chances = {}) {
   // Получаем текущую дату
   const currentDate = moment();
