@@ -160,7 +160,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
       const existingMonthLesson = await isLessonExistsForToday(
         userId,
         language,
-        date.formattedCurrentDate
+        date.regexpCurrentDate
       );
 
       if (existingMonthLesson) {
