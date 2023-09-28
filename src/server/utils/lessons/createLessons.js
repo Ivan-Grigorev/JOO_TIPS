@@ -1,7 +1,7 @@
 const Lesson = require("../../models/lessons/lessons");
+const Algorithm = require("./Algorithm");
 const selectRandomCards = require("./selectRandomCards");
 const getAllTakenCards = require("../../utils/lessons/getAllTakenCards");
-const Algorithm = require("./Algorithm");
 
 /**
  * @function createLessons
