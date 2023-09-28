@@ -60,7 +60,6 @@ function Algorithm(arrayOfIDs, cardsAmount) {
   // Convert the Set back to an array
   const selectedIDs = Array.from(selectedIDsSet);
 
-
   return selectedIDs;
 }
 
