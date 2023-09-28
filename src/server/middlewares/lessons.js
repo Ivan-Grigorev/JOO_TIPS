@@ -133,7 +133,8 @@ const isScheduleAlreadyExists = async (req, res, next) => {
  * @function createScheduleToEndOfWeek
  * @description Middleware to create a schedule for the current week.
  *
- * @param {object} req - Express request object.
+ * @param {object} req.user - Object representing user info what have been hashed in auth middleware.  
+ * @param {boolean} req.scheduleIsExists - Boolean value set if schedule is already exist.If true - skip this middleware through next()
  * @param {object} res - Express response object.
  * @param {function} next - Express next middleware function.
  *
