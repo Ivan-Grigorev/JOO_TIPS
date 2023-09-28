@@ -22,6 +22,7 @@ moment.updateLocale("en", {
  * @description Middleware function to check if a lesson exists by its ID.
  *
  * @param {object} req - Express request object.
+ * @param {string} req.body.lessonId - ID of the lesson to check.
  * @param {object} res - Express response object.
  * @param {function} next - Express next middleware function.
  *
