@@ -2,10 +2,10 @@ const express = require("express");
 const { auth } = require("../../middlewares/auth.js");
 const middlewares = require("../../middlewares/lessons.js");
 const {
-  getLessonsPointsSum,
   getLessons,
   finishLesson,
   addPoints,
+  getActiveLessonPoints,
 } = require("../../controllers/lessons/lessons.js");
 
 const router = express.Router();
@@ -18,7 +18,7 @@ router.get(
   getLessons
 );
 
-router.get("/points", auth, getLessonsPointsSum);
+router.get("/points", auth, getActiveLessonPoints);
 
 router.post(
   "/finish",

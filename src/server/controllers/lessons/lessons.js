@@ -4,7 +4,7 @@ require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
 // todo переименовать в getActiveLessonPoints
-async function getLessonsPointsSum(req, res) {
+async function getActiveLessonPoints(req, res) {
   try {
     // Check if there is an authenticated user, return error if not.
     if (!req.user || !req.user.id) {
@@ -84,4 +84,4 @@ async function finishLesson(req, res, next) {
   }
 }
 
-module.exports = { getLessonsPointsSum, getLessons, finishLesson, addPoints };
+module.exports = { getActiveLessonPoints, getLessons, finishLesson, addPoints };
