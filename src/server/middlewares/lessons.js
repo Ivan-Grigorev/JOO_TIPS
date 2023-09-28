@@ -105,9 +105,16 @@ const isScheduleAlreadyExists = async (req, res, next) => {
 
     console.log("Dates until Sunday: ", datesUntilSunday); // Log the array of dates
 
+    // Создаем массив регулярных выражений для каждой даты
+    const dateRegexArray = datesUntilSunday.map(
+      (date) => new RegExp(date.replace(/\./g, "\\."))
+    );
+
     // Find documents with lesson dates within the current week
     const existingLessons = await Lesson.find({
-      lessonDate: { $in: datesUntilSunday },
+      $or: dateRegexArray.map((dateRegex) => ({
+        lessonDate: { $regex: dateRegex },
+      })),
     });
 
     if (existingLessons.length !== 0) {
@@ -115,7 +122,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
       req.scheduleIsExists = true; // Set a flag in the request object
     }
 
-    next(); // Continue to the next middleware
+    return next(); // Continue to the next middleware
   } catch (error) {
     console.error("Error in createScheduleToEndOfWeek middleware".red, error); // Log an error message
     res.status(500).json({ message: "Internal server error" }); // Respond with a 500 Internal Server Error
@@ -134,6 +141,8 @@ const isScheduleAlreadyExists = async (req, res, next) => {
  */
 async function createScheduleToEndOfWeek(req, res, next) {
   try {
+    if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
+
     const userId = req.user.id;
     const language = req.body.language;
 
@@ -197,8 +206,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
 
       return next();
     }
-
-    if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
 
     console.log("Creating daily lessons".blue);
 
