@@ -1,6 +1,6 @@
 const Card = require("../../models/Card/Card");
 const User = require("../../models/user/user");
-const Algorithm = require("./Algorithm");
+const Algorithm = require("./Algorithm/Algorithm");
 const getAllTakenCards = require("./getAllTakenCards");
 const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
 
