@@ -61,9 +61,9 @@ async function createLessons(
         startTime: null,
         endTime: null,
         status: null,
-        lessonDate: day.format("DD.MM.YYYY"),
+        lessonDate: day.format("DD.MM.YYYY HH:mm"),
         lessonDuration,
-        expired: expiredDate.format("DD.MM.YYYY"),
+        expired: expiredDate.format("DD.MM.YYYY HH:mm"),
       };
 
       lessonsToCreate.push(lesson);
