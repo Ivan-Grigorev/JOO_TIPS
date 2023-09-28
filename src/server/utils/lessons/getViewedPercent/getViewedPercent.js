@@ -1,6 +1,14 @@
 const Card = require("../../../models/Card/Card");
 const Lesson = require("../../../models/lessons/lessons");
 
+/**
+ * @description Middleware to count viewed percent of the cards.
+ *
+ * @param {string } userId - User ID user to search Lessons linked with user.
+ * @param {string} topic - Card topic to search and count Card documents and to find Lessons by its topics.
+ *
+ * @returns {number}
+ */
 async function getViewedPercent(userId, topic) {
   try {
     const [totalCardCount, userLessons] = await Promise.all([
