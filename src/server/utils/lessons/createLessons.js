@@ -33,15 +33,22 @@ async function createLessons(
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
 
+    const usedCardIDs = new Set(); // Для отслеживания использованных карточек
+
     // Create lessons for each day until Saturday
     for (let i = 0; i < daysRemaining; i++) {
       const uniqueCards = new Set();
 
       // Select random unique cards (until the desired number is reached)
       while (uniqueCards.size < cardsAmount) {
-        const cardID = cards[Math.floor(Math.random() * cards.length)]; // prettier-ignore
+        const randomIndex = Math.floor(Math.random() * cards.length);
+        const cardID = cards[randomIndex];
 
-        if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
+        // Проверяем, что карточка ещё не использовалась
+        if (!usedCardIDs.has(cardID)) {
+          uniqueCards.add(cardID);
+          usedCardIDs.add(cardID); // Добавляем в использованные карточки
+        }
       }
 
       const day = currentDate.clone().add(i, "days");
