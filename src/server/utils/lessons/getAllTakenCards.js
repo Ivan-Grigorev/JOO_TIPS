@@ -14,8 +14,6 @@ const moment = require("moment");
  */
 async function getTakenCards(userId, language) {
   try {
-    console.log({ userId, language });
-    return { month: [] };
     // Find all lessons and select only the "cards" field
     const lessons = await Lesson.find({ userId, language }, "cards");
 
@@ -30,20 +28,17 @@ async function getTakenCards(userId, language) {
     // Extract card references from each lesson and add them to Sets
     lessons.forEach((lesson) => {
       lesson.cards.forEach((cardId) => {
-        allTakenCardsIDs.add(cardId);
+        allTakenCardsIDs.add(cardId.toString());
 
         // Check if the lesson was within the week
         const lessonInWeek = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(7, "days")); // prettier-ignore
-        if (lessonInWeek) weekTakenCardsIDs.add(cardId);
+        if (lessonInWeek) weekTakenCardsIDs.add(cardId.toString());
 
         // Check if the lesson was within the month
         const lessonInMonth = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(1, "months")); // prettier-ignore
-        if (lessonInMonth) monthTakenCardsIDs.add(cardId);
+        if (lessonInMonth) monthTakenCardsIDs.add(cardId.toString());
       });
     });
-
-    console.log("lessons after loop");
-    console.log(lessons);
 
     // Convert Sets back to arrays
     const allTakenCardsIDsArray = [...allTakenCardsIDs];
