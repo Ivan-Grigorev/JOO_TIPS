@@ -169,7 +169,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
         console.log("Month lesson is already exists.".blue);
         return next();
       }
-      console.log("Creating month lesson".blue);
 
       await createLessons.monthly(
         userId,
@@ -194,8 +193,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
         return next();
       }
 
-      console.log("Creating week lesson".blue);
-
       // If there are not enough cards, use a shared array and push random cards into it
       await createLessons.weekly(
         userId,
@@ -209,8 +206,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
       return next();
     }
 
-    console.log("Creating daily lessons".blue);
-
     const lessonsToCreate = await createLessons.daily(
       date.daysUntilSunday,
       date.currentDate,
@@ -221,7 +216,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
     );
 
     await Lesson.insertMany(lessonsToCreate); // Insert the created lessons into the database
-    console.log(lessonsToCreate.length + " lessons have been created".green);
 
     next();
   } catch (e) {

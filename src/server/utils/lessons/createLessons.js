@@ -2,7 +2,7 @@ const Lesson = require("../../models/lessons/lessons");
 const Algorithm = require("./Algorithm/Algorithm");
 const selectRandomCards = require("./selectRandomCards");
 const getAllTakenCards = require("../../utils/lessons/getAllTakenCards");
-
+require("colors");
 /**
  * @function createLessons
  * @description Creates lessons for a specified number of days until Saturday.
@@ -27,6 +27,8 @@ async function createLessons(
   lessonDuration
 ) {
   try {
+    console.log("Creating daily lessons".blue);
+
     const { randomCards: cards } = await selectRandomCards(
       userId,
       language,
@@ -79,6 +81,8 @@ async function createLessons(
       lessonsToCreate.push(lesson);
     }
 
+    console.log(lessonsToCreate.length + " lessons have been created".green);
+
     return lessonsToCreate;
   } catch (e) {
     console.error("Error while creating lessons", e);
@@ -109,6 +113,8 @@ async function createWeekLesson(
   lessonDuration
 ) {
   try {
+    console.log("Creating week lesson".blue);
+
     const takenCards = await getAllTakenCards(userId, language);
     const shuffledTakenCards = Algorithm(takenCards.week, cardsAmount);
 
@@ -160,6 +166,7 @@ async function createWeekLesson(
 
     // Save the special Sunday lesson to the database
     const lessonsToCreate = await Lesson.create(lesson);
+    console.log("Week lesson have been created.");
     return lessonsToCreate;
   } catch (e) {
     console.error("Error creating Sunday lesson", e);
@@ -191,6 +198,8 @@ async function createMonthLesson(
   lessonDuration
 ) {
   try {
+    console.log("Creating month lesson".blue);
+
     const takenCards = await getAllTakenCards(userId, language);
     const shuffledTakenCards = Algorithm(takenCards.month, cardsAmount);
 
@@ -239,6 +248,7 @@ async function createMonthLesson(
       expired: expiredDate,
     };
 
+    console.log("Month lesson has been created".blue);
     // Save the special Sunday lesson to the database
     const lessonsToCreate = await Lesson.create(lesson);
     return lessonsToCreate;
