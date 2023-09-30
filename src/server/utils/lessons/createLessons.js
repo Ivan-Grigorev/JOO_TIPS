@@ -28,7 +28,7 @@ async function createLessons(
 ) {
   try {
     const Algorithm = await selectRandomCards(userId, language, cardsAmount);
-    const { cards } = Algorithm;
+    const { randomCards: cards } = Algorithm;
 
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
@@ -205,7 +205,7 @@ async function createMonthLesson(
         additionalCardsNeeded
       );
       // Flat array of cards
-      takenCardIDs.push(...additionalCards.cards.flat());
+      takenCardIDs.push(...additionalCards.randomCards.flat());
     }
     // console.log(takenCardIDs);
 
