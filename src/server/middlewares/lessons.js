@@ -243,6 +243,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
  */
 async function shouldAddNewTopic(req, res, next) {
   try {
+    console.log('shouldAddNewTopic middleware'.blue)
     const [a, b] = await Promise.all([getViewedPercent(), getViewedPercent()]);
     next();
   } catch (e) {
