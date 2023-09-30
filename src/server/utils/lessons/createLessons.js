@@ -205,8 +205,9 @@ async function createMonthLesson(
         additionalCardsNeeded
       );
       // Flat array of cards
-      takenCardIDs.push(...additionalCards.flat());
+      takenCardIDs.push(...additionalCards.cards.flat());
     }
+    // console.log(takenCardIDs);
 
     const uniqueCards = new Set();
 
