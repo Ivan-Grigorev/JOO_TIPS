@@ -150,7 +150,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
   const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
   const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
   try {
-    if (req.scheduleIsExists && !todayIsEndOfMonth) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
+    if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
 
     // Get the current date in different formats
 

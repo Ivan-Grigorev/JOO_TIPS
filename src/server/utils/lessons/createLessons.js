@@ -57,6 +57,17 @@ async function createLessons(
       }
 
       const day = currentDate.clone().add(i, "days");
+      console.log(`day - ${day}`);
+
+      // Добавьте проверку на воскресенье и конец месяца
+      if (day.day() === 0 || day.endOf("month").isSame(day)) {
+        console.log(
+          `Skipping lesson creation for ${day.format(
+            "DD.MM.YYYY"
+          )} because it's Sunday or the end of the month`.yellow
+        );
+        continue; // Пропустить итерацию и не создавать урок
+      }
 
       const expiredDate = day
         .clone()
@@ -218,7 +229,6 @@ async function createMonthLesson(
         additionalCardsNeeded
       );
 
-      console.log(`additionalCardsNeeded - ${additionalCardsNeeded}`.red);
       // Flat array of cards
       takenCardIDs.push(...additionalCards.randomCards.flat());
     }
