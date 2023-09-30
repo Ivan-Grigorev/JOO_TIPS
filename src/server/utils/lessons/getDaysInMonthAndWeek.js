@@ -22,7 +22,7 @@ function getDaysInMonthAndWeek() {
   while (currentDay.isSameOrBefore(lastDayOfMonth, "day")) {
     daysInMonth.push(currentDay.format("DD.MM.YYYY"));
     currentDay.add(1, "day");
-    console.count("monthWhile");
+    // console.count("monthWhile"); // debug counting how many times was called loop
   }
 
   // Создаем массив дней в текущей неделе
@@ -31,16 +31,13 @@ function getDaysInMonthAndWeek() {
   while (currentDay.isSameOrBefore(lastDayOfWeek, "day")) {
     daysInWeek.push(currentDay.format("DD.MM.YYYY"));
     currentDay.add(1, "day");
-    console.count("weekWhile");
+    // console.count("weekWhile"); // debug counting how many times was called loop
   }
 
   // console.log("Days in Month:", daysInMonth);
   // console.log("Days in Week:", daysInWeek);
 
-  return {
-    week: daysInWeek,
-    month: daysInMonth,
-  };
+  return { week: daysInWeek, month: daysInMonth };
 }
 
 module.exports = getDaysInMonthAndWeek;
