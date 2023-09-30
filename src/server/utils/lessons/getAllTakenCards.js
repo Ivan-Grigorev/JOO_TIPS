@@ -1,7 +1,6 @@
 const Lesson = require("../../models/lessons/lessons");
-const moment = require("moment");
+const getDaysInMonthAndWeek = require("./getDaysInMonthAndWeek");
 
-// todo добавить язык по которому идёт поиск
 /**
  * Get unique card identifiers associated with a user's lessons.
  *
@@ -14,29 +13,50 @@ const moment = require("moment");
  */
 async function getTakenCards(userId, language) {
   try {
-    // Find all lessons and select only the "cards" field
-    const lessons = await Lesson.find({ userId, language }, "cards");
+    // Get the array of days in the current month and week
 
-    // Create Sets to store unique identifiers
+    const { week, month } = getDaysInMonthAndWeek();
+
+    // Create RegExp patterns from dates
+    const weekRegExp = new RegExp(week.map((date) => `^${date}`).join("|"));
+    const monthRegExp = new RegExp(month.map((date) => `^${date}`).join("|"));
+
+    // Execute two database queries concurrently using Promise.all
+    const [weekLessons, monthLessons] = await Promise.all([
+      Lesson.find(
+        {
+          userId,
+          language,
+          lessonDate: { $regex: weekRegExp },
+        },
+        "cards"
+      ),
+      Lesson.find(
+        {
+          userId,
+          language,
+          lessonDate: { $regex: monthRegExp },
+        },
+        "cards"
+      ),
+    ]);
+
+    // Extract card references from the query results
     const allTakenCardsIDs = new Set();
     const weekTakenCardsIDs = new Set();
     const monthTakenCardsIDs = new Set();
 
-    // Get the current date
-    const currentDate = moment();
-
-    // Extract card references from each lesson and add them to Sets
-    lessons.forEach((lesson) => {
+    weekLessons.forEach((lesson) => {
       lesson.cards.forEach((cardId) => {
         allTakenCardsIDs.add(cardId.toString());
+        weekTakenCardsIDs.add(cardId.toString());
+      });
+    });
 
-        // Check if the lesson was within the week
-        const lessonInWeek = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(7, "days")); // prettier-ignore
-        if (lessonInWeek) weekTakenCardsIDs.add(cardId.toString());
-
-        // Check if the lesson was within the month
-        const lessonInMonth = moment(lesson.lessonDate).isSameOrAfter(currentDate.clone().subtract(1, "months")); // prettier-ignore
-        if (lessonInMonth) monthTakenCardsIDs.add(cardId.toString());
+    monthLessons.forEach((lesson) => {
+      lesson.cards.forEach((cardId) => {
+        allTakenCardsIDs.add(cardId.toString());
+        monthTakenCardsIDs.add(cardId.toString());
       });
     });
 
@@ -44,6 +64,8 @@ async function getTakenCards(userId, language) {
     const allTakenCardsIDsArray = [...allTakenCardsIDs];
     const weekTakenCardsIDsArray = [...weekTakenCardsIDs];
     const monthTakenCardsIDsArray = [...monthTakenCardsIDs];
+
+    // console.log({ weekTakenCardsIDsArray, monthTakenCardsIDsArray });
 
     return {
       all: allTakenCardsIDsArray,
