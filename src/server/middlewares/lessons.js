@@ -143,19 +143,18 @@ const isScheduleAlreadyExists = async (req, res, next) => {
  * @returns {void}
  */
 async function createScheduleToEndOfWeek(req, res, next) {
-  try {
-    if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
+  const userId = req.user.id;
+  const language = req.body.language;
 
-    const userId = req.user.id;
-    const language = req.body.language;
+  const date = getCurrentDate();
+  const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
+  const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
+  try {
+    if (req.scheduleIsExists && !todayIsEndOfMonth) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
 
     // Get the current date in different formats
-    const date = getCurrentDate();
 
     const techProps = await getTechProps(language);
-
-    const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
-    const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
 
     if (todayIsEndOfMonth) {
       console.log("Today is the end of the month.".blue);
@@ -243,7 +242,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
  */
 async function shouldAddNewTopic(req, res, next) {
   try {
-    console.log('shouldAddNewTopic middleware'.blue)
+    console.log("shouldAddNewTopic middleware".blue);
     const [a, b] = await Promise.all([getViewedPercent(), getViewedPercent()]);
     next();
   } catch (e) {
