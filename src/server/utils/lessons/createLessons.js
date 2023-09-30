@@ -27,8 +27,11 @@ async function createLessons(
   lessonDuration
 ) {
   try {
-    const Algorithm = await selectRandomCards(userId, language, cardsAmount);
-    const { randomCards: cards } = Algorithm;
+    const { randomCards: cards } = await selectRandomCards(
+      userId,
+      language,
+      cardsAmount
+    );
 
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
