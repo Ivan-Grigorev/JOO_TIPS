@@ -1,6 +1,6 @@
-const Card = require("../../models/Card/Card");
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm/Algorithm");
+const getCardsByActiveTopics = require("./Algorithm/utils/getCardsByActiveTopic");
 const getAllTakenCards = require("./getAllTakenCards");
 const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
 
@@ -45,26 +45,10 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
     // Получаем активные темы для указанного языка (может быть массивом)
     const activeTopics = [activeLanguage.activeTopic]; // в будущем здесь будет максимум 4 темы
 
-    const cardIDs = [];
-    const findedCards = [];
-
-    // Проходимся по массиву тем, ищем уникальные карточки с соответствующими темами
-    // Добавляем их в массив cardIDs
-    for (const topic of activeTopics) {
-      const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
-      const cardIDsToAdd = findCards // проверка на уникальность тем
-        .filter((card) => !takenCards.all.includes(card._id.toString()))
-        .map((card) => card._id.toString());
-
-      cardIDs.push(...cardIDsToAdd);
-      findedCards.push({
-        topic,
-        findedAmount: cardIDs.length,
-        totalAmount: findCards.length,
-      });
-    }
-
-    console.log("Количество найденных карточек:", cardIDs.length);
+    const { cardIDs, findedCards } = getCardsByActiveTopics(
+      activeTopics,
+      takenCards.all
+    );
 
     if (cardIDs.length === 0) return { randomCards: null };
 
