@@ -8,7 +8,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
   try {
     const [user, takenCards, topicsList] = await Promise.all([
       User.findById(userId),
-      getAllTakenCards(userId),
+      getAllTakenCards(userId, language),
       getTopicsByLanguage(language),
     ]);
 
@@ -17,8 +17,10 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       return lang.language === language;
     });
 
+    console.log(topicsList);
+
     // если нет активной темы - устанавливаем первую тему из списка
-    const noActiveTopic = activeLanguage.activeTopic === null || !activeLanguage.activeTopic; // prettier-ignore
+    const noActiveTopic = activeLanguage.activeTopic === null || !topicsList.includes(activeLanguage.activeTopic); // prettier-ignore
     if (noActiveTopic) {
       const languageToUpdate = user.languages.find((lang) => {
         return lang.language === language;

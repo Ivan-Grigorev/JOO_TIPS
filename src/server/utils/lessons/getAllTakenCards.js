@@ -14,6 +14,8 @@ const moment = require("moment");
  */
 async function getTakenCards(userId, language) {
   try {
+    console.log({ userId, language });
+    return { month: [] };
     // Find all lessons and select only the "cards" field
     const lessons = await Lesson.find({ userId, language }, "cards");
 
@@ -39,6 +41,9 @@ async function getTakenCards(userId, language) {
         if (lessonInMonth) monthTakenCardsIDs.add(cardId);
       });
     });
+
+    console.log("lessons after loop");
+    console.log(lessons);
 
     // Convert Sets back to arrays
     const allTakenCardsIDsArray = [...allTakenCardsIDs];

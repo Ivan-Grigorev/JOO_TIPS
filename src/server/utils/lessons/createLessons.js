@@ -121,7 +121,11 @@ async function createWeekLesson(
       const additionalCardsNeeded = cardsAmount - takenCards.week.length;
 
       // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
-      const additionalCards = await selectRandomCards(additionalCardsNeeded);
+      const additionalCards = await selectRandomCards(
+        userId,
+        language,
+        additionalCardsNeeded
+      );
 
       // Разглаживаем массивы и добавляем дополнительные карты
       takenCardIDs.push(...additionalCards.flat());
@@ -195,7 +199,11 @@ async function createMonthLesson(
 
       // counting how many cards required
       const additionalCardsNeeded = cardsAmount - takenCards.month.length;
-      const additionalCards = await selectRandomCards(additionalCardsNeeded);
+      const additionalCards = await selectRandomCards(
+        userId,
+        language,
+        additionalCardsNeeded
+      );
       // Flat array of cards
       takenCardIDs.push(...additionalCards.flat());
     }

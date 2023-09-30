@@ -7,6 +7,7 @@ const isTodayEndOfTheMonth = require("../utils/lessons/isTodayEndOfTheMonth");
 
 const moment = require("moment");
 const isLessonExistsForToday = require("../utils/lessons/isLessonExistsForToday");
+const getViewedPercent = require("../utils/lessons/getViewedPercent/getViewedPercent");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -230,9 +231,30 @@ async function createScheduleToEndOfWeek(req, res, next) {
   }
 }
 
+/**
+ * @function shouldAddNewTopic
+ * @description Checks viewed card percentage or time from adding topic.
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ *
+ * @return {void}
+ */
+async function shouldAddNewTopic(req, res, next) {
+  try {
+    const [a, b] = await Promise.all([getViewedPercent(), getViewedPercent()]);
+    next();
+  } catch (e) {
+    console.error("Error in shouldAddNewTopic", e);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   isLessonExistById,
   isLessonAlreadyCompleted,
   isScheduleAlreadyExists,
   createScheduleToEndOfWeek,
+  shouldAddNewTopic,
 };
