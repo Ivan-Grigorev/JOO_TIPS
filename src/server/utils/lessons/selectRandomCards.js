@@ -4,6 +4,17 @@ const Algorithm = require("./Algorithm/Algorithm");
 const getAllTakenCards = require("./getAllTakenCards");
 const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
 
+/**
+ * Selects a random set of cards for a user based on their language and topics.
+ *
+ * @async
+ * @function selectRandomCards
+ * @param {string} userId - The user's identifier.
+ * @param {string} language - The user's selected language.
+ * @param {number} cardsAmount - The number of random cards to select.
+ * @returns {Promise<{ cards: string[] | null, takenCards: string[], foundCardsAmount: number }>} An object containing the selected cards and additional information.
+ * @throws {Error} An error if there was an issue fetching the data or selecting cards.
+ */
 const selectRandomCards = async (userId, language, cardsAmount) => {
   try {
     const [user, takenCards, topicsList] = await Promise.all([
@@ -17,7 +28,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       return lang.language === language;
     });
 
-    console.log(topicsList);
+    // console.log(topicsList);
 
     // если нет активной темы - устанавливаем первую тему из списка
     const noActiveTopic = activeLanguage.activeTopic === null || !topicsList.includes(activeLanguage.activeTopic); // prettier-ignore
@@ -26,7 +37,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
         return lang.language === language;
       });
 
-      languageToUpdate.activeTopic = topicsList[0].topic;
+      languageToUpdate.activeTopic = topicsList.topics[0]; // todo протестировать
 
       await user.save();
     }
@@ -53,7 +64,11 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
 
     const randomCards = Algorithm(cardIDs, cardsAmount);
 
-    return { cards: randomCards, takenCards };
+    return {
+      cards: randomCards,
+      takenCards,
+      findedCardsAmount: cardIDs.length,
+    };
   } catch (e) {
     console.error(e);
   }
