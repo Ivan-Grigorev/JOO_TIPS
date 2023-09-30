@@ -4,10 +4,10 @@ const getCurrentDate = require("../utils/lessons/getCurrentDate");
 const createLessons = require("../utils/lessons/createLessons");
 const isTodaySunday = require("../utils/lessons/isTodaySunday");
 const isTodayEndOfTheMonth = require("../utils/lessons/isTodayEndOfTheMonth");
-
-const moment = require("moment");
 const isLessonExistsForToday = require("../utils/lessons/isLessonExistsForToday");
 const getViewedPercent = require("../utils/lessons/getViewedPercent/getViewedPercent");
+
+const moment = require("moment");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
