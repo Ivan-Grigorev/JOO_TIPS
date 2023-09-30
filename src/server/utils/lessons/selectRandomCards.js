@@ -12,7 +12,7 @@ const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
  * @param {string} userId - The user's identifier.
  * @param {string} language - The user's selected language.
  * @param {number} cardsAmount - The number of random cards to select.
- * @returns {Promise<{ cards: string[] | null, takenCards: string[], foundCardsAmount: number }>} An object containing the selected cards and additional information.
+ * @returns {Promise<{ randomCards: string[] | null, takenCards: string[], foundCards: { topic: string, foundAmount: number, totalAmount: number }[] }>} An object containing the selected cards and additional information.
  * @throws {Error} An error if there was an issue fetching the data or selecting cards.
  */
 const selectRandomCards = async (userId, language, cardsAmount) => {
@@ -46,6 +46,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
     const activeTopics = [activeLanguage.activeTopic]; // в будущем здесь будет максимум 4 темы
 
     const cardIDs = [];
+    const findedCards = [];
 
     // Проходимся по массиву тем, ищем уникальные карточки с соответствующими темами
     // Добавляем их в массив cardIDs
@@ -56,18 +57,23 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
         .map((card) => card._id.toString());
 
       cardIDs.push(...cardIDsToAdd);
+      findedCards.push({
+        topic,
+        findedAmount: cardIDs.length,
+        totalAmount: findCards.length,
+      });
     }
 
     console.log("Количество найденных карточек:", cardIDs.length);
 
-    if (cardIDs.length === 0) return { cards: null };
+    if (cardIDs.length === 0) return { randomCards: null };
 
     const randomCards = Algorithm(cardIDs, cardsAmount);
 
     return {
-      cards: randomCards,
+      randomCards: randomCards,
       takenCards,
-      findedCardsAmount: cardIDs.length,
+      findedCards,
     };
   } catch (e) {
     console.error(e);
