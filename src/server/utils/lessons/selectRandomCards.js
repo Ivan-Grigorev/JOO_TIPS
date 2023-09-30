@@ -38,6 +38,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       });
 
       languageToUpdate.activeTopic = topicsList.topics[0]; // todo протестировать
+      console.log("Changing active topic to default (first topic)");
 
       await user.save();
     }
@@ -45,12 +46,12 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
     // Получаем активные темы для указанного языка (может быть массивом)
     const activeTopics = [activeLanguage.activeTopic]; // в будущем здесь будет максимум 4 темы
 
-    const { cardIDs, findedCards } = getCardsByActiveTopics(
+    const { cardIDs, findedCards } = await getCardsByActiveTopics(
       activeTopics,
       takenCards.all
     );
 
-    if (cardIDs.length === 0) return { randomCards: null };
+    if (!cardIDs) return { randomCards: [] };
 
     const randomCards = Algorithm(cardIDs, cardsAmount);
 

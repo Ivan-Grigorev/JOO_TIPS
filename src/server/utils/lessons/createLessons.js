@@ -202,11 +202,14 @@ async function createMonthLesson(
 
       // counting how many cards required
       const additionalCardsNeeded = cardsAmount - takenCards.month.length;
+
       const additionalCards = await selectRandomCards(
         userId,
         language,
         additionalCardsNeeded
       );
+
+      console.log(`additionalCardsNeeded - ${additionalCardsNeeded}`.red);
       // Flat array of cards
       takenCardIDs.push(...additionalCards.randomCards.flat());
     }
