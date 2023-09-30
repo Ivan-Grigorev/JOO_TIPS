@@ -1,6 +1,6 @@
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm/Algorithm");
-const getCardsByActiveTopics = require("./Algorithm/utils/getCardsByActiveTopic");
+const getCardsByActiveTopics = require("./Algorithm/utils/getCardsByActiveTopics");
 const getAllTakenCards = require("./getAllTakenCards");
 const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
 
