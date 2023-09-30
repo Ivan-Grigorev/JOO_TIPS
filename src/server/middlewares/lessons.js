@@ -185,7 +185,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
       const existedWeekLesson = await isLessonExistsForToday(
         userId,
         language,
-        date.formattedCurrentDate
+        date.regexpCurrentDate
       );
 
       if (existedWeekLesson) {
