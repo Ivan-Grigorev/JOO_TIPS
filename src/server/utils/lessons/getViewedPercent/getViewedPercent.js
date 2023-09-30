@@ -4,7 +4,7 @@ const Lesson = require("../../../models/lessons/lessons");
 /**
  * @description Middleware to count viewed percent of the cards.
  *
- * @param {string } userId - User ID user to search Lessons linked with user.
+ * @param {string} userId - User ID user to search Lessons linked with user.
  * @param {string} topic - Card topic to search and count Card documents and to find Lessons by its topics.
  *
  * @returns {number}
@@ -21,9 +21,7 @@ async function getViewedPercent(userId, topic) {
 
     // Извлеките уникальные идентификаторы карточек из уроков пользователя
     userLessons.forEach((lesson) => {
-      lesson.cards.forEach((cardId) => {
-        uniqueCardIds.add(cardId);
-      });
+      lesson.cards.forEach((cardId) => uniqueCardIds.add(cardId));
     });
 
     // Получите количество уникальных карточек, привязанных к пользователю
