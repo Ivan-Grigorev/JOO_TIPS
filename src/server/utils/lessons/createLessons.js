@@ -131,15 +131,12 @@ async function createWeekLesson(
 
     let takenCardIDs = [];
 
-    // Проверяем, достаточно ли карт в массиве takenCards.week
-    takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.week
-    if (takenCards.week.length < cardsAmount) {
-      // Распространяем массив takenCards.week
-      takenCardIDs = shuffledTakenCards;
+    takenCardIDs = shuffledTakenCards;
+    // Вычисляем, сколько дополнительных карт нужно для cardsAmount
+    const additionalCardsNeeded = cardsAmount - takenCards.week.length;
+    console.log(`additionalCardsNeeded - ${additionalCardsNeeded}`.red);
 
-      // Вычисляем, сколько дополнительных карт нужно для cardsAmount
-      const additionalCardsNeeded = cardsAmount - takenCards.week.length;
-
+    if (additionalCardsNeeded > 0) {
       // Вызываем функцию selectRandomCards, чтобы получить дополнительные карты
       const additionalCards = await selectRandomCards(
         userId,
@@ -148,13 +145,13 @@ async function createWeekLesson(
       );
 
       // Разглаживаем массивы и добавляем дополнительные карты
-      takenCardIDs.push(...additionalCards.flat());
+      takenCardIDs.push(...additionalCards.randomCards.flat());
     }
 
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < takenCardIDs.length) {
+    while (uniqueCards.size < cardsAmount) {
       const cardID = takenCardIDs[Math.floor(Math.random() * takenCardIDs.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
@@ -177,7 +174,7 @@ async function createWeekLesson(
 
     // Save the special Sunday lesson to the database
     const lessonsToCreate = await Lesson.create(lesson);
-    console.log("Week lesson have been created.");
+    console.log("Week lesson have been created.".blue);
     return lessonsToCreate;
   } catch (e) {
     console.error("Error creating Sunday lesson", e);
@@ -216,28 +213,25 @@ async function createMonthLesson(
 
     let takenCardIDs = [];
 
-    takenCardIDs = shuffledTakenCards; // Распространяем массив takenCards.month
-    if (takenCards.month.length < cardsAmount) {
-      takenCardIDs = shuffledTakenCards;
+    takenCardIDs = shuffledTakenCards;
 
-      // counting how many cards required
-      const additionalCardsNeeded = cardsAmount - takenCards.month.length;
+    const additionalCardsNeeded = cardsAmount - takenCards.month.length;
 
+    if (additionalCardsNeeded > 0) {
       const additionalCards = await selectRandomCards(
         userId,
         language,
         additionalCardsNeeded
       );
 
-      // Flat array of cards
+      // Разглаживаем массивы и добавляем дополнительные карты
       takenCardIDs.push(...additionalCards.randomCards.flat());
     }
-    // console.log(takenCardIDs);
 
     const uniqueCards = new Set();
 
     // Select random unique cards (until the desired number is reached)
-    while (uniqueCards.size < takenCardIDs.length) {
+    while (uniqueCards.size < cardsAmount) {
       const cardID = takenCardIDs[Math.floor(Math.random() * takenCardIDs.length)]; // prettier-ignore
 
       if (!uniqueCards.has(cardID)) uniqueCards.add(cardID);
