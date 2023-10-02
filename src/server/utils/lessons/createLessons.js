@@ -50,13 +50,13 @@ async function createLessons(
       const formattedEndOfMonth = day.endOf("month").format("DD.MM.YYYY");
       const todayIsEndOfMonth = formattedDay === formattedEndOfMonth;
 
-      // Добавьте проверку на конец месяца
+      // Add a check for the end of the month
       if (todayIsEndOfMonth) {
         console.log(
-          `Skipping lesson creation for ${formattedDay} because it's Sunday or the end of the month`
+          `Skipping lesson creation for ${formattedDay} because it's the end of the month`
             .yellow
         );
-        continue; // Пропустить итерацию и не создавать урок
+        continue; // Skip the iteration and do not create a lesson
       }
 
       // Select random unique cards (until the desired number is reached)
