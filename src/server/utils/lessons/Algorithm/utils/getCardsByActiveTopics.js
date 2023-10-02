@@ -7,7 +7,7 @@ const Card = require("../../../../models/Card/Card");
  * @function getCardsByActiveTopics
  * @param {string[]} activeTopics - An array of active topics.
  * @param {string[]} allTakenCards - An array of card identifiers that the user has already taken.
- * @returns {Promise<{ cardIDs: string[], findedCards: { topic: string, foundAmount: number, totalAmount: number }[] }>} An object containing card identifiers and information about the found cards.
+ * @returns {Promise<{ cardIDs: {ref: string, topic: string,}[], findedCards: { topic: string, foundAmount: number, totalAmount: number }[] }>} An object containing card identifiers and information about the found cards.
  * @throws {Error} An error if there was an issue fetching the data or processing the cards.
  */
 async function getCardsByActiveTopics(activeTopics, allTakenCards) {
