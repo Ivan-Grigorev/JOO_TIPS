@@ -236,7 +236,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
  */
 async function shouldAddNewTopic(req, res, next) {
   try {
-    console.log("shouldAddNewTopic middleware".blue);
+    // console.log("shouldAddNewTopic middleware".blue);
     const [viewedPercent] = await Promise.all([getViewedPercent(req.user.id)]);
 
     console.log(`viewedPercent - ${viewedPercent}`.green);
