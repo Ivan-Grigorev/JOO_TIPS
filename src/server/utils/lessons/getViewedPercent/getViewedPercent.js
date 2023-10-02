@@ -24,8 +24,8 @@ async function getViewedPercent(userId) {
       Lesson.find({ userId, "cards.topic": activeLanguage.activeTopic[0] }),
     ]);
 
-    console.log(`totalCardCount - ${totalCardCount}`);
-    console.log(`Lesson -> ${Lesson}`);
+    // console.log(`totalCardCount - ${totalCardCount}`);
+    // console.log(`Lesson -> ${Lesson}`);
 
     // Создайте Set для хранения уникальных идентификаторов карточек
     const uniqueCardIds = new Set();
