@@ -13,7 +13,6 @@ const User = require("../../../models/user/user");
 async function getViewedPercent(userId) {
   try {
     const user = await User.findById(userId);
-    const topic = user.languages;
     const activeLanguage = user.languages.find((lang) => {
       return lang.language === user.activeLanguage;
     });
