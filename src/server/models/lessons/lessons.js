@@ -47,13 +47,14 @@ const lessonSchema = new mongoose.Schema(
         },
         topic: {
           type: String,
-          enum: [1, 2, 3],
           required: [true, "Card topic is required"],
         },
         viewIndex: {
           type: Number,
+          enum: [0, 1, 2, 3],
           default: 0,
         },
+        _id: false, // Добавляем опцию _id: false
       },
     ],
     expired: {
