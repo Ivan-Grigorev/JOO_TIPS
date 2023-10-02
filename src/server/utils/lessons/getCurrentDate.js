@@ -23,12 +23,12 @@ function getCurrentDate() {
     .set({ hour: 3, minute: 0, second: 0 })
     .format("DD.MM.YYYY HH:mm");
 
-  console.log(`moment() current date - ${currentDate}`.yellow);
-  console.log(`Current datetime  - ${formattedCurrentDatetime}`.yellow);
-  console.log(`Regexp current date  - ${regexpCurrentDate}`.yellow);
-  console.log(`Current day of week date - ${currentDayOfWeek}`.yellow);
-  console.log(`Expired date - ${expiredDate}`.yellow);
-  console.log(`Days until the Sunday - ${daysUntilSunday}`.yellow);
+  // console.log(`moment() current date - ${currentDate}`.yellow);
+  // console.log(`Current datetime  - ${formattedCurrentDatetime}`.yellow);
+  // console.log(`Regexp current date  - ${regexpCurrentDate}`.yellow);
+  // console.log(`Current day of week date - ${currentDayOfWeek}`.yellow);
+  // console.log(`Expired date - ${expiredDate}`.yellow);
+  // console.log(`Days until the Sunday - ${daysUntilSunday}`.yellow);
 
   return {
     currentDate,
