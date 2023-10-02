@@ -68,7 +68,9 @@ async function finishLesson(req, res, next) {
     const lesson = await Lesson.findById(lessonId);
 
     // Set the completion flag of the lesson to true
-    lesson.completed = true;
+    lesson.status = "completed";
+    // increase cards view index
+    lesson.cards.forEach((card) => (card.viewIndex += 1));
     await lesson.save();
 
     req.lesson.points = lesson.points;
