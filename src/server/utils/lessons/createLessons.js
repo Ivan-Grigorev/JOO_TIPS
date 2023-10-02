@@ -44,6 +44,21 @@ async function createLessons(
     for (let i = 0; i < daysRemaining; i++) {
       const uniqueCards = new Set();
 
+      const day = currentDate.clone().add(i, "days"); // например Mon Oct 02 2023 21:44:01 GMT+0300
+
+      const formattedDay = day.format("DD.MM.YYYY");
+      const formattedEndOfMonth = day.endOf("month").format("DD.MM.YYYY");
+      const todayIsEndOfMonth = formattedDay === formattedEndOfMonth;
+
+      // Добавьте проверку на конец месяца
+      if (todayIsEndOfMonth) {
+        console.log(
+          `Skipping lesson creation for ${formattedDay} because it's Sunday or the end of the month`
+            .yellow
+        );
+        continue; // Пропустить итерацию и не создавать урок
+      }
+
       // Select random unique cards (until the desired number is reached)
       while (uniqueCards.size < cardsAmount) {
         const randomIndex = Math.floor(Math.random() * cards.length);
@@ -54,19 +69,6 @@ async function createLessons(
           uniqueCards.add(cardID);
           usedCardIDs.add(cardID); // Добавляем в использованные карточки
         }
-      }
-
-      const day = currentDate.clone().add(i, "days");
-      console.log(`day - ${day}`);
-
-      // Добавьте проверку на воскресенье и конец месяца
-      if (day.day() === 0 || day.endOf("month").isSame(day)) {
-        console.log(
-          `Skipping lesson creation for ${day.format(
-            "DD.MM.YYYY"
-          )} because it's Sunday or the end of the month`.yellow
-        );
-        continue; // Пропустить итерацию и не создавать урок
       }
 
       const expiredDate = day
