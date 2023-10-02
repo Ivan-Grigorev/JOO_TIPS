@@ -28,8 +28,6 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       return lang.language === language;
     });
 
-    // console.log(topicsList);
-
     // если нет активной темы - устанавливаем первую тему из списка
     const noActiveTopic = activeLanguage.activeTopic === null || !topicsList.includes(activeLanguage.activeTopic); // prettier-ignore
     if (noActiveTopic) {
