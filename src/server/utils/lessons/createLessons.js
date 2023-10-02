@@ -44,10 +44,14 @@ async function createLessons(
     for (let i = 0; i < daysRemaining; i++) {
       const uniqueCards = new Set();
 
-      const today = currentDate.clone().add(i, "days");
-
-      const formattedDay = today.format("DD.MM.YYYY");
-      const formattedEndOfMonth = today.endOf("month").format("DD.MM.YYYY");
+      const day = currentDate.clone().add(i, "days");
+      const expiredDate = day
+        .clone()
+        .add(1, "days")
+        .set({ hour: 3, minute: 0, second: 0 })
+        .format("DD.MM.YYYY HH:mm");
+      const formattedDay = day.format("DD.MM.YYYY");
+      const formattedEndOfMonth = day.endOf("month").format("DD.MM.YYYY");
       const todayIsEndOfMonth = formattedDay === formattedEndOfMonth;
 
       // Add a check for the end of the month
@@ -71,11 +75,6 @@ async function createLessons(
         }
       }
 
-      const expiredDate = today
-        .clone()
-        .add(1, "days")
-        .set({ hour: 3, minute: 0, second: 0 });
-
       const cardsArray = Array.from(uniqueCards);
 
       const lesson = {
@@ -88,7 +87,7 @@ async function createLessons(
         status: null,
         lessonDate: formattedDay,
         lessonDuration,
-        expired: expiredDate.format("DD.MM.YYYY HH:mm"),
+        expired: expiredDate,
       };
 
       lessonsToCreate.push(lesson);
