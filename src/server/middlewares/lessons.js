@@ -119,7 +119,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
       })),
     });
 
-    if (existingLessons.length !== 0) {
+    if (existingLessons.length > 0) {
       console.log("Lessons schedule already exists".blue); // Log a message if lessons exist
       req.scheduleIsExists = true; // Set a flag in the request object
     }
@@ -237,8 +237,11 @@ async function createScheduleToEndOfWeek(req, res, next) {
 async function shouldAddNewTopic(req, res, next) {
   try {
     console.log("shouldAddNewTopic middleware".blue);
-    const [a, b] = await Promise.all([getViewedPercent(), getViewedPercent()]);
-    next();
+    const [viewedPercent] = await Promise.all([getViewedPercent(req.user.id)]);
+
+    console.log(`viewedPercent - ${viewedPercent}`.green);
+
+    return next();
   } catch (e) {
     console.error("Error in shouldAddNewTopic", e);
     return res.status(500).json({ message: "Internal server error" });
