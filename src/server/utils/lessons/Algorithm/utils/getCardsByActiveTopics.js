@@ -21,7 +21,9 @@ async function getCardsByActiveTopics(activeTopics, allTakenCards) {
       const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
       const cardIDsToAdd = findCards // проверка на уникальность тем
         .filter((card) => !allTakenCards.includes(card._id.toString()))
-        .map((card) => card._id.toString());
+        .map((card) => {
+          return { ref: card._id.toString(), topic: card.topic };
+        });
 
       cardIDs.push(...cardIDsToAdd);
       findedCards.push({
