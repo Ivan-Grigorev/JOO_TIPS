@@ -38,20 +38,22 @@ const lessonSchema = new mongoose.Schema(
       type: String,
       enum: languagesEnum,
     },
-    // topic: {
-    //   type: String,
-    //   required: [true, "Lesson topic is required."],
-    //   trim: true,
-    // },
-    // cardText: {
-    //   type: String,
-    //   required: [true, "Lesson subtopic is required."],
-    // },
     cards: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Card",
-        required: [true, "Card ref is required"],
+        ref: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Card",
+          required: [true, "Card ref is required"],
+        },
+        topic: {
+          type: String,
+          enum: [1, 2, 3],
+          required: [true, "Card topic is required"],
+        },
+        viewIndex: {
+          type: Number,
+          default: 0,
+        },
       },
     ],
     expired: {
