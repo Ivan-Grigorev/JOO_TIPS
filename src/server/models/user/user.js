@@ -115,8 +115,8 @@ const user = new mongoose.Schema(
             type: String,
             enum: languagesEnum,
           },
-          activeTopics: Array, // Здесь храните активную тему
-          _id: false, // Добавляем опцию _id: false
+          activeTopics: { type: Array, default: [] },
+          _id: false, // disable _id auto set
         },
       ],
       default: [],
