@@ -282,15 +282,15 @@ async function isActiveTopicsValid(req, res, next) {
     // Handle cases where topics need to be modified
     if (noActiveTopic || invalidTopic) {
       if (invalidTopic) {
-        console.log("Invalid topic in active topics array".yellow);
-        console.log("Deleting invalid topic.".yellow);
+        // console.log("Invalid topic in active topics array".yellow);
+        // console.log("Deleting invalid topic.".yellow);
         // Delete invalid topics from the activeTopics array
         activeLanguage.activeTopics = activeLanguage.activeTopics.filter((topic) => topicsList.includes(topic)); // prettier-ignore
       }
 
       if (noActiveTopic) {
-        console.log("No active topic in active topics array".yellow);
-        console.log(`Changing active topic to default (${topicsList[0].slice(10)}...)`.yellow); // prettier-ignore
+        // console.log("No active topic in active topics array".yellow);
+        // console.log(`Changing active topic to default (${topicsList[0].slice(10)}...)`.yellow); // prettier-ignore
         // Set the first topic from the topicsList as the active topic
         activeLanguage.activeTopics = [topicsList[0]];
       }
