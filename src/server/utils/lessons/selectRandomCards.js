@@ -28,27 +28,27 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       return lang.language === language;
     });
 
-    // Проверяем, есть ли активная тема, которая не входит в общий список тем
-    const noActiveTopic =
-      activeLanguage.activeTopics === null ||
-      activeLanguage.activeTopics.length === 0 ||
-      !activeLanguage.activeTopics.every((topic) => topicsList.includes(topic)); // если в массиве есть тема, которой не существует в общем массиве тем - вернёт true
+    // если в массиве есть тема, которой не существует в общем массиве тем - вернёт true
+    const invalidTopic = !activeLanguage.activeTopics.every((topic) =>
+      topicsList.includes(topic)
+    );
+    const noActiveTopic = activeLanguage.activeTopics.length === 0;
 
-    console.log(`noActiveTopic - ${noActiveTopic}`);
-
-    if (noActiveTopic) {
-      // Если нет активной темы, устанавливаем первую тему из списка
-      const languageToUpdate = user.languages.find((lang) => {
-        return lang.language === language;
-      });
-
-      languageToUpdate.activeTopics = [topicsList[0]]; // Установка первой темы как активной
-      console.log(
-        `Changing active topic to default (${topicsList[0].slice(10)})`
-      );
+    if (noActiveTopic || invalidTopic) {
+      if (invalidTopic) {
+        console.log("Invalid topic in active topics array".yellow);
+        console.log("Deleting invalid topic.".yellow);
+        activeLanguage.activeTopics = activeLanguage.activeTopics.filter(
+          (topic) => topicsList.includes(topic)
+        ); // deleting invalid topic from the array
+      }
+      if (noActiveTopic) {
+        console.log("No active topic".yellow);
+        console.log(`Changing active topic to default (${topicsList[0].slice(10)}...)`.yellow); // prettier-ignore
+        activeLanguage.activeTopics = [topicsList[0]]; // Установка первой темы как активной
+      }
 
       await user.save();
-      console.log("User's active topic updated successfully.");
     }
 
     // Получаем активные темы для указанного языка (может быть массивом)
