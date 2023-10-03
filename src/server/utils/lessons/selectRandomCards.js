@@ -28,21 +28,31 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       return lang.language === language;
     });
 
-    // если нет активной темы - устанавливаем первую тему из списка
-    const noActiveTopic = activeLanguage.activeTopic === null || !topicsList.includes(activeLanguage.activeTopic); // prettier-ignore
+    // Проверяем, есть ли активная тема, которая не входит в общий список тем
+    const noActiveTopic =
+      activeLanguage.activeTopics === null ||
+      activeLanguage.activeTopics.length === 0 ||
+      !activeLanguage.activeTopics.every((topic) => topicsList.includes(topic)); // если в массиве есть тема, которой не существует в общем массиве тем - вернёт true
+
+    console.log(`noActiveTopic - ${noActiveTopic}`);
+
     if (noActiveTopic) {
+      // Если нет активной темы, устанавливаем первую тему из списка
       const languageToUpdate = user.languages.find((lang) => {
         return lang.language === language;
       });
 
-      languageToUpdate.activeTopic = topicsList.topics[0]; // todo протестировать
-      console.log("Changing active topic to default (first topic)");
+      languageToUpdate.activeTopics = [topicsList[0]]; // Установка первой темы как активной
+      console.log(
+        `Changing active topic to default (${topicsList[0].slice(10)})`
+      );
 
       await user.save();
+      console.log("User's active topic updated successfully.");
     }
 
     // Получаем активные темы для указанного языка (может быть массивом)
-    const activeTopics = [activeLanguage.activeTopic]; // в будущем здесь будет максимум 4 темы
+    const activeTopics = [activeLanguage.activeTopics]; // в будущем здесь будет максимум 4 темы
 
     const { cardIDs, findedCards } = await getCardsByActiveTopics(
       activeTopics,
