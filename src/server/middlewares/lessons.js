@@ -24,10 +24,10 @@ moment.updateLocale("en", {
  * @function isLessonExistById
  * @description Middleware function to check if a lesson exists by its ID.
  *
- * @param {object} req - Express request object.
+ * @param {Request} req - Express request object.
  * @param {string} req.body.lessonId - ID of the lesson to check.
- * @param {object} res - Express response object.
- * @param {function} next - Express next middleware function.
+ * @param {Response} res - Express response object.
+ * @param {Function} next - Express next middleware function.
  *
  * @returns {undefined}
  */
@@ -58,9 +58,9 @@ const isLessonExistById = async (req, res, next) => {
  * @function isLessonAlreadyCompleted
  * @description Middleware to check if a lesson has already been completed.
  *
- * @param {object} req - Express request object with a 'lesson' property.
- * @param {object} res - Express response object.
- * @param {function} next - Express next middleware function.
+ * @param {Request} req - Express request object with a 'lesson' property.
+ * @param {Response} res - Express response object.
+ * @param {Function} next - Express next middleware function.
  *
  * @returns {undefined}
  */
@@ -85,9 +85,9 @@ const isLessonAlreadyCompleted = async (req, res, next) => {
  * @function isScheduleAlreadyExists
  * @description Middleware to check if there are already lessons for the current week.
  *
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
- * @param {function} next - Express next middleware function.
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
+ * @param {Function} next - Express next middleware function.
  *
  * @returns {void}
  */
@@ -107,7 +107,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
       today.add(1, "day"); // Move to the next day
     }
 
-    console.log("Dates until Sunday: ", datesUntilSunday); // Log the array of dates
+    // console.log("Dates until Sunday: ", datesUntilSunday); // Log the array of dates
 
     // Создаем массив регулярных выражений для каждой даты
     const dateRegexArray = datesUntilSunday.map(
@@ -139,8 +139,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
  *
  * @param {object} req.user - Object representing user info what have been hashed in auth middleware.
  * @param {boolean} req.scheduleIsExists - Boolean value set if schedule is already exist.If true - skip this middleware through next()
- * @param {object} res - Express response object.
- * @param {function} next - Express next middleware function.
+ * @param {Function} next - Express next middleware function.
  *
  * @returns {void}
  */
