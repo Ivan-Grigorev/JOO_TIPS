@@ -121,37 +121,39 @@ const user = new mongoose.Schema(
       },
     },
 
-    languages: {
-      languageRef: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "LanguagesList",
-      },
-      activeTopicRef: [
-        {
+    languages: [
+      {
+        languageRef: {
           type: mongoose.Schema.Types.ObjectId,
-          topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef
+          ref: "LanguagesList",
         },
-      ],
-      topicStatuses: [
-        {
-          topicRef: {
+        activeTopicRef: [
+          {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "TopicsList",
+            topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef
           },
-          viewStatus: {
-            type: Number,
-            enum: [-1, 0, 1, 2, 3],
-            default: 0,
+        ],
+        topicStatuses: [
+          {
+            topicRef: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "TopicsList",
+            },
+            viewStatus: {
+              type: Number,
+              enum: [-1, 0, 1, 2, 3],
+              default: 0,
+            },
+            cardViewStatus: {
+              firstViewed: [cardAndTopicRefSchema],
+              secondViewed: [cardAndTopicRefSchema],
+              thirdViewed: [cardAndTopicRefSchema],
+              fourthViewed: [cardAndTopicRefSchema],
+            },
           },
-          cardViewStatus: {
-            firstViewed: [cardAndTopicRefSchema],
-            secondViewed: [cardAndTopicRefSchema],
-            thirdViewed: [cardAndTopicRefSchema],
-            fourthViewed: [cardAndTopicRefSchema],
-          },
-        },
-      ],
-    },
+        ],
+      },
+    ],
     languagesPoints: {
       type: Map,
       of: Number,
