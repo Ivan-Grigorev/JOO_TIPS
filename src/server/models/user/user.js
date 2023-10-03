@@ -152,6 +152,7 @@ const user = new mongoose.Schema(
             },
           },
         ],
+        _id: false,
       },
     ],
     languagesPoints: {

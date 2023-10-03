@@ -8,12 +8,14 @@ const schema = new mongoose.Schema(
           type: String,
           required: [true, "Language name is required"],
         },
-        _id: true,
+        _id: {
+          type: mongoose.Schema.Types.ObjectId, // Указываем тип ObjectId
+          default: mongoose.Types.ObjectId, // Устанавливаем значение по умолчанию (новый ObjectId)
+        },
       },
     ],
   },
-  { versionKey: false },
-  { collection: "languages_list" } // Указание желаемого имени коллекции
+  { versionKey: false, collection: "languages_list" }
 );
 
 const LanguagesList = mongoose.model("languages_list", schema);

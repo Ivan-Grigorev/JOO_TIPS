@@ -9,7 +9,10 @@ const schema = new mongoose.Schema(
     topics: [
       {
         topicTitle: { type: String, required: true },
-        _id: { type: mongoose.Schema.Types.ObjectId, required: true },
+        _id: {
+          type: mongoose.Schema.Types.ObjectId, // Указываем тип ObjectId
+          default: mongoose.Types.ObjectId, // Устанавливаем значение по умолчанию (новый ObjectId)
+        },
       },
     ],
   },
