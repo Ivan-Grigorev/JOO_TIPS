@@ -80,8 +80,8 @@ async function setActive(req, res) {
       // console.log("Adding language object to user.languages".yellow);
       const createdLanguageObject = {
         languageRef: languageRef,
-        activeTopicRef: [topicsList.topics[0]._id],
-        topicStatuses: [{ topicRef: topicsList.topics[0]._id, viewStatus: 0 }],
+        activeTopicRef: [topicsList.topics[0]._id.toString()],
+        topicStatuses: [{ topicRef: topicsList.topics[0]._id, viewStatus: 1 }],
       };
       user.languages.push(createdLanguageObject);
     }
