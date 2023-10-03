@@ -25,6 +25,19 @@ const languagesEnum = [
   null,
 ];
 
+const cardAndTopicRefSchema = new mongoose.Schema({
+  cardRef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Card",
+    required: [true, "Card ref is required"],
+  },
+  cardTopicRef: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TopicsList",
+    required: [true, "Card topic ref is required"],
+  },
+});
+
 const user = new mongoose.Schema(
   {
     name: {
@@ -109,17 +122,37 @@ const user = new mongoose.Schema(
     },
 
     languages: {
-      type: [
+      languageRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "Language ref is required"],
+      },
+      activeTopicRef: [
         {
-          language: {
-            type: String,
-            enum: languagesEnum,
-          },
-          activeTopics: { type: Array, default: [] },
-          _id: false, // disable _id auto set
+          type: mongoose.Schema.Types.ObjectId,
+          topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef
+          required: [true, "Topic ref is required"],
         },
       ],
-      default: [],
+      topicStatuses: [
+        {
+          topicRef: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "TopicsList",
+            required: [true, "Topic ref is required"],
+          },
+          viewStatus: {
+            type: Number,
+            enum: [-1, 0, 1, 2, 3],
+            default: 0,
+          },
+          cardViewStatus: {
+            firstViewed: [cardAndTopicRefSchema],
+            secondViewed: [cardAndTopicRefSchema],
+            thirdViewed: [cardAndTopicRefSchema],
+            fourthViewed: [cardAndTopicRefSchema],
+          },
+        },
+      ],
     },
     languagesPoints: {
       type: Map,
