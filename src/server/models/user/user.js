@@ -124,13 +124,12 @@ const user = new mongoose.Schema(
     languages: {
       languageRef: {
         type: mongoose.Schema.Types.ObjectId,
-        required: [true, "Language ref is required"],
+        ref: "LanguagesList",
       },
       activeTopicRef: [
         {
           type: mongoose.Schema.Types.ObjectId,
           topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef
-          required: [true, "Topic ref is required"],
         },
       ],
       topicStatuses: [
@@ -138,7 +137,6 @@ const user = new mongoose.Schema(
           topicRef: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "TopicsList",
-            required: [true, "Topic ref is required"],
           },
           viewStatus: {
             type: Number,
