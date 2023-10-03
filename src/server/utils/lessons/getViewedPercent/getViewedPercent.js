@@ -17,28 +17,33 @@ async function getViewedPercent(userId) {
     });
 
     const topicsToFind = activeLanguage.activeTopics;
-
-    // console.log({ activeLanguage });
+    /*
+    console.log({ topicsToFind });
+    console.log({ activeLanguage });
+    */
 
     const [totalCardCount, userLessons] = await Promise.all([
       getCardsCountByTopics(topicsToFind),
       Lesson.find({ userId, "cards.topic": { $in: topicsToFind } }),
     ]);
 
-    console.log(`totalCardCount - ${totalCardCount}`);
-    console.log(`Lesson -> ${Lesson}`);
+    /*
+     */
+    console.log(`totalCardCount`.red, totalCardCount);
+    console.log(`User lessons amount`.red, userLessons.length);
 
     // Создайте Set для хранения уникальных идентификаторов карточек
     const uniqueCardIds = new Set();
 
     // Извлеките уникальные идентификаторы карточек из уроков пользователя
     userLessons.forEach((lesson) => {
-      lesson.cards.forEach((cardId) => uniqueCardIds.add(cardId));
+      lesson.cards.forEach((card) => uniqueCardIds.add(card.ref));
     });
 
     // Получите количество уникальных карточек, привязанных к пользователю
     const userCardCount = uniqueCardIds.size;
 
+    // todo проверка должна осуществляться учитывая индекс просмотренности тем в массиве .
     // Рассчитайте процент привязанных карточек
     const percentage = (userCardCount / totalCardCount) * 100;
 
