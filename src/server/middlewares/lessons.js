@@ -8,6 +8,8 @@ const isLessonExistsForToday = require("../utils/lessons/isLessonExistsForToday"
 const getViewedPercent = require("../utils/lessons/getViewedPercent/getViewedPercent");
 
 const moment = require("moment");
+const User = require("../models/user/user");
+const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopicsByLanguage");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -228,9 +230,9 @@ async function createScheduleToEndOfWeek(req, res, next) {
  * @function shouldAddNewTopic
  * @description Checks viewed card percentage or time from adding topic.
  *
- * @param {object} req
- * @param {object} res
- * @param {function} next
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Function} next
  *
  * @return {void}
  */
@@ -248,10 +250,67 @@ async function shouldAddNewTopic(req, res, next) {
   }
 }
 
+/**
+ * Middleware to validate and manage active topics for a user.
+ *
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<void>} - A Promise that resolves when the validation and topic management is complete.
+ */
+async function isActiveTopicsValid(req, res, next) {
+  try {
+    // Find the user by their ID
+    const user = await User.findById(req.user.id);
+
+    // Get the list of topics for the user's active language
+    const topicsList = await getTopicsByLanguage(user.activeLanguage);
+
+    // Find the active language object in the user's languages array
+    const activeLanguage = user.languages.find((lang) => {
+      return lang.language === user.activeLanguage;
+    });
+
+    // Check if there are invalid topics in the activeTopics array
+    const invalidTopic = !activeLanguage.activeTopics.every((topic) => {
+      return topicsList.includes(topic);
+    });
+
+    // Check if there are no active topics
+    const noActiveTopic = activeLanguage.activeTopics.length === 0;
+
+    // Handle cases where topics need to be modified
+    if (noActiveTopic || invalidTopic) {
+      if (invalidTopic) {
+        console.log("Invalid topic in active topics array".yellow);
+        console.log("Deleting invalid topic.".yellow);
+        // Delete invalid topics from the activeTopics array
+        activeLanguage.activeTopics = activeLanguage.activeTopics.filter((topic) => topicsList.includes(topic)); // prettier-ignore
+      }
+
+      if (noActiveTopic) {
+        console.log("No active topic in active topics array".yellow);
+        console.log(`Changing active topic to default (${topicsList[0].slice(10)}...)`.yellow); // prettier-ignore
+        // Set the first topic from the topicsList as the active topic
+        activeLanguage.activeTopics = [topicsList[0]];
+      }
+
+      // Save the user's data with the updated topics
+      await user.save();
+    }
+
+    next();
+  } catch (e) {
+    console.error(`Error in isActiveTopicsValid check\n ${e}`.red);
+    res.status(500).json({ message: "Internal server error." });
+  }
+}
+
 module.exports = {
   isLessonExistById,
   isLessonAlreadyCompleted,
   isScheduleAlreadyExists,
   createScheduleToEndOfWeek,
   shouldAddNewTopic,
+  isActiveTopicsValid,
 };

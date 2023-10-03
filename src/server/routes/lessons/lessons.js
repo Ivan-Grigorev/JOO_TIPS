@@ -13,6 +13,7 @@ const router = express.Router();
 router.get(
   "",
   auth,
+  middlewares.isActiveTopicsValid,
   middlewares.shouldAddNewTopic,
   middlewares.isScheduleAlreadyExists,
   middlewares.createScheduleToEndOfWeek,

@@ -28,31 +28,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       return lang.language === language;
     });
 
-    // если в массиве есть тема, которой не существует в общем массиве тем - вернёт true
-    const invalidTopic = !activeLanguage.activeTopics.every((topic) =>
-      topicsList.includes(topic)
-    );
-    const noActiveTopic = activeLanguage.activeTopics.length === 0;
-
-    if (noActiveTopic || invalidTopic) {
-      if (invalidTopic) {
-        console.log("Invalid topic in active topics array".yellow);
-        console.log("Deleting invalid topic.".yellow);
-        activeLanguage.activeTopics = activeLanguage.activeTopics.filter(
-          (topic) => topicsList.includes(topic)
-        ); // deleting invalid topic from the array
-      }
-      if (noActiveTopic) {
-        console.log("No active topic".yellow);
-        console.log(`Changing active topic to default (${topicsList[0].slice(10)}...)`.yellow); // prettier-ignore
-        activeLanguage.activeTopics = [topicsList[0]]; // Установка первой темы как активной
-      }
-
-      await user.save();
-    }
-
-    // Получаем активные темы для указанного языка (может быть массивом)
-    const activeTopics = [activeLanguage.activeTopics]; // в будущем здесь будет максимум 4 темы
+    const activeTopics = [activeLanguage.activeTopics]; // В будущем здесь будет максимум 4 темы
 
     const { cardIDs, findedCards } = await getCardsByActiveTopics(
       activeTopics,
