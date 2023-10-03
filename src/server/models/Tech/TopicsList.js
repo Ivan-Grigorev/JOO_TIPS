@@ -6,10 +6,12 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    topics: {
-      type: [String],
-      required: true,
-    },
+    topics: [
+      {
+        topicTitle: { type: String, required: true },
+        _id: { type: mongoose.Schema.Types.ObjectId, required: true },
+      },
+    ],
   },
 
   { collection: "topics_list" } // Указание желаемого имени коллекции
