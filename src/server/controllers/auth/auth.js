@@ -56,7 +56,7 @@ async function signup(req, res, next) {
             device: req.user.deviceInfo.device,
             browser: req.user.deviceInfo.browser,
           },
-          registrationDate: new Date(),
+          registrationDate: moment().format("DD.MM.YYYY"),
         });
 
         // Generate a JWT token for the newly registered user.
