@@ -154,8 +154,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
   try {
     if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
 
-    // Get the current date in different formats
-
     const techProps = await getTechProps(language);
 
     if (todayIsEndOfMonth) {
