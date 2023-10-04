@@ -114,8 +114,9 @@ const isScheduleAlreadyExists = async (req, res, next) => {
       (date) => new RegExp(date.replace(/\./g, "\\."))
     );
 
-    // Find documents with lesson dates within the current week
+    // Find documents with lesson dates within the current week and matching userId
     const existingLessons = await Lesson.find({
+      userId: req.user.id,
       $or: dateRegexArray.map((dateRegex) => ({
         lessonDate: { $regex: dateRegex },
       })),
