@@ -44,8 +44,6 @@ async function add(req, res) {
       return res.status(400).json({ message: "Language is required." });
     }
 
-    user.languagesPoints.set(newLanguage, 0);
-
     // Find the language reference ID and name in the languages list.
     const { _id: languageId, language: languageName } =
       languagesList.languages.find((obj) => obj.language === newLanguage);
@@ -63,6 +61,7 @@ async function add(req, res) {
         topicStatuses: [{ topicRef: topicsList.topics[0]._id, viewStatus: 1 }],
       };
       user.languages.push(createdLanguageObject);
+      user.languagesPoints.set(newLanguage, 0);
     }
 
     user.save(); // without await to increase performance
@@ -76,12 +75,10 @@ async function add(req, res) {
     }));
 
     // Return the added language object and the updated list of user languages.
-    res
-      .status(201)
-      .json({
-        addedLanguage: { _id: languageId, languageName },
-        userLanguages,
-      });
+    res.status(201).json({
+      addedLanguage: { _id: languageId, languageName },
+      userLanguages,
+    });
   } catch (e) {
     console.log(`Error while adding language to user object: ${e}`);
     res.status(500).json({ message: "Error adding new language." });
