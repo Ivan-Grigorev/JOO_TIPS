@@ -52,7 +52,7 @@ async function addPoints(req, res) {
       $inc: { [`languagesPoints.${language}`]: points },
     });
 
-    res.status(204).json(user.languagesPoints.React);
+    res.status(200).json({ points: user.languagesPoints[language] });
   } catch (e) {
     console.error(`Error adding points: ${e}`);
     res.status(500).json({ message: "Internal server error" });
