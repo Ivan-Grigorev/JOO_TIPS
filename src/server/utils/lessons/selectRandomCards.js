@@ -1,3 +1,4 @@
+const LanguagesList = require("../../models/Tech/LanguagesList");
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm/Algorithm");
 const getCardsByActiveTopics = require("./Algorithm/utils/getCardsByActiveTopics");
@@ -17,16 +18,29 @@ const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
  */
 const selectRandomCards = async (userId, language, cardsAmount) => {
   try {
-    const [user, takenCards, topicsList] = await Promise.all([
+    const [user, takenCards, topicsList, languagesList] = await Promise.all([
       User.findById(userId),
       getAllTakenCards(userId, language),
       getTopicsByLanguage(language),
+      LanguagesList.findOne({}),
     ]);
 
     // Находим объект с нужным языком в массиве languages пользователя
     const activeLanguage = user.languages.find((lang) => {
       return lang.language === language;
     });
+
+    /*
+    console.log("languagesList".red);
+    console.log(languagesList);
+    console.log(`language - ${language}`.red);
+    */
+
+    const languageRef = languagesList.languages.find((obj) => {
+      return obj.language === language;
+    })._id;
+
+    console.log(`languageRef - ${languageRef.toString()}`.red);
 
     const activeTopics = [activeLanguage.activeTopics]; // В будущем здесь будет максимум 4 темы
 
@@ -45,7 +59,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       findedCards,
     };
   } catch (e) {
-    console.error(e);
+    console.error(e.message);
   }
 };
 
