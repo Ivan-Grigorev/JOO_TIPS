@@ -60,21 +60,10 @@ async function addPoints(req, res) {
 }
 
 async function finishLesson(req, res, next) {
-  const { lessonId } = req.body;
-  // console.log(req.body); // Logging the request body for debugging
-
   try {
-    // Find the lesson by its ID in the database
-    const lesson = await Lesson.findById(lessonId);
-
-    // Set the completion flag of the lesson to true
-    lesson.status = "completed";
-    // increase cards view index
-    lesson.cards.forEach((card) => (card.viewIndex += 1));
-    await lesson.save();
-
-    req.lesson.points = lesson.points;
-    req.lesson.language = lesson.language;
+    req.lesson.status = "completed";
+    req.lesson.cards.forEach((card) => (card.viewIndex += 1)); // increase cards view index
+    req.lesson.save();
 
     next();
     // Respond with a success message if the lesson was completed successfully
