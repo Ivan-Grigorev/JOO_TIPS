@@ -44,11 +44,11 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
     const activeTopicRefs = userLanguageObject.activeTopicsRefs;
 
     // Находим темы по их идентификаторам
-    const activeTopics = activeTopicRefs.map((topicRef) => {
+    const activeTopics = activeTopicRefs.map((topicObject) => {
       // Берём из объекта пользователя реф на тему
       return topicsList.find((topic) => {
         // Ищем по рефу нужный нам объект в списке тем
-        return topic._id.toString() === topicRef.toString();
+        return topic._id.toString() === topicObject.ref.toString();
       });
     });
 
