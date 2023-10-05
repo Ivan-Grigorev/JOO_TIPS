@@ -1,30 +1,28 @@
 const Lesson = require("../../../models/lessons/lessons");
-const User = require("../../../models/user/user");
+const getUserLanguagesInfo = require("../getUserLanguagesInfo");
 const getCardsCountByTopics = require("./utils/getCardsCountByTopic");
 
 /**
  * @description Middleware to count viewed percent of the cards.
  *
- * @param {string} userId - User ID user to search Lessons linked with user.
+ * @param {string} userObject - User object which data used to search Lessons linked with user.
  *
  * @returns {number}
  */
-async function getViewedPercent(userId) {
+async function getViewedPercent(userObject) {
   try {
-    const user = await User.findById(userId);
-    const activeLanguage = user.languages.find((lang) => {
-      return lang.language === user.activeLanguage;
-    });
+    const user = userObject;
 
-    const topicsToFind = activeLanguage.activeTopics;
-    /*
-    console.log({ topicsToFind });
-    console.log({ activeLanguage });
-    */
+    const userLanguagesInfo = await getUserLanguagesInfo(user);
+
+    console.log("userLanguagesInfo".red, userLanguagesInfo);
 
     const [totalCardCount, userLessons] = await Promise.all([
-      getCardsCountByTopics(topicsToFind),
-      Lesson.find({ userId, "cards.topic": { $in: topicsToFind } }),
+      getCardsCountByTopics(userLanguagesInfo.activeTopicsTitles),
+      Lesson.find({
+        userId: user._id,
+        "cards.topic": { $in: userLanguagesInfo.activeTopicsTitles },
+      }),
     ]);
 
     /*

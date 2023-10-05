@@ -1,9 +1,8 @@
-const LanguagesList = require("../../models/Tech/LanguagesList");
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm/Algorithm");
 const getCardsByActiveTopics = require("./Algorithm/utils/getCardsByActiveTopics");
 const getAllTakenCards = require("./getAllTakenCards");
-const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
+const getUserLanguagesInfo = require("./getUserLanguagesInfo");
 
 /**
  * Selects a random set of cards for a user based on their language and topics.
@@ -18,49 +17,17 @@ const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
  */
 const selectRandomCards = async (userId, language, cardsAmount) => {
   try {
-    const [user, takenCards, topicsList, languagesList] = await Promise.all([
+    const [user, takenCards] = await Promise.all([
       User.findById(userId),
       getAllTakenCards(userId, language),
-      getTopicsByLanguage(language),
-      LanguagesList.findOne({}),
     ]);
 
-    /*
-    console.log("languagesList".red);
-    console.log(languagesList);e
-    console.log(`language - ${language}`.red);
-    console.log('activeLanguage'.red)
-    console.log(activeLanguage)
-    */
+    const userLanguagesInfo = await getUserLanguagesInfo(user);
 
-    const languageRef = languagesList.languages.find((obj) => {
-      return obj.language === language;
-    })._id;
-
-    const userLanguageObject = user.languages.find((obj) => {
-      return obj.languageRef.toString() === languageRef.toString();
-    });
-
-    const activeTopicRefs = userLanguageObject.activeTopicsRefs;
-
-    // Находим темы по их идентификаторам
-    const activeTopics = activeTopicRefs.map((topicObject) => {
-      // Берём из объекта пользователя реф на тему
-      return topicsList.find((topic) => {
-        // Ищем по рефу нужный нам объект в списке тем
-        return topic._id.toString() === topicObject.ref.toString();
-      });
-    });
-
-    const activeTopicsTitles = [
-      activeTopics[0]?.topicTitle,
-      activeTopics[1]?.topicTitle,
-      activeTopics[2]?.topicTitle,
-      activeTopics[3]?.topicTitle,
-    ];
+    // console.log("userLanguagesInfo".red, userLanguagesInfo);
 
     const { cardIDs, findedCards } = await getCardsByActiveTopics(
-      activeTopicsTitles,
+      userLanguagesInfo.activeTopicsTitles,
       language,
       takenCards.all
     );
