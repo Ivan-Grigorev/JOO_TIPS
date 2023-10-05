@@ -13,8 +13,7 @@ const router = express.Router();
 router.get(
   "",
   auth,
-  // middlewares.isActiveTopicsValid,
-  // middlewares.shouldAddNewTopic,
+  middlewares.shouldChangeTopicStatus, // todo поставить после проверки на существование расписания
   middlewares.isScheduleAlreadyExists,
   middlewares.createScheduleToEndOfWeek,
   getLessons
