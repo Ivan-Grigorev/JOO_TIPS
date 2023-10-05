@@ -127,7 +127,7 @@ const user = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "LanguagesList",
         },
-        activeTopicRef: [
+        activeTopicsRefs: [
           {
             type: mongoose.Schema.Types.ObjectId,
             topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef

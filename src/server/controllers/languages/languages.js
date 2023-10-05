@@ -57,7 +57,7 @@ async function add(req, res) {
       // If not, create a new language object and add it to the user's profile.
       const createdLanguageObject = {
         languageRef: languageId,
-        activeTopicRef: [topicsList.topics[0]._id.toString()],
+        activeTopicsRefs: [topicsList.topics[0]._id.toString()],
         topicStatuses: [{ topicRef: topicsList.topics[0]._id, viewStatus: 1 }],
       };
       user.languages.push(createdLanguageObject);
