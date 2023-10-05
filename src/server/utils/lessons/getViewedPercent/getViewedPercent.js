@@ -15,18 +15,14 @@ async function getViewedPercent(userObject) {
 
     const userLanguagesInfo = await getUserLanguagesInfo(user);
 
-    console.log("userLanguagesInfo".red, userLanguagesInfo);
-
     const [totalCardCount, userLessons] = await Promise.all([
-      getCardsCountByTopics(userLanguagesInfo.activeTopicsTitles),
+      getCardsCountByTopics(userLanguagesInfo.userLanguageObject),
       Lesson.find({
         userId: user._id,
         "cards.topic": { $in: userLanguagesInfo.activeTopicsTitles },
       }),
     ]);
 
-    /*
-     */
     console.log(`totalCardCount`.red, totalCardCount);
     console.log(`User lessons amount`.red, userLessons.length);
 

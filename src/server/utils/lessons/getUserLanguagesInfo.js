@@ -34,7 +34,7 @@ async function getUserLanguagesInfo(user) {
       activeTopics[3]?.topicTitle,
     ];
 
-    return { activeTopics, activeTopicsTitles };
+    return { userLanguageObject, activeTopicsTitles };
   } catch (e) {
     console.error(e);
   }
