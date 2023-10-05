@@ -129,8 +129,12 @@ const user = new mongoose.Schema(
         },
         activeTopicsRefs: [
           {
-            type: mongoose.Schema.Types.ObjectId,
-            topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef
+            ref: {
+              type: mongoose.Schema.Types.ObjectId,
+              topicRef: "TopicsList", // Указываем модель, на которую будет ссылаться поле cardRef
+            },
+            activationDate: String,
+            _id: false,
           },
         ],
         topicStatuses: [
