@@ -50,7 +50,9 @@ async function createLessons(
         .add(1, "days")
         .set({ hour: 3, minute: 0, second: 0 })
         .format("DD.MM.YYYY HH:mm");
-      const formattedDay = day.format("DD.MM.YYYY HH:mm");
+      const formattedDay = day
+        .set({ hour: 3, minute: 0, second: 0 })
+        .format("DD.MM.YYYY HH:mm");
       const formattedEndOfMonth = day.endOf("month").format("DD.MM.YYYY");
       const todayIsEndOfMonth = formattedDay === formattedEndOfMonth;
 
