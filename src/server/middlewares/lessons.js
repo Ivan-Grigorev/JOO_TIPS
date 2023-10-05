@@ -10,6 +10,7 @@ const getViewedPercent = require("../utils/lessons/getViewedPercent/getViewedPer
 const moment = require("moment");
 const User = require("../models/user/user");
 const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopicsByLanguage");
+const LanguagesList = require("../models/Tech/LanguagesList");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -225,30 +226,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
 }
 
 /**
- * @function shouldAddNewTopic
- * @description Checks viewed card percentage or time from adding topic.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {Function} next
- *
- * @return {void}
- */
-async function shouldAddNewTopic(req, res, next) {
-  try {
-    // console.log("shouldAddNewTopic middleware".blue);
-    const [viewedPercent] = await Promise.all([getViewedPercent(req.user.id)]);
-
-    console.log(`viewedPercent - ${viewedPercent}`.green);
-
-    return next();
-  } catch (e) {
-    console.error("Error in shouldAddNewTopic", e);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-}
-
-/**
  * Middleware to validate and manage active topics for a user.
  *
  * @param {Request} req - Express request object.
@@ -256,46 +233,34 @@ async function shouldAddNewTopic(req, res, next) {
  * @param {Function} next - The next middleware function.
  * @returns {Promise<void>} - A Promise that resolves when the validation and topic management is complete.
  */
-async function isActiveTopicsValid(req, res, next) {
+async function shouldChangeTopicStatus(req, res, next) {
   try {
-    // Find the user by their ID
-    const user = await User.findById(req.user.id);
+    const language = req.body.language;
+    const userID = req.user.id;
 
-    // Get the list of topics for the user's active language
-    const topicsList = await getTopicsByLanguage(user.activeLanguage);
+    // Find the user by their ID
+    const [user, languagesList, topicsList] = await Promise.all([
+      User.findById(userID),
+      LanguagesList.findOne({}), // Get the list of the languages (needed for his IDs)
+      getTopicsByLanguage(language), // Get the list of topics for the user's active language
+    ]);
+
+    const viewedPercent = await getViewedPercent(user);
+
+    console.log(`viewedPercent - ${viewedPercent}`.green);
 
     // Find the active language object in the user's languages array
-    const activeLanguage = user.languages.find((lang) => {
-      return lang.language === user.activeLanguage;
+    const currentLanguageRef = languagesList.languages.find((obj) => {
+      return obj.language === language;
+    })._id;
+
+    const userLanguageObject = user.languages.find((obj) => {
+      return obj.languageRef.toString() === currentLanguageRef.toString();
     });
 
-    // Check if there are invalid topics in the activeTopics array
-    const invalidTopic = !activeLanguage.activeTopics.every((topic) => {
-      return topicsList.includes(topic);
-    });
+    const userActiveTopics = userLanguageObject.activeTopicsRefs;
 
-    // Check if there are no active topics
-    const noActiveTopic = activeLanguage.activeTopics.length === 0;
-
-    // Handle cases where topics need to be modified
-    if (noActiveTopic || invalidTopic) {
-      if (invalidTopic) {
-        // console.log("Invalid topic in active topics array".yellow);
-        // console.log("Deleting invalid topic.".yellow);
-        // Delete invalid topics from the activeTopics array
-        activeLanguage.activeTopics = activeLanguage.activeTopics.filter((topic) => topicsList.includes(topic)); // prettier-ignore
-      }
-
-      if (noActiveTopic) {
-        // console.log("No active topic in active topics array".yellow);
-        // console.log(`Changing active topic to default (${topicsList[0].slice(10)}...)`.yellow); // prettier-ignore
-        // Set the first topic from the topicsList as the active topic
-        activeLanguage.activeTopics = [topicsList[0]];
-      }
-
-      // Save the user's data with the updated topics
-      await user.save();
-    }
+    console.log("userActiveTopics".red, userActiveTopics);
 
     next();
   } catch (e) {
@@ -309,6 +274,5 @@ module.exports = {
   isLessonAlreadyCompleted,
   isScheduleAlreadyExists,
   createScheduleToEndOfWeek,
-  shouldAddNewTopic,
-  isActiveTopicsValid,
+  shouldChangeTopicStatus,
 };

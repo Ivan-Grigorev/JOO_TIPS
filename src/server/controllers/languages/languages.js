@@ -70,6 +70,10 @@ async function add(req, res) {
       user.languagesPoints.set(newLanguage, 0);
     }
 
+    if (user.activeLanguage === null) {
+      user.activeLanguage = newLanguage.toLowerCase();
+    }
+
     user.save(); // without await to increase performance
 
     // Retrieve the list of user languages.
