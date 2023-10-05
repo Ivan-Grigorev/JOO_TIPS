@@ -40,20 +40,9 @@ const lessonSchema = new mongoose.Schema(
     },
     cards: [
       {
-        ref: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Card",
-          required: [true, "Card ref is required"],
-        },
-        topic: {
-          type: String,
-          required: [true, "Card topic is required"],
-        },
-        viewIndex: {
-          type: Number,
-          enum: [0, 1, 2, 3],
-          default: 0,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Card",
+        required: [true, "Card ref is required"],
         _id: false, // Добавляем опцию _id: false
       },
     ],
