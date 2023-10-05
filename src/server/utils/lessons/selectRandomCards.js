@@ -25,29 +25,47 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       LanguagesList.findOne({}),
     ]);
 
-    // Находим объект с нужным языком в массиве languages пользователя
-    const activeLanguage = user.languages.find((lang) => {
-      return lang.language === language;
-    });
-
     /*
     console.log("languagesList".red);
-    console.log(languagesList);
+    console.log(languagesList);e
     console.log(`language - ${language}`.red);
+    console.log('activeLanguage'.red)
+    console.log(activeLanguage)
     */
 
     const languageRef = languagesList.languages.find((obj) => {
       return obj.language === language;
     })._id;
 
-    console.log(`languageRef - ${languageRef.toString()}`.red);
+    const userLanguageObject = user.languages.find((obj) => {
+      return obj.languageRef.toString() === languageRef.toString();
+    });
 
-    const activeTopics = [activeLanguage.activeTopics]; // В будущем здесь будет максимум 4 темы
+    const activeTopicRefs = userLanguageObject.activeTopicsRefs;
+
+    // Находим темы по их идентификаторам
+    const activeTopics = activeTopicRefs.map((topicRef) => {
+      // Берём из объекта пользователя реф на тему
+      return topicsList.find((topic) => {
+        // Ищем по рефу нужный нам объект в списке тем
+        return topic._id.toString() === topicRef.toString();
+      });
+    });
+
+    const activeTopicsTitles = [
+      activeTopics[0]?.topicTitle,
+      activeTopics[1]?.topicTitle,
+      activeTopics[2]?.topicTitle,
+      activeTopics[3]?.topicTitle,
+    ];
 
     const { cardIDs, findedCards } = await getCardsByActiveTopics(
-      activeTopics,
+      activeTopicsTitles,
+      language,
       takenCards.all
     );
+
+    // console.log({ cardIDs, findedCards });
 
     if (!cardIDs) return { randomCards: [] };
 
@@ -59,7 +77,8 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       findedCards,
     };
   } catch (e) {
-    console.error(e.message);
+    // console.error(e.message);
+    throw new Error("Error generating random cards.", e.message);
   }
 };
 

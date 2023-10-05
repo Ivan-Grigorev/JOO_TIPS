@@ -10,32 +10,39 @@ const Card = require("../../../../models/Card/Card");
  * @returns {Promise<{ cardIDs: {ref: string, topic: string,}[], findedCards: { topic: string, foundAmount: number, totalAmount: number }[] }>} An object containing card identifiers and information about the found cards.
  * @throws {Error} An error if there was an issue fetching the data or processing the cards.
  */
-async function getCardsByActiveTopics(activeTopics, allTakenCards) {
+async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
   try {
-    const cardIDs = [];
+    const cardSet = new Set(); // Создаем сет для уникальных карточек
     const findedCards = [];
 
-    // Проходимся по массиву тем, ищем уникальные карточки с соответствующими темами
-    // Добавляем их в массив cardIDs
     for (const topic of activeTopics) {
-      const findCards = await Card.find({ topic }); // поиск карточек по заданной теме.
-      const cardIDsToAdd = findCards // проверка на уникальность тем
-        .filter((card) => !allTakenCards.includes(card._id.toString()))
-        .map((card) => {
-          return { ref: card._id.toString(), topic: card.topic };
-        });
+      if (!topic) continue;
+      /* 
+       console.log(`topic - ${topic}`.blue);
+      console.log(`language - ${language}`.blue);
+      */
+      const findCards = await Card.find({ topic, language }); // Поиск карточек по заданной теме
+      findCards.forEach((card) => {
+        const cardIdString = card._id.toString();
 
-      cardIDs.push(...cardIDsToAdd);
-      findedCards.push({
-        topic,
-        findedAmount: cardIDs.length,
-        totalAmount: findCards.length,
+        // Проверка на уникальность карточки
+        const isUniqueCard =!allTakenCards.includes(cardIdString) && !cardSet.has(cardIdString); // prettier-ignore
+
+        if (isUniqueCard) {
+          cardSet.add(cardIdString);
+          findedCards.push({
+            ref: cardIdString,
+            topic: card.topic,
+          });
+        }
       });
+
+      console.log(`Количество найденных карточек по теме "${topic}": ${findedCards.length}`); // prettier-ignore
     }
 
-    console.log("Количество найденных карточек:", cardIDs.length);
+    console.log("Общее количество найденных уникальных карточек:", findedCards.length); // prettier-ignore
 
-    return { cardIDs, findedCards };
+    return { cardIDs: [...cardSet], findedCards };
   } catch (e) {
     console.error("Error getting cards by user's active topics", e);
   }
