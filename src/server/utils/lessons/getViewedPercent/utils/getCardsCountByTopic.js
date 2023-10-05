@@ -3,20 +3,59 @@ const Card = require("../../../../models/Card/Card");
 /**
  * Get the count of cards by topics.
  *
- * @param {string[]} topicsArray - An array of topic strings to search for.
- * @returns {Promise<{ n: number, nPlus1: number, nPlus2: number, nMinus1: number }>} - A Promise that resolves to an object with counts for each topic.
+ * @returns {Promise<object>} - A Promise that resolves to an object with counts for each topic.
  * @throws {Error} If there is an error while fetching the counts.
  */
-async function getCardsCountByTopics(topicsArray) {
+async function getCardsCountByTopics(languageObject) {
   try {
-    const [n, nPlus1, nPlus2, nMinus1] = await Promise.all([
-      Card.find({ topic: topicsArray[0] }).countDocuments(),
-      Card.find({ topic: topicsArray[1] }).countDocuments(),
-      Card.find({ topic: topicsArray[2] }).countDocuments(),
-      Card.find({ topic: topicsArray[3] }).countDocuments(),
-    ]);
+    const activeTopics = languageObject.activeTopicsRefs;
+    const topicStatuses = languageObject.topicStatuses;
+    const counts = {};
 
-    return { n, nPlus1, nPlus2, nMinus1 };
+    for (let i = 0; i < activeTopics.length; i++) {
+      // Create an array of strings (refs) for active topics
+      const activeTopicsRefsArray = activeTopics.map((obj) =>
+        obj.ref.toString()
+      );
+
+      // Filter topic objects based on refs
+      const topicsObjects = topicStatuses.filter((obj) =>
+        activeTopicsRefsArray.includes(obj.topicRef.toString())
+      );
+
+      for (let j = 0; j < topicsObjects.length; j++) {
+        const topicObject = topicsObjects[j];
+        const { viewStatus, cardViewStatus } = topicObject;
+        const { firstViewed, secondViewed, thirdViewed, fourthViewed } =
+          cardViewStatus;
+
+        let count = null;
+
+        // Determine the count of cards based on viewStatus
+        switch (viewStatus) {
+          case 1:
+            count = firstViewed.length;
+            break;
+          case 2:
+            count = secondViewed.length;
+            break;
+          case 3:
+            count = thirdViewed.length;
+            break;
+          case 4:
+            count = fourthViewed.length;
+            break;
+          default:
+            count = 0;
+            break;
+        }
+
+        // Save the result in the counts object with keys n1, n2, etc.
+        counts[`n${i + 1}`] = count;
+      }
+    }
+
+    return counts;
   } catch (e) {
     console.error("Error getting cards count by topics", e);
     throw new Error("Error getting cards count by topics", e);
