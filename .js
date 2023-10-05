@@ -2,7 +2,7 @@
 const languages = [
   {
     languageRef: "javascriptID",
-    activeTopicRef: ["n", "n+1", "n+2"],
+    activeTopicRef: ["n", "n+1", "n+2", "n-1"],
     topicsStatuses: [
       { topicID: "topicRef1", viewStatus: 1 }, // status - n
       { topicID: "topicRef2", viewStatus: 2 }, // status n + 1
