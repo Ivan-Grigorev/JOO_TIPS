@@ -1,12 +1,10 @@
-const Card = require("../../../../models/Card/Card");
-
 /**
  * Get the count of cards by topics.
  *
  * @returns {Promise<object>} - A Promise that resolves to an object with counts for each topic.
  * @throws {Error} If there is an error while fetching the counts.
  */
-async function getCardsCountByTopics(languageObject) {
+function getCardsCountByTopics(languageObject) {
   try {
     const activeTopics = languageObject.activeTopicsRefs;
     const topicStatuses = languageObject.topicStatuses;
@@ -50,8 +48,10 @@ async function getCardsCountByTopics(languageObject) {
             break;
         }
 
+        const topicNumber = i === 0 ? "" : `+${i}`;
+
         // Save the result in the counts object with keys n1, n2, etc.
-        counts[`n${i + 1}`] = count;
+        counts[`n${topicNumber}`] = count;
       }
     }
 
