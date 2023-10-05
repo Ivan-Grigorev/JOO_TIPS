@@ -1,6 +1,7 @@
 const LanguagesList = require("../../models/Tech/LanguagesList");
 const TopicsList = require("../../models/Tech/TopicsList");
 const User = require("../../models/user/user");
+const moment = require("moment");
 
 // This function retrieves the user's language preferences.
 async function get(req, res) {
@@ -57,7 +58,12 @@ async function add(req, res) {
       // If not, create a new language object and add it to the user's profile.
       const createdLanguageObject = {
         languageRef: languageId,
-        activeTopicsRefs: [topicsList.topics[0]._id.toString()],
+        activeTopicsRefs: [
+          {
+            ref: topicsList.topics[0]._id.toString(),
+            activationDate: moment().format("DD.MM.YYYY"),
+          },
+        ],
         topicStatuses: [{ topicRef: topicsList.topics[0]._id, viewStatus: 1 }],
       };
       user.languages.push(createdLanguageObject);
