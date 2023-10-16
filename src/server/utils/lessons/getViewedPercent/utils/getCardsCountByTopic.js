@@ -12,14 +12,14 @@ function getCardsCountByTopics(languageObject) {
 
     for (let i = 0; i < activeTopics.length; i++) {
       // Create an array of strings (refs) for active topics
-      const activeTopicsRefsArray = activeTopics.map((obj) =>
-        obj.ref.toString()
-      );
+      const activeTopicsRefsArray = activeTopics.map((obj) => {
+        return obj.ref.toString();
+      });
 
       // Filter topic objects based on refs
-      const topicsObjects = topicStatuses.filter((obj) =>
-        activeTopicsRefsArray.includes(obj.topicRef.toString())
-      );
+      const topicsObjects = topicStatuses.filter((obj) => {
+        return activeTopicsRefsArray.includes(obj.topicRef.toString());
+      });
 
       for (let j = 0; j < topicsObjects.length; j++) {
         const topicObject = topicsObjects[j];

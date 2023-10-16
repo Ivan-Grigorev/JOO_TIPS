@@ -7,7 +7,7 @@ const getCardsCountByTopics = require("./utils/getCardsCountByTopic");
  *
  * @param {string} userObject - User object which data used to search Lessons linked with user.
  *
- * @returns {number}
+ * @returns {<Promise<number>>}
  */
 async function getViewedPercent(userObject) {
   try {
@@ -16,17 +16,17 @@ async function getViewedPercent(userObject) {
     const userLanguagesInfo = await getUserLanguagesInfo(user);
     const { activeTopicsTitles } = userLanguagesInfo;
 
+    const totalCardsCountByActiveTopic = await Card.find({ topic: { $in: activeTopicsTitles }}).countDocuments(); // prettier-ignore
+
     const viewedCardsByActiveTopic = getCardsCountByTopics(userLanguagesInfo.userLanguageObject) // prettier-ignore
 
-    const totalCardsCountByActiveToppic = await Card.find({ topic: { $in: activeTopicsTitles }}).countDocuments(); // prettier-ignore
-
     console.log(`totalCardCount`.red, viewedCardsByActiveTopic);
-    console.log(`User lessons amount`.red, totalCardsCountByActiveToppic);
+    // console.log(`User lessons amount`.red, totalCardsCountByActiveToppic);
 
     // todo проверка должна осуществляться учитывая индекс просмотренности тем в массиве .
     // Рассчитайте процент привязанных карточек
     const percentage =
-      (viewedCardsByActiveTopic.n / totalCardsCountByActiveToppic) * 100;
+      (viewedCardsByActiveTopic.n / totalCardsCountByActiveTopic) * 100;
 
     return percentage;
   } catch (e) {

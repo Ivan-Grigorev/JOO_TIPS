@@ -249,19 +249,6 @@ async function shouldChangeTopicStatus(req, res, next) {
 
     console.log(`viewedPercent - ${viewedPercent}`.green);
 
-    // Find the active language object in the user's languages array
-    const currentLanguageRef = languagesList.languages.find((obj) => {
-      return obj.language === language;
-    })._id;
-
-    const userLanguageObject = user.languages.find((obj) => {
-      return obj.languageRef.toString() === currentLanguageRef.toString();
-    });
-
-    const userActiveTopics = userLanguageObject.activeTopicsRefs;
-
-    console.log("userActiveTopics".red, userActiveTopics);
-
     next();
   } catch (e) {
     console.error(`Error in isActiveTopicsValid check\n ${e}`.red);
