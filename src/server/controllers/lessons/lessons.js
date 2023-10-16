@@ -86,6 +86,20 @@ async function finishLesson(req, res, next) {
   }
 }
 
+async function addCardToViewed(req, res, next) {
+  try {
+    const { card } = req.body;
+
+    // logic
+    // logic
+    // logic
+
+    res.status(201).end();
+  } catch (e) {
+    console.error(`Error adding card to viewed cards array: ${e}`.red);
+  }
+}
+
 module.exports = {
   getActiveLessonPoints,
   getLessons,
