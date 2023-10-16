@@ -1,5 +1,6 @@
 const Lesson = require("../../models/lessons/lessons");
 const User = require("../../models/user/user");
+const moment = require("moment");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
@@ -52,22 +53,32 @@ async function addPoints(req, res) {
       $inc: { [`languagesPoints.${language}`]: points },
     });
 
-    res.status(200).json({ points: user.languagesPoints[language] });
+    res.status(201).json({ points: user.languagesPoints[language] });
   } catch (e) {
     console.error(`Error adding points: ${e}`);
     res.status(500).json({ message: "Internal server error" });
   }
 }
 
+async function startLesson(req, res, next) {
+  try {
+    req.lesson.startTime = moment().format("DD.MM.YYYY HH:mm");
+    req.lesson.save();
+
+    res.status(201).end();
+  } catch (e) {
+    console.error(`Error starting Lesson: ${e}`.red);
+  }
+}
+
 async function finishLesson(req, res, next) {
   try {
     req.lesson.status = "completed";
-    req.lesson.cards.forEach((card) => (card.viewIndex += 1)); // increase cards view index
+    // req.lesson.cards.forEach((card) => (card.viewIndex += 1)); // increase cards view index
+    req.lesson.endTime = moment().format("DD.MM.YYYY HH:mm");
     req.lesson.save();
 
     next();
-    // Respond with a success message if the lesson was completed successfully
-    // res.status(200).json({ message: "Lesson finished successfully." });
   } catch (error) {
     // Handle errors if any occurred during the process
     console.error("Error finishing lesson:", error);
@@ -75,4 +86,10 @@ async function finishLesson(req, res, next) {
   }
 }
 
-module.exports = { getActiveLessonPoints, getLessons, finishLesson, addPoints };
+module.exports = {
+  getActiveLessonPoints,
+  getLessons,
+  finishLesson,
+  addPoints,
+  startLesson,
+};
