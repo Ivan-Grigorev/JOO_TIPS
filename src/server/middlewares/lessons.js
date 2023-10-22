@@ -240,13 +240,34 @@ async function shouldChangeTopicStatus(req, res, next) {
     const userLanguageInfo = await getUserLanguagesInfo(user);
     const topicsViewedPercentage = await getViewedPercent(userLanguageInfo); // count viewed cards percent
 
-    console.log(`viewedPercent`.yellow);
-    console.log(topicsViewedPercentage);
+    // console.log(`topicsViewedPercentage`.yellow);
+    // console.log(topicsViewedPercentage);
 
-    if (topicsViewedPercentage >= 75) {
-      // logic
-      // logic
-      // logic
+    const keys = Object.keys(topicsViewedPercentage);
+    const lastKey = keys[keys.length - 1];
+    const lastActiveTopic = topicsViewedPercentage[lastKey];
+
+    if (lastActiveTopic.viewedPercentage >= 75) {
+      const topicsList = await getTopicsByLanguage(user.activeLanguage);
+      const targetIndex = topicsList.findIndex(
+        (topic) =>
+          topic.topicTitle ===
+          userLanguageInfo.activeTopicsTitles[
+            userLanguageInfo.activeTopicsTitles.length - 1
+          ].title
+      );
+
+      console.log("targetIndex", targetIndex);
+      const nextIndex = targetIndex + 1;
+
+      if(!topicsList[nextIndex]) throw new Error('No more topics available!') // ! Придумать как реализовать
+
+      userLanguageInfo.userLanguageObject.activeTopicsRefs.push({
+        ref: topicsList[nextIndex]._id,
+        activationDate: moment().format("DD.MM.YYYY"),
+      });
+
+      user.save();
     }
 
     next();
