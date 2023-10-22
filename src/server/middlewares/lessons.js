@@ -237,22 +237,12 @@ async function createScheduleToEndOfWeek(req, res, next) {
 async function shouldChangeTopicStatus(req, res, next) {
   try {
     const language = req.body.language;
-    const userID = req.user.id;
 
-    const user = await User.findById(userID);
-
-    // Find the user by their ID
-    const [userLanguageInfo, languagesList, topicsList] = await Promise.all([
-      getUserLanguagesInfo(user),
-      LanguagesList.findOne({}), // Get the list of the languages (needed for his IDs)
-      getTopicsByLanguage(language), // Get the list of topics for the user's active language
-    ]);
-
+    const user = await User.findById(req.user.id);
+    const userLanguageInfo = await getUserLanguagesInfo(user);
     const viewedPercent = await getViewedPercent(userLanguageInfo); // count viewed cards percent
 
     console.log(`viewedPercent - ${viewedPercent}%`.green);
-    // console.log("userLanguageInfo.activeTopicsRefs".red);
-    // console.log(userLanguageInfo.userLanguageObject.activeTopicsRefs);
 
     if (viewedPercent >= 75) {
       // logic
