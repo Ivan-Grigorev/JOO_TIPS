@@ -1,7 +1,7 @@
 /**
  * Get the count of cards by topics.
  *
- * @returns {{n: Number, n1: Number ,n2: Number, n3: Number}} - An Object with counts for each topic.
+ * @returns {{n: Number, n+1: Number ,n+2: Number, n+3: Number}} - An Object with counts for each topic.
  * @throws {Error} If there is an error while fetching the counts.
  */
 function getCardsCountByTopics(languageObject) {
