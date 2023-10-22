@@ -257,17 +257,22 @@ async function shouldChangeTopicStatus(req, res, next) {
           ].title
       );
 
-      console.log("targetIndex", targetIndex);
       const nextIndex = targetIndex + 1;
 
-      if(!topicsList[nextIndex]) throw new Error('No more topics available!') // ! Придумать как реализовать
+      if (!topicsList[nextIndex]) {
+        console.log("No more topics available!".red); // ! Придумать как реализовать
+        return next();
+      }
 
-      userLanguageInfo.userLanguageObject.activeTopicsRefs.push({
+      const topicToPush = {
         ref: topicsList[nextIndex]._id,
         activationDate: moment().format("DD.MM.YYYY"),
-      });
-
+      };
+      userLanguageInfo.userLanguageObject.activeTopicsRefs.push(topicToPush);
+      userLanguageInfo.userLanguageObject.topicStatuses.push(topicToPush);
       user.save();
+
+      console.log("New topic was added right now.".yellow);
     }
 
     next();
