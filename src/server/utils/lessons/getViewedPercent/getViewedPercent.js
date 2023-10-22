@@ -1,5 +1,4 @@
 const Card = require("../../../models/Card/Card");
-const getUserLanguagesInfo = require("../getUserLanguagesInfo");
 const getCardsCountByTopics = require("./utils/getCardsCountByTopic");
 
 /**
@@ -9,14 +8,13 @@ const getCardsCountByTopics = require("./utils/getCardsCountByTopic");
  *
  * @returns {<Promise<number>>}
  */
-async function getViewedPercent(user) {
+async function getViewedPercent(user, userLanguageInfo) {
   try {
-    const userLanguagesInfo = await getUserLanguagesInfo(user);
-    const { activeTopicsTitles } = userLanguagesInfo;
+    const { activeTopicsTitles } = userLanguageInfo;
 
     const totalCardsCountByActiveTopic = await Card.find({ topic: { $in: activeTopicsTitles }}).countDocuments(); // prettier-ignore
 
-    const viewedCardsByActiveTopic = getCardsCountByTopics(userLanguagesInfo.userLanguageObject) // prettier-ignore
+    const viewedCardsByActiveTopic = getCardsCountByTopics(userLanguageInfo.userLanguageObject) // prettier-ignore
 
     console.log(`totalCardCount`.red, viewedCardsByActiveTopic);
     // console.log(`User lessons amount`.red, totalCardsCountByActiveToppic);

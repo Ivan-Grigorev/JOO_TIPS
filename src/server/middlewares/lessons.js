@@ -11,6 +11,7 @@ const moment = require("moment");
 const User = require("../models/user/user");
 const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopicsByLanguage");
 const LanguagesList = require("../models/Tech/LanguagesList");
+const getUserLanguagesInfo = require("../utils/lessons/getUserLanguagesInfo");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -238,16 +239,23 @@ async function shouldChangeTopicStatus(req, res, next) {
     const language = req.body.language;
     const userID = req.user.id;
 
+    const user = await User.findById(userID);
+
     // Find the user by their ID
-    const [user, languagesList, topicsList] = await Promise.all([
-      User.findById(userID),
+    const [userLanguageInfo, languagesList, topicsList] = await Promise.all([
+      getUserLanguagesInfo(user),
       LanguagesList.findOne({}), // Get the list of the languages (needed for his IDs)
       getTopicsByLanguage(language), // Get the list of topics for the user's active language
     ]);
 
-    const viewedPercent = await getViewedPercent(user);
+    const viewedPercent = await getViewedPercent(user, userLanguageInfo); // count viewed cards percent
 
     console.log(`viewedPercent - ${viewedPercent}`.green);
+    if (viewedPercent >= 75) {
+      // logic
+      // logic
+      // logic
+    }
 
     next();
   } catch (e) {
