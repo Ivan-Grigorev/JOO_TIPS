@@ -32,7 +32,7 @@ async function getViewedPercent(userLanguageInfo) {
         topic: activeTopicTitle,
       });
 
-      console.log("topicsStatusesObjects[i]".green, topicsStatusesObjects[i]);
+      // console.log("topicsStatusesObjects[i]".green, topicsStatusesObjects[i]);
 
       // console.log("topicsStatusesObjects[i]".green, topicsStatusesObjects[i]);
 
