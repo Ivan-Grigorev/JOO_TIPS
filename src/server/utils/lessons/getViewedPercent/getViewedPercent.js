@@ -8,13 +8,15 @@ const getCardsCountByTopics = require("./utils/getCardsCountByTopic");
  *
  * @returns {<Promise<number>>}
  */
-async function getViewedPercent(user, userLanguageInfo) {
+async function getViewedPercent(userLanguageInfo) {
   try {
-    const { activeTopicsTitles } = userLanguageInfo;
+    const { activeTopicsTitles, userLanguageObject } = userLanguageInfo;
+    console.log("activeTopicsTitles".red, activeTopicsTitles);
 
+    // todo сделать цикл for для каждой из тем, чтобы узнать процент просмотра каждой темы
     const totalCardsCountByActiveTopic = await Card.find({ topic: { $in: activeTopicsTitles }}).countDocuments(); // prettier-ignore
 
-    const viewedCardsByActiveTopic = getCardsCountByTopics(userLanguageInfo.userLanguageObject) // prettier-ignore
+    const viewedCardsByActiveTopic = getCardsCountByTopics(userLanguageObject) // prettier-ignore
 
     console.log(`totalCardCount`.red, viewedCardsByActiveTopic);
     // console.log(`User lessons amount`.red, totalCardsCountByActiveToppic);

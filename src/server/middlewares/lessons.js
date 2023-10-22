@@ -248,9 +248,12 @@ async function shouldChangeTopicStatus(req, res, next) {
       getTopicsByLanguage(language), // Get the list of topics for the user's active language
     ]);
 
-    const viewedPercent = await getViewedPercent(user, userLanguageInfo); // count viewed cards percent
+    const viewedPercent = await getViewedPercent(userLanguageInfo); // count viewed cards percent
 
-    console.log(`viewedPercent - ${viewedPercent}`.green);
+    console.log(`viewedPercent - ${viewedPercent}%`.green);
+    // console.log("userLanguageInfo.activeTopicsRefs".red);
+    // console.log(userLanguageInfo.userLanguageObject.activeTopicsRefs);
+
     if (viewedPercent >= 75) {
       // logic
       // logic
