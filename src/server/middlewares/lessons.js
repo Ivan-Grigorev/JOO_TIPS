@@ -238,11 +238,12 @@ async function shouldChangeTopicStatus(req, res, next) {
   try {
     const user = await User.findById(req.user.id);
     const userLanguageInfo = await getUserLanguagesInfo(user);
-    const viewedPercent = await getViewedPercent(userLanguageInfo); // count viewed cards percent
+    const topicsViewedPercentage = await getViewedPercent(userLanguageInfo); // count viewed cards percent
 
-    console.log(`viewedPercent - ${viewedPercent}%`.green);
+    console.log(`viewedPercent`.yellow);
+    console.log(topicsViewedPercentage);
 
-    if (viewedPercent >= 75) {
+    if (topicsViewedPercentage >= 75) {
       // logic
       // logic
       // logic
