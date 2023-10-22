@@ -9,10 +9,8 @@ const getCardsCountByTopics = require("./utils/getCardsCountByTopic");
  *
  * @returns {<Promise<number>>}
  */
-async function getViewedPercent(userObject) {
+async function getViewedPercent(user) {
   try {
-    const user = userObject;
-
     const userLanguagesInfo = await getUserLanguagesInfo(user);
     const { activeTopicsTitles } = userLanguagesInfo;
 
