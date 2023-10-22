@@ -139,14 +139,14 @@ const user = new mongoose.Schema(
         ],
         topicStatuses: [
           {
-            topicRef: {
+            ref: {
               type: mongoose.Schema.Types.ObjectId,
               ref: "TopicsList",
             },
             viewStatus: {
               type: Number,
               enum: [-1, 0, 1, 2, 3],
-              default: 0,
+              default: 1,
             },
             cardViewStatus: {
               firstViewed: [cardAndTopicRefSchema],
