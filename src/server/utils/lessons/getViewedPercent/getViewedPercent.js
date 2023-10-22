@@ -18,9 +18,8 @@ async function getViewedPercent(userLanguageInfo) {
     );
 
     const topicsStatusesObjects = topicStatuses.filter((obj) => {
-      return activeTopicsRefsArray.includes(obj.topicRef.toString());
+      return activeTopicsRefsArray.includes(obj.ref.toString());
     });
-
     const viewedCardsByActiveTopic = {};
 
     for (let i = 0; i < activeTopicsRefsArray.length; i++) {
@@ -32,6 +31,10 @@ async function getViewedPercent(userLanguageInfo) {
       const totalCardsCount = await Card.countDocuments({
         topic: activeTopicTitle,
       });
+
+      console.log("topicsStatusesObjects[i]".green, topicsStatusesObjects[i]);
+
+      // console.log("topicsStatusesObjects[i]".green, topicsStatusesObjects[i]);
 
       const viewStatus = topicsStatusesObjects[i].viewStatus;
       const cardViewStatuses = topicsStatusesObjects[i].cardViewStatus;
