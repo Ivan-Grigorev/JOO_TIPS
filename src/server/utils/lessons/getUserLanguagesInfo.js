@@ -31,25 +31,23 @@ async function getUserLanguagesInfo(user) {
 
     // Retrieve the details of active topics by their references
     const activeTopics = activeTopicRefs.map((topicObject) => {
-      return topicsList.find((topic) => {
-        return topic._id.toString() === topicObject.ref.toString();
-      });
+      const foundTopic = topicsList.find(
+        (topic) => topicObject.ref.toString() === topic._id.toString()
+      );
+
+      return {
+        id: foundTopic.id,
+        title: foundTopic.topicTitle,
+        activationDate: topicObject.activationDate,
+      };
     });
 
     // Создаем пустой массив для хранения объектов тем
     const activeTopicsTitles = [];
 
-    // Перебираем активные темы и добавляем объекты только при наличии `id`
-    for (let i = 0; i < activeTopics.length; i++) {
-      const topic = activeTopics[i];
-
-      if (topic) {
-        activeTopicsTitles.push({
-          id: topic.id,
-          title: topic.topicTitle,
-        });
-      }
-    }
+    activeTopics.forEach((topic) => {
+      activeTopicsTitles.push(topic);
+    });
 
     // Return the user's language object and active topics' titles
     return { userLanguageObject, activeTopicsTitles };
