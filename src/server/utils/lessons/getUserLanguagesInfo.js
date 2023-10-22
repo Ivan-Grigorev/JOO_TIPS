@@ -36,13 +36,20 @@ async function getUserLanguagesInfo(user) {
       });
     });
 
-    // Extract the titles of the active topics, handling potential null values
-    const activeTopicsTitles = [
-      activeTopics[0]?.topicTitle,
-      activeTopics[1]?.topicTitle,
-      activeTopics[2]?.topicTitle,
-      activeTopics[3]?.topicTitle,
-    ];
+    // Создаем пустой массив для хранения объектов тем
+    const activeTopicsTitles = [];
+
+    // Перебираем активные темы и добавляем объекты только при наличии `id`
+    for (let i = 0; i < activeTopics.length; i++) {
+      const topic = activeTopics[i];
+
+      if (topic) {
+        activeTopicsTitles.push({
+          id: topic.id,
+          title: topic.topicTitle,
+        });
+      }
+    }
 
     // Return the user's language object and active topics' titles
     return { userLanguageObject, activeTopicsTitles };
