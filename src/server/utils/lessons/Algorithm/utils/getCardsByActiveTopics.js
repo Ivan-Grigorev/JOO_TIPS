@@ -16,10 +16,10 @@ async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
     const cardSet = new Set(); // Create a set for unique cards
     const findedCards = new Set();
 
-    for (const topic of activeTopics) {
-      if (!topic) continue;
+    for (const topicObj of activeTopics) {
+      if (!topicObj) continue;
 
-      const findCards = await Card.find({ topic, language }); // Search for cards based on the given topic and language
+      const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
       findCards.forEach((card) => {
         const cardIdString = card._id.toString();
 
@@ -34,7 +34,9 @@ async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
       });
 
       console.log(
-        `Number of found cards for the topic "${topic}":`,
+        "Number of found cards for the topic",
+        topicObj,
+        ":",
         findedCards.size
       );
     }
