@@ -1,4 +1,6 @@
 const Lesson = require("../models/lessons/lessons");
+const User = require("../models/user/user");
+
 const getTechProps = require("../utils/lessons/getTechProps/getTechProps");
 const getCurrentDate = require("../utils/lessons/getCurrentDate");
 const createLessons = require("../utils/lessons/createLessons");
@@ -6,12 +8,10 @@ const isTodaySunday = require("../utils/lessons/isTodaySunday");
 const isTodayEndOfTheMonth = require("../utils/lessons/isTodayEndOfTheMonth");
 const isLessonExistsForToday = require("../utils/lessons/isLessonExistsForToday");
 const getViewedPercent = require("../utils/lessons/getViewedPercent/getViewedPercent");
+const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopicsByLanguage");
+const getUserLanguagesInfo = require("../utils/lessons/getUserLanguagesInfo");
 
 const moment = require("moment");
-const User = require("../models/user/user");
-const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopicsByLanguage");
-const LanguagesList = require("../models/Tech/LanguagesList");
-const getUserLanguagesInfo = require("../utils/lessons/getUserLanguagesInfo");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -237,39 +237,52 @@ async function createScheduleToEndOfWeek(req, res, next) {
 async function shouldChangeTopicStatus(req, res, next) {
   try {
     const user = await User.findById(req.user.id);
-    const userLanguageInfo = await getUserLanguagesInfo(user);
-    const topicsViewedPercentage = await getViewedPercent(userLanguageInfo); // count viewed cards percent
 
-    // console.log(`topicsViewedPercentage`.yellow);
-    // console.log(topicsViewedPercentage);
+    const userLanguageInfo = await getUserLanguagesInfo(user);
+    const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
+    const { activeTopicsRefs } = userLanguageObject;
+
+    const topicsViewedPercentage = await getViewedPercent(userLanguageInfo); // count viewed cards percent
 
     const keys = Object.keys(topicsViewedPercentage);
     const lastKey = keys[keys.length - 1];
     const lastActiveTopic = topicsViewedPercentage[lastKey];
 
-    if (lastActiveTopic.viewedPercentage >= 75) {
+    const lastTopic = activeTopicsRefs[activeTopicsRefs.length - 1];
+
+    const currentDate = moment();
+    const lastTopicActivationDate = moment(lastTopic.activationDate,"DD.MM.YYYY"); // prettier-ignore
+    const daysDifference = moment(currentDate, "DD.MM.YYYY").diff(lastTopicActivationDate, "days"); // prettier-ignore
+
+    console.log("daysDifference".red, daysDifference);
+
+    // Если прошло 2 недели с последней активации темы или процент просмотренных карт >= 75%
+    if (daysDifference >= 14 || lastActiveTopic.viewedPercentage >= 75) {
       const topicsList = await getTopicsByLanguage(user.activeLanguage);
-      const targetIndex = topicsList.findIndex(
-        (topic) =>
-          topic.topicTitle ===
-          userLanguageInfo.activeTopicsTitles[
-            userLanguageInfo.activeTopicsTitles.length - 1
-          ].title
-      );
+
+      // Находим индекс текущей активной темы в массиве topicsList
+      const targetIndex = topicsList.findIndex((topic) => {
+        return (
+          topic.topicTitle === activeTopicsTitles[activeTopicsTitles.length - 1].title // prettier-ignore
+        );
+      });
 
       const nextIndex = targetIndex + 1;
 
       if (!topicsList[nextIndex]) {
-        console.log("No more topics available!".red); // ! Придумать как реализовать
+        console.log("No more topics available!".red);
         return next();
       }
 
+      // Создать объект новой темы для добавления
       const topicToPush = {
         ref: topicsList[nextIndex]._id,
         activationDate: moment().format("DD.MM.YYYY"),
       };
-      userLanguageInfo.userLanguageObject.activeTopicsRefs.push(topicToPush);
-      userLanguageInfo.userLanguageObject.topicStatuses.push(topicToPush);
+
+      userLanguageObject.activeTopicsRefs.push(topicToPush); // Добавить новую тему в список активных тем пользователя
+      userLanguageObject.topicStatuses.push(topicToPush); // Добавить новую тему в статусы тем пользователя
+
       user.save();
 
       console.log("New topic was added right now.".yellow);
