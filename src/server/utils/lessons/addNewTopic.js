@@ -35,6 +35,9 @@ async function addNewTopic(
       return console.log("No more topics available!".red);
     }
 
+    // Deleting first topic from the active topics array
+    if (activeTopicsRefs.length === 3) activeTopicsRefs.shift();
+
     // Create an object for the new topic to be added
     const topicToPush = {
       ref: topicsList[nextIndex]._id,
@@ -48,7 +51,10 @@ async function addNewTopic(
     // Save the user's changes
     user.save();
 
-    console.log("New topic was added right now.".yellow);
+    console.log(
+      `New topic was added right now - ${topicsList[nextIndex].topicTitle}`
+        .yellow
+    );
   } catch (e) {
     console.error("Error while adding a new topic".red, e);
   }
