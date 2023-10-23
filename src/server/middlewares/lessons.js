@@ -12,6 +12,9 @@ const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopi
 const getUserLanguagesInfo = require("../utils/lessons/getUserLanguagesInfo");
 
 const moment = require("moment");
+const calculateDaysDifference = require("../utils/lessons/calculateDaysDifference");
+const addNewTopic = require("../utils/lessons/addNewTopic");
+const getLastActiveTopic = require("../utils/lessons/getLastActiveTopic");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -236,60 +239,38 @@ async function createScheduleToEndOfWeek(req, res, next) {
  */
 async function shouldChangeTopicStatus(req, res, next) {
   try {
+    // Find the user by ID from the request
     const user = await User.findById(req.user.id);
 
+    // Get information about the user's languages and active topics
     const userLanguageInfo = await getUserLanguagesInfo(user);
     const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
-    const { activeTopicsRefs } = userLanguageObject;
+    const { activeTopicsRefs, topicStatuses } = userLanguageObject;
 
-    const topicsViewedPercentage = await getViewedPercent(userLanguageInfo); // count viewed cards percent
+    // Calculate the viewed card percentages for active topics
+    const topicsViewedPercentage = await getViewedPercent(userLanguageInfo);
 
-    const keys = Object.keys(topicsViewedPercentage);
-    const lastKey = keys[keys.length - 1];
-    const lastActiveTopic = topicsViewedPercentage[lastKey];
-
+    // Get the last active topic and calculate the days difference
+    const lastActiveTopic = getLastActiveTopic(topicsViewedPercentage);
     const lastTopic = activeTopicsRefs[activeTopicsRefs.length - 1];
 
-    const currentDate = moment();
-    const lastTopicActivationDate = moment(lastTopic.activationDate,"DD.MM.YYYY"); // prettier-ignore
-    const daysDifference = moment(currentDate, "DD.MM.YYYY").diff(lastTopicActivationDate, "days"); // prettier-ignore
+    const daysDifference = calculateDaysDifference(lastTopic.activationDate);
 
-    console.log("daysDifference".red, daysDifference);
-
-    // Если прошло 2 недели с последней активации темы или процент просмотренных карт >= 75%
+    // If it has been 2 weeks since the last topic activation or viewed percentage is >= 75%
     if (daysDifference >= 14 || lastActiveTopic.viewedPercentage >= 75) {
-      const topicsList = await getTopicsByLanguage(user.activeLanguage);
-
-      // Находим индекс текущей активной темы в массиве topicsList
-      const targetIndex = topicsList.findIndex((topic) => {
-        return (
-          topic.topicTitle === activeTopicsTitles[activeTopicsTitles.length - 1].title // prettier-ignore
-        );
-      });
-
-      const nextIndex = targetIndex + 1;
-
-      if (!topicsList[nextIndex]) {
-        console.log("No more topics available!".red);
-        return next();
-      }
-
-      // Создать объект новой темы для добавления
-      const topicToPush = {
-        ref: topicsList[nextIndex]._id,
-        activationDate: moment().format("DD.MM.YYYY"),
-      };
-
-      userLanguageObject.activeTopicsRefs.push(topicToPush); // Добавить новую тему в список активных тем пользователя
-      userLanguageObject.topicStatuses.push(topicToPush); // Добавить новую тему в статусы тем пользователя
-
-      user.save();
-
-      console.log("New topic was added right now.".yellow);
+      // Add a new topic to the user's active topics
+      await addNewTopic(
+        user,
+        activeTopicsTitles,
+        activeTopicsRefs,
+        topicStatuses
+      );
     }
 
+    // Proceed to the next middleware
     next();
   } catch (e) {
+    // Handle errors and respond with a 500 Internal Server Error
     console.error(`Error in isActiveTopicsValid check\n ${e}`.red);
     res.status(500).json({ message: "Internal server error." });
   }
