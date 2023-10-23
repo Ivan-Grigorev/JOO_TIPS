@@ -64,7 +64,7 @@ async function add(req, res) {
             activationDate: moment().format("DD.MM.YYYY"),
           },
         ],
-        topicStatuses: [{ topicRef: topicsList.topics[0]._id, viewStatus: 1 }],
+        topicStatuses: [{ ref: topicsList.topics[0]._id, viewStatus: 1 }],
       };
       user.languages.push(createdLanguageObject);
       user.languagesPoints.set(newLanguage, 0);
