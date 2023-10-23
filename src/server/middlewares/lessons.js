@@ -8,13 +8,12 @@ const isTodaySunday = require("../utils/lessons/isTodaySunday");
 const isTodayEndOfTheMonth = require("../utils/lessons/isTodayEndOfTheMonth");
 const isLessonExistsForToday = require("../utils/lessons/isLessonExistsForToday");
 const getViewedPercent = require("../utils/lessons/getViewedPercent/getViewedPercent");
-const getTopicsByLanguage = require("../utils/lessons/getTechProps/utils/getTopicsByLanguage");
 const getUserLanguagesInfo = require("../utils/lessons/getUserLanguagesInfo");
-
-const moment = require("moment");
 const calculateDaysDifference = require("../utils/lessons/calculateDaysDifference");
 const addNewTopic = require("../utils/lessons/addNewTopic");
 const getLastActiveTopic = require("../utils/lessons/getLastActiveTopic");
+
+const moment = require("moment");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -258,9 +257,9 @@ async function shouldChangeTopicStatus(req, res, next) {
 
     // If it has been 2 weeks since the last topic activation or viewed percentage is >= 75%
     const passedTwoWeeks = daysDifference >= 14;
-    const viewedMoreThen25Percents =  lastActiveTopic.viewedPercentage >= 25; // prettier-ignore
-    const viewedAtLeast75Percents = lastActiveTopic.viewedPercentage >= 75;
-    if (passedTwoWeeks & viewedMoreThen25Percents || viewedAtLeast75Percents) {
+    const viewedAtLeast25Percents = lastActiveTopic.viewedPercentage >= 25;
+    const viewedMoreThan75Percents = lastActiveTopic.viewedPercentage >= 75;
+    if (passedTwoWeeks & viewedAtLeast25Percents || viewedMoreThan75Percents) {
       // Add a new topic to the user's active topics
       await addNewTopic(
         user,
