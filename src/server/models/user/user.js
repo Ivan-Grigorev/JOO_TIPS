@@ -148,6 +148,10 @@ const user = new mongoose.Schema(
               enum: [-1, 0, 1, 2, 3],
               default: 1,
             },
+            viewPercentage: {
+              type: Number,
+              default: 0,
+            },
             cardViewStatus: {
               firstViewed: [cardAndTopicRefSchema],
               secondViewed: [cardAndTopicRefSchema],
