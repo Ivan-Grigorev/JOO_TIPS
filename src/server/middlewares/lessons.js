@@ -257,7 +257,10 @@ async function shouldChangeTopicStatus(req, res, next) {
     const daysDifference = calculateDaysDifference(lastTopic.activationDate);
 
     // If it has been 2 weeks since the last topic activation or viewed percentage is >= 75%
-    if (daysDifference >= 14 || lastActiveTopic.viewedPercentage >= 75) {
+    const passedTwoWeeks = daysDifference >= 14;
+    const viewedMoreThen25Percents =  lastActiveTopic.viewedPercentage >= 25; // prettier-ignore
+    const viewedAtLeast75Percents = lastActiveTopic.viewedPercentage >= 75;
+    if (passedTwoWeeks & viewedMoreThen25Percents || viewedAtLeast75Percents) {
       // Add a new topic to the user's active topics
       await addNewTopic(
         user,
