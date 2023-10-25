@@ -1,9 +1,9 @@
 function findTopicStatus(userLanguageObject, cardTopicRef) {
-  const output = userLanguageObject.topicStatuses.find(
+  const topicObject = userLanguageObject.topicStatuses.find(
     (topic) => topic.ref.toString() === cardTopicRef.toString()
   );
 
-  return output;
+  return topicObject;
 }
 
 module.exports = findTopicStatus;
