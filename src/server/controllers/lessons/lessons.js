@@ -100,30 +100,53 @@ async function finishLesson(req, res, next) {
  */
 async function addCardToViewed(req, res) {
   try {
+    // Extract cardTopic and cardId from the request body
     const { cardTopic, cardId } = req.body;
+
+    // Get the user's ID from the request object
     const userId = req.user.id;
 
+    // Create an object representing the card data to push
     const cardDataToPush = { cardRef: cardId, cardTopicRef: cardTopic };
 
+    // Find the user by their ID
     const user = await User.findById(userId);
+
+    // Get user language information
     const userLanguageInfo = await getUserLanguagesInfo(user);
+
+    // Extract the user language object from the information
     const userLanguageObject = userLanguageInfo.userLanguageObject;
 
+    // Find the topic status object for the specified card topic
     const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
+
+    // If the topic status object is not found, return a 404 response
     if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
+
+    // Extract the card view status from the topic status object
     const { cardViewStatus } = topicStatusObject;
 
     let cardExistsInSomeView = false;
+
+    // Iterate through each view number in the card view status
     for (const viewNumber in cardViewStatus) {
-      // skip mongoDB prototype properties
+      // Skip MongoDB prototype properties
       if (!cardViewStatus.hasOwnProperty(viewNumber)) continue;
 
+      // Get the current status array for the view number
       const currentStatusArray = cardViewStatus[viewNumber];
+
+      // Check if the card with the specified ID exists in the current status array
       const cardExists = isCardAlreadyExists(currentStatusArray, cardId);
 
       if (cardExists) {
         cardExistsInSomeView = true;
+
+        // Get the index of the current view in the card view status
         const cardIndex = Object.keys(cardViewStatus).indexOf(viewNumber);
+
+        // Check if the current view is not the last view
         const notLastArray = cardIndex < Object.keys(cardViewStatus).length - 1;
 
         if (notLastArray) {
@@ -133,6 +156,7 @@ async function addCardToViewed(req, res) {
       }
     }
 
+    // If the card doesn't exist in any view, add it to the 'firstViewed' array
     if (!cardExistsInSomeView) {
       console.log("Adding the card to the firstViewed array.".yellow);
       cardViewStatus.firstViewed.push(cardDataToPush);
@@ -146,6 +170,7 @@ async function addCardToViewed(req, res) {
 
     res.status(201).json(cardViewStatus);
   } catch (e) {
+    // Handle any errors that occur during the execution
     console.error(`Error adding card to viewed cards array: ${e}`.red);
     res.status(500).json({ message: "Internal server error" });
   }
