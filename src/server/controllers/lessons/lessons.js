@@ -90,11 +90,7 @@ async function finishLesson(req, res, next) {
 
 async function addCardToViewed(req, res) {
   try {
-    // const { card } = req.body;
-    const card = {
-      cardTopic: "651c7e2e562ef973f78a78b9",
-      cardId: "64f3a3df738642b697b70cdc",
-    };
+    const { card } = req.body;
 
     const user = await User.findById(req.user.id);
 
@@ -112,7 +108,7 @@ async function addCardToViewed(req, res) {
 
     if (!topicStatusObject) {
       console.log("Topic status object not found".red);
-      return res.status(404).jspn({ message: "Topic status object not found" });
+      return res.status(404).json({ message: "Topic status object not found" });
     }
     const { cardViewStatus, viewStatus, viewPercentage } = topicStatusObject;
 
@@ -126,35 +122,39 @@ async function addCardToViewed(req, res) {
       cardTopicRef: card.cardTopic,
     };
 
+    let cardExistsInSomeView = false;
+
     for (const viewNumber in cardViewStatus) {
-      if (cardViewStatus.hasOwnProperty(viewNumber)) {
-        const cardExists = cardViewStatus[viewNumber].some(
-          (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
-        );
+      if (!cardViewStatus.hasOwnProperty(viewNumber)) continue;
 
-        if (cardExists) {
-          const index = Object.keys(cardViewStatus).indexOf(viewNumber);
-          console.log("index,index", index);
-          if (index < Object.keys(cardViewStatus).length - 1) {
-            const nextView = Object.keys(cardViewStatus)[index + 1];
-            // Выводим в консоль информацию о добавлении карточки в следующий массив
-            console.log(`Добавление карточки в массив ${nextView}:`,cardDataToPush); // prettier-ignore
-            cardViewStatus[nextView].push(cardDataToPush);
+      const cardExists = cardViewStatus[viewNumber].some(
+        (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
+      );
+      const existedCard = cardViewStatus[viewNumber].find(
+        (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
+      );
 
-            break;
-          }
-        }
+      if (cardExists) {
+        cardExistsInSomeView = true;
+        const cardIndex = Object.keys(cardViewStatus).indexOf(viewNumber);
+        if (cardIndex < Object.keys(cardViewStatus).length - 1) {
+          const nextView = Object.keys(cardViewStatus)[cardIndex + 1];
 
-        const cardIsUniqueInArray = !cardViewStatus.firstViewed.some(
-          (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
-        );
+          // Удаляем карточку из текущего массива
+          cardViewStatus[viewNumber].splice(existedCard, 1);
 
-        if (cardIsUniqueInArray) {
-          console.log(`Добавление карточки в массив firstViewed: ${cardDataToPush}`.yellow); // prettier-ignore
-          cardViewStatus.firstViewed.push(cardDataToPush);
+          // Добавляем карточку в следующий массив
+          cardViewStatus[nextView].push(cardDataToPush);
+
+          console.log(`Перенос карточки в массив ${nextView}:`.yellow,cardDataToPush); // prettier-ignore
           break;
         }
       }
+    }
+
+    if (!cardExistsInSomeView) {
+      console.log("Добавление карточки в массив firstViewed:".yellow,  cardDataToPush); // prettier-ignore
+      cardViewStatus.firstViewed.push(cardDataToPush);
     }
 
     // logic bills adding
