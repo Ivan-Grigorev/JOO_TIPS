@@ -103,21 +103,15 @@ async function addCardToViewed(req, res) {
     const { cardTopic, cardId } = req.body;
     const userId = req.user.id;
 
-    const cardDataToPush = {
-      cardRef: cardId,
-      cardTopicRef: cardTopic,
-    };
+    const cardDataToPush = { cardRef: cardId, cardTopicRef: cardTopic };
 
     const user = await User.findById(userId);
     const userLanguageInfo = await getUserLanguagesInfo(user);
-    const { userLanguageObject } = userLanguageInfo;
+    const userLanguageObject = userLanguageInfo.userLanguageObject;
 
     const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
 
-    if (!topicStatusObject) {
-      console.log("Topic status object not found".red);
-      return res.status(404).json({ message: "Topic status object not found" });
-    }
+    if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
     const { cardViewStatus } = topicStatusObject;
 
     let cardExistsInSomeView = false;
@@ -136,7 +130,6 @@ async function addCardToViewed(req, res) {
 
         if (notLastArray) {
           moveCardToNextArray(cardViewStatus, viewNumber, cardIndex, cardId);
-
           break;
         }
       }
