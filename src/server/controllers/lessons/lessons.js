@@ -2,7 +2,6 @@ const Lesson = require("../../models/lessons/lessons");
 const User = require("../../models/user/user");
 const moment = require("moment");
 const getUserLanguagesInfo = require("../../utils/lessons/getUserLanguagesInfo");
-const getViewedPercent = require("../../utils/lessons/getViewedPercent/getViewedPercent");
 const findTopicStatus = require("../../utils/lessons/findTopicStatus");
 const isCardAlreadyExists = require("../../utils/lessons/isCardAlreadyExists");
 const moveCardToNextArray = require("../../utils/lessons/moveCardToNextArray");
