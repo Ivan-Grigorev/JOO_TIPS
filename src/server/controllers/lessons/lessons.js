@@ -1,6 +1,8 @@
 const Lesson = require("../../models/lessons/lessons");
 const User = require("../../models/user/user");
 const moment = require("moment");
+const getUserLanguagesInfo = require("../../utils/lessons/getUserLanguagesInfo");
+const getViewedPercent = require("../../utils/lessons/getViewedPercent/getViewedPercent");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
@@ -86,17 +88,87 @@ async function finishLesson(req, res, next) {
   }
 }
 
-async function addCardToViewed(req, res, next) {
+async function addCardToViewed(req, res) {
   try {
-    const { card } = req.body;
+    // const { card } = req.body;
+    const card = {
+      cardTopic: "651c7e2e562ef973f78a78b9",
+      cardId: "64f3a3df738642b697b70cdc",
+    };
 
-    // logic
-    // logic
-    // logic
+    const user = await User.findById(req.user.id);
 
-    res.status(201).end();
+    // Get information about the user's languages and active topics
+    const userLanguageInfo = await getUserLanguagesInfo(user);
+    const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
+
+    // Calculate the viewed card percentages for active topics
+    const getViewedPercentage = await getViewedPercent(userLanguageInfo); // высчитывать процент только после добавления темы
+
+    // Найдем нужный объект в массиве topicStatuses
+    const topicStatusObject = userLanguageObject.topicStatuses.find(
+      (topic) => topic.ref.toString() === card.cardTopic.toString()
+    );
+
+    if (!topicStatusObject) {
+      console.log("Topic status object not found".red);
+      return res.status(404).jspn({ message: "Topic status object not found" });
+    }
+    const { cardViewStatus, viewStatus, viewPercentage } = topicStatusObject;
+
+    /*
+    todo После добавления карточки нужно сделать перерасчёт процентов и...
+    todo ...определить viewStatus темы (если +75% - то статус ++)
+    */
+
+    const cardDataToPush = {
+      cardRef: card.cardId,
+      cardTopicRef: card.cardTopic,
+    };
+
+    for (const viewNumber in cardViewStatus) {
+      if (cardViewStatus.hasOwnProperty(viewNumber)) {
+        console.log("cardViewStatus[viewNumber]", cardViewStatus[viewNumber]);
+        console.log(
+          "cardViewStatus[viewNumber].includes(card.cardId)".red,
+          cardViewStatus[viewNumber].includes(card.cardId)
+        );
+        if (cardViewStatus[viewNumber].includes(card.cardId)) {
+          const index = Object.keys(cardViewStatus).indexOf(viewNumber);
+          console.log("index,index", index);
+          if (index < Object.keys(cardViewStatus).length - 1) {
+            const nextView = Object.keys(cardViewStatus)[index + 1];
+            // Выводим в консоль информацию о добавлении карточки в следующий массив
+            console.log(`Добавление карточки в массив ${nextView}:`,cardDataToPush); // prettier-ignore
+            cardViewStatus[nextView].push(cardDataToPush);
+
+            break;
+          }
+        }
+
+        const cardIsUniqueInArray = !cardViewStatus.firstViewed.some(
+          (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
+        );
+
+        if (cardIsUniqueInArray) {
+          console.log(`Добавление карточки в массив firstViewed: ${cardDataToPush}`.yellow); // prettier-ignore
+          cardViewStatus.firstViewed.push(cardDataToPush);
+        }
+
+        break;
+      }
+    }
+
+    // logic bills adding
+    // logic bills adding
+    // logic bills adding
+
+    await user.save();
+
+    res.status(201).json(cardViewStatus);
   } catch (e) {
     console.error(`Error adding card to viewed cards array: ${e}`.red);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -106,4 +178,5 @@ module.exports = {
   finishLesson,
   addPoints,
   startLesson,
+  addCardToViewed,
 };
