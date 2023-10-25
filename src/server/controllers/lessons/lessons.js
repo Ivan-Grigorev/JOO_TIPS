@@ -88,9 +88,17 @@ async function finishLesson(req, res, next) {
   }
 }
 
+/**
+ * Add a card to one of the topic statuses arrays, so we can watch topic status.
+ * Also update topic status and view percentage
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Object} JSON response containing the updated card view status.
+ */
 async function addCardToViewed(req, res) {
   try {
-    const { card } = req.body;
+    const { cardTopic, cardId } = req.body;
 
     const user = await User.findById(req.user.id);
 
@@ -99,11 +107,11 @@ async function addCardToViewed(req, res) {
     const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
 
     // Calculate the viewed card percentages for active topics
-    const getViewedPercentage = await getViewedPercent(userLanguageInfo); // высчитывать процент только после добавления темы
+    const getViewedPercentage = await getViewedPercent(userLanguageInfo); // Calculate the percentage only after adding the topic
 
-    // Найдем нужный объект в массиве topicStatuses
+    // Find the necessary object in the topicStatuses array
     const topicStatusObject = userLanguageObject.topicStatuses.find(
-      (topic) => topic.ref.toString() === card.cardTopic.toString()
+      (topic) => topic.ref.toString() === cardTopic.toString()
     );
 
     if (!topicStatusObject) {
@@ -113,13 +121,13 @@ async function addCardToViewed(req, res) {
     const { cardViewStatus, viewStatus, viewPercentage } = topicStatusObject;
 
     /*
-    todo После добавления карточки нужно сделать перерасчёт процентов и...
-    todo ...определить viewStatus темы (если +75% - то статус ++)
+    todo After adding the card, recalculate the percentages and...
+    todo ...determine the viewStatus of the topic (if +75% - then status ++)
     */
 
     const cardDataToPush = {
-      cardRef: card.cardId,
-      cardTopicRef: card.cardTopic,
+      cardRef: cardId,
+      cardTopicRef: cardTopic,
     };
 
     let cardExistsInSomeView = false;
@@ -140,26 +148,26 @@ async function addCardToViewed(req, res) {
         if (cardIndex < Object.keys(cardViewStatus).length - 1) {
           const nextView = Object.keys(cardViewStatus)[cardIndex + 1];
 
-          // Удаляем карточку из текущего массива
+          // Remove the card from the current array
           cardViewStatus[viewNumber].splice(existedCard, 1);
 
-          // Добавляем карточку в следующий массив
+          // Add the card to the next array
           cardViewStatus[nextView].push(cardDataToPush);
 
-          console.log(`Перенос карточки в массив ${nextView}:`.yellow,cardDataToPush); // prettier-ignore
+          console.log(`Moving the card to the ${nextView} array:`.yellow, cardDataToPush); // prettier-ignore
           break;
         }
       }
     }
 
     if (!cardExistsInSomeView) {
-      console.log("Добавление карточки в массив firstViewed:".yellow,  cardDataToPush); // prettier-ignore
+      console.log("Adding the card to the firstViewed array:".yellow, cardDataToPush); // prettier-ignore
       cardViewStatus.firstViewed.push(cardDataToPush);
     }
 
-    // logic bills adding
-    // logic bills adding
-    // logic bills adding
+    // Logic for adding bills
+    // Logic for adding bills
+    // Logic for adding bills
 
     await user.save();
 
