@@ -36,6 +36,7 @@ const cardAndTopicRefSchema = new mongoose.Schema({
     ref: "TopicsList",
     required: [true, "Card topic ref is required"],
   },
+  _id: false,
 });
 
 const user = new mongoose.Schema(
