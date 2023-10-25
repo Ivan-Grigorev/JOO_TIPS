@@ -128,12 +128,11 @@ async function addCardToViewed(req, res) {
 
     for (const viewNumber in cardViewStatus) {
       if (cardViewStatus.hasOwnProperty(viewNumber)) {
-        console.log("cardViewStatus[viewNumber]", cardViewStatus[viewNumber]);
-        console.log(
-          "cardViewStatus[viewNumber].includes(card.cardId)".red,
-          cardViewStatus[viewNumber].includes(card.cardId)
+        const cardExists = cardViewStatus[viewNumber].some(
+          (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
         );
-        if (cardViewStatus[viewNumber].includes(card.cardId)) {
+
+        if (cardExists) {
           const index = Object.keys(cardViewStatus).indexOf(viewNumber);
           console.log("index,index", index);
           if (index < Object.keys(cardViewStatus).length - 1) {
@@ -153,9 +152,8 @@ async function addCardToViewed(req, res) {
         if (cardIsUniqueInArray) {
           console.log(`Добавление карточки в массив firstViewed: ${cardDataToPush}`.yellow); // prettier-ignore
           cardViewStatus.firstViewed.push(cardDataToPush);
+          break;
         }
-
-        break;
       }
     }
 
