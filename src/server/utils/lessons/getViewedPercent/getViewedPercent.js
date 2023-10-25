@@ -1,4 +1,4 @@
-const Card = require("../../../models/Card/Card");
+const getViewedCardsByActiveTopic = require("./utils/getViewedCardsByActiveTopic");
 
 /**
  * Middleware function to calculate the viewed percentage of cards for active topics.
@@ -11,8 +11,7 @@ async function getViewedPercent(userLanguageInfo) {
   try {
     // Extract relevant data from userLanguageInfo
     const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
-    const activeTopicsRefs = userLanguageObject.activeTopicsRefs;
-    const topicStatuses = userLanguageObject.topicStatuses;
+    const { activeTopicsRefs, topicStatuses } = userLanguageObject;
 
     // Convert activeTopicsRefs to an array of strings
     const activeTopicsRefsArray = activeTopicsRefs.map((obj) =>
@@ -24,54 +23,11 @@ async function getViewedPercent(userLanguageInfo) {
       return activeTopicsRefsArray.includes(obj.ref.toString());
     });
 
-    const viewedCardsByActiveTopic = {};
-
-    for (let i = 0; i < activeTopicsRefsArray.length; i++) {
-      const topicTitle = activeTopicsRefsArray[i];
-      const activeTopicTitle = activeTopicsTitles.find((topic) => {
-        return topic.id === topicTitle;
-      }).title;
-
-      // Get the total count of cards for the active topic
-      const totalCardsCount = await Card.countDocuments({
-        topic: activeTopicTitle,
-      });
-
-      // Get viewStatus and cardViewStatus for the active topic
-      const viewStatus = topicsStatusesObjects[i].viewStatus;
-      const cardViewStatuses = topicsStatusesObjects[i].cardViewStatus;
-
-      let viewedCardsCount = 0;
-
-      // Calculate the count of viewed cards based on viewStatus
-      switch (viewStatus) {
-        case 1:
-          viewedCardsCount = cardViewStatuses.firstViewed.length;
-          break;
-        case 2:
-          viewedCardsCount = cardViewStatuses.secondViewed.length;
-          break;
-        case 3:
-          viewedCardsCount = cardViewStatuses.thirdViewed.length;
-          break;
-        default:
-          viewedCardsCount = 0;
-          break;
-      }
-
-      // Calculate the percentage of viewed cards
-      const percentage = (viewedCardsCount / totalCardsCount) * 100;
-
-      // Store the information in the viewedCardsByActiveTopic object
-      viewedCardsByActiveTopic[topicTitle] = {
-        cardsViewed: viewedCardsCount,
-        totalCards: totalCardsCount,
-        viewedPercentage: percentage,
-        status: viewStatus,
-      };
-    }
-
-    // Return the viewedCardsByActiveTopic object
+    const viewedCardsByActiveTopic = await getViewedCardsByActiveTopic(
+      activeTopicsRefsArray,
+      activeTopicsTitles,
+      topicsStatusesObjects
+    );
     return viewedCardsByActiveTopic;
   } catch (e) {
     console.error("Error getting viewed cards percent", e);
