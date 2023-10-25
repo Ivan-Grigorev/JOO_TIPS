@@ -3,6 +3,9 @@ const User = require("../../models/user/user");
 const moment = require("moment");
 const getUserLanguagesInfo = require("../../utils/lessons/getUserLanguagesInfo");
 const getViewedPercent = require("../../utils/lessons/getViewedPercent/getViewedPercent");
+const findTopicStatus = require("../../utils/lessons/findTopicStatus");
+const isCardAlreadyExists = require("../../utils/lessons/isCardAlreadyExists");
+const moveCardToNextArray = require("../../utils/lessons/moveCardToNextArray");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
@@ -89,8 +92,7 @@ async function finishLesson(req, res, next) {
 }
 
 /**
- * Add a card to one of the topic statuses arrays, so we can watch topic status.
- * Also update topic status and view percentage
+ * Add a card to one of the topic statuses arrays, update topic status, and view percentage.
  *
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
@@ -99,69 +101,49 @@ async function finishLesson(req, res, next) {
 async function addCardToViewed(req, res) {
   try {
     const { cardTopic, cardId } = req.body;
-
-    const user = await User.findById(req.user.id);
-
-    // Get information about the user's languages and active topics
-    const userLanguageInfo = await getUserLanguagesInfo(user);
-    const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
-
-    // Calculate the viewed card percentages for active topics
-    const getViewedPercentage = await getViewedPercent(userLanguageInfo); // Calculate the percentage only after adding the topic
-
-    // Find the necessary object in the topicStatuses array
-    const topicStatusObject = userLanguageObject.topicStatuses.find(
-      (topic) => topic.ref.toString() === cardTopic.toString()
-    );
-
-    if (!topicStatusObject) {
-      console.log("Topic status object not found".red);
-      return res.status(404).json({ message: "Topic status object not found" });
-    }
-    const { cardViewStatus, viewStatus, viewPercentage } = topicStatusObject;
-
-    /*
-    todo After adding the card, recalculate the percentages and...
-    todo ...determine the viewStatus of the topic (if +75% - then status ++)
-    */
+    const userId = req.user.id;
 
     const cardDataToPush = {
       cardRef: cardId,
       cardTopicRef: cardTopic,
     };
 
+    const user = await User.findById(userId);
+    const userLanguageInfo = await getUserLanguagesInfo(user);
+    const { userLanguageObject } = userLanguageInfo;
+
+    const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
+
+    if (!topicStatusObject) {
+      console.log("Topic status object not found".red);
+      return res.status(404).json({ message: "Topic status object not found" });
+    }
+    const { cardViewStatus } = topicStatusObject;
+
     let cardExistsInSomeView = false;
 
     for (const viewNumber in cardViewStatus) {
+      // skip mongoDB prototype properties
       if (!cardViewStatus.hasOwnProperty(viewNumber)) continue;
 
-      const cardExists = cardViewStatus[viewNumber].some(
-        (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
-      );
-      const existedCard = cardViewStatus[viewNumber].find(
-        (obj) => obj.cardRef.toString() === cardDataToPush.cardRef
-      );
+      const currentStatusArray = cardViewStatus[viewNumber];
+      const cardExists = isCardAlreadyExists(currentStatusArray, cardId);
 
       if (cardExists) {
         cardExistsInSomeView = true;
         const cardIndex = Object.keys(cardViewStatus).indexOf(viewNumber);
-        if (cardIndex < Object.keys(cardViewStatus).length - 1) {
-          const nextView = Object.keys(cardViewStatus)[cardIndex + 1];
+        const notLastArray = cardIndex < Object.keys(cardViewStatus).length - 1;
 
-          // Remove the card from the current array
-          cardViewStatus[viewNumber].splice(existedCard, 1);
+        if (notLastArray) {
+          moveCardToNextArray(cardViewStatus, viewNumber, cardIndex, cardId);
 
-          // Add the card to the next array
-          cardViewStatus[nextView].push(cardDataToPush);
-
-          console.log(`Moving the card to the ${nextView} array:`.yellow, cardDataToPush); // prettier-ignore
           break;
         }
       }
     }
 
     if (!cardExistsInSomeView) {
-      console.log("Adding the card to the firstViewed array:".yellow, cardDataToPush); // prettier-ignore
+      console.log("Adding the card to the firstViewed array.".yellow);
       cardViewStatus.firstViewed.push(cardDataToPush);
     }
 
