@@ -100,21 +100,15 @@ async function finishLesson(req, res, next) {
  */
 async function addCardToViewed(req, res) {
   try {
-    // Extract cardTopic and cardId from the request body
     const { cardTopic, cardId } = req.body;
-
-    // Get the user's ID from the request object
     const userId = req.user.id;
 
-    // Create an object representing the card data to push
     const cardDataToPush = { cardRef: cardId, cardTopicRef: cardTopic };
 
-    // Find the user by their ID
     const user = await User.findById(userId);
 
     // Get user language information
     const userLanguageInfo = await getUserLanguagesInfo(user);
-
     // Extract the user language object from the information
     const userLanguageObject = userLanguageInfo.userLanguageObject;
 
@@ -123,7 +117,6 @@ async function addCardToViewed(req, res) {
 
     // If the topic status object is not found, return a 404 response
     if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
-
     // Extract the card view status from the topic status object
     const { cardViewStatus } = topicStatusObject;
 
@@ -163,10 +156,11 @@ async function addCardToViewed(req, res) {
     }
 
     // Logic for adding bills
-    // Logic for adding bills
+    const viewedPercent = await getViewedPercent(userLanguageInfo);
+    console.log("viewedPercent".red, viewedPercent);
     // Logic for adding bills
 
-    await user.save();
+    //  user.save();
 
     res.status(201).json(cardViewStatus);
   } catch (e) {
