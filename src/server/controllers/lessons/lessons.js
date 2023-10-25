@@ -6,6 +6,7 @@ const getViewedPercent = require("../../utils/lessons/getViewedPercent/getViewed
 const findTopicStatus = require("../../utils/lessons/findTopicStatus");
 const isCardAlreadyExists = require("../../utils/lessons/isCardAlreadyExists");
 const moveCardToNextArray = require("../../utils/lessons/moveCardToNextArray");
+const updatePercentage = require("../../utils/lessons/updatePercentage");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
@@ -118,7 +119,7 @@ async function addCardToViewed(req, res) {
     // If the topic status object is not found, return a 404 response
     if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
     // Extract the card view status from the topic status object
-    const { cardViewStatus, viewPercentage } = topicStatusObject;
+    const { cardViewStatus } = topicStatusObject;
 
     let cardExistsInSomeView = false;
 
@@ -155,19 +156,12 @@ async function addCardToViewed(req, res) {
       cardViewStatus.firstViewed.push(cardDataToPush);
     }
 
-    // Logic for adding bills
-    // Logic for adding bills
-    // Logic for adding bills
+    //* Logic for adding bills
+    //* Logic for adding bills
+    //* Logic for adding bills
 
-    // Logic for updating percentages
-
-    const viewedPercent = await getViewedPercent(userLanguageInfo);
-    topicStatusObject.viewPercentage =
-      viewedPercent[cardTopic].viewedPercentage;
-    console.log("topicStatusObject.viewPercentage".red, topicStatusObject.viewPercentage);
-
-    // Logic for updating percentages
-
+    // update topic view percentage
+    await updatePercentage(userLanguageInfo, topicStatusObject, cardTopic);
     user.save();
 
     res.status(201).json(cardViewStatus);
