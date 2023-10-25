@@ -110,12 +110,10 @@ async function addCardToViewed(req, res) {
     const userLanguageObject = userLanguageInfo.userLanguageObject;
 
     const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
-
     if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
     const { cardViewStatus } = topicStatusObject;
 
     let cardExistsInSomeView = false;
-
     for (const viewNumber in cardViewStatus) {
       // skip mongoDB prototype properties
       if (!cardViewStatus.hasOwnProperty(viewNumber)) continue;
