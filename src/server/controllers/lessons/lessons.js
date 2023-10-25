@@ -118,7 +118,7 @@ async function addCardToViewed(req, res) {
     // If the topic status object is not found, return a 404 response
     if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
     // Extract the card view status from the topic status object
-    const { cardViewStatus } = topicStatusObject;
+    const { cardViewStatus, viewPercentage } = topicStatusObject;
 
     let cardExistsInSomeView = false;
 
@@ -156,11 +156,19 @@ async function addCardToViewed(req, res) {
     }
 
     // Logic for adding bills
-    const viewedPercent = await getViewedPercent(userLanguageInfo);
-    console.log("viewedPercent".red, viewedPercent);
+    // Logic for adding bills
     // Logic for adding bills
 
-    //  user.save();
+    // Logic for updating percentages
+
+    const viewedPercent = await getViewedPercent(userLanguageInfo);
+    topicStatusObject.viewPercentage =
+      viewedPercent[cardTopic].viewedPercentage;
+    console.log("topicStatusObject.viewPercentage".red, topicStatusObject.viewPercentage);
+
+    // Logic for updating percentages
+
+    user.save();
 
     res.status(201).json(cardViewStatus);
   } catch (e) {
