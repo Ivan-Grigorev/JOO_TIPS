@@ -238,7 +238,6 @@ async function createScheduleToEndOfWeek(req, res, next) {
  */
 async function shouldChangeTopicStatus(req, res, next) {
   try {
-    // Find the user by ID from the request
     const user = await User.findById(req.user.id);
 
     // Get information about the user's languages and active topics
