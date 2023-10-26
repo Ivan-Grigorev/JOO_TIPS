@@ -25,6 +25,12 @@ router.post(
   controllers.addPoints
 );
 
-router.patch("/viewedcards", auth, controllers.addCardToViewed);
+router.patch(
+  "/viewedcards",
+  auth,
+  middlewares.shouldChangeTopicStatus,
+  middlewares.isCardProvided,
+  controllers.addCardToViewed
+);
 
 module.exports = router;

@@ -277,10 +277,23 @@ async function shouldChangeTopicStatus(req, res, next) {
   }
 }
 
+function isCardProvided(req, res, next) {
+  const { cardTopic, cardId } = req.body;
+
+  if (!cardTopic || !cardId) {
+    return res
+      .status(400)
+      .json({ message: "No card topic or cardId provided" });
+  }
+
+  next();
+}
+
 module.exports = {
   isLessonExistById,
   isLessonAlreadyCompleted,
   isScheduleAlreadyExists,
   createScheduleToEndOfWeek,
   shouldChangeTopicStatus,
+  isCardProvided,
 };
