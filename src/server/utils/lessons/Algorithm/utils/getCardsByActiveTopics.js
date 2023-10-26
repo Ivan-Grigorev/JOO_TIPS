@@ -1,4 +1,7 @@
 const Card = require("../../../../models/Card/Card");
+const getCardProbability = require("./getCardProbability");
+const selectRandomCardsByProbability = require("./selectRandomCardsByProbabilitie");
+const setTopicProbability = require("./setTopicProbability");
 
 /**
  * Retrieves unique card identifiers based on active topics with different card selection probabilities.
@@ -15,7 +18,7 @@ async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
   try {
     const cardSet = new Set(); // Create a set for unique cards
     const findedCards = new Set();
-    const selectedTopics = []; // Create an array to store selected topics
+    const selectedTopics = new Set(); // Create an array to store selected topics
 
     console.log("Total active topics:".yellow, activeTopics.length);
     for (let i = 0; i < activeTopics.length; i++) {
@@ -23,44 +26,26 @@ async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
 
       if (!topicObj) continue;
 
-      // Calculate the probability for this topic (adjust as needed)
-      let probability;
-      if (i === 0) {
-        probability = 100; // 100% probability for the first topic
-      } else if (i === 1) {
-        probability = 75; // 75% probability for the second topic
-      } else if (i === 2) {
-        probability = 50; // 50% probability for the third topic
-      } else {
-        probability = 0; // 0% probability for other topics
-      }
+      const probability = await setTopicProbability(i);
 
       console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
 
       const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
-      console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow);
+      console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow); // prettier-ignore
 
       // Calculate the probability of selecting each card within the topic
-      const cardProbabilities = findCards.map(
-        () => probability / findCards.length
-      );
+      const cardProbabilities = getCardProbability(findCards, probability);
 
       // Randomly select cards based on their probabilities
-      findCards.forEach((card, index) => {
-        const cardIdString = card._id.toString();
-
-        // Check if the card is unique
-        const isUniqueCard = !allTakenCards.includes(cardIdString) && !cardSet.has(cardIdString); // prettier-ignore
-
-        if (isUniqueCard && Math.random() <= cardProbabilities[index]) {
-          cardSet.add(cardIdString);
-          findedCards.add(cardIdString);
-
-          if (!selectedTopics.includes(topicObj.title)) {
-            selectedTopics.push(topicObj.title);
-          }
-        }
-      });
+      selectRandomCardsByProbability(
+        findCards,
+        findedCards,
+        allTakenCards,
+        cardProbabilities,
+        cardSet,
+        selectedTopics,
+        topicObj
+      );
     }
 
     console.log("Total number of found unique cards:".yellow, findedCards.size);
