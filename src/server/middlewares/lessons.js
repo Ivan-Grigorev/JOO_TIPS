@@ -277,15 +277,26 @@ async function shouldChangeTopicStatus(req, res, next) {
   }
 }
 
+/**
+ * Middleware to check if the required card topic and card ID are provided in the request body.
+ * If either the card topic or card ID is missing, it returns a 400 Bad Request response with an error message.
+ * If both the card topic and card ID are provided, it allows the request to proceed to the next middleware.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {function} next - The next middleware function to call if the required data is provided.
+ */
 function isCardProvided(req, res, next) {
   const { cardTopic, cardId } = req.body;
 
+  // Check if either the card topic or card ID is missing in the request body
   if (!cardTopic || !cardId) {
     return res
       .status(400)
       .json({ message: "No card topic or cardId provided" });
   }
 
+  // If both card topic and card ID are provided, allow the request to proceed
   next();
 }
 
