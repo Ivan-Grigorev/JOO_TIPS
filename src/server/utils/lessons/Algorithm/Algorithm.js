@@ -34,7 +34,7 @@ const moment = require("moment");
  *
  * @param {Array} arrayOfIDs - An array of card IDs to choose from.
  * @param {number} cardsAmount - The total number of cards to return.
- * @returns {Array} - An array of random selected unique card IDs.
+ * @returns {string[]} - An array of random selected unique card IDs.
  */
 function Algorithm(arrayOfIDs, cardsAmount) {
   const currentDate = moment();
