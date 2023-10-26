@@ -1,7 +1,7 @@
 const Card = require("../../../../models/Card/Card");
 
 /**
- * Retrieves unique card identifiers based on active topics.
+ * Retrieves unique card identifiers based on active topics with different card selection probabilities.
  *
  * @async
  * @function getCardsByActiveTopics
@@ -15,37 +15,60 @@ async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
   try {
     const cardSet = new Set(); // Create a set for unique cards
     const findedCards = new Set();
+    const selectedTopics = []; // Create an array to store selected topics
 
-    for (const topicObj of activeTopics) {
+    console.log("Total active topics:".yellow, activeTopics.length);
+    for (let i = 0; i < activeTopics.length; i++) {
+      const topicObj = activeTopics[i];
+
       if (!topicObj) continue;
 
+      // Calculate the probability for this topic (adjust as needed)
+      let probability;
+      if (i === 0) {
+        probability = 100; // 100% probability for the first topic
+      } else if (i === 1) {
+        probability = 75; // 75% probability for the second topic
+      } else if (i === 2) {
+        probability = 50; // 50% probability for the third topic
+      } else {
+        probability = 0; // 0% probability for other topics
+      }
+
+      console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
+
       const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
-      findCards.forEach((card) => {
+      console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow);
+
+      // Calculate the probability of selecting each card within the topic
+      const cardProbabilities = findCards.map(
+        () => probability / findCards.length
+      );
+
+      // Randomly select cards based on their probabilities
+      findCards.forEach((card, index) => {
         const cardIdString = card._id.toString();
 
         // Check if the card is unique
-        const isUniqueCard =
-          !allTakenCards.includes(cardIdString) && !cardSet.has(cardIdString);
+        const isUniqueCard = !allTakenCards.includes(cardIdString) && !cardSet.has(cardIdString); // prettier-ignore
 
-        if (isUniqueCard) {
+        if (isUniqueCard && Math.random() <= cardProbabilities[index]) {
           cardSet.add(cardIdString);
           findedCards.add(cardIdString);
+
+          if (!selectedTopics.includes(topicObj.title)) {
+            selectedTopics.push(topicObj.title);
+          }
         }
       });
-
-      console.log(
-        "Number of found cards for the topic",
-        topicObj,
-        ":",
-        findedCards.size
-      );
     }
 
-    console.log("Total number of found unique cards:", findedCards.size);
+    console.log("Total number of found unique cards:".yellow, findedCards.size);
+    console.log("Selected topics:".yellow, selectedTopics);
 
     return { cardIDs: [...cardSet], findedCards: [...findedCards] };
   } catch (e) {
-    console.error("Error getting cards by user's active topics", e);
+    console.error("Error getting cards by user's active topics".red, e);
     throw e; // Re-throw the error to indicate a problem with fetching or processing the cards
   }
 }
