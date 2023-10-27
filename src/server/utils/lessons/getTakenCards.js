@@ -7,11 +7,12 @@ const getDaysInMonthAndWeek = require("./getDaysInMonthAndWeek");
  * @async
  * @function getTakenCards
  * @param {string} userId - The user's identifier used for searching lessons.
+ * @param {string} userLanguageObj - The user's language object used for taking used cards.
  * @param {string} language - The language used for searching lessons.
  * @returns {Promise<{ all: string[], week: string[], month: string[] }>} An object containing unique card identifiers.
  * @throws {Error} An error if there was an issue fetching the data.
  */
-async function getTakenCards(userId, language) {
+async function getTakenCards(userId, userLanguageObj, language) {
   try {
     // Get the array of days in the current month and week
 
@@ -42,40 +43,52 @@ async function getTakenCards(userId, language) {
     ]);
 
     // Extract card references from the query results
-    const allTakenCardsIDs = new Set();
+    const allTakenCardsIDs = getAllTakenCards(userLanguageObj.topicStatuses);
     const weekTakenCardsIDs = new Set();
     const monthTakenCardsIDs = new Set();
 
+    console.log("All taken cards:", allTakenCardsIDs);
+
     weekLessons.forEach((lesson) => {
       lesson.cards.forEach((cardId) => {
-        allTakenCardsIDs.add(cardId.toString());
         weekTakenCardsIDs.add(cardId.toString());
       });
     });
 
     monthLessons.forEach((lesson) => {
       lesson.cards.forEach((cardId) => {
-        allTakenCardsIDs.add(cardId.toString());
         monthTakenCardsIDs.add(cardId.toString());
       });
     });
 
-    // Convert Sets back to arrays
-    const allTakenCardsIDsArray = [...allTakenCardsIDs];
-    const weekTakenCardsIDsArray = [...weekTakenCardsIDs];
-    const monthTakenCardsIDsArray = [...monthTakenCardsIDs];
-
     // console.log({ weekTakenCardsIDsArray, monthTakenCardsIDsArray });
 
     return {
-      all: allTakenCardsIDsArray,
-      week: weekTakenCardsIDsArray,
-      month: monthTakenCardsIDsArray,
+      all: [...allTakenCardsIDs],
+      week: [...weekTakenCardsIDs],
+      month: [...monthTakenCardsIDs],
     };
   } catch (error) {
     console.error("Error fetching lessons:", error);
     throw error;
   }
+}
+
+function getAllTakenCards(topicList) {
+  const takenCards = new Set(); // Создаем массив для хранения объектов с cardRef
+
+  topicList.forEach((obj) => {
+    for (const viewArray in obj.cardViewStatus) {
+      const ownProperty = obj.cardViewStatus.hasOwnProperty(viewArray);
+      if (ownProperty) {
+        const array = obj.cardViewStatus[viewArray];
+        // Итерируем по объектам внутри массива
+        array.forEach((item) => takenCards.add(item.cardRef.toString()));
+      }
+    }
+  });
+
+  return takenCards;
 }
 
 module.exports = getTakenCards;
