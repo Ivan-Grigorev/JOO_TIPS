@@ -57,10 +57,11 @@ async function getCardsByActiveTopics(
     // console.log("Total not active topics".yellow, notActiveTopics.length);
     for (let j = 0; j < notActiveTopics.length; j++) {
       const topicObj = notActiveTopics[j];
+      const topicStatus = topicObj.status;
 
-      const probability = await setTopicProbability();
+      const probability = await setTopicProbability(null, topicStatus);
 
-      console.log(`Not active topic ${topicObj[j].id}: Probability: ${probability}%`.yellow); // prettier-ignore
+      // console.log(`Not active topic ${topicObj.id}: Probability: ${probability}%`.yellow); // prettier-ignore
 
       const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
 
