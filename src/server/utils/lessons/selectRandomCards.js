@@ -27,15 +27,12 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       language
     );
 
-    // console.log("userLanguagesInfo".red, userLanguagesInfo);
-
     const { cardIDs, findedCards } = await getCardsByActiveTopics(
       userLanguagesInfo.activeTopicsTitles,
+      userLanguagesInfo.notActiveTopics,
       language,
       takenCards.all
     );
-
-    // console.log({ cardIDs, findedCards });
 
     if (!cardIDs) return { randomCards: [] };
 
