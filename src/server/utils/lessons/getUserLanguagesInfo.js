@@ -42,15 +42,28 @@ async function getUserLanguagesInfo(user) {
       };
     });
 
-    // Создаем пустой массив для хранения объектов тем
-    const activeTopicsTitles = [];
+    const allUsedTopics = userLanguageObject.topicStatuses;
 
-    activeTopics.forEach((topic) => {
-      activeTopicsTitles.push(topic);
-    });
+    // Фильтруем темы, которые не активны и не идентичны активным темам
+    const notActiveTopics = allUsedTopics
+      .map((topicObject) => {
+        const foundTopic = topicsList.find(
+          (topic) => topicObject.ref.toString() === topic._id.toString()
+        );
 
-    // Return the user's language object and active topics' titles
-    return { userLanguageObject, activeTopicsTitles };
+        return { id: foundTopic.id, title: foundTopic.topicTitle };
+      })
+      .filter((topic) => {
+        return !activeTopics.some(
+          (activeTopic) => activeTopic.id.toString() === topic.id.toString()
+        );
+      });
+
+    return {
+      userLanguageObject,
+      activeTopicsTitles: activeTopics,
+      notActiveTopics,
+    };
   } catch (e) {
     console.error(e);
   }
