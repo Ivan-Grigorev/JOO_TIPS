@@ -4,7 +4,7 @@ const getTopicsChances = require("../../getTechProps/utils/getTopicsChances");
  *
  * @async
  * @function setTopicProbability
- * @param {number} i - The position of the topic (0 for the first topic, 1 for the second, and so on).
+ * @param {number | null} i - The position of the topic (0 for the first topic, 1 for the second, and so on).
  * @param {number} status - The complete status of the topic.
  * @returns {Promise<number>} The calculated probability for selecting the topic (in percentage).
  */
