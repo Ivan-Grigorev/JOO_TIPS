@@ -8,19 +8,25 @@ const setTopicProbability = require("./setTopicProbability");
  *
  * @async
  * @function getCardsByActiveTopics
- * @param {string[]} activeTopics - An array of active topics.
+ * @param {[{id: string, title: string, activationDate: string}]} activeTopics - An array of active topics.
+ * @param {[{id: string, title: string}]} notActiveTopics - An array of active topics.
  * @param {string} language - The language for which to retrieve cards.
  * @param {string[]} allTakenCards - An array of card identifiers that the user has already taken.
  * @returns {Promise<{ cardIDs: string[], findedCards: string[] }>} An object containing card identifiers and information about the found cards.
  * @throws {Error} An error if there was an issue fetching the data or processing the cards.
  */
-async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
+async function getCardsByActiveTopics(
+  activeTopics,
+  notActiveTopics,
+  language,
+  allTakenCards
+) {
   try {
     const cardSet = new Set(); // Create a set for unique cards
     const findedCards = new Set();
-    const selectedTopics = new Set(); // Create an array to store selected topics
+    const selectedTopics = new Set(); // Create a set to store selected topics
 
-    console.log("Total active topics:".yellow, activeTopics.length);
+    // console.log("Total active topics:".yellow, activeTopics.length);
     for (let i = 0; i < activeTopics.length; i++) {
       const topicObj = activeTopics[i];
 
@@ -48,8 +54,33 @@ async function getCardsByActiveTopics(activeTopics, language, allTakenCards) {
       );
     }
 
-    console.log("Total number of found unique cards:".yellow, findedCards.size);
-    console.log("Selected topics:".yellow, selectedTopics);
+    // console.log("Total not active topics".yellow, notActiveTopics.length);
+    for (let j = 0; j < notActiveTopics.length; j++) {
+      const topicObj = notActiveTopics[j];
+
+      const probability = await setTopicProbability();
+
+      console.log(`Not active topic ${topicObj[j].id}: Probability: ${probability}%`.yellow); // prettier-ignore
+
+      const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
+
+      // Calculate the probability of selecting each card within the topic
+      const cardProbabilities = getCardProbability(findCards, probability);
+
+      // Randomly select cards based on their probabilities
+      selectRandomCardsByProbability(
+        findCards,
+        findedCards,
+        allTakenCards,
+        cardProbabilities,
+        cardSet,
+        selectedTopics,
+        topicObj
+      );
+    }
+
+    // console.log("Total number of found unique cards:".yellow, findedCards.size);
+    // console.log("Selected topics:".yellow, selectedTopics);
 
     return { cardIDs: [...cardSet], findedCards: [...findedCards] };
   } catch (e) {
