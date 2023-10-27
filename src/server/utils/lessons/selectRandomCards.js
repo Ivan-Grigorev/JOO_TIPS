@@ -1,7 +1,7 @@
 const User = require("../../models/user/user");
 const Algorithm = require("./Algorithm/Algorithm");
 const getCardsByActiveTopics = require("./Algorithm/utils/getCardsByActiveTopics");
-const getAllTakenCards = require("./getTakenCards");
+const getTakenCards = require("./getTakenCards");
 const getUserLanguagesInfo = require("./getUserLanguagesInfo");
 
 /**
@@ -21,7 +21,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
 
     const userLanguagesInfo = await getUserLanguagesInfo(user);
 
-    const takenCards = await getAllTakenCards(
+    const takenCards = await getTakenCards(
       userId,
       userLanguagesInfo.userLanguageObject,
       language
