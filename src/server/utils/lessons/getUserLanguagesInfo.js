@@ -51,7 +51,11 @@ async function getUserLanguagesInfo(user) {
           (topic) => topicObject.ref.toString() === topic._id.toString()
         );
 
-        return { id: foundTopic.id, title: foundTopic.topicTitle };
+        return {
+          id: foundTopic.id,
+          title: foundTopic.topicTitle,
+          status: topicObject.viewStatus,
+        };
       })
       .filter((topic) => {
         return !activeTopics.some(
