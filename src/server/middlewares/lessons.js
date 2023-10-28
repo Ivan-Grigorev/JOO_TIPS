@@ -262,6 +262,7 @@ async function shouldChangeTopicStatus(req, res, next) {
     const passedTwoWeeks = daysDifference >= 14;
     const viewedAtLeast25Percents = lastActiveTopic.viewedPercentage >= 25;
     const viewedMoreThan75Percents = lastActiveTopic.viewedPercentage >= 75;
+
     if (passedTwoWeeks & viewedAtLeast25Percents || viewedMoreThan75Percents) {
       // Add a new topic to the user's active topics
       await addNewTopic(
