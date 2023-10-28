@@ -300,6 +300,23 @@ function isCardProvided(req, res, next) {
   next();
 }
 
+async function isActiveLanguageExists(req, res, next) {
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user.activeLanguage) {
+      return res.status(400).json({
+        message: "Current user doesn't have an activeLanguage field.",
+      });
+    }
+
+    next();
+  } catch (e) {
+    console.error("Error in isActiveLanguageExists middleware.".red, e);
+    res.status(500).json({ message: "Internal server error." });
+  }
+}
+
 module.exports = {
   isLessonExistById,
   isLessonAlreadyCompleted,
@@ -307,4 +324,5 @@ module.exports = {
   createScheduleToEndOfWeek,
   shouldChangeTopicStatus,
   isCardProvided,
+  isActiveLanguageExists,
 };

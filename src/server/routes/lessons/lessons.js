@@ -8,17 +8,24 @@ const router = express.Router();
 router.get(
   "",
   auth,
+  middlewares.isActiveLanguageExists,
   middlewares.isScheduleAlreadyExists,
-  middlewares.shouldChangeTopicStatus, // todo поставить после проверки на существование расписания
+  middlewares.shouldChangeTopicStatus,
   middlewares.createScheduleToEndOfWeek,
   controllers.getLessons
 );
 
-router.get("/points", auth, controllers.getActiveLessonPoints);
+router.get(
+  "/points",
+  auth,
+  middlewares.isActiveLanguageExists,
+  controllers.getActiveLessonPoints
+);
 
 router.post(
   "/finish",
   auth,
+  middlewares.isActiveLanguageExists,
   middlewares.isLessonExistById,
   middlewares.isLessonAlreadyCompleted,
   controllers.finishLesson,
@@ -28,6 +35,8 @@ router.post(
 router.patch(
   "/viewedcards",
   auth,
+  middlewares.isActiveLanguageExists,
+  middlewares.isActiveLanguageExists,
   middlewares.shouldChangeTopicStatus,
   middlewares.isCardProvided,
   controllers.addCardToViewed
