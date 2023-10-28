@@ -47,7 +47,8 @@ async function getTakenCards(userId, userLanguageObj, language) {
     const weekTakenCardsIDs = new Set();
     const monthTakenCardsIDs = new Set();
 
-    console.log("All taken cards:", allTakenCardsIDs);
+    // console.log("All taken cards:", allTakenCardsIDs);
+    console.log("All taken cards count:".yellow, allTakenCardsIDs.size);
 
     weekLessons.forEach((lesson) => {
       lesson.cards.forEach((cardId) => {
