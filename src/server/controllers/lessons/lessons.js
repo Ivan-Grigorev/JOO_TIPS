@@ -112,6 +112,8 @@ async function addCardsToViewed(req, res) {
 
     // Get user language information
     const userLanguageInfo = await getUserLanguagesInfo(user);
+    const topicsStatusesObjects = []; // must be an array for work correct with indexes
+    const cardViewStatuses = new Set();
 
     for (let i = 0; i < cardIDs.length; i++) {
       const cardId = cardIDs[i];
@@ -126,9 +128,13 @@ async function addCardsToViewed(req, res) {
 
       // Find the topic status object for the specified card topic
       const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
+      // console.log("userLanguageObject".red, userLanguageObject);
+      // console.log("cardTopic".red, cardTopic);
+      // console.log("topicStatusObject".red, topicStatusObject);
 
       // If the topic status object is not found, return a 404 response
       if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
+      topicsStatusesObjects.push(topicStatusObject);
       // Extract the card view status from the topic status object
       const { cardViewStatus } = topicStatusObject;
 
@@ -167,13 +173,18 @@ async function addCardsToViewed(req, res) {
         console.log("Adding the card to the firstViewed array.".yellow);
         cardViewStatus.firstViewed.push(cardDataToPush);
       }
+      cardViewStatuses.add(cardViewStatus);
     }
 
     // update topic view percentage
-    // await updatePercentage(userLanguageInfo, topicStatusObject, cardTopic);
+    await updatePercentage(
+      userLanguageInfo,
+      topicsStatusesObjects,
+      cardTopicsIDs
+    );
     user.save();
 
-    res.status(201); // .json(cardViewStatus);
+    res.status(201).json(cardViewStatuses);
   } catch (e) {
     // Handle any errors that occur during the execution
     console.error(`Error adding card to viewed cards array: ${e}`.red);
