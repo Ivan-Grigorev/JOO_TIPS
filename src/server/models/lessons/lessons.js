@@ -52,12 +52,12 @@ const lessonSchema = new mongoose.Schema(
     },
 
     startTime: {
-      type: Date,
+      type: String,
       // required: [true, "Start time is required."],
       default: null,
     },
     endTime: {
-      type: Date,
+      type: String,
       // required: [true, "End time is required."],
       default: null,
     },
