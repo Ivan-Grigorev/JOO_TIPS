@@ -42,15 +42,4 @@ router.post(
   controllers.addPoints
 );
 
-// ! to delete
-// router.patch(
-//   "/viewedcards",
-//   auth,
-//   middlewares.isActiveLanguageExists,
-//   // middlewares.isActiveLessonExists,
-//   middlewares.shouldChangeTopicStatus,
-//   middlewares.isCardProvided,
-//   controllers.addCardsToViewed
-// );
-
 module.exports = router;
