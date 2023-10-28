@@ -5,7 +5,7 @@ const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
  * Retrieves information about a user's active languages and topics.
  *
  * @param {Object} user - The user object for which to fetch information.
- * @returns {Promise<{ userLanguageObject: object, activeTopicsTitles: { id: string, title: string, activationDate: string }[], notActiveTopics: {id: string, title: string } }>} A promise that resolves to an object containing
+ * @returns {Promise<{ userLanguageObject: object, activeTopics: { id: string, title: string, activationDate: string }[], notActiveTopics: {id: string, title: string } }>} A promise that resolves to an object containing
  * the user's language object and an array of titles of their active topics. If the information cannot be retrieved, the Promise resolves to undefined.
  */
 async function getUserLanguagesInfo(user) {
@@ -42,11 +42,9 @@ async function getUserLanguagesInfo(user) {
       };
     });
 
-    const allUsedTopics = userLanguageObject.topicStatuses;
-
-    // Фильтруем темы, которые не активны и не идентичны активным темам
-    const notActiveTopics = allUsedTopics
-      .map((topicObject) => {
+    // All topics
+    const allUsedTopics = userLanguageObject.topicStatuses.map(
+      (topicObject) => {
         const foundTopic = topicsList.find(
           (topic) => topicObject.ref.toString() === topic._id.toString()
         );
@@ -56,16 +54,20 @@ async function getUserLanguagesInfo(user) {
           title: foundTopic.topicTitle,
           status: topicObject.viewStatus,
         };
-      })
-      .filter((topic) => {
-        return !activeTopics.some(
-          (activeTopic) => activeTopic.id.toString() === topic.id.toString()
-        );
-      });
+      }
+    );
+
+    // Фильтруем темы, которые не активны и не идентичны активным темам
+    const notActiveTopics = allUsedTopics.filter((topic) => {
+      return !activeTopics.some(
+        (activeTopic) => activeTopic.id.toString() === topic.id.toString()
+      );
+    });
 
     return {
       userLanguageObject,
-      activeTopicsTitles: activeTopics,
+      allTopics: allUsedTopics,
+      activeTopics: activeTopics,
       notActiveTopics,
     };
   } catch (e) {
