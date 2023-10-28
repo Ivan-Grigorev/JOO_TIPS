@@ -34,10 +34,10 @@ async function getCardsByActiveTopics(
 
       const probability = await setTopicProbability(i);
 
-      console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
+      // console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
 
       const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
-      console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow); // prettier-ignore
+      // console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow); // prettier-ignore
 
       // Calculate the probability of selecting each card within the topic
       const cardProbabilities = getCardProbability(findCards, probability);
@@ -80,7 +80,7 @@ async function getCardsByActiveTopics(
       );
     }
 
-    // console.log("Total number of found unique cards:".yellow, findedCards.size);
+    console.log("Total number of found unique cards:".yellow, findedCards.size);
     // console.log("Selected topics:".yellow, selectedTopics);
 
     return { cardIDs: [...cardSet], findedCards: [...findedCards] };
