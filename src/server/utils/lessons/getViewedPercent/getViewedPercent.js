@@ -1,4 +1,4 @@
-const getViewedCardsByActiveTopic = require("./utils/getViewedCardsByActiveTopic");
+const getViewedCardsByTopic = require("./utils/getViewedCardsByTopic");
 
 /**
  * Middleware function to calculate the viewed percentage of cards for active topics.
@@ -20,7 +20,7 @@ async function getViewedPercent(userLanguageInfo) {
       return topicsRefsArray.includes(obj.ref.toString());
     });
 
-    const viewedCardsByTopic = await getViewedCardsByActiveTopic(
+    const viewedCardsByTopic = await getViewedCardsByTopic(
       topicsRefsArray,
       allTopics,
       topicsStatusesObjects
