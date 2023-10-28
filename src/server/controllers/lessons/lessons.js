@@ -96,7 +96,7 @@ async function finishLesson(req, res, next) {
  *
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @returns {Object} JSON response containing the updated card view status.
+ * @returns {Promise<object>} JSON response containing the updated card view status.
  */
 async function addCardToViewed(req, res) {
   try {
