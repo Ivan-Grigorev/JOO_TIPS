@@ -28,7 +28,7 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
     );
 
     const { cardIDs, findedCards } = await getCardsByActiveTopics(
-      userLanguagesInfo.activeTopicsTitles,
+      userLanguagesInfo.activeTopics,
       userLanguagesInfo.notActiveTopics,
       language,
       takenCards.all
