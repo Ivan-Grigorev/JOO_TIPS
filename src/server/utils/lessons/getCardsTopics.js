@@ -17,7 +17,7 @@ async function getCardsTopics(language, cardID) {
     const topicsList = await getTopicsByLanguage(language);
 
     // Create a Set to store unique topics related to the cards
-    const cardTopicsRefs = new Set();
+    const cardTopicsRefs = [];
 
     for (let j = 0; j < cardID.length; j++) {
       // Retrieve card details by ID
@@ -29,10 +29,10 @@ async function getCardsTopics(language, cardID) {
         ._id.toString();
 
       // Add the topic reference to the Set
-      cardTopicsRefs.add(cardTopicRef);
+      cardTopicsRefs.push(cardTopicRef);
     }
 
-    return [...cardTopicsRefs];
+    return cardTopicsRefs;
   } catch (e) {
     // Handle and log any errors that may occur
     console.error(e);
