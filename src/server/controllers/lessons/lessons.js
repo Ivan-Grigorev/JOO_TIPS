@@ -6,10 +6,12 @@ const findTopicStatus = require("../../utils/lessons/findTopicStatus");
 const isCardAlreadyExists = require("../../utils/lessons/isCardAlreadyExists");
 const moveCardToNextArray = require("../../utils/lessons/moveCardToNextArray");
 const updatePercentage = require("../../utils/lessons/updatePercentage");
+const Card = require("../../models/Card/Card");
+const getTopicsByLanguage = require("../../utils/lessons/getTechProps/utils/getTopicsByLanguage");
+const getCardsTopics = require("../../utils/lessons/getCardsTopics");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
-// todo переименовать в getActiveLessonPoints
 async function getActiveLessonPoints(req, res) {
   try {
     // Check if there is an authenticated user, return error if not.
@@ -70,7 +72,7 @@ async function startLesson(req, res, next) {
     req.lesson.startTime = moment().format("DD.MM.YYYY HH:mm");
     req.lesson.save();
 
-    res.status(201).end();
+    res.status(201).json({ message: "Lesson successfully started" });
   } catch (e) {
     console.error(`Error starting Lesson: ${e}`.red);
   }
@@ -78,10 +80,10 @@ async function startLesson(req, res, next) {
 
 async function finishLesson(req, res, next) {
   try {
-    req.lesson.status = "completed";
-    // req.lesson.cards.forEach((card) => (card.viewIndex += 1)); // increase cards view index
-    req.lesson.endTime = moment().format("DD.MM.YYYY HH:mm");
-    req.lesson.save();
+    const { lesson } = req;
+    lesson.status = "completed";
+    lesson.endTime = moment().format("DD.MM.YYYY HH:mm");
+    // lesson.save();
 
     next();
   } catch (error) {
@@ -98,72 +100,80 @@ async function finishLesson(req, res, next) {
  * @param {Object} res - The response object.
  * @returns {Promise<object>} JSON response containing the updated card view status.
  */
-async function addCardToViewed(req, res) {
+async function addCardsToViewed(req, res) {
   try {
-    const { cardTopic, cardId } = req.body;
+    const cardIDs = req.lesson.cards.map((ref) => ref.toString()); // array of IDs
     const userId = req.user.id;
 
-    const cardDataToPush = { cardRef: cardId, cardTopicRef: cardTopic };
-
-    const user = await User.findById(userId);
+    const [user, cardTopicsIDs] = await Promise.all([
+      User.findById(userId),
+      getCardsTopics(req.lesson.language, cardIDs),
+    ]);
 
     // Get user language information
     const userLanguageInfo = await getUserLanguagesInfo(user);
-    // Extract the user language object from the information
-    const userLanguageObject = userLanguageInfo.userLanguageObject;
 
-    // Find the topic status object for the specified card topic
-    const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
+    for (let i = 0; i < cardIDs.length; i++) {
+      const cardId = cardIDs[i];
+      const cardTopic = cardTopicsIDs[i];
+      const cardDataToPush = {
+        cardRef: cardIDs[i],
+        cardTopicRef: cardTopicsIDs[i],
+      };
 
-    // If the topic status object is not found, return a 404 response
-    if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
-    // Extract the card view status from the topic status object
-    const { cardViewStatus } = topicStatusObject;
+      // Extract the user language object from the information
+      const userLanguageObject = userLanguageInfo.userLanguageObject;
 
-    let cardExistsInSomeView = false;
+      // Find the topic status object for the specified card topic
+      const topicStatusObject = findTopicStatus(userLanguageObject, cardTopic);
 
-    // Iterate through each view number in the card view status
-    for (const viewNumber in cardViewStatus) {
-      // Skip MongoDB prototype properties
-      if (!cardViewStatus.hasOwnProperty(viewNumber)) continue;
+      // If the topic status object is not found, return a 404 response
+      if (!topicStatusObject) return res.status(404).json({ message: "Topic status object not found" }); // prettier-ignore
+      // Extract the card view status from the topic status object
+      const { cardViewStatus } = topicStatusObject;
 
-      // Get the current status array for the view number
-      const currentStatusArray = cardViewStatus[viewNumber];
+      let cardExistsInSomeView = false;
 
-      // Check if the card with the specified ID exists in the current status array
-      const cardExists = isCardAlreadyExists(currentStatusArray, cardId);
+      // Iterate through each view number in the card view status
+      for (const viewNumber in cardViewStatus) {
+        // Skip MongoDB prototype properties
+        if (!cardViewStatus.hasOwnProperty(viewNumber)) continue;
 
-      if (cardExists) {
-        cardExistsInSomeView = true;
+        // Get the current status array for the view number
+        const currentStatusArray = cardViewStatus[viewNumber];
 
-        // Get the index of the current view in the card view status
-        const cardIndex = Object.keys(cardViewStatus).indexOf(viewNumber);
+        // Check if the card with the specified ID exists in the current status array
+        const cardExists = isCardAlreadyExists(currentStatusArray, cardId);
 
-        // Check if the current view is not the last view
-        const notLastArray = cardIndex < Object.keys(cardViewStatus).length - 1;
+        if (cardExists) {
+          cardExistsInSomeView = true;
 
-        if (notLastArray) {
-          moveCardToNextArray(cardViewStatus, viewNumber, cardIndex, cardId);
-          break;
+          // Get the index of the current view in the card view status
+          const cardIndex = Object.keys(cardViewStatus).indexOf(viewNumber);
+
+          // Check if the current view is not the last view
+          const notLastArray =
+            cardIndex < Object.keys(cardViewStatus).length - 1;
+
+          if (notLastArray) {
+            moveCardToNextArray(cardViewStatus, viewNumber, cardIndex, cardId);
+            break;
+          }
         }
+      }
+
+      // If the card doesn't exist in any view, add it to the 'firstViewed' array
+      if (!cardExistsInSomeView) {
+        console.log("Adding the card to the firstViewed array.".yellow);
+        cardViewStatus.firstViewed.push(cardDataToPush);
       }
     }
 
-    // If the card doesn't exist in any view, add it to the 'firstViewed' array
-    if (!cardExistsInSomeView) {
-      console.log("Adding the card to the firstViewed array.".yellow);
-      cardViewStatus.firstViewed.push(cardDataToPush);
-    }
-
-    //* Logic for adding bills
-    //* Logic for adding bills
-    //* Logic for adding bills
-
     // update topic view percentage
-    await updatePercentage(userLanguageInfo, topicStatusObject, cardTopic);
+    // await updatePercentage(userLanguageInfo, topicStatusObject, cardTopic);
     user.save();
 
-    res.status(201).json(cardViewStatus);
+    res.status(201); // .json(cardViewStatus);
   } catch (e) {
     // Handle any errors that occur during the execution
     console.error(`Error adding card to viewed cards array: ${e}`.red);
@@ -177,5 +187,5 @@ module.exports = {
   finishLesson,
   addPoints,
   startLesson,
-  addCardToViewed,
+  addCardsToViewed,
 };
