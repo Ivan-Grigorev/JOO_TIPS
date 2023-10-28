@@ -5,23 +5,23 @@ const getTotalCardsCount = require("./getTotalCardsCount");
 /**
  * Calculates the viewed cards count and percentage for active topics.
  *
- * @param {string[]} activeTopicsRefsArray - An array of active topics references.
- * @param {object[]} activeTopicsTitles - An array of active topics titles.
+ * @param {string[]} topicsRefsArray - An array of active topics references.
+ * @param {object[]} allTopics - An array of active topics titles.
  * @param {object[]} topicsStatusesObjects - An array of topic status objects.
  * @returns {Promise<{ [topicTitle: string]: { cardsViewed: number, totalCards: number, viewedPercentage: number, status: number } }>}
  * A Promise that resolves to an object representing the detailed card view information for each active topic.
  */
 async function getViewedCardsByActiveTopic(
-  activeTopicsRefsArray,
-  activeTopicsTitles,
+  topicsRefsArray,
+  allTopics,
   topicsStatusesObjects
 ) {
-  const viewedCardsByActiveTopic = {};
+  const viewedCardsByTopic = {};
 
   try {
-    for (let i = 0; i < activeTopicsRefsArray.length; i++) {
-      const topicTitle = activeTopicsRefsArray[i];
-      const activeTopicTitle = activeTopicsTitles.find((topic) => {
+    for (let i = 0; i < topicsRefsArray.length; i++) {
+      const topicTitle = topicsRefsArray[i];
+      const activeTopicTitle = allTopics.find((topic) => {
         return topic.id === topicTitle;
       }).title;
 
@@ -37,7 +37,7 @@ async function getViewedCardsByActiveTopic(
       const percentage = (viewedCardsCount / totalCardsCount) * 100;
 
       // Store the information in the viewedCardsByActiveTopic object
-      viewedCardsByActiveTopic[topicTitle] = {
+      viewedCardsByTopic[topicTitle] = {
         cardsViewed: viewedCardsCount,
         totalCards: totalCardsCount,
         viewedPercentage: percentage,
@@ -45,7 +45,7 @@ async function getViewedCardsByActiveTopic(
       };
     }
 
-    return viewedCardsByActiveTopic;
+    return viewedCardsByTopic;
   } catch (e) {
     console.error("Error in getViewedCardsByActiveTopic".red, e);
     throw Error(e);
