@@ -83,7 +83,7 @@ async function finishLesson(req, res, next) {
     const { lesson } = req;
     lesson.status = "completed";
     lesson.endTime = moment().format("DD.MM.YYYY HH:mm");
-    // lesson.save();
+    lesson.save();
 
     next();
   } catch (error) {
