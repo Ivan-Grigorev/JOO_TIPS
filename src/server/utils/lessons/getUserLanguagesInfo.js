@@ -5,7 +5,11 @@ const getTopicsByLanguage = require("./getTechProps/utils/getTopicsByLanguage");
  * Retrieves information about a user's active languages and topics.
  *
  * @param {Object} user - The user object for which to fetch information.
- * @returns {Promise<{ userLanguageObject: object, activeTopics: { id: string, title: string, activationDate: string }[], notActiveTopics: {id: string, title: string } }>} A promise that resolves to an object containing
+ * @returns {Promise<{
+ *  userLanguageObject: object,
+ *  activeTopics: { id: string, title: string, activationDate: string }[],
+ *  notActiveTopics: { id: string, title: string } }>}
+ *  A promise that resolves to an object containing
  * the user's language object and an array of titles of their active topics. If the information cannot be retrieved, the Promise resolves to undefined.
  */
 async function getUserLanguagesInfo(user) {
