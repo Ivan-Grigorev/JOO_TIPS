@@ -10,25 +10,22 @@ const getViewedCardsByActiveTopic = require("./utils/getViewedCardsByActiveTopic
 async function getViewedPercent(userLanguageInfo) {
   try {
     // Extract relevant data from userLanguageInfo
-    const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
-    const { activeTopicsRefs, topicStatuses } = userLanguageObject;
+    const { userLanguageObject, allTopics } = userLanguageInfo;
+    const { topicStatuses } = userLanguageObject;
 
-    // Convert activeTopicsRefs to an array of strings
-    const activeTopicsRefsArray = activeTopicsRefs.map((obj) =>
-      obj.ref.toString()
-    );
+    const topicsRefsArray = allTopics.map((obj) => obj.id.toString());
 
     // Filter topicsStatuses to get relevant objects
     const topicsStatusesObjects = topicStatuses.filter((obj) => {
-      return activeTopicsRefsArray.includes(obj.ref.toString());
+      return topicsRefsArray.includes(obj.ref.toString());
     });
 
-    const viewedCardsByActiveTopic = await getViewedCardsByActiveTopic(
-      activeTopicsRefsArray,
-      activeTopicsTitles,
+    const viewedCardsByTopic = await getViewedCardsByActiveTopic(
+      topicsRefsArray,
+      allTopics,
       topicsStatusesObjects
     );
-    return viewedCardsByActiveTopic;
+    return viewedCardsByTopic;
   } catch (e) {
     console.error("Error getting viewed cards percent", e);
     throw Error("Error getting viewed cards percent", e);
