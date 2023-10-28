@@ -23,23 +23,34 @@ router.get(
 );
 
 router.post(
+  "/start",
+  auth,
+  middlewares.isActiveLanguageExists,
+  middlewares.isLessonExistById,
+  middlewares.isLessonAlreadyCompleted,
+  controllers.startLesson
+);
+
+router.post(
   "/finish",
   auth,
   middlewares.isActiveLanguageExists,
   middlewares.isLessonExistById,
   middlewares.isLessonAlreadyCompleted,
   controllers.finishLesson,
+  controllers.addCardsToViewed,
   controllers.addPoints
 );
 
-router.patch(
-  "/viewedcards",
-  auth,
-  middlewares.isActiveLanguageExists,
-  middlewares.isActiveLanguageExists,
-  middlewares.shouldChangeTopicStatus,
-  middlewares.isCardProvided,
-  controllers.addCardToViewed
-);
+// ! to delete
+// router.patch(
+//   "/viewedcards",
+//   auth,
+//   middlewares.isActiveLanguageExists,
+//   // middlewares.isActiveLessonExists,
+//   middlewares.shouldChangeTopicStatus,
+//   middlewares.isCardProvided,
+//   controllers.addCardsToViewed
+// );
 
 module.exports = router;

@@ -39,6 +39,10 @@ const isLessonExistById = async (req, res, next) => {
   try {
     const { lessonId } = req.body;
 
+    if (!lessonId) {
+      return res.status(400).json({ message: "No lesson ID provided" });
+    }
+
     // Find the lesson in the database by its ID and user ID
     const lesson = await Lesson.findOne({ _id: lessonId, userId: req.user.id });
 
@@ -242,7 +246,7 @@ async function shouldChangeTopicStatus(req, res, next) {
 
     // Get information about the user's languages and active topics
     const userLanguageInfo = await getUserLanguagesInfo(user);
-    const { userLanguageObject, activeTopicsTitles } = userLanguageInfo;
+    const { userLanguageObject, activeTopics: activeTopicsTitles } = userLanguageInfo; // prettier-ignore
     const { activeTopicsRefs, topicStatuses } = userLanguageObject;
 
     // Calculate the viewed card percentages for active topics
