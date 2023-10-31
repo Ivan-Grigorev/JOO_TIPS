@@ -1,7 +1,7 @@
 const Lesson = require("../../models/lessons/lessons");
 const Algorithm = require("./Algorithm/Algorithm");
 const selectRandomCards = require("./selectRandomCards");
-const getAllTakenCards = require("./getTakenCards");
+const getTakenCards = require("./getTakenCards");
 require("colors");
 /**
  * @function createLessons
@@ -129,7 +129,7 @@ async function createWeekLesson(
   try {
     console.log("Creating week lesson".blue);
 
-    const takenCards = await getAllTakenCards(userId, language);
+    const takenCards = await getTakenCards(userId, language);
     const shuffledTakenCards = Algorithm(takenCards.week, cardsAmount);
 
     let takenCardIDs = [];
@@ -211,7 +211,7 @@ async function createMonthLesson(
   try {
     console.log("Creating month lesson".blue);
 
-    const takenCards = await getAllTakenCards(userId, language);
+    const takenCards = await getTakenCards(userId, language);
     const shuffledTakenCards = Algorithm(takenCards.month, cardsAmount);
 
     let takenCardIDs = [];

@@ -1,5 +1,7 @@
 const Lesson = require("../../models/lessons/lessons");
+const User = require("../../models/user/user");
 const getDaysInMonthAndWeek = require("./getDaysInMonthAndWeek");
+const getUserLanguagesInfo = require("./getUserLanguagesInfo");
 
 /**
  * Get unique card identifiers associated with a user's lessons.
@@ -13,7 +15,15 @@ const getDaysInMonthAndWeek = require("./getDaysInMonthAndWeek");
  * @throws {Error} An error if there was an issue fetching the data.
  */
 async function getTakenCards(userId, userLanguageObj, language) {
+  let userLanguageObject;
   try {
+    const user = await User.findById(userId);
+
+    if (!userLanguageObj) {
+      const userInfo = await getUserLanguagesInfo(user);
+      userLanguageObject = userInfo.userLanguageObject;
+    }
+
     // Get the array of days in the current month and week
 
     const { week, month } = getDaysInMonthAndWeek();
@@ -42,8 +52,15 @@ async function getTakenCards(userId, userLanguageObj, language) {
       ),
     ]);
 
+    const noWeekTakenCards = weekLessons.length === 0;
+    const noMonthTakenCards = monthLessons.length === 0;
+
+    if (noWeekTakenCards && noMonthTakenCards) {
+      return { all: [], week: [], month: [] };
+    }
+
     // Extract card references from the query results
-    const allTakenCardsIDs = getAllTakenCards(userLanguageObj.topicStatuses);
+    const allTakenCardsIDs = getAllTakenCards(userLanguageObject.topicStatuses);
     const weekTakenCardsIDs = new Set();
     const monthTakenCardsIDs = new Set();
 
