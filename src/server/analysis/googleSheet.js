@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-const serviceAccPath = path.join(__dirname, "jootips-923e9874e02e.json");
+const serviceAccPath = path.join(__dirname, "credentials.json");
 const PRIVATE_KEY = require(serviceAccPath);
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 
