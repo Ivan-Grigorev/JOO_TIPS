@@ -1,18 +1,16 @@
 # JOO TIPS
 ## A private commercial start-up that creates and develops a programming language learning platform that helps you develop your understanding of code and improve syntax through regular and daily exercises right on your phone.
 
-# JooTips
+Welcome to JooTips - your path to a successful IT career!
 
-Добро пожаловать в JooTips - ваш путь к успешной IT карьере!
+## Description
 
-## Описание
+JooTips is an online platform for learning programming.
 
-JooTips - это онлайн-платформа для изучения программирования.
-
-Здесь вы можете выбрать один из следующих языков:
+Here, you can choose from one of the following languages:
 
 - JavaScript
-- Python  
+- Python
 - HTML/CSS
 - Swift
 - Solidity
@@ -21,47 +19,47 @@ JooTips - это онлайн-платформа для изучения про�
 - React
 - Node.js/Express
 - PHP
-- Django  
+- Django
 - Java
 - Go
 - Kotlin
-- и другие
+- and more
 
-Также изучаются:  
+We also cover:
 
-- Базы данных (MongoDB, MySQL)
+- Databases (MongoDB, MySQL)
 - Docker
 - Nginx
-- Сети TCP/IP
+- TCP/IP Networks
 
-Обучение происходит посредством прохождения ежедневных уроков. Каждый урок состоит из 5 карточек с вопросами 3 уровней сложности (всего более 2000 уникальных вопросов).
+Learning happens through daily lessons. Each lesson consists of 5 cards with questions of 3 difficulty levels (over 2000 unique questions in total).
 
-[ИЗОБРАЖЕНИЕ - пример карточки с вопросом]
+[IMAGE - example question card]
 
-По выходным формируются уроки-повторения пройденного материала за неделю и месяц. 
+On weekends, review lessons are generated for the material covered during the week and the month.
 
-В процессе обучения добавляются новые темы и вопросы.
+New topics and questions are added as you progress in your learning.
 
-Реализована система достижений, баллов и премиум-аккаунтов для расширения возможностей.  
+We have an achievement system, points, and premium accounts to expand your possibilities.
 
-[ВИДЕО - процесс прохождения урока]
+[VIDEO - lesson progress demonstration]
 
-## Преимущества
+## Advantages
 
-- Интерактивный формат обучения
-- Возможность выбрать любой язык программирования 
-- Большое количество уникальных вопросов и тем
-- Ежедневные уроки с автоматически сгенерированным расписанием
-- Уроки-повторения в выходные дни 
-- Система достижений и баллов
-- Премиум-аккаунты
-- Всегда актуальный материал - новые темы и вопросы добавляются постоянно
+- Interactive learning format
+- Choose any programming language you like
+- Abundance of unique questions and topics
+- Daily lessons with automatically generated schedules
+- Weekend review lessons
+- Achievement system and points
+- Premium accounts
+- Always up-to-date material - new topics and questions are constantly added
 
-## Контакты 
+## Contacts
 
-Вопросы? Свяжитесь с нами!
+Questions? Contact us!
 
 - Email: info@jootips.com
-- Телефон: 8 800 555 35 35  
+- Phone: 8 800 555 35 35
 
-С нетерпением ждем вас в JooTips!
+We look forward to welcoming you to JooTips!
