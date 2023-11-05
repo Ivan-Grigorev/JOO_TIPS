@@ -6,7 +6,7 @@ const Lesson = require("../../models/lessons/lessons");
  * @param {string} userId - The user's ID.
  * @param {string} language - The language for the lesson.
  * @param {string} regexpCurrentDate - The date of the lesson in regexp format.
- * @returns {Promise<object>} A promise that resolves to the found lesson or null if not found.
+ * @returns {Promise<object | null>} A promise that resolves to the found lesson or null if not found.
  */
 async function isLessonExistsForToday(userId, language, regexpCurrentDate) {
   try {
