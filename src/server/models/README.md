@@ -1,84 +1,44 @@
 # Models
 
-This folder contains MongoDB models representing application data entities.
+## Folder Structure
 
-## Structure
-
-Models are organized into subfolders based on their semantic blocks:
-
-- `Card` - Models related to cards
-- `Lessons` - Models for lessons
-- `Tech` - Technical reference data
-- `User` - User model
+Models are organized into subfolders based on their semantic blocks.
 
 ## Model Descriptions
 
-### Card
+### User
 
-**Answer.js**
-
-Represents an answer for a card's question. It contains:
-
-- Answer text
-- Flag indicating whether the answer is correct
-
-**Card.js**
-
-Represents an educational card. It contains:
-
-- Card language
-- Theme
-- Card text
-- Code example
-- Links to questions
-
-**Question.js**
-
-Represents a question for a card. It contains:
-
-- Question text
-- Links to answers
-
-These models are used for representing and storing educational cards.
+**user.js** - User model.
 
 ### Lessons
 
-**lessons.js**
+**lessons.js** - User lesson model.
 
-Represents a user's lesson. It contains:
+### Question
 
-- User ID
-- Lesson points
-- Lesson language
-- Links to cards in the lesson
-- Lesson date and time
-- Lesson status
-- Duration
+**Question.js** - Question model for cards.
 
-Used to store information about user lessons.
+### Answer
+
+**Answer.js** - Answer model for card questions.
+
+### Card
+
+**Card.js** - Educational card model.
+
+### Events
+
+Models for various application events.
 
 ### Tech
 
-**LanguagesList.js**
+Auxiliary reference data.
 
-Contains a list of available learning languages.
+## Usage of Models
 
-**LessonConfig.js**
+Models are used for:
 
-Stores lesson configuration - number of cards, duration, etc.
-
-**TopicsChances.js**
-
-Contains probability formulas for topic selection in lessons.
-
-**TopicsList.js**
-
-A reference for themes and topics for each language.
-
-**TopicsToChooseAmount.js**
-
-Stores the number of topics to choose in lessons.
-
-Technical reference data used in the application's logic.
-
-Next, I will proceed to describe the user model.
+- Creating and storing data in MongoDB
+- Retrieving and displaying data in the application
+- Validating data for business logic
+- Controllers and middleware interact with MongoDB collections through these models.
