@@ -1,6 +1,6 @@
-# Lessons Utils
+# Lessons Utilities
 
-This folder contains utility functions for working with lessons.
+This section covers the utility functions in the "utils/lessons" folder for working with lessons.
 
 ## Files
 
@@ -48,6 +48,26 @@ This folder contains utility functions for working with lessons.
 
 - Checks if today is the end of the month.
 
+**isCardAlreadyExists.js**
+
+- Checks if a card already exists in a view status array.
+
+**isLessonExistsForToday.js**
+
+- Checks if a lesson exists for today. Search using `userId`, `language` and `regexpCurrentDate`.
+
+**isTodayEndOfTheMonth.js**
+
+- Checks if today is the end of the month.
+
+**isTodaySunday.js**
+
+- Checks if today is Sunday.
+
+**moveCardToNextArray.js**
+
+- Moves a card to the next view array in the user language object in the special topic object.
+
 ## Usage
 
 These utility functions are used by middleware and controllers for:
@@ -56,5 +76,7 @@ These utility functions are used by middleware and controllers for:
 - Managing topics and getting topic data
 - Working with dates and times
 - Fetching related user language data
+- Checking lesson, card, date, and day logic
+- Moving card data between view status arrays
 
-The utils are exported and imported where needed in the codebase.
+The utils are imported and used in lessons middlewares and controllers as well they helps with validating conditions and manipulating lesson and card data.
