@@ -27,57 +27,55 @@ async function getCardsByActiveTopics(
     const cardSet = new Set(); // Create a set for unique cards
     const selectedTopics = new Set(); // Create a set to store selected topics
 
-    while (cardSet.size < requiredCardsAmount) {
-      // console.log("Total active topics:".yellow, activeTopics.length);
-      for (let i = 0; i < activeTopics.length; i++) {
-        const topicObj = activeTopics[i];
-        if (!topicObj) continue;
+    // console.log("Total active topics:".yellow, activeTopics.length);
+    for (let i = 0; i < activeTopics.length; i++) {
+      const topicObj = activeTopics[i];
+      if (!topicObj) continue;
 
-        const probability = await setTopicProbability(i);
+      const probability = await setTopicProbability(i);
 
-        // console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
+      // console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
 
-        const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
-        // console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow); // prettier-ignore
+      const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
+      // console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow); // prettier-ignore
 
-        // Calculate the probability of selecting each card within the topic
-        const cardProbabilities = getCardProbability(findCards, probability);
+      // Calculate the probability of selecting each card within the topic
+      const cardProbabilities = getCardProbability(findCards, probability);
 
-        // Randomly select cards based on their probabilities
-        selectRandomCardsByProbability(
-          findCards,
-          allTakenCards,
-          cardProbabilities,
-          cardSet,
-          selectedTopics,
-          topicObj
-        );
-      }
+      // Randomly select cards based on their probabilities
+      selectRandomCardsByProbability(
+        findCards,
+        allTakenCards,
+        cardProbabilities,
+        cardSet,
+        selectedTopics,
+        topicObj
+      );
+    }
 
-      // console.log("Total not active topics".yellow, notActiveTopics.length);
-      for (let j = 0; j < notActiveTopics.length; j++) {
-        const topicObj = notActiveTopics[j];
-        const topicStatus = topicObj.status;
+    // console.log("Total not active topics".yellow, notActiveTopics.length);
+    for (let j = 0; j < notActiveTopics.length; j++) {
+      const topicObj = notActiveTopics[j];
+      const topicStatus = topicObj.status;
 
-        const probability = await setTopicProbability(null, topicStatus);
+      const probability = await setTopicProbability(null, topicStatus);
 
-        // console.log(`Not active topic ${topicObj.id}: Probability: ${probability}%`.yellow); // prettier-ignore
+      // console.log(`Not active topic ${topicObj.id}: Probability: ${probability}%`.yellow); // prettier-ignore
 
-        const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
+      const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
 
-        // Calculate the probability of selecting each card within the topic
-        const cardProbabilities = getCardProbability(findCards, probability);
+      // Calculate the probability of selecting each card within the topic
+      const cardProbabilities = getCardProbability(findCards, probability);
 
-        // Randomly select cards based on their probabilities
-        selectRandomCardsByProbability(
-          findCards,
-          allTakenCards,
-          cardProbabilities,
-          cardSet,
-          selectedTopics,
-          topicObj
-        );
-      }
+      // Randomly select cards based on their probabilities
+      selectRandomCardsByProbability(
+        findCards,
+        allTakenCards,
+        cardProbabilities,
+        cardSet,
+        selectedTopics,
+        topicObj
+      );
     }
 
     console.log("Total amount of found unique cards:".yellow, cardSet.size);
