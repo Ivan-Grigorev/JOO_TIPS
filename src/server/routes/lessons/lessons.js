@@ -43,4 +43,7 @@ router.post(
   controllers.addPoints
 );
 
+// ! test route
+router.post("/finishAll", auth, controllers.finishAllLessons);
+
 module.exports = router;
