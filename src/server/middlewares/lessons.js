@@ -89,6 +89,20 @@ const isLessonAlreadyCompleted = async (req, res, next) => {
   }
 };
 
+async function areLessonStarted(req, res, next) {
+  try {
+    const lessonStarted = req.lesson.startDate !== null;
+
+    if (!lessonStarted) {
+      return res.status(409).json({ message: "The lesson must begin." });
+    }
+
+    next();
+  } catch (e) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 /**
  * @function isScheduleAlreadyExists
  * @description Middleware to check if there are already lessons for the current week.
@@ -324,6 +338,7 @@ async function isActiveLanguageExists(req, res, next) {
 
 module.exports = {
   isLessonExistById,
+  areLessonStarted,
   isLessonAlreadyCompleted,
   isScheduleAlreadyExists,
   createScheduleToEndOfWeek,

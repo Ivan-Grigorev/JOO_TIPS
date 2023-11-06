@@ -37,6 +37,7 @@ router.post(
   middlewares.isActiveLanguageExists,
   middlewares.isLessonExistById,
   middlewares.isLessonAlreadyCompleted,
+  middlewares.areLessonStarted,
   controllers.finishLesson,
   controllers.addCardsToViewed,
   controllers.addPoints
