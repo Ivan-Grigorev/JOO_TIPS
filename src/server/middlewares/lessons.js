@@ -263,6 +263,15 @@ async function shouldChangeTopicStatus(req, res, next) {
     const { userLanguageObject, activeTopics: activeTopicsTitles } = userLanguageInfo; // prettier-ignore
     const { activeTopicsRefs, topicStatuses } = userLanguageObject;
 
+    const fullViewedTopic = topicStatuses.find(
+      (topic) => topic.viewPercentage === 100
+    );
+    if (fullViewedTopic) {
+      fullViewedTopic.viewStatus++;
+      fullViewedTopic.viewPercentage = 0;
+      user.save();
+    }
+
     // Calculate the viewed card percentages for active topics
     const topicsViewedPercentage = await getViewedPercent(userLanguageInfo);
 
