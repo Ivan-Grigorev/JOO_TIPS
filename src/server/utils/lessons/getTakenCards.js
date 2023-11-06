@@ -15,7 +15,7 @@ const getUserLanguagesInfo = require("./getUserLanguagesInfo");
  * @throws {Error} An error if there was an issue fetching the data.
  */
 async function getTakenCards(userId, userLanguageObj, language) {
-  let userLanguageObject;
+  let userLanguageObject = userLanguageObj;
   try {
     const user = await User.findById(userId);
 
