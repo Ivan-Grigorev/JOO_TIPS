@@ -263,12 +263,20 @@ async function shouldChangeTopicStatus(req, res, next) {
     const { userLanguageObject, activeTopics: activeTopicsTitles } = userLanguageInfo; // prettier-ignore
     const { activeTopicsRefs, topicStatuses } = userLanguageObject;
 
+    // Find the topic with a viewPercentage of 100% in the topicStatuses array.
     const fullViewedTopic = topicStatuses.find(
       (topic) => topic.viewPercentage === 100
     );
-    if (fullViewedTopic) {
+
+    // Check if a fullViewedTopic was found and if the viewStatus is less than 3.
+    if (fullViewedTopic && fullViewedTopic.viewStatus < 3) {
+      // Increment the viewStatus of the found topic by 1.
       fullViewedTopic.viewStatus++;
+
+      // Set the viewPercentage of the found topic to 0, indicating it's no longer fully viewed.
       fullViewedTopic.viewPercentage = 0;
+
+      // Save the changes to the user's data (assuming the user object has a save method).
       user.save();
     }
 
