@@ -11,11 +11,11 @@ const getUserLanguagesInfo = require("./getUserLanguagesInfo");
  * @function selectRandomCards
  * @param {string} userId - The user's identifier.
  * @param {string} language - The user's selected language.
- * @param {number} cardsAmount - The number of random cards to select.
+ * @param {number} requiredCardsAmount - The number of random cards to select.
  * @returns {Promise<{ randomCards: string[] | null, takenCards: string[], foundCards: { topic: string, foundAmount: number, totalAmount: number }[] }>} An object containing the selected cards and additional information.
  * @throws {Error} An error if there was an issue fetching the data or selecting cards.
  */
-const selectRandomCards = async (userId, language, cardsAmount) => {
+const selectRandomCards = async (userId, language, requiredCardsAmount) => {
   try {
     const user = await User.findById(userId);
 
@@ -31,12 +31,13 @@ const selectRandomCards = async (userId, language, cardsAmount) => {
       userLanguagesInfo.activeTopics,
       userLanguagesInfo.notActiveTopics,
       language,
+      requiredCardsAmount,
       takenCards.all
     );
 
     if (!cardIDs) return { randomCards: [] };
 
-    const randomCards = Algorithm(cardIDs, cardsAmount);
+    const randomCards = Algorithm(cardIDs, requiredCardsAmount);
 
     return {
       randomCards: randomCards,
