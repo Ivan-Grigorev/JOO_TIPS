@@ -277,6 +277,11 @@ async function shouldChangeTopicStatus(req, res, next) {
       // Set the viewPercentage of the found topic to 0, indicating it's no longer fully viewed.
       fullViewedTopic.viewPercentage = 0;
 
+      console.log(
+        "Topic was reseted to 0 percentage an upgraded to next viewStatus level"
+          .yellow
+      );
+
       // Save the changes to the user's data (assuming the user object has a save method).
       user.save();
     }

@@ -44,6 +44,13 @@ router.post(
 );
 
 // ! test route
-router.post("/finishAll", auth, controllers.finishAllLessons);
+router.post(
+  "/finishAll",
+  auth,
+  middlewares.isScheduleAlreadyExists,
+  middlewares.shouldChangeTopicStatus,
+  middlewares.createScheduleToEndOfWeek,
+  controllers.finishAllLessons
+);
 
 module.exports = router;
