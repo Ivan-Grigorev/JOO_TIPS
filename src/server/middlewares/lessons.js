@@ -234,6 +234,7 @@ async function createScheduleToEndOfWeek(req, res, next) {
       userId,
       language,
       techProps.dayLesson.cardsAmount,
+      techProps.dayLesson.cardsAmount * date.daysUntilSunday,
       techProps.dayLesson.duration
     );
 

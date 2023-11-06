@@ -11,7 +11,7 @@ require("colors");
  * @param {moment} currentDate - The current date as a moment.js object.
  * @param {string} userId - The user's ID.
  * @param {string} language - The language for the lessons.
- * @param {number} cardsAmount - The number of cards for each lesson.
+ * @param {number} cardsAmountToEndOfTheWeek - The number of cards for each lesson.
  * @param {number} lessonDuration - The duration of each lesson.
  *
  * @returns {Promise<Array>} A promise that resolves to an array of lesson objects.
@@ -23,17 +23,26 @@ async function createLessons(
   currentDate,
   userId,
   language,
-  cardsAmount,
+  cardsAmountByDay,
+  cardsAmountToEndOfTheWeek,
   lessonDuration
 ) {
   try {
     console.log("Creating daily lessons".blue);
+    const cards = new Set();
 
-    const { randomCards: cards } = await selectRandomCards(
-      userId,
-      language,
-      cardsAmount
-    );
+    while (cards.size < cardsAmountToEndOfTheWeek) {
+      const { randomCards } = await selectRandomCards(
+        userId,
+        language,
+        cardsAmountToEndOfTheWeek
+      );
+
+      // Добавляем каждый элемент randomCards как уникальный элемент в Set
+      for (const card of randomCards) {
+        cards.add(card);
+      }
+    }
 
     const lessonsToCreate = [];
     if (daysRemaining === 0 || daysRemaining === -1) return [];
@@ -42,8 +51,6 @@ async function createLessons(
 
     // Create lessons for each day until Saturday
     for (let i = 0; i < daysRemaining; i++) {
-      const uniqueCards = new Set();
-
       const day = currentDate.clone().add(i, "days");
       const expiredDate = day
         .clone()
@@ -65,10 +72,13 @@ async function createLessons(
         continue; // Skip the iteration and do not create a lesson
       }
 
+      const uniqueCards = new Set();
+      const cardsIDsArray = Array.from(cards);
+
       // Select random unique cards (until the desired number is reached)
-      while (uniqueCards.size < cardsAmount) {
-        const randomIndex = Math.floor(Math.random() * cards.length);
-        const cardID = cards[randomIndex];
+      while (uniqueCards.size < cardsAmountByDay) {
+        const randomIndex = Math.floor(Math.random() * cardsIDsArray.length);
+        const cardID = cardsIDsArray[randomIndex];
 
         // Проверяем, что карточка ещё не использовалась
         if (!usedCardIDs.has(cardID)) {
