@@ -34,7 +34,7 @@ async function getViewedCardsByTopic(
       const viewedCardsCount = calculateViewedCardsCount(viewStatus,cardViewStatuses); // prettier-ignore
 
       // Calculate the percentage of viewed cards
-      const percentage = (viewedCardsCount / totalCardsCount) * 100;
+      const percentage = Math.ceil((viewedCardsCount / totalCardsCount) * 100);
 
       // Store the information in the viewedCardsByActiveTopic object
       viewedCardsByTopic[topicTitle] = {
