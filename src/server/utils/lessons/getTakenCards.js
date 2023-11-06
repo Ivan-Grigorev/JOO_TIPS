@@ -17,15 +17,12 @@ const getUserLanguagesInfo = require("./getUserLanguagesInfo");
 async function getTakenCards(userId, userLanguageObj, language) {
   let userLanguageObject = userLanguageObj;
   try {
-    const user = await User.findById(userId);
-
     if (!userLanguageObj) {
-      const userInfo = await getUserLanguagesInfo(user);
-      userLanguageObject = userInfo.userLanguageObject;
+      const user = await User.findById(userId);
+      userLanguageObject = await getUserLanguagesInfo(user).userLanguageObject;
     }
 
     // Get the array of days in the current month and week
-
     const { week, month } = getDaysInMonthAndWeek();
 
     // Create RegExp patterns from dates
@@ -35,37 +32,28 @@ async function getTakenCards(userId, userLanguageObj, language) {
     // Execute two database queries concurrently using Promise.all
     const [weekLessons, monthLessons] = await Promise.all([
       Lesson.find(
-        {
-          userId,
-          language,
-          lessonDate: { $regex: weekRegExp },
-        },
+        { userId, language, lessonDate: { $regex: weekRegExp } },
         "cards"
       ),
       Lesson.find(
-        {
-          userId,
-          language,
-          lessonDate: { $regex: monthRegExp },
-        },
+        { userId, language, lessonDate: { $regex: monthRegExp } },
         "cards"
       ),
     ]);
-
-    const noWeekTakenCards = weekLessons.length === 0;
-    const noMonthTakenCards = monthLessons.length === 0;
-
-    if (noWeekTakenCards && noMonthTakenCards) {
-      return { all: [], week: [], month: [] };
-    }
 
     // Extract card references from the query results
     const allTakenCardsIDs = getAllTakenCards(userLanguageObject.topicStatuses);
     const weekTakenCardsIDs = new Set();
     const monthTakenCardsIDs = new Set();
 
-    // console.log("All taken cards:", allTakenCardsIDs);
     console.log("All taken cards count:".yellow, allTakenCardsIDs.size);
+
+    const noWeekTakenCards = weekLessons.length === 0;
+    const noMonthTakenCards = monthLessons.length === 0;
+
+    if (noWeekTakenCards && noMonthTakenCards) {
+      return { all: [...allTakenCardsIDs], week: [], month: [] };
+    }
 
     weekLessons.forEach((lesson) => {
       lesson.cards.forEach((cardId) => {

@@ -2,7 +2,6 @@
  * Randomly selects cards from a list based on their probabilities and adds them to the result set.
  *
  * @param {object[]} findCards - An array of cards to select from.
- * @param {Set} findedCards - A Set of found card identifiers.
  * @param {string[]} allTakenCards - An array of card identifiers that the user has already taken.
  * @param {number[]} cardProbabilities - An array of card selection probabilities.
  * @param {Set} cardSet - A Set of unique card identifiers.
@@ -11,7 +10,6 @@
  */
 function selectRandomCardsByProbability(
   findCards,
-  findedCards,
   allTakenCards,
   cardProbabilities,
   cardSet,
@@ -25,9 +23,10 @@ function selectRandomCardsByProbability(
     // Check if the card is unique
     const isUniqueCard = !allTakenCards.includes(cardIdString) && !cardSet.has(cardIdString); // prettier-ignore
 
+    // console.log("isUniqueCard - cardIdString".red, isUniqueCard, cardIdString);
+
     if (isUniqueCard && Math.random() <= cardProbabilities[index]) {
       cardSet.add(cardIdString);
-      findedCards.add(cardIdString);
 
       selectedTopics.add(topicObj.title);
     }

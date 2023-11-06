@@ -23,13 +23,11 @@ async function getCardsByActiveTopics(
 ) {
   try {
     const cardSet = new Set(); // Create a set for unique cards
-    const findedCards = new Set();
     const selectedTopics = new Set(); // Create a set to store selected topics
 
     // console.log("Total active topics:".yellow, activeTopics.length);
     for (let i = 0; i < activeTopics.length; i++) {
       const topicObj = activeTopics[i];
-
       if (!topicObj) continue;
 
       const probability = await setTopicProbability(i);
@@ -45,7 +43,6 @@ async function getCardsByActiveTopics(
       // Randomly select cards based on their probabilities
       selectRandomCardsByProbability(
         findCards,
-        findedCards,
         allTakenCards,
         cardProbabilities,
         cardSet,
@@ -71,7 +68,6 @@ async function getCardsByActiveTopics(
       // Randomly select cards based on their probabilities
       selectRandomCardsByProbability(
         findCards,
-        findedCards,
         allTakenCards,
         cardProbabilities,
         cardSet,
@@ -80,10 +76,12 @@ async function getCardsByActiveTopics(
       );
     }
 
-    console.log("Total number of found unique cards:".yellow, findedCards.size);
-    // console.log("Selected topics:".yellow, selectedTopics);
+    console.log("Total number of found unique cards:".yellow, cardSet.size);
+    // console.log("cardSet:".yellow, cardSet);
 
-    return { cardIDs: [...cardSet], findedCards: [...findedCards] };
+    return {
+      cardIDs: [...cardSet],
+    };
   } catch (e) {
     console.error("Error getting cards by user's active topics".red, e);
     throw e; // Re-throw the error to indicate a problem with fetching or processing the cards
