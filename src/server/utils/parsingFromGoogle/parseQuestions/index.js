@@ -1,12 +1,10 @@
 const { google } = require("googleapis");
-const creds = require("./сredentials.json"); // Загрузка учетных данных Google API из файла credentials.json
-const Card = require("../../models/Card/Card");
-const Question = require("../../models/Question/Question");
-const Answer = require("../../models/Answer/Answer");
-const mongoDB = require("../../db");
-const logErrorToFile = require("./logErrorToFile");
-const winston = require("winston");
-
+const creds = require("../сredentials.json"); // Загрузка учетных данных Google API из файла credentials.json
+const Card = require("../../../models/Card/Card");
+const Question = require("../../../models/Question/Question");
+const Answer = require("../../../models/Answer/Answer");
+const mongoDB = require("../../../db");
+const logErrorToFile = require("../logErrorToFile");
 require("colors");
 
 const client = new google.auth.JWT(
@@ -116,10 +114,7 @@ async function getDataFromGoogleDocs(language, docNumber) {
 async function parseAndSaveData() {
   await mongoDB(); // подключились к базе данных
 
-  const languages = [
-    "javascript",
-    "python",
-  ];
+  const languages = ["javascript", "python"];
 
   for (const language of languages) {
     for (const docNumber in questionDocs[language]) {
