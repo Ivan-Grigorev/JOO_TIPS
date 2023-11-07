@@ -122,10 +122,11 @@ async function parseAndSaveTopics() {
     );
     const uniqueTopics = new Set();
 
-    let countOfRequests = 0;
+    let countOfRequests = 0; // устанавливаю лимит на обращения к google
     for (const docNumber in questionDocs[language]) {
       const pages = await getDataFromGoogleDocs(language, docNumber);
 
+      // если лимит достигнут - делаем паузу в 15 секунд и сбрасываем
       if (countOfRequests === 10) {
         console.log("Sleep for 15 seconds".blue);
         await new Promise((resolve) => setTimeout(resolve, 15000));
@@ -140,12 +141,8 @@ async function parseAndSaveTopics() {
           rowNumber++;
         }
 
-        //   console.log(`Programming language - ${language}\nRange: ${sheet.title}\n`.yellow); // prettier-ignore
-
         if (uniqueTopics.has(topic)) {
-          console.log(
-            `The "${topic}" topic is not unique.\nRange: ${sheet.title}`.red
-          );
+          console.log(`The "${topic}" topic is not unique.\nRange: ${sheet.title}`.red); // prettier-ignore
           continue;
         }
 
@@ -155,7 +152,7 @@ async function parseAndSaveTopics() {
         console.log(`Topic "${topic}" was pushed to language topics list`.green); // prettier-ignore
 
         uniqueTopics.add(topic);
-        countOfRequests += 1;
+        countOfRequests += 1; // увеличиваем количество обращений по лимиту
       }
     }
   }
