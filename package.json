@@ -74,7 +74,8 @@
     "start": "react-scripts start",
     "dev-server": "nodemon src/server/server.js",
     "lessons": "node src/server/utils/createTestLessons/",
-    "parseQuestions": "node src/server/utils/parseQuestions/index.js",
+    "parseQuestions": "node src/server/utils/parsingFromGoogle/parseQuestions/index.js",
+    "parseTopics": "node src/server/utils/parsingFromGoogle/parseTopics/parseTopics.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
