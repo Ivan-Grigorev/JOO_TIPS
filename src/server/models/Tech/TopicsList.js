@@ -9,15 +9,11 @@ const schema = new mongoose.Schema(
     topics: [
       {
         topicTitle: { type: String, required: true },
-        _id: {
-          type: mongoose.Schema.Types.ObjectId, // Указываем тип ObjectId
-          default: mongoose.Types.ObjectId, // Устанавливаем значение по умолчанию (новый ObjectId)
-        },
       },
     ],
   },
 
-  { collection: "topics_list" } // Указание желаемого имени коллекции
+  { collection: "topics_list", versionKey: false } // Указание желаемого имени коллекции
 );
 
 const TopicsList = mongoose.model("topics_list", schema);
