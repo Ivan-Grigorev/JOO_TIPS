@@ -114,7 +114,7 @@ async function parseAndSaveTopics() {
   await mongoDB(); // подключились к базе данных
   const languages = [
     // "javascript",
-    "python",
+    "python", // в питоне темы дублируются в каждые 2 листа, т.к. вопросы разбиты по 50 * 2 на тему.
   ];
 
   for (const language of languages) {
