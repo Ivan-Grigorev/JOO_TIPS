@@ -35,9 +35,9 @@ async function getUserLanguagesInfo(user) {
 
     // Retrieve the details of active topics by their references
     const activeTopics = activeTopicRefs.map((topicObject) => {
-      const foundTopic = topicsList.find(
-        (topic) => topicObject.ref.toString() === topic._id.toString()
-      );
+      const foundTopic = topicsList.find((topic) => {
+        return topicObject.ref.toString() === topic._id.toString();
+      });
 
       return {
         id: foundTopic.id,
