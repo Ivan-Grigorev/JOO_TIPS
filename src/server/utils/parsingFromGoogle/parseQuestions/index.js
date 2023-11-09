@@ -5,6 +5,7 @@ const Question = require("../../../models/Question/Question");
 const Answer = require("../../../models/Answer/Answer");
 const mongoDB = require("../../../db");
 const logErrorToFile = require("../logErrorToFile");
+const parseRow = require("../parseRow");
 require("colors");
 
 const client = new google.auth.JWT(
@@ -201,9 +202,41 @@ async function parseAndSaveData() {
             });
 
             const answerDifficult = parsedData.answerDifficult;
-            const unknownDifficult = answerDifficult !== "easy" && answerDifficult !== "medium" && answerDifficult !== "difficult"; // prettier-ignore
 
-            if (answerDifficult === "easy") {
+            switch (answerDifficult) {
+              case "easy":
+                // console.log("Добавляю easy ответ");
+                question.difficultyLevels.easy.addToSet(answer._id);
+                break;
+
+              case "medium":
+                // console.log("Добавляю medium ответ");
+                question.difficultyLevels.medium.addToSet(answer._id);
+                break;
+
+              case "difficult":
+                // console.log("Добавляю difficult ответ");
+                question.difficultyLevels.hard.addToSet(answer._id);
+                break;
+
+              default: // неизвестная сложность
+                const errorText = `answerDifficult doesn't equal easy, medium or difficult\n\nparsedData.answerDifficult - - - > ${parsedData.answerDifficult}`;
+
+                console.log(`${errorText}`.red); // prettier-ignore
+                console.log(`parsedData.answerDifficult - ${parsedData.answerDifficult}`.red); // prettier-ignore
+
+                const errorLog = `${language}\n Range: ${sheetTitle}\n Cell: ${i}\nError: ${errorText}  `;
+
+                logErrorToFile(language, sheetTitle, errorLog); //* Запись ошибки в файл
+
+                continue;
+            }
+
+            //!
+            /**
+              const unknownDifficult = answerDifficult !== "easy" && answerDifficult !== "medium" && answerDifficult !== "difficult"; // prettier-ignore
+             * 
+             *  if (answerDifficult === "easy") {
               // console.log("Добавляю easy ответ");
               question.difficultyLevels.easy.addToSet(answer._id);
             } else if (answerDifficult === "medium") {
@@ -224,6 +257,7 @@ async function parseAndSaveData() {
 
               continue;
             } // неизвестная сложность
+             */
 
             // console.log("Добавляю вопрос в карту");
             card.questions.addToSet(question._id); //* привязываю вопрос к карточке
@@ -247,31 +281,6 @@ async function parseAndSaveData() {
   console.log("Data parsed and saved.".green);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
-}
-
-function parseRow(row) {
-  try {
-    const [language, topic, text, example, questionText, answerText] = row;
-
-    // Парсинг answerText
-    const answerMatch = answerText.match(/\[(.*?)\]/);
-    const answerDifficult = (answerMatch || [])[1]?.toLowerCase();
-    const isCorrect = answerText.includes("[CORRECT]");
-    const optionText = answerText.match(/\[.*?\] \[.*?\] (.*)/)[1];
-
-    return {
-      language,
-      topic,
-      text,
-      example,
-      questionText,
-      answerDifficult,
-      isCorrect,
-      optionText,
-    };
-  } catch (error) {
-    console.error(`Error parsing row: ${error}`.red);
-  }
 }
 
 // Вызов функции для разбора данных
