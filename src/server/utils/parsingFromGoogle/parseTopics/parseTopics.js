@@ -3,6 +3,7 @@ const creds = require("../сredentials.json"); // Загрузка учетны�
 const mongoDB = require("../../../db");
 const logErrorToFile = require("../logErrorToFile");
 const TopicsList = require("../../../models/Tech/TopicsList");
+const parseRow = require("../parseRow");
 require("colors");
 
 const client = new google.auth.JWT(
@@ -112,13 +113,14 @@ async function getDataFromGoogleDocs(language, docNumber) {
 async function parseAndSaveTopics() {
   await mongoDB(); // подключились к базе данных
   const languages = [
-    "javascript",
-    //    "python"
+    // "javascript",
+    "python",
   ];
 
   for (const language of languages) {
     const languageTopicList = await TopicsList.findById(
-      "65187c8b450db5dd3ab77cb5"
+      // "65187c8b450db5dd3ab77cb5" // javascript topics id
+      "654d4ead2b975b05379e868a" // python topics id
     );
     const uniqueTopics = new Set();
 
@@ -160,31 +162,6 @@ async function parseAndSaveTopics() {
   console.log("\nTopics was parsed and saved.".yellow);
   console.log("Disconnected from the DB".yellow);
   process.exit(1); // Exit the application with a non-zero status code
-}
-
-function parseRow(row) {
-  try {
-    const [language, topic, text, example, questionText, answerText] = row;
-
-    // Парсинг answerText
-    const answerMatch = answerText.match(/\[(.*?)\]/);
-    const answerDifficult = (answerMatch || [])[1]?.toLowerCase();
-    const isCorrect = answerText.includes("[CORRECT]");
-    const optionText = answerText.match(/\[.*?\] \[.*?\] (.*)/)[1];
-
-    return {
-      language,
-      topic,
-      text,
-      example,
-      questionText,
-      answerDifficult,
-      isCorrect,
-      optionText,
-    };
-  } catch (error) {
-    console.error(`Error parsing row: ${error}`.red);
-  }
 }
 
 // Вызов функции для разбора данных
