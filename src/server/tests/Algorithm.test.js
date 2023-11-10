@@ -4,9 +4,7 @@ const { mongoose } = require("mongoose");
 const mongoDB = require("../db.js");
 const { createScheduleToEndOfWeek } = require("../middlewares/lessons");
 
-beforeAll(async () => {
-  await mongoDB();
-});
+beforeAll(async () => await mongoDB());
 
 describe("createScheduleToEndOfWeek middleware (algorithm)", () => {
   it("Should create the lessons for current week", async () => {
@@ -33,6 +31,4 @@ describe("createScheduleToEndOfWeek middleware (algorithm)", () => {
   });
 });
 
-afterAll(async () => {
-  await mongoose.disconnect();
-});
+afterAll(async () => await mongoose.disconnect());
