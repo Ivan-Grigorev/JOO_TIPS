@@ -164,7 +164,7 @@ const isScheduleAlreadyExists = async (req, res, next) => {
  * @param {boolean} req.scheduleIsExists - Boolean value set if schedule is already exist.If true - skip this middleware through next()
  * @param {Function} next - Express next middleware function.
  *
- * @returns {void}
+ * @returns {Promise<void>}
  */
 async function createScheduleToEndOfWeek(req, res, next) {
   const userId = req.user.id;
