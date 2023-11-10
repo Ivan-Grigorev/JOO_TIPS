@@ -2,7 +2,7 @@ require("moment-timezone");
 const { mongoose } = require("mongoose");
 
 const mongoDB = require("../db.js");
-const { createScheduleToEndOfWeek } = require("../middlewares/lessons");
+const { createScheduleToEndOfWeek } = require("../middlewares/lessons.js");
 
 beforeAll(async () => await mongoDB());
 
