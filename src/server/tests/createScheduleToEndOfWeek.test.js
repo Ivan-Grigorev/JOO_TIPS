@@ -1,17 +1,58 @@
-require("moment-timezone");
+const moment = require("moment");
 const { mongoose } = require("mongoose");
+require("moment-timezone");
 
 const mongoDB = require("../db.js");
 const { createScheduleToEndOfWeek } = require("../middlewares/lessons.js");
 const createLessons = require("../utils/lessons/createLessons.js");
 const getTechProps = require("../utils/lessons/getTechProps/getTechProps.js");
 const getCurrentDate = require("../utils/lessons/getCurrentDate.js");
+const User = require("../models/user/user.js");
 
 beforeAll(async () => await mongoDB());
 
 describe("createScheduleToEndOfWeek middleware", () => {
-  const userId = "654d5389af1719bc76520019";
-  const language = "javascript";
+  var userId;
+  var language;
+
+  it("Should create new user for test", async () => {
+    const newUser = await User.create({
+      name: "testUser",
+      email: "email@gmail.com",
+      password: "hashedPassword",
+      country: "not identified",
+      activeLanguage: "javascript",
+      profile: {
+        about: null,
+        username: null,
+        interfaceLanguage: "English",
+        notifications: true,
+      },
+      subscription: {
+        type: "Common",
+        isPremium: false,
+        expired: {
+          startDate: null,
+          endDate: null,
+        },
+      },
+      deviceInfo: {
+        os: "req.user.deviceInfo.os",
+        device: "req.user.deviceInfo.device",
+        browser: "req.user.deviceInfo.browser",
+      },
+      IP: {
+        firstUserIP: "userIP",
+        lastUserIP: "userIP",
+      },
+      registrationDate: moment().format("DD.MM.YYYY"),
+    });
+
+    expect(newUser).toBeDefined();
+
+    userId = newUser._id.toString();
+    language = newUser.activeLanguage;
+  });
 
   // Получаем текущую дату и количество дней до воскресенья с помощью утилиты getCurrentDate
   const {
@@ -114,6 +155,11 @@ describe("createScheduleToEndOfWeek middleware", () => {
     // Проверяем, что создано правильное количество уроков
     expect(lessonToCreate).toBeDefined();
   });
+
+  // it("Should delete test user using userId", async () => {
+  //   const deletedUser = await User.findByIdAndDelete(userId);
+  //   expect(deletedUser).toBeDefined();
+  // });
 });
 
 // Отключаемся от MongoDB после завершения всех тестов
