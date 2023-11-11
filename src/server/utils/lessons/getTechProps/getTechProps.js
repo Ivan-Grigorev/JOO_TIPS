@@ -10,9 +10,18 @@ const getTopicsToChooseAmount = require("./utils/getTopicsToChooseAmount");
  * @function getTechProps
  * @param {string} language - The language for which to retrieve technical properties.
  * @returns {Promise<{
- *   dayLesson: object,
- *   weekLesson: object,
- *   monthLesson: object,
+ *   dayLesson: {
+ *    duration: number,
+ *    cardsAmount: number,
+ * },
+ *   weekLesson:  {
+ *    duration: number,
+ *    cardsAmount: number,
+ * },
+ *   monthLesson:  {
+ *    duration: number,
+ *    cardsAmount: number,
+ * },
  *   topics: string[],
  *   topicsToChoose: number,
  *   chances: object,
