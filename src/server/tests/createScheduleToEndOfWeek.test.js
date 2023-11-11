@@ -96,6 +96,24 @@ describe("createScheduleToEndOfWeek middleware", () => {
     // Проверяем, что создано правильное количество уроков
     expect(lessonsToCreate).toBeDefined();
   });
+
+  it("Should create month lesson", async () => {
+    // Получаем технические свойства с использованием утилиты getTechProps
+    const techProps = await getTechProps(language);
+
+    // Создаем урок на воскресенье
+    const lessonsToCreate = await createLessons.monthly(
+      userId,
+      language,
+      techProps.monthLesson.cardsAmount,
+      lastDayOfMonth, // test current date
+      expiredDate,
+      techProps.monthLesson.lessonDuration
+    );
+
+    // Проверяем, что создано правильное количество уроков
+    expect(lessonsToCreate).toBeDefined();
+  });
 });
 
 // Отключаемся от MongoDB после завершения всех тестов
