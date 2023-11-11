@@ -1,19 +1,28 @@
 const moment = require("moment");
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 require("moment-timezone");
+
+const User = require("../models/user/user.js");
 
 const mongoDB = require("../db.js");
 const { createScheduleToEndOfWeek } = require("../middlewares/lessons.js");
 const createLessons = require("../utils/lessons/createLessons.js");
+const languages = require("../controllers/languages/languages.js");
+
 const getTechProps = require("../utils/lessons/getTechProps/getTechProps.js");
 const getCurrentDate = require("../utils/lessons/getCurrentDate.js");
-const User = require("../models/user/user.js");
 
 beforeAll(async () => await mongoDB());
+var testUserID;
 
 describe("createScheduleToEndOfWeek middleware", () => {
   var userId;
   var language;
+
+  // Получаем текущую дату и количество дней до воскресенья с помощью утилиты getCurrentDate
+  const date = getCurrentDate();
+
+  const next = jest.fn(); // Создаем mock функцию для next()
 
   it("Should create new user for test", async () => {
     const newUser = await User.create({
@@ -21,7 +30,7 @@ describe("createScheduleToEndOfWeek middleware", () => {
       email: "email@gmail.com",
       password: "hashedPassword",
       country: "not identified",
-      activeLanguage: "javascript",
+      activeLanguage: null, // "javascript",
       profile: {
         about: null,
         username: null,
@@ -51,17 +60,25 @@ describe("createScheduleToEndOfWeek middleware", () => {
     expect(newUser).toBeDefined();
 
     userId = newUser._id.toString();
-    language = newUser.activeLanguage;
+    testUserID = newUser._id.toString();
   });
 
-  // Получаем текущую дату и количество дней до воскресенья с помощью утилиты getCurrentDate
-  const {
-    currentDate,
-    lastDayOfMonth,
-    firstSundayOfMonth,
-    daysUntilSunday,
-    expiredDate,
-  } = getCurrentDate();
+  it("Should add language and set him as active language", async () => {
+    const req = { body: { language: "javascript" }, user: { id: userId } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await Promise.all([languages.add(req, res), languages.setActive(req, res)]);
+
+    const user = await User.findById(userId);
+
+    const languageObjWasCreated = user.languages.length === 1;
+    const activeLanguageIsExisting = user.activeLanguage === req.body.language;
+
+    expect(languageObjWasCreated).toBe(true);
+    expect(activeLanguageIsExisting).toBe(true);
+
+    language = user.activeLanguage;
+  });
 
   it("Should create the lessons for the current week", async () => {
     // Создаем объект req, который бы обычно передавался в middleware
@@ -71,7 +88,6 @@ describe("createScheduleToEndOfWeek middleware", () => {
       scheduleIsExists: false,
     };
     const res = {};
-    const next = jest.fn(); // Создаем mock функцию для next()
 
     // Вызываем middleware для создания расписания
     await createScheduleToEndOfWeek(req, res, next);
@@ -86,12 +102,12 @@ describe("createScheduleToEndOfWeek middleware", () => {
 
     // Создаем уроки для каждого дня до воскресенья
     const lessonsToCreate = await createLessons.daily(
-      daysUntilSunday,
-      currentDate,
+      date.daysUntilSunday,
+      date.currentDate,
       userId,
       language,
       techProps.dayLesson.cardsAmount,
-      techProps.dayLesson.cardsAmount * daysUntilSunday,
+      techProps.dayLesson.cardsAmount * date.daysUntilSunday,
       techProps.dayLesson.duration
     );
 
@@ -107,15 +123,15 @@ describe("createScheduleToEndOfWeek middleware", () => {
         lesson.endTime === null &&
         lesson.status === null &&
         lesson.lessonDate ===
-          currentDate
+          date.currentDate
             .set({ hour: 3, minute: 0, second: 0 })
             .format("DD.MM.YYYY HH:mm") &&
         lesson.lessonDuration === techProps.dayLesson.duration &&
-        lesson.expired === expiredDate
+        lesson.expired === date.expiredDate
       );
     });
 
-    expect(lessonsToCreate).toHaveLength(daysUntilSunday); // Проверяем, что создано правильное количество уроков
+    expect(lessonsToCreate).toHaveLength(date.daysUntilSunday); // Проверяем, что создано правильное количество уроков
     expect(allLessonsHasFiveCardsInside).toBe(true);
     expect(allFieldsCorrect).toBe(true);
   });
@@ -129,8 +145,8 @@ describe("createScheduleToEndOfWeek middleware", () => {
       userId,
       language,
       techProps.weekLesson.cardsAmount,
-      firstSundayOfMonth, // test current date
-      expiredDate,
+      date.firstSundayOfMonth, // test current date
+      date.expiredDate,
       techProps.weekLesson.lessonDuration
     );
 
@@ -147,8 +163,8 @@ describe("createScheduleToEndOfWeek middleware", () => {
       userId,
       language,
       techProps.monthLesson.cardsAmount,
-      lastDayOfMonth, // test current date
-      expiredDate,
+      date.lastDayOfMonth, // test current date
+      date.expiredDate,
       techProps.monthLesson.lessonDuration
     );
 
@@ -162,5 +178,12 @@ describe("createScheduleToEndOfWeek middleware", () => {
   // });
 });
 
-// Отключаемся от MongoDB после завершения всех тестов
-afterAll(async () => await mongoose.disconnect());
+afterAll(async () => {
+  // Удаляем созданного тестового пользователя
+  await User.findByIdAndDelete(testUserID)
+    .then(() => console.log("Test user was deleted successfully".green))
+    .catch((e) => console.error(`Error deleting test user: ${e}`.red));
+
+  // Отключаемся от MongoDB после завершения всех тестов
+  await mongoose.disconnect();
+});
