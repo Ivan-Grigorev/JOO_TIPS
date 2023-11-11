@@ -14,7 +14,13 @@ describe("createScheduleToEndOfWeek middleware", () => {
   const language = "javascript";
 
   // Получаем текущую дату и количество дней до воскресенья с помощью утилиты getCurrentDate
-  const { currentDate, daysUntilSunday } = getCurrentDate();
+  const {
+    currentDate,
+    lastDayOfMonth,
+    firstSundayOfMonth,
+    daysUntilSunday,
+    expiredDate,
+  } = getCurrentDate();
 
   it("Should create the lessons for the current week", async () => {
     // Создаем объект req, который бы обычно передавался в middleware
@@ -33,7 +39,7 @@ describe("createScheduleToEndOfWeek middleware", () => {
     expect(next).toHaveBeenCalled();
   });
 
-  it("Should create lessons amount depending on the date", async () => {
+  it("Should create daily lessons amount depending on the date", async () => {
     // Получаем технические свойства с использованием утилиты getTechProps
     const techProps = await getTechProps(language);
 
@@ -48,8 +54,47 @@ describe("createScheduleToEndOfWeek middleware", () => {
       techProps.dayLesson.duration
     );
 
+    const allLessonsHasFiveCardsInside = lessonsToCreate.every((lesson) => {
+      return lesson.cards.length === 5;
+    });
+
+    const allFieldsCorrect = lessonsToCreate.every((lesson) => {
+      return (
+        lesson.userId === userId &&
+        lesson.language === language &&
+        lesson.startTime === null &&
+        lesson.endTime === null &&
+        lesson.status === null &&
+        lesson.lessonDate ===
+          currentDate
+            .set({ hour: 3, minute: 0, second: 0 })
+            .format("DD.MM.YYYY HH:mm") &&
+        lesson.lessonDuration === techProps.dayLesson.duration &&
+        lesson.expired === expiredDate
+      );
+    });
+
+    expect(lessonsToCreate).toHaveLength(daysUntilSunday); // Проверяем, что создано правильное количество уроков
+    expect(allLessonsHasFiveCardsInside).toBe(true);
+    expect(allFieldsCorrect).toBe(true);
+  });
+
+  it("Should create week lesson", async () => {
+    // Получаем технические свойства с использованием утилиты getTechProps
+    const techProps = await getTechProps(language);
+
+    // Создаем урок на воскресенье
+    const lessonsToCreate = await createLessons.weekly(
+      userId,
+      language,
+      techProps.weekLesson.cardsAmount,
+      firstSundayOfMonth, // test current date
+      expiredDate,
+      techProps.weekLesson.lessonDuration
+    );
+
     // Проверяем, что создано правильное количество уроков
-    expect(lessonsToCreate).toHaveLength(daysUntilSunday);
+    expect(lessonsToCreate).toBeDefined();
   });
 });
 
