@@ -84,7 +84,7 @@ describe("createScheduleToEndOfWeek middleware", () => {
     const techProps = await getTechProps(language);
 
     // Создаем урок на воскресенье
-    const lessonsToCreate = await createLessons.weekly(
+    const lessonToCreate = await createLessons.weekly(
       userId,
       language,
       techProps.weekLesson.cardsAmount,
@@ -94,7 +94,7 @@ describe("createScheduleToEndOfWeek middleware", () => {
     );
 
     // Проверяем, что создано правильное количество уроков
-    expect(lessonsToCreate).toBeDefined();
+    expect(lessonToCreate).toBeDefined();
   });
 
   it("Should create month lesson", async () => {
@@ -102,7 +102,7 @@ describe("createScheduleToEndOfWeek middleware", () => {
     const techProps = await getTechProps(language);
 
     // Создаем урок на воскресенье
-    const lessonsToCreate = await createLessons.monthly(
+    const lessonToCreate = await createLessons.monthly(
       userId,
       language,
       techProps.monthLesson.cardsAmount,
@@ -112,7 +112,7 @@ describe("createScheduleToEndOfWeek middleware", () => {
     );
 
     // Проверяем, что создано правильное количество уроков
-    expect(lessonsToCreate).toBeDefined();
+    expect(lessonToCreate).toBeDefined();
   });
 });
 
