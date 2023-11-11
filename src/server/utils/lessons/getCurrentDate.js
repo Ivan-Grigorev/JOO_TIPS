@@ -4,7 +4,7 @@ const moment = require("moment");
  * @function getCurrentDate
  * @description Retrieves and formats the current date along with additional date-related information.
  *
- * @returns {Object} An object containing the following properties:
+ * @returns {{currentDate: number, formattedCurrentDate: string, regexpCurrentDate: string, currentDayOfWeek: number, daysUntilSunday: number, expiredDate: string,  lastDayOfMonth: string, firstSundayOfMonth: string  }} An object containing the following properties:
  *   - currentDate (moment): The current date as a moment.js object.
  *   - formattedCurrentDatetime (string): The current date in the "DD.MM.YYYY HH:mm" format.
  *   - currentDayOfWeek (number): The current day of the week (1 for Monday, 2 for Tuesday, ..., 7 for Sunday).
@@ -23,6 +23,17 @@ function getCurrentDate() {
     .set({ hour: 3, minute: 0, second: 0 })
     .format("DD.MM.YYYY HH:mm");
 
+  // for tests
+  const lastDayOfMonth = currentDate
+    .clone()
+    .endOf("month")
+    .format("DD.MM.YYYY HH:mm"); // последний день месяца
+  const firstSundayOfMonth = currentDate
+    .clone()
+    .startOf("month")
+    .day("Sunday")
+    .format("DD.MM.YYYY HH:mm"); // первое воскресенье месяца
+
   // console.log(`moment() current date - ${currentDate}`.yellow);
   // console.log(`Current datetime  - ${formattedCurrentDatetime}`.yellow);
   // console.log(`Regexp current date  - ${regexpCurrentDate}`.yellow);
@@ -37,6 +48,8 @@ function getCurrentDate() {
     currentDayOfWeek,
     daysUntilSunday,
     expiredDate,
+    lastDayOfMonth,
+    firstSundayOfMonth,
   };
 }
 

@@ -83,7 +83,7 @@ async function getTakenCards(userId, userLanguageObj, language) {
 function getAllTakenCards(topicList) {
   const takenCards = new Set(); // Создаем массив для хранения объектов с cardRef
 
-  topicList.forEach((obj) => {
+  topicList?.forEach((obj) => {
     for (const viewArray in obj.cardViewStatus) {
       const ownProperty = obj.cardViewStatus.hasOwnProperty(viewArray);
       if (ownProperty) {
