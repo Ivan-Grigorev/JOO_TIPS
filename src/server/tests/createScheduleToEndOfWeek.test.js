@@ -11,6 +11,7 @@ const languages = require("../controllers/languages/languages.js");
 
 const getTechProps = require("../utils/lessons/getTechProps/getTechProps.js");
 const getCurrentDate = require("../utils/lessons/getCurrentDate.js");
+const Lesson = require("../models/lessons/lessons.js");
 
 beforeAll(async () => await mongoDB());
 var testUserID;
@@ -189,10 +190,15 @@ describe("createScheduleToEndOfWeek middleware", () => {
 });
 
 afterAll(async () => {
-  // Удаляем созданного тестового пользователя
-  await User.findByIdAndDelete(testUserID)
-    .then(() => console.log("Test user was deleted successfully".green))
-    .catch((e) => console.error(`Error deleting test user: ${e}`.red));
+  // Удаляем созданного тестового пользователя и тестовые уроки.
+  await Promise.all([
+    User.findByIdAndDelete(testUserID)
+      .then(() => console.log("Test user was deleted successfully".green))
+      .catch((e) => console.error(`Error deleting test user: ${e}`.red)),
+    Lesson.deleteMany({ userId: testUserID })
+      .then(() => console.log("Test lessons was deleted successfully".green))
+      .catch((e) => console.error(`Error deleting test lessons: ${e}`.red)),
+  ]);
 
   // Отключаемся от MongoDB после завершения всех тестов
   await mongoose.disconnect();
