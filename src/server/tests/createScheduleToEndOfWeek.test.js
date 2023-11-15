@@ -115,19 +115,34 @@ describe("createScheduleToEndOfWeek middleware", () => {
       return lesson.cards.length === 5;
     });
 
-    const allFieldsCorrect = lessonsToCreate.every((lesson) => {
+    const allFieldsCorrect = lessonsToCreate.every((lesson, i) => {
+      const lessonDate = date.currentDate
+        .clone()
+        .add(i, "days")
+        .set({ hour: 3, minute: 0, second: 0 })
+        .format("DD.MM.YYYY HH:mm");
+
+      const expiredDate = date.currentDate
+        .clone()
+        .add(i + 1, "days")
+        .set({ hour: 3, minute: 0, second: 0 })
+        .format("DD.MM.YYYY HH:mm");
+
+      lesson.userId !== userId && console.error("User id is not match".red);
+      lesson.language !== language && console.error("Lesson language is not match".red); // prettier-ignore
+      lesson.lessonDate !== lessonDate && console.error("Lesson date is not match".red); // prettier-ignore
+      lesson.lessonDuration !== techProps.dayLesson.duration && console.error("lesson Duration  is not match".red); // prettier-ignore
+      lesson.expired !== expiredDate && console.error("expired time is not match".red); // prettier-ignore
+
       return (
         lesson.userId === userId &&
         lesson.language === language &&
         lesson.startTime === null &&
         lesson.endTime === null &&
         lesson.status === null &&
-        lesson.lessonDate ===
-          date.currentDate
-            .set({ hour: 3, minute: 0, second: 0 })
-            .format("DD.MM.YYYY HH:mm") &&
+        lesson.lessonDate === lessonDate &&
         lesson.lessonDuration === techProps.dayLesson.duration &&
-        lesson.expired === date.expiredDate
+        lesson.expired === expiredDate
       );
     });
 
@@ -171,11 +186,6 @@ describe("createScheduleToEndOfWeek middleware", () => {
     // Проверяем, что создано правильное количество уроков
     expect(lessonToCreate).toBeDefined();
   });
-
-  // it("Should delete test user using userId", async () => {
-  //   const deletedUser = await User.findByIdAndDelete(userId);
-  //   expect(deletedUser).toBeDefined();
-  // });
 });
 
 afterAll(async () => {
