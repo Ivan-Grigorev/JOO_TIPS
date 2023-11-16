@@ -70,6 +70,7 @@
     "@babel/core": "^7.23.3",
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
     "babel-jest": "^29.7.0",
     "colors": "^1.4.0",
     "jest": "^27.5.1",
@@ -86,13 +87,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:server": "jest --testPathPattern=src/server/tests"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
+    "test:server": "jest --testPathPattern=src/server/tests",
+    "jest": "jest"
   },
   "eslintConfig": {
     "extends": [
