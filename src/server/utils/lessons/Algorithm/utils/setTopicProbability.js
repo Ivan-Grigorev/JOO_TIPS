@@ -44,7 +44,7 @@ async function setTopicProbability(i, status) {
 
   const topicNumber = i ? i + 1 : -1;
 
-  console.log(`Topic №${topicNumber} probability:`.red, probability + "%");
+  // console.log(`Topic №${topicNumber} probability:`.red, probability + "%");
 
   return probability;
 }

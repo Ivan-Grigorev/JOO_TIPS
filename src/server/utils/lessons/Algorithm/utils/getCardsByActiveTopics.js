@@ -78,7 +78,7 @@ async function getCardsByActiveTopics(
       );
     }
 
-    console.log("Total amount of found unique cards:".yellow, cardSet.size);
+    // console.log("Total amount of found unique cards:".yellow, cardSet.size);
     // console.log("cardSet:".yellow, cardSet);
 
     return { cardIDs: [...cardSet] };
