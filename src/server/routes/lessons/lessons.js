@@ -2,6 +2,8 @@ const express = require("express");
 const { auth } = require("../../middlewares/auth.js");
 const middlewares = require("../../middlewares/lessons.js");
 const controllers = require("../../controllers/lessons/lessons.js");
+const createTestScheduleToEndOfWeek = require("../../tests/utils/createTestScheduleToEndOfWeek.js");
+const TESTisScheduleAlreadyExists = require("../../tests/utils/TESTisScheduleAlreadyExists.js");
 
 const router = express.Router();
 
@@ -44,13 +46,16 @@ router.post(
 );
 
 // ! test route
-router.post(
-  "/finishAll",
+router.get(
+  "/testAlgorithm",
   auth,
-  middlewares.isScheduleAlreadyExists,
+  middlewares.isActiveLanguageExists,
+  TESTisScheduleAlreadyExists,
   middlewares.shouldChangeTopicStatus,
-  middlewares.createScheduleToEndOfWeek,
-  controllers.finishAllLessons
+  createTestScheduleToEndOfWeek,
+  controllers.getLessons
 );
+
+router.post("/finishAll", auth, controllers.finishAllLessons);
 
 module.exports = router;
