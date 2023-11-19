@@ -3,10 +3,20 @@ const app = require("../app.js"); // Подключите ваше Express-пр�
 const moment = require("moment");
 const mongoDB = require("../db.js");
 const User = require("../models/user/user.js");
+// moment config
+moment.tz.setDefault("Europe/Kiev");
+moment.updateLocale("en", {
+  week: {
+    dow: 1, // Начало недели - понедельник (1)
+  },
+  // weekEnd: 6, // Конец недели - суббота (6)
+});
+
+jest.setTimeout(999999999);
 
 describe("Test algorithm with 2 test users and logging topics", () => {
-  var userToken;
-  let startDate;
+  const language = "javascript";
+  let userToken;
 
   const userData = {
     name: "testUser-topics",
@@ -34,44 +44,94 @@ describe("Test algorithm with 2 test users and logging topics", () => {
   });
 
   it("Should add language and active language", async () => {
-    await Promise.all([
+    const requests = await Promise.all([
       request(app)
         .post("/languages/add")
-        .send({ language: "javascript" })
+        .send({ language })
         .set("Authorization", `Bearer ${userToken}`)
         .catch((e) => console.error(e)),
 
       request(app)
         .post("/languages/add/active")
-        .send({ language: "javascript" })
+        .send({ language })
         .set("Authorization", `Bearer ${userToken}`)
         .catch((e) => console.error(e)),
     ]);
 
+    expect(requests[0].status).toBe(201);
+    expect(requests[1].status).toBe(201);
+
     const user = await User.findOne({ email: userData.email });
-    const userHaveLanguageObject = user.languages[0];
+
+    expect(user).toBeDefined();
+
+    const userHaveLanguageObject = user.languages.length === 1;
     const userHaveActiveLanguage = user.activeLanguage === "javascript";
 
-    expect(userHaveLanguageObject).toBeDefined();
+    expect(userHaveLanguageObject).toBe(true);
     expect(userHaveActiveLanguage).toBe(true);
   });
 
   it("Should create and finish lessons in half year with logging all used topics", async () => {
     try {
-      const endDate = moment(startDate).add(6, "months"); // Добавляем полгода к начальной дате
-      let currentDate = moment(startDate);
+      let currentDate = moment();
+      let loopIteration = 0;
+      const endDate = currentDate.clone().add(6, "months"); // Добавляем полгода к начальной дате
 
+      //! Разбить на три группы тестов
+      //! Которые будут создавать уроки каждый на 2 месяца
+
+      //! Разбить на три группы тестов
+      //! Которые будут создавать уроки каждый на 2 месяца
+
+      //! Разбить на три группы тестов
+      //! Которые будут создавать уроки каждый на 2 месяца
+
+      //! Разбить на три группы тестов
+      //! Которые будут создавать уроки каждый на 2 месяца
+
+      //! Разбить на три группы тестов
+      //! Которые будут создавать уроки каждый на 2 месяца
+      
       while (currentDate.isSameOrBefore(endDate)) {
-        const formattedDate = currentDate.format("DD.MM.YYYY");
-        console.log("Текущая дата:", formattedDate);
+        if (loopIteration % 10 === 0) {
+          console.info("Пауза на 30 секунд".blue);
+          await new Promise((resolve) => setTimeout(resolve, 60000)); // Задержка на секунду
+          console.info("Продолжение".blue);
+        }
+        console.log("Текущая дата:".yellow, currentDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
 
-        // Выполнение тестов или действий с использованием formattedDate
-        console.info("Some action".blue);
+        const createdLessons = await request(app)
+          .get("/lessons/testAlgorithm")
+          .send({ language, testDate: currentDate })
+          .set("Authorization", `Bearer ${userToken}`);
+
+        // expect(createdLessons.status).toBe(200);
+        expect(createdLessons.body).toBeDefined();
+
+        const lessons = createdLessons.body;
+
+        const activeLessons = lessons
+          .filter((lesson) => lesson.status === null) // Фильтруем уроки по условию
+          .map((lesson) => lesson._id.toString()); // Преобразуем в массив строковых ID уроков
+
+        if (activeLessons.length === 0) {
+          currentDate.add(1, "day");
+          loopIteration++;
+          continue;
+        }
+
+        await request(app)
+          .post("/lessons/finishAll")
+          .send({ language, testDate: currentDate })
+          .set("Authorization", `Bearer ${userToken}`)
+          .then(() => console.log("Lessons was finished"))
+          .catch((e) => console.error(e));
+
         // Увеличиваем текущую дату на один день
         currentDate.add(1, "day");
+        loopIteration++;
       }
-
-      console.log(`endDate, ${endDate}`.red);
     } catch (e) {
       console.error(e);
     }
@@ -81,6 +141,6 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     // Удаляем созданного тестового пользователя
     await User.findOneAndDelete({ email: userData.email })
       .then(console.log("Test user was deleted".green))
-      .catch((e) => console.error("Test user wasn't deleted".red));
+      .catch((e) => console.error(`Test user wasn't deleted, ${e}`.red));
   });
 });
