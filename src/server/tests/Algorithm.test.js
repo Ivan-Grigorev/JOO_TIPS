@@ -73,11 +73,11 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     expect(userHaveActiveLanguage).toBe(true);
   });
 
-  it("Should create and finish lessons in 2 months with logging all used topics", async () => {
+  it("Should create and finish lessons in 6 months with logging all used topics", async () => {
     try {
       let currentDate = moment();
       let loopIteration = 0;
-      const endDate = currentDate.clone().add(2, "months"); // Добавляем полгода к начальной дате
+      const endDate = currentDate.clone().add(6, "months"); // Добавляем полгода к начальной дате
 
       while (currentDate.isSameOrBefore(endDate)) {
         const inWorkingRange =
@@ -121,7 +121,6 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
           // Увеличиваем текущую дату на один день
           currentDate.add(1, "day");
-          loopIteration++;
         }
       }
     } catch (e) {
