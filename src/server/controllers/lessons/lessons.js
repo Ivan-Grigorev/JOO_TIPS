@@ -198,10 +198,7 @@ async function finishAllLessons(req, res) {
   const time = moment().format("DD.MM.YYYY HH:mm");
 
   try {
-    const [user, lessons] = await Promise.all([
-      User.findById(userId),
-      Lesson.find({ userId, status: null }),
-    ]);
+    const lessons = Lesson.find({ userId, status: null });
     if (lessons.length === 0) throw new Error("No lessons found!");
 
     lessons.forEach(async (lesson) => {
@@ -214,17 +211,18 @@ async function finishAllLessons(req, res) {
       await addAllCardsToViewed(cardIDs, userId, lesson.language);
     });
 
-    let deletedLessonsCount = 0;
-    for (let i = 0; i < lessons.length; i++) {
-      await Lesson.findOneAndDelete({ userId });
-      deletedLessonsCount++;
-    }
-    console.log(`Успешно удалено ${deletedLessonsCount} моделей`.yellow);
-    console.log(user.languages[0].topicStatuses);
+    // let deletedLessonsCount = 0;
+    // for (let i = 0; i < lessons.length; i++) {
+    //   await Lesson.findOneAndDelete({ userId });
+    //   deletedLessonsCount++;
+    // }
+    // console.log(`Успешно удалено ${deletedLessonsCount} моделей`.yellow);
+    // console.log(user.languages[0].topicStatuses);
 
-    res.status(201).json({
-      message: `${deletedLessonsCount} lessons have been successfully finished and deleted from DB.`,
-    });
+    // res.status(201).json({
+    //   message: `${deletedLessonsCount} lessons have been successfully finished and deleted from DB.`,
+    // });
+    res.status(201);
   } catch (e) {
     return res.status(500).json({ message: e.message });
   }
