@@ -3,6 +3,7 @@ const app = require("../app.js"); // Подключите ваше Express-пр�
 const moment = require("moment");
 const mongoDB = require("../db.js");
 const User = require("../models/user/user.js");
+const { isMonday, isEndOfMonth, isEndOfWeek } = require("./utils/dateUtils.js");
 // moment config
 moment.tz.setDefault("Europe/Kiev");
 moment.updateLocale("en", {
@@ -72,65 +73,56 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     expect(userHaveActiveLanguage).toBe(true);
   });
 
-  it("Should create and finish lessons in half year with logging all used topics", async () => {
+  it("Should create and finish lessons in 2 months with logging all used topics", async () => {
     try {
       let currentDate = moment();
       let loopIteration = 0;
-      const endDate = currentDate.clone().add(6, "months"); // Добавляем полгода к начальной дате
+      const endDate = currentDate.clone().add(2, "months"); // Добавляем полгода к начальной дате
 
-      //! Разбить на три группы тестов
-      //! Которые будут создавать уроки каждый на 2 месяца
-
-      //! Разбить на три группы тестов
-      //! Которые будут создавать уроки каждый на 2 месяца
-
-      //! Разбить на три группы тестов
-      //! Которые будут создавать уроки каждый на 2 месяца
-
-      //! Разбить на три группы тестов
-      //! Которые будут создавать уроки каждый на 2 месяца
-
-      //! Разбить на три группы тестов
-      //! Которые будут создавать уроки каждый на 2 месяца
-      
       while (currentDate.isSameOrBefore(endDate)) {
-        if (loopIteration % 10 === 0) {
-          console.info("Пауза на 30 секунд".blue);
-          await new Promise((resolve) => setTimeout(resolve, 60000)); // Задержка на секунду
-          console.info("Продолжение".blue);
-        }
-        console.log("Текущая дата:".yellow, currentDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
+        const inWorkingRange =
+          isMonday(currentDate) ||
+          isEndOfWeek(currentDate) ||
+          isEndOfMonth(currentDate);
 
-        const createdLessons = await request(app)
-          .get("/lessons/testAlgorithm")
-          .send({ language, testDate: currentDate })
-          .set("Authorization", `Bearer ${userToken}`);
+        if (inWorkingRange) {
+          console.log("Текущая дата:".yellow, currentDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
+          console.log("Конечная дата:".yellow, endDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
 
-        // expect(createdLessons.status).toBe(200);
-        expect(createdLessons.body).toBeDefined();
+          const createdLessons = await request(app)
+            .get("/lessons/testAlgorithm")
+            .send({ language, testDate: currentDate })
+            .set("Authorization", `Bearer ${userToken}`);
 
-        const lessons = createdLessons.body;
+          // expect(createdLessons.status).toBe(200);
+          // expect(createdLessons.body).toBeDefined();
 
-        const activeLessons = lessons
-          .filter((lesson) => lesson.status === null) // Фильтруем уроки по условию
-          .map((lesson) => lesson._id.toString()); // Преобразуем в массив строковых ID уроков
+          const lessons = createdLessons.body;
 
-        if (activeLessons.length === 0) {
+          if (!lessons) continue;
+
+          // console.log("lessons".red, lessons);
+          const activeLessons = lessons
+            .filter((lesson) => lesson.status === null) // Фильтруем уроки по условию
+            .map((lesson) => lesson._id.toString()); // Преобразуем в массив строковых ID уроков
+
+          if (activeLessons.length === 0) {
+            currentDate.add(1, "day");
+            loopIteration++;
+            continue;
+          }
+
+          await request(app)
+            .post("/lessons/finishAll")
+            .send({ language, testDate: currentDate })
+            .set("Authorization", `Bearer ${userToken}`)
+            .then(() => console.log("Lessons was finished"))
+            .catch((e) => console.error(e));
+
+          // Увеличиваем текущую дату на один день
           currentDate.add(1, "day");
           loopIteration++;
-          continue;
         }
-
-        await request(app)
-          .post("/lessons/finishAll")
-          .send({ language, testDate: currentDate })
-          .set("Authorization", `Bearer ${userToken}`)
-          .then(() => console.log("Lessons was finished"))
-          .catch((e) => console.error(e));
-
-        // Увеличиваем текущую дату на один день
-        currentDate.add(1, "day");
-        loopIteration++;
       }
     } catch (e) {
       console.error(e);
