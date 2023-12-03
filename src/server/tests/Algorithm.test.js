@@ -5,6 +5,7 @@ const mongoDB = require("../db.js");
 const User = require("../models/user/user.js");
 
 const user = require("./utils/user.js");
+const languages = require("./utils/languages.js");
 const { isMonday, isEndOfMonth, isEndOfWeek } = require("./utils/dateUtils.js");
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -46,17 +47,8 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
   it("Should add language and active language", async () => {
     const requests = await Promise.all([
-      request(app)
-        .post("/languages/add")
-        .send({ language })
-        .set("Authorization", `Bearer ${userToken}`)
-        .catch((e) => console.error(e)),
-
-      request(app)
-        .post("/languages/add/active")
-        .send({ language })
-        .set("Authorization", `Bearer ${userToken}`)
-        .catch((e) => console.error(e)),
+      languages.add(app, language, userToken),
+      languages.addActive(app, language, userToken),
     ]);
 
     expect(requests[0].status).toBe(201);
@@ -128,10 +120,10 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     }
   });
 
-  afterAll(async () => {
-    // Удаляем созданного тестового пользователя
-    await User.findOneAndDelete({ email: userData.email })
-      .then(console.log("Test user was deleted".green))
-      .catch((e) => console.error(`Test user wasn't deleted, ${e}`.red));
-  });
+  // afterAll(async () => {
+  //   // Удаляем созданного тестового пользователя
+  //   await User.findOneAndDelete({ email: userData.email })
+  //     .then(console.log("Test user was deleted".green))
+  //     .catch((e) => console.error(`Test user wasn't deleted, ${e}`.red));
+  // });
 });
