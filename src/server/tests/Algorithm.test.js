@@ -3,6 +3,8 @@ const app = require("../app.js"); // Подключите ваше Express-пр�
 const moment = require("moment");
 const mongoDB = require("../db.js");
 const User = require("../models/user/user.js");
+
+const user = require("./utils/user.js");
 const { isMonday, isEndOfMonth, isEndOfWeek } = require("./utils/dateUtils.js");
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -34,10 +36,8 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
   it("Should create new test user", async () => {
     // Создаём тестового пользователя
-    const response = await request(app)
-      .post("/users/signup")
-      .send(userData)
-      .catch((e) => console.error(e));
+
+    const response = await user.create(app, userData);
 
     expect(response.status).toBe(201);
 
