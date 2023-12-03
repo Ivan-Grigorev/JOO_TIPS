@@ -12,4 +12,12 @@ function isEndOfMonth(date) {
   return date.isSame(date.endOf("month"));
 }
 
-module.exports = { isMonday, isEndOfWeek, isEndOfMonth };
+function isInWorkingRange(currentDate) {
+  return (
+    isMonday(currentDate) ||
+    isEndOfWeek(currentDate) ||
+    isEndOfMonth(currentDate)
+  );
+}
+
+module.exports = { isMonday, isEndOfWeek, isEndOfMonth, isInWorkingRange };
