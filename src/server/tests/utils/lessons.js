@@ -24,11 +24,11 @@ async function getActiveLessons(userId) {
   }
 }
 
-async function finishAllLessons(app, language, testDate, userToken) {
+async function finishAllLessons(app, language, date, userToken) {
   try {
     return await request(app)
       .post("/lessons/finishAll")
-      .send({ language, testDate: testDate })
+      .send({ language, testDate: date })
       .set("Authorization", `Bearer ${userToken}`);
   } catch (e) {
     // Log and handle any errors that occur during the request
