@@ -45,11 +45,10 @@ async function getActiveLessons(userId) {
  * @param {string} userToken - The user's authentication token.
  * @returns {Promise} - A promise that resolves with the finished lessons or rejects with an error.
  */
-async function finishAllLessons(app, language, date, userToken) {
+async function finishAllLessons(app, userId, userToken) {
   try {
     return await request(app)
       .post("/lessons/finishAll")
-      .send({ language, testDate: date })
       .set("Authorization", `Bearer ${userToken}`);
   } catch (e) {
     // Log and handle any errors that occur during the request

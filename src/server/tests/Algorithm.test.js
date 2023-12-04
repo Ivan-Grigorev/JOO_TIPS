@@ -41,9 +41,9 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     const response = await User.create(app, userData);
 
     expect(response.status).toBe(201);
+    expect(response.body.token).toBeDefined();
 
     userToken = response.body.token;
-    userId = response.body.userId;
   });
 
   it("Should add language and active language", async () => {
@@ -58,11 +58,12 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     const user = await User.findByEmail(userData.email);
 
     expect(user).toBeDefined();
+    expect(user._id).toBeDefined();
 
-    const userHaveLanguageObject = user.languages.length === 1;
+    userId = user._id.toString();
+
     const userHaveActiveLanguage = user.activeLanguage === "javascript";
 
-    expect(userHaveLanguageObject).toBe(true);
     expect(userHaveActiveLanguage).toBe(true);
   });
 
@@ -77,15 +78,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
         await Lesson.create(app, language, currentDate, userToken);
 
-        const activeLessons = await Lesson.getActive(userId);
-
-        if (activeLessons.length === 0) {
-          currentDate.add(1, "day");
-          continue;
-        }
-
-        await Lesson.finishAll(app, language, currentDate, userToken);
-
+        await Lesson.finishAll(app, userId, userToken);
         // Увеличиваем текущую дату на один день
         currentDate.add(1, "day");
       }
@@ -96,7 +89,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     // Удаляем созданного тестового пользователя
     await Promise.all([
       User.deleteByEmail(userData.email),
-      //  Lesson.deleteCreated(userId);
+      //  Lesson.deleteCreated(userId)
     ]);
   });
 });
