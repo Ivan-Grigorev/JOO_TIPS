@@ -78,7 +78,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
         await Lesson.create(app, language, currentDate, userToken);
 
-        await Lesson.finishAll(app, userId, userToken);
+        await Lesson.finishAll(app, userToken);
         // Увеличиваем текущую дату на один день
         currentDate.add(1, "day");
       }

@@ -45,7 +45,7 @@ async function getActiveLessons(userId) {
  * @param {string} userToken - The user's authentication token.
  * @returns {Promise} - A promise that resolves with the finished lessons or rejects with an error.
  */
-async function finishAllLessons(app, userId, userToken) {
+async function finishAllLessons(app, userToken) {
   try {
     return await request(app)
       .post("/lessons/finishAll")

@@ -200,7 +200,7 @@ async function finishAllLessons(req, res) {
   try {
     const lessons = await Lesson.find({ userId, status: null });
     if (lessons.length === 0) {
-      return res.status(404).json({ message: "No lesson found" });
+      return res.json({ message: "No lesson found" });
     }
 
     lessons.forEach(async (lesson) => {
