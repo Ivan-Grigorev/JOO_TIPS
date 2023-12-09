@@ -212,10 +212,9 @@ async function finishAllLessons(req, res) {
       lesson.cards.forEach((card) => cardIDs.push(card.toString()));
     });
 
-    console.log("cardIDs".yellow, cardIDs);
     await addAllCardsToViewed(cardIDs, userId, lessons[0].language);
 
-    const result = await Lesson.deleteMany({ userId, status: "completed" });
+    // const result = await Lesson.deleteMany({ userId, status: "completed" });
 
     return res.status(201).end();
   } catch (e) {
