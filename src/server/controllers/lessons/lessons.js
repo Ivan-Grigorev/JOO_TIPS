@@ -199,22 +199,27 @@ async function finishAllLessons(req, res) {
 
   try {
     const lessons = await Lesson.find({ userId, status: null });
-    if (lessons.length === 0) {
-      return res.json({ message: "No lesson found" });
-    }
+    const cardIDs = [];
 
     lessons.forEach(async (lesson) => {
+      if (!lesson) return;
+
       lesson.startTime = time;
       lesson.endTime = time;
       lesson.status = "completed";
       lesson.save();
 
-      const cardIDs = lesson.cards.map((ref) => ref.toString()); // array of IDs
-      await addAllCardsToViewed(cardIDs, userId, lesson.language);
+      lesson.cards.forEach((card) => cardIDs.push(card.toString()));
     });
 
-    return res.status(201).json(lessons);
+    console.log("cardIDs".yellow, cardIDs);
+    await addAllCardsToViewed(cardIDs, userId, lessons[0].language);
+
+    const result = await Lesson.deleteMany({ userId, status: "completed" });
+
+    return res.status(201).end();
   } catch (e) {
+    console.error(e);
     return res.status(500).json({ message: e.message });
   }
 }
@@ -249,6 +254,8 @@ async function addAllCardsToViewed(cardIDs, userId, language) {
       // console.log("cardTopic".red, cardTopic);
       // console.log("topicStatusObject".red, topicStatusObject);
 
+      // If the topic status object is not found, return a 404 response
+      if (!topicStatusObject) return;
       topicsStatusesObjects.push(topicStatusObject);
       // Extract the card view status from the topic status object
       const { cardViewStatus } = topicStatusObject;
@@ -297,12 +304,13 @@ async function addAllCardsToViewed(cardIDs, userId, language) {
       topicsStatusesObjects,
       cardTopicsIDs
     );
-    user.save();
+    await user.save();
 
     return cardViewStatuses;
   } catch (e) {
     // Handle any errors that occur during the execution
     console.error(`Error adding card to TESTED viewed cards array: ${e}`.red);
+    throw new Error(`Error adding card to TESTED viewed cards array: ${e}`);
   }
 }
 
