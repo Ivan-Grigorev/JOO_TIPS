@@ -270,7 +270,7 @@ async function shouldChangeTopicStatus(req, res, next) {
 
     // Find the topic with a viewPercentage of 100% in the topicStatuses array.
     const fullViewedTopic = topicStatuses.find(
-      (topic) => topic.viewPercentage === 100
+      (topic) => topic.viewPercentage >= 100
     );
 
     // Check if a fullViewedTopic was found and if the viewStatus is less than 3.
