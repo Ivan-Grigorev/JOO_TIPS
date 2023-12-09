@@ -6,31 +6,31 @@ const isLessonExistsForToday = require("../../utils/lessons/isLessonExistsForTod
 const isTodayEndOfTheMonth = require("../../utils/lessons/isTodayEndOfTheMonth");
 const isTodaySunday = require("../../utils/lessons/isTodaySunday");
 
+const moment = require("moment");
 /**
  * @function createScheduleToEndOfWeek
  * @description Test function to create a schedule for the current week. Used in JEST
  * @param {object} req.user - Object representing user info what have been hashed in auth middleware.
- * @param {boolean} req.scheduleIsExists - Boolean value set if schedule is already exist.If true - skip this middleware through next()
- * @param {Function} next - Express next middleware function.
+//  * @param {boolean} req.scheduleIsExists - Boolean value set if schedule is already exist.If true - skip this middleware through next()
+// //  * @param {Function} next - Express next middleware function.
  *
  * @returns {Promise<void>}
  */
-async function createTestScheduleToEndOfWeek(req, res, next) {
+async function createTestScheduleToEndOfWeek(req, res) {
   const userId = req.user.id;
-  const { language, testDate } = req.body;
+  // const { language, testDate } = req.body;
+  const language = "javascript";
+
+  const testDate = moment().add(2, "days");
 
   const date = getDateByArgument(testDate);
   const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
   const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
-  const techProps = await getTechProps("javascript");
+  const techProps = await getTechProps(language);
 
   try {
-    if (req.scheduleIsExists) return next(); // Skip if the schedule already exists (set boolean to true in a previous middleware)
-
-    // const techProps = await getTechProps(language);
-
     if (todayIsEndOfMonth) {
-    //   console.log("Today is the end of the month.".blue);
+      //   console.log("Today is the end of the month.".blue);
 
       const existingMonthLesson = await isLessonExistsForToday(
         userId,
@@ -40,7 +40,8 @@ async function createTestScheduleToEndOfWeek(req, res, next) {
 
       if (existingMonthLesson) {
         console.log("Month lesson is already exists.".blue);
-        return next();
+        // return next();
+        return res.status(201).end();
       }
 
       await createLessons.monthly(
@@ -51,9 +52,10 @@ async function createTestScheduleToEndOfWeek(req, res, next) {
         date.expiredDate,
         techProps.monthLesson.duration
       );
-      return next();
+      // return next();
+      return res.status(201).end();
     } else if (todayIsSunday) {
-    //   console.log("Today is Sunday.".blue);
+      //   console.log("Today is Sunday.".blue);
 
       const existedWeekLesson = await isLessonExistsForToday(
         userId,
@@ -63,7 +65,8 @@ async function createTestScheduleToEndOfWeek(req, res, next) {
 
       if (existedWeekLesson) {
         console.log("Week lesson already exists".blue);
-        return next();
+        // return next();
+        return res.status(201).end();
       }
 
       // If there are not enough cards, use a shared array and push random cards into it
@@ -76,7 +79,8 @@ async function createTestScheduleToEndOfWeek(req, res, next) {
         techProps.weekLesson.duration
       );
 
-      return next();
+      // return next();
+      return res.status(201).end();
     }
 
     const lessonsToCreate = await createLessons.daily(
@@ -91,7 +95,7 @@ async function createTestScheduleToEndOfWeek(req, res, next) {
 
     await Lesson.insertMany(lessonsToCreate); // Insert the created lessons into the database
 
-    next();
+    return res.status(201).end();
   } catch (e) {
     console.error("Error creating user schedule:".red, e);
     res.status(500).json({ message: "Internal Server Error" });
