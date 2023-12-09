@@ -170,6 +170,10 @@ async function createScheduleToEndOfWeek(req, res, next) {
   const userId = req.user.id;
   const language = req.body.language;
 
+  if (!language) {
+    return res.status(400).json({ message: "Invalid language" });
+  }
+
   const date = getCurrentDate();
   const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
   const todayIsSunday = isTodaySunday(date.currentDayOfWeek) === true;
