@@ -46,16 +46,20 @@ router.post(
 );
 
 // ! test route
-router.get(
+router.post(
   "/testAlgorithm",
   auth,
   middlewares.isActiveLanguageExists,
-  TESTisScheduleAlreadyExists,
+  // TESTisScheduleAlreadyExists,
   middlewares.shouldChangeTopicStatus,
-  createTestScheduleToEndOfWeek,
-  controllers.getLessons
+  createTestScheduleToEndOfWeek
 );
 
-router.post("/finishAll", auth, controllers.finishAllLessons);
+router.post(
+  "/finishAll",
+  auth,
+  middlewares.isActiveLanguageExists,
+  controllers.finishAllLessons
+);
 
 module.exports = router;
