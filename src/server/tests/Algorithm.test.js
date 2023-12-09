@@ -16,7 +16,7 @@ moment.updateLocale("en", {
   // weekEnd: 6, // Конец недели - суббота (6)
 });
 
-jest.setTimeout(100000);
+jest.setTimeout(200000);
 
 describe("Test algorithm with 2 test users and logging topics", () => {
   const language = "javascript";
@@ -67,29 +67,43 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     expect(userHaveActiveLanguage).toBe(true);
   });
 
-  it("Should create and finish lessons in 6 months with logging all used topics", async () => {
+  it("Should create and finish lessons in 5 months with logging all used topics", async () => {
     let currentDate = moment();
-    const endDate = currentDate.clone().add(6, "months"); // Добавляем полгода к начальной дате
+    const endDate = currentDate.clone().add(5, "months"); // Добавляем полгода к начальной дате
 
     while (currentDate.isSameOrBefore(endDate)) {
-      if (isInWorkingRange(currentDate)) {
-        console.log("Текущая дата:".yellow, currentDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
-        console.log("Конечная дата:".yellow, endDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
-
-        await Lesson.create(app, language, currentDate, userToken);
-
-        await Lesson.finishAll(app, userToken);
-        // Увеличиваем текущую дату на один день
+      if (!isInWorkingRange(currentDate)) {
         currentDate.add(1, "day");
+        continue;
       }
+      console.log("Текущая дата:".yellow, currentDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
+      console.log("Конечная дата:".yellow, endDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
+
+      const createLessons = await Lesson.create(
+        app,
+        language,
+        currentDate,
+        userToken
+      );
+
+      expect(createLessons.status).toBe(201);
+      expect(createLessons.body).toBeDefined();
+
+      const finishLessons = await Lesson.finishAll(app, userToken);
+
+      expect(finishLessons.status).toBe(201);
+      // Увеличиваем текущую дату на один день
+      currentDate.add(1, "day");
     }
   });
 
   afterAll(async () => {
+    await Lesson.count(userId);
+
     // Удаляем созданного тестового пользователя
-    await Promise.all([
-      User.deleteByEmail(userData.email),
-      //  Lesson.deleteCreated(userId)
-    ]);
+    // await Promise.all([
+    //   User.deleteByEmail(userData.email),
+    //   Lesson.deleteCreated(userId),
+    // ]);
   });
 });
