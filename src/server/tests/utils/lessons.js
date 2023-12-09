@@ -12,7 +12,7 @@ const Lesson = require("../../models/lessons/lessons");
 async function createLessons(app, language, testDate, userToken) {
   try {
     return await request(app)
-      .get("/lessons/testAlgorithm")
+      .post("/lessons/testAlgorithm")
       .send({ language, testDate: testDate })
       .set("Authorization", `Bearer ${userToken}`);
   } catch (e) {
@@ -70,9 +70,21 @@ async function deleteAllCreatedLessons(userId) {
   }
 }
 
+async function countCreatedLessons(userId) {
+  try {
+    const count = await Lesson.countDocuments({ userId });
+
+    console.log(`Количество созданных уроков: ${count}`.green);
+    return;
+  } catch (e) {
+    console.error(e.message);
+  }
+}
+
 module.exports = {
   create: createLessons,
   finishAll: finishAllLessons,
   getActive: getActiveLessons,
   deleteCreated: deleteAllCreatedLessons,
+  count: countCreatedLessons,
 };

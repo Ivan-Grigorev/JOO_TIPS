@@ -6,7 +6,6 @@ const isLessonExistsForToday = require("../../utils/lessons/isLessonExistsForTod
 const isTodayEndOfTheMonth = require("../../utils/lessons/isTodayEndOfTheMonth");
 const isTodaySunday = require("../../utils/lessons/isTodaySunday");
 
-const moment = require("moment");
 /**
  * @function createScheduleToEndOfWeek
  * @description Test function to create a schedule for the current week. Used in JEST
@@ -18,10 +17,7 @@ const moment = require("moment");
  */
 async function createTestScheduleToEndOfWeek(req, res) {
   const userId = req.user.id;
-  // const { language, testDate } = req.body;
-  const language = "javascript";
-
-  const testDate = moment().add(2, "days");
+  const { language, testDate } = req.body;
 
   const date = getDateByArgument(testDate);
   const todayIsEndOfMonth = isTodayEndOfTheMonth(date.currentDate) === true;
