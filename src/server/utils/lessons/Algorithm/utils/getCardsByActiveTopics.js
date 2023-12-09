@@ -36,7 +36,11 @@ async function getCardsByActiveTopics(
 
       // console.log(`Topic ${i}: Probability: ${probability}%`.yellow);
 
-      const findCards = await Card.find({ topic: topicObj.title, language }); // Search for cards based on the given topic and language
+      const findCards = await Card.find({
+        topic: topicObj.title,
+        language,
+        _id: { $nin: allTakenCards }, // Находим карты, чей _id не находится в массиве existedCards
+      });
       // console.log(`Number of cards found for topic ${i}: ${findCards.length}`.yellow); // prettier-ignore
 
       // Calculate the probability of selecting each card within the topic
