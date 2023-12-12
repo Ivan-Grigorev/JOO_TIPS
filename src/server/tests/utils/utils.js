@@ -1,4 +1,6 @@
-const Lesson = require("../../models/lessons/lessons");
+const moment = require("moment");
+
+const LessonModel = require("../../models/lessons/lessons");
 const createLessons = require("../../utils/lessons/createLessons");
 const getDateByArgument = require("../../utils/lessons/getDateByArgument");
 const getTechProps = require("../../utils/lessons/getTechProps/getTechProps");
@@ -6,12 +8,13 @@ const isLessonExistsForToday = require("../../utils/lessons/isLessonExistsForTod
 const isTodayEndOfTheMonth = require("../../utils/lessons/isTodayEndOfTheMonth");
 const isTodaySunday = require("../../utils/lessons/isTodaySunday");
 
+const User = require("./user.js");
+const Lesson = require("./lessons.js");
+
 /**
  * @function createScheduleToEndOfWeek
  * @description Test function to create a schedule for the current week. Used in JEST
  * @param {object} req.user - Object representing user info what have been hashed in auth middleware.
-//  * @param {boolean} req.scheduleIsExists - Boolean value set if schedule is already exist.If true - skip this middleware through next()
-// //  * @param {Function} next - Express next middleware function.
  *
  * @returns {Promise<void>}
  */
@@ -89,7 +92,7 @@ async function createTestScheduleToEndOfWeek(req, res) {
       techProps.dayLesson.duration
     );
 
-    await Lesson.insertMany(lessonsToCreate); // Insert the created lessons into the database
+    await LessonModel.insertMany(lessonsToCreate); // Insert the created lessons into the database
 
     return res.status(201).end();
   } catch (e) {
@@ -98,4 +101,70 @@ async function createTestScheduleToEndOfWeek(req, res) {
   }
 }
 
-module.exports = createTestScheduleToEndOfWeek;
+/**
+ * @function isScheduleAlreadyExists
+ * @description Middleware to check if there are already lessons for the current week.
+ *
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
+ * @param {Function} next - Express next middleware function.
+ *
+ * @returns {void}
+ */
+async function TESTisScheduleAlreadyExists(req, res, next) {
+  try {
+    const { testDate } = req.body;
+
+    const today = moment(testDate); // Get the current date
+    const sunday = 0; // Sunday is represented as 0 in moment.js (0 - Sunday, 1 - Monday, ..., 6 - Saturday)
+
+    // If today is Sunday, immediately execute next()
+    if (today.day() === sunday) return next();
+
+    const datesUntilSunday = []; // Create an array to store dates
+
+    // The loop runs until it's Sunday
+    while (today.day() !== sunday) {
+      datesUntilSunday.push(today.format("DD.MM.YYYY")); // Add the date to the array
+      today.add(1, "day"); // Move to the next day
+    }
+
+    // console.log("Dates until Sunday: ", datesUntilSunday); // Log the array of dates
+
+    // Создаем массив регулярных выражений для каждой даты
+    const dateRegexArray = datesUntilSunday.map(
+      (date) => new RegExp(date.replace(/\./g, "\\."))
+    );
+
+    // Find documents with lesson dates within the current week and matching userId
+    const existingLessons = await LessonModel.find({
+      userId: req.user.id,
+      $or: dateRegexArray.map((dateRegex) => ({
+        lessonDate: { $regex: dateRegex },
+      })),
+    });
+
+    if (existingLessons.length > 0) {
+      console.log("Lessons schedule already exists".blue); // Log a message if lessons exist
+      req.scheduleIsExists = true; // Set a flag in the request object
+    }
+
+    return next(); // Continue to the next middleware
+  } catch (error) {
+    console.error("Error in createScheduleToEndOfWeek middleware".red, error); // Log an error message
+    res.status(500).json({ message: "Internal server error" }); // Respond with a 500 Internal Server Error
+  }
+}
+
+async function clearDatabase(userId, userEmail) {
+  await Promise.all([
+    User.deleteByEmail(userEmail),
+    Lesson.deleteCreated(userId),
+  ]).catch((e) => console.error(e));
+}
+
+module.exports = {
+  createTestScheduleToEndOfWeek,
+  TESTisScheduleAlreadyExists,
+  clearDatabase,
+};

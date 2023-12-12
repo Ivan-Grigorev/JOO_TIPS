@@ -33,6 +33,39 @@ async function findUserByEmail(email) {
 }
 
 /**
+ * Finds a user in the database by user ID.
+ * @param {string} userId - The ID of the user to find.
+ * @returns {Promise<object|null>} A Promise that resolves with the user object found, or null if not found.
+ * @throws {Error} Throws an error if there's a problem finding the user.
+ */
+async function findUserById(userId) {
+  try {
+    // Find a user in the database using the userId
+    return await User.findById(userId);
+  } catch (error) {
+    // Log and handle any errors that occur during the search
+    console.error(error);
+    throw new Error(`Error finding user by email: ${error.message}`);
+  }
+}
+
+/**
+ * Retrieves the language object of the user by user ID.
+ * @param {string} userId - The ID of the user.
+ * @returns {Promise<object|null>} A Promise that resolves with the user's first language, or null if not found.
+ */
+async function getUserLanguageObject(userId) {
+  try {
+    const user = await findUserById(userId);
+
+    return user.languages[0];
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Error getting user language object: ${error.message}`);
+  }
+}
+
+/**
  * Deletes a user from the database based on their email address.
  * @param {string} email - The email address of the user to be deleted.
  * @returns {Promise} - A promise that resolves when the user is successfully deleted or rejects with an error.
@@ -51,4 +84,6 @@ module.exports = {
   create: createUser,
   findByEmail: findUserByEmail,
   deleteByEmail: deleteUserByEmail,
+  findById: findUserById,
+  getLanguageObject: getUserLanguageObject,
 };
