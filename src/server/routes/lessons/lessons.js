@@ -2,8 +2,7 @@ const express = require("express");
 const { auth } = require("../../middlewares/auth.js");
 const middlewares = require("../../middlewares/lessons.js");
 const controllers = require("../../controllers/lessons/lessons.js");
-const createTestScheduleToEndOfWeek = require("../../tests/utils/createTestScheduleToEndOfWeek.js");
-const TESTisScheduleAlreadyExists = require("../../tests/utils/TESTisScheduleAlreadyExists.js");
+const { createTestScheduleToEndOfWeek } = require("../../tests/utils/utils.js");
 
 const router = express.Router();
 
