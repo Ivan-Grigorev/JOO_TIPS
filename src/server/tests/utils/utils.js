@@ -1,4 +1,6 @@
 const moment = require("moment");
+const fs = require("fs/promises");
+const path = require("path");
 
 const LessonModel = require("../../models/lessons/lessons");
 const createLessons = require("../../utils/lessons/createLessons");
@@ -163,8 +165,24 @@ async function clearDatabase(userId, userEmail) {
   ]).catch((e) => console.error(e));
 }
 
+const logFileName = "algorithm.log";
+const logFile = path.join(__dirname, "..", logFileName);
+
+async function log(data) {
+  try {
+    const dataToSave = data.split(".").join(".\n");
+
+    console.log("dataToSave".green, dataToSave);
+
+    await fs.appendFile(logFile, dataToSave);
+  } catch (err) {
+    console.log(`Error saving the ${logFile}`.red);
+  }
+}
+
 module.exports = {
   createTestScheduleToEndOfWeek,
   TESTisScheduleAlreadyExists,
   clearDatabase,
+  log,
 };
