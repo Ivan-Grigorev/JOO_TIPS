@@ -176,6 +176,7 @@ async function log(data) {
 
     await fs.appendFile(logFile, dataToSave);
   } catch (err) {
+    console.error(err);
     console.log(`Error saving the ${logFile}`.red);
   }
 }
