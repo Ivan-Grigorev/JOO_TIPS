@@ -5,6 +5,7 @@ const mongoDB = require("../db.js");
 const User = require("./utils/user.js");
 const Language = require("./utils/languages.js");
 const Lesson = require("./utils/lessons.js");
+const utils = require("./utils/utils");
 const isInWorkingRange = require("./utils/dateUtils.js").isInWorkingRange;
 
 // moment config
@@ -16,7 +17,7 @@ moment.updateLocale("en", {
   // weekEnd: 6, // Конец недели - суббота (6)
 });
 
-jest.setTimeout(200000);
+jest.setTimeout(999999);
 
 describe("Test algorithm with 2 test users and logging topics", () => {
   const language = "javascript";
@@ -71,11 +72,13 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     let currentDate = moment();
     const endDate = currentDate.clone().add(5, "months"); // Добавляем полгода к начальной дате
 
+    let iteration = 0;
     while (currentDate.isSameOrBefore(endDate)) {
       if (!isInWorkingRange(currentDate)) {
         currentDate.add(1, "day");
         continue;
       }
+
       console.log("Текущая дата:".yellow, currentDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
       console.log("Конечная дата:".yellow, endDate.format('DD.MM.YYYY HH:mm')); // prettier-ignore
 
@@ -94,16 +97,19 @@ describe("Test algorithm with 2 test users and logging topics", () => {
       expect(finishLessons.status).toBe(201);
       // Увеличиваем текущую дату на один день
       currentDate.add(1, "day");
+      iteration++;
+
+      if (iteration % 5 === 0) {
+        const userLanguageObject = await User.getLanguageObject(userId);
+
+        console.log("userLanguageObject".green, userLanguageObject);
+      }
     }
   });
 
   afterAll(async () => {
     await Lesson.count(userId);
 
-    // Удаляем созданного тестового пользователя
-    // await Promise.all([
-    //   User.deleteByEmail(userData.email),
-    //   Lesson.deleteCreated(userId),
-    // ]);
+    await utils.clearDatabase(userId, userData.email);
   });
 });
