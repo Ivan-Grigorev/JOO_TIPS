@@ -172,15 +172,23 @@ async function clearDatabase(userId, userEmail) {
   ]).catch((e) => console.error(e));
 }
 
+/**
+ * Retrieves the topic name based on the provided topic reference and active language.
+ * @param {string} topicRef - The reference ID of the topic.
+ * @param {string} activeLanguage - The active language for topic retrieval.
+ * @returns {Promise<string>} - The name of the topic associated with the reference ID.
+ */
 async function getTopicNameByRef(topicRef, activeLanguage) {
   try {
+    // Retrieve the list of topics based on the active language
     const topicsList = await getTopicsByLanguage(activeLanguage);
 
+    // Find the topic in the list that matches the provided reference ID
     const foundTopic = topicsList.find((topic) => {
       return topic._id.toString() === topicRef;
-    }).topicTitle;
+    }).topicTitle; // Extract the topic title
 
-    return foundTopic;
+    return foundTopic; // Return the found topic name
   } catch (e) {
     console.error(`Error while getting topic by ref: ${e.message}`.red);
   }
@@ -191,16 +199,16 @@ async function getTopicNameByRef(topicRef, activeLanguage) {
  * @param {string} data - The data to be logged.
  * @returns {Promise<void>} - A Promise that resolves when the data is logged.
  */
-async function log(data) {
-  const logFileName = "algorithm.log";
+async function log(data, date) {
+  const logFileName = "Algorithm.log";
   const logFile = path.join(__dirname, "..", logFileName);
 
   try {
-    const dataToSave = data.split(".").join(".\n");
+    await fs.appendFile(logFile, `${date}\n`); // print date in log file
 
-    console.log("dataToSave".green, dataToSave);
+    await data.forEach((text) => fs.appendFile(logFile, text + "\n")); // print all messages in log file
 
-    await fs.appendFile(logFile, dataToSave);
+    await fs.appendFile(logFile, "\n\n"); // print whitespace in log file
   } catch (err) {
     console.error(err);
     console.log(`Error saving the ${logFile}`.red);
@@ -256,29 +264,28 @@ function compareFields(oldObject, actualObject) {
   return Object.keys(changes).length > 0 ? changes : null; // Возвращаем объект с информацией об изменениях или null, если изменений нет
 }
 
+/**
+ * Formats changes and logs messages based on the provided changes and language.
+ * @param {object} changes - Object containing changes to be formatted.
+ * @param {string} language - Language used for formatting.
+ * @returns {Array} - Array of log messages for the changes made.
+ */
 async function formatChanges(changes, language) {
-  const formattedChanges = {
-    topics: [],
-    activeTopics: [],
-  };
+  const MESSAGES = []; // Output messages for the log file
 
   if (changes.activeTopicsRefs) {
-    const oldTopics = changes.activeTopicsRefs.oldValue.map(
-      (topic) => topic.ref
-    );
-    const newTopics = changes.activeTopicsRefs.actualValue.map(
-      (topic) => topic.ref
-    );
+    const oldTopics = changes.activeTopicsRefs.oldValue;
+    const newTopics = changes.activeTopicsRefs.actualValue;
 
     const addedTopic = newTopics.find((topic) => !oldTopics.includes(topic));
 
     if (addedTopic) {
       const topicName = await getTopicNameByRef(addedTopic, language);
 
-      console.log(`Добавилась активная тема: ${topicName}, ID: ${addedTopic}`.blue); // prettier-ignore
-      console.log(`Список активных тем: ${changes.activeTopicsRefs.actualValue}`.blue); // prettier-ignore
+      // console.log(`Added active topic: ${topicName}, ID: ${addedTopic}`.blue);
+      // console.log(`List of active topics: ${changes.activeTopicsRefs.actualValue}`.blue); // prettier-ignore
 
-      formattedChanges.activeTopics.push(addedTopic);
+      MESSAGES.push(`Added active topic: ${topicName}, ID: ${addedTopic}`);
     }
   }
 
@@ -293,18 +300,20 @@ async function formatChanges(changes, language) {
       );
 
       if (addedTopic) {
-        const topicsList = changes.topicStatuses.actualValue.map((topic) => topic.ref); // prettier-ignore
+        const topicsList = changes.topicStatuses.actualValue.map(
+          (topic) => topic.ref
+        );
         const topicName = await getTopicNameByRef(addedTopic.ref, language);
 
-        console.log(`Добавлена тема: "${topicName}"`.blue);
-        console.log(`Список тем: ${topicsList}`.blue);
+        // console.log(`Added topic: "${topicName}"`.blue);
+        // console.log(`List of topics: ${topicsList}`.blue);
 
-        formattedChanges.topics.push(addedTopic);
+        MESSAGES.push(`Added topic: ${topicName}, ID: ${addedTopic.ref}`);
       }
     }
   }
 
-  return formattedChanges;
+  return MESSAGES;
 }
 
 module.exports = {

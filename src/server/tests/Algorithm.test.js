@@ -113,11 +113,9 @@ describe("Test algorithm with 2 test users and logging topics", () => {
         if (changes) {
           const formattedChanges = await utils.formatChanges(changes, language);
 
-          console.log("formattedChanges".red, formattedChanges);
+          await utils.log(formattedChanges, currentDate.format("DD.MM.YYYY"));
 
-          // await utils.log("datas");
-
-          if (iteration % 10 === 0) break;
+          // if (iteration % 50 === 0) break;
         }
 
         oldLanguageObject = userLanguageObject;
