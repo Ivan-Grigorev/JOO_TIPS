@@ -6,6 +6,7 @@ const LessonModel = require("../../models/lessons/lessons");
 const createLessons = require("../../utils/lessons/createLessons");
 const getDateByArgument = require("../../utils/lessons/getDateByArgument");
 const getTechProps = require("../../utils/lessons/getTechProps/getTechProps");
+const getTopicsByLanguage = require("../../utils/lessons/getTechProps/utils/getTopicsByLanguage.js");
 const isLessonExistsForToday = require("../../utils/lessons/isLessonExistsForToday");
 const isTodayEndOfTheMonth = require("../../utils/lessons/isTodayEndOfTheMonth");
 const isTodaySunday = require("../../utils/lessons/isTodaySunday");
@@ -158,6 +159,12 @@ async function TESTisScheduleAlreadyExists(req, res, next) {
   }
 }
 
+/**
+ * Clears user-related data from the database.
+ * @param {string} userId - The ID of the user.
+ * @param {string} userEmail - The email of the user.
+ * @returns {Promise<void>} - A Promise that resolves when the database is cleared.
+ */
 async function clearDatabase(userId, userEmail) {
   await Promise.all([
     User.deleteByEmail(userEmail),
@@ -165,10 +172,29 @@ async function clearDatabase(userId, userEmail) {
   ]).catch((e) => console.error(e));
 }
 
-const logFileName = "algorithm.log";
-const logFile = path.join(__dirname, "..", logFileName);
+async function getTopicNameByRef(topicRef, activeLanguage) {
+  try {
+    const topicsList = await getTopicsByLanguage(activeLanguage);
 
+    const foundTopic = topicsList.find((topic) => {
+      return topic._id.toString() === topicRef;
+    }).topicTitle;
+
+    return foundTopic;
+  } catch (e) {
+    console.error(`Error while getting topic by ref: ${e.message}`.red);
+  }
+}
+
+/**
+ * Logs data to a file asynchronously.
+ * @param {string} data - The data to be logged.
+ * @returns {Promise<void>} - A Promise that resolves when the data is logged.
+ */
 async function log(data) {
+  const logFileName = "algorithm.log";
+  const logFile = path.join(__dirname, "..", logFileName);
+
   try {
     const dataToSave = data.split(".").join(".\n");
 
@@ -181,9 +207,110 @@ async function log(data) {
   }
 }
 
+/**
+ * Сравнивает два объекта и возвращает информацию об изменениях в определенных полях.
+ * @param {object} oldObject - Первый объект для сравнения.
+ * @param {object} actualObject - Второй объект для сравнения.
+ * @returns {object|null} - Объект с информацией об изменениях или null, если изменений нет.
+ */
+function compareFields(oldObject, actualObject) {
+  if (oldObject === null) return null; // Если oldObject === null, вернуть null
+
+  const changes = {};
+
+  // Сравнение объектов внутри activeTopicsRefs
+  const oldActiveTopics = oldObject.activeTopicsRefs.map((ref) =>
+    ref.ref.toString()
+  );
+  const actualActiveTopics = actualObject.activeTopicsRefs.map((ref) =>
+    ref.ref.toString()
+  );
+
+  if (JSON.stringify(oldActiveTopics) !== JSON.stringify(actualActiveTopics)) {
+    changes.activeTopicsRefs = {
+      oldValue: oldActiveTopics,
+      actualValue: actualActiveTopics,
+    };
+  }
+
+  // Сравнение объектов в массиве topicStatuses
+  const oldStatuses = oldObject.topicStatuses.map((status) => ({
+    ref: status.ref.toString(),
+    viewStatus: status.viewStatus,
+    viewPercentage: status.viewPercentage,
+  }));
+
+  const actualStatuses = actualObject.topicStatuses.map((status) => ({
+    ref: status.ref.toString(),
+    viewStatus: status.viewStatus,
+    viewPercentage: status.viewPercentage,
+  }));
+
+  if (JSON.stringify(oldStatuses) !== JSON.stringify(actualStatuses)) {
+    changes.topicStatuses = {
+      oldValue: oldStatuses,
+      actualValue: actualStatuses,
+    };
+  }
+
+  return Object.keys(changes).length > 0 ? changes : null; // Возвращаем объект с информацией об изменениях или null, если изменений нет
+}
+
+async function formatChanges(changes) {
+  const formattedChanges = {
+    topics: [],
+    activeTopics: [],
+  };
+
+  const language = "javascript";
+
+  if (changes.activeTopicsRefs) {
+    const oldTopics = changes.activeTopicsRefs.oldValue.map(JSON.stringify);
+    const newTopics = changes.activeTopicsRefs.actualValue.map(JSON.stringify);
+
+    const addedTopic = newTopics.find((topic) => !oldTopics.includes(topic));
+
+    if (addedTopic) {
+      console.log(`Добавилась активная тема: ${addedTopic}`.blue);
+      console.log(
+        `Список активных тем: ${changes.activeTopicsRefs.actualValue}`.blue
+      );
+
+      formattedChanges.activeTopics.push(addedTopic);
+    }
+  }
+
+  if (changes.topicStatuses) {
+    const oldTopicsAmount = changes.topicStatuses.oldValue.length;
+    const newTopicsAmount = changes.topicStatuses.actualValue.length;
+
+    if (oldTopicsAmount < newTopicsAmount) {
+      const addedTopic = changes.topicStatuses.actualValue.find(
+        (status) =>
+          !changes.topicStatuses.oldValue.some((old) => old.ref === status.ref)
+      );
+
+      if (addedTopic) {
+        const topicsList = changes.topicStatuses.actualValue.map((topic) => topic.ref); // prettier-ignore
+
+        const topicName = await getTopicNameByRef(addedTopic.ref, language);
+
+        console.log(`Добавлена тема: "${topicName}"`.blue);
+        console.log(`Список тем: ${topicsList}`.blue);
+
+        formattedChanges.topics.push(addedTopic);
+      }
+    }
+  }
+
+  return formattedChanges;
+}
+
 module.exports = {
   createTestScheduleToEndOfWeek,
   TESTisScheduleAlreadyExists,
   clearDatabase,
   log,
+  compareFields,
+  formatChanges,
 };
