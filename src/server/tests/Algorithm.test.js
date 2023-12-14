@@ -5,8 +5,7 @@ const mongoDB = require("../db.js");
 const User = require("./utils/user.js");
 const Language = require("./utils/languages.js");
 const Lesson = require("./utils/lessons.js");
-const clearDatabase = require("./utils/utils").clearDatabase;
-const log = require("./utils/utils").log;
+const utils = require("./utils/utils.js");
 const isInWorkingRange = require("./utils/dateUtils.js").isInWorkingRange;
 
 // moment config
@@ -74,7 +73,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     const endDate = currentDate.clone().add(5, "months"); // Добавляем полгода к начальной дате
 
     let iteration = 0;
-    let oldLanguageObject;
+    let oldLanguageObject = null;
 
     while (currentDate.isSameOrBefore(endDate)) {
       if (!isInWorkingRange(currentDate)) {
@@ -98,32 +97,37 @@ describe("Test algorithm with 2 test users and logging topics", () => {
       const finishLessons = await Lesson.finishAll(app, userToken);
 
       expect(finishLessons.status).toBe(201);
+
       // Увеличиваем текущую дату на один день
       currentDate.add(1, "day");
       iteration++;
 
-      if (iteration % 5 !== 0) continue;
-      const userLanguageObject = await User.getLanguageObject(userId);
+      if (iteration % 5 === 0) {
+        const userLanguageObject = await User.getLanguageObject(userId);
 
-      expect(userLanguageObject).toBeDefined();
+        const changes = utils.compareFields(
+          oldLanguageObject,
+          userLanguageObject
+        );
 
-      console.log("userLanguageObject".green, userLanguageObject);
+        if (changes) {
+          const formattedChanges = await utils.formatChanges(changes);
 
-      if (iteration !== 5 && oldLanguageObject !== userLanguageObject) {
-        console.log(`iteration - ${iteration}`.red);
+          console.log("formattedChanges".red, formattedChanges);
 
-        // ! здесь должна быть проверка на совпадение полей
-        // ! либо же принудительно записывать значение в log
-        await log("some data. some new data. some new data. some new data. ");
+          // await utils.log("datas");
+
+          if (iteration % 10 === 0) break;
+        }
+
+        oldLanguageObject = userLanguageObject;
       }
-
-      oldLanguageObject = userLanguageObject;
     }
   });
 
   afterAll(async () => {
     await Lesson.count(userId);
 
-    await clearDatabase(userId, userData.email);
+    await utils.clearDatabase(userId, userData.email);
   });
 });
