@@ -23,6 +23,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
   const language = "javascript";
   let userToken;
   let userId;
+  let oldLanguageObject = null;
 
   const userData = {
     name: "testUser-topics",
@@ -62,6 +63,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     expect(user._id).toBeDefined();
 
     userId = user._id.toString();
+    oldLanguageObject = user.languages[0];
 
     const userHaveActiveLanguage = user.activeLanguage === "javascript";
 
@@ -73,7 +75,6 @@ describe("Test algorithm with 2 test users and logging topics", () => {
     const endDate = currentDate.clone().add(5, "months"); // Добавляем полгода к начальной дате
 
     let iteration = 0;
-    let oldLanguageObject = null;
 
     while (currentDate.isSameOrBefore(endDate)) {
       if (!isInWorkingRange(currentDate)) {
@@ -105,15 +106,14 @@ describe("Test algorithm with 2 test users and logging topics", () => {
       if (iteration % 5 === 0) {
         const userLanguageObject = await User.getLanguageObject(userId);
 
-        const changes = utils.compareFields(
-          oldLanguageObject,
-          userLanguageObject
-        );
+        const changes = utils.compareFields(oldLanguageObject, userLanguageObject); // prettier-ignore
 
         if (changes) {
-          const formattedChanges = await utils.formatChanges(changes, language);
-
-          await utils.log(formattedChanges, currentDate.format("DD.MM.YYYY"));
+          await utils
+            .formatChanges(changes, language)
+            .then((formattedChanges) => {
+              utils.log(formattedChanges, currentDate.format("DD.MM.YYYY"));
+            });
 
           // if (iteration % 50 === 0) break;
         }

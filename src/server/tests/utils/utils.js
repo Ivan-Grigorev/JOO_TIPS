@@ -199,20 +199,24 @@ async function getTopicNameByRef(topicRef, activeLanguage) {
  * @param {string} data - The data to be logged.
  * @returns {Promise<void>} - A Promise that resolves when the data is logged.
  */
-async function log(data, date) {
+function log(data, date) {
   const logFileName = "Algorithm.log";
   const logFile = path.join(__dirname, "..", logFileName);
 
-  try {
-    await fs.appendFile(logFile, `${date}\n`); // print date in log file
-
-    await data.forEach((text) => fs.appendFile(logFile, text + "\n")); // print all messages in log file
-
-    await fs.appendFile(logFile, "\n\n"); // print whitespace in log file
-  } catch (err) {
-    console.error(err);
-    console.log(`Error saving the ${logFile}`.red);
-  }
+  // print date in log file
+  fs.appendFile(logFile, `${date}\n`)
+    .then(() => {
+      // print all messages in log file
+      data.forEach((text) => {
+        fs.appendFile(logFile, `${text}\n`).then(() =>
+          fs.appendFile(logFile, "\n\n")
+        );
+      });
+    })
+    .catch((e) => {
+      console.log(`Error saving the ${logFile}: ${e.message}`.red);
+      console.error(e);
+    });
 }
 
 /**
@@ -268,24 +272,30 @@ function compareFields(oldObject, actualObject) {
  * Formats changes and logs messages based on the provided changes and language.
  * @param {object} changes - Object containing changes to be formatted.
  * @param {string} language - Language used for formatting.
- * @returns {Array} - Array of log messages for the changes made.
+ * @returns {Promise<array>} - Array of log messages for the changes made.
  */
 async function formatChanges(changes, language) {
   const MESSAGES = []; // Output messages for the log file
 
   if (changes.activeTopicsRefs) {
     const oldTopics = changes.activeTopicsRefs.oldValue;
-    const newTopics = changes.activeTopicsRefs.actualValue;
+    const actualTopics = changes.activeTopicsRefs.actualValue;
 
-    const addedTopic = newTopics.find((topic) => !oldTopics.includes(topic));
+    const addedTopic = actualTopics.find((topic) => !oldTopics.includes(topic));
+    const removedTopic = oldTopics.find((topic) => !actualTopics.includes(topic)); // prettier-ignore
 
     if (addedTopic) {
-      const topicName = await getTopicNameByRef(addedTopic, language);
+      const addedTopicName = await getTopicNameByRef(addedTopic, language);
 
-      // console.log(`Added active topic: ${topicName}, ID: ${addedTopic}`.blue);
-      // console.log(`List of active topics: ${changes.activeTopicsRefs.actualValue}`.blue); // prettier-ignore
+      if (oldTopics.length === 3) {
+        const removedTopicName = await getTopicNameByRef(
+          removedTopic,
+          language
+        );
+        MESSAGES.push(`Removed active topic: "${removedTopicName}", ID: "${removedTopic}"`); // prettier-ignore
+      }
 
-      MESSAGES.push(`Added active topic: ${topicName}, ID: ${addedTopic}`);
+      MESSAGES.push(`Added active topic: "${addedTopicName}", ID: "${addedTopic}"`); // prettier-ignore
     }
   }
 
@@ -300,15 +310,12 @@ async function formatChanges(changes, language) {
       );
 
       if (addedTopic) {
-        const topicsList = changes.topicStatuses.actualValue.map(
-          (topic) => topic.ref
-        );
         const topicName = await getTopicNameByRef(addedTopic.ref, language);
 
         // console.log(`Added topic: "${topicName}"`.blue);
         // console.log(`List of topics: ${topicsList}`.blue);
 
-        MESSAGES.push(`Added topic: ${topicName}, ID: ${addedTopic.ref}`);
+        MESSAGES.push(`Added topic: "${topicName}", ID: "${addedTopic.ref}"`);
       }
     }
   }
