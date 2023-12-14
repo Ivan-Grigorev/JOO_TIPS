@@ -234,47 +234,49 @@ function compareFields(oldObject, actualObject) {
   }
 
   // Сравнение объектов в массиве topicStatuses
-  const oldStatuses = oldObject.topicStatuses.map((status) => ({
-    ref: status.ref.toString(),
-    viewStatus: status.viewStatus,
-    viewPercentage: status.viewPercentage,
+  const oldTopics = oldObject.topicStatuses.map((topic) => ({
+    ref: topic.ref.toString(),
+    viewStatus: topic.viewStatus,
+    viewPercentage: topic.viewPercentage,
   }));
 
-  const actualStatuses = actualObject.topicStatuses.map((status) => ({
-    ref: status.ref.toString(),
-    viewStatus: status.viewStatus,
-    viewPercentage: status.viewPercentage,
+  const actualTopics = actualObject.topicStatuses.map((topic) => ({
+    ref: topic.ref.toString(),
+    viewStatus: topic.viewStatus,
+    viewPercentage: topic.viewPercentage,
   }));
 
-  if (JSON.stringify(oldStatuses) !== JSON.stringify(actualStatuses)) {
+  if (JSON.stringify(oldTopics) !== JSON.stringify(actualTopics)) {
     changes.topicStatuses = {
-      oldValue: oldStatuses,
-      actualValue: actualStatuses,
+      oldValue: oldTopics,
+      actualValue: actualTopics,
     };
   }
 
   return Object.keys(changes).length > 0 ? changes : null; // Возвращаем объект с информацией об изменениях или null, если изменений нет
 }
 
-async function formatChanges(changes) {
+async function formatChanges(changes, language) {
   const formattedChanges = {
     topics: [],
     activeTopics: [],
   };
 
-  const language = "javascript";
-
   if (changes.activeTopicsRefs) {
-    const oldTopics = changes.activeTopicsRefs.oldValue.map(JSON.stringify);
-    const newTopics = changes.activeTopicsRefs.actualValue.map(JSON.stringify);
+    const oldTopics = changes.activeTopicsRefs.oldValue.map(
+      (topic) => topic.ref
+    );
+    const newTopics = changes.activeTopicsRefs.actualValue.map(
+      (topic) => topic.ref
+    );
 
     const addedTopic = newTopics.find((topic) => !oldTopics.includes(topic));
 
     if (addedTopic) {
-      console.log(`Добавилась активная тема: ${addedTopic}`.blue);
-      console.log(
-        `Список активных тем: ${changes.activeTopicsRefs.actualValue}`.blue
-      );
+      const topicName = await getTopicNameByRef(addedTopic, language);
+
+      console.log(`Добавилась активная тема: ${topicName}, ID: ${addedTopic}`.blue); // prettier-ignore
+      console.log(`Список активных тем: ${changes.activeTopicsRefs.actualValue}`.blue); // prettier-ignore
 
       formattedChanges.activeTopics.push(addedTopic);
     }
@@ -292,7 +294,6 @@ async function formatChanges(changes) {
 
       if (addedTopic) {
         const topicsList = changes.topicStatuses.actualValue.map((topic) => topic.ref); // prettier-ignore
-
         const topicName = await getTopicNameByRef(addedTopic.ref, language);
 
         console.log(`Добавлена тема: "${topicName}"`.blue);

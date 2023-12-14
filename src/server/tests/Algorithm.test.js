@@ -111,7 +111,7 @@ describe("Test algorithm with 2 test users and logging topics", () => {
         );
 
         if (changes) {
-          const formattedChanges = await utils.formatChanges(changes);
+          const formattedChanges = await utils.formatChanges(changes, language);
 
           console.log("formattedChanges".red, formattedChanges);
 
