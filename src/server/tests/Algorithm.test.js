@@ -72,9 +72,8 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
   it("Should create and finish lessons in 5 months with logging all used topics", async () => {
     let currentDate = moment();
+    let startLoggingDate = currentDate.clone(); // Начальная дата для логирования
     const endDate = currentDate.clone().add(5, "months"); // Добавляем полгода к начальной дате
-
-    let iteration = 0;
 
     while (currentDate.isSameOrBefore(endDate)) {
       if (!isInWorkingRange(currentDate)) {
@@ -101,9 +100,9 @@ describe("Test algorithm with 2 test users and logging topics", () => {
 
       // Увеличиваем текущую дату на один день
       currentDate.add(1, "day");
-      iteration++;
 
-      if (iteration % 5 === 0) {
+      // Раз в неделю проверяем на наличие изменений в объекте пользователя
+      if (currentDate.diff(startLoggingDate, "weeks") >= 1) {
         const userLanguageObject = await User.getLanguageObject(userId);
 
         const changes = utils.compareFields(oldLanguageObject, userLanguageObject); // prettier-ignore
@@ -112,12 +111,13 @@ describe("Test algorithm with 2 test users and logging topics", () => {
           await utils
             .formatChanges(changes, language)
             .then((formattedChanges) => {
-              utils.log(formattedChanges, currentDate.format("DD.MM.YYYY"));
+              formattedChanges.length !== 0
+              ? utils.log(formattedChanges, currentDate.format("DD.MM.YYYY"))
+              : utils.log(["Nothing changed"], currentDate.format("DD.MM.YYYY")) // prettier-ignore
             });
-
-          // if (iteration % 50 === 0) break;
         }
 
+        startLoggingDate = currentDate.clone(); // Обновляем начальную дату для следующего логирования
         oldLanguageObject = userLanguageObject;
       }
     }

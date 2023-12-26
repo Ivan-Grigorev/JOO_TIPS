@@ -196,7 +196,8 @@ async function getTopicNameByRef(topicRef, activeLanguage) {
 
 /**
  * Logs data to a file asynchronously.
- * @param {string} data - The data to be logged.
+ * @param {string[]} data - The data to be logged.
+ * @param {moment} date - The data to be logged.
  * @returns {Promise<void>} - A Promise that resolves when the data is logged.
  */
 function log(data, date) {
@@ -204,13 +205,11 @@ function log(data, date) {
   const logFile = path.join(__dirname, "..", logFileName);
 
   // print date in log file
-  fs.appendFile(logFile, `${date}\n`)
+  fs.appendFile(logFile, `\n${date}\n`)
     .then(() => {
-      // print all messages in log file
       data.forEach((text) => {
-        fs.appendFile(logFile, `${text}\n`).then(() =>
-          fs.appendFile(logFile, "\n\n")
-        );
+        // print all messages in log file
+        fs.appendFile(logFile, `${text}\n`);
       });
     })
     .catch((e) => {
@@ -277,6 +276,8 @@ function compareFields(oldObject, actualObject) {
 async function formatChanges(changes, language) {
   const MESSAGES = []; // Output messages for the log file
 
+  console.info("changes.topicStatuses".red, changes.topicStatuses);
+  // throw new Error(1);
   if (changes.activeTopicsRefs) {
     const oldTopics = changes.activeTopicsRefs.oldValue;
     const actualTopics = changes.activeTopicsRefs.actualValue;
@@ -305,15 +306,12 @@ async function formatChanges(changes, language) {
 
     if (oldTopicsAmount < newTopicsAmount) {
       const addedTopic = changes.topicStatuses.actualValue.find(
-        (status) =>
-          !changes.topicStatuses.oldValue.some((old) => old.ref === status.ref)
+        (topic) =>
+          !changes.topicStatuses.oldValue.some((old) => old.ref === topic.ref)
       );
 
       if (addedTopic) {
         const topicName = await getTopicNameByRef(addedTopic.ref, language);
-
-        // console.log(`Added topic: "${topicName}"`.blue);
-        // console.log(`List of topics: ${topicsList}`.blue);
 
         MESSAGES.push(`Added topic: "${topicName}", ID: "${addedTopic.ref}"`);
       }
