@@ -198,7 +198,7 @@ async function getTopicNameByRef(topicRef, activeLanguage) {
  * Logs data to a file asynchronously.
  * @param {string[]} data - The data to be logged.
  * @param {moment} date - The data to be logged.
- * @returns {Promise<void>} - A Promise that resolves when the data is logged.
+ * @returns {void} - A Promise that resolves when the data is logged.
  */
 function log(data, date) {
   const logFileName = "Algorithm.log";
