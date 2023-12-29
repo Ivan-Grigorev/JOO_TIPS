@@ -14,6 +14,7 @@ const addNewTopic = require("../utils/lessons/addNewTopic");
 const getLastActiveTopic = require("../utils/lessons/getLastActiveTopic");
 
 const moment = require("moment");
+const TaskTypes = require("../models/Tech/TasksTypes");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -363,6 +364,27 @@ async function isActiveLanguageExists(req, res, next) {
   }
 }
 
+async function randomSelectTypeOfTasks(req, res, next) {
+  try {
+    const { types } = await TaskTypes.findOne().types;
+
+    if (!types) {
+      return res.status(404).json({ message: "Task type wasn't found" });
+    }
+
+    console.log("types".red, types);
+
+    const randomTaskType = types[Math.floor(Math.random() * types.length)];
+    console.log(randomTaskType);
+    req.taskType = randomTaskType;
+
+    next();
+  } catch (e) {
+    console.error("Error in randomSelectTypeOfTasks middleware.".red, e);
+    res.status(500).json({ message: "Internal server error." });
+  }
+}
+
 module.exports = {
   isLessonExistById,
   areLessonStarted,
@@ -372,4 +394,5 @@ module.exports = {
   shouldChangeTopicStatus,
   isCardProvided,
   isActiveLanguageExists,
+  randomSelectTypeOfTasks,
 };

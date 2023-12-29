@@ -29,6 +29,7 @@ router.post(
   middlewares.isActiveLanguageExists,
   middlewares.isLessonExistById,
   middlewares.isLessonAlreadyCompleted,
+  middlewares.randomSelectTypeOfTasks,
   controllers.startLesson
 );
 
