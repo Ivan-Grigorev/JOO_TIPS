@@ -15,6 +15,12 @@ const getLastActiveTopic = require("../utils/lessons/getLastActiveTopic");
 
 const moment = require("moment");
 const TaskTypes = require("../models/Tech/TasksTypes");
+const chooseRandomEntityInArray = require("../utils/lessons/chooseRandomEntityInArray");
+const getCardQuestions = require("../utils/lessons/getCardQuestions");
+const getQuestionsForLessonCards = require("../utils/lessons/getLessonQuestions");
+const chooseRandomEntitiesInArray = require("../utils/lessons/chooseRandomEntityInArray");
+const getRandomQuestions = require("../utils/lessons/getRandomQuestions");
+const QuestionToRandomizeAmount = require("../models/Tech/QuestionToRandomizeAmount");
 
 // moment config
 moment.tz.setDefault("Europe/Kiev");
@@ -364,23 +370,43 @@ async function isActiveLanguageExists(req, res, next) {
   }
 }
 
-async function randomSelectTypeOfTasks(req, res, next) {
+async function selectRandomTypeOfTasks(req, res, next) {
   try {
-    const { types } = await TaskTypes.findOne().types;
+    const { types } = await TaskTypes.findOne();
 
     if (!types) {
       return res.status(404).json({ message: "Task type wasn't found" });
     }
 
-    console.log("types".red, types);
+    const randomTaskType = chooseRandomEntityInArray(types);
 
-    const randomTaskType = types[Math.floor(Math.random() * types.length)];
-    console.log(randomTaskType);
-    req.taskType = randomTaskType;
+    req.taskType = randomTaskType[0];
 
     next();
   } catch (e) {
-    console.error("Error in randomSelectTypeOfTasks middleware.".red, e);
+    console.error("Error in selectRandomTypeOfTasks middleware.".red, e);
+    res.status(500).json({ message: "Internal server error." });
+  }
+}
+
+async function selectRandomQuestions(req, res, next) {
+  try {
+    const lessonCardsIDs = req.lesson.cards.map((cardID) => cardID.toString());
+
+    const [cardsQuestions, { questionToRandomizeAmount: questionAmount }] =
+      await Promise.all([
+        getQuestionsForLessonCards(lessonCardsIDs),
+        QuestionToRandomizeAmount.findOne(),
+      ]);
+
+    console.log("questionAmount".green, questionAmount);
+
+    const randomQuestions = getRandomQuestions(cardsQuestions, questionAmount);
+
+    return res.json({ questions: randomQuestions }).end();
+    next();
+  } catch (e) {
+    console.log("Error in selectRandomQuestions middleware".red, e);
     res.status(500).json({ message: "Internal server error." });
   }
 }
@@ -394,5 +420,6 @@ module.exports = {
   shouldChangeTopicStatus,
   isCardProvided,
   isActiveLanguageExists,
-  randomSelectTypeOfTasks,
+  selectRandomTypeOfTasks,
+  selectRandomQuestions,
 };
