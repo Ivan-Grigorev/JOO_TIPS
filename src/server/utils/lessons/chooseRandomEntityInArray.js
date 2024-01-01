@@ -6,13 +6,13 @@
  */
 function chooseRandomEntitiesInArray(array, count) {
   const iterationCount = count || 1;
-  const randomEntities = [];
+  const randomEntities = new Set();
 
   for (let i = 0; i < iterationCount; i++) {
     const randomIndex = Math.floor(Math.random() * array.length);
-    randomEntities.push(array[randomIndex]);
+    randomEntities.add(array[randomIndex]);
   }
-  return randomEntities;
+  return [...randomEntities];
 }
 
 module.exports = chooseRandomEntitiesInArray;
