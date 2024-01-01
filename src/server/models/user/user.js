@@ -36,6 +36,22 @@ const cardAndTopicRefSchema = new mongoose.Schema({
     ref: "TopicsList",
     required: [true, "Card topic ref is required"],
   },
+  showedQuestions: [
+    {
+      questionRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Question",
+        required: [true, "Question ref is required"],
+      },
+      difficult: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Answer",
+          required: [true, "Answer ref is required"],
+        },
+      ],
+    },
+  ],
   _id: false,
 });
 
