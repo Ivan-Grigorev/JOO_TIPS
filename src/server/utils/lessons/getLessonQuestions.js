@@ -2,13 +2,13 @@ const getCardQuestions = require("./getCardQuestions");
 
 /**
  * Retrieves questions for lesson cards based on their IDs.
- * @param {Array<string>} lessonCardsIDs - Array of lesson card IDs.
+ * @param {Array<string>} lessonCardsIDsArray - Array of lesson card IDs.
  * @returns {Promise<object>} - Promise resolving to an object containing card IDs as keys and arrays of questions as values.
  */
-async function getQuestionsForLessonCards(lessonCardsIDs) {
+async function getQuestionsForLessonCards(lessonCardsIDsArray) {
   const cardsQuestions = {};
 
-  for (const cardID of lessonCardsIDs) {
+  for (const cardID of lessonCardsIDsArray) {
     // Получаем вопросы для каждой карты по её ID
     const cardQuestions = await getCardQuestions(cardID);
 
