@@ -9,6 +9,7 @@ const updatePercentage = require("../../utils/lessons/updatePercentage");
 const Card = require("../../models/Card/Card");
 const getTopicsByLanguage = require("../../utils/lessons/getTechProps/utils/getTopicsByLanguage");
 const getCardsTopics = require("../../utils/lessons/getCardsTopics");
+const getCardsQuestions = require("../../utils/lessons/getCardsQuestions");
 require("colors");
 
 // This function calculates the sum of points for lessons associated with the user.
@@ -67,12 +68,13 @@ async function addPoints(req, res) {
   }
 }
 
-async function startLesson(req, res, next) {
+async function startLesson(req, res) {
   try {
     req.lesson.startTime = moment().format("DD.MM.YYYY HH:mm");
     req.lesson.save();
 
-    res.status(201).json({ message: "Lesson successfully started" });
+    // res.status(201).json({ message: "Lesson successfully started" });
+    res.status(201).json({ questions: req.randomQuestions });
   } catch (e) {
     console.error(`Error starting Lesson: ${e}`.red);
   }
@@ -105,15 +107,21 @@ async function addCardsToViewed(req, res) {
     const cardIDs = req.lesson.cards.map((ref) => ref.toString()); // array of IDs
     const userId = req.user.id;
 
-    const [user, cardTopicsIDs] = await Promise.all([
+    const [user, cardTopicsIDs, cardsQuestions] = await Promise.all([
       User.findById(userId),
       getCardsTopics(req.lesson.language, cardIDs),
+      getCardsQuestions(cardIDs),
     ]);
+
+    console.log("cardsQuestions".red, cardsQuestions);
+    return res.status(200).end();
 
     // Get user language information
     const userLanguageInfo = await getUserLanguagesInfo(user);
     const topicsStatusesObjects = []; // must be an array for work correct with indexes
     const cardViewStatuses = new Set();
+
+    console.log("cardTopicsIDs".red, cardTopicsIDs);
 
     for (let i = 0; i < cardIDs.length; i++) {
       const cardId = cardIDs[i];
